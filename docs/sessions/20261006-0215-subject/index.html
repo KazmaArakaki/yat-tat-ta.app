@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="session-state" content="done">
+<meta name="state" content="done">
+<title>題材を決める</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } },
+        pulse2: { '0%,100%': { transform: 'scale(1)' }, '50%': { transform: 'scale(1.04)' } }
+      },
+      animation: { rise: 'rise .5s ease-out both', pulse2: 'pulse2 1.6s ease-in-out infinite' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-4xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <time datetime="2026-10-06T02:15">2026-10-06 02:15</time>
+      <span>/</span>
+      <span>設計セッション</span>
+      <span class="rounded-full border border-signal bg-signal/10 px-2.5 py-0.5 font-bold text-ink">状態：done</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">題材</span>を決める</h1>
+  </header>
+
+  <section id="result" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="relative overflow-hidden rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916] sm:p-8">
+      <div class="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-dopa-soft"></div>
+      <p class="relative font-mono text-xs uppercase tracking-[0.2em] text-dopa">結果</p>
+      <p class="relative mt-6 font-display text-4xl tracking-wide sm:text-5xl">毎食後スクワット</p>
+      <p class="relative mt-2 text-sm text-mute">開発者が決定</p>
+      <p class="relative mt-6 text-lg font-bold leading-relaxed sm:text-xl">
+        何かを食べたら、決めた回数だけスクワットをして、その回数だけボタンを連打する。<br>
+        1打ごとに、スクワット1回が1ドパに変わる。ためたドパと、続いた日数を見て、明日もしゃがむ。
+      </p>
+    </div>
+  </section>
+
+  <section id="why" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / why</p>
+    <h2 class="mt-2 font-display text-3xl">候補の外から来た題材</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">Claude が出した候補は4つでした。ToDo、電卓、算数ドリル、集中タイマー。どれも <a href="../../glossary.html#dopa-apps" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパ〇〇</a> の事例に近い「画面の中の道具」です。開発者が選んだのは、そのどれでもありませんでした。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">食後に20回ほどスクワットすると、糖質の吸収を抑えられるらしい。それをゲームのように続けたい。道具の中身は、スクワットをしたという記録です。</p>
+    <p class="mt-8 font-mono text-xs text-mute">表1　候補を選ぶのに使った物差しと、毎食後スクワットの当てはまり</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[34rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">物差し</th><th class="py-2 pr-4 font-bold">毎食後スクワット</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">名前と合うか</td><td class="py-3 pr-4"><span class="mr-1 font-bold text-dopa">◎</span>やり切ったあとの声が、そのまま <a href="../../glossary.html#yat-tat-ta" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">Yat Tat Ta</a>（やったった）になる。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">多言語で通じるか</td><td class="py-3 pr-4"><span class="mr-1 font-bold text-dopa">◎</span>食事もスクワットも、どこの国にもある。九九やパチンコ用語のような日本だけの前提がない。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">依存批判を受けにくいか</td><td class="py-3 pr-4"><span class="mr-1 font-bold text-dopa">○</span>大人が自分の体のために使う。ただし連続記録を持つので、途切れる不安をあおらない作りが要る（06）。</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-bold">手触りが活きるか</td><td class="py-3 pr-4"><span class="mr-1 font-bold text-dopa">○</span>スクワットの回数だけ連打する。20回なら20打。最初の案では1回だけ叩く形で、ここは「？」だった（03）。</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="counting" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / counting</p>
+    <h2 class="mt-2 font-display text-3xl">スクワットをどう数えるか</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">Claude は最初、アプリが1回ずつ数える形を考えていました。iPhone を胸の前で持ってしゃがめば、加速度で1回ずつ数えられる。1回ごとに振動が手に返れば、<a href="../../glossary.html#tezawari" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">手触り</a>の出番も増えるはずだ、と。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">開発者の答えは、もっと素朴でした。回数は先に決めておく。終わったらボタンを叩くだけ。そのあと、叩き方が2回変わりました。1回を10回の連打に。さらに、連打の回数をスクワットの回数そのものに。</p>
+    <div class="mt-6 grid gap-4 md:grid-cols-3">
+      <div class="rounded-3xl border-2 border-dashed border-mute bg-white p-5">
+        <p class="font-mono text-xs text-mute">見送り</p>
+        <p class="mt-1 font-display text-lg">胸で持って自動</p>
+        <p class="mt-2 text-sm leading-relaxed">加速度で数える。数える精度を確かめる試作が要る。</p>
+      </div>
+      <div class="rounded-3xl border-2 border-dashed border-mute bg-white p-5">
+        <p class="font-mono text-xs text-mute">見送り</p>
+        <p class="mt-1 font-display text-lg">置いてカメラで自動</p>
+        <p class="mt-2 text-sm leading-relaxed">姿勢を読む処理が重く、「盛っても止まらない」とぶつかる。</p>
+      </div>
+      <div class="rounded-3xl border-2 border-dopa bg-white p-5">
+        <p class="font-mono text-xs text-dopa">採用</p>
+        <p class="mt-1 font-display text-lg">回数だけ連打</p>
+        <p class="mt-2 text-sm leading-relaxed"><a href="../../glossary.html#target-reps" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">目標回数</a>を決めておき、終わったらその回数だけ<a href="../../glossary.html#done-mash" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">完了連打</a>。数えるのは本人。</p>
+      </div>
+    </div>
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">1回だけ叩く案のままなら、ドパ電卓の「=」と同じ形でした。普通の操作の最後の1押しに、煽りを全部載せる。手触りが問われるのは1日に数回だけです。10回の連打に変えると、スクワットのたびに小さな山が1つできました。ただ、10という数はスクワットと何の関係もありません。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">最後の形では、叩く回数に意味があります。20回しゃがんだら20打。画面には「スクワット 20」が積まれていて、1打ごとに1つずつ崩れ、<a href="../../glossary.html#dopa-point" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパ</a>に変わって流れ込む。済ませたスクワットを、自分の指でドパに替えていく作業です。叩くほど音も振動も光も強くなり、最後の1打で残りが0になったところで弾けます。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">この形には、すでに指での裏付けがあります。<a href="../20261006-0140-feel-prototype/index.html#results" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">手触りの試作</a>の Q3 で、続けて叩くと段階が上がる面を、開発者は「気持ちいい」と答えました。完了連打は、あの面を題材の中に置き直したものです。</p>
+    <p class="mt-8 font-mono text-xs text-mute">図1　目標回数 20 の完了連打。7打目まで叩いたところ</p>
+    <div class="mt-3 grid items-center gap-4 rounded-2xl border-2 border-ink bg-white px-4 py-5 sm:grid-cols-[1fr_auto_1fr] sm:px-8">
+      <div><p class="font-mono text-[11px] text-mute">スクワット　残り 13</p><ol class="mt-2 flex flex-wrap gap-1"><li class="flex flex-col items-center gap-1"><span class="block h-3 w-3 rounded-sm bg-rule"></span></li><li class="flex flex-col items-center gap-1"><span class="block h-3 w-3 rounded-sm bg-rule"></span></li><li class="flex flex-col items-center gap-1"><span class="block h-3 w-3 rounded-sm bg-rule"></span></li><li class="flex flex-col items-center gap-1"><span class="block h-3 w-3 rounded-sm bg-rule"></span></li><li class="flex flex-col items-center gap-1"><span class="block h-3 w-3 rounded-sm bg-rule"></span></li><li class="flex flex-col items-center gap-1"><span class="block h-3 w-3 rounded-sm bg-rule"></span></li><li class="flex flex-col items-center gap-1"><span class="block h-3 w-3 rounded-sm bg-rule"></span></li><li class="flex flex-col items-center gap-1"><span class="block h-3 w-3 rounded-sm bg-ink"></span></li><li class="flex flex-col items-center gap-1"><span class="block h-3 w-3 rounded-sm bg-ink"></span></li><li class="flex flex-col items-center gap-1"><span class="block h-3 w-3 rounded-sm bg-ink"></span></li><li class="flex flex-col items-center gap-1"><span class="block h-3 w-3 rounded-sm bg-ink"></span></li><li class="flex flex-col items-center gap-1"><span class="block h-3 w-3 rounded-sm bg-ink"></span></li><li class="flex flex-col items-center gap-1"><span class="block h-3 w-3 rounded-sm bg-ink"></span></li><li class="flex flex-col items-center gap-1"><span class="block h-3 w-3 rounded-sm bg-ink"></span></li><li class="flex flex-col items-center gap-1"><span class="block h-3 w-3 rounded-sm bg-ink"></span></li><li class="flex flex-col items-center gap-1"><span class="block h-3 w-3 rounded-sm bg-ink"></span></li><li class="flex flex-col items-center gap-1"><span class="block h-3 w-3 rounded-sm bg-ink"></span></li><li class="flex flex-col items-center gap-1"><span class="block h-3 w-3 rounded-sm bg-ink"></span></li><li class="flex flex-col items-center gap-1"><span class="block h-3 w-3 rounded-sm bg-ink"></span></li><li class="flex flex-col items-center gap-1"><span class="block h-3 w-3 rounded-sm bg-ink"></span></li></ol></div>
+      <p class="text-center font-display text-2xl text-dopa">→</p>
+      <div><p class="font-mono text-[11px] text-mute">ドパ　+7</p><ol class="mt-2 flex flex-wrap items-end gap-1"><li><span class="block rounded-full bg-dopa" style="width:6px;height:6px;opacity:0.40"></span></li><li><span class="block rounded-full bg-dopa" style="width:8px;height:8px;opacity:0.49"></span></li><li><span class="block rounded-full bg-dopa" style="width:9px;height:9px;opacity:0.58"></span></li><li><span class="block rounded-full bg-dopa" style="width:11px;height:11px;opacity:0.67"></span></li><li><span class="block rounded-full bg-dopa" style="width:12px;height:12px;opacity:0.76"></span></li><li><span class="block rounded-full bg-dopa" style="width:14px;height:14px;opacity:0.85"></span></li><li><span class="block rounded-full bg-gold ring-2 ring-dopa" style="width:16px;height:16px;opacity:0.94"></span></li></ol></div>
+    </div>
+    <p class="mt-2 text-xs leading-relaxed text-mute">1打ごとに、左の1つがドパに変わる。演出の強さは、目標回数のうち何打目まで来たかで決める。20打でも30打でも、最後の1打がいちばん強い。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">叩いたぶんのドパは、その場で確定します。途中で手が止まっても、変わったドパは消えません。止まって落ちるのは、連打の勢いだけです。前の案にあった「間が空いたら1打目から数え直す」は、ここで要らなくなりました。</p>
+    <p class="mt-4 rounded-lg border border-dashed border-mute bg-white/60 p-3 text-xs leading-relaxed">アプリはスクワットをしたかどうかを確かめません。ごまかせますが、ランキングも他人との比較もないので、困るのは本人だけです。</p>
+  </section>
+
+  <section id="anytime" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / anytime</p>
+    <h2 class="mt-2 font-display text-3xl">いつ、何回まで記録できるか</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">最初の案では、朝、昼、夕の3つの枠を用意していました。叩いた時刻で枠を決め、1つの枠に記録は1件まで。3つそろえばその日のフィナーレ。「毎食後」という題材を、そのまま形にしたつもりでした。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">開発者の指摘で、この枠は外しました。人が食べるのは3食だけではありません。午後のおやつ、仕事帰りの菓子パン、夜中のアイス。糖質を摂るたびにしゃがむなら、むしろ間食や夜食のほうが記録したい場面です。3つの枠に入らない食事を、アプリが受け付けない理由はありません。</p>
+    <div class="mt-6 grid gap-4 md:grid-cols-2">
+      <div class="rounded-3xl border-2 border-dashed border-mute bg-white p-5">
+        <p class="font-mono text-xs text-mute">最初の案</p>
+        <p class="mt-1 font-display text-lg">朝昼夕の3枠</p>
+        <p class="mt-2 text-sm leading-relaxed">1枠1件。3つそろうとフィナーレ。間食と夜食の居場所がない。</p>
+      </div>
+      <div class="rounded-3xl border-2 border-dopa bg-white p-5">
+        <p class="font-mono text-xs text-dopa">採用</p>
+        <p class="mt-1 font-display text-lg">いつでも、何度でも</p>
+        <p class="mt-2 text-sm leading-relaxed">食べたら記録する。1日の回数に上限はない。</p>
+      </div>
+    </div>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">ここで一つ、夜食のための決めごとが要ります。日付は何時に切り替えるのか。午前0時で切ると、23時50分の夜食のあとに日付をまたいでしゃがんだ人は、その日の分を記録しそこねます。次の節の<a href="../../glossary.html#streak" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">連続記録</a>が、たった10分の差で途切れかねません。そこで、1日の境目を<b>午前4時</b>に置きます。午前4時までのスクワットは、前の日の分です。</p>
+  </section>
+
+  <section id="points" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / points</p>
+    <h2 class="mt-2 font-display text-3xl">ドパと、2つの合計</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">スクワット1回で1<a href="../../glossary.html#dopa-point" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパ</a>がたまります。20回なら20ドパ。完了連打の1打ごとに1ドパずつ入ります。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">このドパでは、何も買えません。ショップも景品もない。それなら、ドパは回数と同じもので、わざわざ名前を付ける意味はあるのでしょうか。中身は同じです。違うのは見え方で、「20回」は済んだことの記録ですが、「20ドパ」はためていくものに見えます。ドパドリルが<a href="../../glossary.html#dopa-value" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパ値</a>を億まで膨らませたのも、使い道のためではありませんでした。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">ためたドパは、2つの合計で見せます。</p>
+    <div class="mt-6 grid gap-4 md:grid-cols-2">
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs text-dopa">Dopa Total</p>
+        <p class="mt-1 font-display text-3xl"><a href="../../glossary.html#dt" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">DT</a></p>
+        <p class="mt-2 text-sm leading-relaxed">これまでの全部。減ることがない。100、1000、1万ドパで節目の演出。</p>
+      </div>
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs text-dopa">Dopa per Week</p>
+        <p class="mt-1 font-display text-3xl"><a href="../../glossary.html#dpw" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">DPW</a></p>
+        <p class="mt-2 text-sm leading-relaxed">今週の分。月曜の午前4時に0へ戻る。先週の DPW と、自己ベストの週と並べる。自己ベストを超えた連打で演出。</p>
+      </div>
+    </div>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">DPW の相手は、他人ではなく先週の自分です。Duolingo は30人ずつのリーグで週の XP を競わせ、総学習時間を17%伸ばしました（<a href="duolingo.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">Duolingo の調査</a>）。Yat Tat Ta にはサーバーも他人のデータもないので、同じ週の区切りだけを借りて、比べる相手を自分に置き換えます。</p>
+  </section>
+
+  <section id="streak" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / streak</p>
+    <h2 class="mt-2 font-display text-3xl">連続記録を持つか</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">「ゲームのように続ける」と聞いて、Claude が最初に思い浮かべたのは連続記録（ストリーク）でした。そして、見送るつもりでいました。外食で1日抜いただけで、30日分の数字が0に戻る。そこでやめる人が出る仕組みは、続けたいという狙いと逆を向いている、と考えたからです。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">開発者の判断は、持つ、でした。参考に挙げたのは Duolingo です。調べてみると、Duolingo は連続記録で継続を大きく伸ばしたアプリでした。7日続いた人は、翌日も使う確率が2.4倍ある。ただし、効いたのは連続記録そのものより、続けるための条件の低さでした。継続の条件を「その日の目標 XP の達成」から「1レッスン」に下げたところ、7日続く人が4割以上増えています。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">Claude の心配も、外れてはいませんでした。途切れたことを示された人は、その行動を続ける率が約66%から約58%に下がる、という研究があります。連続記録は、伸びている間は効き、途切れた瞬間に逆に働く。だから、途切れにくくする仕組みと、途切れても残るものを一緒に置きます。</p>
+    <p class="mt-8 font-mono text-xs text-mute">表2　Duolingo の仕組みから借りるもの（詳しくは Duolingo の調査ページ）</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[34rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">仕組み</th><th class="py-2 pr-4 font-bold">Yat Tat Ta での形</th><th class="py-2 pr-4 font-bold">理由</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">継続の条件</td><td class="py-3 pr-4">その日に完了連打を1回すれば継続。</td><td class="py-3 pr-4">Duolingo で最も効いた変更と同じ形。目標回数を何回にしていても1回でよい。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">休んでも途切れない権利</td><td class="py-3 pr-4"><a href="../../glossary.html#rest-pass" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">休み券</a>。7日続くたびに1枚もらえ、2枚まで持てる。叩かなかった日に自動で使われる。</td><td class="py-3 pr-4">Duolingo は通貨で買わせるが、ドパは使えない。上限2枚は Duolingo と同じ。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">節目の演出</td><td class="py-3 pr-4">連続 7、30、100、365 日の連打で、節目の演出を重ねる。</td><td class="py-3 pr-4">Duolingo は連続記録のアニメーションで新規ユーザーの継続率を伸ばした。</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-bold">途切れたとき</td><td class="py-3 pr-4">最長記録と DT を前に出す。「また1日目から」とだけ表示しない。</td><td class="py-3 pr-4">途切れた直後が、やめる人の出る瞬間だから。</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-8 font-mono text-xs text-mute">表3　借りないもの</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[34rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">仕組み</th><th class="py-2 pr-4 font-bold">借りない理由</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">リーグ、友達との連続記録</td><td class="py-3 pr-4">他人が前提。DPW の比較相手を先週の自分にして代える。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">通貨で直す、通貨を賭ける</td><td class="py-3 pr-4">ドパで買えるものを作らない。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">XP が2倍になる時間</td><td class="py-3 pr-4">1ドパが1回のスクワットでなくなる。</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-bold">罪悪感をあおる通知</td><td class="py-3 pr-4">1人用で逃げ場がない。依存批判の的にもなる。</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="effects" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">07 / effects</p>
+    <h2 class="mt-2 font-display text-3xl">演出が強まる3つの単位</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">ドパドリルは、1回の学習の中で問題が進むほど演出を強くしました（<a href="../../glossary.html#effect-inflation" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">演出インフレ</a>）。毎食後スクワットでは、強まりを3つの単位で重ねます。</p>
+    <div class="mt-6 grid gap-4 md:grid-cols-3">
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs text-dopa">強まり 1</p>
+        <p class="mt-1 font-display text-lg">変換がどこまで進んだか</p>
+        <p class="mt-2 text-sm leading-relaxed">最初の1打から、残りが0になる最後の1打へ強くなる（図1）。毎回、必ず通る山。</p>
+      </div>
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs text-dopa">強まり 2</p>
+        <p class="mt-1 font-display text-lg">その日の最初の1回か</p>
+        <p class="mt-2 text-sm leading-relaxed">その日最初の完了連打の最後の1打で、連続記録が1日伸びる演出。2回目からは出ない。</p>
+      </div>
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs text-dopa">強まり 3</p>
+        <p class="mt-1 font-display text-lg">節目に届いたか</p>
+        <p class="mt-2 text-sm leading-relaxed">DT の 100、1000、1万ドパ。連続 7、30、100、365 日。DPW の自己ベスト更新。届いた1打で重ねる。</p>
+      </div>
+    </div>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">いちばん重いのは、3つがそろう最後の1打です。その日最初の連打で連続30日目に届き、同じ1打で DT が1000ドパを超える。直前の19打の変換の演出も、まだ画面に残っています。</p>
+  </section>
+
+  <section id="sketch" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">08 / sketch</p>
+    <h2 class="mt-2 font-display text-3xl">画面のイメージ</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">題材の手ざわりをそろえるためのラフです。配置も文言も、本作りで描き直します。</p>
+    <div class="mt-8 flex flex-col items-center gap-8 md:flex-row md:items-start md:justify-center">
+      <div class="w-[260px] shrink-0 rounded-[2.6rem] border-[6px] border-ink bg-ink p-1.5 shadow-[10px_10px_0_#E5337A]">
+        <div class="relative flex h-[520px] flex-col overflow-hidden rounded-[2rem] bg-paper px-5 pb-6 pt-10">
+          <div class="absolute left-1/2 top-2 h-5 w-20 -translate-x-1/2 rounded-full bg-ink"></div>
+          <div class="flex items-center justify-between">
+            <p class="font-display text-2xl leading-none text-dopa">29<span class="ml-1 text-xs text-ink">日連続</span></p>
+            <p class="flex items-center gap-1 text-[10px] text-mute">休み券<span class="h-2.5 w-2.5 rounded-sm bg-signal"></span><span class="h-2.5 w-2.5 rounded-sm bg-signal"></span></p>
+          </div>
+          <p class="mt-1 text-[10px] text-mute">今日はまだ。1回で30日目</p>
+          <div class="mt-auto flex flex-col items-center">
+            <button type="button" class="grid h-40 w-40 animate-pulse2 place-items-center rounded-full border-4 border-ink bg-gold shadow-[0_8px_0_#1C1916]">
+              <span class="text-center">
+                <span class="block font-mono text-[10px] text-ink/70">スクワット</span>
+                <span class="block font-display text-4xl leading-none">13</span>
+                <span class="mt-1 block text-[11px] font-black">叩いてドパに</span>
+              </span>
+            </button>
+            <p class="mt-3 font-display text-lg text-dopa">+7 ドパ</p>
+          </div>
+          <div class="mt-8 grid grid-cols-2 gap-2 text-center">
+            <div class="rounded-xl bg-white py-2 ring-1 ring-rule">
+              <p class="font-mono text-[10px] text-mute">DPW</p>
+              <p class="font-display text-xl leading-tight">347</p>
+              <p class="text-[9px] text-mute">先週 300</p>
+            </div>
+            <div class="rounded-xl bg-white py-2 ring-1 ring-rule">
+              <p class="font-mono text-[10px] text-mute">DT</p>
+              <p class="font-display text-xl leading-tight">987</p>
+              <p class="text-[9px] text-mute">次の節目 1,000</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ul class="flex max-w-xs flex-col gap-3 text-sm leading-relaxed">
+        <li class="border-l-4 border-dopa pl-3"><b>連続記録</b>：いちばん上。今日まだ叩いていなければ、あと1回で何日目かを出す。横に休み券の残り。</li>
+        <li class="border-l-4 border-gold pl-3"><b>完了連打</b>：画面の主役。ボタンの数字は、まだドパに変えていないスクワットの数。叩くたびに1減り、下のドパと、DPW、DT が1増える。</li>
+        <li class="border-l-4 border-ink pl-3"><b>DPW と DT</b>：下に並べる。DPW は先週と、DT は次の節目と並べる。</li>
+      </ul>
+    </div>
+    <p class="mt-6 max-w-2xl text-xs leading-relaxed text-mute">この画面は20打のうち7打目まで叩いたところ。残り13打を叩き切ると、連続30日目と DT 1000ドパが同じ最後の1打で重なる（07 のいちばん重い場面）。</p>
+  </section>
+
+  <section id="data" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">09 / data</p>
+    <h2 class="mt-2 font-display text-3xl">端末に残すもの</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">いまのアプリは何も保存していません。今回の題材で初めて、消えては困るデータが生まれます。既存のデータがないので、壊す変更はありません。保存先は端末の中だけで、サーバーもアカウントも持ちません。</p>
+    <p class="mt-8 font-mono text-xs text-mute">表4　残すデータ</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[34rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">データ</th><th class="py-2 pr-4 font-bold">中身</th><th class="py-2 pr-4 font-bold">なぜ要るか</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">記録</td><td class="py-3 pr-4">叩いた日時と、ドパに変えた回数。完了連打1回で1件。</td><td class="py-3 pr-4">ドパ、DT、DPW、連続記録は、どれもこの記録から計算できる。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">目標回数</td><td class="py-3 pr-4">1つの数。既定は 20。</td><td class="py-3 pr-4">完了連打で叩く回数。叩き始めたときの値を使う。</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-bold">休み券</td><td class="py-3 pr-4">いま持っている枚数と、使った日。</td><td class="py-3 pr-4">使った日は、記録がなくても連続記録をつなぐ。記録からは計算できない。</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">記録に回数まで持たせるのは、目標回数を途中で変えるからです。20回から30回に上げた人の DT を「記録の件数 × いまの目標回数」で出すと、過去の20回まで30回に化けます。叩いたときの回数をその場で写しておけば、DT は足し算だけで正しく出ます。</p>
+  </section>
+
+  <section id="decisions" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">10 / decisions</p>
+    <h2 class="mt-2 font-display text-3xl">決めたこと</h2>
+    <ol class="mt-6 flex flex-col gap-3 text-sm leading-relaxed">
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">01</span>題材は <b>毎食後スクワット</b>（開発者が決定）。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">02</span>スクワットはアプリが数えない。目標回数を決めておき、終わったらその回数だけボタンを連打する（完了連打、開発者が決定）。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">03</span>1打ごとにスクワット1回が1ドパに変わる演出を出す（開発者が決定）。演出は最後の1打に向けて強まる。変わったドパはその場で確定し、手が止まっても消えない。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">04</span>目標回数の既定は 20 回。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">05</span>記録は朝昼夕に限らず、いつでも何度でもできる。間食や夜食のあとも含む（開発者が決定）。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">06</span>1日の境目は午前4時。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">07</span>スクワット1回で1ドパ。ドパには使い道を作らない（開発者が決定）。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">08</span>DT（これまでのドパの合計）と DPW（その週のドパの合計）を持つ（開発者が決定）。週は月曜の午前4時に始まる。DPW は先週と自己ベストと比べる。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">09</span>連続記録を持つ（開発者が決定）。その日に1回連打すれば継続。休み券は7日続くたびに1枚、2枚まで持て、叩かなかった日に自動で使う。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">10</span>演出は、連打の何打目か、その日の最初の1回か、節目（DT、連続記録、DPW の自己ベスト）の3つで強くする。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">11</span>記録は端末の中だけに残す。記録（日時、回数）、目標回数、休み券を持つ。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">12</span>本作りで題材の画面に置き換えるまで、アプリは手触りの試作画面を出し続ける。</li>
+    </ol>
+  </section>
+
+  <section id="deferred" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">11 / deferred</p>
+    <h2 class="mt-2 font-display text-3xl">本作りで決めることと、先送りにしたこと</h2>
+    <p class="mt-6 text-xs font-bold text-mute">次のセッション（本作り）で決める</p>
+    <ol class="mt-2 flex flex-col gap-2 text-sm">
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">1</span><span>画面の構成と、演出の段階（1打ごとの変換、連続記録が伸びる演出、各節目）の中身。途中で手が止まったとき、いつ記録を1件として閉じるか</span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">2</span><span>連続記録が途切れたときの画面</span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">3</span><span>記録を保存する仕組み（SwiftData など）。間違えて記録したときに取り消せるようにするか</span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">4</span><span>通知を出すか。出すなら、夜に「今日はまだ」と知らせるか、文面をどう回すか、使われなければ自分から止めるか（<a href="duolingo.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">Duolingo の調査</a>：通知）</span></li>
+    </ol>
+    <p class="mt-8 text-xs font-bold text-mute">課題として先送りした</p>
+    <ul class="mt-2 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-xl bg-paper p-4 leading-relaxed ring-1 ring-rule">
+        <p class="font-bold">健康効果の書き方 <span class="ml-1 font-mono text-[11px] text-dopa">新規</span></p>
+        <p class="mt-1 text-ink/80">「糖質の吸収を抑える」とアプリやストアに書いてよいか。出典の確認と、膝や持病のある人への注意書き。課題 <a href="../../issues/health-claims/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">health-claims</a>。</p>
+      </li>
+      <li class="rounded-xl bg-paper p-4 leading-relaxed ring-1 ring-rule">
+        <p class="font-bold">演出を盛ったときの処理落ち <span class="ml-1 font-mono text-[11px] text-mute">更新</span></p>
+        <p class="mt-1 text-ink/80">一番重い場面が決まった。連続記録が伸びる演出と節目が重なる最後の1打。課題 <a href="../../issues/heavy-effects-performance/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">heavy-effects-performance</a>。</p>
+      </li>
+      <li class="rounded-xl bg-paper p-4 leading-relaxed ring-1 ring-rule">
+        <p class="font-bold">マナーモードで音を鳴らすか <span class="ml-1 font-mono text-[11px] text-mute">更新</span></p>
+        <p class="mt-1 text-ink/80">いつでも記録できるので、職場や外で叩く場面がある。決めるための材料がそろった。課題 <a href="../../issues/silent-mode-sound/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">silent-mode-sound</a>。</p>
+      </li>
+    </ul>
+  </section>
+
+  <section id="links" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">12 / links</p>
+    <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../glossary.html#meal-squat" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">毎食後スクワット</a><a href="../../glossary.html#target-reps" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">目標回数</a><a href="../../glossary.html#done-mash" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">完了連打</a><a href="../../glossary.html#dopa-point" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパ</a><a href="../../glossary.html#dt" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">DT</a><a href="../../glossary.html#dpw" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">DPW</a><a href="../../glossary.html#streak" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">連続記録</a><a href="../../glossary.html#rest-pass" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">休み券</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">このセッションの調査</p><a href="duolingo.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">Duolingo の継続の仕組み</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">新しい課題</p><a href="../../issues/health-claims/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">health-claims</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">前回のセッション</p><a href="../20261006-0140-feel-prototype/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">手触りの試作</a></li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

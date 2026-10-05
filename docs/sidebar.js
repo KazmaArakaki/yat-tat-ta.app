@@ -10,6 +10,13 @@
   // セッション一覧（新しい順）。新しいセッションは先頭に足す。
   var sessions = [
     {
+      path: "sessions/20261006-0215-subject/index.html",
+      label: "10/06 題材を決める",
+      children: [
+        { path: "sessions/20261006-0215-subject/duolingo.html", label: "Duolingo の継続の仕組み" }
+      ]
+    },
+    {
       path: "sessions/20261006-0140-feel-prototype/index.html",
       label: "10/06 手触りの試作"
     },
@@ -67,6 +74,7 @@
       label: "Issues",
       items: [
         { label: "課題一覧", path: "issues/index.html", level: 0 },
+        { label: "健康効果の書き方", path: "issues/health-claims/index.html", level: 1 },
         { label: "多言語展開の進め方", path: "issues/localization/index.html", level: 1 },
         { label: "演出を盛ったときの処理落ち", path: "issues/heavy-effects-performance/index.html", level: 1 },
         { label: "マナーモードで音を鳴らすか", path: "issues/silent-mode-sound/index.html", level: 1 }

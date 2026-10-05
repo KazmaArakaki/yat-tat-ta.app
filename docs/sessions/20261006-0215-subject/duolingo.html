@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Duolingo の継続の仕組み</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } },
+        pulse2: { '0%,100%': { transform: 'scale(1)' }, '50%': { transform: 'scale(1.04)' } }
+      },
+      animation: { rise: 'rise .5s ease-out both', pulse2: 'pulse2 1.6s ease-in-out infinite' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-4xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <a href="index.html" class="hover:text-dopa hover:underline">2026-10-06 題材を決める</a>
+      <span>/</span>
+      <span>調査</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">Duolingo</span> の継続の仕組み</h1>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">連続記録を持つと決めたとき、開発者が手本に挙げたアプリです。何が効いて、何が裏目に出たのか。数字の出どころごとに印を付けています。</p>
+    <p class="mt-3 flex flex-wrap items-center gap-3 text-xs text-mute"><span class="mr-2 rounded px-1.5 py-0.5 font-mono text-[10px] font-bold bg-ink text-white">事実</span>公式ブログ、論文、公式の発言で確認 <span class="mr-2 rounded px-1.5 py-0.5 font-mono text-[10px] font-bold bg-white text-ink ring-1 ring-ink">二次</span>公式以外の解説 <span class="mr-2 rounded px-1.5 py-0.5 font-mono text-[10px] font-bold bg-rule text-mute">未確認</span>一次の出典を確かめられなかった</p>
+  </header>
+
+  <section id="summary" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916] sm:p-8">
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-dopa">ひとことで</p>
+      <p class="mt-4 text-lg font-bold leading-relaxed sm:text-xl">いちばん効いたのは、連続記録を飾ることではなく、続ける条件を下げることだった。</p>
+      <div class="mt-6 grid gap-3 sm:grid-cols-3">
+        <div class="rounded-2xl border-2 border-ink bg-white p-4"><p class="font-display text-3xl text-dopa">2.4倍</p><p class="mt-1 text-xs leading-relaxed">7日続いた人が、翌日も使う確率</p></div>
+        <div class="rounded-2xl border-2 border-ink bg-white p-4"><p class="font-display text-3xl text-dopa">+40%超</p><p class="mt-1 text-xs leading-relaxed">継続の条件を「目標 XP」から「1レッスン」に下げたときの、7日続く人の増え方</p></div>
+        <div class="rounded-2xl border-2 border-ink bg-white p-4"><p class="font-display text-3xl text-violet">66→58%</p><p class="mt-1 text-xs leading-relaxed">途切れたと示された人が、その行動を続ける率（Duolingo とは別の研究）</p></div>
+      </div>
+      <p class="mt-4 text-xs text-mute">出典：<a href="https://blog.duolingo.com/improving-the-streak/" class="break-all font-mono text-[11px] text-signal underline underline-offset-2">blog.duolingo.com/improving-the-streak/</a>、<a href="https://www.psychologytoday.com/us/blog/ulterior-motives/202306/how-broken-streaks-sap-motivation" class="break-all font-mono text-[11px] text-signal underline underline-offset-2">www.psychologytoday.com/us/blog/ulterior-motives/202306/how-</a></p>
+    </div>
+  </section>
+
+  <section id="streak" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / streak</p>
+    <h2 class="mt-2 font-display text-3xl">連続記録（Streak）</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">Duolingo の連続記録は、もとは「その日の目標 XP を達成した日」を数えていました。それを「1レッスン終えた日」に変えたところ、7日続く人が4割以上増え、14日後の継続率も 3.3% 上がっています。数えるもの自体は同じで、条件の高さだけを変えた結果です。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">途切れないための道具も、何種類も用意されています。</p>
+    <ul class="mt-6 flex flex-col gap-3 text-sm">
+      <li class="rounded-2xl border border-rule bg-white p-4 leading-relaxed"><p class="font-bold">Streak Freeze（休んでも途切れない権利）</p><p class="mt-1 text-ink/80"><span class="mr-2 rounded px-1.5 py-0.5 font-mono text-[10px] font-bold bg-ink text-white">事実</span>同時に持てるのは2個まで。上限を1個から2個に増やしたら、1日あたりの利用者が +0.38%。入手はアプリ内通貨 Gems での購入。</p><p class="mt-2"><a href="https://blog.duolingo.com/how-duolingo-streak-builds-habit/" class="break-all font-mono text-[11px] text-signal underline underline-offset-2">blog.duolingo.com/how-duolingo-streak-builds-habit/</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4 leading-relaxed"><p class="font-bold">Weekend Amulet（週末は休んでも途切れない）</p><p class="mt-1 text-ink/80"><span class="mr-2 rounded px-1.5 py-0.5 font-mono text-[10px] font-bold bg-ink text-white">事実</span>提示された人は、1週間後に戻る確率が4%高く、連続記録を失う確率が5%低い。利用者は週末に5〜10%落ちる。</p><p class="mt-2"><a href="https://blog.duolingo.com/how-streaks-keep-duolingo-learners-committed-to-their-language-goals/" class="break-all font-mono text-[11px] text-signal underline underline-offset-2">blog.duolingo.com/how-streaks-keep-duolingo-learners-committ</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4 leading-relaxed"><p class="font-bold">Streak Wager（7日続けると Gems が増える賭け）</p><p class="mt-1 text-ink/80"><span class="mr-2 rounded px-1.5 py-0.5 font-mono text-[10px] font-bold bg-ink text-white">事実</span>7日後の継続率が +14%。</p><p class="mt-2"><a href="https://blog.duolingo.com/how-streaks-keep-duolingo-learners-committed-to-their-language-goals/" class="break-all font-mono text-[11px] text-signal underline underline-offset-2">blog.duolingo.com/how-streaks-keep-duolingo-learners-committ</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4 leading-relaxed"><p class="font-bold">連続記録のアニメーション</p><p class="mt-1 text-ink/80"><span class="mr-2 rounded px-1.5 py-0.5 font-mono text-[10px] font-bold bg-ink text-white">事実</span>導入で新規ユーザーの継続率が +1.7%。節目の日には特別な演出が出る。どの日数が節目かは未確認。</p><p class="mt-2"><a href="https://blog.duolingo.com/how-duolingo-streak-builds-habit/" class="break-all font-mono text-[11px] text-signal underline underline-offset-2">blog.duolingo.com/how-duolingo-streak-builds-habit/</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4 leading-relaxed"><p class="font-bold">Streak Repair、Streak Goal、Perfect Streak</p><p class="mt-1 text-ink/80"><span class="mr-2 rounded px-1.5 py-0.5 font-mono text-[10px] font-bold bg-white text-ink ring-1 ring-ink">二次</span>途切れたあと Gems で1回だけ直せる。最初に 7、14、30日から目標を選ぶ。Freeze を使わずに続いた週は、炎が金色の縁取りになる。</p><p class="mt-2"><a href="https://duolingo.fandom.com/wiki/Streak_Society" class="break-all font-mono text-[11px] text-signal underline underline-offset-2">duolingo.fandom.com/wiki/Streak_Society</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4 leading-relaxed"><p class="font-bold">日の境目</p><p class="mt-1 text-ink/80"><span class="mr-2 rounded px-1.5 py-0.5 font-mono text-[10px] font-bold bg-white text-ink ring-1 ring-ink">二次</span>アカウントのタイムゾーンの午前0時。アプリを使うと端末のタイムゾーンに合わせて更新される。公式ヘルプは未確認。</p><p class="mt-2"><a href="https://duolingo.fandom.com/wiki/Streak" class="break-all font-mono text-[11px] text-signal underline underline-offset-2">duolingo.fandom.com/wiki/Streak</a></p></li>
+    </ul>
+  </section>
+
+  <section id="weekly" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / weekly</p>
+    <h2 class="mt-2 font-display text-3xl">XP と、週のリーグ</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">連続記録が「毎日」を支えるなら、リーグは「週」を支えます。似た時期に XP を稼ぎ始めた30人を1組にして、週ごとに上位を上のリーグへ上げ、下位を下げる。導入後、総学習時間は17%伸び、週5日以上かつ1日1時間以上学ぶ人は3倍になりました。</p>
+    <ul class="mt-6 flex flex-col gap-3 text-sm">
+      <li class="rounded-2xl border border-rule bg-white p-4 leading-relaxed"><p class="font-bold">Leagues（週次リーグ）</p><p class="mt-1 text-ink/80"><span class="mr-2 rounded px-1.5 py-0.5 font-mono text-[10px] font-bold bg-ink text-white">事実</span>総学習時間 +17%。週5日・1日1時間以上の人が3倍。</p><p class="mt-2"><a href="https://www.lennysnewsletter.com/p/how-duolingo-reignited-user-growth" class="break-all font-mono text-[11px] text-signal underline underline-offset-2">www.lennysnewsletter.com/p/how-duolingo-reignited-user-growt</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4 leading-relaxed"><p class="font-bold">リーグの仕様</p><p class="mt-1 text-ink/80"><span class="mr-2 rounded px-1.5 py-0.5 font-mono text-[10px] font-bold bg-white text-ink ring-1 ring-ink">二次</span>30人1組。Bronze から Diamond まで10段階。日曜夜に締めて月曜に組み直す。</p><p class="mt-2"><a href="https://duoplanet.com/how-to-win-duolingo-league/" class="break-all font-mono text-[11px] text-signal underline underline-offset-2">duoplanet.com/how-to-win-duolingo-league/</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4 leading-relaxed"><p class="font-bold">Daily Goal と XP Boost</p><p class="mt-1 text-ink/80"><span class="mr-2 rounded px-1.5 py-0.5 font-mono text-[10px] font-bold bg-white text-ink ring-1 ring-ink">二次</span>1日の目標 XP は 1、10、20、30、50 から選ぶ。XP Boost は15分間 XP が2倍。</p><p class="mt-2"><a href="https://www.makeuseof.com/duolingo-xp-how-boost/" class="break-all font-mono text-[11px] text-signal underline underline-offset-2">www.makeuseof.com/duolingo-xp-how-boost/</a></p></li>
+    </ul>
+  </section>
+
+  <section id="notifications" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / notifications</p>
+    <h2 class="mt-2 font-display text-3xl">通知</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">通知の文面は、手書きのひな形から、反応を見ながら効くものを選ぶ仕組み（多腕バンディット）で選ばれています。同じ文面を続けると効き目が落ちるため、最近送った文面は選ばれにくくする。これで1日あたりの利用者が +0.5%、新規ユーザーの継続率が +2% でした。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">意外なのは、いちばん効いた文面です。しばらく使っていない人に「このリマインダーは効いていないようなので、しばらく止めます」と送る。通知をやめると告げる通知が、最も人を戻しました。</p>
+    <ul class="mt-6 flex flex-col gap-3 text-sm">
+      <li class="rounded-2xl border border-rule bg-white p-4 leading-relaxed"><p class="font-bold">文面の選び方</p><p class="mt-1 text-ink/80"><span class="mr-2 rounded px-1.5 py-0.5 font-mono text-[10px] font-bold bg-ink text-white">事実</span>多腕バンディット。最近送った文面に減点（半減期15日）。成果は「送ってから2時間以内にレッスンしたか」。</p><p class="mt-2"><a href="https://research.duolingo.com/papers/yancey.kdd20.pdf" class="break-all font-mono text-[11px] text-signal underline underline-offset-2">research.duolingo.com/papers/yancey.kdd20.pdf</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4 leading-relaxed"><p class="font-bold">止める通知</p><p class="mt-1 text-ink/80"><span class="mr-2 rounded px-1.5 py-0.5 font-mono text-[10px] font-bold bg-ink text-white">事実</span>Duolingo の幹部 Cem Kansu の発言。止めるまでの日数は未確認（二次情報では約1週間）。</p><p class="mt-2"><a href="https://x.com/cemkansu/status/1301267132009848832" class="break-all font-mono text-[11px] text-signal underline underline-offset-2">x.com/cemkansu/status/1301267132009848832</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4 leading-relaxed"><p class="font-bold">深夜の「連続記録が切れそう」通知</p><p class="mt-1 text-ink/80"><span class="mr-2 rounded px-1.5 py-0.5 font-mono text-[10px] font-bold bg-ink text-white">事実</span>効果が大きかった。通知の本数は、正当な理由なしに増やさない方針。</p><p class="mt-2"><a href="https://www.lennysnewsletter.com/p/how-duolingo-reignited-user-growth" class="break-all font-mono text-[11px] text-signal underline underline-offset-2">www.lennysnewsletter.com/p/how-duolingo-reignited-user-growt</a></p></li>
+    </ul>
+  </section>
+
+  <section id="criticism" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / criticism</p>
+    <h2 class="mt-2 font-display text-3xl">裏目に出るところ</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">連続記録は、伸びている間は効きます。途切れた瞬間は別です。記録が途切れたと示された人は、その行動を続ける率が約66%から約58%に下がった、という研究があります（Silverman と Barasch、2023年）。</p>
+    <ul class="mt-6 flex flex-col gap-3 text-sm">
+      <li class="rounded-2xl border border-rule bg-white p-4 leading-relaxed"><p class="font-bold">途切れたあとの逆効果</p><p class="mt-1 text-ink/80"><span class="mr-2 rounded px-1.5 py-0.5 font-mono text-[10px] font-bold bg-ink text-white">事実</span>続ける率が約66%から約58%へ。</p><p class="mt-2"><a href="https://www.psychologytoday.com/us/blog/ulterior-motives/202306/how-broken-streaks-sap-motivation" class="break-all font-mono text-[11px] text-signal underline underline-offset-2">www.psychologytoday.com/us/blog/ulterior-motives/202306/how-</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4 leading-relaxed"><p class="font-bold">数字を守ることが目的になる</p><p class="mt-1 text-ink/80"><span class="mr-2 rounded px-1.5 py-0.5 font-mono text-[10px] font-bold bg-white text-ink ring-1 ring-ink">二次</span>本来の目的が抜け落ちる「streak creep」の指摘。</p><p class="mt-2"><a href="https://thedecisionlab.com/insights/consumer-insights/streak-creep-the-perils-of-too-much-gamification" class="break-all font-mono text-[11px] text-signal underline underline-offset-2">thedecisionlab.com/insights/consumer-insights/streak-creep-t</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4 leading-relaxed"><p class="font-bold">罪悪感をあおる作り</p><p class="mt-1 text-ink/80"><span class="mr-2 rounded px-1.5 py-0.5 font-mono text-[10px] font-bold bg-white text-ink ring-1 ring-ink">二次</span>「Duo が悲しんでいる」通知。失う不安を作り、課金で解消させる構造。</p><p class="mt-2"><a href="https://screenwiseapp.com/guides/duolingo-streaks-and-anxiety-in-kids" class="break-all font-mono text-[11px] text-signal underline underline-offset-2">screenwiseapp.com/guides/duolingo-streaks-and-anxiety-in-kid</a></p></li>
+    </ul>
+  </section>
+
+  <section id="porting" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / porting</p>
+    <h2 class="mt-2 font-display text-3xl">Yat Tat Ta に持ち込めるか</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">Yat Tat Ta は1人用で、サーバーも他人のデータもなく、ドパには使い道がありません。この3つの条件で、Duolingo の仕組みは大きく2つに分かれます。採否は<a href="index.html#streak" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">セッションページの 06</a>で決めました。</p>
+    <div class="mt-6 grid gap-4 md:grid-cols-2">
+      <div class="rounded-3xl border-2 border-dopa bg-white p-5">
+        <p class="font-mono text-xs text-dopa">持ち込める</p>
+        <ul class="mt-3 flex flex-col gap-2 text-sm leading-relaxed">
+          <li>低い継続条件（1日1回の完了連打）</li>
+          <li>休んでも途切れない権利（通貨で買う代わりに、続けた日数で配る）</li>
+          <li>節目の演出</li>
+          <li>週の区切り（相手を先週の自分にする）</li>
+          <li>端末の中だけで出せる通知</li>
+        </ul>
+      </div>
+      <div class="rounded-3xl border-2 border-dashed border-mute bg-white p-5">
+        <p class="font-mono text-xs text-mute">持ち込めない</p>
+        <ul class="mt-3 flex flex-col gap-2 text-sm leading-relaxed">
+          <li>リーグ、友達との連続記録（他人が前提）</li>
+          <li>通貨で直す、通貨を賭ける（使い道を作らない）</li>
+          <li>XP が2倍になる時間（1ドパが1回でなくなる）</li>
+          <li>文面の自動最適化（サーバーと大勢の利用者が要る）</li>
+          <li>罪悪感をあおる通知（逃げ場のない1人用では逆効果）</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>
