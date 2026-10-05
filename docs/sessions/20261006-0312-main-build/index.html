@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="session-state" content="developing">
+<meta name="state" content="developing">
+<title>本作りの設計</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } }
+      },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-4xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <time datetime="2026-10-06T03:12">2026-10-06 03:12</time>
+      <span>/</span>
+      <span>設計セッション</span>
+      <span class="rounded-full border border-gold bg-gold/15 px-2.5 py-0.5 font-bold text-ink">状態：developing</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">本作り</span>の設計</h1>
+  </header>
+
+  <section id="result" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="relative overflow-hidden rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916] sm:p-8">
+      <div class="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-dopa-soft"></div>
+      <p class="relative font-mono text-xs uppercase tracking-[0.2em] text-dopa">このセッションで作るもの</p>
+      <p class="relative mt-6 font-display text-3xl leading-snug tracking-wide sm:text-4xl">試作の画面を外し、<br>毎食後スクワットの画面に置き換える</p>
+      <p class="relative mt-6 text-base leading-relaxed sm:text-lg">
+        画面は1枚。叩いてドパに変え、連続記録と2つの合計を見る。設定は下から出すシートに置く。<br>
+        保存するのは「記録」1種類だけ。DT も DPW も、連続記録も休み券も、記録から計算する。
+      </p>
+      <p class="relative mt-4 text-sm text-mute">設計はレビュー済み（2026-10-06）。いまは実装中（developing）。実機での確認が済んだら done にする。</p>
+    </div>
+  </section>
+
+  <section id="position" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / position</p>
+    <h2 class="mt-2 font-display text-3xl">4つの機能と、その置き場所</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">前回の<a href="../20261006-0215-subject/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">題材を決める</a>で、何を数え、何を見せるかは決まりました。決まっていないのは、それをどう組むかです。並べてみると、題材は4つの機能に分かれます。どれも同じ「記録」を読み書きします。</p>
+    <div class="mt-6 grid gap-4 sm:grid-cols-2">
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs text-dopa">feature / done-mash</p>
+        <p class="mt-1 font-display text-xl"><a href="../../features/done-mash/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:text-dopa hover:decoration-dopa">完了連打</a></p>
+        <p class="mt-2 text-sm leading-relaxed">叩いてスクワットをドパに変える。記録を作るのはこの機能だけ。最後の1打の<a href="../../glossary.html#finale" class="underline decoration-dopa/50 decoration-2 underline-offset-4">フィナーレ</a>もここ。</p>
+      </div>
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs text-dopa">feature / dopa-totals</p>
+        <p class="mt-1 font-display text-xl"><a href="../../features/dopa-totals/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:text-dopa hover:decoration-dopa">ドパの合計</a></p>
+        <p class="mt-2 text-sm leading-relaxed">DT と DPW を出す。DPW は前の7日と<a href="../../glossary.html#best-week" class="underline decoration-dopa/50 decoration-2 underline-offset-4">自己ベスト</a>に並べる。DT の<a href="../../glossary.html#milestone" class="underline decoration-dopa/50 decoration-2 underline-offset-4">節目</a>を判定する。</p>
+      </div>
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs text-dopa">feature / streak</p>
+        <p class="mt-1 font-display text-xl"><a href="../../features/streak/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:text-dopa hover:decoration-dopa">連続記録と休み券</a></p>
+        <p class="mt-2 text-sm leading-relaxed">何日続いたか、休み券が何枚あるか。途切れたときに出すカードも、この機能が持つ。</p>
+      </div>
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs text-dopa">feature / today-reminder</p>
+        <p class="mt-1 font-display text-xl"><a href="../../features/today-reminder/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:text-dopa hover:decoration-dopa">今日まだ通知</a></p>
+        <p class="mt-2 text-sm leading-relaxed">その日まだ叩いていない夜に、1回だけ知らせる。開かれなければ7日で自分から止まる。</p>
+      </div>
+    </div>
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">画面は1枚にします。上に連続記録、まん中に叩くボタン、下に DPW と DT。前回のラフとほぼ同じ並びです（画面の見本は <a href="../../ui/pages/home/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ホーム</a>）。設定は右上の歯車から下に出すシートで、目標回数と通知だけを置きます。記録の一覧画面は作りません。取り消しを作らないと決めたので、一覧で見せて操作させるものがないからです。</p>
+  </section>
+
+  <section id="closing" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / closing</p>
+    <h2 class="mt-2 font-display text-3xl">手が止まった連打は、いつ1件になるのか</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">20打を叩き切れば、話は簡単です。最後の1打で残りが0になり、そこで<a href="../../glossary.html#record" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録</a>が1件できる。迷うのは、7打で手が止まったときです。叩いた7ドパはその場で確定する、と前回決めました。では、残りの13はいつまで待てばいいのでしょうか。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">待ちすぎると困ったことが起きます。昼に7打で止めた人が、夜食のあとに開くと、ボタンにはまだ「13」が残っている。夜のスクワット20回を叩くはずが、13打で昼の記録に足されて終わります。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">手がかりは叩く順番にあります。完了連打は、スクワットを終えてから叩くものです。しゃがみながら叩くわけではないので、連打の途中で1分も手が空くのは、やめたときだけでしょう。そこで、閉じる条件を3つにしました。</p>
+    <div class="mt-6 grid gap-4 md:grid-cols-3">
+      <div class="rounded-3xl border-2 border-dopa bg-white p-5">
+        <p class="font-mono text-xs text-dopa">閉じる 1</p>
+        <p class="mt-1 font-display text-lg">残りが0になった</p>
+        <p class="mt-2 text-sm leading-relaxed">最後の1打。フィナーレを出す。そのあと1.2秒は叩いても数えない。勢い余った指で、次の記録が始まらないように。</p>
+      </div>
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs text-mute">閉じる 2</p>
+        <p class="mt-1 font-display text-lg">60秒叩かなかった</p>
+        <p class="mt-2 text-sm leading-relaxed">叩いたところまでで1件にする。フィナーレは出さない。ボタンは目標回数に戻る。</p>
+      </div>
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs text-mute">閉じる 3</p>
+        <p class="mt-1 font-display text-lg">アプリを離れた</p>
+        <p class="mt-2 text-sm leading-relaxed">ホームに戻った、電話が来た。2 と同じ閉じ方。離れたまま終了されても、叩いた分が消えない。</p>
+      </div>
+    </div>
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">途中で閉じた7打も、立派な1件です。連続記録もつながります。継続の条件は「その日に完了連打を1回」で、目標回数に届いたかは問いません。前回、条件を低くするほど続く、という Duolingo の数字を見たばかりです。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">保存は、閉じたときに1回だけ行います。1打ごとに書き込むと、タップの瞬間の仕事が増えるからです。手触りの試作で、音のファイルも振動のプレイヤーも先に作っておいたのと同じ理由です。叩いている間の数は画面の中だけにあり、閉じた瞬間に端末へ書く。アプリが落ちれば、その1件は消えます。ただし落ちるのは異常なときだけで、普通に離れた場合は 3 の条件で必ず書き込まれます。</p>
+  </section>
+
+  <section id="effects" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / effects</p>
+    <h2 class="mt-2 font-display text-3xl">3つの強まりを、何で表すか</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">前回決めた強まりは3つでした。変換の進み具合、その日の最初の1回か、節目に届いたか。手触りの試作では、もう1つ別の強まりを使っています。0.45秒以内に叩き続けると段階が上がる、連打の速さです。開発者が「気持ちいい」と答えたのは、こちらでした。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">どちらか1つに絞るなら、進み具合を取るべきだと思っていました。速さで音程を上げると、ゆっくり20打を叩く人は、最後の1打まで低い音のままになるからです。けれども速さを捨てると、試作で確かめた気持ちよさまで捨てることになる。そこで、受け持ちを分けました。</p>
+    <p class="mt-8 font-mono text-xs text-mute">表1　1打ごとの演出と、何で強さを決めるか</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[34rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">出すもの</th><th class="py-2 pr-4 font-bold">強さを決めるもの</th><th class="py-2 pr-4 font-bold">理由</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">音の高さ、振動の強さ</td><td class="py-3 pr-4">進み具合。目標回数を8つに割り、何打目かで8段階のどれかを鳴らす</td><td class="py-3 pr-4">20打でも50打でも、最後の1打がいちばん高く、いちばん強い。叩く速さに左右されない。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">ボタンの光、指の位置の輪</td><td class="py-3 pr-4">連打の速さ。0.45秒以内に次を叩くと明るくなり、止まると落ちる</td><td class="py-3 pr-4">試作の「気持ちいい」を残す。前回の言葉では「止まって落ちるのは、連打の勢いだけ」。</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-bold">ドパの粒</td><td class="py-3 pr-4">いつも同じ</td><td class="py-3 pr-4">1打で1粒、ボタンから「+N ドパ」へ飛ぶ。1打が1ドパであることを、数より先に目で見せる。</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">最後の1打では、上の3つに<a href="../../glossary.html#finale" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">フィナーレ</a>が重なります。粒が弾け、「やったった！」の文字が出て、和音と長めの振動が鳴る。ここに強まり2と3が乗ります。</p>
+    <div class="mt-6 grid gap-4 md:grid-cols-3">
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs text-dopa">強まり 1</p>
+        <p class="mt-1 font-display text-lg">フィナーレ</p>
+        <p class="mt-2 text-sm leading-relaxed">叩き切ったら毎回。粒が弾け、「やったった！」と和音。</p>
+      </div>
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs text-dopa">強まり 2</p>
+        <p class="mt-1 font-display text-lg">連続記録が伸びる</p>
+        <p class="mt-2 text-sm leading-relaxed">その日最初の記録が閉じたとき。上の日数がめくれて1増える。途中で閉じた記録でも伸びるが、フィナーレがないぶん控えめ。</p>
+      </div>
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs text-dopa">強まり 3</p>
+        <p class="mt-1 font-display text-lg">節目の札</p>
+        <p class="mt-2 text-sm leading-relaxed">届いた<a href="../../glossary.html#milestone" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">節目</a>ごとに札が1枚、フィナーレの下に積まれる。札1枚につき金色の粒と音を1つ足す。DT と DPW の節目は連打の途中でまたぐこともあり、そのときはまたいだ1打で札を出す。途中で閉じた記録でも同じ。</p>
+      </div>
+    </div>
+    <p class="mt-8 font-mono text-xs text-mute">表2　節目</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[34rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">何の</th><th class="py-2 pr-4 font-bold">どこで</th><th class="py-2 pr-4 font-bold">補足</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">DT</td><td class="py-3 pr-4">100、1,000、10,000、100,000 ドパ</td><td class="py-3 pr-4">前回の3つに 10万を足した。毎日60回で、5年足らずで届く。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">連続記録</td><td class="py-3 pr-4">7、30、100、365 日。その先は365日ごと</td><td class="py-3 pr-4">1年を超えた人にも、年に1度は札が出る。</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-bold">DPW</td><td class="py-3 pr-4">自己ベストを超えた1打</td><td class="py-3 pr-4">1日に1回まで。記録を始めて8日目から（05）。</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">節目の札が3枚そろう1打が、<a href="../../issues/heavy-effects-performance/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">処理落ちの課題</a>で確かめる一番重い場面です。粒は CAEmitterLayer で出します。粒の動きを GPU 側で計算するので、1打ごとにメインスレッドの仕事が増えません。足りるかどうかは、作ってから実機で見ます。</p>
+    <p class="mt-4 rounded-lg border border-dashed border-mute bg-white/60 p-3 text-xs leading-relaxed">iPhone の「視差効果を減らす」が入っているときは、粒と画面の揺れを止め、数字の変化と輪だけにする（<a href="../../glossary.html#reduced-effects-mode" class="underline decoration-dopa/50 decoration-2 underline-offset-4">ひかえめモード</a>の考え方）。</p>
+  </section>
+
+  <section id="dpw" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / dpw</p>
+    <h2 class="mt-2 font-display text-3xl">DPW を、曜日で区切るか</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">前回は、DPW を月曜の午前4時に0へ戻すと決めていました。Duolingo の週のリーグと同じ区切りです。レビューで、開発者がこれを改めました。<a href="../../glossary.html#dpw" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">DPW</a> は<b>直近7日間</b>のドパの合計にします（開発者が決定）。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">曜日で区切ると、月曜の朝の DPW は、叩いた1回分しかありません。何曜日に開くかで、数字の重みが変わってしまう。直近7日間なら、いつ開いても「この1週間でどれだけしゃがんだか」が同じ物差しで出ます。リーグのような、みんなで同時に締める相手がいないので、曜日にそろえる理由もありません。</p>
+    <p class="mt-8 font-mono text-xs text-mute">表2-2　直近7日間にしたときの数え方</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[34rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">数</th><th class="py-2 pr-4 font-bold">決め方</th><th class="py-2 pr-4 font-bold">補足</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">DPW</td><td class="py-3 pr-4">今日と、その前の6日の<a href="../../glossary.html#record-day" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録日</a>の回数を足す</td><td class="py-3 pr-4">日の区切りは午前4時のまま。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">前の7日</td><td class="py-3 pr-4">7日前から13日前までの合計</td><td class="py-3 pr-4">「先週」の代わり。カードには「前の7日 300」と出す。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold"><a href="../../glossary.html#best-week" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">自己ベスト</a></td><td class="py-3 pr-4">昨日までのどの日で区切った7日間の合計のうち、いちばん大きいもの</td><td class="py-3 pr-4">今日を含めると、叩くたびに自分を超え続けてしまう。</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-bold">自己ベストの節目</td><td class="py-3 pr-4">今日の DPW が自己ベストを超えた1打。1日に1回まで</td><td class="py-3 pr-4">記録を始めて8日目から。それより前は、7日まるごとの区間が1つもなく、超える相手がいない。</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">代わりに、DPW は叩かなくても減るようになりました。午前4時を過ぎるたびに、7日前の1日分が抜けるからです。7日前に60ドパためた人は、今朝開くと、何もしていないのに DPW が60減っています。月曜にまとめて0になるより穏やかですが、「減った」と見える日は前より増えます。画面では減ったことを強調せず、数字をそのまま出します。</p>
+  </section>
+
+  <section id="streak" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / streak</p>
+    <h2 class="mt-2 font-display text-3xl">休み券は、保存しなくても数えられる</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">前回は、休み券を記録と別に保存するつもりでいました。使った日は、記録のない日だからです。ない記録から、使ったことは読めない。そう考えていました。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">ところが、休み券の配り方と使い方には、人の判断が1つも入りません。7日続くたびに1枚、持てるのは2枚まで、叩かなかった日に自動で使う。最初の記録の日から今日まで1日ずつたどれば、どの日にもらい、どの日に使ったかは毎回同じ答えになります。保存するのは<a href="../../glossary.html#record" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録</a>だけで足ります（開発者が了承）。</p>
+    <p class="mt-8 font-mono text-xs text-mute">図1　記録を1日ずつたどる</p>
+    <ol class="mt-2 flex flex-col gap-2 text-sm">
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">1</span><span>記録のある日：連続日数を1増やす。7の倍数になったら休み券を1枚足す（2枚を超えない）。</span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">2</span><span>記録のない日（今日より前）：休み券があれば1枚使い、連続日数はそのまま。なければ途切れる。連続日数は0に、休み券も0枚に戻す。</span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">3</span><span>今日：記録がなければ、まだ何もしない。今日が終わるまでは途切れていない。</span></li>
+    </ol>
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">休み券で埋めた日は、連続日数に数えません。つなぐだけです。数えてしまうと、14日目に2枚もらった人は、何もしなくても16日まで伸びます。途切れたときに休み券を0枚に戻すのは、同じ持ち札で次の連続を始めさせないためです。持ち越せると、途切れる直前まで休み券をためる意味が変わってしまいます。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">「どの日か」は、記録を作った瞬間に決めて記録に書き込みます。<a href="../../glossary.html#record-day" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録日</a>と呼びます。午前4時より前なら前の日です。日時だけを保存して毎回計算し直す手もありますが、それだと海外へ行った人の過去の記録が、時差の分だけ別の日に移ります。ロサンゼルスで夜22時に叩いた記録は、帰国して東京で開くと翌日の14時になり、記録日が1日後ろへ動く。叩いたその場の日付を写しておけば、どこで開いても日はずれません。</p>
+    <p class="mt-8 font-mono text-xs text-mute">表3　途切れたときと、休み券を使ったときに出すもの</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[34rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">場面</th><th class="py-2 pr-4 font-bold">出すもの</th><th class="py-2 pr-4 font-bold">出さないもの</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">途切れたあと、最初に開いたとき</td><td class="py-3 pr-4">カードを1枚。「連続記録は29日で止まりました」の下に、<a href="../../glossary.html#best-streak" class="underline decoration-dopa/50 decoration-2 underline-offset-4">最長記録</a>と DT を大きく。「ためた 987 ドパは、そのまま」。ボタンは「今日の1回から」</td><td class="py-3 pr-4">「0日」の表示。上の日数は「今日の1回で1日目」と出す</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-bold">休み券が使われたあと、最初に開いたとき</td><td class="py-3 pr-4">上に2秒だけ帯を出す。「休み券を1枚使って、29日連続をつなぎました」</td><td class="py-3 pr-4">「昨日は休みましたね」のような責める文</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">どちらも1回出したら終わりです。どこまで見せたかは、端末の設定として小さく覚えておきます。記録とは別の、消えても困らない値です。</p>
+  </section>
+
+  <section id="reminder" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">07 / reminder</p>
+    <h2 class="mt-2 font-display text-3xl">通知を、責めずに出せるか</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">前回の調査で、通知には2つの顔が見えました。Duolingo の深夜の「連続記録が切れそう」は効果が大きかった。一方で、罪悪感をあおる作りは批判の的になっている。そして最も人を戻したのは「この通知は効いていないようなので、しばらく止めます」でした。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">出します。ただし、3つの縛りを付けます。</p>
+    <ul class="mt-4 flex max-w-2xl flex-col gap-3 text-sm leading-relaxed">
+      <li class="border-l-4 border-dopa pl-3"><b>頼まれてから</b>：初めて叩き切ったフィナーレのあとに、「夜、今日まだのときだけ知らせますか？」と1度だけ聞く。起動直後には聞かない。何をするアプリかも分からないうちに許可を求めても、断られるだけだからです。</li>
+      <li class="border-l-4 border-gold pl-3"><b>まだの日だけ、1日1回</b>：既定は 21:00。その日に記録が1件でもあれば、その日の分は取り消す。</li>
+      <li class="border-l-4 border-ink pl-3"><b>7日で黙る</b>：開かれるたびに、先の7日分を予約し直す。7日目の通知だけ文面が違い、「しばらく通知を止めます。また開いたら再開します」。7日開かなければ、それきり何も届かない。</li>
+    </ul>
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">3つ目は、通知の仕組みから自然に出てきた形でもあります。端末の中だけで出す通知は、届く時刻に「今日もう叩いたか」を確かめられません。先に予約しておき、叩いたら取り消すしかない。予約を7日分に限れば、止める処理を別に書かなくても、開かれない限り7日で尽きます。文面は4つを日ごとに回します（中身は<a href="../../features/today-reminder/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日まだ通知</a>）。</p>
+  </section>
+
+  <section id="sound" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">08 / sound</p>
+    <h2 class="mt-2 font-display text-3xl">マナーモードのときは黙る</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">試作では、マナーモードでも音を鳴らしていました。「音が出ない」で迷わないためです。本作りでは、マナーモードに従って黙ります（<a href="../../issues/silent-mode-sound/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">silent-mode-sound</a> を閉じる）。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">決め手は、いつでも記録できることでした。職場で昼食のあとに叩けば、20個の「ポン」が事務所に響きます。手触りの試作でも、振動と光だけでどれだけ残るかは確かめていません。ただ、試作の Q2 で音を150ms遅らせても指が気づかなかったのは、振動と光が「叩いた感じ」の大半を背負っているからかもしれない。黙っても振動は残ります。ほかのアプリの音楽も止めません。</p>
+  </section>
+
+  <section id="data" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">09 / data</p>
+    <h2 class="mt-2 font-display text-3xl">端末に残すもの</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">保存の仕組みは SwiftData にします。最小対応が iOS 26 なので使えない端末がなく、外部の部品も要りません。持つのは1種類だけです（<a href="../../database/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">データベース</a>）。今のアプリは何も保存していないので、壊れるデータはありません。</p>
+    <p class="mt-8 font-mono text-xs text-mute">表4　保存するもの</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[34rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">どこに</th><th class="py-2 pr-4 font-bold">何を</th><th class="py-2 pr-4 font-bold">なぜ</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">SwiftData<br><a href="../../database/squat-record/index.html" class="font-mono text-xs underline decoration-dopa/50 decoration-2 underline-offset-4">SquatRecord</a></td><td class="py-3 pr-4">叩き始めた日時、記録日、ドパに変えた回数。1件が完了連打1回</td><td class="py-3 pr-4">ほかの数はすべてここから計算する。消えると取り戻せない唯一のデータ。</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-bold">端末の設定<br><span class="font-mono text-xs">UserDefaults</span></td><td class="py-3 pr-4">目標回数、通知の ON/OFF と時刻、通知を1度聞いたか、途切れと休み券をどこまで見せたか</td><td class="py-3 pr-4">消えても既定値に戻るだけ。表として持つほどのものではない。</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">起動時に記録を全部読み、DT、DPW、連続記録、休み券をまとめて計算します。毎食後に3回叩いても、1年で1,000件ほどです。叩いている間は、画面の中の数を1ずつ足すだけで、計算し直しません。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">この計算は画面から切り離し、テストを書きます。日をまたぐ、休み券を2枚使う、途切れて0枚に戻る、時差。指で確かめるには日にちがかかりすぎる場面ばかりだからです。</p>
+  </section>
+
+  <section id="build" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">10 / build</p>
+    <h2 class="mt-2 font-display text-3xl">実装の順番</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">レビューのあと、この順で作ります。1〜4 は Claude の作業、5 は開発者の実機確認です。</p>
+    <ol class="mt-6 flex flex-col gap-2 text-sm">
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">1</span><span><b>記録と計算</b>：SquatRecord、記録日と直近7日の決め方、DT／DPW／連続記録／休み券／節目の計算とテスト。テスト用のターゲットを project.yml に足す。</span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">2</span><span><b>叩く面と演出</b>：試作の FeelEngine から A の鳴らし方だけを移す。音声カテゴリを .ambient に。ボタン、粒、フィナーレ、節目の札、記録を閉じる3つの条件。</span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">3</span><span><b>ホームの組み立て</b>：連続記録の帯、DPW と DT のカード、途切れたときのカード、休み券の帯。試作画面と Prototype/ を消す。</span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">4</span><span><b>設定と通知</b>：設定シート、通知の許可と予約。文言を String Catalog に集める。</span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">5</span><span><b>実機で確かめる</b>（開発者、20分ほど）：叩き切る、途中で止める、マナーモード、節目が重なる1打の処理落ち。手順は実装のあとにこのページへ書き足す。</span></li>
+    </ol>
+    <p class="mt-8 font-mono text-xs text-mute">表5　project.yml で変えること</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[34rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">設定</th><th class="py-2 pr-4 font-bold">変えたあと</th><th class="py-2 pr-4 font-bold">理由</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">画面の向き</td><td class="py-3 pr-4">縦だけ</td><td class="py-3 pr-4">連打中に横へ倒れると、ボタンの位置が動いて指が外れる。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">開発言語</td><td class="py-3 pr-4">日本語（ja）。文言は String Catalog に集める</td><td class="py-3 pr-4"><a href="../../issues/localization/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4">多言語展開の課題</a>の (b)。画面の文言を書き始める今が、入れどき。</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-bold">テストのターゲット</td><td class="py-3 pr-4">YatTatTaTests を足す</td><td class="py-3 pr-4">09 の計算のテストを置く。</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-3 max-w-2xl text-xs leading-relaxed text-mute"><a href="../../devops/ios-project/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4">iOS プロジェクトの設定</a>のページは、実際に project.yml を変えたときに書き換える。</p>
+  </section>
+
+  <section id="decisions" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">11 / decisions</p>
+    <h2 class="mt-2 font-display text-3xl">決めたこと</h2>
+    <ol class="mt-6 flex flex-col gap-3 text-sm leading-relaxed">
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">01</span>画面は1枚（ホーム）。設定は下から出すシート。記録の一覧画面は作らない。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">02</span>記録は、残りが0になったとき、60秒叩かなかったとき、アプリを離れたときに1件として閉じる。叩き切ったあと1.2秒は叩いても数えない。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">03</span>途中で閉じた記録も、連続記録の継続に数える。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">04</span>記録の保存は閉じたときに1回だけ。叩いている間は書き込まない。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">05</span>音の高さと振動の強さは進み具合（8段階）、光は連打の速さで決める。1打で1粒のドパを飛ばす。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">06</span>節目は DT 100／1,000／10,000／100,000、連続 7／30／100／365 日とその先365日ごと、DPW の自己ベスト更新（1日に1回まで、記録を始めて8日目から）。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">07</span>休み券は保存せず、記録から計算する（開発者が了承。前回の決定 11 を改める）。休み券で埋めた日は連続日数に数えない。途切れたら休み券も0枚に戻る。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">08</span>記録を取り消す仕組みは作らない（開発者が決定）。課題 <a href="../../issues/undo-record/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4">undo-record</a> に残す。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">09</span>記録日は、記録を作った瞬間の端末の時刻から決めて記録に書き込む。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">10</span>途切れたら、最長記録と DT を前に出すカードを1度だけ出す。「0日」とは表示しない。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">11</span>通知は、初めて叩き切ったあとに1度だけ聞く。まだの日だけ1日1回、既定 21:00。予約は7日先までで、7日目は「しばらく止めます」。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">12</span>マナーモードでは音を鳴らさない（.ambient）。ほかのアプリの音は止めない。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">13</span>保存は SwiftData。記録以外の小さな値は UserDefaults。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">14</span>画面は縦だけ。開発言語は日本語で、文言は String Catalog に集める。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">15</span>画面にもストアにも、健康効果はまだ書かない（課題 health-claims が決まるまで）。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">16</span>DPW は直近7日間（今日と前の6日）の合計にする（開発者が決定。前回の決定 08 の「週は月曜の午前4時に始まる」を改める）。比べる相手は前の7日と自己ベスト。</li>
+    </ol>
+  </section>
+
+  <section id="deferred" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">12 / deferred</p>
+    <h2 class="mt-2 font-display text-3xl">課題の動き</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-xl bg-paper p-4 leading-relaxed ring-1 ring-rule">
+        <p class="font-bold">記録の取り消し <span class="ml-1 font-mono text-[11px] text-dopa">新規</span></p>
+        <p class="mt-1 text-ink/80">間違えて叩いた1件を消せるようにするか。今回は作らない。課題 <a href="../../issues/undo-record/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">undo-record</a>。</p>
+      </li>
+      <li class="rounded-xl bg-paper p-4 leading-relaxed ring-1 ring-rule">
+        <p class="font-bold">マナーモードで音を鳴らすか <span class="ml-1 font-mono text-[11px] text-signal">完了</span></p>
+        <p class="mt-1 text-ink/80">黙ると決めた（08）。課題 <a href="../../issues/silent-mode-sound/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">silent-mode-sound</a>。</p>
+      </li>
+      <li class="rounded-xl bg-paper p-4 leading-relaxed ring-1 ring-rule">
+        <p class="font-bold">多言語展開の進め方 <span class="ml-1 font-mono text-[11px] text-mute">更新</span></p>
+        <p class="mt-1 text-ink/80">(b) 文言の持ち方だけ決めた。どの言語で出すかは残る。課題 <a href="../../issues/localization/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">localization</a>。</p>
+      </li>
+      <li class="rounded-xl bg-paper p-4 leading-relaxed ring-1 ring-rule">
+        <p class="font-bold">演出を盛ったときの処理落ち <span class="ml-1 font-mono text-[11px] text-mute">更新</span></p>
+        <p class="mt-1 text-ink/80">描画の道具は CAEmitterLayer で始める。実装後の実機確認（10 の 5）で見る。課題 <a href="../../issues/heavy-effects-performance/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">heavy-effects-performance</a>。</p>
+      </li>
+      <li class="rounded-xl bg-paper p-4 leading-relaxed ring-1 ring-rule">
+        <p class="font-bold">健康効果の書き方 <span class="ml-1 font-mono text-[11px] text-mute">更新</span></p>
+        <p class="mt-1 text-ink/80">決まるまで画面に効果を書かない。注意書きの置き場所も、この課題で決める。課題 <a href="../../issues/health-claims/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">health-claims</a>。</p>
+      </li>
+    </ul>
+  </section>
+
+  <section id="links" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">13 / links</p>
+    <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">新しい用語</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../glossary.html#record" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録</a><a href="../../glossary.html#record-day" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録日</a><a href="../../glossary.html#finale" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">フィナーレ</a><a href="../../glossary.html#milestone" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">節目</a><a href="../../glossary.html#best-streak" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">最長記録</a><a href="../../glossary.html#best-week" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">自己ベスト</a><a href="../../glossary.html#today-reminder" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日まだ通知</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">画面の見本</p><a href="../../ui/pages/home/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ホーム</a><a href="../../ui/pages/settings/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">設定シート</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">新しい課題</p><a href="../../issues/undo-record/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">undo-record</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">前回のセッション</p><a href="../20261006-0215-subject/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">題材を決める</a></li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

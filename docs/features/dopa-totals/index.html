@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ドパの合計</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } },
+        pulse2: { '0%,100%': { transform: 'scale(1)' }, '50%': { transform: 'scale(1.04)' } }
+      },
+      animation: { rise: 'rise .5s ease-out both', pulse2: 'pulse2 1.6s ease-in-out infinite' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-4xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <a href="../index.html" class="hover:text-ink">features</a><span>/</span><span>ふり返って続ける</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">ドパ</span>の合計</h1>
+    <p class="mt-4 max-w-2xl text-base leading-relaxed">ためた<a href="../../glossary.html#dopa-point" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパ</a>を、2つの合計で見せる。これまでの全部の <a href="../../glossary.html#dt" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">DT</a> と、直近7日間の <a href="../../glossary.html#dpw" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">DPW</a>。どちらも保存せず、<a href="../../glossary.html#record" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録</a>から計算します。</p>
+  </header>
+
+  <section id="overview" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01 / overview</p>
+    <h2 class="mt-2 font-display text-3xl">何と並べて見せるか</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">ドパでは何も買えません。それでも数を2つに分けるのは、比べる相手が違うからです。DT は減ることがなく、次の<a href="../../glossary.html#milestone" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">節目</a>までの距離で見せる。DPW は直近7日間の合計で、1週間前の自分と<a href="../../glossary.html#best-week" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">自己ベスト</a>で見せる。Duolingo の週のリーグから、他人を抜いて「1週間」という長さだけを借りた形です。曜日では区切りません。</p>
+    <div class="mt-6 grid gap-4 md:grid-cols-2">
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs text-dopa">Dopa Total</p>
+        <p class="mt-1 font-display text-3xl">DT</p>
+        <ul class="mt-3 flex flex-col gap-1.5 text-sm leading-relaxed">
+          <li>計算：すべての記録の回数を足す</li>
+          <li>並べるもの：次の節目</li>
+          <li>節目：100、1,000、10,000、100,000 ドパ</li>
+        </ul>
+      </div>
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs text-dopa">Dopa per Week</p>
+        <p class="mt-1 font-display text-3xl">DPW</p>
+        <ul class="mt-3 flex flex-col gap-1.5 text-sm leading-relaxed">
+          <li>計算：今日と前の6日の記録の回数を足す</li>
+          <li>並べるもの：前の7日の合計、自己ベスト</li>
+          <li>節目：自己ベストを超えた1打。1日に1回まで、記録を始めて8日目から</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="calc" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / calc</p>
+    <h2 class="mt-2 font-display text-3xl">直近7日間は、どこからどこまでか</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">直近7日間は、今日の<a href="../../glossary.html#record-day" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録日</a>と、その前の6日です。記録日は叩き始めた瞬間に決まり、午前4時より前なら前の日です。比べる相手の「前の7日」は、7日前から13日前まで。どちらも曜日とは関係なく、開いた日から数えます。前は月曜の午前4時で区切るつもりでしたが、それだと月曜の朝の DPW は1回分しかなく、何曜日に開くかで数字の重みが変わってしまう。いつ開いても同じ物差しで出せるよう、直近7日間に改めました（開発者が決定）。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">そのかわり、DPW は叩かなくても減ります。午前4時を過ぎるたびに、7日前の1日分が区間から抜けるからです。7日前に60ドパためた人は、今朝開くと、まだ何もしていないのに DPW が60少ない。曜日で区切ったときのように、ある朝まとめて0になることはありませんが、「減った」と見える日は増えます。画面では減ったことを強調せず、数字をそのまま出します。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">起動時に記録を全部読み、記録日ごとの合計を作ってから、7日ずつずらして足します。毎食後に3回叩いても1年で1,000件ほどなので、毎回最初から足しても間に合います。叩いている間は、画面の中の DT と DPW に1ずつ足すだけで、計算し直しません。</p>
+    <p class="mt-8 font-mono text-xs text-mute">表1　DPW の自己ベストの決まりごと</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[34rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">場面</th><th class="py-2 pr-4 font-bold">扱い</th><th class="py-2 pr-4 font-bold">理由</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">自己ベストとは</td><td class="py-3 pr-4">昨日までのどの日で区切った7日間の合計のうち、最大のもの</td><td class="py-3 pr-4">今日を含めると、叩くたびに自分を超え続けてしまう。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">超えた1打</td><td class="py-3 pr-4">今日の DPW が自己ベストを1でも上回った打で、節目の札を出す</td><td class="py-3 pr-4">並んだ瞬間ではなく、抜いた瞬間を祝う。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">同じ日に2度目</td><td class="py-3 pr-4">出さない</td><td class="py-3 pr-4">超えたあとは1打ごとに更新になる。札が毎回出ては節目でなくなる。</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-bold">はじめの7日</td><td class="py-3 pr-4">記録を始めて7日目までは出さない。カードの自己ベスト欄は「—」</td><td class="py-3 pr-4">7日まるごとたまった区間がなく、超える相手がいない。</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">DT の節目は、その打で DT が節目の数をまたいだときに1回だけ出ます。前回の3つ（100、1,000、1万）に10万を足しました。毎日60回で、5年足らずで届く距離です。札は<a href="../done-mash/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">完了連打</a>のフィナーレの下に積まれます。途中で閉じた記録で節目をまたいだ場合も、またいだ1打で札を出します。</p>
+  </section>
+
+  <section id="screens" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / screens</p>
+    <h2 class="mt-2 font-display text-3xl">関連する画面</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><a href="../../ui/pages/home/index.html" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ホーム</a><p class="mt-1 text-ink/80">画面の下に DPW と DT のカードが並ぶ。</p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><a href="../../ui/pages/settings/index.html" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">設定シート</a><p class="mt-1 text-ink/80">この機能の設定はない。目標回数を変えても、過去の記録のドパは変わらない（記録ごとに回数を持つため）。</p></li>
+    </ul>
+  </section>
+
+  <section id="components" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / components</p>
+    <h2 class="mt-2 font-display text-3xl">関連するコンポーネント</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">サンプル：DPW 347（前の7日 300、自己ベスト 410）、DT 987（次の節目 1,000）。</p>
+    <div class="mt-6 rounded-3xl border-2 border-ink bg-white p-5">
+      <div class="flex items-baseline justify-between"><a href="../../ui/components/totals-cards/index.html" class="font-mono text-xs font-bold text-dopa underline underline-offset-4">totals-cards</a><span class="font-mono text-[11px] text-mute">通常</span></div>
+      <div class="mx-auto mt-4 grid max-w-sm grid-cols-2 gap-3 rounded-2xl bg-paper p-4 text-center">
+        <div class="rounded-xl bg-white py-3 ring-1 ring-rule">
+          <p class="font-mono text-[10px] text-mute">DPW</p>
+          <p class="font-display text-2xl leading-tight">347</p>
+          <p class="text-[10px] text-mute">前の7日 300</p>
+          <div class="mx-3 mt-2 h-1.5 overflow-hidden rounded-full bg-rule"><div class="h-full rounded-full bg-dopa" style="width:85%"></div></div>
+          <p class="mt-1 text-[10px] text-mute">ベスト 410 まで 63</p>
+        </div>
+        <div class="rounded-xl bg-white py-3 ring-1 ring-rule">
+          <p class="font-mono text-[10px] text-mute">DT</p>
+          <p class="font-display text-2xl leading-tight">987</p>
+          <p class="text-[10px] text-mute">次の節目 1,000</p>
+          <div class="mx-3 mt-2 h-1.5 overflow-hidden rounded-full bg-rule"><div class="h-full rounded-full bg-gold" style="width:98.7%"></div></div>
+          <p class="mt-1 text-[10px] text-mute">あと 13</p>
+        </div>
+      </div>
+    </div>
+    <div class="mt-4 rounded-3xl border-2 border-ink bg-white p-5">
+      <div class="flex items-baseline justify-between"><a href="../../ui/components/finale/index.html" class="font-mono text-xs font-bold text-dopa underline underline-offset-4">finale</a><span class="font-mono text-[11px] text-mute">節目の札</span></div>
+      <div class="mt-4 flex flex-wrap justify-center gap-2 rounded-2xl bg-ink p-5 text-paper">
+        <span class="rounded-full border-2 border-gold bg-gold/15 px-4 py-1 text-sm font-bold">DT 1,000 ドパ</span>
+        <span class="rounded-full border-2 border-gold bg-gold/15 px-4 py-1 text-sm font-bold">DPW 自己ベスト</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="links" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / links</p>
+    <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">設計の経緯</p><a href="../../sessions/20261006-0312-main-build/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">本作りの設計</a><a href="../../sessions/20261006-0215-subject/duolingo.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">Duolingo の継続の仕組み</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">計算のもとになるデータ</p><a href="../../database/squat-record/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">SquatRecord</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../glossary.html#dt" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">DT</a><a href="../../glossary.html#dpw" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">DPW</a><a href="../../glossary.html#best-week" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">自己ベスト</a><a href="../../glossary.html#milestone" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">節目</a><a href="../../glossary.html#record-day" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録日</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">ほかの機能</p><a href="../done-mash/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">完了連打</a><a href="../streak/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">連続記録と休み券</a></li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

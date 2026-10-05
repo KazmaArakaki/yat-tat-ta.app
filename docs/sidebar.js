@@ -10,6 +10,10 @@
   // セッション一覧（新しい順）。新しいセッションは先頭に足す。
   var sessions = [
     {
+      path: "sessions/20261006-0312-main-build/index.html",
+      label: "10/06 本作りの設計"
+    },
+    {
       path: "sessions/20261006-0215-subject/index.html",
       label: "10/06 題材を決める",
       children: [
@@ -63,6 +67,33 @@
       items: [{ label: "セッション一覧", path: "sessions/index.html", level: 0 }].concat(sessionItems)
     },
     {
+      label: "Features",
+      items: [
+        { label: "機能一覧", path: "features/index.html", level: 0 },
+        { label: "完了連打", path: "features/done-mash/index.html", level: 1 },
+        { label: "ドパの合計", path: "features/dopa-totals/index.html", level: 1 },
+        { label: "連続記録と休み券", path: "features/streak/index.html", level: 1 },
+        { label: "今日まだ通知", path: "features/today-reminder/index.html", level: 1 }
+      ]
+    },
+    {
+      label: "UI",
+      items: [
+        { label: "基本方針", path: "ui/principles.html", level: 0 },
+        { label: "コンポーネント一覧", path: "ui/components/index.html", level: 0 },
+        { label: "ページ一覧", path: "ui/pages/index.html", level: 0 },
+        { label: "ホーム", path: "ui/pages/home/index.html", level: 1 },
+        { label: "設定シート", path: "ui/pages/settings/index.html", level: 1 }
+      ]
+    },
+    {
+      label: "Database",
+      items: [
+        { label: "データベース", path: "database/index.html", level: 0 },
+        { label: "SquatRecord", path: "database/squat-record/index.html", level: 1 }
+      ]
+    },
+    {
       label: "DevOps",
       items: [
         { label: "開発/運用一覧", path: "devops/index.html", level: 0 },
@@ -77,7 +108,7 @@
         { label: "健康効果の書き方", path: "issues/health-claims/index.html", level: 1 },
         { label: "多言語展開の進め方", path: "issues/localization/index.html", level: 1 },
         { label: "演出を盛ったときの処理落ち", path: "issues/heavy-effects-performance/index.html", level: 1 },
-        { label: "マナーモードで音を鳴らすか", path: "issues/silent-mode-sound/index.html", level: 1 }
+        { label: "記録の取り消し", path: "issues/undo-record/index.html", level: 1 }
       ]
     }
   ];

@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>データベース</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: { rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } } },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-3xl">
+
+  <header class="animate-rise">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">database</p>
+    <h1 class="mt-2 font-display text-4xl leading-tight">データベース</h1>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">端末の中だけに保存するデータの全体図。サーバーもアカウントも持たない。保存の仕組みは SwiftData で、表は <b>SquatRecord</b> の1つだけ。</p>
+  </header>
+
+  <section id="why-one" class="animate-rise mt-10 [animation-delay:100ms]">
+    <div class="rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916]">
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-dopa">なぜ1つで足りるのか</p>
+      <p class="mt-3 leading-relaxed">画面に出る数は5つある。<a href="../glossary.html#dt" class="text-dopa underline underline-offset-4">DT</a>、<a href="../glossary.html#dpw" class="text-dopa underline underline-offset-4">DPW</a>、<a href="../glossary.html#streak" class="text-dopa underline underline-offset-4">連続記録</a>、<a href="../glossary.html#rest-pass" class="text-dopa underline underline-offset-4">休み券</a>、<a href="../glossary.html#best-streak" class="text-dopa underline underline-offset-4">最長記録</a>。どれも<a href="../glossary.html#record" class="text-dopa underline underline-offset-4">記録</a>を足すか、日付順にたどれば出る。休み券の配り方と使い方には人の判断が入らないので、たどるたびに同じ答えになる。</p>
+      <p class="mt-3 leading-relaxed">計算で出る数を別に保存すると、記録と食い違う日が来る。たとえば将来<a href="../issues/undo-record/index.html" class="text-dopa underline underline-offset-4">記録の取り消し</a>を作れば、消した1件に合わせて休み券の枚数も直さなければならない。保存するのを記録だけにしておけば、直す場所も記録だけで済む。</p>
+    </div>
+  </section>
+
+  <section id="figure" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">overview</p>
+    <h2 class="mt-2 font-display text-3xl">保存するものと、計算するもの</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">実線の枠が端末に保存するもの、点線の枠が起動のたびに計算するもの。</p>
+    <div class="mt-6 grid items-stretch gap-4 md:grid-cols-[1fr_auto_1fr]">
+      <div class="flex flex-col gap-4">
+        <a href="squat-record/index.html" class="group block rounded-2xl border-2 border-ink bg-white p-5 shadow-[6px_6px_0_#E5337A] transition hover:-translate-y-0.5">
+          <p class="font-mono text-xs text-dopa">SwiftData</p>
+          <p class="mt-1 font-display text-xl group-hover:text-dopa">SquatRecord</p>
+          <p class="mt-2 font-mono text-xs leading-relaxed text-ink/80">id / startedAt / day / reps</p>
+          <p class="mt-2 text-sm leading-relaxed">完了連打1回で1件。</p>
+        </a>
+        <div class="rounded-2xl border-2 border-ink bg-white p-5">
+          <p class="font-mono text-xs text-mute">UserDefaults</p>
+          <p class="mt-1 font-display text-xl">端末の設定</p>
+          <p class="mt-2 text-sm leading-relaxed">目標回数、通知、どこまで見せたか。下の表3。</p>
+        </div>
+      </div>
+      <p class="self-center text-center font-display text-3xl text-dopa">→</p>
+      <ul class="flex flex-col gap-2 text-sm">
+        <li class="rounded-xl border-2 border-dashed border-mute bg-white/70 px-4 py-3"><b>DT</b>：reps の合計</li>
+        <li class="rounded-xl border-2 border-dashed border-mute bg-white/70 px-4 py-3"><b>DPW</b>、前の7日、自己ベスト：day ごとに reps を足し、直近7日ずつ合計する</li>
+        <li class="rounded-xl border-2 border-dashed border-mute bg-white/70 px-4 py-3"><b>連続記録</b>、<b>休み券</b>、<b>最長記録</b>：day を日付順にたどる</li>
+        <li class="rounded-xl border-2 border-dashed border-mute bg-white/70 px-4 py-3"><b>節目</b>：上の数が閾値をまたいだか</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="done-mash" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">feature / done-mash</p>
+    <h2 class="mt-2 font-display text-3xl">完了連打で書くもの</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">記録を書き込むのは<a href="../features/done-mash/index.html" class="text-dopa underline underline-offset-4">完了連打</a>だけ。叩いている間は画面の中で数え、記録を閉じたときに SquatRecord を1件足す。読むのは、叩き始めたときの目標回数（UserDefaults）。</p>
+    <p class="mt-6 font-mono text-xs text-mute">表1　完了連打が触る表</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[30rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">表</th><th class="py-2 pr-4 font-bold">読む</th><th class="py-2 pr-4 font-bold">書く</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold"><a href="squat-record/index.html" class="text-dopa underline underline-offset-4">SquatRecord</a></td><td class="py-3 pr-4">起動時に全件</td><td class="py-3 pr-4">閉じたときに1件足す。更新と削除はしない</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-bold">UserDefaults</td><td class="py-3 pr-4">targetReps</td><td class="py-3 pr-4">しない</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="totals-streak" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">feature / dopa-totals, streak</p>
+    <h2 class="mt-2 font-display text-3xl">ドパの合計と連続記録が読むもの</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80"><a href="../features/dopa-totals/index.html" class="text-dopa underline underline-offset-4">ドパの合計</a>と<a href="../features/streak/index.html" class="text-dopa underline underline-offset-4">連続記録と休み券</a>は、表を持たない。SquatRecord を読んで計算するだけ。直近7日間も連続の日数も、記録に書いた day から数える。端末の時刻から計算し直さないので、時差で数が動かない。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">連続記録だけは、UserDefaults にも小さな値を1つ書く。途切れたことと休み券を使ったことを、どの日まで見せたか。カードと帯を1度だけ出すためで、消えても1度余計に出るだけで済む。</p>
+    <p class="mt-6 font-mono text-xs text-mute">表2　計算に使う列</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[30rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">出す数</th><th class="py-2 pr-4 font-bold">使う列</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">DT</td><td class="py-3 pr-4">reps</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">DPW、前の7日、<a href="../glossary.html#best-week" class="text-dopa underline underline-offset-4">自己ベスト</a></td><td class="py-3 pr-4">day、reps</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-bold">連続記録、休み券、最長記録</td><td class="py-3 pr-4">day</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="reminder" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">feature / today-reminder</p>
+    <h2 class="mt-2 font-display text-3xl">今日まだ通知が読むもの</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80"><a href="../features/today-reminder/index.html" class="text-dopa underline underline-offset-4">今日まだ通知</a>は、今日の記録があるかだけを SquatRecord から読む。予約した通知そのものは iOS が持つので、アプリ側には保存しない。</p>
+  </section>
+
+  <section id="defaults" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">userdefaults</p>
+    <h2 class="mt-2 font-display text-3xl">UserDefaults に置く値</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">表として持つほどではない、小さな値。どれも消えたら既定値に戻るだけで、記録は失われない。</p>
+    <p class="mt-6 font-mono text-xs text-mute">表3　UserDefaults の値</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[34rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">キー</th><th class="py-2 pr-4 font-bold">型と既定値</th><th class="py-2 pr-4 font-bold">使う機能</th><th class="py-2 pr-4 font-bold">中身</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">targetReps</td><td class="py-3 pr-4">Int、20</td><td class="py-3 pr-4">完了連打</td><td class="py-3 pr-4"><a href="../glossary.html#target-reps" class="text-dopa underline underline-offset-4">目標回数</a>。5〜100、5刻み。叩き始めたときの値を使う</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">reminderEnabled</td><td class="py-3 pr-4">Bool、false</td><td class="py-3 pr-4">今日まだ通知</td><td class="py-3 pr-4">通知を出すか</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">reminderMinutes</td><td class="py-3 pr-4">Int、1260</td><td class="py-3 pr-4">今日まだ通知</td><td class="py-3 pr-4">通知の時刻。0時からの分（1260 は 21:00）</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">reminderAsked</td><td class="py-3 pr-4">Bool、false</td><td class="py-3 pr-4">今日まだ通知</td><td class="py-3 pr-4">初めて叩き切ったあとに、出してよいかを聞いたか</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-mono text-xs">lastAcknowledgedDay</td><td class="py-3 pr-4">Int、0</td><td class="py-3 pr-4">連続記録</td><td class="py-3 pr-4">途切れたカードと休み券の帯を、どの<a href="../glossary.html#record-day" class="text-dopa underline underline-offset-4">記録日</a>まで見せたか（yyyymmdd）</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-3 max-w-2xl text-xs leading-relaxed text-mute">キー名は設計時点の案。実装で変えたら、このページを直す。</p>
+  </section>
+
+</article>
+</main>
+<script src="../sidebar.js" defer></script>
+</body>
+</html>

@@ -35,7 +35,7 @@ tailwind.config = {
 
   <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">glossary</p>
   <h1 class="mt-2 font-display text-4xl">用語集</h1>
-  <p class="mt-4 text-sm leading-relaxed text-ink/80">セッションで出てきた用語。各用語に、説明、会話での使い方、関連する用語、関連する機能を置いています。<br>このプロジェクトにはまだ機能ページがないため、「関連する機能」は調査レポートへのリンクで代えています。</p>
+  <p class="mt-4 text-sm leading-relaxed text-ink/80">セッションで出てきた用語。各用語に、説明、会話での使い方、関連する用語、関連する機能を置いています。<br>「関連する機能」は、機能ページがある用語は機能ページへ、ない用語は調査やセッションの記録へリンクしています。</p>
 
   <nav aria-label="用語一覧" class="mt-8 flex flex-wrap gap-2 text-sm">
     <a href="#yat-tat-ta" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">Yat Tat Ta</a>
@@ -63,6 +63,13 @@ tailwind.config = {
     <a href="#dpw" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">DPW</a>
     <a href="#streak" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">連続記録</a>
     <a href="#rest-pass" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">休み券</a>
+    <a href="#record" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">記録</a>
+    <a href="#record-day" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">記録日</a>
+    <a href="#finale" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">フィナーレ</a>
+    <a href="#milestone" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">節目</a>
+    <a href="#best-streak" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">最長記録</a>
+    <a href="#best-week" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">自己ベスト</a>
+    <a href="#today-reminder" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">今日まだ通知</a>
   </nav>
 
   <!-- Yat Tat Ta -->
@@ -398,8 +405,8 @@ tailwind.config = {
       <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>はい。目標回数はこれからの記録にだけ効きます。</p>
     </div>
     <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
-      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#meal-squat" class="text-dopa underline underline-offset-4">毎食後スクワット</a><a href="#done-mash" class="text-dopa underline underline-offset-4">完了連打</a><a href="#dopa-point" class="text-dopa underline underline-offset-4">ドパ</a><a href="#dt" class="text-dopa underline underline-offset-4">DT</a></p></div>
-      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="sessions/20261006-0215-subject/index.html#data" class="text-signal underline underline-offset-4">セッション：題材を決める（残すもの）</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#meal-squat" class="text-dopa underline underline-offset-4">毎食後スクワット</a><a href="#done-mash" class="text-dopa underline underline-offset-4">完了連打</a><a href="#dopa-point" class="text-dopa underline underline-offset-4">ドパ</a><a href="#dt" class="text-dopa underline underline-offset-4">DT</a><a href="#record" class="text-dopa underline underline-offset-4">記録</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="features/done-mash/index.html" class="text-signal underline underline-offset-4">機能：完了連打</a><a href="sessions/20261006-0215-subject/index.html#data" class="text-signal underline underline-offset-4">セッション：題材を決める（残すもの）</a></p></div>
     </div>
   </section>
 
@@ -415,8 +422,8 @@ tailwind.config = {
       <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>最後の1打で連続記録が1日伸びます。その日の最初の完了連打だけに出る演出です。</p>
     </div>
     <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
-      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#meal-squat" class="text-dopa underline underline-offset-4">毎食後スクワット</a><a href="#dopa-point" class="text-dopa underline underline-offset-4">ドパ</a><a href="#streak" class="text-dopa underline underline-offset-4">連続記録</a><a href="#tezawari" class="text-dopa underline underline-offset-4">手触り</a><a href="#kakutei-enshutsu" class="text-dopa underline underline-offset-4">確定演出／煽り演出</a></p></div>
-      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="sessions/20261006-0215-subject/index.html#counting" class="text-signal underline underline-offset-4">セッション：題材を決める（数え方）</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#meal-squat" class="text-dopa underline underline-offset-4">毎食後スクワット</a><a href="#dopa-point" class="text-dopa underline underline-offset-4">ドパ</a><a href="#streak" class="text-dopa underline underline-offset-4">連続記録</a><a href="#tezawari" class="text-dopa underline underline-offset-4">手触り</a><a href="#kakutei-enshutsu" class="text-dopa underline underline-offset-4">確定演出／煽り演出</a><a href="#record" class="text-dopa underline underline-offset-4">記録</a><a href="#finale" class="text-dopa underline underline-offset-4">フィナーレ</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="features/done-mash/index.html" class="text-signal underline underline-offset-4">機能：完了連打</a><a href="sessions/20261006-0215-subject/index.html#counting" class="text-signal underline underline-offset-4">セッション：題材を決める（数え方）</a></p></div>
     </div>
   </section>
 
@@ -449,25 +456,25 @@ tailwind.config = {
       <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>20回ずつ1日3回なら、50回ぶん、だいたい17日です。</p>
     </div>
     <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
-      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#dopa-point" class="text-dopa underline underline-offset-4">ドパ</a><a href="#dpw" class="text-dopa underline underline-offset-4">DPW</a><a href="#streak" class="text-dopa underline underline-offset-4">連続記録</a></p></div>
-      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="sessions/20261006-0215-subject/index.html#points" class="text-signal underline underline-offset-4">セッション：題材を決める（ドパ）</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#dopa-point" class="text-dopa underline underline-offset-4">ドパ</a><a href="#dpw" class="text-dopa underline underline-offset-4">DPW</a><a href="#streak" class="text-dopa underline underline-offset-4">連続記録</a><a href="#milestone" class="text-dopa underline underline-offset-4">節目</a><a href="#best-streak" class="text-dopa underline underline-offset-4">最長記録</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="features/dopa-totals/index.html" class="text-signal underline underline-offset-4">機能：ドパの合計</a><a href="sessions/20261006-0215-subject/index.html#points" class="text-signal underline underline-offset-4">セッション：題材を決める（ドパ）</a></p></div>
     </div>
   </section>
 
   <section id="dpw" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
     <p class="font-mono text-xs text-mute">#dpw</p>
     <h2 class="mt-1 font-display text-2xl">DPW（Dopa per Week）</h2>
-    <p class="mt-3 leading-relaxed">その週にためた<a href="#dopa-point" class="text-dopa underline underline-offset-4">ドパ</a>の合計。週が変わると0から数え直す。<a href="#dt" class="text-dopa underline underline-offset-4">DT</a>が「これまで全部」なら、DPW は「今週の調子」を見る数。他人とは比べず、先週の DPW や自己ベストの週と比べる。週は月曜の午前4時に始まる。</p>
+    <p class="mt-3 leading-relaxed">直近7日間にためた<a href="#dopa-point" class="text-dopa underline underline-offset-4">ドパ</a>の合計。今日と、その前の6日の<a href="#record-day" class="text-dopa underline underline-offset-4">記録日</a>の回数を足す。<a href="#dt" class="text-dopa underline underline-offset-4">DT</a>が「これまで全部」なら、DPW は「この1週間の調子」を見る数。他人とは比べず、前の7日（7日前から13日前まで）の合計や自己ベストと比べる。最初は月曜の午前4時に0へ戻す週の区切りだったが、何曜日に開くかで数字の重みが変わるため、直近7日間に改めた（開発者が決定、2026-10-06 本作りの設計）。</p>
     <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
     <div class="mt-2 flex flex-col gap-2 text-sm">
       <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>DPW は、Duolingo のリーグみたいに誰かと競うんですか。</p>
-      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>競いません。サーバーも他人のデータもないので、相手は先週の自分です。</p>
-      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>週の途中でサボったら、DPW は減りますか。</p>
-      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>減りません。今週ここまでにためた分が並ぶだけです。月曜にまた0から始まります。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>競いません。サーバーも他人のデータもないので、相手は1週間前の自分です。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>2日サボったら、DPW は減りますか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>減ります。午前4時を過ぎるたびに、7日前の1日分が抜けるからです。叩かなくても減りますが、画面で減ったことを強調はしません。</p>
     </div>
     <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
-      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#dt" class="text-dopa underline underline-offset-4">DT</a><a href="#streak" class="text-dopa underline underline-offset-4">連続記録</a><a href="#dopa-point" class="text-dopa underline underline-offset-4">ドパ</a></p></div>
-      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="sessions/20261006-0215-subject/index.html#points" class="text-signal underline underline-offset-4">セッション：題材を決める（ドパ）</a><a href="sessions/20261006-0215-subject/duolingo.html" class="text-signal underline underline-offset-4">調査：Duolingo の継続の仕組み</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#dt" class="text-dopa underline underline-offset-4">DT</a><a href="#streak" class="text-dopa underline underline-offset-4">連続記録</a><a href="#dopa-point" class="text-dopa underline underline-offset-4">ドパ</a><a href="#best-week" class="text-dopa underline underline-offset-4">自己ベスト</a><a href="#milestone" class="text-dopa underline underline-offset-4">節目</a><a href="#record-day" class="text-dopa underline underline-offset-4">記録日</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="features/dopa-totals/index.html" class="text-signal underline underline-offset-4">機能：ドパの合計</a><a href="sessions/20261006-0215-subject/index.html#points" class="text-signal underline underline-offset-4">セッション：題材を決める（ドパ）</a><a href="sessions/20261006-0215-subject/duolingo.html" class="text-signal underline underline-offset-4">調査：Duolingo の継続の仕組み</a></p></div>
     </div>
   </section>
 
@@ -483,15 +490,15 @@ tailwind.config = {
       <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>午前4時までは前の日です。寝る前のスクワットが、次の日扱いにならないようにしています。</p>
     </div>
     <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
-      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#dt" class="text-dopa underline underline-offset-4">DT</a><a href="#dpw" class="text-dopa underline underline-offset-4">DPW</a><a href="#done-mash" class="text-dopa underline underline-offset-4">完了連打</a><a href="#rest-pass" class="text-dopa underline underline-offset-4">休み券</a></p></div>
-      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="sessions/20261006-0215-subject/index.html#streak" class="text-signal underline underline-offset-4">セッション：題材を決める（連続記録）</a><a href="sessions/20261006-0215-subject/duolingo.html" class="text-signal underline underline-offset-4">調査：Duolingo の継続の仕組み</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#dt" class="text-dopa underline underline-offset-4">DT</a><a href="#dpw" class="text-dopa underline underline-offset-4">DPW</a><a href="#done-mash" class="text-dopa underline underline-offset-4">完了連打</a><a href="#rest-pass" class="text-dopa underline underline-offset-4">休み券</a><a href="#best-streak" class="text-dopa underline underline-offset-4">最長記録</a><a href="#record-day" class="text-dopa underline underline-offset-4">記録日</a><a href="#milestone" class="text-dopa underline underline-offset-4">節目</a><a href="#today-reminder" class="text-dopa underline underline-offset-4">今日まだ通知</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="features/streak/index.html" class="text-signal underline underline-offset-4">機能：連続記録と休み券</a><a href="sessions/20261006-0215-subject/index.html#streak" class="text-signal underline underline-offset-4">セッション：題材を決める（連続記録）</a><a href="sessions/20261006-0215-subject/duolingo.html" class="text-signal underline underline-offset-4">調査：Duolingo の継続の仕組み</a></p></div>
     </div>
   </section>
 
   <section id="rest-pass" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
     <p class="font-mono text-xs text-mute">#rest-pass</p>
     <h2 class="mt-1 font-display text-2xl">休み券</h2>
-    <p class="mt-3 leading-relaxed"><a href="#done-mash" class="text-dopa underline underline-offset-4">完了連打</a>をしなかった日に、<a href="#streak" class="text-dopa underline underline-offset-4">連続記録</a>を途切れさせない権利。7日続くたびに1枚もらえ、2枚まで持てる。叩かなかった日に自動で使われる。Duolingo の Streak Freeze にならった。Duolingo は通貨で買わせるが、<a href="#dopa-point" class="text-dopa underline underline-offset-4">ドパ</a>には使い道を作らないので、続けた日数で配る。</p>
+    <p class="mt-3 leading-relaxed"><a href="#done-mash" class="text-dopa underline underline-offset-4">完了連打</a>をしなかった日に、<a href="#streak" class="text-dopa underline underline-offset-4">連続記録</a>を途切れさせない権利。7日続くたびに1枚もらえ、2枚まで持てる。叩かなかった日に自動で使われる。Duolingo の Streak Freeze にならった。Duolingo は通貨で買わせるが、<a href="#dopa-point" class="text-dopa underline underline-offset-4">ドパ</a>には使い道を作らないので、続けた日数で配る。休み券で埋めた日は連続日数に数えず、つなぐだけ。途切れたら休み券も0枚に戻る。枚数も使った日も保存せず、<a href="#record" class="text-dopa underline underline-offset-4">記録</a>を日付順にたどって毎回計算する（2026-10-06 本作りの設計）。</p>
     <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
     <div class="mt-2 flex flex-col gap-2 text-sm">
       <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>休み券は、ドパで買えるんですか。</p>
@@ -500,8 +507,127 @@ tailwind.config = {
       <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>2枚までしか持てないので、3日目で途切れます。ただ、DT は減りませんし、最長記録も残ります。</p>
     </div>
     <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
-      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#streak" class="text-dopa underline underline-offset-4">連続記録</a><a href="#dpw" class="text-dopa underline underline-offset-4">DPW</a><a href="#dt" class="text-dopa underline underline-offset-4">DT</a></p></div>
-      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="sessions/20261006-0215-subject/index.html#streak" class="text-signal underline underline-offset-4">セッション：題材を決める（連続記録）</a><a href="sessions/20261006-0215-subject/duolingo.html#streak" class="text-signal underline underline-offset-4">調査：Duolingo の Streak Freeze</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#streak" class="text-dopa underline underline-offset-4">連続記録</a><a href="#dpw" class="text-dopa underline underline-offset-4">DPW</a><a href="#dt" class="text-dopa underline underline-offset-4">DT</a><a href="#best-streak" class="text-dopa underline underline-offset-4">最長記録</a><a href="#record" class="text-dopa underline underline-offset-4">記録</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="features/streak/index.html" class="text-signal underline underline-offset-4">機能：連続記録と休み券</a><a href="sessions/20261006-0215-subject/index.html#streak" class="text-signal underline underline-offset-4">セッション：題材を決める（連続記録）</a><a href="sessions/20261006-0215-subject/duolingo.html#streak" class="text-signal underline underline-offset-4">調査：Duolingo の Streak Freeze</a></p></div>
+    </div>
+  </section>
+
+  <section id="record" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#record</p>
+    <h2 class="mt-1 font-display text-2xl">記録</h2>
+    <p class="mt-3 leading-relaxed"><a href="#done-mash" class="text-dopa underline underline-offset-4">完了連打</a>1回分のデータ。端末に保存するのはこれ1種類だけで、叩き始めた日時、<a href="#record-day" class="text-dopa underline underline-offset-4">記録日</a>、ドパに変えた回数を持つ。記録は3つのどれかで1件として閉じる。残りが0になったとき、60秒叩かなかったとき、アプリを離れたとき。途中で閉じた記録も1件で、<a href="#streak" class="text-dopa underline underline-offset-4">連続記録</a>の継続に数える。保存は閉じたときに1回だけ行い、叩いている間は書き込まない。<a href="#dt" class="text-dopa underline underline-offset-4">DT</a>、<a href="#dpw" class="text-dopa underline underline-offset-4">DPW</a>、連続記録、<a href="#rest-pass" class="text-dopa underline underline-offset-4">休み券</a>は、どれも記録から計算する。間違えて作った記録を取り消す仕組みはない（開発者が決定、2026-10-06）。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>7打で手が止まったら、その7回はどうなりますか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>60秒たっても叩かなければ、7ドパの記録として1件になります。ボタンは目標回数に戻ります。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>間違えて叩いた記録は消せますか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>いまは消せません。取り消しは課題として残してあります。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#done-mash" class="text-dopa underline underline-offset-4">完了連打</a><a href="#record-day" class="text-dopa underline underline-offset-4">記録日</a><a href="#dopa-point" class="text-dopa underline underline-offset-4">ドパ</a><a href="#streak" class="text-dopa underline underline-offset-4">連続記録</a><a href="#rest-pass" class="text-dopa underline underline-offset-4">休み券</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="features/done-mash/index.html" class="text-signal underline underline-offset-4">機能：完了連打</a><a href="database/squat-record/index.html" class="text-signal underline underline-offset-4">データ：SquatRecord</a><a href="sessions/20261006-0312-main-build/index.html#closing" class="text-signal underline underline-offset-4">セッション：本作りの設計（閉じ方）</a></p></div>
+    </div>
+  </section>
+
+  <section id="record-day" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#record-day</p>
+    <h2 class="mt-1 font-display text-2xl">記録日</h2>
+    <p class="mt-3 leading-relaxed"><a href="#record" class="text-dopa underline underline-offset-4">記録</a>がどの日の分かを表す日付。日の境目は午前4時で、午前4時より前に叩いた記録は前の日になる。記録を作った瞬間の端末の時刻で決め、記録に書き込む。あとから日時で計算し直さないので、海外へ行っても過去の記録の日付は動かない。<a href="#streak" class="text-dopa underline underline-offset-4">連続記録</a>と<a href="#dpw" class="text-dopa underline underline-offset-4">DPW</a>の直近7日間は、この記録日から数える。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>夜中の2時に叩いた記録は、何日の分ですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>前の日です。午前4時までは前の日の記録日になります。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>旅行先で開いたら、日付がずれたりしませんか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>ずれません。叩いたその場の日付を記録に書いてあるので、どこで開いても同じ日のままです。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#record" class="text-dopa underline underline-offset-4">記録</a><a href="#streak" class="text-dopa underline underline-offset-4">連続記録</a><a href="#dpw" class="text-dopa underline underline-offset-4">DPW</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="features/streak/index.html" class="text-signal underline underline-offset-4">機能：連続記録と休み券</a><a href="database/squat-record/index.html" class="text-signal underline underline-offset-4">データ：SquatRecord</a><a href="sessions/20261006-0312-main-build/index.html#streak" class="text-signal underline underline-offset-4">セッション：本作りの設計（連続記録）</a></p></div>
+    </div>
+  </section>
+
+  <section id="finale" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#finale</p>
+    <h2 class="mt-1 font-display text-2xl">フィナーレ</h2>
+    <p class="mt-3 leading-relaxed"><a href="#done-mash" class="text-dopa underline underline-offset-4">完了連打</a>を叩き切った最後の1打で出る演出。ドパの粒が弾け、「やったった！」の文字が出て、和音と長めの振動が鳴る。叩き切ったときだけ出し、途中で閉じた記録には出さない。その日最初の記録なら<a href="#streak" class="text-dopa underline underline-offset-4">連続記録</a>が伸びる演出が、<a href="#milestone" class="text-dopa underline underline-offset-4">節目</a>に届いたなら札が、ここに重なる。フィナーレのあと1.2秒は、叩いても数えない。<br><span class="text-sm text-mute">注意：2026-10-06 の題材を決めるセッションでは、朝昼夕の3つの枠がそろったときの演出を「フィナーレ」と呼んでいた。この案は外れ、いまは叩き切った最後の1打の演出を指す。</span></p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>20打のうち19打で止めたら、フィナーレは出ますか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>出ません。フィナーレは残りが0になった1打だけです。19ドパはちゃんと記録になります。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>フィナーレのあとに勢いで叩いたら、次の記録が始まりませんか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>始まりません。フィナーレのあと1.2秒は叩いても数えません。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#done-mash" class="text-dopa underline underline-offset-4">完了連打</a><a href="#milestone" class="text-dopa underline underline-offset-4">節目</a><a href="#effect-inflation" class="text-dopa underline underline-offset-4">演出インフレ</a><a href="#streak" class="text-dopa underline underline-offset-4">連続記録</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="features/done-mash/index.html" class="text-signal underline underline-offset-4">機能：完了連打</a><a href="sessions/20261006-0312-main-build/index.html#effects" class="text-signal underline underline-offset-4">セッション：本作りの設計（演出）</a></p></div>
+    </div>
+  </section>
+
+  <section id="milestone" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#milestone</p>
+    <h2 class="mt-1 font-display text-2xl">節目</h2>
+    <p class="mt-3 leading-relaxed">届いた1打で特別な演出を重ねる区切り。<a href="#dt" class="text-dopa underline underline-offset-4">DT</a>は 100、1,000、10,000、100,000 ドパ。<a href="#streak" class="text-dopa underline underline-offset-4">連続記録</a>は 7、30、100、365 日と、その先は365日ごと。<a href="#dpw" class="text-dopa underline underline-offset-4">DPW</a>は<a href="#best-week" class="text-dopa underline underline-offset-4">自己ベスト</a>を超えた1打で、1日に1回まで。記録を始めて8日目から。届いた節目ごとに札が1枚、<a href="#finale" class="text-dopa underline underline-offset-4">フィナーレ</a>の下に積まれ、札1枚につき金色の粒と音を1つ足す。3枚が重なる1打が、いちばん重い場面になる。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>DT が1,000を超えるのと、連続30日目が同じ1打だったらどうなりますか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>札が2枚積まれます。粒と音もそのぶん重なります。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>自己ベストを超えたあとも、叩くたびに札が出ますか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>出ません。DPW の節目は1日に1回までです。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#dt" class="text-dopa underline underline-offset-4">DT</a><a href="#streak" class="text-dopa underline underline-offset-4">連続記録</a><a href="#best-week" class="text-dopa underline underline-offset-4">自己ベスト</a><a href="#finale" class="text-dopa underline underline-offset-4">フィナーレ</a><a href="#effect-inflation" class="text-dopa underline underline-offset-4">演出インフレ</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="features/dopa-totals/index.html" class="text-signal underline underline-offset-4">機能：ドパの合計</a><a href="features/streak/index.html" class="text-signal underline underline-offset-4">機能：連続記録と休み券</a><a href="sessions/20261006-0312-main-build/index.html#effects" class="text-signal underline underline-offset-4">セッション：本作りの設計（節目）</a></p></div>
+    </div>
+  </section>
+
+  <section id="best-streak" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#best-streak</p>
+    <h2 class="mt-1 font-display text-2xl">最長記録</h2>
+    <p class="mt-3 leading-relaxed"><a href="#streak" class="text-dopa underline underline-offset-4">連続記録</a>の、これまでで最も長かった日数。連続記録が途切れても残る。途切れたあと最初に開いたときのカードで、<a href="#dt" class="text-dopa underline underline-offset-4">DT</a>と並べて大きく出す。途切れた直後は、やめる人が出やすい瞬間なので、「0日」ではなく残っているものを前に出すためにある。最長記録も<a href="#record" class="text-dopa underline underline-offset-4">記録</a>から計算し、保存はしない。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>途切れたら、何が表示されますか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>「連続記録は29日で止まりました」のカードに、最長記録と DT を大きく出します。0日とは表示しません。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>最長記録は、どこかに保存しておくんですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>しません。記録を日付順にたどれば、毎回同じ答えが出ます。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#streak" class="text-dopa underline underline-offset-4">連続記録</a><a href="#rest-pass" class="text-dopa underline underline-offset-4">休み券</a><a href="#dt" class="text-dopa underline underline-offset-4">DT</a><a href="#record" class="text-dopa underline underline-offset-4">記録</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="features/streak/index.html" class="text-signal underline underline-offset-4">機能：連続記録と休み券</a><a href="sessions/20261006-0312-main-build/index.html#streak" class="text-signal underline underline-offset-4">セッション：本作りの設計（途切れたとき）</a></p></div>
+    </div>
+  </section>
+
+  <section id="best-week" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#best-week</p>
+    <h2 class="mt-1 font-display text-2xl">自己ベスト</h2>
+    <p class="mt-3 leading-relaxed"><a href="#dpw" class="text-dopa underline underline-offset-4">DPW</a>のこれまでで最も高かった7日間の値。昨日までのどの日で区切った7日間の合計のうち、いちばん大きいものを取る。今日を含めないのは、含めると叩くたびに自分を超え続けてしまうから。ホームでは今日の DPW を、前の7日と自己ベストに並べて出す。今日の DPW が自己ベストを超えた1打が<a href="#milestone" class="text-dopa underline underline-offset-4">節目</a>になり、1日に1回まで札が出る。記録を始めて7日目までは、7日まるごとの区間が1つもなく超える相手がいないので出さない。比べる相手は他人ではなく自分。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>始めた日から、自己ベスト更新の演出は出ますか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>出ません。7日まるごとたまった区間がないと、超える相手がいないからです。始めて8日目からです。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>自己ベストは、どこかに覚えておくんですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>覚えません。記録を1日ずつ足して、7日ずつずらしながら合計すれば出ます。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#dpw" class="text-dopa underline underline-offset-4">DPW</a><a href="#milestone" class="text-dopa underline underline-offset-4">節目</a><a href="#dt" class="text-dopa underline underline-offset-4">DT</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="features/dopa-totals/index.html" class="text-signal underline underline-offset-4">機能：ドパの合計</a><a href="sessions/20261006-0312-main-build/index.html#effects" class="text-signal underline underline-offset-4">セッション：本作りの設計（節目）</a></p></div>
+    </div>
+  </section>
+
+  <section id="today-reminder" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#today-reminder</p>
+    <h2 class="mt-1 font-display text-2xl">今日まだ通知</h2>
+    <p class="mt-3 leading-relaxed">その日まだ<a href="#done-mash" class="text-dopa underline underline-offset-4">完了連打</a>をしていない夜に、1日1回だけ出す通知。既定は 21:00。初めて叩き切った<a href="#finale" class="text-dopa underline underline-offset-4">フィナーレ</a>のあとに、出してよいかを1度だけ聞く。起動直後には聞かない。端末の中だけで出すので、届く時刻に「今日もう叩いたか」を確かめられない。そこで7日先まで予約しておき、その日に記録ができたら当日分を取り消す。アプリを開くたびに予約し直し、7日目の通知だけ「しばらく通知を止めます。また開いたら再開します」と出す。7日開かなければ、それきり届かない。責める文面は使わない。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>毎晩通知が来ると、うるさくないですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>その日にもう叩いていれば来ません。来るのは、まだの日の夜1回だけです。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>しばらく使わなかったら、ずっと届き続けますか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>7日で止まります。7日目に「しばらく止めます」と伝えて、それきりです。開けばまた再開します。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#done-mash" class="text-dopa underline underline-offset-4">完了連打</a><a href="#streak" class="text-dopa underline underline-offset-4">連続記録</a><a href="#finale" class="text-dopa underline underline-offset-4">フィナーレ</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="features/today-reminder/index.html" class="text-signal underline underline-offset-4">機能：今日まだ通知</a><a href="sessions/20261006-0312-main-build/index.html#reminder" class="text-signal underline underline-offset-4">セッション：本作りの設計（通知）</a><a href="sessions/20261006-0215-subject/duolingo.html#notifications" class="text-signal underline underline-offset-4">調査：Duolingo の通知</a></p></div>
     </div>
   </section>
 

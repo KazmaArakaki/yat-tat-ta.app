@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>設定シート</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=M+PLUS+Rounded+1c:wght@500;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+        round: ['"M PLUS Rounded 1c"', '"Noto Sans JP"', 'sans-serif']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } }
+      },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+<style>
+/* アプリ画面の色。明るい配色と暗い配色を、.app と .app.dark で切り替える */
+.app { --a-bg:#FBF6EE; --a-card:#FFFFFF; --a-ink:#1C1916; --a-mute:#6E655C; --a-rule:#E7DDCC; --a-line:#1C1916; --a-soft:#FFE6F0; }
+.app.dark { --a-bg:#16120F; --a-card:#231D18; --a-ink:#F5EEE3; --a-mute:#A89C8E; --a-rule:#3A312A; --a-line:#F5EEE3; --a-soft:#3A1726; }
+.a-bg { background:var(--a-bg); color:var(--a-ink); }
+.a-card { background:var(--a-card); }
+.a-ink { color:var(--a-ink); }
+.a-mute { color:var(--a-mute); }
+.a-line { border-color:var(--a-line); }
+.a-rule { border-color:var(--a-rule); }
+.a-soft { background:var(--a-soft); }
+.a-shadow { box-shadow:4px 4px 0 var(--a-line); }
+.a-shadow-lg { box-shadow:0 8px 0 var(--a-line); }
+.num { font-family:"M PLUS Rounded 1c","Noto Sans JP",sans-serif; font-weight:900; font-variant-numeric:tabular-nums; letter-spacing:-0.02em; }
+.ticket { width:14px; height:18px; border-radius:3px; background:#2F79F7; position:relative; }
+.ticket::after { content:""; position:absolute; left:2px; right:2px; top:8px; border-top:2px dotted rgba(255,255,255,.75); }
+.ticket.empty { background:transparent; border:2px dashed var(--a-rule); }
+.mash { width:200px; height:200px; border-radius:9999px; background:#E9A800; border:4px solid var(--a-line); box-shadow:0 8px 0 var(--a-line); color:#1C1916; transition:transform .06s; }
+.mash:active { transform:translateY(6px); box-shadow:0 2px 0 var(--a-line); }
+.glow { position:absolute; inset:-22px; border-radius:9999px; background:radial-gradient(circle, rgba(229,51,122,.55) 0%, rgba(229,51,122,0) 70%); pointer-events:none; }
+.ring { position:absolute; border-radius:9999px; border:3px solid #E5337A; pointer-events:none; }
+.grain { position:absolute; border-radius:9999px; background:#E5337A; pointer-events:none; }
+@keyframes pop { 0%{transform:scale(.3);opacity:0} 60%{transform:scale(1.08);opacity:1} 100%{transform:scale(1)} }
+@keyframes ringout { 0%{transform:translate(-50%,-50%) scale(.2);opacity:1} 100%{transform:translate(-50%,-50%) scale(1);opacity:0} }
+@keyframes fly { 0%{transform:translate(0,0) scale(1);opacity:1} 100%{transform:translate(var(--dx),var(--dy)) scale(.4);opacity:0} }
+@keyframes burst { 0%{transform:translate(0,0);opacity:1} 100%{transform:translate(var(--dx),var(--dy));opacity:0} }
+@keyframes drop { 0%{transform:translateY(-120%)} 100%{transform:none} }
+.pop { animation:pop .45s cubic-bezier(.2,1.4,.4,1) both; }
+.tabbtn[aria-selected="true"] { background:#1C1916; color:#FBF6EE; }
+</style>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-5xl">
+<header class="animate-rise">
+  <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">ui / pages / settings</p>
+  <h1 class="mt-2 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">設定</span>シート</h1>
+  <div class="mt-4 max-w-2xl space-y-3 text-sm leading-relaxed text-ink/80"><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">ホームの右上の歯車から、下に出すシートです。置くのは2つだけ。<a href="../../../glossary.html#target-reps" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">目標回数</a>と、<a href="../../../glossary.html#today-reminder" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日まだ通知</a>。</p><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">音の ON/OFF は置きません。マナーモードに従って黙るので、iPhone の側で切り替えられます。−と＋、通知のスイッチは、このモックでも動きます。</p></div>
+</header>
+<div class="mt-10 flex flex-col items-center gap-10 md:flex-row md:items-start md:justify-center">
+  <div class="w-[300px] shrink-0 rounded-[2.8rem] border-[6px] border-ink bg-ink p-1.5 shadow-[10px_10px_0_#E5337A] ">
+  <div class="app  a-bg relative flex h-[650px] flex-col overflow-hidden rounded-[2.2rem] px-5 pb-6 pt-11">
+    <div class="absolute left-1/2 top-2.5 z-40 h-6 w-24 -translate-x-1/2 rounded-full bg-black"></div>
+    <div class="pointer-events-none opacity-40"><div class="flex items-start justify-between gap-2"><div class="flex-1"><div class="flex items-start justify-between">
+  <div><p class="num a-ink text-[40px] leading-none"><span class="text-dopa">29</span><span class="ml-1 font-sans text-sm font-bold">日連続</span></p><p class="mt-1.5 text-[11px] font-bold a-mute">今日はまだ。<span class="text-dopa">1回で30日目</span></p></div>
+  <div class="flex flex-col items-end gap-1 pt-1">
+    <p class="text-[9px] font-bold a-mute">休み券</p>
+    <div class="flex gap-1"><span class="ticket"></span><span class="ticket"></span></div>
+  </div>
+</div></div></div>
+<div class="absolute right-4 top-[52px] z-20"><span class="a-ink grid h-8 w-8 place-items-center rounded-full border-2 a-line a-card text-base leading-none">⚙︎</span></div>
+<div class="mt-auto"><div class="flex flex-col items-center">
+  <div class="relative">
+    
+    <button type="button" class="mash relative grid place-items-center " aria-label="完了連打">
+      <span class="text-center">
+        <span class="block text-[11px] font-bold opacity-70">スクワット</span>
+        <span class="num block text-[76px] leading-[.95]">20</span>
+        <span class="mt-0.5 block text-[12px] font-black">叩いてドパに</span>
+      </span>
+    </button>
+    
+  </div>
+  
+</div></div>
+<div class="mt-auto pt-6"><div class="grid grid-cols-2 gap-3">
+  <div class="a-card a-shadow relative rounded-2xl border-2 a-line px-3 py-2.5">
+    <p class="font-mono text-[9px] font-bold tracking-widest a-mute">DPW</p>
+    <p class="num text-[30px] leading-none">347</p><p class="mt-1 text-[9px] font-bold a-mute">前の7日 300　ベスト 410</p>
+  </div>
+  <div class="a-card a-shadow relative rounded-2xl border-2 a-line px-3 py-2.5">
+    <p class="font-mono text-[9px] font-bold tracking-widest a-mute">DT</p>
+    <p class="num text-[30px] leading-none">987</p>
+    <div class="mt-1.5 h-1.5 overflow-hidden rounded-full a-soft"><div class="h-full rounded-full bg-dopa" style="width:98.7%"></div></div>
+    <p class="mt-1 text-[9px] font-bold a-mute">次の節目 1,000</p>
+  </div>
+</div></div>
+</div>
+<div class="absolute inset-0 z-20 bg-black/30"></div>
+<div class="a-card absolute inset-x-0 bottom-0 top-24 z-30 flex flex-col rounded-t-[1.8rem] border-t-2 a-line px-5 pt-3" style="animation:rise .35s ease-out both">
+  <div class="mx-auto h-1.5 w-10 rounded-full bg-rule"></div>
+  <div class="mt-3 flex items-center justify-between">
+    <p class="text-base font-black a-ink">設定</p>
+    <a href="../home/index.html" class="rounded-full border-2 border-ink bg-gold px-3 py-1 text-xs font-black text-ink shadow-[0_3px_0_#1C1916]">閉じる</a>
+  </div>
+  <div class="mt-6">
+    <p class="text-[11px] font-bold a-mute">目標回数</p>
+    <div class="mt-2 flex items-center justify-between rounded-2xl border-2 a-line px-3 py-2.5">
+      <button id="minus" type="button" class="grid h-10 w-10 place-items-center rounded-full border-2 a-line text-xl font-black a-ink" aria-label="5回減らす">−</button>
+      <p class="a-ink"><span id="reps" class="num text-[44px] leading-none">20</span><span class="ml-1 text-sm font-bold">回</span></p>
+      <button id="plus" type="button" class="grid h-10 w-10 place-items-center rounded-full border-2 border-ink bg-gold text-xl font-black text-ink" aria-label="5回増やす">＋</button>
+    </div>
+    <p class="mt-2 text-[10px] leading-relaxed a-mute">5〜100回、5回ずつ。次に叩き始めた記録から変わる。</p>
+  </div>
+  <div class="mt-6">
+    <p class="text-[11px] font-bold a-mute">今日まだ通知</p>
+    <div class="mt-2 rounded-2xl border-2 a-line">
+      <div class="flex items-center justify-between px-3 py-3">
+        <p class="text-sm font-bold a-ink">夜に知らせる</p>
+        <button id="notify" type="button" role="switch" aria-checked="true" class="relative h-7 w-12 rounded-full border-2 border-ink bg-dopa transition-colors"><span class="absolute left-0.5 top-0.5 h-5 w-5 rounded-full border-2 border-ink bg-white transition-transform" style="transform:translateX(20px)"></span></button>
+      </div>
+      <div id="time-row" class="flex items-center justify-between border-t-2 a-rule px-3 py-3 transition-opacity">
+        <p class="text-sm font-bold a-ink">時刻</p>
+        <p class="num rounded-lg a-soft px-2.5 py-1 text-lg a-ink">21:00</p>
+      </div>
+    </div>
+    <p class="mt-2 text-[10px] leading-relaxed a-mute">その日まだ叩いていないときだけ、1回。7日開かなければ、しばらく止まります。</p>
+  </div>
+</div>
+  </div>
+</div>
+  <ul class="flex max-w-xs flex-col gap-3 text-sm leading-relaxed">
+  <li class="border-l-4 border-gold pl-3"><b>目標回数</b>：−と＋で5回ずつ。5〜100回。既定は20。叩いている途中で変えても、その記録は叩き始めたときの回数のまま。</li>
+  <li class="border-l-4 border-dopa pl-3"><b>今日まだ通知</b>：ON/OFF と時刻。既定は 21:00。OFF にすると時刻の行が薄くなる。</li>
+  <li class="border-l-4 border-ink pl-3"><b>閉じる</b>：ホームに戻る。下へ引いても閉じる。</li>
+</ul>
+</div>
+</article>
+</main>
+<script>
+(function () {
+  var reps = 20;
+  var out = document.getElementById('reps');
+  document.getElementById('minus').addEventListener('click', function () { reps = Math.max(5, reps - 5); out.textContent = reps; });
+  document.getElementById('plus').addEventListener('click', function () { reps = Math.min(100, reps + 5); out.textContent = reps; });
+  var sw = document.getElementById('notify'), time = document.getElementById('time-row');
+  sw.addEventListener('click', function () {
+    var on = sw.getAttribute('aria-checked') !== 'true';
+    sw.setAttribute('aria-checked', on ? 'true' : 'false');
+    sw.classList.toggle('bg-dopa', on); sw.classList.toggle('bg-rule', !on);
+    sw.firstElementChild.style.transform = on ? 'translateX(20px)' : 'none';
+    time.style.opacity = on ? 1 : .35;
+  });
+})();
+</script>
+<script src="../../../sidebar.js" defer></script>
+</body>
+</html>

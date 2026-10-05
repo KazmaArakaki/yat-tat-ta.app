@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>連続記録と休み券</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } },
+        pulse2: { '0%,100%': { transform: 'scale(1)' }, '50%': { transform: 'scale(1.04)' } }
+      },
+      animation: { rise: 'rise .5s ease-out both', pulse2: 'pulse2 1.6s ease-in-out infinite' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-4xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <a href="../index.html" class="hover:text-ink">features</a><span>/</span><span>ふり返って続ける</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">連続記録</span>と休み券</h1>
+    <p class="mt-4 max-w-2xl text-base leading-relaxed">完了連打をした日が何日続いたか。休んでも途切れない<a href="../../glossary.html#rest-pass" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">休み券</a>と、途切れたときに何を見せるかも、この機能が持ちます。保存するものはなく、すべて<a href="../../glossary.html#record" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録</a>から計算します。</p>
+  </header>
+
+  <section id="rules" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01 / rules</p>
+    <h2 class="mt-2 font-display text-3xl">続いたことにする条件</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80"><a href="../../glossary.html#streak" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">連続記録</a>は、伸びている間は人を続けさせ、途切れた瞬間に逆に働きます。そこで、途切れにくくする仕組みと、途切れても残るものを一緒に置いています。条件の低さは Duolingo で最も効いた変更にならいました。</p>
+    <p class="mt-8 font-mono text-xs text-mute">表1　決まりごと</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[34rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">項目</th><th class="py-2 pr-4 font-bold">決まり</th><th class="py-2 pr-4 font-bold">理由</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">続いた日</td><td class="py-3 pr-4">その<a href="../../glossary.html#record-day" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録日</a>に記録が1件以上ある。途中で閉じた7打の記録でもよい</td><td class="py-3 pr-4">目標回数に届いたかを問わない。条件は低いほど続く。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">1日の境目</td><td class="py-3 pr-4">午前4時</td><td class="py-3 pr-4">23時50分の夜食のあと、日付をまたいでしゃがんだ人が記録しそこねない。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">休み券をもらう</td><td class="py-3 pr-4">連続日数が7の倍数になった日に1枚。持てるのは2枚まで</td><td class="py-3 pr-4">Duolingo は通貨で買わせるが、ドパには使い道がない。上限2枚は Duolingo と同じ。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">休み券を使う</td><td class="py-3 pr-4">記録のない日に自動で1枚。その日は連続日数に数えない</td><td class="py-3 pr-4">数えると、14日目に2枚もらった人が何もせず16日まで伸びる。</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-bold">途切れる</td><td class="py-3 pr-4">記録のない日に休み券がない。連続日数も休み券も0に戻る</td><td class="py-3 pr-4">持ち越せると、次の連続を同じ持ち札で始められてしまう。</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="walk" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / walk</p>
+    <h2 class="mt-2 font-display text-3xl">休み券を保存しないで数える</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">休み券を使った日には、記録がありません。ない記録から使ったことは読めないので、別に保存するしかない。題材を決めたときは、そう考えていました。けれども配り方にも使い方にも、人の判断は入りません。最初の記録日から今日まで1日ずつたどれば、毎回同じ答えが出ます（開発者が了承）。</p>
+    <p class="mt-8 font-mono text-xs text-mute">図1　記録日を1日ずつたどる</p>
+    <ol class="mt-2 flex flex-col gap-2 text-sm">
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">1</span><span>記録のある日：連続日数を1増やす。7の倍数になったら休み券を1枚足す（2枚を超えない）。<a href="../../glossary.html#best-streak" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">最長記録</a>を更新する。</span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">2</span><span>記録のない日（今日より前）：休み券があれば1枚使い、連続日数はそのまま。なければ途切れる。</span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">3</span><span>今日：記録がなければ何もしない。今日が終わるまでは途切れていない。</span></li>
+    </ol>
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">たどった結果から、いまの連続日数、休み券の枚数、最長記録、最後に休み券を使った日、最後に途切れた日が出ます。後ろの2つは、次の節のカードと帯を出すかどうかに使います。この計算は画面から切り離してテストを書きます。日をまたぐ、2枚使う、途切れて0枚に戻る、どれも指で確かめるには日にちがかかりすぎるからです。</p>
+  </section>
+
+  <section id="display" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / display</p>
+    <h2 class="mt-2 font-display text-3xl">いつ、何を見せるか</h2>
+    <p class="mt-8 font-mono text-xs text-mute">表2　画面上の帯（連続記録の帯）の出し方</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[34rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">状態</th><th class="py-2 pr-4 font-bold">大きな数</th><th class="py-2 pr-4 font-bold">下の一言</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">今日はもう叩いた</td><td class="py-3 pr-4">30日連続</td><td class="py-3 pr-4">今日の分はできた</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">今日まだ、続いている</td><td class="py-3 pr-4">29日連続</td><td class="py-3 pr-4">今日はまだ。1回で30日目</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-bold">途切れたあと、まだ叩いていない</td><td class="py-3 pr-4">「0日」は出さない</td><td class="py-3 pr-4">今日の1回で1日目</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">その日最初の記録が閉じると、日数がめくれて1増えます。叩き切った記録ならフィナーレと同じ1打で、途中で閉じた記録なら控えめに。連続 7、30、100、365 日と、その先365日ごとが<a href="../../glossary.html#milestone" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">節目</a>で、届いた1打で札を1枚積みます。1年を超えた人にも、年に1度は札が出ます。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">途切れた直後は、やめる人が出る瞬間です。途切れたと示された人は続ける率が約66%から約58%に下がる、という研究もあります。だから「また1日目から」とだけ見せず、途切れても残るもの（最長記録と DT）を前に出します。</p>
+    <p class="mt-8 font-mono text-xs text-mute">表3　1度だけ出すもの</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[34rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">場面</th><th class="py-2 pr-4 font-bold">出すもの</th><th class="py-2 pr-4 font-bold">出さないもの</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">途切れたあと、最初に開いたとき</td><td class="py-3 pr-4">途切れたときのカード。「連続記録は29日で止まりました」、最長記録と DT を大きく、「ためた 987 ドパは、そのまま」。ボタンは「今日の1回から」</td><td class="py-3 pr-4">「0日」の表示</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-bold">休み券が使われたあと、最初に開いたとき</td><td class="py-3 pr-4">上に2秒だけ帯。「休み券を1枚使って、29日連続をつなぎました」</td><td class="py-3 pr-4">「昨日は休みましたね」のような責める文</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">どこまで見せたかは、端末の設定（UserDefaults）に小さく覚えておきます。記録とは別の、消えても困らない値です。消えたら、直近の途切れか休み券をもう1度見せるだけで済みます。</p>
+  </section>
+
+  <section id="screens" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / screens</p>
+    <h2 class="mt-2 font-display text-3xl">関連する画面</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><a href="../../ui/pages/home/index.html" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ホーム</a><p class="mt-1 text-ink/80">いちばん上が連続記録の帯。途切れたときのカードと休み券の帯もこの画面に重ねる。</p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><a href="../../ui/pages/settings/index.html" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">設定シート</a><p class="mt-1 text-ink/80">この機能の設定はない。休み券は自動で使われ、選べない。</p></li>
+    </ul>
+  </section>
+
+  <section id="components" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / components</p>
+    <h2 class="mt-2 font-display text-3xl">関連するコンポーネント</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">サンプル：29日連続、休み券2枚、最長記録29日、DT 987。</p>
+    <div class="mt-6 grid gap-6 md:grid-cols-2">
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <div class="flex items-baseline justify-between"><a href="../../ui/components/streak-bar/index.html" class="font-mono text-xs font-bold text-dopa underline underline-offset-4">streak-bar</a><span class="font-mono text-[11px] text-mute">今日まだ</span></div>
+        <div class="mt-4 rounded-2xl bg-paper p-4">
+          <div class="flex items-center justify-between">
+            <p class="font-display text-3xl leading-none text-dopa">29<span class="ml-1 text-sm text-ink">日連続</span></p>
+            <p class="flex items-center gap-1 text-[11px] text-mute">休み券<span class="h-3 w-3 rounded-sm bg-signal"></span><span class="h-3 w-3 rounded-sm bg-signal"></span></p>
+          </div>
+          <p class="mt-1 text-xs text-mute">今日はまだ。1回で30日目</p>
+        </div>
+      </div>
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <div class="flex items-baseline justify-between"><a href="../../ui/components/rest-pass-banner/index.html" class="font-mono text-xs font-bold text-dopa underline underline-offset-4">rest-pass-banner</a><span class="font-mono text-[11px] text-mute">1枚使った翌朝</span></div>
+        <div class="mt-4 rounded-2xl bg-paper p-4">
+          <div class="flex items-center gap-3 rounded-xl border-2 border-signal bg-white px-4 py-3 text-sm shadow-[4px_4px_0_#2F79F7]">
+            <span class="h-4 w-4 shrink-0 rounded-sm bg-signal"></span>
+            <span>休み券を1枚使って、29日連続をつなぎました</span>
+          </div>
+        </div>
+      </div>
+      <div class="rounded-3xl border-2 border-ink bg-white p-5 md:col-span-2">
+        <div class="flex items-baseline justify-between"><a href="../../ui/components/streak-break-card/index.html" class="font-mono text-xs font-bold text-dopa underline underline-offset-4">streak-break-card</a><span class="font-mono text-[11px] text-mute">途切れたあと最初に開いたとき</span></div>
+        <div class="mt-4 flex justify-center rounded-2xl bg-ink/80 p-6">
+          <div class="w-full max-w-xs rounded-3xl border-2 border-ink bg-paper p-6 text-center shadow-[6px_6px_0_#E5337A]">
+            <p class="text-sm">連続記録は <b>29日</b> で止まりました</p>
+            <div class="mt-5 grid grid-cols-2 gap-3">
+              <div class="rounded-xl bg-white py-3 ring-1 ring-rule"><p class="font-mono text-[10px] text-mute">最長記録</p><p class="font-display text-2xl">29<span class="text-xs">日</span></p></div>
+              <div class="rounded-xl bg-white py-3 ring-1 ring-rule"><p class="font-mono text-[10px] text-mute">DT</p><p class="font-display text-2xl">987</p></div>
+            </div>
+            <p class="mt-4 text-sm font-bold">ためた 987 ドパは、そのまま</p>
+            <p class="mt-5 rounded-full border-2 border-ink bg-gold py-2.5 font-black shadow-[0_4px_0_#1C1916]">今日の1回から</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="links" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / links</p>
+    <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">設計の経緯</p><a href="../../sessions/20261006-0312-main-build/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">本作りの設計</a><a href="../../sessions/20261006-0215-subject/duolingo.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">Duolingo の継続の仕組み</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">計算のもとになるデータ</p><a href="../../database/squat-record/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">SquatRecord</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../glossary.html#streak" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">連続記録</a><a href="../../glossary.html#rest-pass" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">休み券</a><a href="../../glossary.html#best-streak" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">最長記録</a><a href="../../glossary.html#record-day" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録日</a><a href="../../glossary.html#milestone" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">節目</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">ほかの機能</p><a href="../done-mash/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">完了連打</a><a href="../today-reminder/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日まだ通知</a></li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

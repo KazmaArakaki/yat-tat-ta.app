@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ホーム</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=M+PLUS+Rounded+1c:wght@500;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+        round: ['"M PLUS Rounded 1c"', '"Noto Sans JP"', 'sans-serif']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } }
+      },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+<style>
+/* アプリ画面の色。明るい配色と暗い配色を、.app と .app.dark で切り替える */
+.app { --a-bg:#FBF6EE; --a-card:#FFFFFF; --a-ink:#1C1916; --a-mute:#6E655C; --a-rule:#E7DDCC; --a-line:#1C1916; --a-soft:#FFE6F0; }
+.app.dark { --a-bg:#16120F; --a-card:#231D18; --a-ink:#F5EEE3; --a-mute:#A89C8E; --a-rule:#3A312A; --a-line:#F5EEE3; --a-soft:#3A1726; }
+.a-bg { background:var(--a-bg); color:var(--a-ink); }
+.a-card { background:var(--a-card); }
+.a-ink { color:var(--a-ink); }
+.a-mute { color:var(--a-mute); }
+.a-line { border-color:var(--a-line); }
+.a-rule { border-color:var(--a-rule); }
+.a-soft { background:var(--a-soft); }
+.a-shadow { box-shadow:4px 4px 0 var(--a-line); }
+.a-shadow-lg { box-shadow:0 8px 0 var(--a-line); }
+.num { font-family:"M PLUS Rounded 1c","Noto Sans JP",sans-serif; font-weight:900; font-variant-numeric:tabular-nums; letter-spacing:-0.02em; }
+.ticket { width:14px; height:18px; border-radius:3px; background:#2F79F7; position:relative; }
+.ticket::after { content:""; position:absolute; left:2px; right:2px; top:8px; border-top:2px dotted rgba(255,255,255,.75); }
+.ticket.empty { background:transparent; border:2px dashed var(--a-rule); }
+.mash { width:200px; height:200px; border-radius:9999px; background:#E9A800; border:4px solid var(--a-line); box-shadow:0 8px 0 var(--a-line); color:#1C1916; transition:transform .06s; }
+.mash:active { transform:translateY(6px); box-shadow:0 2px 0 var(--a-line); }
+.glow { position:absolute; inset:-22px; border-radius:9999px; background:radial-gradient(circle, rgba(229,51,122,.55) 0%, rgba(229,51,122,0) 70%); pointer-events:none; }
+.ring { position:absolute; border-radius:9999px; border:3px solid #E5337A; pointer-events:none; }
+.grain { position:absolute; border-radius:9999px; background:#E5337A; pointer-events:none; }
+@keyframes pop { 0%{transform:scale(.3);opacity:0} 60%{transform:scale(1.08);opacity:1} 100%{transform:scale(1)} }
+@keyframes ringout { 0%{transform:translate(-50%,-50%) scale(.2);opacity:1} 100%{transform:translate(-50%,-50%) scale(1);opacity:0} }
+@keyframes fly { 0%{transform:translate(0,0) scale(1);opacity:1} 100%{transform:translate(var(--dx),var(--dy)) scale(.4);opacity:0} }
+@keyframes burst { 0%{transform:translate(0,0);opacity:1} 100%{transform:translate(var(--dx),var(--dy));opacity:0} }
+@keyframes drop { 0%{transform:translateY(-120%)} 100%{transform:none} }
+.pop { animation:pop .45s cubic-bezier(.2,1.4,.4,1) both; }
+.tabbtn[aria-selected="true"] { background:#1C1916; color:#FBF6EE; }
+</style>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-5xl">
+<header class="animate-rise">
+  <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">ui / pages / home</p>
+  <h1 class="mt-2 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">ホーム</span></h1>
+  <div class="mt-4 max-w-2xl space-y-3 text-sm leading-relaxed text-ink/80"><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">アプリの画面はこの1枚です。起動した直後の状態を描いています。29日連続で今日はまだ、休み券2枚、<a href="../../../glossary.html#target-reps" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">目標回数</a> 20、DPW 347、DT 987。</p><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">ボタンは押せます。20打を叩き切ると、連続30日目と DT 1,000 ドパが同じ最後の1打で重なります。前回のラフで「いちばん重い場面」として描いた1打です。右上の歯車は設定シートを開きます。音と振動はこのモックでは出ません。</p></div>
+</header>
+<div class="mt-10 flex flex-col items-center gap-10 md:flex-row md:items-start md:justify-center">
+  <div class="w-[300px] shrink-0 rounded-[2.8rem] border-[6px] border-ink bg-ink p-1.5 shadow-[10px_10px_0_#E5337A] ">
+  <div class="app  a-bg relative flex h-[650px] flex-col overflow-hidden rounded-[2.2rem] px-5 pb-6 pt-11">
+    <div class="absolute left-1/2 top-2.5 z-40 h-6 w-24 -translate-x-1/2 rounded-full bg-black"></div>
+    <div class="flex items-start justify-between">
+  <div>
+    <p class="num a-ink text-[40px] leading-none"><span id="streak-num" class="text-dopa">29</span><span class="ml-1 font-sans text-sm font-bold">日連続</span></p>
+    <p id="streak-sub" class="mt-1.5 flex items-center gap-1 text-[11px] font-bold a-mute">今日はまだ。<span class="text-dopa">1回で30日目</span></p>
+  </div>
+  <div class="flex flex-col items-end gap-2">
+    <a href="../settings/index.html" aria-label="設定" class="a-ink grid h-8 w-8 place-items-center rounded-full border-2 a-line a-card text-base leading-none hover:bg-gold">⚙︎</a>
+    <div class="flex items-center gap-1"><span class="text-[9px] font-bold a-mute">休み券</span><span class="ticket"></span><span class="ticket"></span></div>
+  </div>
+</div>
+<div class="mt-auto flex flex-col items-center">
+  <div id="mash-wrap" class="relative">
+    <span id="mash-glow" class="glow transition-opacity duration-150" style="opacity:0"></span>
+    <button id="mash" type="button" class="mash relative grid touch-manipulation select-none place-items-center" aria-label="完了連打">
+      <span class="pointer-events-none text-center">
+        <span id="mash-top" class="block text-[11px] font-bold opacity-70">スクワット</span>
+        <span id="mash-num" class="num block text-[76px] leading-[.95]">20</span>
+        <span class="mt-0.5 block text-[12px] font-black">叩いてドパに</span>
+      </span>
+    </button>
+  </div>
+  <p id="gain" class="num mt-4 text-2xl text-dopa" style="visibility:hidden">+0 <span class="font-sans text-sm font-black">ドパ</span></p>
+</div>
+<div class="mt-auto pt-4">
+  <div class="grid grid-cols-2 gap-3">
+    <div class="a-card a-shadow relative rounded-2xl border-2 a-line px-3 py-2.5">
+      <p class="font-mono text-[9px] font-bold tracking-widest a-mute">DPW</p>
+      <p id="dpw" class="num text-[30px] leading-none">347</p>
+      <p class="mt-1 text-[9px] font-bold a-mute">前の7日 300　ベスト 410</p>
+    </div>
+    <div class="a-card a-shadow relative rounded-2xl border-2 a-line px-3 py-2.5">
+      <p class="font-mono text-[9px] font-bold tracking-widest a-mute">DT</p>
+      <p id="dt" class="num text-[30px] leading-none">987</p>
+      <div class="mt-1.5 h-1.5 overflow-hidden rounded-full a-soft"><div id="dt-bar" class="h-full rounded-full bg-dopa" style="width:98.7%"></div></div>
+      <p class="mt-1 text-[9px] font-bold a-mute">次の節目 1,000</p>
+    </div>
+  </div>
+</div>
+<div id="finale" hidden><div class="absolute inset-0 z-30 flex flex-col items-center justify-center backdrop-blur-[2px]" style="background:color-mix(in srgb, var(--a-bg) 72%, transparent)">
+  <div class="relative"><span class="grain" style="left:50%;top:50%;width:5px;height:5px;background:#E9A800;transform:translate(91px,0px);opacity:0.65"></span><span class="grain" style="left:50%;top:50%;width:9px;height:9px;background:#E9A800;transform:translate(89px,18px);opacity:0.65"></span><span class="grain" style="left:50%;top:50%;width:7px;height:7px;background:#E9A800;transform:translate(81px,36px);opacity:0.45"></span><span class="grain" style="left:50%;top:50%;width:10px;height:10px;background:#E9A800;transform:translate(60px,44px);opacity:0.85"></span><span class="grain" style="left:50%;top:50%;width:9px;height:9px;background:#E9A800;transform:translate(70px,78px);opacity:0.85"></span><span class="grain" style="left:50%;top:50%;width:6px;height:6px;background:#E9A800;transform:translate(51px,88px);opacity:0.55"></span><span class="grain" style="left:50%;top:50%;width:10px;height:10px;background:#E9A800;transform:translate(28px,87px);opacity:0.75"></span><span class="grain" style="left:50%;top:50%;width:6px;height:6px;background:#E9A800;transform:translate(8px,84px);opacity:0.65"></span><span class="grain" style="left:50%;top:50%;width:10px;height:10px;background:#E5337A;transform:translate(-7px,70px);opacity:0.45"></span><span class="grain" style="left:50%;top:50%;width:9px;height:9px;background:#E5337A;transform:translate(-35px,110px);opacity:0.75"></span><span class="grain" style="left:50%;top:50%;width:11px;height:11px;background:#E5337A;transform:translate(-53px,92px);opacity:0.45"></span><span class="grain" style="left:50%;top:50%;width:7px;height:7px;background:#E5337A;transform:translate(-50px,55px);opacity:0.85"></span><span class="grain" style="left:50%;top:50%;width:7px;height:7px;background:#E5337A;transform:translate(-83px,60px);opacity:0.65"></span><span class="grain" style="left:50%;top:50%;width:9px;height:9px;background:#E5337A;transform:translate(-80px,35px);opacity:0.35"></span><span class="grain" style="left:50%;top:50%;width:6px;height:6px;background:#E5337A;transform:translate(-79px,16px);opacity:0.85"></span><span class="grain" style="left:50%;top:50%;width:10px;height:10px;background:#E5337A;transform:translate(-81px,0px);opacity:0.35"></span><span class="grain" style="left:50%;top:50%;width:7px;height:7px;background:#E5337A;transform:translate(-118px,-25px);opacity:0.65"></span><span class="grain" style="left:50%;top:50%;width:8px;height:8px;background:#E5337A;transform:translate(-82px,-36px);opacity:0.55"></span><span class="grain" style="left:50%;top:50%;width:5px;height:5px;background:#E5337A;transform:translate(-90px,-65px);opacity:0.35"></span><span class="grain" style="left:50%;top:50%;width:6px;height:6px;background:#E5337A;transform:translate(-80px,-89px);opacity:0.55"></span><span class="grain" style="left:50%;top:50%;width:6px;height:6px;background:#E5337A;transform:translate(-56px,-97px);opacity:0.45"></span><span class="grain" style="left:50%;top:50%;width:8px;height:8px;background:#E5337A;transform:translate(-29px,-92px);opacity:0.65"></span><span class="grain" style="left:50%;top:50%;width:6px;height:6px;background:#E5337A;transform:translate(-11px,-108px);opacity:0.65"></span><span class="grain" style="left:50%;top:50%;width:8px;height:8px;background:#E5337A;transform:translate(11px,-107px);opacity:0.55"></span><span class="grain" style="left:50%;top:50%;width:8px;height:8px;background:#E5337A;transform:translate(22px,-69px);opacity:0.65"></span><span class="grain" style="left:50%;top:50%;width:5px;height:5px;background:#E5337A;transform:translate(45px,-78px);opacity:0.65"></span><span class="grain" style="left:50%;top:50%;width:9px;height:9px;background:#E5337A;transform:translate(60px,-67px);opacity:0.65"></span><span class="grain" style="left:50%;top:50%;width:7px;height:7px;background:#E5337A;transform:translate(71px,-52px);opacity:0.45"></span><span class="grain" style="left:50%;top:50%;width:10px;height:10px;background:#E5337A;transform:translate(68px,-30px);opacity:0.85"></span><span class="grain" style="left:50%;top:50%;width:9px;height:9px;background:#E5337A;transform:translate(102px,-21px);opacity:0.85"></span><p class="pop font-display text-[44px] leading-none text-dopa [text-shadow:3px_3px_0_#1C1916]">やったった！</p></div>
+  <p class="num mt-3 text-2xl text-dopa">+20 <span class="font-sans text-sm font-black">ドパ</span></p>
+  <div class="mt-5 flex w-52 flex-col gap-2"><p class="pop rounded-xl border-2 border-ink bg-dopa text-white px-3 py-1.5 text-center text-[13px] font-black shadow-[3px_3px_0_#1C1916]" style="animation-delay:250ms">連続 <span class="num">30</span> 日</p><p class="pop rounded-xl border-2 border-ink bg-gold text-ink px-3 py-1.5 text-center text-[13px] font-black shadow-[3px_3px_0_#1C1916]" style="animation-delay:400ms">DT <span class="num">1,000</span> ドパ</p></div>
+</div></div>
+  </div>
+</div>
+  <ul class="flex max-w-xs flex-col gap-3 text-sm leading-relaxed">
+  <li class="border-l-4 border-dopa pl-3"><b>連続記録の帯</b>：29日連続、今日まだ。右に休み券2枚と、設定を開く歯車。<a href="../../components/streak-bar/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4">streak-bar</a></li>
+  <li class="border-l-4 border-gold pl-3"><b>完了連打のボタン</b>：目標回数 20 の待機。叩けば残りが減り、+N ドパが増える。<a href="../../components/mash-button/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4">mash-button</a></li>
+  <li class="border-l-4 border-ink pl-3"><b>DPW と DT</b>：叩くたびに1ずつ増える。<a href="../../components/totals-cards/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4">totals-cards</a></li>
+  <li class="border-l-4 border-signal pl-3"><b>20打を叩き切ると</b>：連続30日と DT 1,000 の札が重なるフィナーレ。<a href="../../components/finale/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4">finale</a></li>
+</ul>
+</div>
+</article>
+</main>
+<script>
+(function () {
+  var target = 20, left = target, gained = 0, dpw = 347, dt = 987, last = 0, locked = false;
+  var btn = document.getElementById('mash');
+  var num = document.getElementById('mash-num');
+  var top = document.getElementById('mash-top');
+  var gain = document.getElementById('gain');
+  var glow = document.getElementById('mash-glow');
+  var wrap = document.getElementById('mash-wrap');
+  var dpwEl = document.getElementById('dpw'), dtEl = document.getElementById('dt'), bar = document.getElementById('dt-bar');
+  var finale = document.getElementById('finale');
+  function fmt(n) { return n.toLocaleString('en-US'); }
+  btn.addEventListener('pointerdown', function (e) {
+    if (locked) return;
+    var now = performance.now();
+    var fast = now - last <= 450; last = now;
+    left -= 1; gained += 1; dpw += 1; dt += 1;
+    num.textContent = left; top.textContent = 'スクワット 残り';
+    gain.innerHTML = '+' + gained + ' <span class="font-sans text-sm font-black">ドパ</span>';
+    gain.style.visibility = 'visible';
+    dpwEl.textContent = fmt(dpw); dtEl.textContent = fmt(dt);
+    bar.style.width = Math.min(100, (dt / 1000) * 100) + '%';
+    glow.style.opacity = fast ? Math.min(1, parseFloat(glow.style.opacity || 0) + 0.2) : 0.25;
+    var r = wrap.getBoundingClientRect();
+    var ring = document.createElement('span');
+    ring.className = 'ring';
+    var size = 60 + (target - left) / target * 80;
+    ring.style.cssText = 'left:' + (e.clientX - r.left) + 'px;top:' + (e.clientY - r.top) + 'px;width:' + size + 'px;height:' + size + 'px;animation:ringout .32s ease-out forwards';
+    wrap.appendChild(ring); setTimeout(function () { ring.remove(); }, 340);
+    var grain = document.createElement('span');
+    grain.className = 'grain';
+    grain.style.cssText = 'left:50%;top:80%;width:9px;height:9px;--dx:0px;--dy:70px;animation:fly .4s ease-in forwards';
+    wrap.appendChild(grain); setTimeout(function () { grain.remove(); }, 420);
+    if (left === 0) {
+      locked = true;
+      document.getElementById('streak-num').textContent = '30';
+      document.getElementById('streak-sub').innerHTML = '<span class="grid h-3.5 w-3.5 place-items-center rounded-full bg-dopa text-[9px] text-white">✓</span>今日のぶんは済み';
+      finale.hidden = false;
+      setTimeout(function () {
+        finale.hidden = true; locked = false;
+        left = target; gained = 0; num.textContent = left; top.textContent = 'スクワット';
+        gain.style.visibility = 'hidden'; glow.style.opacity = 0;
+      }, 2600);
+    }
+  });
+  setInterval(function () {
+    if (performance.now() - last > 450) glow.style.opacity = Math.max(0, parseFloat(glow.style.opacity || 0) - 0.15);
+  }, 120);
+})();
+</script>
+<script src="../../../sidebar.js" defer></script>
+</body>
+</html>

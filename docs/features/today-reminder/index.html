@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>今日まだ通知</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } },
+        pulse2: { '0%,100%': { transform: 'scale(1)' }, '50%': { transform: 'scale(1.04)' } }
+      },
+      animation: { rise: 'rise .5s ease-out both', pulse2: 'pulse2 1.6s ease-in-out infinite' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-4xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <a href="../index.html" class="hover:text-ink">features</a><span>/</span><span>知らせる</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">今日まだ</span>通知</h1>
+    <p class="mt-4 max-w-2xl text-base leading-relaxed">その日まだ叩いていない夜に、1回だけ知らせる。頼まれてから出し、開かれなければ7日で自分から止まります（<a href="../../glossary.html#today-reminder" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日まだ通知</a>）。</p>
+  </header>
+
+  <section id="why" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01 / why</p>
+    <h2 class="mt-2 font-display text-3xl">責めずに知らせられるか</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">Duolingo の深夜の「連続記録が切れそう」通知は、効果が大きかったといいます。一方で、罪悪感をあおる作りは批判の的になりました。そして最も人を戻したのは、「この通知は効いていないようなので、しばらく止めます」という、やめると告げる通知でした。Yat Tat Ta は1人用で、通知から逃げる先がありません。出すなら、責めない形に縛ります。</p>
+    <ul class="mt-6 flex max-w-2xl flex-col gap-3 text-sm leading-relaxed">
+      <li class="border-l-4 border-dopa pl-3"><b>頼まれてから</b>：初めて叩き切ったフィナーレのあとに1度だけ聞く。起動直後には聞かない。何をするアプリかも分からないうちに許可を求めても、断られるだけだから。</li>
+      <li class="border-l-4 border-gold pl-3"><b>まだの日だけ、1日1回</b>：既定は 21:00。その日に記録が1件でもあれば、その日の分は取り消す。</li>
+      <li class="border-l-4 border-ink pl-3"><b>7日で黙る</b>：開かれるたびに先の7日分を予約し直す。7日目だけ文面が違う。</li>
+    </ul>
+  </section>
+
+  <section id="schedule" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / schedule</p>
+    <h2 class="mt-2 font-display text-3xl">届く時刻に、叩いたかを確かめられない</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">通知はサーバーを持たず、端末の中だけで出します。端末の中の通知は、届く瞬間にアプリを動かして「今日もう叩いたか」を確かめることができません。できるのは、先に予約しておき、叩いたら取り消すことだけです。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">予約し直すのは、アプリが前に出たときと、記録が閉じたときです。どちらでも、予約を全部消してから、今日から7日分を入れ直します。今日の分は、記録がすでにあるか、時刻を過ぎていれば入れません。予約を7日分に限ったので、止める処理を別に書かなくても、開かれない限り7日で尽きます。</p>
+    <p class="mt-8 font-mono text-xs text-mute">表1　文面（日ごとに順に回す）</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[34rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">順</th><th class="py-2 pr-4 font-bold">文面</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono font-bold">1</td><td class="py-3 pr-4">今日はまだです。食べたら、しゃがんで、叩く。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono font-bold">2</td><td class="py-3 pr-4">{<a href="../../glossary.html#target-reps" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">目標回数</a>}回で{目標回数}ドパ。今夜のおやつのあとにでも。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono font-bold">3</td><td class="py-3 pr-4"><a href="../../glossary.html#streak" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">連続記録</a>は、今日の1回でつながります。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono font-bold">4</td><td class="py-3 pr-4">1打で1<a href="../../glossary.html#dopa-point" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパ</a>。今日の分は、まだ0です。</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-mono font-bold text-dopa">7日目</td><td class="py-3 pr-4">しばらく通知を止めます。また開いたら再開します。</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">文面には、予約した時点で分かる値（目標回数）しか入れません。連続日数を入れたくなりますが、7日先の連続日数は、その間に叩くかどうかで変わります。同じ文面が続くと効き目が落ちるという Duolingo の結果から、4つを日ごとに回します。文面は String Catalog に置き、<a href="../../glossary.html#localization" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">多言語展開</a>のときに訳せるようにします。</p>
+  </section>
+
+  <section id="settings" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / settings</p>
+    <h2 class="mt-2 font-display text-3xl">許可と設定</h2>
+    <p class="mt-8 font-mono text-xs text-mute">表2　状態と、どこで変わるか</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[34rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">値</th><th class="py-2 pr-4 font-bold">既定</th><th class="py-2 pr-4 font-bold">変わるところ</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">1度聞いたか</td><td class="py-3 pr-4">まだ</td><td class="py-3 pr-4">初めての<a href="../../glossary.html#finale" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">フィナーレ</a>のあとの問いかけ。「知らせて」でも「いらない」でも、聞いたことになる</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">ON/OFF</td><td class="py-3 pr-4">OFF</td><td class="py-3 pr-4">問いかけで「知らせて」を選び、iOS の許可が出たら ON。設定シートでいつでも切り替えられる</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-bold">時刻</td><td class="py-3 pr-4">21:00</td><td class="py-3 pr-4">設定シート。変えたら、その場で予約し直す</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">設定シートで ON にしたとき、iOS の許可がまだなら、そこで許可を求めます。iOS の設定で通知を切られていたら、シートの切り替えの下に「iPhone の設定で通知が切られています」と出し、iOS の設定画面を開く導線を置きます。値はすべて UserDefaults に置きます。消えても既定の OFF に戻るだけです。</p>
+  </section>
+
+  <section id="screens" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / screens</p>
+    <h2 class="mt-2 font-display text-3xl">関連する画面</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><a href="../../ui/pages/home/index.html" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ホーム</a><p class="mt-1 text-ink/80">初めて叩き切ったフィナーレのあと、ここに問いかけを重ねる。</p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><a href="../../ui/pages/settings/index.html" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">設定シート</a><p class="mt-1 text-ink/80">通知の ON/OFF と時刻。</p></li>
+    </ul>
+  </section>
+
+  <section id="components" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / components</p>
+    <h2 class="mt-2 font-display text-3xl">関連するコンポーネント</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">サンプル：目標回数 20。問いかけと、届いた通知の見え方。</p>
+    <div class="mt-6 grid gap-6 md:grid-cols-2">
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <div class="flex items-baseline justify-between"><a href="../../ui/components/reminder-ask/index.html" class="font-mono text-xs font-bold text-dopa underline underline-offset-4">reminder-ask</a><span class="font-mono text-[11px] text-mute">初めてのフィナーレのあと</span></div>
+        <div class="mt-4 rounded-2xl bg-paper p-4">
+          <div class="rounded-3xl border-2 border-ink bg-white p-5 shadow-[6px_6px_0_#1C1916]">
+            <p class="font-bold">夜、今日まだのときだけ知らせますか？</p>
+            <p class="mt-1 text-xs text-mute">21:00 に1回。設定でいつでも変えられます</p>
+            <div class="mt-4 grid grid-cols-2 gap-2 text-sm font-bold">
+              <span class="rounded-full border-2 border-ink py-2 text-center">いらない</span>
+              <span class="rounded-full border-2 border-ink bg-dopa py-2 text-center text-white shadow-[0_3px_0_#1C1916]">知らせて</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <div class="flex items-baseline justify-between"><span class="font-mono text-xs font-bold text-mute">iOS の通知（参考）</span><span class="font-mono text-[11px] text-mute">21:00</span></div>
+        <div class="mt-4 flex flex-col gap-2 rounded-2xl bg-ink/85 p-4">
+          <div class="rounded-2xl bg-white/90 p-3 text-sm">
+            <p class="flex justify-between text-[11px] text-mute"><span class="font-bold text-ink">Yat Tat Ta</span><span>21:00</span></p>
+            <p class="mt-1">20回で20ドパ。今夜のおやつのあとにでも。</p>
+          </div>
+          <div class="rounded-2xl bg-white/90 p-3 text-sm">
+            <p class="flex justify-between text-[11px] text-mute"><span class="font-bold text-ink">Yat Tat Ta</span><span>7日目</span></p>
+            <p class="mt-1">しばらく通知を止めます。また開いたら再開します。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="links" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / links</p>
+    <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">設計の経緯</p><a href="../../sessions/20261006-0312-main-build/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">本作りの設計</a><a href="../../sessions/20261006-0215-subject/duolingo.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">Duolingo の継続の仕組み（通知）</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../glossary.html#today-reminder" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日まだ通知</a><a href="../../glossary.html#streak" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">連続記録</a><a href="../../glossary.html#finale" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">フィナーレ</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">ほかの機能</p><a href="../done-mash/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">完了連打</a><a href="../streak/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">連続記録と休み券</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">課題</p><a href="../../issues/localization/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">多言語展開の進め方</a></li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

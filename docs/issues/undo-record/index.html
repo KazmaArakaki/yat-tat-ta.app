@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>記録の取り消し</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: { rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } } },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-3xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <a href="../index.html" class="hover:text-dopa hover:underline">issues</a>
+      <span>/</span>
+      <span>アプリの中身</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight">間違えて作った記録を取り消せるようにするか</h1>
+    <div class="mt-4 flex flex-wrap gap-2 font-mono text-xs font-bold">
+      <span class="rounded-full border border-ink bg-white px-3 py-1 text-ink">優先度：低</span>
+      <span class="rounded-full border border-mute bg-white px-3 py-1 text-ink">状態：未着手</span>
+    </div>
+  </header>
+
+  <!-- 概要 -->
+  <section id="summary" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916]">
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-dopa">概要</p>
+      <p class="mt-3 font-bold leading-relaxed">
+        いまの作りでは、一度できた<a href="../../glossary.html#record" class="text-dopa underline underline-offset-4">記録</a>は消せない。<br>
+        間違えて叩いてできた1件を、あとから取り消せるようにするかを決める。
+      </p>
+    </div>
+
+    <p class="mt-6 text-sm leading-relaxed">取り消したくなる場面は、たとえば2つある。</p>
+    <ol class="mt-3 flex flex-col gap-3 text-sm">
+      <li class="rounded-2xl border border-rule bg-white p-4">
+        <p class="flex items-baseline gap-3"><span class="font-mono font-bold text-dopa">a</span><span class="font-bold">ポケットの中で触れた</span></p>
+        <p class="mt-1 pl-7 leading-relaxed text-ink/80">スクワットしていないのに数打が入り、60秒後に1件として閉じる。</p>
+      </li>
+      <li class="rounded-2xl border border-rule bg-white p-4">
+        <p class="flex items-baseline gap-3"><span class="font-mono font-bold text-dopa">b</span><span class="font-bold">勢いで次の連打を始めた</span></p>
+        <p class="mt-1 pl-7 leading-relaxed text-ink/80"><a href="../../glossary.html#finale" class="text-dopa underline underline-offset-4">フィナーレ</a>のあとの1.2秒を過ぎてから叩き、1件多くなる。</p>
+      </li>
+    </ol>
+    <p class="mt-4 text-sm leading-relaxed">設計のときに考えた形は、画面下から今日の記録を開き、1件を左へスワイプして消すもの。消せるのは今日（午前4時区切り）の分だけにする。</p>
+    <p class="mt-3 text-sm leading-relaxed">作るときに、休み券の食い違いは心配しなくてよい。<a href="../../glossary.html#rest-pass" class="text-dopa underline underline-offset-4">休み券</a>は保存せず、記録を日付順にたどって毎回計算している。7日目の記録を消せば、その日にもらった休み券も、計算し直した結果から自然に消える。<a href="../../glossary.html#dt" class="text-dopa underline underline-offset-4">DT</a>、<a href="../../glossary.html#dpw" class="text-dopa underline underline-offset-4">DPW</a>、<a href="../../glossary.html#streak" class="text-dopa underline underline-offset-4">連続記録</a>も同じで、直すのは記録1件だけで済む。</p>
+
+    <dl class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <dt class="font-mono text-xs text-mute">優先度が低の理由</dt>
+        <dd class="mt-1 leading-relaxed">間違いの記録が残って困るのは本人だけ。ランキングも他人との比較もない。記録から全部を計算する作りなので、あとから足してもほかの作りに響かない。</dd>
+      </div>
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <dt class="font-mono text-xs text-mute">先送りにした理由</dt>
+        <dd class="mt-1 leading-relaxed">2026-10-06 の本作りの設計で、開発者が今回は作らないと決めた。取り消しがなければ、記録を一覧で見せる画面も要らず、画面はホーム1枚で済む。使ってみて、間違いの記録が本当に起きるかを見てから決める。</dd>
+      </div>
+    </dl>
+  </section>
+
+  <!-- 関連 -->
+  <section id="related" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">related</p>
+    <h2 class="mt-2 font-display text-3xl">関連</h2>
+    <div class="mt-6 flex flex-col gap-3">
+      <a href="../../sessions/20261006-0312-main-build/index.html#decisions" class="group block rounded-2xl border-2 border-ink bg-white p-5 transition hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#E5337A]">
+        <p class="font-mono text-xs text-mute">2026-10-06 本作りの設計</p>
+        <p class="mt-1 font-display text-xl group-hover:text-dopa">この課題が出たセッション</p>
+        <p class="mt-2 text-sm leading-relaxed text-ink/80">取り消しを作らないと決めた経緯と、休み券を記録から計算すると決めた理由。</p>
+      </a>
+      <a href="../../database/squat-record/index.html" class="group block rounded-2xl border-2 border-ink bg-white p-5 transition hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#E5337A]">
+        <p class="font-mono text-xs text-mute">database</p>
+        <p class="mt-1 font-display text-xl group-hover:text-dopa">SquatRecord</p>
+        <p class="mt-2 text-sm leading-relaxed text-ink/80">取り消すときに消すことになる、記録の表。</p>
+      </a>
+    </div>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

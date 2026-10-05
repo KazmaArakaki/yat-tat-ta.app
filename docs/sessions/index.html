@@ -34,9 +34,21 @@ tailwind.config = {
   <div class="mx-auto max-w-3xl">
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">sessions</p>
     <h1 class="mt-2 font-display text-4xl">セッション一覧</h1>
-    <p class="mt-4 text-sm text-ink/80">新しい順。state が <span class="font-mono">developing</span> のものはレビュー待ちです。</p>
+    <p class="mt-4 text-sm text-ink/80">新しい順。state が <span class="font-mono">planning</span> と <span class="font-mono">developing</span> のものはレビュー待ちです。</p>
 
     <ol class="mt-10 border-t-2 border-ink">
+      <li class="border-b border-rule">
+        <a href="20261006-0312-main-build/index.html" class="group grid gap-2 py-6 sm:grid-cols-[9rem_1fr] sm:gap-6">
+          <time datetime="2026-10-06T03:12" class="font-mono text-sm text-mute">2026-10-06<br class="hidden sm:inline"> 03:12</time>
+          <div>
+            <div class="flex flex-wrap items-center gap-3">
+              <h2 class="font-display text-xl group-hover:text-dopa">本作りの設計</h2>
+              <span class="rounded-full border border-gold bg-gold/15 px-2.5 py-0.5 font-mono text-[11px] font-bold text-ink">developing／設計レビュー済み</span>
+            </div>
+            <p class="mt-2 text-sm leading-relaxed text-ink/80">試作の画面を、毎食後スクワットの画面1枚に置き換える設計。保存するのは記録だけで、休み券も連続記録も記録から計算する。記録の閉じ方、演出、通知、マナーモードを決めた。</p>
+          </div>
+        </a>
+      </li>
       <li class="border-b border-rule">
         <a href="20261006-0215-subject/index.html" class="group grid gap-2 py-6 sm:grid-cols-[9rem_1fr] sm:gap-6">
           <time datetime="2026-10-06T02:15" class="font-mono text-sm text-mute">2026-10-06<br class="hidden sm:inline"> 02:15</time>

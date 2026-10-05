@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DPW と DT のカード</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=M+PLUS+Rounded+1c:wght@500;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+        round: ['"M PLUS Rounded 1c"', '"Noto Sans JP"', 'sans-serif']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } }
+      },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+<style>
+/* アプリ画面の色。明るい配色と暗い配色を、.app と .app.dark で切り替える */
+.app { --a-bg:#FBF6EE; --a-card:#FFFFFF; --a-ink:#1C1916; --a-mute:#6E655C; --a-rule:#E7DDCC; --a-line:#1C1916; --a-soft:#FFE6F0; }
+.app.dark { --a-bg:#16120F; --a-card:#231D18; --a-ink:#F5EEE3; --a-mute:#A89C8E; --a-rule:#3A312A; --a-line:#F5EEE3; --a-soft:#3A1726; }
+.a-bg { background:var(--a-bg); color:var(--a-ink); }
+.a-card { background:var(--a-card); }
+.a-ink { color:var(--a-ink); }
+.a-mute { color:var(--a-mute); }
+.a-line { border-color:var(--a-line); }
+.a-rule { border-color:var(--a-rule); }
+.a-soft { background:var(--a-soft); }
+.a-shadow { box-shadow:4px 4px 0 var(--a-line); }
+.a-shadow-lg { box-shadow:0 8px 0 var(--a-line); }
+.num { font-family:"M PLUS Rounded 1c","Noto Sans JP",sans-serif; font-weight:900; font-variant-numeric:tabular-nums; letter-spacing:-0.02em; }
+.ticket { width:14px; height:18px; border-radius:3px; background:#2F79F7; position:relative; }
+.ticket::after { content:""; position:absolute; left:2px; right:2px; top:8px; border-top:2px dotted rgba(255,255,255,.75); }
+.ticket.empty { background:transparent; border:2px dashed var(--a-rule); }
+.mash { width:200px; height:200px; border-radius:9999px; background:#E9A800; border:4px solid var(--a-line); box-shadow:0 8px 0 var(--a-line); color:#1C1916; transition:transform .06s; }
+.mash:active { transform:translateY(6px); box-shadow:0 2px 0 var(--a-line); }
+.glow { position:absolute; inset:-22px; border-radius:9999px; background:radial-gradient(circle, rgba(229,51,122,.55) 0%, rgba(229,51,122,0) 70%); pointer-events:none; }
+.ring { position:absolute; border-radius:9999px; border:3px solid #E5337A; pointer-events:none; }
+.grain { position:absolute; border-radius:9999px; background:#E5337A; pointer-events:none; }
+@keyframes pop { 0%{transform:scale(.3);opacity:0} 60%{transform:scale(1.08);opacity:1} 100%{transform:scale(1)} }
+@keyframes ringout { 0%{transform:translate(-50%,-50%) scale(.2);opacity:1} 100%{transform:translate(-50%,-50%) scale(1);opacity:0} }
+@keyframes fly { 0%{transform:translate(0,0) scale(1);opacity:1} 100%{transform:translate(var(--dx),var(--dy)) scale(.4);opacity:0} }
+@keyframes burst { 0%{transform:translate(0,0);opacity:1} 100%{transform:translate(var(--dx),var(--dy));opacity:0} }
+@keyframes drop { 0%{transform:translateY(-120%)} 100%{transform:none} }
+.pop { animation:pop .45s cubic-bezier(.2,1.4,.4,1) both; }
+.tabbtn[aria-selected="true"] { background:#1C1916; color:#FBF6EE; }
+</style>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-5xl">
+<header class="animate-rise">
+  <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">ui / components / totals-cards</p>
+  <h1 class="mt-2 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">DPW</span> と <span class="text-dopa">DT</span> のカード</h1>
+  <div class="mt-4 max-w-2xl space-y-3 text-sm leading-relaxed text-ink/80"><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">画面の下に2枚並べます。左が<a href="../../../glossary.html#dpw" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">DPW</a>、右が<a href="../../../glossary.html#dt" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">DT</a>。叩くたびに、どちらも1ずつ増えます。</p><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">DPW の比べる相手は前の7日と<a href="../../../glossary.html#best-week" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">自己ベスト</a>、DT は次の<a href="../../../glossary.html#milestone" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">節目</a>です。DT の下の細い棒は、ひとつ前の節目から次の節目までの進み具合を表します。</p></div>
+</header>
+<section id="states" class="mt-12">
+  <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">states</p>
+  <h2 class="mt-2 font-display text-3xl">状態ごとの見た目</h2>
+  <div data-story class="mt-6 rounded-3xl border-2 border-ink bg-white p-5 sm:p-7">
+  <div class="flex flex-wrap items-center justify-between gap-3">
+    <div role="tablist" class="flex flex-wrap gap-2"><button type="button" role="tab" data-tab="normal" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">通常</button><button type="button" role="tab" data-tab="best" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">自己ベスト更新中</button><button type="button" role="tab" data-tab="first" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">はじめの7日</button></div>
+    <label class="flex cursor-pointer items-center gap-2 font-mono text-xs text-mute"><input type="checkbox" data-dark class="accent-dopa"> 暗い配色</label>
+  </div>
+  <div class="mt-6 rounded-2xl bg-[repeating-linear-gradient(45deg,#FBF6EE_0_10px,#F5EDE0_10px_20px)] p-5 sm:p-8"><div data-panel="normal" class="grid items-start gap-8 md:grid-cols-[auto_1fr]">
+  <div class="app a-bg w-[300px] shrink-0 rounded-3xl border border-rule p-5"><div class="grid grid-cols-2 gap-3">
+  <div class="a-card a-shadow relative rounded-2xl border-2 a-line px-3 py-2.5">
+    <p class="font-mono text-[9px] font-bold tracking-widest a-mute">DPW</p>
+    <p class="num text-[30px] leading-none">347</p><p class="mt-1 text-[9px] font-bold a-mute">前の7日 300　ベスト 410</p>
+  </div>
+  <div class="a-card a-shadow relative rounded-2xl border-2 a-line px-3 py-2.5">
+    <p class="font-mono text-[9px] font-bold tracking-widest a-mute">DT</p>
+    <p class="num text-[30px] leading-none">987</p>
+    <div class="mt-1.5 h-1.5 overflow-hidden rounded-full a-soft"><div class="h-full rounded-full bg-dopa" style="width:98.7%"></div></div>
+    <p class="mt-1 text-[9px] font-bold a-mute">次の節目 1,000</p>
+  </div>
+</div></div>
+  <div class="max-w-sm text-sm leading-relaxed"><p class="font-mono text-xs text-mute">state / normal</p><p class="mt-1 font-display text-xl">通常</p><div class="mt-3 space-y-2 text-ink/80"><p>DPW 347（前の7日 300、ベスト 410）、DT 987（次の節目 1,000）。</p><p>DT の棒はほぼ満ちている。あと13打で節目に届く。</p></div></div>
+</div><div data-panel="best" class="grid items-start gap-8 md:grid-cols-[auto_1fr]">
+  <div class="app a-bg w-[300px] shrink-0 rounded-3xl border border-rule p-5"><div class="grid grid-cols-2 gap-3">
+  <div class="a-card a-shadow relative rounded-2xl border-2 border-dopa px-3 py-2.5">
+    <p class="font-mono text-[9px] font-bold tracking-widest a-mute">DPW</p>
+    <p class="num text-[30px] leading-none text-dopa">423</p><p class="mt-1 text-[9px] font-bold a-mute">前の7日 300　ベスト 410</p><span class="absolute -right-2 -top-2.5 rotate-6 rounded-full border-2 border-ink bg-gold px-1.5 py-0.5 text-[8px] font-black text-ink">ベスト更新中</span>
+  </div>
+  <div class="a-card a-shadow relative rounded-2xl border-2 a-line px-3 py-2.5">
+    <p class="font-mono text-[9px] font-bold tracking-widest a-mute">DT</p>
+    <p class="num text-[30px] leading-none">987</p>
+    <div class="mt-1.5 h-1.5 overflow-hidden rounded-full a-soft"><div class="h-full rounded-full bg-dopa" style="width:98.7%"></div></div>
+    <p class="mt-1 text-[9px] font-bold a-mute">次の節目 1,000</p>
+  </div>
+</div></div>
+  <div class="max-w-sm text-sm leading-relaxed"><p class="font-mono text-xs text-mute">state / best</p><p class="mt-1 font-display text-xl">自己ベスト更新中</p><div class="mt-3 space-y-2 text-ink/80"><p>DPW がベスト 410 を超えた。超えた1打で節目の札が出て、そのあと今日のあいだは数字が dopa 色になり、札「ベスト更新中」が残る。</p><p>札は1日に1回まで。</p></div></div>
+</div><div data-panel="first" class="grid items-start gap-8 md:grid-cols-[auto_1fr]">
+  <div class="app a-bg w-[300px] shrink-0 rounded-3xl border border-rule p-5"><div class="grid grid-cols-2 gap-3">
+  <div class="a-card a-shadow relative rounded-2xl border-2 a-line px-3 py-2.5">
+    <p class="font-mono text-[9px] font-bold tracking-widest a-mute">DPW</p>
+    <p class="num text-[30px] leading-none">60</p><p class="mt-1 text-[9px] font-bold a-mute">比べるのは8日目から</p>
+  </div>
+  <div class="a-card a-shadow relative rounded-2xl border-2 a-line px-3 py-2.5">
+    <p class="font-mono text-[9px] font-bold tracking-widest a-mute">DT</p>
+    <p class="num text-[30px] leading-none">60</p>
+    <div class="mt-1.5 h-1.5 overflow-hidden rounded-full a-soft"><div class="h-full rounded-full bg-dopa" style="width:60%"></div></div>
+    <p class="mt-1 text-[9px] font-bold a-mute">次の節目 100</p>
+  </div>
+</div></div>
+  <div class="max-w-sm text-sm leading-relaxed"><p class="font-mono text-xs text-mute">state / first</p><p class="mt-1 font-display text-xl">はじめの7日</p><div class="mt-3 space-y-2 text-ink/80"><p>記録を始めて7日目まで。7日まるごとたまった区間がまだなく、前の7日もベストもないので、DPW の下は「比べるのは8日目から」。自己ベストの節目は出さない（超える相手がいない）。</p><p>DT は 60。次の節目は 100。</p></div></div>
+</div></div>
+</div>
+</section>
+
+<section id="links" class="mt-16">
+  <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">links</p>
+  <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
+  <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+    <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">機能</p><a href="../../../features/dopa-totals/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa" >ドパの合計</a></li>
+    <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">置かれる画面</p><a href="../../../ui/pages/home/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ホーム</a></li>
+    <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">方針</p><a href="../../../ui/principles.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">UI の基本方針</a></li>
+    <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">決めたセッション</p><a href="../../../sessions/20261006-0312-main-build/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">本作りの設計</a></li>
+  </ul>
+</section>
+</article>
+</main>
+<script>
+document.querySelectorAll('[data-story]').forEach(function (story) {
+  var tabs = story.querySelectorAll('[data-tab]');
+  var panels = story.querySelectorAll('[data-panel]');
+  function show(id) {
+    tabs.forEach(function (t) { t.setAttribute('aria-selected', t.dataset.tab === id ? 'true' : 'false'); });
+    panels.forEach(function (p) { p.hidden = p.dataset.panel !== id; });
+  }
+  tabs.forEach(function (t) { t.addEventListener('click', function () { show(t.dataset.tab); }); });
+  show(tabs[0].dataset.tab);
+  var dark = story.querySelector('[data-dark]');
+  if (dark) dark.addEventListener('change', function () {
+    story.querySelectorAll('.app').forEach(function (a) { a.classList.toggle('dark', dark.checked); });
+  });
+});
+</script>
+<script src="../../../sidebar.js" defer></script>
+</body>
+</html>

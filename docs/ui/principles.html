@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UI の基本方針</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=M+PLUS+Rounded+1c:wght@500;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+        round: ['"M PLUS Rounded 1c"', '"Noto Sans JP"', 'sans-serif']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } }
+      },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+<style>
+/* アプリ画面の色。明るい配色と暗い配色を、.app と .app.dark で切り替える */
+.app { --a-bg:#FBF6EE; --a-card:#FFFFFF; --a-ink:#1C1916; --a-mute:#6E655C; --a-rule:#E7DDCC; --a-line:#1C1916; --a-soft:#FFE6F0; }
+.app.dark { --a-bg:#16120F; --a-card:#231D18; --a-ink:#F5EEE3; --a-mute:#A89C8E; --a-rule:#3A312A; --a-line:#F5EEE3; --a-soft:#3A1726; }
+.a-bg { background:var(--a-bg); color:var(--a-ink); }
+.a-card { background:var(--a-card); }
+.a-ink { color:var(--a-ink); }
+.a-mute { color:var(--a-mute); }
+.a-line { border-color:var(--a-line); }
+.a-rule { border-color:var(--a-rule); }
+.a-soft { background:var(--a-soft); }
+.a-shadow { box-shadow:4px 4px 0 var(--a-line); }
+.a-shadow-lg { box-shadow:0 8px 0 var(--a-line); }
+.num { font-family:"M PLUS Rounded 1c","Noto Sans JP",sans-serif; font-weight:900; font-variant-numeric:tabular-nums; letter-spacing:-0.02em; }
+.ticket { width:14px; height:18px; border-radius:3px; background:#2F79F7; position:relative; }
+.ticket::after { content:""; position:absolute; left:2px; right:2px; top:8px; border-top:2px dotted rgba(255,255,255,.75); }
+.ticket.empty { background:transparent; border:2px dashed var(--a-rule); }
+.mash { width:200px; height:200px; border-radius:9999px; background:#E9A800; border:4px solid var(--a-line); box-shadow:0 8px 0 var(--a-line); color:#1C1916; transition:transform .06s; }
+.mash:active { transform:translateY(6px); box-shadow:0 2px 0 var(--a-line); }
+.glow { position:absolute; inset:-22px; border-radius:9999px; background:radial-gradient(circle, rgba(229,51,122,.55) 0%, rgba(229,51,122,0) 70%); pointer-events:none; }
+.ring { position:absolute; border-radius:9999px; border:3px solid #E5337A; pointer-events:none; }
+.grain { position:absolute; border-radius:9999px; background:#E5337A; pointer-events:none; }
+@keyframes pop { 0%{transform:scale(.3);opacity:0} 60%{transform:scale(1.08);opacity:1} 100%{transform:scale(1)} }
+@keyframes ringout { 0%{transform:translate(-50%,-50%) scale(.2);opacity:1} 100%{transform:translate(-50%,-50%) scale(1);opacity:0} }
+@keyframes fly { 0%{transform:translate(0,0) scale(1);opacity:1} 100%{transform:translate(var(--dx),var(--dy)) scale(.4);opacity:0} }
+@keyframes burst { 0%{transform:translate(0,0);opacity:1} 100%{transform:translate(var(--dx),var(--dy));opacity:0} }
+@keyframes drop { 0%{transform:translateY(-120%)} 100%{transform:none} }
+.pop { animation:pop .45s cubic-bezier(.2,1.4,.4,1) both; }
+.tabbtn[aria-selected="true"] { background:#1C1916; color:#FBF6EE; }
+</style>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-4xl">
+<header class="animate-rise">
+  <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">ui / principles</p>
+  <h1 class="mt-2 font-display text-4xl leading-tight sm:text-5xl">UI の<span class="text-dopa">基本方針</span></h1>
+  <div class="mt-4 max-w-2xl space-y-3 text-sm leading-relaxed text-ink/80"><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">Yat Tat Ta の画面を作るときの決まり事です。新しい部品を足すときに、既存の画面と並べて違和感が出ないようにするためのもの。このドキュメントのサイトではなく、アプリの画面についての方針です。</p><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">画面の主役は、<a href="../glossary.html#done-mash" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">完了連打</a>のボタンです。叩くたびにスクワットが<a href="../glossary.html#dopa-point" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパ</a>に変わる、その1打を気持ちよくすることに、ほかのすべてを従わせます。</p></div>
+</header>
+<div class="mt-10 flex flex-col items-center gap-8 md:flex-row md:items-start">
+  <div class="w-[300px] shrink-0 rounded-[2.8rem] border-[6px] border-ink bg-ink p-1.5 shadow-[10px_10px_0_#E5337A] ">
+  <div class="app  a-bg relative flex h-[650px] flex-col overflow-hidden rounded-[2.2rem] px-5 pb-6 pt-11">
+    <div class="absolute left-1/2 top-2.5 z-40 h-6 w-24 -translate-x-1/2 rounded-full bg-black"></div>
+    <div class="flex items-start justify-between gap-2"><div class="flex-1"><div class="flex items-start justify-between">
+  <div><p class="num a-ink text-[40px] leading-none"><span class="text-dopa">29</span><span class="ml-1 font-sans text-sm font-bold">日連続</span></p><p class="mt-1.5 text-[11px] font-bold a-mute">今日はまだ。<span class="text-dopa">1回で30日目</span></p></div>
+  <div class="flex flex-col items-end gap-1 pt-1">
+    <p class="text-[9px] font-bold a-mute">休み券</p>
+    <div class="flex gap-1"><span class="ticket"></span><span class="ticket"></span></div>
+  </div>
+</div></div></div>
+<div class="absolute right-4 top-[52px] z-20"><span class="a-ink grid h-8 w-8 place-items-center rounded-full border-2 a-line a-card text-base leading-none">⚙︎</span></div>
+<div class="mt-auto"><div class="flex flex-col items-center">
+  <div class="relative">
+    <span class="glow"></span>
+    <button type="button" class="mash relative grid place-items-center " aria-label="完了連打">
+      <span class="text-center">
+        <span class="block text-[11px] font-bold opacity-70">スクワット 残り</span>
+        <span class="num block text-[76px] leading-[.95]">13</span>
+        <span class="mt-0.5 block text-[12px] font-black">叩いてドパに</span>
+      </span>
+    </button>
+    <span class="ring" style="left:62%;top:38%;width:90px;height:90px;transform:translate(-50%,-50%);opacity:.7"></span><span class="ring" style="left:40%;top:58%;width:50px;height:50px;transform:translate(-50%,-50%);opacity:.35"></span><span class="grain" style="left:46%;top:108%;width:9px;height:9px;opacity:0.9"></span><span class="grain" style="left:53%;top:118%;width:7px;height:7px;opacity:0.6"></span><span class="grain" style="left:49%;top:128%;width:5px;height:5px;opacity:0.35"></span>
+  </div>
+  <p class="num mt-4 text-2xl text-dopa">+7 <span class="font-sans text-sm font-black">ドパ</span></p>
+</div></div>
+<div class="mt-auto pt-6"><div class="grid grid-cols-2 gap-3">
+  <div class="a-card a-shadow relative rounded-2xl border-2 a-line px-3 py-2.5">
+    <p class="font-mono text-[9px] font-bold tracking-widest a-mute">DPW</p>
+    <p class="num text-[30px] leading-none">347</p><p class="mt-1 text-[9px] font-bold a-mute">前の7日 300　ベスト 410</p>
+  </div>
+  <div class="a-card a-shadow relative rounded-2xl border-2 a-line px-3 py-2.5">
+    <p class="font-mono text-[9px] font-bold tracking-widest a-mute">DT</p>
+    <p class="num text-[30px] leading-none">987</p>
+    <div class="mt-1.5 h-1.5 overflow-hidden rounded-full a-soft"><div class="h-full rounded-full bg-dopa" style="width:98.7%"></div></div>
+    <p class="mt-1 text-[9px] font-bold a-mute">次の節目 1,000</p>
+  </div>
+</div></div>
+
+  </div>
+</div>
+  <div class="w-[300px] shrink-0 rounded-[2.8rem] border-[6px] border-ink bg-ink p-1.5 shadow-[10px_10px_0_#E5337A] ">
+  <div class="app dark a-bg relative flex h-[650px] flex-col overflow-hidden rounded-[2.2rem] px-5 pb-6 pt-11">
+    <div class="absolute left-1/2 top-2.5 z-40 h-6 w-24 -translate-x-1/2 rounded-full bg-black"></div>
+    <div class="flex items-start justify-between gap-2"><div class="flex-1"><div class="flex items-start justify-between">
+  <div><p class="num a-ink text-[40px] leading-none"><span class="text-dopa">29</span><span class="ml-1 font-sans text-sm font-bold">日連続</span></p><p class="mt-1.5 text-[11px] font-bold a-mute">今日はまだ。<span class="text-dopa">1回で30日目</span></p></div>
+  <div class="flex flex-col items-end gap-1 pt-1">
+    <p class="text-[9px] font-bold a-mute">休み券</p>
+    <div class="flex gap-1"><span class="ticket"></span><span class="ticket"></span></div>
+  </div>
+</div></div></div>
+<div class="absolute right-4 top-[52px] z-20"><span class="a-ink grid h-8 w-8 place-items-center rounded-full border-2 a-line a-card text-base leading-none">⚙︎</span></div>
+<div class="mt-auto"><div class="flex flex-col items-center">
+  <div class="relative">
+    <span class="glow"></span>
+    <button type="button" class="mash relative grid place-items-center " aria-label="完了連打">
+      <span class="text-center">
+        <span class="block text-[11px] font-bold opacity-70">スクワット 残り</span>
+        <span class="num block text-[76px] leading-[.95]">13</span>
+        <span class="mt-0.5 block text-[12px] font-black">叩いてドパに</span>
+      </span>
+    </button>
+    <span class="ring" style="left:62%;top:38%;width:90px;height:90px;transform:translate(-50%,-50%);opacity:.7"></span><span class="ring" style="left:40%;top:58%;width:50px;height:50px;transform:translate(-50%,-50%);opacity:.35"></span><span class="grain" style="left:46%;top:108%;width:9px;height:9px;opacity:0.9"></span><span class="grain" style="left:53%;top:118%;width:7px;height:7px;opacity:0.6"></span><span class="grain" style="left:49%;top:128%;width:5px;height:5px;opacity:0.35"></span>
+  </div>
+  <p class="num mt-4 text-2xl text-dopa">+7 <span class="font-sans text-sm font-black">ドパ</span></p>
+</div></div>
+<div class="mt-auto pt-6"><div class="grid grid-cols-2 gap-3">
+  <div class="a-card a-shadow relative rounded-2xl border-2 a-line px-3 py-2.5">
+    <p class="font-mono text-[9px] font-bold tracking-widest a-mute">DPW</p>
+    <p class="num text-[30px] leading-none">347</p><p class="mt-1 text-[9px] font-bold a-mute">前の7日 300　ベスト 410</p>
+  </div>
+  <div class="a-card a-shadow relative rounded-2xl border-2 a-line px-3 py-2.5">
+    <p class="font-mono text-[9px] font-bold tracking-widest a-mute">DT</p>
+    <p class="num text-[30px] leading-none">987</p>
+    <div class="mt-1.5 h-1.5 overflow-hidden rounded-full a-soft"><div class="h-full rounded-full bg-dopa" style="width:98.7%"></div></div>
+    <p class="mt-1 text-[9px] font-bold a-mute">次の節目 1,000</p>
+  </div>
+</div></div>
+
+  </div>
+</div>
+</div>
+<p class="mt-3 text-xs text-mute">ホームの連打中。左が明るい配色、右が暗い配色。</p>
+<section id="color" class="mt-16">
+  <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01 / color</p>
+  <h2 class="mt-2 font-display text-3xl">色</h2>
+  <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">色は意味ごとに1つです。ドパは dopa、押せるものは gold、休み券は signal。DT の棒も、DPW の数字も、ドパに関わるものはすべて dopa で描きます。金色のボタンが2つ並んだら、どちらかは押せるものではありません。</p><div class="mt-6 grid grid-cols-2 gap-3 text-sm sm:grid-cols-3"><div class="rounded-2xl border-2 border-ink bg-white p-3">
+  <div class="flex gap-1.5"><span class="h-12 flex-1 rounded-lg border border-ink/20" style="background:#FBF6EE"></span><span class="h-12 flex-1 rounded-lg border border-ink/20" style="background:#16120F"></span></div>
+  <p class="mt-2 font-bold">paper</p><p class="font-mono text-[11px] text-mute">#FBF6EE</p><span class="mt-1 block font-mono text-[11px] text-mute">暗い配色 #16120F</span>
+  <p class="mt-1 text-xs leading-relaxed">画面の地。</p>
+</div><div class="rounded-2xl border-2 border-ink bg-white p-3">
+  <div class="flex gap-1.5"><span class="h-12 flex-1 rounded-lg border border-ink/20" style="background:#1C1916"></span><span class="h-12 flex-1 rounded-lg border border-ink/20" style="background:#F5EEE3"></span></div>
+  <p class="mt-2 font-bold">ink</p><p class="font-mono text-[11px] text-mute">#1C1916</p><span class="mt-1 block font-mono text-[11px] text-mute">暗い配色 #F5EEE3</span>
+  <p class="mt-1 text-xs leading-relaxed">文字、枠、ずらした影。</p>
+</div><div class="rounded-2xl border-2 border-ink bg-white p-3">
+  <div class="flex gap-1.5"><span class="h-12 flex-1 rounded-lg border border-ink/20" style="background:#FFFFFF"></span><span class="h-12 flex-1 rounded-lg border border-ink/20" style="background:#231D18"></span></div>
+  <p class="mt-2 font-bold">card</p><p class="font-mono text-[11px] text-mute">#FFFFFF</p><span class="mt-1 block font-mono text-[11px] text-mute">暗い配色 #231D18</span>
+  <p class="mt-1 text-xs leading-relaxed">カードの地。</p>
+</div><div class="rounded-2xl border-2 border-ink bg-white p-3">
+  <div class="flex gap-1.5"><span class="h-12 flex-1 rounded-lg border border-ink/20" style="background:#E5337A"></span></div>
+  <p class="mt-2 font-bold">dopa</p><p class="font-mono text-[11px] text-mute">#E5337A</p>
+  <p class="mt-1 text-xs leading-relaxed">ドパそのもの。粒、増えた数、連続日数。</p>
+</div><div class="rounded-2xl border-2 border-ink bg-white p-3">
+  <div class="flex gap-1.5"><span class="h-12 flex-1 rounded-lg border border-ink/20" style="background:#E9A800"></span></div>
+  <p class="mt-2 font-bold">gold</p><p class="font-mono text-[11px] text-mute">#E9A800</p>
+  <p class="mt-1 text-xs leading-relaxed">押せるもの。完了連打のボタンと、決める側のボタン。節目の札。</p>
+</div><div class="rounded-2xl border-2 border-ink bg-white p-3">
+  <div class="flex gap-1.5"><span class="h-12 flex-1 rounded-lg border border-ink/20" style="background:#2F79F7"></span></div>
+  <p class="mt-2 font-bold">signal</p><p class="font-mono text-[11px] text-mute">#2F79F7</p>
+  <p class="mt-1 text-xs leading-relaxed">休み券だけ。ほかの意味に使わない。</p>
+</div></div><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">暗い配色は iPhone の表示設定に従います。夜食のあとに開く人が多いので、暗い配色を後回しにはしません。入れ替えるのは地と文字と枠だけで、dopa、gold、signal はどちらでも同じ色です。金色のボタンの文字は、暗い配色でも ink のままにします。</p>
+</section><section id="shape" class="mt-16">
+  <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / shape</p>
+  <h2 class="mt-2 font-display text-3xl">形と影</h2>
+  <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">枠は ink の太い線（2〜4pt）、影はぼかさずに右下か真下へずらします。押すと沈むおもちゃの見た目です。押せるものほど影を厚くします。完了連打のボタンは真下に 8pt、カードは右下に 4pt。押し込むとボタンが沈み、影が縮みます。叩いたことを、音と振動より先に目で返すためです。</p><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">角は丸くします。カードは 16pt 前後、ボタンは真円か両端の丸い形。直角は使いません。</p>
+</section><section id="type" class="mt-16">
+  <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / type</p>
+  <h2 class="mt-2 font-display text-3xl">文字</h2>
+  <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">数字は SF Pro Rounded の Heavy で描きます。日数も、ドパも、目標回数も、画面で大きく出るのは数字だからです。桁が増えても幅が揺れないよう、等幅の数字を使います。このドキュメントの見本では、近い形の M PLUS Rounded 1c で代えています。</p><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">日本語はシステムフォント（ヒラギノ）の Bold か Black。地の文の細い字は使いません。片手で叩きながら目の端で読む画面なので、読ませる文は1行で終わる長さにします。</p>
+</section><section id="layout" class="mt-16">
+  <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / layout</p>
+  <h2 class="mt-2 font-display text-3xl">置き方</h2>
+  <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">縦画面だけです。連打の途中で横に倒れると、ボタンの位置が動いて指が外れます。</p><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">ホームは上から、連続記録の帯、完了連打のボタン、DPW と DT のカードの順。ボタンは画面の下半分の、親指が届く高さに置きます。重ねる部品（フィナーレ、途切れたときのカード、休み券の帯、通知の問いかけ）は、ホームの上に出して用が済めば消します。画面を増やして遷移させることはしません。</p>
+</section><section id="touch" class="mt-16">
+  <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / touch</p>
+  <h2 class="mt-2 font-display text-3xl">叩いたときの返し方</h2>
+  <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">タップは、指が触れた瞬間に受けます（UIKit の touchesBegan）。SwiftUI のボタンは指を離したときに反応するので、連打の速さに追いつきません。複数の指で叩けば、1本ずつ数えます。<a href="../glossary.html#tezawari" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">手触り</a>の試作で決めたことの引き継ぎです。</p><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">光は指の位置から広がる輪で出し、画面全体の明滅は弱くします。連打で画面全体が強く明滅すると、光に敏感な人の負担になるからです。ボタンの外側の光は連打の速さで強まり、止まると落ちます。</p>
+</section><section id="motion" class="mt-16">
+  <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / motion</p>
+  <h2 class="mt-2 font-display text-3xl">動きを減らす設定</h2>
+  <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">iPhone の「視差効果を減らす」が入っているときは、粒と画面の揺れを止めます。残すのは、数字の変化、指の位置の輪、文字と札。<a href="../glossary.html#reduced-effects-mode" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ひかえめモード</a>の考え方です。音と振動は変えません。</p>
+</section><section id="words" class="mt-16">
+  <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">07 / words</p>
+  <h2 class="mt-2 font-display text-3xl">文言</h2>
+  <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">責めない文を書きます。「昨日は休みましたね」「連続記録が途切れそうです！」のような、失うことを先に見せる文は使いません。途切れたときも「0日」とは出さず、「今日の1回で1日目」と、次の1回で起きることを書きます。</p><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">健康効果は書きません。「血糖値」「糖質の吸収」といった言葉は、課題 <a href="../issues/health-claims/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">health-claims</a> が決まるまで画面に出しません。</p><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">文言は String Catalog に集めます。開発言語は日本語です（課題 <a href="../issues/localization/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">localization</a>）。</p>
+</section>
+<section id="links" class="mt-16">
+  <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">links</p>
+  <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
+  <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+    <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">部品</p><a href="components/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">コンポーネント</a></li>
+    <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">画面</p><a href="pages/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">画面の見本</a></li>
+    <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">決めたセッション</p><a href="../sessions/20261006-0312-main-build/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">本作りの設計</a></li>
+    <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">手触りの根拠</p><a href="../sessions/20261006-0140-feel-prototype/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">手触りの試作</a></li>
+  </ul>
+</section>
+</article>
+</main>
+<script src="../sidebar.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SquatRecord</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: { rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } } },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-3xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <a href="../index.html" class="hover:text-dopa hover:underline">database</a>
+      <span>/</span>
+      <span>SwiftData</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight">SquatRecord</h1>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80"><a href="../../glossary.html#done-mash" class="text-dopa underline underline-offset-4">完了連打</a>1回分の<a href="../../glossary.html#record" class="text-dopa underline underline-offset-4">記録</a>。このアプリが保存する、ただ1つの表。消えると取り戻せない唯一のデータでもある。</p>
+  </header>
+
+  <section id="er" class="animate-rise mt-10 [animation-delay:100ms]">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">er</p>
+    <h2 class="mt-2 font-display text-3xl">ER図</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">ほかの表とのつながりはない。右側は表ではなく、この表から計算する数。</p>
+    <div class="mt-6 overflow-x-auto rounded-2xl border border-rule bg-white p-4">
+      <svg viewBox="0 0 640 260" class="mx-auto block w-full min-w-[34rem] max-w-2xl" role="img" aria-label="SquatRecord と、そこから計算する数">
+        <g font-family="JetBrains Mono, monospace" font-size="13">
+          <rect x="10" y="40" width="230" height="170" rx="10" fill="#FFFFFF" stroke="#1C1916" stroke-width="2"/>
+          <rect x="10" y="40" width="230" height="38" rx="10" fill="#E5337A"/>
+          <rect x="10" y="66" width="230" height="12" fill="#E5337A"/>
+          <text x="26" y="65" fill="#FFFFFF" font-weight="700" font-size="15">SquatRecord</text>
+          <text x="26" y="104" fill="#1C1916">PK id</text><text x="150" y="104" fill="#6E655C">UUID</text>
+          <text x="26" y="134" fill="#1C1916">   startedAt</text><text x="150" y="134" fill="#6E655C">Date</text>
+          <text x="26" y="164" fill="#1C1916">   day</text><text x="150" y="164" fill="#6E655C">Int</text>
+          <text x="26" y="194" fill="#1C1916">   reps</text><text x="150" y="194" fill="#6E655C">Int</text>
+        </g>
+        <g fill="none" stroke="#6E655C" stroke-width="1.5" stroke-dasharray="5 4">
+          <path d="M240 190 C 300 190, 300 40, 380 40"/>
+          <path d="M240 160 C 300 160, 300 100, 380 100"/>
+          <path d="M240 160 C 300 160, 300 160, 380 160"/>
+          <path d="M240 160 C 300 160, 300 220, 380 220"/>
+        </g>
+        <g font-family="Noto Sans JP, sans-serif" font-size="13">
+          <rect x="380" y="22" width="250" height="36" rx="8" fill="#FBF6EE" stroke="#6E655C" stroke-dasharray="5 4"/>
+          <text x="394" y="45" fill="#1C1916">DT：reps の合計</text>
+          <rect x="380" y="82" width="250" height="36" rx="8" fill="#FBF6EE" stroke="#6E655C" stroke-dasharray="5 4"/>
+          <text x="394" y="105" fill="#1C1916">DPW、自己ベスト：直近7日ずつの reps</text>
+          <rect x="380" y="142" width="250" height="36" rx="8" fill="#FBF6EE" stroke="#6E655C" stroke-dasharray="5 4"/>
+          <text x="394" y="165" fill="#1C1916">連続記録、最長記録：day をたどる</text>
+          <rect x="380" y="202" width="250" height="36" rx="8" fill="#FBF6EE" stroke="#6E655C" stroke-dasharray="5 4"/>
+          <text x="394" y="225" fill="#1C1916">休み券：day をたどる</text>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <section id="columns" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">columns</p>
+    <h2 class="mt-2 font-display text-3xl">各カラム</h2>
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full min-w-[34rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">カラム</th><th class="py-2 pr-4 font-bold">型</th><th class="py-2 pr-4 font-bold">中身と理由</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs font-bold">id</td><td class="py-3 pr-4 font-mono text-xs">UUID</td><td class="py-3 pr-4">記録を見分けるための値。作るときに振る。いまは使う場面がないが、将来の<a href="../../issues/undo-record/index.html" class="text-dopa underline underline-offset-4">取り消し</a>や書き出しで1件を指すときに要る。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs font-bold">startedAt</td><td class="py-3 pr-4 font-mono text-xs">Date</td><td class="py-3 pr-4">叩き始めた日時。最初の1打の時刻。閉じた時刻ではないのは、60秒待って閉じた記録の時刻が、叩いた時刻から1分ずれるのを避けるため。画面には出さず、計算にも使わない。あとから振り返るときの手がかりとして残す。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs font-bold">day</td><td class="py-3 pr-4 font-mono text-xs">Int</td><td class="py-3 pr-4"><a href="../../glossary.html#record-day" class="text-dopa underline underline-offset-4">記録日</a>。yyyymmdd の8桁（例：20261006）。午前4時より前は前の日。最初の1打の瞬間に、端末の時刻とタイムゾーンで決めて書く。あとで startedAt から計算し直さないのは、海外へ行くと過去の記録の日が動くから。連続記録も DPW の直近7日間も、この列から数える。</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-mono text-xs font-bold">reps</td><td class="py-3 pr-4 font-mono text-xs">Int</td><td class="py-3 pr-4">ドパに変えた回数。1以上。叩き切れば<a href="../../glossary.html#target-reps" class="text-dopa underline underline-offset-4">目標回数</a>と同じ数、途中で閉じれば叩いたところまで。目標回数をあとで変えても、過去の記録の DT が変わらないように、その場の回数を写しておく。</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <ul class="mt-6 flex max-w-2xl flex-col gap-3 text-sm leading-relaxed">
+      <li class="border-l-4 border-dopa pl-3"><b>書くとき</b>：記録を閉じたときに1件足す。閉じる条件は、残りが0、60秒叩かない、アプリを離れる、の3つ（<a href="../../features/done-mash/index.html" class="text-dopa underline underline-offset-4">完了連打</a>）。叩いている間は書かない。</li>
+      <li class="border-l-4 border-gold pl-3"><b>更新と削除</b>：しない。取り消しは作らないと決めた（課題 <a href="../../issues/undo-record/index.html" class="text-dopa underline underline-offset-4">undo-record</a>）。</li>
+      <li class="border-l-4 border-ink pl-3"><b>件数</b>：毎食後に3回叩いても、1年で1,000件ほど。起動時に全件を読んで計算する。</li>
+    </ul>
+  </section>
+
+  <section id="related" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">related</p>
+    <h2 class="mt-2 font-display text-3xl">関連</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">つながる表はない。代わりに、この表から計算する数と、隣に置く小さな値を並べる。</p>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">計算する数</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../glossary.html#dt" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">DT</a><a href="../../glossary.html#dpw" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">DPW</a><a href="../../glossary.html#best-week" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">自己ベスト</a><a href="../../glossary.html#streak" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">連続記録</a><a href="../../glossary.html#best-streak" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">最長記録</a><a href="../../glossary.html#rest-pass" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">休み券</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">隣に置く値</p><a href="../index.html#defaults" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">UserDefaults の値</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">使う機能</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../features/done-mash/index.html" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">完了連打</a><a href="../../features/dopa-totals/index.html" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">ドパの合計</a><a href="../../features/streak/index.html" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">連続記録と休み券</a><a href="../../features/today-reminder/index.html" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">今日まだ通知</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">決めたセッション</p><a href="../../sessions/20261006-0312-main-build/index.html#data" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">本作りの設計</a></li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

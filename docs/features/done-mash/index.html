@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>完了連打</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } },
+        pulse2: { '0%,100%': { transform: 'scale(1)' }, '50%': { transform: 'scale(1.04)' } }
+      },
+      animation: { rise: 'rise .5s ease-out both', pulse2: 'pulse2 1.6s ease-in-out infinite' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-4xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <a href="../index.html" class="hover:text-ink">features</a><span>/</span><span>記録する</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">完了連打</span></h1>
+    <p class="mt-4 max-w-2xl text-base leading-relaxed">スクワットを終えたら、その回数だけボタンを叩く。1打ごとにスクワット1回が1ドパに変わる。<a href="../../glossary.html#record" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録</a>を作るのは、アプリの中でこの機能だけです。</p>
+  </header>
+
+  <section id="overview" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01 / overview</p>
+    <h2 class="mt-2 font-display text-3xl">何を叩いているのか</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80"><a href="../../glossary.html#meal-squat" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">毎食後スクワット</a>では、アプリはスクワットを数えません。数えるのは本人で、アプリが受け取るのは「終わった」という合図だけです。その合図を1回の押下ではなく、<a href="../../glossary.html#target-reps" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">目標回数</a>と同じ数の連打にしたのが<a href="../../glossary.html#done-mash" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">完了連打</a>です。20回しゃがんだら20打。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">ボタンに出ている数は、まだ<a href="../../glossary.html#dopa-point" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパ</a>に変えていないスクワットの数です。1打で1減り、その1がドパの粒になって飛んでいく。済ませたスクワットを、自分の指でドパに替える作業になります。アプリはスクワットをしたかを確かめません。他人と比べる場所がないので、ごまかして困るのは本人だけです。</p>
+    <p class="mt-8 font-mono text-xs text-mute">表1　決まりごと</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[34rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">項目</th><th class="py-2 pr-4 font-bold">値</th><th class="py-2 pr-4 font-bold">理由</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">1打の重さ</td><td class="py-3 pr-4">スクワット1回 = 1ドパ</td><td class="py-3 pr-4">ドパに使い道はない。回数と同じものを、ためていく数として見せる。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">目標回数</td><td class="py-3 pr-4">既定 20。設定で 5〜100、5刻み</td><td class="py-3 pr-4">食後20回ほど、という開発者の動機から。叩き始めた時点の値をその記録の最後まで使う。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">いつ叩けるか</td><td class="py-3 pr-4">いつでも、何度でも</td><td class="py-3 pr-4">間食や夜食のあとも記録したい。1日の上限は置かない。</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-bold">複数の指</td><td class="py-3 pr-4">1本ずつ1打に数える</td><td class="py-3 pr-4">手触りの試作と同じ。指が触れた瞬間に受ける（離したときではない）。</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="closing" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / closing</p>
+    <h2 class="mt-2 font-display text-3xl">記録が1件になるまで</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">最初の1打で、記録が1件開きます。叩くたびに画面の中のドパ、DPW、DT が1ずつ増え、開いた記録は次の3つのどれかで閉じます。閉じるまで記録は画面の中にだけあり、閉じた瞬間に1回だけ端末へ保存します。1打ごとに書き込むと、タップの瞬間の仕事が増えるからです。</p>
+    <div class="mt-6 grid gap-4 md:grid-cols-3">
+      <div class="rounded-3xl border-2 border-dopa bg-white p-5">
+        <p class="font-mono text-xs text-dopa">閉じる 1</p>
+        <p class="mt-1 font-display text-lg">残りが0になった</p>
+        <p class="mt-2 text-sm leading-relaxed">最後の1打。<a href="../../glossary.html#finale" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">フィナーレ</a>を出す。そのあと1.2秒は叩いても数えない。勢い余った指で次の記録が始まらないように。</p>
+      </div>
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs text-mute">閉じる 2</p>
+        <p class="mt-1 font-display text-lg">60秒叩かなかった</p>
+        <p class="mt-2 text-sm leading-relaxed">叩いたところまでで1件。フィナーレは出さず、ボタンは目標回数に戻る。スクワットを終えてから叩くので、途中で1分空くのはやめたときだけ。</p>
+      </div>
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs text-mute">閉じる 3</p>
+        <p class="mt-1 font-display text-lg">アプリを離れた</p>
+        <p class="mt-2 text-sm leading-relaxed">ホームに戻った、電話が来た。2 と同じ閉じ方。離れたまま終了されても、叩いた分は消えない。</p>
+      </div>
+    </div>
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">7打で止めた記録も、7ドパの1件として残り、その日の<a href="../../glossary.html#streak" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">連続記録</a>もつながります。継続の条件は「その日に完了連打を1回」で、目標回数に届いたかは問いません。閉じないまま待ち続けると、昼に7打で止めた人が夜に開いたとき、ボタンに「13」が残ってしまいます。</p>
+    <p class="mt-4 rounded-lg border border-dashed border-mute bg-white/60 p-3 text-xs leading-relaxed">間違えて叩いた記録を消す仕組みはない（開発者が決定）。課題 <a href="../../issues/undo-record/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">undo-record</a>。アプリが異常終了したときは、開いていた1件が消える。</p>
+  </section>
+
+  <section id="effects" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / effects</p>
+    <h2 class="mt-2 font-display text-3xl">1打ごとの演出と、最後の1打</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">演出は、ドパドリルの<a href="../../glossary.html#effect-inflation" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">演出インフレ</a>と同じく、最後に向けて強くなります。強さの決め方は、出すものごとに分けています。音程を叩く速さで決めると、ゆっくり叩く人は最後まで低い音のままになる。かといって速さを捨てると、<a href="../../glossary.html#tezawari" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">手触り</a>の試作で「気持ちいい」と言われた連打の勢いが消えます。</p>
+    <p class="mt-8 font-mono text-xs text-mute">表2　何で強さを決めるか</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[34rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">出すもの</th><th class="py-2 pr-4 font-bold">強さを決めるもの</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">音の高さ、振動の強さ</td><td class="py-3 pr-4">進み具合。目標回数を8つに割り、何打目かで8段階のどれかを鳴らす。最後の1打がいちばん高く強い</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">ボタンの光、指の位置の輪</td><td class="py-3 pr-4">連打の速さ。0.45秒以内に次を叩くと明るくなり、止まると落ちる</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-bold">ドパの粒</td><td class="py-3 pr-4">いつも同じ。1打で1粒、ボタンから「+N ドパ」へ飛ぶ</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">残りが0になる1打では、フィナーレが重なります。粒が弾け、「やったった！」の文字、和音、長めの振動。その日最初の記録なら連続記録の日数がめくれ、<a href="../../glossary.html#milestone" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">節目</a>に届いていれば札が1枚ずつ下に積まれます。節目の中身は<a href="../dopa-totals/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパの合計</a>と<a href="../streak/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">連続記録と休み券</a>に書いています。</p>
+    <ul class="mt-6 flex max-w-2xl flex-col gap-3 text-sm leading-relaxed">
+      <li class="border-l-4 border-dopa pl-3"><b>音</b>：外部の音素材を持たず、起動時に8段階ぶん合成しておく。マナーモードでは鳴らさない（.ambient）。ほかのアプリの音楽は止めない。</li>
+      <li class="border-l-4 border-gold pl-3"><b>粒</b>：CAEmitterLayer で出す。粒の動きを GPU 側で計算し、1打ごとのメインスレッドの仕事を増やさない。足りるかは課題 <a href="../../issues/heavy-effects-performance/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">heavy-effects-performance</a> で実機確認。</li>
+      <li class="border-l-4 border-ink pl-3"><b>視差効果を減らす</b>：iPhone のこの設定が入っていれば、粒と画面の揺れを止め、数字の変化と輪だけにする（<a href="../../glossary.html#reduced-effects-mode" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ひかえめモード</a>の考え方）。</li>
+    </ul>
+  </section>
+
+  <section id="screens" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / screens</p>
+    <h2 class="mt-2 font-display text-3xl">関連する画面</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><a href="../../ui/pages/home/index.html" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ホーム</a><p class="mt-1 text-ink/80">画面のまん中が叩くボタン。この機能の舞台。</p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><a href="../../ui/pages/settings/index.html" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">設定シート</a><p class="mt-1 text-ink/80">目標回数を 5〜100 の5刻みで変える。次に叩き始めた記録から効く。</p></li>
+    </ul>
+  </section>
+
+  <section id="components" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / components</p>
+    <h2 class="mt-2 font-display text-3xl">関連するコンポーネント</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">サンプル：目標回数 20 のうち7打目まで叩いたところと、叩き切った1打。状態ごとの見本は各コンポーネントのページにある。</p>
+    <div class="mt-6 grid gap-6 md:grid-cols-2">
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <div class="flex items-baseline justify-between"><a href="../../ui/components/mash-button/index.html" class="font-mono text-xs font-bold text-dopa underline underline-offset-4">mash-button</a><span class="font-mono text-[11px] text-mute">7 / 20 打</span></div>
+        <div class="mt-4 flex flex-col items-center rounded-2xl bg-paper py-8">
+          <div class="grid h-44 w-44 animate-pulse2 place-items-center rounded-full border-4 border-ink bg-gold shadow-[0_8px_0_#1C1916]">
+            <span class="text-center">
+              <span class="block font-mono text-[10px] text-ink/70">スクワット</span>
+              <span class="block font-display text-5xl leading-none">13</span>
+              <span class="mt-1 block text-[11px] font-black">叩いてドパに</span>
+            </span>
+          </div>
+          <p class="mt-4 font-display text-xl text-dopa">+7 ドパ</p>
+        </div>
+      </div>
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <div class="flex items-baseline justify-between"><a href="../../ui/components/finale/index.html" class="font-mono text-xs font-bold text-dopa underline underline-offset-4">finale</a><span class="font-mono text-[11px] text-mute">20 / 20 打</span></div>
+        <div class="relative mt-4 flex flex-col items-center overflow-hidden rounded-2xl bg-ink py-8 text-paper">
+          <span class="absolute left-6 top-6 h-2 w-2 rounded-full bg-gold"></span><span class="absolute right-10 top-10 h-3 w-3 rounded-full bg-dopa"></span><span class="absolute left-12 bottom-14 h-2.5 w-2.5 rounded-full bg-dopa-body"></span><span class="absolute right-6 bottom-20 h-2 w-2 rounded-full bg-gold"></span><span class="absolute left-1/2 top-4 h-1.5 w-1.5 rounded-full bg-paper"></span>
+          <p class="font-display text-4xl text-gold">やったった！</p>
+          <p class="mt-2 font-display text-lg">+20 ドパ</p>
+          <div class="mt-5 flex flex-col items-center gap-2">
+            <span class="rounded-full border-2 border-gold bg-gold/15 px-4 py-1 text-sm font-bold">連続 30日</span>
+            <span class="rounded-full border-2 border-gold bg-gold/15 px-4 py-1 text-sm font-bold">DT 1,000 ドパ</span>
+          </div>
+        </div>
+        <p class="mt-3 text-xs leading-relaxed text-mute">29日連続の人が、その日最初の連打で DT 987 から叩き切った場合。節目の札が2枚積まれる。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="links" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / links</p>
+    <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">設計の経緯</p><a href="../../sessions/20261006-0312-main-build/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">本作りの設計</a><a href="../../sessions/20261006-0215-subject/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">題材を決める</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">保存するデータ</p><a href="../../database/squat-record/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">SquatRecord</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../glossary.html#done-mash" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">完了連打</a><a href="../../glossary.html#target-reps" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">目標回数</a><a href="../../glossary.html#record" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録</a><a href="../../glossary.html#finale" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">フィナーレ</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">ほかの機能</p><a href="../dopa-totals/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパの合計</a><a href="../streak/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">連続記録と休み券</a></li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

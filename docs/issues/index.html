@@ -34,7 +34,7 @@ tailwind.config = {
   <div class="mx-auto max-w-3xl">
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">issues</p>
     <h1 class="mt-2 font-display text-4xl">課題一覧</h1>
-    <p class="mt-4 text-sm text-ink/80">セッションの中で片付かず、先に送った作業。</p>
+    <p class="mt-4 text-sm text-ink/80">セッションの中で片付かず、先に送った作業。完了したものは各セクションの下に、取り消し線を引いて残しています。</p>
 
     <section id="app" class="mt-10">
       <h2 class="font-display text-xl">アプリの中身</h2>
@@ -44,9 +44,9 @@ tailwind.config = {
             <div class="flex flex-wrap items-center gap-3">
               <h3 class="font-display text-lg group-hover:text-dopa">多言語展開の進め方を決める</h3>
               <span class="rounded-full bg-gold px-2.5 py-0.5 font-mono text-[11px] font-bold text-ink">優先度：中</span>
-              <span class="rounded-full border border-mute bg-white px-2.5 py-0.5 font-mono text-[11px] font-bold text-ink">未着手</span>
+              <span class="rounded-full border border-mute bg-white px-2.5 py-0.5 font-mono text-[11px] font-bold text-ink">一部決定</span>
             </div>
-            <p class="mt-2 text-sm leading-relaxed text-ink/80">対応する言語、画面の文言の持ち方、ストアの説明文。画面の文言を書き始める前に決める。</p>
+            <p class="mt-2 text-sm leading-relaxed text-ink/80">文言の持ち方は String Catalog に決めた。残るのは、どの言語で出すかと、ストアの説明文。</p>
           </a>
         </li>
         <li class="border-b border-rule">
@@ -70,13 +70,22 @@ tailwind.config = {
           </a>
         </li>
         <li class="border-b border-rule">
-          <a href="silent-mode-sound/index.html" class="group block py-5">
+          <a href="undo-record/index.html" class="group block py-5">
             <div class="flex flex-wrap items-center gap-3">
-              <h3 class="font-display text-lg group-hover:text-dopa">マナーモードで音を鳴らすか</h3>
+              <h3 class="font-display text-lg group-hover:text-dopa">間違えて作った記録を取り消せるようにするか</h3>
               <span class="rounded-full border border-ink bg-white px-2.5 py-0.5 font-mono text-[11px] font-bold text-ink">優先度：低</span>
               <span class="rounded-full border border-mute bg-white px-2.5 py-0.5 font-mono text-[11px] font-bold text-ink">未着手</span>
             </div>
-            <p class="mt-2 text-sm leading-relaxed text-ink/80">試作は鳴らしている。本作りで鳴らすか、マナーモードに従って黙るか。いつでも記録できるので、職場や外で叩く場面がある。</p>
+            <p class="mt-2 text-sm leading-relaxed text-ink/80">本作りでは作らないと決めた。休み券は記録から計算するので、作るときも食い違いは起きない。</p>
+          </a>
+        </li>
+        <li class="border-b border-rule opacity-60">
+          <a href="silent-mode-sound/index.html" class="group block py-5">
+            <div class="flex flex-wrap items-center gap-3">
+              <h3 class="font-display text-lg line-through decoration-2 group-hover:text-dopa">マナーモードで音を鳴らすか</h3>
+              <span class="rounded-full bg-ink px-2.5 py-0.5 font-mono text-[11px] font-bold text-white">完了 2026-10-06</span>
+            </div>
+            <p class="mt-2 text-sm leading-relaxed text-ink/80">マナーモードに従って黙る（.ambient）。ほかのアプリの音楽は止めない。</p>
           </a>
         </li>
         <li class="border-b border-rule opacity-60">
