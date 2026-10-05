@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ドキュメント トップ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: { rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } } },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper bg-[radial-gradient(#E7DDCC_1px,transparent_1px)] bg-[length:22px_22px] font-sans text-ink antialiased">
+<main class="px-4 py-12 sm:px-10 lg:py-20">
+  <div class="mx-auto max-w-3xl">
+    <p class="animate-rise font-mono text-xs uppercase tracking-[0.2em] text-mute">project docs</p>
+    <h1 class="animate-rise mt-3 font-display text-4xl leading-tight sm:text-5xl [animation-delay:80ms]">ドキュメント<span class="text-dopa">.</span></h1>
+    <p class="animate-rise mt-6 max-w-xl leading-relaxed [animation-delay:160ms]">
+      このリポジトリには、まだ機能の実装がありません。<br>
+      いま置いてあるのは調査セッションの記録と、先送りにした課題です。
+    </p>
+
+    <div class="mt-12 grid gap-4 sm:grid-cols-2">
+      <a href="sessions/index.html" class="group animate-rise rounded-2xl border-2 border-ink bg-white p-6 shadow-[6px_6px_0_#1C1916] transition hover:-translate-y-0.5 hover:shadow-[8px_8px_0_#E5337A] [animation-delay:240ms]">
+        <p class="font-mono text-xs text-mute">sessions/</p>
+        <p class="mt-2 font-display text-2xl">セッション</p>
+        <p class="mt-2 text-sm leading-relaxed text-ink/80">調査や開発の記録。最新は 2026-10-05 の「ドパ〇〇」アプリ調査。</p>
+        <p class="mt-4 text-sm font-bold text-dopa group-hover:underline">一覧を開く →</p>
+      </a>
+      <a href="glossary.html" class="group animate-rise rounded-2xl border-2 border-ink bg-white p-6 shadow-[6px_6px_0_#1C1916] transition hover:-translate-y-0.5 hover:shadow-[8px_8px_0_#2F79F7] [animation-delay:320ms]">
+        <p class="font-mono text-xs text-mute">glossary.html</p>
+        <p class="mt-2 font-display text-2xl">用語集</p>
+        <p class="mt-2 text-sm leading-relaxed text-ink/80">ドパ〇〇、ドパ値、演出インフレなど、調査で出てきた用語の定義と用例。</p>
+        <p class="mt-4 text-sm font-bold text-signal group-hover:underline">用語集を開く →</p>
+      </a>
+      <a href="issues/index.html" class="group animate-rise rounded-2xl border-2 border-ink bg-white p-6 shadow-[6px_6px_0_#1C1916] transition hover:-translate-y-0.5 hover:shadow-[8px_8px_0_#E9A800] [animation-delay:400ms]">
+        <p class="font-mono text-xs text-mute">issues/</p>
+        <p class="mt-2 font-display text-2xl">課題</p>
+        <p class="mt-2 text-sm leading-relaxed text-ink/80">先送りにした作業。いまは iOS 開発環境の準備が1件（優先度：高）。</p>
+        <p class="mt-4 text-sm font-bold text-gold group-hover:underline">一覧を開く →</p>
+      </a>
+    </div>
+  </div>
+</main>
+<script src="sidebar.js" defer></script>
+</body>
+</html>

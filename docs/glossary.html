@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>用語集</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: { rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } } },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<div class="mx-auto max-w-3xl">
+
+  <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">glossary</p>
+  <h1 class="mt-2 font-display text-4xl">用語集</h1>
+  <p class="mt-4 text-sm leading-relaxed text-ink/80">調査セッションで出てきた用語。各用語に、説明、会話での使い方、関連する用語、関連する機能を置いています。<br>このプロジェクトにはまだ機能ページがないため、「関連する機能」は調査レポートへのリンクで代えています。</p>
+
+  <nav aria-label="用語一覧" class="mt-8 flex flex-wrap gap-2 text-sm">
+    <a href="#dopa-apps" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">ドパ〇〇</a>
+    <a href="#dopagaki" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">ドパガキ</a>
+    <a href="#dopa-value" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">ドパ値</a>
+    <a href="#effect-inflation" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">演出インフレ</a>
+    <a href="#combo-multiplier" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">コンボ倍率</a>
+    <a href="#kakutei-enshutsu" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">確定演出／煽り演出</a>
+    <a href="#fixed-vs-variable-reward" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">確定報酬と可変報酬</a>
+    <a href="#reduced-effects-mode" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">ひかえめモード</a>
+    <a href="#vibe-coding" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">バイブコーディング</a>
+  </nav>
+
+  <!-- ドパ〇〇 -->
+  <section id="dopa-apps" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#dopa-apps</p>
+    <h2 class="mt-1 font-display text-2xl">ドパ〇〇</h2>
+    <p class="mt-3 leading-relaxed">ドリル、電卓、九九、タイピング、将棋のような普通の道具に、パチンコやお祭り級の過剰な演出をかぶせたネタ寄りのアプリ群。操作するたびにドーパミンが出るよう設計されている。名前は「ドパ」＋元の道具名。2026年9月下旬に個人開発とAIの界隈で連鎖的に量産された。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>ドパ〇〇って、学習をゲームにしたアプリのことですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>中身は普通の道具のままです。ドリルは普通に採点するし、電卓は普通に計算します。そこに過剰な演出をかぶせたものです。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>演出を全部外せば、元の道具に戻るということですね。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>はい。ドパ将棋！だけは例外で、演出ではなく手番をなくすというルールの側でドパを出しています。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#dopagaki" class="text-dopa underline underline-offset-4">ドパガキ</a><a href="#effect-inflation" class="text-dopa underline underline-offset-4">演出インフレ</a><a href="#vibe-coding" class="text-dopa underline underline-offset-4">バイブコーディング</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="sessions/20261005-1815-dopa-apps-research/index.html#definition" class="text-signal underline underline-offset-4">調査レポート：ひとことで</a><a href="sessions/20261005-1815-dopa-apps-research/index.html#cases" class="text-signal underline underline-offset-4">事例5つ</a></p></div>
+    </div>
+  </section>
+
+  <!-- ドパガキ -->
+  <section id="dopagaki" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#dopagaki</p>
+    <h2 class="mt-1 font-display text-2xl">ドパガキ</h2>
+    <p class="mt-3 leading-relaxed">ドーパミン＋ガキ。ショート動画、通知、ガチャなどの即時報酬に弱い若者を、自虐的に指すZ世代のスラング。2025〜2026年に拡散した。派生語に「ドパる」「ドパ舌」がある。ドパ〇〇という名付けの下地になった。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>ドパガキは他人を馬鹿にする言葉ですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>若者が自分たちを指して使う自虐語です。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>アプリの中で直接使われている例はありますか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>ドパ将棋！が、対局後に「ドパガキ度」を診断します。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#dopa-apps" class="text-dopa underline underline-offset-4">ドパ〇〇</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="sessions/20261005-1815-dopa-apps-research/index.html#why-now" class="text-signal underline underline-offset-4">調査レポート：なぜ流行ったか</a></p></div>
+    </div>
+  </section>
+
+  <!-- ドパ値 -->
+  <section id="dopa-value" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#dopa-value</p>
+    <h2 class="mt-1 font-display text-2xl">ドパ値</h2>
+    <p class="mt-3 leading-relaxed">ドパドリルで正解するともらえる報酬の数値「ドパ」。内部では常用対数 L で持ち、表示は 10<sup>L</sup>。1万以上は「万」「億」で表記する。100、1000、1万から1億までの節目で演出が入り、上限は 10<sup>9.08</sup>（約12億）。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>ドパ値が億まで行くなら、そのまま整数で持つんですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>内部は対数 L です。画面に出すときだけ 10 の L 乗にして、「万」「億」で書きます。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>上限はありますか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>10 の 9.08 乗で止まります。節目の演出は 100 から 1億まで、桁が上がるたびに入ります。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#combo-multiplier" class="text-dopa underline underline-offset-4">コンボ倍率</a><a href="#effect-inflation" class="text-dopa underline underline-offset-4">演出インフレ</a><a href="#fixed-vs-variable-reward" class="text-dopa underline underline-offset-4">確定報酬と可変報酬</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="sessions/20261005-1815-dopa-apps-research/index.html#patterns" class="text-signal underline underline-offset-4">調査レポート：図3 ドパ値のスケール</a></p></div>
+    </div>
+  </section>
+
+  <!-- 演出インフレ -->
+  <section id="effect-inflation" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#effect-inflation</p>
+    <h2 class="mt-1 font-display text-2xl">演出インフレ</h2>
+    <p class="mt-3 leading-relaxed">1回のセッションの中で、進むほど演出が強くなっていくこと。ドパドリルでは演出強度を <span class="font-mono text-sm">E = 0.08 + 0.92 × (i/(N−1))<sup>1.3</sup></span> で決め、序盤は基本描画だけ、中盤で背景変化やはなまる、紙吹雪、星、終盤で花火や観客、行進、電飾、揺れを出す。最後は4種のフィナーレ（巨大ドパキチ、花火大会、ロケット、パレード）で終わる。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>1問目から花火を出す設計にはしないんですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>ドパドリルの仕様では、序盤は基本描画だけです。花火は終盤まで取ってあります。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>強さは問題数に比例して上がりますか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>指数が 1.3 なので、比例より遅く立ち上がって、最終問で 1.0 に届きます。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#combo-multiplier" class="text-dopa underline underline-offset-4">コンボ倍率</a><a href="#kakutei-enshutsu" class="text-dopa underline underline-offset-4">確定演出／煽り演出</a><a href="#reduced-effects-mode" class="text-dopa underline underline-offset-4">ひかえめモード</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="sessions/20261005-1815-dopa-apps-research/index.html#patterns" class="text-signal underline underline-offset-4">調査レポート：図1 演出強度カーブ</a></p></div>
+    </div>
+  </section>
+
+  <!-- コンボ倍率 -->
+  <section id="combo-multiplier" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#combo-multiplier</p>
+    <h2 class="mt-1 font-display text-2xl">コンボ倍率</h2>
+    <p class="mt-3 leading-relaxed">連続正解（コンボ）の数に応じて報酬を増やす倍率。ドパドリルでは <span class="font-mono text-sm">M(c) = 1 + min(1, c/20)</span>。10コンボで1.5倍、20コンボ以上で「ドパ×2 MAX」になる。倍率とは別に、10、20、30、50、75コンボで大きく祝う。ドパにゃんでは30コンボで FEVER、60コンボで「マタタビモード」に入る。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>30コンボなら3倍ですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>20コンボで2倍に届いたら、そこで止まります。表示は「ドパ×2 MAX」です。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>じゃあ20コンボを超えたら何も起きない？</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>倍率は変わりませんが、30、50、75コンボで大きく祝う演出が入ります。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#dopa-value" class="text-dopa underline underline-offset-4">ドパ値</a><a href="#effect-inflation" class="text-dopa underline underline-offset-4">演出インフレ</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="sessions/20261005-1815-dopa-apps-research/index.html#patterns" class="text-signal underline underline-offset-4">調査レポート：図2 コンボ倍率</a></p></div>
+    </div>
+  </section>
+
+  <!-- 確定演出と煽り演出 -->
+  <section id="kakutei-enshutsu" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#kakutei-enshutsu</p>
+    <h2 class="mt-1 font-display text-2xl">確定演出／煽り演出</h2>
+    <p class="mt-3 leading-relaxed">パチンコの文法を借りた演出。<b>煽り演出</b>は結果を見せる前に段階を踏んで期待を高めるもので、ドパ電卓は NORMAL、CHANCE、激熱、PUSH、シャッター、暗転、復活、PREMIUM と進む。<b>確定演出</b>は到達が決まったことを告げるもので、ドパ九九の「虹ドパ」が当たる。語彙として先バレ、激熱、PUSH、虹がよく使われる。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>電卓の答えはランダムじゃないですよね。ドパ電卓は何を煽っているんですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>答えは普通の計算どおりです。上がるのは演出のランクだけ。結果が 7、77、777、7777、8192 なら強制で PREMIUM です。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>結果が 0 のときは？</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>「全消灯」です。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#effect-inflation" class="text-dopa underline underline-offset-4">演出インフレ</a><a href="#fixed-vs-variable-reward" class="text-dopa underline underline-offset-4">確定報酬と可変報酬</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="sessions/20261005-1815-dopa-apps-research/index.html#patterns" class="text-signal underline underline-offset-4">調査レポート：図4 ドパ電卓の煽り</a></p></div>
+    </div>
+  </section>
+
+  <!-- 確定報酬と可変報酬 -->
+  <section id="fixed-vs-variable-reward" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#fixed-vs-variable-reward</p>
+    <h2 class="mt-1 font-display text-2xl">確定報酬と可変報酬</h2>
+    <p class="mt-3 leading-relaxed"><b>確定報酬</b>は、行動すれば必ず決まった報酬が入る仕組み。<b>可変報酬</b>は、報酬が出るかどうかや量が毎回ぶれる仕組みで、スロット型と呼ばれる。分析者はドパドリルを「確定報酬のセッション内増幅」とし、可変報酬とは違うと評している。ドパドリル系は課金、ランキング、可変報酬を持たない。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>ドパドリルって、仕組みはガチャと同じですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>分析者は違うと見ています。正解すれば必ずドパが入る確定報酬で、それが1回の中で増幅していくだけです。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>それなら依存の批判はかわせますか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>課金もランキングもないとは説明できます。ただ、子ども向けで依存を煽る設計だという批判は受けうると考えておいてください。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#dopa-value" class="text-dopa underline underline-offset-4">ドパ値</a><a href="#kakutei-enshutsu" class="text-dopa underline underline-offset-4">確定演出／煽り演出</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="sessions/20261005-1815-dopa-apps-research/index.html#patterns" class="text-signal underline underline-offset-4">調査レポート：図5</a><a href="sessions/20261005-1815-dopa-apps-research/index.html#cautions" class="text-signal underline underline-offset-4">作るときの注意点</a></p></div>
+    </div>
+  </section>
+
+  <!-- ひかえめモード -->
+  <section id="reduced-effects-mode" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#reduced-effects-mode</p>
+    <h2 class="mt-1 font-display text-2xl">ひかえめモード</h2>
+    <p class="mt-3 leading-relaxed">過剰な演出を抑えるための安全弁。ドパ九九の「ひかえめ」モードがこの名の由来。ドパ九九はあわせて明滅を1秒3回まで、粒子を800個（スマホは400個）までに制限している。ドパ電卓の Reduce Motion 対応も同じ役割の仕組みとして扱う。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>ドパ九九の安全配慮は、ひかえめモードだけですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>ほかに、明滅を1秒3回までにして、粒子も800個、スマホでは400個までにしています。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>ドパ電卓には同じものがありますか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>名前は違いますが、Reduce Motion に対応しています。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#effect-inflation" class="text-dopa underline underline-offset-4">演出インフレ</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="sessions/20261005-1815-dopa-apps-research/index.html#cautions" class="text-signal underline underline-offset-4">調査レポート：作るときの注意点</a></p></div>
+    </div>
+  </section>
+
+  <!-- バイブコーディング -->
+  <section id="vibe-coding" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#vibe-coding</p>
+    <h2 class="mt-1 font-display text-2xl">バイブコーディング</h2>
+    <p class="mt-3 leading-relaxed">生成AIに指示してアプリを作らせる作り方。ドパ〇〇はこの界隈で量産された。ドパドリルは作者が Opus 5.5 を試すために作ったもので、演出、効果音、BGM まで生成している。音を Web Audio で合成して外部素材を持たないため、AIの1回の生成で完結しやすい。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>ドパ〇〇がバイブコーディングと相性がいいのはなぜですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>音を外部ファイルではなく Web Audio で合成するので、素材を用意しなくても1回の生成で動くものができやすいんです。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>作った人たちの動機は？</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>ドパドリルの作者は Opus 5.5 を試すためだったと書いています。演出を盛るのはAIの見せ場になる、という見方もあります。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#dopa-apps" class="text-dopa underline underline-offset-4">ドパ〇〇</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="sessions/20261005-1815-dopa-apps-research/index.html#why-now" class="text-signal underline underline-offset-4">調査レポート：なぜ流行ったか</a></p></div>
+    </div>
+  </section>
+
+</div>
+</main>
+<script src="sidebar.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ドパ将棋！ 再現モック</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Shippori+Mincho+B1:wght@600;800&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        washi: '#F4EDE0',
+        washi2: '#EADFCB',
+        sumi: '#1F1A17',
+        sumi2: '#5A4F47',
+        kaya: '#E6BC72',
+        kayaline: '#8A5A22',
+        shu: '#C23A1E',
+        ai: '#2B4C7E',
+        guess: '#7A5BA8',
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: '#E5337A', 'dopa-soft': '#FFE6F0', 'dopa-pale': '#FFF3E4',
+      },
+      fontFamily: {
+        mincho: ['"Shippori Mincho B1"', 'serif'],
+        gothic: ['"Zen Kaku Gothic New"', 'sans-serif'],
+        display: ['"Dela Gothic One"', 'sans-serif']
+      },
+      keyframes: {
+        grow: { '0%': { transform: 'scaleX(0)' }, '100%': { transform: 'scaleX(1)' } },
+        settle: { '0%': { transform: 'translateY(-6px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
+        needle: { '0%': { strokeDashoffset: '251' } }
+      },
+      animation: {
+        grow: 'grow 0.7s ease-out both',
+        settle: 'settle 0.5s ease-out both',
+        needle: 'needle 1.4s ease-out both'
+      }
+    }
+  }
+}
+</script>
+</head>
+<body class="bg-washi text-sumi font-gothic antialiased">
+<main class="mx-auto max-w-5xl px-4 pb-24 pt-8 sm:px-8">
+
+  <!-- 上部 -->
+  <nav class="text-sm text-sumi2">
+    <a href="index.html" class="underline decoration-kayaline/50 underline-offset-4 hover:text-shu">← 調査レポート</a>
+    <span class="mx-2">/</span><span>ドパ将棋！</span>
+  </nav>
+
+  <header class="mt-6 grid gap-6 border-b-2 border-sumi pb-8 sm:grid-cols-[1fr_auto] sm:items-end">
+    <div>
+      <p class="font-mincho text-sm tracking-[0.3em] text-shu">周辺事例</p>
+      <h1 class="mt-2 font-mincho text-5xl font-extrabold leading-tight sm:text-6xl">ドパ将棋！</h1>
+      <p class="mt-4 max-w-xl text-lg leading-relaxed">手番の概念がない将棋。相手を待たず、両者がリアルタイムに指し進める。</p>
+    </div>
+    <div class="flex h-24 w-24 rotate-[-8deg] items-center justify-center rounded-md border-4 border-shu font-mincho text-xl font-extrabold leading-tight text-shu sm:h-28 sm:w-28">
+      手番<br>なし
+    </div>
+  </header>
+
+  <div class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+    <p class="rounded border border-sumi/20 bg-washi2 px-4 py-3">公開情報をもとにした<strong>再現モック</strong>。実際のスクリーンショットではない。</p>
+    <p class="rounded border border-sumi/20 bg-washi2 px-4 py-3">出典：<a class="text-ai underline underline-offset-4" href="https://automaton-media.com/articles/newsjp/20260925-469998/" target="_blank" rel="noopener">AUTOMATON（2026-09-25）</a>。公開は 9/23、けいち氏（dopasyogi.app）。</p>
+  </div>
+
+  <!-- 位置づけ -->
+  <section class="mt-14 grid gap-8 sm:grid-cols-[14rem_1fr]">
+    <h2 class="font-mincho text-2xl font-extrabold">どこが<br class="hidden sm:block">違うのか</h2>
+    <div class="space-y-4 text-base leading-loose">
+      <p>ドパドリルもドパ電卓も、道具の中身は普通のまま、上から演出をかぶせてドパを出す。紙吹雪、花火、激熱、PUSH。</p>
+      <p>ドパ将棋！は演出の話ではない。<strong class="bg-kaya/50 px-1">ルールを一つ外した</strong>。手番である。</p>
+      <p>将棋の時間の大半は、相手の手を待つ時間だ。そこを消すと、何が残るのか。</p>
+    </div>
+  </section>
+
+  <!-- ① タイムライン -->
+  <section class="mt-16">
+    <p class="font-mincho text-sm tracking-widest text-shu">一　待ち時間</p>
+    <h2 class="mt-1 font-mincho text-3xl font-extrabold">交互に待つか、同時に指すか</h2>
+
+    <div class="mt-8 space-y-10">
+      <figure>
+        <figcaption class="mb-3 flex items-baseline justify-between text-sm">
+          <span class="font-bold">普通の将棋</span><span class="text-sumi2">指す → 待つ → 指す</span>
+        </figcaption>
+        <svg viewBox="0 0 600 96" class="w-full" role="img" aria-label="普通の将棋では先手と後手が交互に指し、片方が指している間もう片方は待っている">
+          <text x="0" y="30" class="fill-sumi text-[13px]">先手</text>
+          <text x="0" y="74" class="fill-sumi text-[13px]">後手</text>
+          <line x1="44" y1="48" x2="600" y2="48" class="stroke-sumi/20" stroke-dasharray="2 4"/>
+          <g class="fill-shu">
+            <rect x="48" y="14" width="60" height="24" rx="3"/><rect x="228" y="14" width="60" height="24" rx="3"/><rect x="408" y="14" width="60" height="24" rx="3"/>
+          </g>
+          <g class="fill-ai">
+            <rect x="138" y="58" width="60" height="24" rx="3"/><rect x="318" y="58" width="60" height="24" rx="3"/><rect x="498" y="58" width="60" height="24" rx="3"/>
+          </g>
+          <g class="fill-sumi/10">
+            <rect x="112" y="14" width="112" height="24" rx="3"/><rect x="292" y="14" width="112" height="24" rx="3"/><rect x="472" y="14" width="112" height="24" rx="3"/>
+            <rect x="48" y="58" width="86" height="24" rx="3"/><rect x="202" y="58" width="112" height="24" rx="3"/><rect x="382" y="58" width="112" height="24" rx="3"/>
+          </g>
+          <g class="fill-sumi2 text-[11px]">
+            <text x="150" y="30">待ち</text><text x="330" y="30">待ち</text><text x="510" y="30">待ち</text>
+            <text x="76" y="74">待ち</text><text x="240" y="74">待ち</text><text x="420" y="74">待ち</text>
+          </g>
+        </svg>
+      </figure>
+
+      <figure>
+        <figcaption class="mb-3 flex items-baseline justify-between text-sm">
+          <span class="font-bold text-shu">ドパ将棋！</span><span class="text-sumi2">両者が同時に、どんどん指す</span>
+        </figcaption>
+        <svg viewBox="0 0 600 96" class="w-full" role="img" aria-label="ドパ将棋では先手と後手が同時に次々と指し、待ち時間がない">
+          <text x="0" y="30" class="fill-sumi text-[13px]">先手</text>
+          <text x="0" y="74" class="fill-sumi text-[13px]">後手</text>
+          <g class="origin-left animate-grow fill-shu motion-reduce:animate-none">
+            <rect x="48" y="14" width="40" height="24" rx="3"/><rect x="92" y="14" width="28" height="24" rx="3"/><rect x="124" y="14" width="52" height="24" rx="3"/><rect x="180" y="14" width="34" height="24" rx="3"/><rect x="218" y="14" width="46" height="24" rx="3"/><rect x="268" y="14" width="30" height="24" rx="3"/><rect x="302" y="14" width="58" height="24" rx="3"/><rect x="364" y="14" width="36" height="24" rx="3"/><rect x="404" y="14" width="44" height="24" rx="3"/><rect x="452" y="14" width="30" height="24" rx="3"/><rect x="486" y="14" width="50" height="24" rx="3"/><rect x="540" y="14" width="44" height="24" rx="3"/>
+          </g>
+          <g class="origin-left animate-grow fill-ai [animation-delay:150ms] motion-reduce:animate-none">
+            <rect x="48" y="58" width="30" height="24" rx="3"/><rect x="82" y="58" width="48" height="24" rx="3"/><rect x="134" y="58" width="36" height="24" rx="3"/><rect x="174" y="58" width="54" height="24" rx="3"/><rect x="232" y="58" width="28" height="24" rx="3"/><rect x="264" y="58" width="42" height="24" rx="3"/><rect x="310" y="58" width="34" height="24" rx="3"/><rect x="348" y="58" width="52" height="24" rx="3"/><rect x="404" y="58" width="30" height="24" rx="3"/><rect x="438" y="58" width="46" height="24" rx="3"/><rect x="488" y="58" width="38" height="24" rx="3"/><rect x="530" y="58" width="54" height="24" rx="3"/>
+          </g>
+        </svg>
+      </figure>
+      <p class="flex flex-wrap gap-x-5 gap-y-1 text-xs text-sumi2">
+        <span><span class="mr-1 inline-block h-3 w-3 rounded-sm bg-shu align-middle"></span>先手が指す</span>
+        <span><span class="mr-1 inline-block h-3 w-3 rounded-sm bg-ai align-middle"></span>後手が指す</span>
+        <span><span class="mr-1 inline-block h-3 w-3 rounded-sm bg-sumi/10 align-middle"></span>待ち</span>
+        <span>ブロックの長さ・本数は概念図で、実測ではない。</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ② 盤面 -->
+  <section class="mt-20 grid items-start gap-10 lg:grid-cols-[auto_1fr]">
+    <div>
+      <p class="font-mincho text-sm tracking-widest text-shu">二　対局中</p>
+      <h2 class="mt-1 font-mincho text-3xl font-extrabold">盤はいつもの将棋盤</h2>
+      <!-- スマホ枠 -->
+      <div class="mt-6 w-[300px] max-w-full rounded-[2.2rem] border-[10px] border-sumi bg-sumi shadow-2xl sm:w-[340px]">
+        <div class="overflow-hidden rounded-[1.5rem] bg-washi">
+          <div class="flex items-center justify-between bg-sumi px-4 py-2 text-washi">
+            <span class="font-mincho text-base font-extrabold">ドパ将棋！</span>
+            <span class="rounded bg-shu px-2 py-0.5 text-[10px] font-bold">手番なし</span>
+          </div>
+          <div class="flex items-center justify-between px-3 pt-3 text-[11px]">
+            <span class="font-bold text-ai">後手</span>
+            <span class="rounded-full border border-ai/40 px-2 py-0.5 text-ai">いつでも指せる</span>
+          </div>
+          <div class="p-3">
+            <div id="board" class="grid grid-cols-9 border-2 border-kayaline bg-kaya" aria-label="9×9 の将棋盤（平手初形から数手進めた例）"></div>
+          </div>
+          <div class="flex items-center justify-between px-3 pb-4 text-[11px]">
+            <span class="font-bold text-shu">先手</span>
+            <span class="rounded-full border border-shu/40 px-2 py-0.5 text-shu">いつでも指せる</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-y-5 pt-2 lg:pt-24">
+      <p class="leading-loose">駒も盤も普通だ。違うのは時間の流れだけで、相手の着手を待つ合図はどこにもない。</p>
+      <p class="leading-loose">朱の枠が先手、藍の枠が後手の直近の手。同じ瞬間に、両方が動いている。</p>
+      <ul class="space-y-2 border-l-4 border-guess pl-4 text-sm text-sumi2">
+        <li><span class="mr-1 rounded bg-guess px-1.5 text-[10px] font-bold text-white">推測</span>上下の「いつでも指せる」表示、直近の手の枠、ヘッダーの配置。実画面は未確認。</li>
+        <li><span class="mr-1 rounded bg-guess px-1.5 text-[10px] font-bold text-white">推測</span>盤面は平手初形から数手進めた説明用の例。</li>
+        <li>確かなのは「9×9 の将棋」「手番の概念がない」の二点だけ。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ③ 診断 -->
+  <section class="mt-20">
+    <p class="font-mincho text-sm tracking-widest text-shu">三　対局後</p>
+    <h2 class="mt-1 font-mincho text-3xl font-extrabold">あなたはどのドパガキか</h2>
+    <p class="mt-4 max-w-2xl leading-loose">終局すると「ドパガキ度」と「ドパタイプ」が診断される。タイプは 16 種。その中から、戦法として名前が広まったものが出てきた。</p>
+
+    <div class="mt-8 grid gap-6 md:grid-cols-[18rem_1fr]">
+      <div class="rounded-lg border-2 border-sumi bg-white/60 p-5">
+        <p class="text-sm font-bold">ドパガキ度</p>
+        <svg viewBox="0 0 200 120" class="mt-2 w-full" role="img" aria-label="ドパガキ度のメーター（値は例）">
+          <path d="M20 100 A80 80 0 0 1 180 100" fill="none" class="stroke-washi2" stroke-width="16" stroke-linecap="round"/>
+          <path d="M20 100 A80 80 0 0 1 180 100" fill="none" class="animate-needle stroke-shu motion-reduce:animate-none" stroke-width="16" stroke-linecap="round" stroke-dasharray="251" stroke-dashoffset="50"/>
+          <text x="100" y="92" text-anchor="middle" class="fill-sumi font-mincho text-[34px] font-extrabold">80</text>
+          <text x="100" y="112" text-anchor="middle" class="fill-sumi2 text-[10px]">数値は例</text>
+        </svg>
+        <p class="mt-2 text-xs text-sumi2"><span class="mr-1 rounded bg-guess px-1.5 text-[10px] font-bold text-white">推測</span>メーター形式・目盛りは想定。値の範囲は公開情報になし。</p>
+      </div>
+
+      <div>
+        <p class="text-sm font-bold">ドパタイプ <span class="font-normal text-sumi2">― 16 種のうち、記事に出てくる 3 つ</span></p>
+        <div class="mt-3 grid gap-4 sm:grid-cols-3">
+          <article class="animate-settle rounded-lg border-2 border-sumi bg-white/60 p-4 motion-reduce:animate-none">
+            <div class="flex h-14 w-12 items-center justify-center bg-kaya font-mincho text-2xl font-extrabold [clip-path:polygon(50%_0,100%_22%,100%_100%,0_100%,0_22%)]">歩</div>
+            <h3 class="mt-3 font-mincho text-xl font-extrabold">歩兵突撃型</h3>
+          </article>
+          <article class="animate-settle rounded-lg border-2 border-sumi bg-white/60 p-4 [animation-delay:120ms] motion-reduce:animate-none">
+            <div class="flex gap-1">
+              <div class="flex h-14 w-12 items-center justify-center bg-kaya font-mincho text-2xl font-extrabold [clip-path:polygon(50%_0,100%_22%,100%_100%,0_100%,0_22%)]">飛</div>
+              <div class="flex h-14 w-12 items-center justify-center bg-kaya font-mincho text-2xl font-extrabold [clip-path:polygon(50%_0,100%_22%,100%_100%,0_100%,0_22%)]">角</div>
+            </div>
+            <h3 class="mt-3 font-mincho text-xl font-extrabold">飛車・角活用型</h3>
+          </article>
+          <article class="animate-settle rounded-lg border-2 border-sumi bg-white/60 p-4 [animation-delay:240ms] motion-reduce:animate-none">
+            <div class="flex h-14 w-12 items-center justify-center font-mincho text-3xl font-extrabold text-shu">↩</div>
+            <h3 class="mt-3 font-mincho text-xl font-extrabold">カウンター型</h3>
+          </article>
+        </div>
+        <p class="mt-3 text-xs text-sumi2"><span class="mr-1 rounded bg-guess px-1.5 text-[10px] font-bold text-white">推測</span>カードの見た目は想定。各タイプの判定条件・説明文は公開情報になく、名前だけを載せた。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 下部 -->
+  <section class="mt-20 rounded-lg bg-sumi p-6 text-washi sm:p-10">
+    <h2 class="font-mincho text-2xl font-extrabold">ドパの出し方</h2>
+    <ol class="mt-6 space-y-4">
+      <li class="flex gap-4"><span class="font-mincho text-2xl font-extrabold text-kaya">一</span><span class="leading-relaxed">手番を消す。待ち時間がゼロになり、操作がそのまま反応になる。</span></li>
+      <li class="flex gap-4"><span class="font-mincho text-2xl font-extrabold text-kaya">二</span><span class="leading-relaxed">終局後に診断する。「ドパガキ度」で自分を数値で笑える。</span></li>
+      <li class="flex gap-4"><span class="font-mincho text-2xl font-extrabold text-kaya">三</span><span class="leading-relaxed">16 種のタイプで指し方に名前を付ける。名前が付くと、戦法として語られ始める。</span></li>
+    </ol>
+  </section>
+
+</main>
+<script>
+(function () {
+  // 平手初形から 先手 7六歩・2六歩、後手 3四歩・8四歩 を指した説明用の局面（左端が9筋）
+  var g = [
+    '香桂銀金王金銀桂香'.split(''),
+    ['', '飛', '', '', '', '', '', '角', ''],
+    '歩歩歩歩歩歩・歩歩'.split(''),
+    ['', '歩', '', '', '', '', '歩', '', ''],
+    ['', '', '', '', '', '', '', '', ''],
+    ['', '', '歩', '', '', '', '', '歩', ''],
+    '歩歩・歩歩歩歩・歩'.split(''),
+    ['', '角', '', '', '', '', '', '飛', ''],
+    '香桂銀金玉金銀桂香'.split('')
+  ];
+  g[2][1] = '';
+  var last = { '3,1': 'ai', '3,6': 'ai', '5,2': 'shu', '5,7': 'shu' };
+  var board = document.getElementById('board');
+  for (var r = 0; r < 9; r++) {
+    for (var c = 0; c < 9; c++) {
+      var p = g[r][c] === '・' ? '' : g[r][c];
+      var cell = document.createElement('div');
+      var mark = last[r + ',' + c];
+      cell.className = 'relative flex aspect-square items-center justify-center border border-kayaline/60 font-mincho text-[15px] font-extrabold sm:text-[17px]' +
+        (mark === 'shu' ? ' ring-2 ring-inset ring-shu bg-shu/10' : '') +
+        (mark === 'ai' ? ' ring-2 ring-inset ring-ai bg-ai/10' : '');
+      if (p) {
+        var s = document.createElement('span');
+        s.textContent = p;
+        s.className = (r < 4 ? 'rotate-180 ' : '') + (mark ? 'animate-settle motion-reduce:animate-none' : '');
+        cell.appendChild(s);
+      }
+      board.appendChild(cell);
+    }
+  }
+})();
+</script>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

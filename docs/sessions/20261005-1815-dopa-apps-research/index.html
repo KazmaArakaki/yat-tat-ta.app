@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="session-state" content="done">
+<title>ドパ〇〇アプリ調査</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: { rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } } },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-4xl">
+
+  <!-- ヘッダー -->
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <time datetime="2026-10-05T18:15">2026-10-05 18:15</time>
+      <span>/</span>
+      <span>調査セッション</span>
+      <span class="rounded-full border border-signal bg-signal/10 px-2.5 py-0.5 font-bold text-ink">state: done（レビュー済み）</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl">「ドパ<span class="text-dopa">〇〇</span>」アプリ調査</h1>
+  </header>
+
+  <!-- ① ひとことで -->
+  <section id="definition" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="relative overflow-hidden rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916] sm:p-8">
+      <div class="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-dopa-soft"></div>
+      <p class="relative font-mono text-xs uppercase tracking-[0.2em] text-dopa">ひとことで</p>
+      <p class="relative mt-3 text-lg font-bold leading-relaxed sm:text-xl">
+        <a href="../../glossary.html#dopa-apps" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパ〇〇</a>は、ドリルや電卓のような普通の道具に、パチンコやお祭りのような過剰な演出をかぶせたアプリ群です。<br>
+        操作するたびにドーパミンが出るよう設計された、ネタ寄りの作品です。<br>
+        2026年9月下旬、個人開発とAIの界隈で連鎖的に量産されました。
+      </p>
+      <div class="relative mt-6 flex flex-wrap items-center gap-2 font-display text-base sm:text-lg">
+        <span class="rounded-xl bg-paper px-3 py-2 ring-1 ring-rule">退屈な道具</span>
+        <span class="text-mute">×</span>
+        <span class="rounded-xl bg-dopa px-3 py-2 text-white">過剰演出</span>
+        <span class="text-mute">=</span>
+        <span class="rounded-xl bg-ink px-3 py-2 text-white">ドパ〇〇</span>
+        <span class="ml-1 font-sans text-sm font-normal text-mute">（中身は普通に正しく動く）</span>
+      </div>
+    </div>
+
+    <dl class="mt-6 grid gap-3 text-sm sm:grid-cols-3">
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <dt class="font-mono text-xs text-mute">名前</dt>
+        <dd class="mt-1 leading-relaxed">「ドパ」＋元の道具名。ドパドリル、ドパ電卓、ドパ九九など。</dd>
+      </div>
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <dt class="font-mono text-xs text-mute">下地の言葉</dt>
+        <dd class="mt-1 leading-relaxed">Z世代スラング「<a href="../../glossary.html#dopagaki" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパガキ</a>」。即時報酬に弱い若者の自虐語で、2025〜2026年に拡散。</dd>
+      </div>
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <dt class="font-mono text-xs text-mute">増え方</dt>
+        <dd class="mt-1 leading-relaxed">ソースを公開し、他の人がフォークして改造する。<a href="../../glossary.html#vibe-coding" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">バイブコーディング</a>で作られた例が多い。</dd>
+      </div>
+    </dl>
+  </section>
+
+  <!-- ② 時系列 -->
+  <section id="timeline" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / timeline</p>
+    <h2 class="mt-2 font-display text-3xl">9月下旬の約1週間</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">将棋から始まり、ドリルで火が付き、九九とタイピングへ枝分かれしました。ドパにゃんはドパドリルのフォークです。</p>
+
+    <ol class="mt-8 grid gap-6 lg:grid-cols-5 lg:gap-0">
+      <li class="relative border-l-4 border-ink pl-5 lg:border-l-0 lg:border-t-4 lg:pl-0 lg:pr-4 lg:pt-6">
+        <span class="absolute -left-[11px] top-1 h-4 w-4 rounded-full border-4 border-ink bg-paper lg:-top-[11px] lg:left-0"></span>
+        <p class="font-mono text-sm font-bold">9/23</p>
+        <p class="mt-1 font-display text-lg">ドパ将棋！</p>
+        <p class="mt-1 text-xs leading-relaxed text-ink/75">けいち氏が公開。手番のない将棋。9/25 に AUTOMATON が記事化。</p>
+      </li>
+      <li class="relative border-l-4 border-dopa pl-5 lg:border-l-0 lg:border-t-4 lg:pl-0 lg:pr-4 lg:pt-6">
+        <span class="absolute -left-[13px] top-0 h-5 w-5 rounded-full bg-dopa ring-4 ring-dopa-soft lg:-top-[13px] lg:left-0"></span>
+        <p class="font-mono text-sm font-bold text-dopa">9/26〜27</p>
+        <p class="mt-1 font-display text-lg">ドパドリル</p>
+        <p class="mt-1 text-xs leading-relaxed text-ink/75">gear machine 氏が Opus 5.5 を試すために作成。MIT で公開。流行の中心。</p>
+      </li>
+      <li class="relative border-l-4 border-ink pl-5 lg:border-l-0 lg:border-t-4 lg:pl-0 lg:pr-4 lg:pt-6">
+        <span class="absolute -left-[11px] top-1 h-4 w-4 rounded-full border-4 border-ink bg-paper lg:-top-[11px] lg:left-0"></span>
+        <p class="font-mono text-sm font-bold">9/28</p>
+        <p class="mt-1 font-display text-lg">ドパ九九</p>
+        <p class="mt-1 text-xs leading-relaxed text-ink/75">kobako リポジトリの PR #31。続く PR #33 で処理落ちを修正。</p>
+      </li>
+      <li class="relative border-l-4 border-ink pl-5 lg:border-l-0 lg:border-t-4 lg:pl-0 lg:pr-4 lg:pt-6">
+        <span class="absolute -left-[11px] top-1 h-4 w-4 rounded-full border-4 border-ink bg-paper lg:-top-[11px] lg:left-0"></span>
+        <p class="font-mono text-sm font-bold">9月末</p>
+        <p class="mt-1 font-display text-lg">ドパにゃん！</p>
+        <p class="mt-1 text-xs leading-relaxed text-ink/75">CHIHAYA 氏。ドパドリルを改造したタイピング。</p>
+        <p class="mt-2 inline-block rounded bg-dopa-soft px-2 py-0.5 font-mono text-[11px] text-dopa">fork ← ドパドリル</p>
+      </li>
+      <li class="relative border-l-4 border-dashed border-mute pl-5 lg:border-l-0 lg:border-t-4 lg:pl-0 lg:pt-6">
+        <span class="absolute -left-[11px] top-1 h-4 w-4 rounded-full border-4 border-dashed border-mute bg-paper lg:-top-[11px] lg:left-0"></span>
+        <p class="font-mono text-sm font-bold text-mute">同時期</p>
+        <p class="mt-1 font-display text-lg">ドパ電卓</p>
+        <p class="mt-1 text-xs leading-relaxed text-ink/75">GitHub の neoenox/dopa_calc ほか。Flutter の MVP。</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ③ 事例カード -->
+  <section id="cases" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / cases</p>
+    <h2 class="mt-2 font-display text-3xl">事例5つ</h2>
+    <p class="mt-3 rounded-xl border border-dashed border-mute bg-white/60 px-4 py-3 text-sm leading-relaxed">
+      「画面イメージを見る」の先は、公開仕様をもとにした<strong>再現モック</strong>です。実際のスクリーンショットではありません。
+    </p>
+
+    <div class="mt-8 grid gap-6 md:grid-cols-2">
+
+      <!-- ドパドリル -->
+      <article class="flex flex-col rounded-3xl border-2 border-ink bg-white p-6 shadow-[6px_6px_0_#E5337A] md:col-span-2">
+        <div class="flex flex-wrap items-baseline justify-between gap-2">
+          <h3 class="font-display text-2xl">ドパドリル</h3>
+          <span class="font-mono text-xs text-mute">算数ドリル／流行の中心</span>
+        </div>
+        <p class="mt-2 font-bold">正解するたびに「ドパ」がもらえ、問題が進むほど演出がインフレしていく算数ドリル。</p>
+        <ul class="mt-4 grid gap-3 text-sm sm:grid-cols-3">
+          <li class="rounded-xl bg-dopa-pale p-3 leading-relaxed"><a href="../../glossary.html#effect-inflation" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">演出インフレ</a>：演出強度 E が序盤 0.08 から終盤 1.0 へ。最後は4種のフィナーレ。</li>
+          <li class="rounded-xl bg-dopa-pale p-3 leading-relaxed"><a href="../../glossary.html#dopa-value" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパ値</a>は対数で管理し「億」まで膨らむ。<a href="../../glossary.html#combo-multiplier" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">コンボ倍率</a>は最大2倍。</li>
+          <li class="rounded-xl bg-dopa-pale p-3 leading-relaxed">ゲームオーバーなし。誤答は紫の点線枠で示すだけ。</li>
+        </ul>
+        <p class="mt-4 text-xs leading-relaxed text-mute">作者 gear machine（@grmchn4ai）。ブラウザ完結、依存なしの ES Modules、音は Web Audio 合成、保存は localStorage のみ。58スキル（小1〜6）、トロフィー306種。PV と攻略本 PDF を作り、ラクスルで物理本まで刷った。</p>
+        <a href="dopa-drill.html" class="mt-5 self-start rounded-full bg-ink px-4 py-2 text-sm font-bold text-white hover:bg-dopa">画面イメージを見る →</a>
+      </article>
+
+      <!-- ドパ電卓 -->
+      <article class="flex flex-col rounded-3xl border-2 border-ink bg-white p-6">
+        <div class="flex flex-wrap items-baseline justify-between gap-2">
+          <h3 class="font-display text-2xl">ドパ電卓</h3>
+          <span class="font-mono text-xs text-mute">電卓／Flutter</span>
+        </div>
+        <p class="mt-2 font-bold">普通の四則演算なのに、= を押した瞬間だけパチンコ風の煽り演出が走る。</p>
+        <ul class="mt-4 flex flex-col gap-2 text-sm leading-relaxed">
+          <li class="border-l-4 border-gold pl-3">演出ランクは NORMAL／CHANCE／激熱／PREMIUM の4段。</li>
+          <li class="border-l-4 border-gold pl-3">結果が 7、77、777、7777、8192 なら強制 PREMIUM。0 なら「全消灯」。</li>
+          <li class="border-l-4 border-gold pl-3">効果音は合成 PCM とハプティクス。Reduce Motion に対応。</li>
+        </ul>
+        <a href="dopa-calc.html" class="mt-auto self-start rounded-full bg-ink px-4 py-2 text-sm font-bold text-white hover:bg-dopa md:mt-5">画面イメージを見る →</a>
+      </article>
+
+      <!-- ドパ九九 -->
+      <article class="flex flex-col rounded-3xl border-2 border-ink bg-white p-6">
+        <div class="flex flex-wrap items-baseline justify-between gap-2">
+          <h3 class="font-display text-2xl">ドパ九九</h3>
+          <span class="font-mono text-xs text-mute">九九／タイムアタック</span>
+        </div>
+        <p class="mt-2 font-bold">九九を1問5秒以内に答え続ける。ミスか時間切れで終わり。</p>
+        <ul class="mt-4 flex flex-col gap-2 text-sm leading-relaxed">
+          <li class="border-l-4 border-signal pl-3">連続正解で「ドパレベル」が Lv0〜8 に上がる。</li>
+          <li class="border-l-4 border-signal pl-3">20連続で「ドパタイム」突入、50連続で「虹ドパ」<a href="../../glossary.html#kakutei-enshutsu" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">確定演出</a>（タイマーが1.5秒止まる）。</li>
+          <li class="border-l-4 border-signal pl-3"><a href="../../glossary.html#reduced-effects-mode" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ひかえめモード</a>あり。明滅は1秒3回まで、粒子は800個（スマホ400）まで。</li>
+        </ul>
+        <a href="dopa-kuku.html" class="mt-auto self-start rounded-full bg-ink px-4 py-2 text-sm font-bold text-white hover:bg-dopa md:mt-5">画面イメージを見る →</a>
+      </article>
+
+      <!-- ドパにゃん -->
+      <article class="flex flex-col rounded-3xl border-2 border-ink bg-white p-6">
+        <div class="flex flex-wrap items-baseline justify-between gap-2">
+          <h3 class="font-display text-2xl">ドパにゃん！<span class="text-base">脳汁タイピング</span></h3>
+          <span class="font-mono text-xs text-mute">タイピング／fork</span>
+        </div>
+        <p class="mt-2 font-bold">ドパドリルを改造したローマ字タイピング。打つたびに猫がキーを踏む。</p>
+        <ul class="mt-4 flex flex-col gap-2 text-sm leading-relaxed">
+          <li class="border-l-4 border-dopa-body pl-3">「ねこふんじゃった」が1音ずつ鳴り、速く打つほどテンポが上がる。</li>
+          <li class="border-l-4 border-dopa-body pl-3">30コンボで FEVER、60コンボで「マタタビモード」。ときどき金色の LUCKY。</li>
+          <li class="border-l-4 border-dopa-body pl-3">11曲、楽器5種を Web Audio で合成。結果画像を保存して共有できる。</li>
+        </ul>
+        <a href="dopanyan.html" class="mt-auto self-start rounded-full bg-ink px-4 py-2 text-sm font-bold text-white hover:bg-dopa md:mt-5">画面イメージを見る →</a>
+      </article>
+
+      <!-- ドパ将棋 -->
+      <article class="flex flex-col rounded-3xl border-2 border-dashed border-ink bg-white p-6">
+        <div class="flex flex-wrap items-baseline justify-between gap-2">
+          <h3 class="font-display text-2xl">ドパ将棋！</h3>
+          <span class="font-mono text-xs text-mute">将棋／周辺事例</span>
+        </div>
+        <p class="mt-2 font-bold">手番の概念がない将棋。演出ではなくルールのほうでドパを出す。</p>
+        <ul class="mt-4 flex flex-col gap-2 text-sm leading-relaxed">
+          <li class="border-l-4 border-violet pl-3">相手を待たず、リアルタイムに指し進める。</li>
+          <li class="border-l-4 border-violet pl-3">対局後に「ドパガキ度」と16種の「ドパタイプ」を診断。</li>
+          <li class="border-l-4 border-violet pl-3">「歩兵突撃型」「カウンター型」などの戦法が生まれた。</li>
+        </ul>
+        <a href="dopa-shogi.html" class="mt-auto self-start rounded-full bg-ink px-4 py-2 text-sm font-bold text-white hover:bg-dopa md:mt-5">画面イメージを見る →</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- ④ 共通パターン -->
+  <section id="patterns" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / patterns</p>
+    <h2 class="mt-2 font-display text-3xl">共通する設計パターン</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">
+      子どもにドーパミンを浴びせるドリル、と聞けば依存を狙った作りを想像します。<br>
+      ところがドパドリルの仕様を読むと、課金もランキングもありません。<br>
+      分析者はこれを「ドーパミンハックではなく、快感の連鎖を壊さない習慣化ゲーム」と評しています。
+    </p>
+
+    <div class="mt-8 grid gap-4 md:grid-cols-2">
+      <div class="rounded-2xl border border-rule bg-white p-5">
+        <p class="font-display text-lg">体験をつくる</p>
+        <ol class="mt-3 flex flex-col gap-2 text-sm leading-relaxed">
+          <li><span class="mr-2 font-mono font-bold text-dopa">01</span>退屈な道具 × 過剰演出。中身は普通に正しく動く。</li>
+          <li><span class="mr-2 font-mono font-bold text-dopa">02</span>即時フィードバック。入力した瞬間に反応する。</li>
+          <li><span class="mr-2 font-mono font-bold text-dopa">03</span>演出のインフレ。進むほど強くなる。</li>
+          <li><span class="mr-2 font-mono font-bold text-dopa">04</span>コンボと倍率、巨大に膨らむ数値。</li>
+          <li><span class="mr-2 font-mono font-bold text-dopa">05</span>失敗を罰しない（ドリル系）か、タイムアタックの緊張（九九）。</li>
+        </ol>
+      </div>
+      <div class="rounded-2xl border border-rule bg-white p-5">
+        <p class="font-display text-lg">演出の文法と配り方</p>
+        <ol class="mt-3 flex flex-col gap-2 text-sm leading-relaxed">
+          <li><span class="mr-2 font-mono font-bold text-signal">06</span>確定演出と節目演出。先バレ、激熱、PUSH、虹などパチンコの文法。</li>
+          <li><span class="mr-2 font-mono font-bold text-signal">07</span>音は Web Audio で合成し、外部素材を持たない。AIの1回の生成で完結しやすい。</li>
+          <li><span class="mr-2 font-mono font-bold text-signal">08</span>安全弁。Reduce Motion、ひかえめモード、明滅上限。</li>
+          <li><span class="mr-2 font-mono font-bold text-signal">09</span>ソース公開と改造による増殖。</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- 図1：演出強度カーブ -->
+    <figure class="mt-12 rounded-3xl border-2 border-ink bg-white p-5 sm:p-7">
+      <figcaption>
+        <p class="font-mono text-xs text-mute">図1 ドパドリル</p>
+        <p class="mt-1 font-display text-xl">演出強度 E の上がり方</p>
+        <p class="mt-2 font-mono text-sm">E = 0.08 + 0.92 × (i / (N−1))<sup>1.3</sup></p>
+        <p class="mt-1 text-xs text-mute">i は何問目か（0始まり）、N は問題数。指数 1.3 のため、直線（点線）より遅く立ち上がり、終盤で追いつく。</p>
+      </figcaption>
+      <svg viewBox="0 0 640 300" class="mt-4 w-full" role="img" aria-label="演出強度Eは序盤0.08から終盤1.0へ下に凸の曲線で上がる">
+        <rect x="60" y="20" width="180" height="220" fill="#FBF6EE"/>
+        <rect x="240" y="20" width="180" height="220" fill="#FFF3E4"/>
+        <rect x="420" y="20" width="180" height="220" fill="#FFE6F0"/>
+        <line x1="60" y1="240" x2="600" y2="240" stroke="#1C1916" stroke-width="2"/>
+        <line x1="60" y1="20" x2="60" y2="240" stroke="#1C1916" stroke-width="2"/>
+        <line x1="60" y1="20" x2="600" y2="20" stroke="#E7DDCC"/>
+        <line x1="60" y1="130" x2="600" y2="130" stroke="#E7DDCC"/>
+        <text x="50" y="244" text-anchor="end" font-size="12" fill="#6E655C" font-family="JetBrains Mono">0</text>
+        <text x="50" y="134" text-anchor="end" font-size="12" fill="#6E655C" font-family="JetBrains Mono">0.5</text>
+        <text x="50" y="24" text-anchor="end" font-size="12" fill="#6E655C" font-family="JetBrains Mono">1.0</text>
+        <text x="60" y="262" font-size="12" fill="#6E655C" font-family="JetBrains Mono">1問目</text>
+        <text x="600" y="262" text-anchor="end" font-size="12" fill="#6E655C" font-family="JetBrains Mono">最終問</text>
+        <line x1="60" y1="222.4" x2="600" y2="20" stroke="#6E655C" stroke-width="1.5" stroke-dasharray="5 5"/>
+        <polyline fill="none" stroke="#E5337A" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"
+          points="60,222.4 114,212.3 168,197.4 222,180.1 276,160.9 330,140.2 384,118.2 438,95.1 492,71.0 546,45.9 600,20"/>
+        <circle cx="60" cy="222.4" r="5" fill="#E5337A"/>
+        <circle cx="600" cy="20" r="6" fill="#E5337A"/>
+        <text x="70" y="214" font-size="13" fill="#E5337A" font-weight="700">0.08</text>
+        <text x="150" y="292" text-anchor="middle" font-size="13" fill="#1C1916" font-weight="700">序盤</text>
+        <text x="330" y="292" text-anchor="middle" font-size="13" fill="#1C1916" font-weight="700">中盤</text>
+        <text x="510" y="292" text-anchor="middle" font-size="13" fill="#1C1916" font-weight="700">終盤</text>
+      </svg>
+      <div class="mt-3 grid gap-2 text-xs leading-relaxed sm:grid-cols-3">
+        <p class="rounded-lg bg-paper p-2"><b>序盤</b>：基本描画のみ</p>
+        <p class="rounded-lg bg-dopa-pale p-2"><b>中盤</b>：背景変化、はなまる、紙吹雪、星</p>
+        <p class="rounded-lg bg-dopa-soft p-2"><b>終盤</b>：花火、硬貨、観客、行進、電飾、揺れ</p>
+      </div>
+      <p class="mt-2 text-[11px] text-mute">背景の三分割は図示用。段階が切り替わる位置は調査メモに記載がない。</p>
+    </figure>
+
+    <!-- 図2：コンボ倍率 -->
+    <figure class="mt-8 rounded-3xl border-2 border-ink bg-white p-5 sm:p-7">
+      <figcaption>
+        <p class="font-mono text-xs text-mute">図2 ドパドリル</p>
+        <p class="mt-1 font-display text-xl">コンボ倍率 M(c)</p>
+        <p class="mt-2 font-mono text-sm">M(c) = 1 + min(1, c / 20)</p>
+        <p class="mt-1 text-xs text-mute">c はコンボ数。20コンボで頭打ちになり「ドパ×2 MAX」。★ は大きく祝う節目（10/20/30/50/75）。</p>
+      </figcaption>
+      <svg viewBox="0 0 640 250" class="mt-4 w-full" role="img" aria-label="コンボ倍率は0から20コンボまで1倍から2倍へ直線で上がり、以後2倍で一定">
+        <line x1="60" y1="200" x2="600" y2="200" stroke="#1C1916" stroke-width="2"/>
+        <line x1="60" y1="30" x2="60" y2="200" stroke="#1C1916" stroke-width="2"/>
+        <line x1="60" y1="120" x2="600" y2="120" stroke="#E7DDCC"/>
+        <line x1="60" y1="40" x2="600" y2="40" stroke="#E7DDCC"/>
+        <text x="50" y="204" text-anchor="end" font-size="12" fill="#6E655C" font-family="JetBrains Mono">×1</text>
+        <text x="50" y="124" text-anchor="end" font-size="12" fill="#6E655C" font-family="JetBrains Mono">×1.5</text>
+        <text x="50" y="44" text-anchor="end" font-size="12" fill="#6E655C" font-family="JetBrains Mono">×2</text>
+        <polyline fill="none" stroke="#2F79F7" stroke-width="4" stroke-linejoin="round" points="60,200 195,40 600,40"/>
+        <rect x="195" y="22" width="110" height="20" rx="10" fill="#1C1916"/>
+        <text x="250" y="36" text-anchor="middle" font-size="11" fill="#fff" font-weight="700" font-family="JetBrains Mono">ドパ×2 MAX</text>
+        <g fill="#E9A800" font-size="20" text-anchor="middle">
+          <text x="127.5" y="127">★</text><text x="195" y="47">★</text><text x="262.5" y="47">★</text><text x="397.5" y="47">★</text><text x="566.25" y="47">★</text>
+        </g>
+        <g font-size="12" fill="#6E655C" text-anchor="middle" font-family="JetBrains Mono">
+          <text x="60" y="220">0</text><text x="127.5" y="220">10</text><text x="195" y="220">20</text><text x="262.5" y="220">30</text><text x="397.5" y="220">50</text><text x="566.25" y="220">75</text>
+        </g>
+        <text x="600" y="240" text-anchor="end" font-size="12" fill="#6E655C">コンボ数 c</text>
+      </svg>
+    </figure>
+
+    <!-- 図3：ドパ値のスケール -->
+    <figure class="mt-8 rounded-3xl border-2 border-ink bg-white p-5 sm:p-7">
+      <figcaption>
+        <p class="font-mono text-xs text-mute">図3 ドパドリル</p>
+        <p class="mt-1 font-display text-xl">ドパ値は対数で積み上がる</p>
+        <p class="mt-1 text-xs text-mute">内部は常用対数 L で持ち、表示は 10<sup>L</sup>。1万以上は「万」「億」で書く。100、1000、1万…1億の節目で演出が入る。</p>
+      </figcaption>
+      <svg viewBox="0 0 640 120" class="mt-4 w-full" role="img" aria-label="ドパ値の対数スケール。100から1億まで10倍ごとに節目、上限は10の9.08乗で約12億">
+        <defs>
+          <linearGradient id="dopa-grad" x1="0" x2="1">
+            <stop offset="0" stop-color="#FFE6F0"/><stop offset="1" stop-color="#E5337A"/>
+          </linearGradient>
+        </defs>
+        <rect x="40" y="40" width="544.8" height="22" rx="11" fill="url(#dopa-grad)"/>
+        <g stroke="#1C1916" stroke-width="2">
+          <line x1="160" y1="34" x2="160" y2="68"/><line x1="220" y1="34" x2="220" y2="68"/><line x1="280" y1="34" x2="280" y2="68"/>
+          <line x1="340" y1="34" x2="340" y2="68"/><line x1="400" y1="34" x2="400" y2="68"/><line x1="460" y1="34" x2="460" y2="68"/>
+          <line x1="520" y1="34" x2="520" y2="68"/>
+        </g>
+        <g font-size="12" text-anchor="middle" fill="#1C1916" font-weight="700">
+          <text x="160" y="86">100</text><text x="220" y="86">1000</text><text x="280" y="86">1万</text><text x="340" y="86">10万</text>
+          <text x="400" y="86">100万</text><text x="460" y="86">1000万</text><text x="520" y="86">1億</text>
+        </g>
+        <g font-size="11" text-anchor="middle" fill="#6E655C" font-family="JetBrains Mono">
+          <text x="40" y="28">L=0</text><text x="160" y="28">2</text><text x="280" y="28">4</text><text x="400" y="28">6</text><text x="520" y="28">8</text>
+        </g>
+        <text x="584" y="108" text-anchor="end" font-size="12" fill="#E5337A" font-weight="700">上限 10^9.08（約12億）</text>
+      </svg>
+    </figure>
+
+    <!-- 図4：ドパ電卓の煽り -->
+    <figure class="mt-8 rounded-3xl border-2 border-ink bg-ink p-5 text-white sm:p-7">
+      <figcaption>
+        <p class="font-mono text-xs text-white/60">図4 ドパ電卓</p>
+        <p class="mt-1 font-display text-xl">= を押してから PREMIUM までの煽り</p>
+      </figcaption>
+      <ol class="mt-5 flex flex-wrap items-center gap-2 font-mono text-xs font-bold sm:text-sm">
+        <li class="rounded-md bg-white/10 px-3 py-2">NORMAL</li><li class="text-white/40">→</li>
+        <li class="rounded-md bg-signal px-3 py-2">CHANCE</li><li class="text-white/40">→</li>
+        <li class="rounded-md bg-dopa px-3 py-2">激熱</li><li class="text-white/40">→</li>
+        <li class="rounded-md border-2 border-gold px-3 py-2 text-gold">PUSH</li><li class="text-white/40">→</li>
+        <li class="rounded-md bg-white/20 px-3 py-2">シャッター</li><li class="text-white/40">→</li>
+        <li class="rounded-md bg-black px-3 py-2 ring-1 ring-white/30">暗転</li><li class="text-white/40">→</li>
+        <li class="rounded-md bg-white px-3 py-2 text-ink">復活</li><li class="text-white/40">→</li>
+        <li class="rounded-md bg-gradient-to-r from-gold via-dopa to-violet px-3 py-2">PREMIUM</li>
+      </ol>
+      <p class="mt-4 text-xs leading-relaxed text-white/70">途中に先バレ、7図柄ロック、擬似 PUSH、復活の白フラッシュ、役物落下、777 JACKPOT が入る。PREMIUM は8ビート9秒。</p>
+    </figure>
+
+    <!-- 図5：確定報酬と可変報酬 -->
+    <figure class="mt-8 grid gap-4 md:grid-cols-2">
+      <div class="rounded-3xl border-2 border-dopa bg-white p-5">
+        <p class="font-mono text-xs text-dopa">ドパドリル系</p>
+        <p class="mt-1 font-display text-xl">確定報酬のセッション内増幅</p>
+        <p class="mt-2 text-sm leading-relaxed">正解すれば必ずドパが入り、1回の学習の中で演出が強くなっていく。課金、ランキング、可変報酬は持たない。観客やパレードは演出だけの擬似ソーシャル。</p>
+      </div>
+      <div class="rounded-3xl border-2 border-dashed border-mute bg-white p-5">
+        <p class="font-mono text-xs text-mute">スロット型</p>
+        <p class="mt-1 font-display text-xl">可変報酬</p>
+        <p class="mt-2 text-sm leading-relaxed">報酬が出るかどうか、どれだけ出るかが毎回ぶれる。分析者はドパドリルをこちらとは違うものとして区別している。</p>
+      </div>
+      <figcaption class="text-xs text-mute md:col-span-2">図5 <a href="../../glossary.html#fixed-vs-variable-reward" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">確定報酬と可変報酬</a>の対比</figcaption>
+    </figure>
+  </section>
+
+  <!-- ⑤ なぜ今 -->
+  <section id="why-now" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / why now</p>
+    <h2 class="mt-2 font-display text-3xl">なぜ2026年9月に流行ったか</h2>
+    <p class="mt-3 text-sm text-mute">調査メモの考察。裏付けのある因果ではない。</p>
+    <div class="mt-6 grid gap-4 sm:grid-cols-3">
+      <div class="rounded-2xl bg-dopa-soft p-5">
+        <p class="font-display text-4xl text-dopa">1</p>
+        <p class="mt-2 font-bold">共通語があった</p>
+        <p class="mt-1 text-sm leading-relaxed">「ドパガキ」の流行で、説明なしに通じるネタの土台ができていた。</p>
+      </div>
+      <div class="rounded-2xl bg-[#E4EEFF] p-5">
+        <p class="font-display text-4xl text-signal">2</p>
+        <p class="mt-2 font-bold">AIで一気に作れる</p>
+        <p class="mt-1 text-sm leading-relaxed">Opus 5.5 などで演出も効果音もBGMもまとめて生成できる。演出盛りはAIの見せ場になる。</p>
+      </div>
+      <div class="rounded-2xl bg-[#FFF1C9] p-5">
+        <p class="font-display text-4xl text-gold">3</p>
+        <p class="mt-2 font-bold">皮肉と実用の両義性</p>
+        <p class="mt-1 text-sm leading-relaxed">「勉強 × ドーパミン」は笑えて、しかも使える。拡散されやすい。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑥ 注意点 -->
+  <section id="cautions" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / cautions</p>
+    <h2 class="mt-2 font-display text-3xl">作るときの注意点</h2>
+
+    <div class="mt-6 grid gap-4 md:grid-cols-3">
+      <div class="rounded-2xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs font-bold text-dopa">明滅と音量</p>
+        <p class="mt-2 text-sm leading-relaxed">光の明滅は光過敏の人に負担になる。ドパ九九は明滅を1秒3回までに抑え、ドパ電卓は Reduce Motion に従う。音量にも配慮が要る。</p>
+      </div>
+      <div class="rounded-2xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs font-bold text-dopa">依存批判</p>
+        <p class="mt-2 text-sm leading-relaxed">子ども向けで依存を煽る設計は、ダークパターンとして批判されうる。ドパドリル系は課金、ランキング、可変報酬を持たないが、見た目だけで判断される可能性は残る。</p>
+      </div>
+      <div class="rounded-2xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs font-bold text-dopa">性能</p>
+        <p class="mt-2 text-sm leading-relaxed">演出を盛るほど端末は重くなる。ドパ九九ではスマホで音が詰まり、入力が遅れた。</p>
+      </div>
+    </div>
+
+    <figure class="mt-6 rounded-3xl border-2 border-ink bg-white p-5 sm:p-7">
+      <figcaption>
+        <p class="font-mono text-xs text-mute">図6 ドパ九九 PR #33</p>
+        <p class="mt-1 font-display text-xl">描画回数（毎秒）</p>
+      </figcaption>
+      <div class="mt-5 flex flex-col gap-3 text-sm">
+        <div class="grid grid-cols-[4rem_1fr] items-center gap-3">
+          <span class="font-bold text-mute">修正前</span>
+          <div class="flex items-center gap-2"><div class="h-6 w-[7.5%] rounded bg-mute"></div><span class="font-mono font-bold">3.8</span></div>
+        </div>
+        <div class="grid grid-cols-[4rem_1fr] items-center gap-3">
+          <span class="font-bold">修正後</span>
+          <div class="flex items-center gap-2"><div class="h-6 w-[85%] rounded bg-signal"></div><span class="font-mono font-bold">約51</span></div>
+        </div>
+      </div>
+      <p class="mt-4 text-xs font-bold">原因として挙がった3点</p>
+      <ul class="mt-2 grid gap-2 text-xs leading-relaxed sm:grid-cols-3">
+        <li class="rounded-lg bg-paper p-2">hue-rotate で回す虹背景</li>
+        <li class="rounded-lg bg-paper p-2">SVG の再描画</li>
+        <li class="rounded-lg bg-paper p-2">音ごとに数十個生成していた OscillatorNode</li>
+      </ul>
+    </figure>
+  </section>
+
+  <!-- ⑦ 作るなら -->
+  <section id="if-we-build" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">07 / if we build</p>
+    <h2 class="mt-2 font-display text-3xl">作るなら</h2>
+    <p class="mt-3 text-sm text-mute">2026-10-05 に開発者と合意した方針。</p>
+
+    <!-- 決定3つ -->
+    <dl class="mt-6 grid gap-3 text-sm sm:grid-cols-3">
+      <div class="rounded-2xl border-2 border-ink bg-white p-4">
+        <dt class="font-mono text-xs text-mute">形式</dt>
+        <dd class="mt-1 font-display text-xl">ネイティブアプリ</dd>
+        <dd class="mt-2 leading-relaxed text-ink/80">事例5本のうち4本は Web。ネイティブはドパ電卓（Flutter）だけ。拡散なら Web が強いが、差別化のためにネイティブを選んだ。</dd>
+      </div>
+      <div class="rounded-2xl border-2 border-ink bg-white p-4">
+        <dt class="font-mono text-xs text-mute">対象</dt>
+        <dd class="mt-1 font-display text-xl">まず iPhone のみ</dd>
+        <dd class="mt-2 leading-relaxed text-ink/80">開発者本人が iPhone を使っているため。</dd>
+      </div>
+      <div class="rounded-2xl border-2 border-ink bg-white p-4">
+        <dt class="font-mono text-xs text-mute">技術</dt>
+        <dd class="mt-1 font-display text-xl">Swift（SwiftUI）</dd>
+        <dd class="mt-2 leading-relaxed text-ink/80">Flutter は2つの OS に出すときに利点が効く。iPhone だけなら効かないので見送った。</dd>
+      </div>
+    </dl>
+
+    <!-- 差別化の本体 -->
+    <div class="mt-8 rounded-3xl border-2 border-ink bg-ink p-5 text-white sm:p-7">
+      <p class="font-mono text-xs text-white/60">差別化の本体</p>
+      <p class="mt-1 font-display text-xl">4つがずれずにそろう手触り</p>
+      <ol class="mt-5 flex flex-wrap items-center gap-2 font-mono text-sm font-bold">
+        <li class="rounded-md bg-white px-3 py-2 text-ink">タップ</li><li class="text-white/40">→</li>
+        <li class="rounded-md bg-signal px-3 py-2">音</li><li class="text-white/40">→</li>
+        <li class="rounded-md bg-dopa px-3 py-2">振動</li><li class="text-white/40">→</li>
+        <li class="rounded-md bg-gold px-3 py-2 text-ink">光</li>
+      </ol>
+      <p class="mt-4 text-xs leading-relaxed text-white/70">Web の事例では、音が詰まって入力が遅れた例もある（ドパ九九）。ずれの小ささそのものを売りにする。</p>
+    </div>
+
+    <!-- Swift を選んだ理由 -->
+    <div class="mt-8 grid gap-4 md:grid-cols-3">
+      <div class="rounded-2xl bg-dopa-soft p-5">
+        <p class="font-display text-4xl text-dopa">1</p>
+        <p class="mt-2 font-bold">Core Haptics</p>
+        <p class="mt-1 text-sm leading-relaxed">演出と振動を細かく同期できる。差別化の中心。</p>
+      </div>
+      <div class="rounded-2xl bg-[#E4EEFF] p-5">
+        <p class="font-display text-4xl text-signal">2</p>
+        <p class="mt-2 font-bold">AVAudioEngine</p>
+        <p class="mt-1 text-sm leading-relaxed">音の遅れを抑えやすい。</p>
+      </div>
+      <div class="rounded-2xl bg-[#FFF1C9] p-5">
+        <p class="font-display text-4xl text-gold">3</p>
+        <p class="mt-2 font-bold">描画の選択肢</p>
+        <p class="mt-1 text-sm leading-relaxed">SwiftUI のアニメーション、SpriteKit、Metal が使える。</p>
+      </div>
+    </div>
+
+    <!-- 比較表 -->
+    <figure class="mt-8 rounded-3xl border-2 border-ink bg-white p-5 sm:p-7">
+      <figcaption>
+        <p class="font-mono text-xs text-mute">表1</p>
+        <p class="mt-1 font-display text-xl">技術の比較（iPhone のみで出す前提）</p>
+      </figcaption>
+      <div class="mt-4 overflow-x-auto">
+        <table class="w-full min-w-[36rem] border-collapse text-left text-sm">
+          <thead>
+            <tr class="border-b-2 border-ink font-mono text-xs text-mute">
+              <th class="py-2 pr-3"></th>
+              <th class="py-2 pr-3">Flutter</th>
+              <th class="bg-dopa-soft px-3 py-2 text-dopa">Swift ★採用</th>
+              <th class="py-2 pr-3">React Native</th>
+              <th class="py-2">Unity</th>
+            </tr>
+          </thead>
+          <tbody class="align-top leading-relaxed">
+            <tr class="border-b border-rule">
+              <th class="py-2 pr-3 font-bold">振動の同期</th>
+              <td class="py-2 pr-3">プラグイン経由</td>
+              <td class="bg-dopa-soft px-3 py-2">Core Haptics を直接使える</td>
+              <td class="py-2 pr-3">ライブラリ経由</td>
+              <td class="py-2">プラグイン経由</td>
+            </tr>
+            <tr class="border-b border-rule">
+              <th class="py-2 pr-3 font-bold">音の遅れ</th>
+              <td class="py-2 pr-3">プラグイン次第</td>
+              <td class="bg-dopa-soft px-3 py-2">AVAudioEngine で抑えやすい</td>
+              <td class="py-2 pr-3">ライブラリ次第</td>
+              <td class="py-2">ゲーム向けの音声機能あり</td>
+            </tr>
+            <tr class="border-b border-rule">
+              <th class="py-2 pr-3 font-bold">演出の描画</th>
+              <td class="py-2 pr-3">独自の描画エンジン</td>
+              <td class="bg-dopa-soft px-3 py-2">SwiftUI／SpriteKit／Metal</td>
+              <td class="py-2 pr-3">ネイティブ部品＋JS</td>
+              <td class="py-2">ゲーム向けで強い</td>
+            </tr>
+            <tr class="border-b border-rule">
+              <th class="py-2 pr-3 font-bold">2つの OS に出す</th>
+              <td class="py-2 pr-3">強み。ただし今回は効かない</td>
+              <td class="bg-dopa-soft px-3 py-2">iOS のみ</td>
+              <td class="py-2 pr-3">強み。ただし今回は効かない</td>
+              <td class="py-2">強み。ただし今回は効かない</td>
+            </tr>
+            <tr>
+              <th class="py-2 pr-3 font-bold">判定</th>
+              <td class="py-2 pr-3">見送り</td>
+              <td class="bg-dopa-soft px-3 py-2 font-bold">採用</td>
+              <td class="py-2 pr-3">見送り</td>
+              <td class="py-2">見送り</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </figure>
+
+    <!-- 体制 -->
+    <div class="mt-8 grid gap-4 md:grid-cols-2">
+      <div class="rounded-3xl border-2 border-signal bg-white p-5">
+        <p class="font-mono text-xs text-signal">Claude</p>
+        <p class="mt-1 font-display text-xl">コードはすべて書く</p>
+        <ul class="mt-3 flex flex-col gap-2 text-sm leading-relaxed">
+          <li class="border-l-4 border-signal pl-3">Claude Code を Mac 上で直接動かす。</li>
+          <li class="border-l-4 border-signal pl-3">XcodeGen・xcodebuild・xcrun simctl・xcrun devicectl を使う。</li>
+          <li class="border-l-4 border-signal pl-3">Linux のコンテナでは iOS をビルドできない。</li>
+        </ul>
+      </div>
+      <div class="rounded-3xl border-2 border-dopa bg-white p-5">
+        <p class="font-mono text-xs text-dopa">開発者</p>
+        <p class="mt-1 font-display text-xl">Claude にできない3つ</p>
+        <ol class="mt-3 flex flex-col gap-2 text-sm leading-relaxed">
+          <li><span class="mr-2 font-mono font-bold text-dopa">01</span>初期設定。Xcode を入れる、Apple ID でサインイン、iPhone のデベロッパモードをオン、開発者を信頼。</li>
+          <li><span class="mr-2 font-mono font-bold text-dopa">02</span>実機で手触りを確かめる。Claude は振動も音の遅れも感じ取れない。シミュレーターでは振動が出ない。</li>
+          <li><span class="mr-2 font-mono font-bold text-dopa">03</span>ストアに出すなら、Apple Developer Program（年額有料）への登録と App Store Connect への提出。</li>
+        </ol>
+      </div>
+    </div>
+
+    <ul class="mt-4 grid gap-2 text-xs leading-relaxed sm:grid-cols-2">
+      <li class="rounded-lg border border-dashed border-mute bg-white/60 p-3">無料の Apple ID だと、約7日ごとにアプリを入れ直す必要がある。</li>
+      <li class="rounded-lg border border-dashed border-mute bg-white/60 p-3">Android に出すことになったら作り直しになる。</li>
+    </ul>
+
+    <!-- 次の一歩 -->
+    <div class="mt-8 rounded-3xl border-2 border-ink bg-white p-5 sm:p-7">
+      <p class="font-mono text-xs text-mute">次の一歩</p>
+      <ol class="mt-4 grid gap-3 text-sm sm:grid-cols-4">
+        <li class="rounded-xl bg-dopa-soft p-3 leading-relaxed">
+          <span class="font-display text-2xl text-dopa">①</span>
+          <p class="mt-1 font-bold">環境構築</p>
+          <p class="mt-1 text-xs">次のセッション。<a href="../../issues/ios-dev-environment-setup/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">課題ページ</a></p>
+        </li>
+        <li class="rounded-xl bg-paper p-3 leading-relaxed ring-1 ring-rule">
+          <span class="font-display text-2xl text-mute">②</span>
+          <p class="mt-1 font-bold">手触りの試作</p>
+          <p class="mt-1 text-xs">タップ→音→振動→光</p>
+        </li>
+        <li class="rounded-xl bg-paper p-3 leading-relaxed ring-1 ring-rule">
+          <span class="font-display text-2xl text-mute">③</span>
+          <p class="mt-1 font-bold">題材を決める</p>
+        </li>
+        <li class="rounded-xl bg-paper p-3 leading-relaxed ring-1 ring-rule">
+          <span class="font-display text-2xl text-mute">④</span>
+          <p class="mt-1 font-bold">本作り</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ⑧ 出典 -->
+  <section id="sources" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">08 / sources</p>
+    <h2 class="mt-2 font-display text-3xl">出典</h2>
+    <div class="mt-6 grid gap-6 text-sm md:grid-cols-2">
+      <div>
+        <p class="font-bold">ドパドリル</p>
+        <ul class="mt-2 flex flex-col gap-1 break-all font-mono text-xs">
+          <li><a class="text-signal hover:underline" href="https://github.com/grmchn/dopa-drill" target="_blank" rel="noopener">github.com/grmchn/dopa-drill</a></li>
+          <li><a class="text-signal hover:underline" href="https://github.com/grmchn/dopa-drill/blob/main/docs/SPEC.md" target="_blank" rel="noopener">github.com/grmchn/dopa-drill/blob/main/docs/SPEC.md</a></li>
+          <li><a class="text-signal hover:underline" href="https://dopa-drill.tanosix.com/" target="_blank" rel="noopener">dopa-drill.tanosix.com</a></li>
+          <li><a class="text-signal hover:underline" href="https://x.com/grmchn4ai/status/2103807453406388538" target="_blank" rel="noopener">x.com/grmchn4ai/status/2103807453406388538</a></li>
+          <li><a class="text-signal hover:underline" href="https://x.com/grmchn4ai/status/2105487518087159929" target="_blank" rel="noopener">x.com/grmchn4ai/status/2105487518087159929</a></li>
+          <li><a class="text-signal hover:underline" href="https://github.com/mayu119/product-knowledge/blob/main/references/2026-09-27-dopa-drill.md" target="_blank" rel="noopener">github.com/mayu119/product-knowledge/…/2026-09-27-dopa-drill.md</a>（分析）</li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-bold">ドパ電卓、ドパ九九、ドパにゃん</p>
+        <ul class="mt-2 flex flex-col gap-1 break-all font-mono text-xs">
+          <li><a class="text-signal hover:underline" href="https://github.com/neoenox/dopa_calc" target="_blank" rel="noopener">github.com/neoenox/dopa_calc</a></li>
+          <li><a class="text-signal hover:underline" href="https://github.com/hirocelica0307-sketch/kobako/pull/31" target="_blank" rel="noopener">github.com/hirocelica0307-sketch/kobako/pull/31</a></li>
+          <li><a class="text-signal hover:underline" href="https://github.com/hirocelica0307-sketch/kobako/pull/33" target="_blank" rel="noopener">github.com/hirocelica0307-sketch/kobako/pull/33</a></li>
+          <li><a class="text-signal hover:underline" href="https://github.com/chihaya369/dopanyan-typing" target="_blank" rel="noopener">github.com/chihaya369/dopanyan-typing</a></li>
+          <li><a class="text-signal hover:underline" href="https://x.com/chihaya_369/status/2105502719809384858" target="_blank" rel="noopener">x.com/chihaya_369/status/2105502719809384858</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-bold">ドパ将棋！</p>
+        <ul class="mt-2 flex flex-col gap-1 break-all font-mono text-xs">
+          <li><a class="text-signal hover:underline" href="https://automaton-media.com/articles/newsjp/20260925-469998/" target="_blank" rel="noopener">automaton-media.com/articles/newsjp/20260925-469998/</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-bold">ドパガキ（言葉と周辺）</p>
+        <ul class="mt-2 flex flex-col gap-1 break-all font-mono text-xs">
+          <li><a class="text-signal hover:underline" href="https://ja.wikipedia.org/wiki/%E3%83%89%E3%83%91%E3%82%AC%E3%82%AD" target="_blank" rel="noopener">ja.wikipedia.org/wiki/ドパガキ</a></li>
+          <li><a class="text-signal hover:underline" href="https://prtimes.jp/main/html/rd/p/000000062.000137975.html" target="_blank" rel="noopener">prtimes.jp/main/html/rd/p/000000062.000137975.html</a></li>
+          <li><a class="text-signal hover:underline" href="https://note.com/alive_boar8640/n/n28321ec4a220" target="_blank" rel="noopener">note.com/alive_boar8640/n/n28321ec4a220</a>（サビ30秒だけ流し続ける音楽プレイヤー）</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

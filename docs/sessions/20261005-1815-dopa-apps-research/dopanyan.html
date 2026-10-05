@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ドパにゃん 再現モック</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Mochiy+Pop+One&family=Zen+Kaku+Gothic+New:wght@400;700&family=JetBrains+Mono:wght@500;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: '#E5337A', 'dopa-soft': '#FFE6F0', 'dopa-pale': '#FFF3E4',
+        tabby: '#F2A65A', bean: '#FFB6C8', gold: '#F5B800', fever: '#FF5A36',
+        matatabi: '#6BBF59', haze: '#2A1446', key: '#FFFDF8'
+      },
+      fontFamily: {
+        display: ['"Dela Gothic One"', 'sans-serif'],
+        pop: ['"Mochiy Pop One"', 'sans-serif'],
+        sans: ['"Zen Kaku Gothic New"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: {
+        note: { '0%': { transform: 'translateY(0) rotate(-10deg)', opacity: '0' }, '20%': { opacity: '1' }, '100%': { transform: 'translateY(-140px) rotate(15deg)', opacity: '0' } },
+        lucky: { '0%': { transform: 'scale(.4) rotate(-12deg)', opacity: '0' }, '30%': { transform: 'scale(1.2) rotate(-6deg)', opacity: '1' }, '100%': { transform: 'scale(1) rotate(-6deg)', opacity: '1' } },
+        sway: { '0%,100%': { transform: 'rotate(-3deg)' }, '50%': { transform: 'rotate(3deg)' } },
+        stomp: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(4px)' } },
+        swirl: { to: { transform: 'rotate(360deg)' } },
+        pulse2: { '0%,100%': { transform: 'scale(1)' }, '50%': { transform: 'scale(1.06)' } },
+        drift: { '0%': { transform: 'translateY(0)', opacity: '0' }, '30%': { opacity: '.9' }, '100%': { transform: 'translateY(-200px)', opacity: '0' } }
+      },
+      animation: {
+        note: 'note 1.6s ease-out infinite', lucky: 'lucky .5s ease-out both',
+        sway: 'sway 2s ease-in-out infinite', stomp: 'stomp .4s ease-in-out infinite',
+        swirl: 'swirl 14s linear infinite', pulse2: 'pulse2 .8s ease-in-out infinite',
+        drift: 'drift 3s ease-out infinite'
+      }
+    }
+  }
+}
+</script>
+</head>
+<body class="bg-paper font-sans text-ink antialiased">
+
+<svg class="hidden" aria-hidden="true">
+  <!-- 白地に茶ぶちの猫（正面） -->
+  <symbol id="cat" viewBox="0 0 120 100">
+    <path d="M24 44 L22 8 L50 26Z" fill="#fff" stroke="#111" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M96 44 L98 8 L70 26Z" fill="#F2A65A" stroke="#111" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M28 34 L27 16 L42 26Z" fill="#FFB6C8"/><path d="M92 34 L93 16 L78 26Z" fill="#FFB6C8"/>
+    <ellipse cx="60" cy="54" rx="44" ry="36" fill="#fff" stroke="#111" stroke-width="3"/>
+    <path d="M70 20 Q96 22 102 50 Q86 40 70 38Z" fill="#F2A65A"/>
+    <ellipse cx="44" cy="52" rx="5" ry="7" fill="#111"/><ellipse cx="76" cy="52" rx="5" ry="7" fill="#111"/>
+    <circle cx="46" cy="49" r="2" fill="#fff"/><circle cx="78" cy="49" r="2" fill="#fff"/>
+    <path d="M57 62 L63 62 L60 66Z" fill="#FF8FA8"/>
+    <path d="M52 68 Q56 73 60 67 Q64 73 68 68" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M14 58 L34 62 M14 68 L34 66 M106 58 L86 62 M106 68 L86 66" stroke="#111" stroke-width="2" stroke-linecap="round"/>
+  </symbol>
+  <!-- マタタビで酔った猫：渦巻き目・赤ら顔 -->
+  <symbol id="cat-tipsy" viewBox="0 0 120 100">
+    <path d="M24 44 L22 8 L50 26Z" fill="#fff" stroke="#111" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M96 44 L98 8 L70 26Z" fill="#F2A65A" stroke="#111" stroke-width="3" stroke-linejoin="round"/>
+    <ellipse cx="60" cy="54" rx="44" ry="36" fill="#fff" stroke="#111" stroke-width="3"/>
+    <path d="M70 20 Q96 22 102 50 Q86 40 70 38Z" fill="#F2A65A"/>
+    <path d="M44 52 m-7 0 a7 7 0 1 1 7 7 a5 5 0 1 1 -4 -5 a2.5 2.5 0 1 1 2 2" fill="none" stroke="#111" stroke-width="2.2"/>
+    <path d="M76 52 m-7 0 a7 7 0 1 1 7 7 a5 5 0 1 1 -4 -5 a2.5 2.5 0 1 1 2 2" fill="none" stroke="#111" stroke-width="2.2"/>
+    <ellipse cx="34" cy="64" rx="8" ry="4" fill="#FF7A9A" opacity=".7"/><ellipse cx="86" cy="64" rx="8" ry="4" fill="#FF7A9A" opacity=".7"/>
+    <path d="M52 66 Q60 78 68 66Z" fill="#FF8FA8" stroke="#111" stroke-width="2.5" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="paw" viewBox="0 0 40 40">
+    <ellipse cx="20" cy="26" rx="11" ry="9" fill="#FFB6C8" stroke="#111" stroke-width="2.5"/>
+    <circle cx="9" cy="13" r="4.5" fill="#FFB6C8" stroke="#111" stroke-width="2.5"/><circle cx="20" cy="8" r="4.5" fill="#FFB6C8" stroke="#111" stroke-width="2.5"/><circle cx="31" cy="13" r="4.5" fill="#FFB6C8" stroke="#111" stroke-width="2.5"/>
+  </symbol>
+</svg>
+
+<main class="min-h-screen bg-[repeating-linear-gradient(90deg,transparent_0_46px,#EADFD2_46px_47px)]">
+<div class="mx-auto max-w-6xl px-4 py-8 sm:px-8">
+
+  <nav class="mb-6 font-mono text-xs text-mute">
+    <a href="index.html" class="rounded px-1 py-0.5 hover:bg-dopa-pale hover:text-ink">← 調査レポートへ戻る</a>
+    <span class="mx-1">/</span><span>ドパにゃん！脳汁タイピング</span>
+  </nav>
+
+  <header class="relative border-b-2 border-ink pb-8">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-fever">Case 04 / ローマ字タイピング</p>
+    <h1 class="mt-2 font-display text-4xl leading-tight sm:text-6xl">ドパにゃん！<span class="block text-2xl sm:text-3xl">脳汁タイピング</span></h1>
+    <p class="mt-4 max-w-2xl text-lg font-bold leading-relaxed">1打鍵ごとに猫が鍵盤を踏み、「ねこふんじゃった」が1音ずつ進む。ドパドリルを改造して生まれた。</p>
+    <p class="mt-3 inline-block rounded border border-dashed border-mute bg-white/70 px-3 py-1.5 text-sm text-mute">公開仕様をもとにした再現モック。実際のスクリーンショットではない。</p>
+    <svg viewBox="0 0 40 40" class="absolute right-2 top-0 hidden size-16 rotate-12 sm:block"><use href="#paw"/></svg>
+    <svg viewBox="0 0 40 40" class="absolute right-20 top-14 hidden size-10 -rotate-12 sm:block"><use href="#paw"/></svg>
+  </header>
+
+  <section class="mt-8 grid gap-3 sm:grid-cols-3">
+    <div class="rounded-xl border-2 border-ink bg-white p-4"><p class="font-mono text-xs text-mute">0〜29 コンボ</p><p class="mt-1 font-pop text-xl">通常</p><p class="mt-1 text-sm">打つたびに1音。速く打てばテンポが上がる。</p></div>
+    <div class="rounded-xl border-2 border-ink bg-fever p-4 text-white"><p class="font-mono text-xs text-white/80">30 コンボ〜</p><p class="mt-1 font-pop text-xl">FEVER</p><p class="mt-1 text-sm">画面が燃える色に変わる。</p></div>
+    <div class="rounded-xl border-2 border-ink bg-haze p-4 text-white"><p class="font-mono text-xs text-white/70">60 コンボ〜</p><p class="mt-1 font-pop text-xl text-matatabi">マタタビモード</p><p class="mt-1 text-sm">猫が酔う。ここが最上段。</p></div>
+  </section>
+
+  <section class="mt-10">
+    <h2 class="font-display text-2xl">打てば打つほど、猫が騒ぐ</h2>
+    <p class="mt-2 text-sm text-mute">1枚目は触れる。表示中のローマ字をキーボードで打つ（スマホは下の入力欄をタップ）。ローマ字の綴りは表示どおりの1通りだけ受け付ける簡易版。</p>
+
+    <div class="mt-8 flex flex-wrap justify-center gap-x-10 gap-y-12">
+
+      <!-- ① 通常（インタラクティブ） -->
+      <figure class="w-[330px] max-w-full">
+        <figcaption class="mb-3 flex items-baseline gap-2"><span class="font-display text-xl">通常</span><span class="text-sm text-mute">触れるデモ</span></figcaption>
+        <div class="relative h-[660px] overflow-hidden rounded-[44px] border-[10px] border-ink bg-ink shadow-[8px_8px_0_#F2A65A]">
+          <div id="n-screen" class="relative flex h-full flex-col bg-[#FFF4E2] font-pop transition-colors duration-500">
+            <div class="flex items-center justify-between px-4 pt-3 text-[11px] text-mute">
+              <span>♪ ねこふんじゃった</span><span id="n-bpm" class="rounded-full bg-white px-2 py-0.5 font-mono font-extrabold text-ink">96 BPM</span>
+            </div>
+            <p id="n-banner" class="mx-4 mt-2 hidden -rotate-2 rounded-lg py-1 text-center text-lg text-white"></p>
+            <div class="mx-4 mt-3 rounded-2xl border-2 border-ink bg-white p-3 text-center">
+              <p id="n-kana" class="text-xl">ねこふんじゃった</p>
+              <p id="n-roma" class="mt-1 break-all font-mono text-lg font-extrabold tracking-wide"></p>
+            </div>
+            <div class="relative flex-1 overflow-hidden">
+              <div id="n-notes" class="pointer-events-none absolute inset-0"></div>
+              <p id="n-lucky" class="pointer-events-none absolute left-1/2 top-4 hidden -translate-x-1/2 font-display text-4xl text-gold drop-shadow-[2px_2px_0_#7A4B00]">LUCKY!</p>
+              <svg id="n-cat" viewBox="0 0 120 100" class="absolute bottom-0 left-1/2 w-40 -translate-x-1/2 animate-sway motion-reduce:animate-none" role="img" aria-label="猫"><use href="#cat"/></svg>
+            </div>
+            <div id="n-piano" class="relative mx-3 flex h-24 overflow-hidden rounded-xl border-[3px] border-ink bg-ink"></div>
+            <div class="flex items-end justify-between px-4 pt-3">
+              <p><span id="n-combo" class="text-3xl">0</span> <span class="text-sm">コンボ</span></p>
+              <p class="text-right text-[11px] text-mute">次の音 <span id="n-step" class="font-mono font-extrabold text-ink">1</span> 音目<br>あと <span id="n-left" class="font-mono text-ink">30</span> で FEVER</p>
+            </div>
+            <div class="flex items-center gap-2 px-4 pb-5 pt-2">
+              <input id="n-input" class="min-w-0 flex-1 rounded-lg border-2 border-ink bg-white px-2 py-1.5 font-mono text-sm" placeholder="ここをタップして入力" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="ローマ字入力">
+              <button id="n-sound" class="shrink-0 rounded-lg border-2 border-ink bg-white px-2 py-1.5 font-sans text-xs font-bold" aria-pressed="false">音 OFF</button>
+            </div>
+          </div>
+          <span class="absolute left-2 top-[18px] grid size-6 place-items-center rounded-full bg-tabby font-sans text-xs font-bold text-ink">1</span>
+          <span class="absolute right-2 top-[64px] grid size-6 place-items-center rounded-full bg-tabby font-sans text-xs font-bold text-ink">2</span>
+          <span class="absolute left-2 top-[372px] grid size-6 place-items-center rounded-full bg-tabby font-sans text-xs font-bold text-ink">3</span>
+          <span class="absolute right-2 top-[480px] grid size-6 place-items-center rounded-full bg-tabby font-sans text-xs font-bold text-ink">4</span>
+        </div>
+        <button id="n-reset" class="mt-3 rounded-full border-2 border-ink px-4 py-1 text-sm font-bold hover:bg-dopa-pale">リセット</button>
+        <ol class="mt-3 space-y-1.5 text-sm leading-relaxed">
+          <li><b class="text-tabby">1</b> 今のテンポ。打鍵の間隔が短いほど BPM が上がる。</li>
+          <li><b class="text-tabby">2</b> お題と入力位置。打ち終えた文字は色が変わる。</li>
+          <li><b class="text-tabby">3</b> 猫が鍵盤を踏む。1打鍵で1音、♪ が上がる。</li>
+          <li><b class="text-tabby">4</b> コンボと、FEVER までの残り。ミスで0に戻る。</li>
+        </ol>
+      </figure>
+
+      <!-- ② FEVER -->
+      <figure class="w-[330px] max-w-full">
+        <figcaption class="mb-3 flex items-baseline gap-2"><span class="font-display text-xl">FEVER</span><span class="text-sm text-mute">30コンボ〜</span></figcaption>
+        <div class="relative h-[660px] overflow-hidden rounded-[44px] border-[10px] border-ink bg-ink shadow-[8px_8px_0_#FF5A36]">
+          <div class="relative flex h-full flex-col bg-gradient-to-b from-[#FF5A36] via-[#FF9A3C] to-[#FFD166] font-pop text-white">
+            <div class="flex items-center justify-between px-4 pt-3 text-[11px]">
+              <span>♪ ねこふんじゃった</span><span class="rounded-full bg-ink px-2 py-0.5 font-mono font-extrabold text-gold">152 BPM</span>
+            </div>
+            <p class="mx-4 mt-2 -rotate-2 animate-pulse2 rounded-lg bg-ink py-1 text-center text-2xl text-gold motion-reduce:animate-none">FEVER!!</p>
+            <div class="mx-4 mt-3 rounded-2xl border-2 border-ink bg-white p-3 text-center text-ink">
+              <p class="text-xl">にくきゅう</p>
+              <p class="mt-1 font-mono text-lg font-extrabold tracking-wide"><span class="text-fever">nikuk</span><span class="border-b-4 border-ink">y</span><span class="text-mute">uu</span></p>
+            </div>
+            <div class="relative flex-1 overflow-hidden">
+              <span class="absolute bottom-6 left-[15%] animate-note text-2xl motion-reduce:animate-none">♪</span>
+              <span class="absolute bottom-6 left-[40%] animate-note text-3xl [animation-delay:.4s] motion-reduce:animate-none">♫</span>
+              <span class="absolute bottom-6 left-[70%] animate-note text-2xl [animation-delay:.9s] motion-reduce:animate-none">♪</span>
+              <span class="absolute bottom-6 left-[85%] animate-note text-xl [animation-delay:1.2s] motion-reduce:animate-none">♬</span>
+              <p class="absolute left-3 top-3 rotate-[-8deg] font-display text-3xl text-gold drop-shadow-[2px_2px_0_#7A4B00]">LUCKY!</p>
+              <svg viewBox="0 0 120 100" class="absolute bottom-0 left-1/2 w-40 -translate-x-1/2 animate-stomp motion-reduce:animate-none"><use href="#cat"/></svg>
+            </div>
+            <div class="relative mx-3 flex h-24 overflow-hidden rounded-xl border-[3px] border-ink bg-ink">
+              <span class="m-px flex-1 rounded-b bg-key"></span><span class="m-px flex-1 rounded-b bg-key"></span><span class="m-px flex-1 rounded-b bg-gold"></span><span class="m-px flex-1 rounded-b bg-key"></span><span class="m-px flex-1 rounded-b bg-key"></span><span class="m-px flex-1 rounded-b bg-gold"></span><span class="m-px flex-1 rounded-b bg-key"></span><span class="m-px flex-1 rounded-b bg-key"></span>
+              <svg viewBox="0 0 40 40" class="absolute left-[27%] top-1 size-8"><use href="#paw"/></svg>
+              <svg viewBox="0 0 40 40" class="absolute left-[64%] top-1 size-8"><use href="#paw"/></svg>
+            </div>
+            <div class="flex items-end justify-between px-4 pb-6 pt-3">
+              <p><span class="text-4xl text-ink">34</span> <span class="text-sm">コンボ</span></p>
+              <p class="text-right text-[11px]">次の音 <span class="font-mono font-extrabold">41</span> 音目<br>あと <span class="font-mono">26</span> でマタタビ</p>
+            </div>
+          </div>
+          <span class="absolute right-2 top-[18px] grid size-6 place-items-center rounded-full bg-ink font-sans text-xs font-bold text-gold">1</span>
+          <span class="absolute left-2 top-[52px] grid size-6 place-items-center rounded-full bg-ink font-sans text-xs font-bold text-gold">2</span>
+          <span class="absolute right-3 top-[200px] grid size-6 place-items-center rounded-full bg-ink font-sans text-xs font-bold text-gold">3</span>
+          <span class="absolute left-2 top-[440px] grid size-6 place-items-center rounded-full bg-ink font-sans text-xs font-bold text-gold">4</span>
+        </div>
+        <ol class="mt-3 space-y-1.5 text-sm leading-relaxed">
+          <li><b class="text-fever">1</b> 速く打ち続けた結果、テンポが上がっている。</li>
+          <li><b class="text-fever">2</b> FEVER の帯。背景が燃える色に変わる。</li>
+          <li><b class="text-fever">3</b> ときどき金色の LUCKY が飛び込む。出るかどうかは読めない。</li>
+          <li><b class="text-fever">4</b> 猫が両手で踏む。♪ の量が増える。</li>
+        </ol>
+      </figure>
+
+      <!-- ③ マタタビモード -->
+      <figure class="w-[330px] max-w-full">
+        <figcaption class="mb-3 flex items-baseline gap-2"><span class="font-display text-xl">マタタビ</span><span class="text-sm text-mute">60コンボ〜</span></figcaption>
+        <div class="relative h-[660px] overflow-hidden rounded-[44px] border-[10px] border-ink bg-ink shadow-[8px_8px_0_#6BBF59]">
+          <div class="relative flex h-full flex-col overflow-hidden bg-haze font-pop text-white">
+            <div class="pointer-events-none absolute -inset-1/2 animate-swirl bg-[conic-gradient(from_0deg,#2A1446,#3E7A3A,#2A1446,#7A2E8A,#2A1446)] opacity-60 motion-reduce:animate-none"></div>
+            <div class="relative flex items-center justify-between px-4 pt-3 text-[11px]">
+              <span>♪ ねこふんじゃった</span><span class="rounded-full bg-matatabi px-2 py-0.5 font-mono font-extrabold text-ink">188 BPM</span>
+            </div>
+            <p class="relative mx-4 mt-2 rotate-1 rounded-lg bg-matatabi py-1 text-center text-xl text-ink">マタタビモード</p>
+            <div class="relative mx-4 mt-3 rounded-2xl border-2 border-matatabi bg-ink/60 p-3 text-center">
+              <p class="text-xl">けんばんの うえで ねる</p>
+              <p class="mt-1 font-mono text-lg font-extrabold tracking-wide"><span class="text-matatabi">kenbannoue</span><span class="border-b-4 border-white">d</span><span class="text-white/40">eneru</span></p>
+            </div>
+            <div class="relative flex-1 overflow-hidden">
+              <span class="absolute bottom-0 left-[10%] animate-drift text-matatabi motion-reduce:animate-none">❦</span>
+              <span class="absolute bottom-0 left-[30%] animate-drift text-lg [animation-delay:.7s] motion-reduce:animate-none">♪</span>
+              <span class="absolute bottom-0 left-[62%] animate-drift text-matatabi [animation-delay:1.4s] motion-reduce:animate-none">❦</span>
+              <span class="absolute bottom-0 left-[84%] animate-drift text-lg [animation-delay:2.1s] motion-reduce:animate-none">♫</span>
+              <svg viewBox="0 0 40 40" class="absolute left-4 top-6 size-7 rotate-[-20deg] opacity-80"><use href="#paw"/></svg>
+              <svg viewBox="0 0 40 40" class="absolute right-6 top-14 size-6 rotate-[25deg] opacity-80"><use href="#paw"/></svg>
+              <svg viewBox="0 0 120 100" class="absolute bottom-0 left-1/2 w-44 -translate-x-1/2 animate-sway motion-reduce:animate-none"><use href="#cat-tipsy"/></svg>
+            </div>
+            <div class="relative mx-3 flex h-24 overflow-hidden rounded-xl border-[3px] border-matatabi bg-ink">
+              <span class="m-px flex-1 rounded-b bg-matatabi"></span><span class="m-px flex-1 rounded-b bg-key"></span><span class="m-px flex-1 rounded-b bg-matatabi"></span><span class="m-px flex-1 rounded-b bg-key"></span><span class="m-px flex-1 rounded-b bg-matatabi"></span><span class="m-px flex-1 rounded-b bg-key"></span><span class="m-px flex-1 rounded-b bg-matatabi"></span><span class="m-px flex-1 rounded-b bg-key"></span>
+            </div>
+            <div class="relative flex items-end justify-between px-4 pb-6 pt-3">
+              <p><span class="text-4xl text-matatabi">72</span> <span class="text-sm">コンボ</span></p>
+              <p class="text-right text-[11px] text-white/70">次の音 <span class="font-mono font-extrabold text-white">213</span> 音目<br>止まらない</p>
+            </div>
+          </div>
+          <span class="absolute left-2 top-[52px] grid size-6 place-items-center rounded-full bg-matatabi font-sans text-xs font-bold text-ink">1</span>
+          <span class="absolute left-2 top-[300px] grid size-6 place-items-center rounded-full bg-matatabi font-sans text-xs font-bold text-ink">2</span>
+          <span class="absolute right-2 top-[470px] grid size-6 place-items-center rounded-full bg-matatabi font-sans text-xs font-bold text-ink">3</span>
+        </div>
+        <ol class="mt-3 space-y-1.5 text-sm leading-relaxed">
+          <li><b class="text-matatabi">1</b> 60コンボで突入。背景がゆっくり渦を巻く。</li>
+          <li><b class="text-matatabi">2</b> 猫の目が渦巻きになり、顔が赤らむ。</li>
+          <li><b class="text-matatabi">3</b> 鍵盤まで色が変わる。ここから上の段はない。</li>
+        </ol>
+      </figure>
+    </div>
+  </section>
+
+  <section class="mt-14 rounded-2xl border-2 border-ink bg-white p-6">
+    <h2 class="font-display text-2xl">ドパの出し方</h2>
+    <ul class="mt-4 space-y-3 leading-relaxed">
+      <li class="flex gap-3"><span class="font-display text-tabby">01</span><span><b>1打鍵＝1音。</b>止めるとメロディも止まる。続きを聴くには打つしかない。</span></li>
+      <li class="flex gap-3"><span class="font-display text-tabby">02</span><span><b>速さが音になる。</b>速く打つほどテンポが上がり、上達が耳でわかる。</span></li>
+      <li class="flex gap-3"><span class="font-display text-tabby">03</span><span><b>段が2つある。</b>30で FEVER、60でマタタビモード。次の段が常に見えている。</span></li>
+      <li class="flex gap-3"><span class="font-display text-tabby">04</span><span><b>不意の金色。</b>LUCKY はときどき出る。いつ出るかわからない分、元のドパドリルの確定報酬とは性質が違う。</span></li>
+      <li class="flex gap-3"><span class="font-display text-tabby">05</span><span><b>外へ持ち出せる。</b>結果画像を保存・共有できる。11曲・楽器5種はすべて Web Audio の合成。</span></li>
+    </ul>
+  </section>
+
+  <footer class="mt-10 border-t border-rule pt-6 text-sm">
+    <h2 class="font-mono text-xs uppercase tracking-[0.2em] text-mute">出典</h2>
+    <ul class="mt-2 space-y-1 break-all text-mute">
+      <li><a class="underline hover:text-fever" href="https://github.com/chihaya369/dopanyan-typing">github.com/chihaya369/dopanyan-typing</a></li>
+      <li><a class="underline hover:text-fever" href="https://x.com/chihaya_369/status/2105502719809384858">作者 CHIHAYA の公開告知（X）</a></li>
+      <li><a class="underline hover:text-fever" href="https://github.com/grmchn/dopa-drill">改造元：github.com/grmchn/dopa-drill</a></li>
+    </ul>
+  </footer>
+</div>
+</main>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var WORDS = [
+    ['ねこふんじゃった', 'nekofunjatta'], ['にくきゅう', 'nikukyuu'], ['まぐろ たべたい', 'magurotabetai'],
+    ['けんばんの うえで ねる', 'kenbannouedeneru'], ['しっぽ ふりふり', 'sippofurifuri'], ['ひなたぼっこ', 'hinatabokko']
+  ];
+  var KEYS = 10, st, w, pos, last, gaps, ctx, soundOn = false;
+  // 黒鍵中心の五音（Hz）。メロディそのものではなく、1打鍵1音の手触りだけ再現
+  var TONES = [554, 622, 740, 831, 932, 1109, 1245, 932, 831, 740];
+
+  function buildPiano() {
+    var p = $('n-piano'); p.innerHTML = '';
+    for (var i = 0; i < KEYS; i++) {
+      var k = document.createElement('span');
+      k.className = 'relative m-px flex-1 rounded-b bg-key transition-colors duration-100';
+      p.appendChild(k);
+    }
+    var paw = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    paw.setAttribute('viewBox', '0 0 40 40'); paw.id = 'n-paw';
+    paw.setAttribute('class', 'absolute left-1/2 top-1 hidden size-7 -translate-x-1/2');
+    paw.innerHTML = '<use href="#paw"/>';
+    p.firstChild.appendChild(paw);
+  }
+  function pickWord() {
+    w = WORDS[Math.floor(Math.random() * WORDS.length)]; pos = 0;
+    $('n-kana').textContent = w[0]; paintRoma(false);
+  }
+  function paintRoma(miss) {
+    var r = $('n-roma'), done = w[1].slice(0, pos), cur = w[1][pos] || '', rest = w[1].slice(pos + 1);
+    r.innerHTML = '';
+    [[done, st.combo >= 60 ? 'text-matatabi' : 'text-fever'], [cur, 'border-b-4 ' + (miss ? 'border-dashed border-fever bg-fever/20' : 'border-ink')], [rest, 'text-mute']].forEach(function (s) {
+      var e = document.createElement('span'); e.className = s[1]; e.textContent = s[0]; r.appendChild(e);
+    });
+  }
+  function stomp() {
+    var keys = $('n-piano').children, i = st.step % KEYS, paw = $('n-paw');
+    for (var j = 0; j < keys.length; j++) keys[j].classList.remove('bg-gold', 'bg-bean');
+    keys[i].classList.add(st.combo >= 30 ? 'bg-gold' : 'bg-bean');
+    keys[i].appendChild(paw); paw.classList.remove('hidden');
+    var n = document.createElement('span');
+    n.className = 'absolute bottom-2 animate-note text-2xl motion-reduce:animate-none ' + ['left-[12%]', 'left-[30%]', 'left-[62%]', 'left-[80%]'][st.step % 4];
+    n.textContent = ['♪', '♫', '♬'][st.step % 3];
+    $('n-notes').appendChild(n);
+    setTimeout(function () { n.remove(); }, 1600);
+    beep(TONES[i]);
+  }
+  function beep(f) {
+    if (!soundOn) return;
+    ctx = ctx || new (window.AudioContext || window.webkitAudioContext)();
+    var o = ctx.createOscillator(), g = ctx.createGain(), t = ctx.currentTime;
+    o.type = 'triangle'; o.frequency.value = f;
+    g.gain.setValueAtTime(0.12, t); g.gain.exponentialRampToValueAtTime(0.001, t + 0.15);
+    o.connect(g).connect(ctx.destination); o.start(t); o.stop(t + 0.16);
+  }
+  function mode() {
+    var c = st.combo, s = $('n-screen'), b = $('n-banner');
+    var fever = c >= 30 && c < 60, mata = c >= 60;
+    s.classList.toggle('bg-[#FFF4E2]', c < 30);
+    s.classList.toggle('bg-fever', fever);
+    s.classList.toggle('bg-haze', mata);
+    s.classList.toggle('text-white', c >= 30);
+    b.classList.toggle('hidden', c < 30);
+    b.className = b.className.replace(/\bbg-\S+/g, '').replace(/\btext-(gold|ink)\b/g, '');
+    if (c >= 30) b.classList.add(mata ? 'bg-matatabi' : 'bg-ink', mata ? 'text-ink' : 'text-gold');
+    b.textContent = mata ? 'マタタビモード' : 'FEVER!!';
+    $('n-cat').innerHTML = '<use href="#' + (mata ? 'cat-tipsy' : 'cat') + '"/>';
+    $('n-combo').textContent = c;
+    $('n-left').parentNode.lastChild.textContent = c < 30 ? ' で FEVER' : ' でマタタビ';
+    $('n-left').textContent = c < 30 ? 30 - c : Math.max(0, 60 - c);
+    $('n-step').textContent = st.step + 1;
+  }
+  function bpm(now) {
+    if (last) { gaps.push(now - last); if (gaps.length > 6) gaps.shift(); }
+    last = now;
+    var avg = gaps.length ? gaps.reduce(function (x, y) { return x + y; }) / gaps.length : 600;
+    $('n-bpm').textContent = Math.round(Math.max(80, Math.min(220, 30000 / avg))) + ' BPM';
+  }
+  function lucky() {
+    var l = $('n-lucky');
+    l.classList.remove('hidden', 'animate-lucky'); void l.offsetWidth;
+    l.classList.add('animate-lucky', 'motion-reduce:animate-none');
+    setTimeout(function () { l.classList.add('hidden'); }, 1100);
+  }
+  function type(ch) {
+    if (!/^[a-z-]$/.test(ch)) return;
+    if (ch === w[1][pos]) {
+      st.combo++; st.step++; pos++;
+      bpm(performance.now()); stomp();
+      if (Math.random() < 0.07) lucky();
+      mode();
+      if (pos >= w[1].length) pickWord(); else paintRoma(false);
+    } else {
+      st.combo = 0; gaps = []; last = 0; mode(); paintRoma(true);
+    }
+  }
+  function reset() {
+    st = { combo: 0, step: 0 }; gaps = []; last = 0;
+    buildPiano(); pickWord(); mode(); $('n-bpm').textContent = '96 BPM';
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey || e.key.length !== 1) return;
+    if (e.target.id === 'n-input') return;
+    type(e.key.toLowerCase());
+  });
+  $('n-input').addEventListener('input', function (e) {
+    var v = e.target.value; e.target.value = '';
+    for (var i = 0; i < v.length; i++) type(v[i].toLowerCase());
+  });
+  $('n-sound').addEventListener('click', function (e) {
+    soundOn = !soundOn;
+    e.target.textContent = soundOn ? '音 ON' : '音 OFF';
+    e.target.setAttribute('aria-pressed', soundOn);
+    if (soundOn) beep(740);
+  });
+  $('n-reset').addEventListener('click', reset);
+  reset();
+})();
+</script>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

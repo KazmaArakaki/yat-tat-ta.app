@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ドパ九九 再現モック</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Mochiy+Pop+One&family=JetBrains+Mono:wght@400;700&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: '#E5337A', 'dopa-soft': '#FFE6F0', 'dopa-pale': '#FFF3E4',
+        cream: '#fff3d1', night: '#17112b', gold: '#ffd400'
+      },
+      fontFamily: {
+        display: ['"Dela Gothic One"', 'sans-serif'],
+        pop: ['"Mochiy Pop One"', 'sans-serif'],
+        sans: ['"Zen Kaku Gothic New"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: {
+        drain: { from: { transform: 'scaleX(1)' }, to: { transform: 'scaleX(0)' } },
+        band: { '0%': { transform: 'translateX(-110%) rotate(-14deg)' }, '18%,82%': { transform: 'translateX(0) rotate(-14deg)' }, '100%': { transform: 'translateX(110%) rotate(-14deg)' } },
+        pop: { '0%': { transform: 'scale(.4)', opacity: '0' }, '60%': { transform: 'scale(1.15)', opacity: '1' }, '100%': { transform: 'scale(1)' } },
+        fall: { '0%': { transform: 'translateY(-30px) rotate(0)' }, '100%': { transform: 'translateY(720px) rotate(540deg)' } },
+        fade: { '0%': { opacity: '1' }, '100%': { opacity: '0' } }
+      },
+      animation: {
+        drain: 'drain 5s linear forwards',
+        band: 'band 1.8s cubic-bezier(.2,.8,.2,1) both',
+        pop: 'pop .45s ease-out both',
+        fall: 'fall 2.6s linear both',
+        fade: 'fade .6s ease-in both'
+      }
+    }
+  }
+};
+</script>
+</head>
+<body class="bg-paper bg-[radial-gradient(#e8ddd0_1px,transparent_1px)] bg-[length:18px_18px] font-sans text-ink antialiased">
+<main class="min-h-screen">
+<div class="mx-auto max-w-[1400px] px-4 py-10 sm:px-8">
+
+  <nav aria-label="パンくず" class="font-mono text-xs text-mute">
+    <a href="index.html" class="rounded px-1 py-0.5 text-ink underline decoration-dopa decoration-2 underline-offset-4 hover:bg-dopa-pale">← 調査レポート</a>
+    <span class="mx-1">/</span><span>ドパ九九</span>
+  </nav>
+
+  <header class="mt-8 grid gap-6 border-b-2 border-ink pb-10 lg:grid-cols-[1fr_auto] lg:items-end">
+    <div>
+      <p class="font-mono text-xs tracking-[.3em] text-dopa">DOPA APPS ／ 9×9 DRILL</p>
+      <h1 class="mt-2 font-display text-6xl leading-none sm:text-8xl">ドパ九九</h1>
+      <p class="mt-5 max-w-2xl text-lg leading-relaxed">九九を<span class="font-bold">1問5秒以内</span>に答え続ける。つながるほど画面が化けていき、1回のミスか時間切れで終わる。</p>
+    </div>
+    <div class="flex max-w-md flex-col gap-3 text-sm">
+      <p class="rounded-lg border-2 border-dashed border-dopa bg-dopa-pale px-4 py-3 leading-relaxed"><span class="mr-2 font-bold text-dopa">注記</span>公開仕様をもとにした再現モック。実際のスクリーンショットではない。</p>
+      <p class="text-mute">出典：<a class="break-all text-ink underline decoration-rule decoration-2 underline-offset-4 hover:decoration-dopa" href="https://github.com/hirocelica0307-sketch/kobako/pull/31">kobako PR #31（企画）</a> ／ <a class="break-all text-ink underline decoration-rule decoration-2 underline-offset-4 hover:decoration-dopa" href="https://github.com/hirocelica0307-sketch/kobako/pull/33">PR #33（処理落ち修正）</a></p>
+    </div>
+  </header>
+
+  <section aria-labelledby="stages" class="mt-12">
+    <div class="flex flex-wrap items-baseline justify-between gap-4">
+      <h2 id="stages" class="font-display text-3xl">ドパレベルの3場面</h2>
+      <ol class="flex flex-wrap gap-1 font-mono text-[11px]">
+        <li class="rounded bg-white px-2 py-1 ring-1 ring-rule">Lv0 <b>0</b></li><li class="rounded bg-white px-2 py-1 ring-1 ring-rule">Lv1 <b>3</b></li>
+        <li class="rounded bg-white px-2 py-1 ring-1 ring-rule">Lv2 <b>6</b></li><li class="rounded bg-white px-2 py-1 ring-1 ring-rule">Lv3 <b>10</b></li>
+        <li class="rounded bg-white px-2 py-1 ring-1 ring-rule">Lv4 <b>15</b></li><li class="rounded bg-night px-2 py-1 text-gold">Lv5 <b>20</b> ドパタイム</li>
+        <li class="rounded bg-white px-2 py-1 ring-1 ring-rule">Lv6 <b>30</b></li><li class="rounded bg-white px-2 py-1 ring-1 ring-rule">Lv7 <b>40</b></li>
+        <li class="rounded bg-gradient-to-r from-pink-300 via-yellow-200 to-cyan-200 px-2 py-1">Lv8 <b>50</b> 虹ドパ</li>
+      </ol>
+    </div>
+    <p class="mt-3 max-w-3xl text-sm leading-relaxed text-mute">数字は到達に必要な連続正解数。大きな演出はレベル番号ではなく連続正解数で決まる。20連続でドパタイム、50連続で虹ドパ確定。</p>
+
+    <div class="mt-10 grid gap-x-10 gap-y-16 md:grid-cols-2 xl:grid-cols-3">
+
+      <figure class="flex flex-col gap-5">
+        <figcaption class="flex items-baseline gap-3 border-b border-rule pb-2">
+          <span class="font-mono text-xs text-mute">01</span><span class="font-display text-2xl">通常</span><span class="font-mono text-xs text-mute">Lv1</span>
+          <span class="ml-auto rounded-full bg-dopa px-2.5 py-0.5 text-xs font-bold text-white">さわれる</span>
+        </figcaption>
+        <div class="relative mx-auto w-full max-w-[340px]">
+          <div data-phone="live" class="relative aspect-[9/19] w-full overflow-hidden rounded-[2.4rem] border-[10px] border-ink shadow-[0_24px_60px_-20px_rgba(27,19,32,.6)]"></div>
+          <span class="absolute -left-3 top-[30%] z-50 grid h-7 w-7 place-items-center rounded-full bg-gold font-mono text-xs font-bold ring-2 ring-ink">1</span>
+          <span class="absolute -right-3 top-[21%] z-50 grid h-7 w-7 place-items-center rounded-full bg-gold font-mono text-xs font-bold ring-2 ring-ink">2</span>
+          <span class="absolute -left-3 top-[6%] z-50 grid h-7 w-7 place-items-center rounded-full bg-gold font-mono text-xs font-bold ring-2 ring-ink">3</span>
+          <span class="absolute -left-3 top-[14%] z-50 grid h-7 w-7 place-items-center rounded-full bg-gold font-mono text-xs font-bold ring-2 ring-ink">4</span>
+          <span class="absolute -right-3 top-[6%] z-50 grid h-7 w-7 place-items-center rounded-full bg-gold font-mono text-xs font-bold ring-2 ring-ink">5</span>
+        </div>
+        <ol class="flex flex-col gap-1.5 text-sm leading-relaxed">
+          <li><b class="font-mono">1</b>　問題。桁数がそろった瞬間に自動で判定</li>
+          <li><b class="font-mono">2</b>　残り時間バー。5秒で空になる（3/5/7秒で変更可）</li>
+          <li><b class="font-mono">3</b>　連続正解数。ミスか時間切れで終了</li>
+          <li><b class="font-mono">4</b>　ドパレベル Lv0〜8 のメーター</li>
+          <li><b class="font-mono">5</b>　ひかえめモード。暗転・帯・紙吹雪を止める</li>
+        </ol>
+        <div class="flex flex-wrap items-center gap-3">
+          <button type="button" data-skip class="rounded-full bg-ink px-4 py-2 font-mono text-xs text-paper hover:bg-dopa">＋10連続（デモ用スキップ）</button>
+          <p class="text-xs text-mute">20連続でドパタイム、50連続で虹ドパ</p>
+        </div>
+      </figure>
+
+      <figure class="flex flex-col gap-5">
+        <figcaption class="flex items-baseline gap-3 border-b border-rule pb-2">
+          <span class="font-mono text-xs text-mute">02</span><span class="font-display text-2xl">ドパタイム突入</span><span class="font-mono text-xs text-mute">20連続</span>
+        </figcaption>
+        <div class="relative mx-auto w-full max-w-[340px]">
+          <div data-phone="time" class="relative aspect-[9/19] w-full overflow-hidden rounded-[2.4rem] border-[10px] border-ink shadow-[0_24px_60px_-20px_rgba(27,19,32,.6)]"></div>
+          <span class="absolute -left-3 top-[66%] z-50 grid h-7 w-7 place-items-center rounded-full bg-gold font-mono text-xs font-bold ring-2 ring-ink">1</span>
+          <span class="absolute -right-3 top-[44%] z-50 grid h-7 w-7 place-items-center rounded-full bg-gold font-mono text-xs font-bold ring-2 ring-ink">2</span>
+          <span class="absolute -left-3 top-[14%] z-50 grid h-7 w-7 place-items-center rounded-full bg-gold font-mono text-xs font-bold ring-2 ring-ink">3</span>
+        </div>
+        <ol class="flex flex-col gap-1.5 text-sm leading-relaxed">
+          <li><b class="font-mono">1</b>　画面が暗転し、夜の配色に切り替わる</li>
+          <li><b class="font-mono">2</b>　斜めの帯「DOPA TIME!!」が横切る（効果音「ギュイーン」つき。モックは無音）</li>
+          <li><b class="font-mono">3</b>　20連続でメーターは Lv5 まで点灯</li>
+        </ol>
+      </figure>
+
+      <figure class="flex flex-col gap-5">
+        <figcaption class="flex items-baseline gap-3 border-b border-rule pb-2">
+          <span class="font-mono text-xs text-mute">03</span><span class="font-display text-2xl">虹ドパ確定</span><span class="font-mono text-xs text-mute">50連続</span>
+        </figcaption>
+        <div class="relative mx-auto w-full max-w-[340px]">
+          <div data-phone="rainbow" class="relative aspect-[9/19] w-full overflow-hidden rounded-[2.4rem] border-[10px] border-ink shadow-[0_24px_60px_-20px_rgba(27,19,32,.6)]"></div>
+          <span class="absolute -left-3 top-[62%] z-50 grid h-7 w-7 place-items-center rounded-full bg-gold font-mono text-xs font-bold ring-2 ring-ink">1</span>
+          <span class="absolute -right-3 top-[21%] z-50 grid h-7 w-7 place-items-center rounded-full bg-gold font-mono text-xs font-bold ring-2 ring-ink">2</span>
+          <span class="absolute -left-3 top-[40%] z-50 grid h-7 w-7 place-items-center rounded-full bg-gold font-mono text-xs font-bold ring-2 ring-ink">3</span>
+          <span class="absolute -right-3 top-[48%] z-50 grid h-7 w-7 place-items-center rounded-full bg-gold font-mono text-xs font-bold ring-2 ring-ink">4</span>
+        </div>
+        <ol class="flex flex-col gap-1.5 text-sm leading-relaxed">
+          <li><b class="font-mono">1</b>　背景が虹に。hue-rotate は使わず固定のグラデーション</li>
+          <li><b class="font-mono">2</b>　この演出中だけタイマーが 1.5 秒止まる。止まること自体がご褒美</li>
+          <li><b class="font-mono">3</b>　紙吹雪。粒子は上限 800 個（スマホ 400）</li>
+          <li><b class="font-mono">4</b>　「虹ドパ確定」の文字</li>
+        </ol>
+      </figure>
+    </div>
+  </section>
+
+  <section aria-labelledby="landscape" class="mt-20 grid gap-8 lg:grid-cols-[16rem_1fr]">
+    <div>
+      <h2 id="landscape" class="font-display text-2xl">横長のとき</h2>
+      <p class="mt-3 text-sm leading-relaxed text-mute">Chromebook のような横長画面では、左に問題、右にテンキー。縦長は上下に積む。</p>
+    </div>
+    <div class="flex flex-wrap items-end gap-8">
+      <figure class="w-full max-w-lg">
+        <div class="grid aspect-[16/10] grid-cols-[1.3fr_1fr] gap-3 rounded-xl border-[8px] border-ink bg-cream p-3 shadow-[0_18px_40px_-18px_rgba(27,19,32,.5)]">
+          <div class="flex flex-col gap-2">
+            <div class="flex items-center justify-between rounded-lg bg-white px-2 py-1 text-[11px] font-bold">連続 <span class="font-pop text-dopa">7</span><span class="ml-auto font-pop">Lv2</span></div>
+            <div class="grid grid-cols-8 gap-0.5"><span class="h-1.5 rounded-sm bg-yellow-400"></span><span class="h-1.5 rounded-sm bg-yellow-400"></span><span class="h-1.5 rounded-sm bg-black/10"></span><span class="h-1.5 rounded-sm bg-black/10"></span><span class="h-1.5 rounded-sm bg-black/10"></span><span class="h-1.5 rounded-sm bg-black/10"></span><span class="h-1.5 rounded-sm bg-black/10"></span><span class="h-1.5 rounded-sm bg-black/10"></span></div>
+            <div class="h-2 overflow-hidden rounded-full bg-black/15"><div class="h-full w-3/5 rounded-full bg-gradient-to-r from-lime-400 to-yellow-300"></div></div>
+            <div class="grid flex-1 place-items-center rounded-2xl bg-white font-pop text-3xl sm:text-4xl">6 × 9 = <span class="text-dopa">?</span></div>
+          </div>
+          <div data-mini-pad class="grid grid-cols-3 gap-1.5"></div>
+        </div>
+        <figcaption class="mt-3 font-mono text-xs text-mute">横長：左＝問題 ／ 右＝テンキー</figcaption>
+      </figure>
+      <figure class="w-24">
+        <div class="flex aspect-[9/16] flex-col gap-1 rounded-lg border-[5px] border-ink bg-cream p-1.5">
+          <div class="h-1.5 rounded bg-white"></div><div class="h-1 rounded bg-black/15"></div>
+          <div class="grid h-8 place-items-center rounded bg-white font-pop text-[9px]">6×9=?</div>
+          <div class="mt-auto grid grid-cols-3 gap-0.5"><span class="h-3 rounded-sm bg-white"></span><span class="h-3 rounded-sm bg-white"></span><span class="h-3 rounded-sm bg-white"></span><span class="h-3 rounded-sm bg-white"></span><span class="h-3 rounded-sm bg-white"></span><span class="h-3 rounded-sm bg-white"></span><span class="h-3 rounded-sm bg-white"></span><span class="h-3 rounded-sm bg-white"></span><span class="h-3 rounded-sm bg-white"></span></div>
+        </div>
+        <figcaption class="mt-3 font-mono text-xs text-mute">縦長：上下</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section aria-labelledby="howto" class="mt-20 grid gap-8 border-t-2 border-ink pt-10 lg:grid-cols-[16rem_1fr]">
+    <h2 id="howto" class="font-display text-3xl">ドパの出し方</h2>
+    <ol class="grid gap-4 sm:grid-cols-2">
+      <li class="rounded-xl border border-rule bg-white/70 p-5"><p class="font-mono text-xs text-dopa">01</p><p class="mt-1 leading-relaxed">1問5秒の制限で、毎問に小さな緊張を置く。</p></li>
+      <li class="rounded-xl border border-rule bg-white/70 p-5"><p class="font-mono text-xs text-dopa">02</p><p class="mt-1 leading-relaxed">数えるのは連続正解だけ。閾値の間隔は 3 から 10 へ広がり、後半ほど遠い。</p></li>
+      <li class="rounded-xl border border-rule bg-white/70 p-5"><p class="font-mono text-xs text-dopa">03</p><p class="mt-1 leading-relaxed">節目で画面ごと切り替える。20連続で暗転と斜め帯、50連続で虹とタイマー停止。</p></li>
+      <li class="rounded-xl border border-rule bg-white/70 p-5"><p class="font-mono text-xs text-dopa">04</p><p class="mt-1 leading-relaxed">安全弁をつける。ひかえめモード、明滅は1秒3回まで、粒子に上限。</p></li>
+      <li class="rounded-xl border border-rule bg-white/70 p-5 sm:col-span-2"><p class="font-mono text-xs text-dopa">05</p><p class="mt-1 leading-relaxed">盛りすぎは入力を遅らせる。PR #33 で虹背景の hue-rotate や音ごとの OscillatorNode 生成を見直し、描画は毎秒 3.8 回から約 51 回に戻った。</p></li>
+    </ol>
+  </section>
+</div>
+</main>
+
+<script>
+(function () {
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var T = [0, 3, 6, 10, 15, 20, 30, 40, 50];
+  var KEYS = ['7', '8', '9', '4', '5', '6', '1', '2', '3', 'けす', '0', '⌫'];
+  var THEME = {
+    light: 'bg-cream',
+    dark: 'bg-night',
+    rainbow: 'bg-[linear-gradient(165deg,#ff6b8b,#ffb86b,#fff27a,#8dffb5,#79c9ff,#c49bff)]'
+  };
+  var ROOT = 'relative flex h-full flex-col gap-3 px-4 pb-4 pt-9 transition-colors duration-500 motion-reduce:transition-none ';
+  var PILL = 'rounded-full bg-white/90 px-3 py-1 text-ink shadow-sm';
+
+  function levelOf(c) { var l = 0; T.forEach(function (t, i) { if (c >= t) l = i; }); return l; }
+
+  function shell(live) {
+    var pad = KEYS.map(function (k) {
+      return '<button type="button" data-k="' + k + '" ' + (live ? '' : 'tabindex="-1" disabled ') +
+        'class="h-12 rounded-2xl bg-white font-pop text-2xl text-ink shadow-[0_4px_0_rgba(0,0,0,.18)] transition active:translate-y-1 active:shadow-none motion-reduce:transition-none' +
+        (k.length > 1 || k === '⌫' ? ' text-base text-mute' : '') + '">' + k + '</button>';
+    }).join('');
+    return '<div class="absolute left-1/2 top-2 z-40 h-5 w-24 -translate-x-1/2 rounded-full bg-ink"></div>' +
+      '<div data-root class="' + ROOT + THEME.light + '">' +
+      '<div class="flex items-center justify-between gap-2">' +
+      '<p class="' + PILL + ' text-sm font-bold">連続 <span data-combo class="font-pop text-xl text-dopa">0</span></p>' +
+      '<button type="button" data-calm aria-pressed="false" ' + (live ? '' : 'tabindex="-1" disabled ') + 'class="' + PILL + ' flex items-center gap-1.5 text-[11px] font-bold">ひかえめ' +
+      '<span data-calm-track class="relative h-4 w-7 rounded-full bg-black/20 transition-colors"><span data-calm-dot class="absolute left-0.5 top-0.5 h-3 w-3 rounded-full bg-white transition-transform"></span></span></button></div>' +
+      '<div class="rounded-2xl bg-white/90 px-3 py-2 shadow-sm"><div class="flex items-baseline justify-between"><span class="font-mono text-[10px] text-mute">DOPA LEVEL</span><span data-lv class="font-pop text-lg text-ink">Lv0</span></div>' +
+      '<div data-meter class="mt-1 grid grid-cols-8 gap-1"></div></div>' +
+      '<div class="flex items-center gap-2"><div class="relative h-3 flex-1 overflow-hidden rounded-full bg-black/20"><div data-bar class="h-full origin-left rounded-full bg-gradient-to-r from-lime-400 to-yellow-300"></div></div>' +
+      '<span data-tlabel class="rounded-full bg-white/90 px-2 font-mono text-[10px] font-bold text-ink">5s</span></div>' +
+      '<div class="rounded-3xl bg-white px-4 py-5 text-center shadow-[0_6px_0_rgba(0,0,0,.12)]"><p class="font-pop text-5xl text-ink"><span data-q>7 × 8</span> = <span data-ans class="inline-block min-w-[2ch] border-b-4 border-dopa text-dopa">?</span></p></div>' +
+      '<div data-fx-mid class="relative flex flex-1 items-center justify-center"></div>' +
+      '<div class="grid grid-cols-3 gap-2">' + pad + '</div></div>' +
+      '<div data-fx-full class="pointer-events-none absolute inset-0 z-30 overflow-hidden"></div>';
+  }
+
+  function meter(lv) {
+    var out = '';
+    for (var i = 1; i <= 8; i++) {
+      var c = 'bg-black/10';
+      if (lv >= i) c = i <= 4 ? 'bg-yellow-400' : i <= 7 ? 'bg-orange-500' : 'bg-gradient-to-r from-pink-400 via-yellow-300 to-cyan-400';
+      out += '<div class="flex flex-col items-center gap-0.5"><span class="h-2.5 w-full rounded-sm ' + c + '"></span><span class="font-mono text-[8px] text-mute">' + T[i] + '</span></div>';
+    }
+    return out;
+  }
+
+  var BAND = '<div class="absolute inset-0 bg-black/40"></div>' +
+    '<div data-band class="absolute left-[-20%] top-[47%] w-[140%] -rotate-[14deg] border-y-4 border-ink bg-[repeating-linear-gradient(45deg,#ffd400_0_14px,#1b1320_14px_28px)] py-1.5">' +
+    '<p class="bg-gold py-1 text-center font-pop text-3xl tracking-widest text-ink">DOPA TIME!!</p></div>';
+  function confetti(n, live) {
+    var cols = ['#ff2e7e', '#ffd400', '#2ec4ff', '#7dff9b', '#ffffff', '#ff8a3d'], out = '';
+    for (var i = 0; i < n; i++) {
+      var x = (i * 37) % 100, y = (i * 53) % 90;
+      out += '<svg aria-hidden="true" viewBox="0 0 10 6" class="absolute h-2 w-3 ' + (live ? 'animate-fall motion-reduce:hidden [animation-delay:' + (i % 8) * 0.12 + 's] -top-4' : '') +
+        ' left-[' + x + '%] ' + (live ? '' : 'top-[' + y + '%]') + ' rotate-[' + (i * 47) % 180 + 'deg]"><rect width="10" height="6" rx="1" fill="' + cols[i % cols.length] + '"/></svg>';
+    }
+    return out;
+  }
+  var NIJI = '<p class="animate-pop rounded-2xl bg-white/80 px-4 py-2 font-pop text-3xl text-dopa shadow-lg [-webkit-text-stroke:1px_#1b1320] motion-reduce:animate-none">虹ドパ確定</p>';
+  var CHIP_TIME = '<span class="absolute right-0 top-1 rounded bg-gold px-2 font-mono text-[10px] font-bold text-ink">DOPA TIME</span>';
+
+  function paint(p, s) {
+    var root = $('[data-root]', p), lv = levelOf(s.combo);
+    root.className = ROOT + THEME[s.theme];
+    $('[data-combo]', p).textContent = s.combo;
+    $('[data-lv]', p).textContent = 'Lv' + lv;
+    $('[data-meter]', p).innerHTML = meter(lv);
+    if (s.q) $('[data-q]', p).textContent = s.q;
+    if (s.ans != null) $('[data-ans]', p).textContent = s.ans;
+    if (s.bar) $('[data-bar]', p).classList.add(s.bar);
+    if (s.tlabel) $('[data-tlabel]', p).textContent = s.tlabel;
+    $('[data-fx-mid]', p).innerHTML = s.mid || '';
+    $('[data-fx-full]', p).innerHTML = s.full || '';
+  }
+
+  // 静的な2枚
+  var pTime = $('[data-phone="time"]'), pRain = $('[data-phone="rainbow"]');
+  pTime.innerHTML = shell(false);
+  paint(pTime, { combo: 20, q: '8 × 6', ans: '?', theme: 'dark', bar: 'scale-x-[.86]', mid: CHIP_TIME, full: BAND });
+  pRain.innerHTML = shell(false);
+  paint(pRain, { combo: 50, q: '9 × 7', ans: '?', theme: 'rainbow', bar: 'scale-x-[.95]', tlabel: 'STOP 1.5s', mid: NIJI, full: confetti(26, false) });
+  $('[data-tlabel]', pRain).classList.add('bg-ink', 'text-gold');
+
+  // 横長の図のテンキー
+  $('[data-mini-pad]').innerHTML = KEYS.map(function (k) {
+    return '<span class="grid place-items-center rounded-lg bg-white font-pop text-xs shadow-[0_2px_0_rgba(0,0,0,.15)]">' + k + '</span>';
+  }).join('');
+
+  // ---- さわれる1枚 ----
+  var live = $('[data-phone="live"]');
+  live.innerHTML = shell(true);
+  var bar = $('[data-bar]', live), tl = $('[data-tlabel]', live);
+  var st = { combo: 0, a: 7, b: 8, input: '', running: false, calm: false };
+  var tEnd = null, tPause = null, fxTimers = [];
+
+  var TIME = 20, NIJI_AT = 50;
+  function theme() { var c = st.combo; return st.calm ? 'light' : c >= NIJI_AT ? 'rainbow' : c >= TIME ? 'dark' : 'light'; }
+  function badge() { var c = st.combo; return st.calm || c >= NIJI_AT ? '' : c >= TIME ? CHIP_TIME : ''; }
+  function fxLater(ms, fn) { fxTimers.push(setTimeout(fn, ms)); }
+  function full(html) { $('[data-fx-full]', live).innerHTML = html; }
+  function mid(html) { $('[data-fx-mid]', live).innerHTML = badge() + html; }
+
+  function startTimer(pauseMs) {
+    clearTimeout(tEnd); clearTimeout(tPause);
+    bar.classList.remove('animate-drain', '[animation-play-state:paused]', 'motion-reduce:animate-none');
+    void bar.offsetWidth;
+    bar.classList.add('animate-drain');
+    tl.textContent = '5s';
+    if (pauseMs) {
+      bar.classList.add('[animation-play-state:paused]');
+      tl.textContent = 'STOP 1.5s';
+      tPause = setTimeout(function () { bar.classList.remove('[animation-play-state:paused]'); tl.textContent = '5s'; }, pauseMs);
+    }
+    tEnd = setTimeout(function () { over('じかんぎれ'); }, 5000 + (pauseMs || 0));
+  }
+  function newQ(pauseMs) {
+    var a, b;
+    do { a = 1 + Math.floor(Math.random() * 9); b = 1 + Math.floor(Math.random() * 9); } while (a === st.a && b === st.b);
+    st.a = a; st.b = b; st.input = '';
+    $('[data-q]', live).textContent = a + ' × ' + b;
+    $('[data-ans]', live).textContent = '?';
+    startTimer(pauseMs);
+  }
+  function refresh() { paint(live, { combo: st.combo, theme: theme(), mid: badge() }); }
+
+  function gain(n) {
+    var pc = st.combo, prev = levelOf(pc);
+    st.combo += n;
+    var lv = levelOf(st.combo), pause = 0;
+    refresh();
+    if (pc < NIJI_AT && st.combo >= NIJI_AT) {
+      pause = 1500;
+      mid(NIJI);
+      if (!st.calm) { full(confetti(40, true)); fxLater(2800, function () { full(''); }); }
+    } else if (pc < TIME && st.combo >= TIME && !st.calm) {
+      full('<div class="absolute inset-0 bg-black animate-fade [animation-delay:.4s] motion-reduce:animate-none"></div>');
+      fxLater(500, function () { full(BAND); $('[data-band]', live).classList.add('animate-band', 'motion-reduce:animate-none'); });
+      fxLater(2300, function () { full(''); });
+    } else if (lv > prev) {
+      mid('<p class="animate-pop font-pop text-3xl text-dopa drop-shadow motion-reduce:animate-none">Lv UP!</p>');
+    } else {
+      mid('<p class="animate-pop font-pop text-xl text-ink/70 motion-reduce:animate-none">せいかい ＋1</p>');
+    }
+    newQ(pause);
+  }
+  function over(why) {
+    st.running = false;
+    clearTimeout(tEnd); clearTimeout(tPause);
+    bar.classList.add('[animation-play-state:paused]');
+    full('<div class="pointer-events-auto absolute inset-0 grid place-items-center bg-black/55 p-6"><div class="w-full rounded-3xl bg-white p-6 text-center shadow-xl">' +
+      '<p class="font-mono text-xs text-mute">' + why + '</p><p class="mt-1 font-pop text-3xl">おしまい</p>' +
+      '<p class="mt-3 text-sm">連続 <b class="font-pop text-2xl text-dopa">' + st.combo + '</b> ／ Lv' + levelOf(st.combo) + '</p>' +
+      '<button type="button" data-start class="mt-5 rounded-full bg-dopa px-6 py-2 font-pop text-white shadow-[0_4px_0_#b3004f] active:translate-y-1 active:shadow-none">もう一回</button></div></div>');
+  }
+  function start() {
+    fxTimers.forEach(clearTimeout); fxTimers = [];
+    st.combo = 0; st.running = true;
+    full(''); refresh(); newQ(0);
+  }
+  function key(k) {
+    if (!st.running) return;
+    if (k === 'けす') st.input = '';
+    else if (k === '⌫') st.input = st.input.slice(0, -1);
+    else st.input += k;
+    $('[data-ans]', live).textContent = st.input || '?';
+    var ans = String(st.a * st.b);
+    if (st.input.length >= ans.length) {
+      if (st.input === ans) gain(1);
+      else over('ミス：' + st.a + '×' + st.b + '＝' + ans);
+    }
+  }
+
+  paint(live, { combo: 0, theme: 'light', q: '7 × 8', ans: '?' });
+  full('<div class="pointer-events-auto absolute inset-0 grid place-items-center bg-black/45"><button type="button" data-start class="rounded-full bg-dopa px-8 py-3 font-pop text-xl text-white shadow-[0_5px_0_#b3004f] active:translate-y-1 active:shadow-none">スタート</button></div>');
+
+  live.addEventListener('click', function (ev) {
+    var t = ev.target.closest('[data-k],[data-start],[data-calm]');
+    if (!t) return;
+    if (t.hasAttribute('data-start')) return start();
+    if (t.hasAttribute('data-calm')) {
+      st.calm = !st.calm;
+      t.setAttribute('aria-pressed', String(st.calm));
+      $('[data-calm-track]', t).classList.toggle('bg-dopa', st.calm);
+      $('[data-calm-dot]', t).classList.toggle('translate-x-3', st.calm);
+      if (st.calm && st.running) full('');
+      refresh();
+      return;
+    }
+    key(t.dataset.k);
+  });
+  $('[data-skip]').addEventListener('click', function () {
+    if (!st.running) start();
+    gain(10);
+  });
+})();
+</script>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

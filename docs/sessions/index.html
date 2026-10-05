@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>セッション一覧</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: { rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } } },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 py-12 sm:px-10 lg:py-16">
+  <div class="mx-auto max-w-3xl">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">sessions</p>
+    <h1 class="mt-2 font-display text-4xl">セッション一覧</h1>
+    <p class="mt-4 text-sm text-ink/80">新しい順。state が <span class="font-mono">developing</span> のものはレビュー待ちです。</p>
+
+    <ol class="mt-10 border-t-2 border-ink">
+      <li class="border-b border-rule">
+        <a href="20261005-1815-dopa-apps-research/index.html" class="group grid gap-2 py-6 sm:grid-cols-[9rem_1fr] sm:gap-6">
+          <time datetime="2026-10-05T18:15" class="font-mono text-sm text-mute">2026-10-05<br class="hidden sm:inline"> 18:15</time>
+          <div>
+            <div class="flex flex-wrap items-center gap-3">
+              <h2 class="font-display text-xl group-hover:text-dopa">「ドパ〇〇」アプリ調査</h2>
+              <span class="rounded-full border border-signal bg-signal/10 px-2.5 py-0.5 font-mono text-[11px] font-bold text-ink">done／レビュー済み</span>
+            </div>
+            <p class="mt-2 text-sm leading-relaxed text-ink/80">2026年9月下旬に個人開発界隈で量産された、普通の道具に過剰演出をかぶせるアプリ群の調査。事例5件と共通する設計パターン。</p>
+          </div>
+        </a>
+      </li>
+    </ol>
+  </div>
+</main>
+<script src="../sidebar.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ドパ電卓 再現モック</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=DotGothic16&family=JetBrains+Mono:wght@400;700&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: '#E5337A', 'dopa-soft': '#FFE6F0', 'dopa-pale': '#FFF3E4',
+        pachi: '#0c0812', gold: '#ffcf1a', hot: '#ff2340', neon: '#2ef2ff'
+      },
+      fontFamily: {
+        display: ['"Dela Gothic One"', 'sans-serif'],
+        sans: ['"Zen Kaku Gothic New"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+        seg: ['"DotGothic16"', 'monospace']
+      },
+      keyframes: {
+        lamp: { '0%,100%': { opacity: '1' }, '50%': { opacity: '.25' } },
+        rays: { to: { transform: 'rotate(360deg)' } },
+        sweep: { '0%': { transform: 'translateX(-120%)' }, '100%': { transform: 'translateX(380%)' } },
+        shutter: { '0%': { transform: 'translateY(-100%)' }, '100%': { transform: 'translateY(0)' } },
+        flash: { '0%': { opacity: '1' }, '100%': { opacity: '0' } },
+        drop: { '0%': { transform: 'translateY(-160%)' }, '70%': { transform: 'translateY(8%)' }, '100%': { transform: 'translateY(0)' } },
+        pop: { '0%': { transform: 'scale(.4)', opacity: '0' }, '60%': { transform: 'scale(1.15)', opacity: '1' }, '100%': { transform: 'scale(1)' } },
+        ring: { '0%': { transform: 'scale(.6)', opacity: '1' }, '100%': { transform: 'scale(1.4)', opacity: '0' } }
+      },
+      animation: {
+        lamp: 'lamp 1s ease-in-out infinite',
+        'lamp-late': 'lamp 1s ease-in-out .5s infinite',
+        rays: 'rays 14s linear infinite',
+        sweep: 'sweep 2.2s ease-in-out infinite',
+        shutter: 'shutter .55s cubic-bezier(.2,.8,.2,1) both',
+        flash: 'flash .7s ease-out both',
+        drop: 'drop .8s cubic-bezier(.3,1.4,.5,1) both',
+        pop: 'pop .5s ease-out both',
+        ring: 'ring 1.6s ease-out infinite'
+      }
+    }
+  }
+};
+</script>
+</head>
+<body class="bg-paper bg-[radial-gradient(#e8ddd0_1px,transparent_1px)] bg-[length:18px_18px] font-sans text-ink antialiased">
+<main class="min-h-screen">
+<div class="mx-auto max-w-[1560px] px-4 py-10 sm:px-8">
+
+  <nav aria-label="パンくず" class="font-mono text-xs text-mute">
+    <a href="index.html" class="rounded px-1 py-0.5 text-ink underline decoration-dopa decoration-2 underline-offset-4 hover:bg-dopa-pale">← 調査レポート</a>
+    <span class="mx-1">/</span><span>ドパ電卓</span>
+  </nav>
+
+  <header class="mt-8 grid gap-6 border-b-2 border-ink pb-10 lg:grid-cols-[1fr_auto] lg:items-end">
+    <div>
+      <p class="font-mono text-xs tracking-[.3em] text-dopa">DOPA APPS ／ CALCULATOR</p>
+      <h1 class="mt-2 font-display text-6xl leading-none sm:text-8xl">ドパ電卓</h1>
+      <p class="mt-5 max-w-2xl text-lg leading-relaxed">四則演算は普通に正しい。<span class="font-bold">= を押した一瞬だけ</span>、パチンコの煽りが走る。</p>
+    </div>
+    <div class="flex max-w-md flex-col gap-3 text-sm">
+      <p class="rounded-lg border-2 border-dashed border-dopa bg-dopa-pale px-4 py-3 leading-relaxed"><span class="mr-2 font-bold text-dopa">注記</span>公開仕様をもとにした再現モック。実際のスクリーンショットではない。</p>
+      <p class="text-mute">出典：<a class="break-all text-ink underline decoration-rule decoration-2 underline-offset-4 hover:decoration-dopa" href="https://github.com/neoenox/dopa_calc">github.com/neoenox/dopa_calc</a>（Flutter MVP）</p>
+    </div>
+  </header>
+
+  <section aria-labelledby="stages" class="mt-12">
+    <div class="flex flex-wrap items-baseline justify-between gap-4">
+      <h2 id="stages" class="font-display text-3xl">演出の4ランク</h2>
+      <ol class="flex flex-wrap items-center gap-1.5 font-mono text-[11px]">
+        <li class="rounded bg-ink px-2 py-1 text-paper">NORMAL</li><li class="text-mute">→</li>
+        <li class="rounded bg-ink px-2 py-1 text-neon">CHANCE</li><li class="text-mute">→</li>
+        <li class="rounded bg-ink px-2 py-1 text-hot">激熱</li><li class="text-mute">→</li>
+        <li class="rounded border border-ink px-2 py-1">PUSH</li><li class="text-mute">→</li>
+        <li class="rounded border border-ink px-2 py-1">シャッター</li><li class="text-mute">→</li>
+        <li class="rounded border border-ink px-2 py-1">暗転</li><li class="text-mute">→</li>
+        <li class="rounded border border-ink px-2 py-1">復活</li><li class="text-mute">→</li>
+        <li class="rounded bg-gold px-2 py-1 font-bold">PREMIUM</li>
+      </ol>
+    </div>
+    <p class="mt-3 max-w-3xl text-sm leading-relaxed text-mute">結果が 7・77・777・7777・8192 なら強制 PREMIUM、0 なら全消灯（公開仕様）。それ以外の振り分けはこのモックの仮ルール：7 を含む→激熱、ゾロ目か 100 の倍数→CHANCE、ほか→NORMAL。</p>
+
+    <div class="mt-10 grid gap-x-8 gap-y-16 md:grid-cols-2 min-[1700px]:grid-cols-4">
+
+      <figure class="flex flex-col gap-5">
+        <figcaption class="flex items-baseline gap-3 border-b border-rule pb-2">
+          <span class="font-mono text-xs text-mute">01</span><span class="font-display text-2xl">NORMAL</span>
+          <span class="ml-auto rounded-full bg-dopa px-2.5 py-0.5 text-xs font-bold text-white">さわれる</span>
+        </figcaption>
+        <div class="relative mx-auto w-full max-w-[340px]">
+          <div data-phone="normal" data-live data-expr="" data-out="0" class="relative aspect-[9/19] w-full overflow-hidden rounded-[2.4rem] border-[10px] border-ink bg-pachi shadow-[0_24px_60px_-20px_rgba(27,19,32,.6)]"></div>
+          <span class="absolute -left-3 top-[5%] z-50 grid h-7 w-7 place-items-center rounded-full bg-gold font-mono text-xs font-bold ring-2 ring-ink">1</span>
+          <span class="absolute -right-3 top-[15%] z-50 grid h-7 w-7 place-items-center rounded-full bg-gold font-mono text-xs font-bold ring-2 ring-ink">2</span>
+          <span class="absolute -left-3 top-[40%] z-50 grid h-7 w-7 place-items-center rounded-full bg-gold font-mono text-xs font-bold ring-2 ring-ink">3</span>
+          <span class="absolute -right-3 bottom-[5%] z-50 grid h-7 w-7 place-items-center rounded-full bg-gold font-mono text-xs font-bold ring-2 ring-ink">4</span>
+        </div>
+        <ol class="flex flex-col gap-1.5 text-sm leading-relaxed">
+          <li><b class="font-mono">1</b>　ランプ。NORMAL は中央の1灯だけ</li>
+          <li><b class="font-mono">2</b>　表示部。式と結果は普通の電卓どおり</li>
+          <li><b class="font-mono">3</b>　演出領域。ランク名や役物はここに出る</li>
+          <li><b class="font-mono">4</b>　= キー。押した瞬間、結果でランクが決まる</li>
+        </ol>
+        <p class="rounded-lg bg-ink px-4 py-3 font-mono text-xs leading-relaxed text-paper">試す：<span class="text-gold">3+4=</span> PREMIUM ／ <span class="text-hot">9×8=</span> 激熱（PUSH） ／ <span class="text-neon">25×4=</span> CHANCE ／ <span class="text-white/60">5−5=</span> 全消灯</p>
+      </figure>
+
+      <figure class="flex flex-col gap-5">
+        <figcaption class="flex items-baseline gap-3 border-b border-rule pb-2">
+          <span class="font-mono text-xs text-mute">02</span><span class="font-display text-2xl text-[#0aa9b8]">CHANCE</span>
+        </figcaption>
+        <div class="relative mx-auto w-full max-w-[340px]">
+          <div data-phone="chance" data-expr="25×4 =" data-out="100" class="relative aspect-[9/19] w-full overflow-hidden rounded-[2.4rem] border-[10px] border-ink bg-pachi shadow-[0_24px_60px_-20px_rgba(27,19,32,.6)]"></div>
+          <span class="absolute -left-3 top-[5%] z-50 grid h-7 w-7 place-items-center rounded-full bg-gold font-mono text-xs font-bold ring-2 ring-ink">1</span>
+          <span class="absolute -right-3 top-[15%] z-50 grid h-7 w-7 place-items-center rounded-full bg-gold font-mono text-xs font-bold ring-2 ring-ink">2</span>
+          <span class="absolute -left-3 top-[40%] z-50 grid h-7 w-7 place-items-center rounded-full bg-gold font-mono text-xs font-bold ring-2 ring-ink">3</span>
+        </div>
+        <ol class="flex flex-col gap-1.5 text-sm leading-relaxed">
+          <li><b class="font-mono">1</b>　ランプが全灯。青で交互に明滅（1秒1回）</li>
+          <li><b class="font-mono">2</b>　走査光が表示部を横切る</li>
+          <li><b class="font-mono">3</b>　リングが広がり、CHANCE! の文字</li>
+        </ol>
+      </figure>
+
+      <figure class="flex flex-col gap-5">
+        <figcaption class="flex items-baseline gap-3 border-b border-rule pb-2">
+          <span class="font-mono text-xs text-mute">03</span><span class="font-display text-2xl text-hot">激熱</span>
+          <span class="font-mono text-xs text-mute">PUSH・シャッター</span>
+        </figcaption>
+        <div class="relative mx-auto w-full max-w-[340px]">
+          <div data-phone="geki" data-expr="9×8 =" data-out="???" class="relative aspect-[9/19] w-full overflow-hidden rounded-[2.4rem] border-[10px] border-ink bg-pachi shadow-[0_24px_60px_-20px_rgba(27,19,32,.6)]"></div>
+          <span class="absolute -left-3 top-[5%] z-50 grid h-7 w-7 place-items-center rounded-full bg-gold font-mono text-xs font-bold ring-2 ring-ink">1</span>
+          <span class="absolute -right-3 top-[15%] z-50 grid h-7 w-7 place-items-center rounded-full bg-gold font-mono text-xs font-bold ring-2 ring-ink">2</span>
+          <span class="absolute -left-3 top-[32%] z-50 grid h-7 w-7 place-items-center rounded-full bg-gold font-mono text-xs font-bold ring-2 ring-ink">3</span>
+          <span class="absolute -right-3 top-[46%] z-50 grid h-7 w-7 place-items-center rounded-full bg-gold font-mono text-xs font-bold ring-2 ring-ink">4</span>
+        </div>
+        <ol class="flex flex-col gap-1.5 text-sm leading-relaxed">
+          <li><b class="font-mono">1</b>　ランプが赤に変わる</li>
+          <li><b class="font-mono">2</b>　シャッターが降りて、結果を隠す</li>
+          <li><b class="font-mono">3</b>　稲妻と「激熱」</li>
+          <li><b class="font-mono">4</b>　PUSH ボタン。次は暗転、そこから復活すれば PREMIUM</li>
+        </ol>
+      </figure>
+
+      <figure class="flex flex-col gap-5">
+        <figcaption class="flex items-baseline gap-3 border-b border-rule pb-2">
+          <span class="font-mono text-xs text-mute">04</span><span class="font-display text-2xl">PREMIUM</span>
+          <span class="font-mono text-xs text-mute">777 JACKPOT</span>
+        </figcaption>
+        <div class="relative mx-auto w-full max-w-[340px]">
+          <div data-phone="premium" data-expr="111×7 =" data-out="777" class="relative aspect-[9/19] w-full overflow-hidden rounded-[2.4rem] border-[10px] border-ink bg-pachi shadow-[0_24px_60px_-20px_rgba(27,19,32,.6)]"></div>
+          <span class="absolute -left-3 top-[5%] z-50 grid h-7 w-7 place-items-center rounded-full bg-gold font-mono text-xs font-bold ring-2 ring-ink">1</span>
+          <span class="absolute -right-3 top-[15%] z-50 grid h-7 w-7 place-items-center rounded-full bg-gold font-mono text-xs font-bold ring-2 ring-ink">2</span>
+          <span class="absolute -left-3 top-[30%] z-50 grid h-7 w-7 place-items-center rounded-full bg-gold font-mono text-xs font-bold ring-2 ring-ink">3</span>
+          <span class="absolute -right-3 top-[40%] z-50 grid h-7 w-7 place-items-center rounded-full bg-gold font-mono text-xs font-bold ring-2 ring-ink">4</span>
+          <span class="absolute -left-3 top-[52%] z-50 grid h-7 w-7 place-items-center rounded-full bg-gold font-mono text-xs font-bold ring-2 ring-ink">5</span>
+        </div>
+        <ol class="flex flex-col gap-1.5 text-sm leading-relaxed">
+          <li><b class="font-mono">1</b>　ランプが虹色の7灯に</li>
+          <li><b class="font-mono">2</b>　結果は 777。強制 PREMIUM の数字</li>
+          <li><b class="font-mono">3</b>　放射線が回り、流星が走る</li>
+          <li><b class="font-mono">4</b>　7図柄ロック。3つの7に LOCK がかかる</li>
+          <li><b class="font-mono">5</b>　役物落下と 777 JACKPOT。実物は8ビート9秒</li>
+        </ol>
+      </figure>
+    </div>
+  </section>
+
+  <section aria-labelledby="howto" class="mt-20 grid gap-8 border-t-2 border-ink pt-10 lg:grid-cols-[16rem_1fr]">
+    <h2 id="howto" class="font-display text-3xl">ドパの出し方</h2>
+    <ol class="grid gap-4 sm:grid-cols-2">
+      <li class="rounded-xl border border-rule bg-white/70 p-5"><p class="font-mono text-xs text-dopa">01</p><p class="mt-1 leading-relaxed">中身は普通の電卓。演出は <b>= の一瞬だけ</b>に載せる。</p></li>
+      <li class="rounded-xl border border-rule bg-white/70 p-5"><p class="font-mono text-xs text-dopa">02</p><p class="mt-1 leading-relaxed">ランクを4段に分ける。上ほど出にくく、派手になる。</p></li>
+      <li class="rounded-xl border border-rule bg-white/70 p-5"><p class="font-mono text-xs text-dopa">03</p><p class="mt-1 leading-relaxed">結果の数字に意味を持たせる。777 は確定、0 は全消灯。</p></li>
+      <li class="rounded-xl border border-rule bg-white/70 p-5"><p class="font-mono text-xs text-dopa">04</p><p class="mt-1 leading-relaxed">パチンコの文法を借りる。先バレ、7図柄ロック、擬似PUSH、シャッター、暗転からの復活。</p></li>
+      <li class="rounded-xl border border-rule bg-white/70 p-5 sm:col-span-2"><p class="font-mono text-xs text-dopa">05</p><p class="mt-1 leading-relaxed">逃げ道も用意する。Reduce Motion に対応（このモックも OS の設定で動きが止まる）。</p></li>
+    </ol>
+  </section>
+</div>
+</main>
+
+<script>
+(function () {
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var KEYS = ['AC', '⌫', '%', '÷', '7', '8', '9', '×', '4', '5', '6', '−', '1', '2', '3', '+', '0', '00', '.', '='];
+  var OPS = '+−×÷';
+  var RAINBOW = ['bg-red-500', 'bg-orange-400', 'bg-yellow-300', 'bg-lime-400', 'bg-cyan-400', 'bg-blue-500', 'bg-fuchsia-500'];
+
+  function keyCls(k) {
+    var base = 'h-10 rounded-xl font-seg text-xl transition active:scale-95 motion-reduce:transition-none ';
+    if (k === '=') return base + 'bg-gold text-pachi shadow-[0_0_18px_#ffcf1a]';
+    if (OPS.indexOf(k) >= 0) return base + 'bg-white/10 text-gold';
+    if (k === 'AC' || k === '⌫' || k === '%') return base + 'bg-white/10 text-sm text-white/70';
+    return base + 'bg-white/[.06] text-white';
+  }
+
+  function shell(live) {
+    var pad = KEYS.map(function (k) {
+      return '<button type="button" data-k="' + k + '" ' + (live ? '' : 'tabindex="-1" disabled ') + 'class="' + keyCls(k) + '">' + k + '</button>';
+    }).join('');
+    return '<div class="absolute left-1/2 top-2 z-40 h-5 w-24 -translate-x-1/2 rounded-full bg-ink"></div>' +
+      '<div class="relative flex h-full flex-col gap-3 px-4 pb-4 pt-9">' +
+      '<div data-lamps class="flex justify-between px-2"></div>' +
+      '<div class="relative h-28 shrink-0 overflow-hidden rounded-2xl bg-black px-4 py-3 text-right ring-1 ring-white/10">' +
+      '<p data-expr-line class="h-4 truncate font-mono text-xs text-white/45"></p>' +
+      '<p data-out-line class="mt-2 truncate font-seg text-5xl leading-none text-white"></p>' +
+      '<div data-fx-disp class="pointer-events-none absolute inset-0"></div></div>' +
+      '<div data-fx-mid class="relative flex flex-1 flex-col items-center justify-center overflow-hidden rounded-2xl"></div>' +
+      '<div class="grid grid-cols-4 gap-2">' + pad + '</div></div>' +
+      '<div data-fx-full class="pointer-events-none absolute inset-0 z-30"></div>';
+  }
+  var MID_DEFAULT = '<p class="font-display text-sm tracking-[.4em] text-white/10">DOPA CALC</p>';
+
+  function lamps(rank) {
+    var out = '';
+    for (var i = 0; i < 7; i++) {
+      var c = 'bg-white/10';
+      if (rank === 'normal' && i === 3) c = 'bg-gold shadow-[0_0_10px_#ffcf1a]';
+      if (rank === 'chance') c = 'bg-neon shadow-[0_0_10px_#2ef2ff] ' + (i % 2 ? 'animate-lamp' : 'animate-lamp-late');
+      if (rank === 'geki') c = 'bg-hot shadow-[0_0_12px_#ff2340] ' + (i % 2 ? 'animate-lamp' : 'animate-lamp-late');
+      if (rank === 'premium') c = RAINBOW[i] + ' shadow-[0_0_12px_rgba(255,255,255,.7)]';
+      out += '<span class="h-3.5 w-3.5 rounded-full ' + c + ' motion-reduce:animate-none"></span>';
+    }
+    return out;
+  }
+
+  function rays(cls) {
+    var g = '';
+    for (var i = 0; i < 18; i++) g += '<polygon points="0,0 -10,-160 10,-160" transform="rotate(' + i * 20 + ')" fill="' + ['#ff2340', '#ffcf1a', '#2ef2ff'][i % 3] + '" opacity=".5"/>';
+    return '<svg aria-hidden="true" viewBox="-100 -100 200 200" class="' + cls + '">' + g + '</svg>';
+  }
+  function bolt(cls) {
+    return '<svg aria-hidden="true" viewBox="0 0 40 100" class="' + cls + '"><path d="M26 0 L6 56 H20 L10 100 L36 36 H22 Z" fill="#fff6a8" stroke="#ffcf1a" stroke-width="2" stroke-linejoin="round"/></svg>';
+  }
+  var RINGS = [0, 1, 2].map(function (i) {
+    return '<span class="absolute h-40 w-40 rounded-full border-2 border-neon animate-ring motion-reduce:animate-none ' + ['', '[animation-delay:.5s]', '[animation-delay:1s]'][i] + '"></span>';
+  }).join('');
+  var MEDAL = '<svg aria-hidden="true" viewBox="0 0 60 60" class="absolute left-3 top-1 h-12 w-12 animate-drop motion-reduce:animate-none"><circle cx="30" cy="30" r="26" fill="#ffcf1a" stroke="#fff6a8" stroke-width="4"/><text x="30" y="40" text-anchor="middle" font-size="28" font-weight="900" fill="#ff2340">D</text></svg>';
+  var METEORS = ['top-[8%] left-[6%] w-24', 'top-[22%] left-[48%] w-16', 'top-[58%] left-[12%] w-20'].map(function (p) {
+    return '<span class="absolute h-0.5 rotate-[28deg] bg-gradient-to-r from-transparent to-white ' + p + '"></span>';
+  }).join('');
+
+  // ランクごとの演出。表示部(disp)・演出領域(mid)・画面全体(full)に差し込む
+  function fx(rank, opt) {
+    opt = opt || {};
+    if (rank === 'normal') return { mid: '<p class="animate-pop font-display text-2xl tracking-widest text-white/80 motion-reduce:animate-none">NORMAL</p>' };
+    if (rank === 'chance') return {
+      disp: '<div class="absolute inset-y-0 left-0 w-1/3 animate-sweep bg-gradient-to-r from-transparent via-neon/50 to-transparent motion-reduce:hidden"></div>',
+      mid: RINGS + '<p class="relative -rotate-6 animate-pop font-display text-5xl text-neon drop-shadow-[0_0_14px_#2ef2ff] motion-reduce:animate-none">CHANCE!</p>'
+    };
+    if (rank === 'geki') {
+      var shut = opt.shutter === 'none' ? '' :
+        '<div class="absolute inset-0 grid place-items-center bg-[repeating-linear-gradient(0deg,#2b2b30_0_10px,#3d3d44_10px_12px)] ' +
+        (opt.shutter === 'anim' ? 'animate-shutter motion-reduce:animate-none' : '-translate-y-[35%]') +
+        '"><span class="mt-8 font-display text-sm tracking-[.5em] text-gold">SHUTTER</span></div>';
+      var push = opt.push ? '<div class="relative mt-3 grid place-items-center"><span class="absolute h-24 w-24 rounded-full bg-hot/50 blur-md animate-lamp motion-reduce:animate-none"></span>' +
+        '<button type="button" data-push class="pointer-events-auto relative h-20 w-20 rounded-full bg-gradient-to-b from-hot to-red-900 font-display text-lg text-white ring-4 ring-gold shadow-[inset_0_-6px_0_rgba(0,0,0,.35)] active:translate-y-0.5">PUSH</button></div>' : '';
+      return {
+        full: '<div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(255,35,64,.45),transparent_65%)]"></div>',
+        disp: shut,
+        mid: bolt('absolute left-2 top-2 h-24 -rotate-12') + bolt('absolute right-3 top-6 h-20 rotate-12') +
+          '<p class="relative animate-pop font-display text-6xl text-gold [-webkit-text-stroke:2px_#ff2340] drop-shadow-[0_4px_0_#000] motion-reduce:animate-none">激熱</p>' + push
+      };
+    }
+    if (rank === 'premium') return {
+      full: (opt.flash ? '<div class="absolute inset-0 z-10 bg-white animate-flash motion-reduce:hidden"></div>' : '') + METEORS,
+      disp: '<span class="absolute left-3 top-2 rounded bg-gold px-1.5 font-mono text-[10px] font-bold text-pachi">PREMIUM</span>',
+      mid: rays('absolute h-[170%] w-[170%] animate-rays motion-reduce:animate-none') + MEDAL +
+        '<div class="relative flex gap-2">' + [0, 1, 2].map(function () {
+          return '<div class="relative grid h-20 w-16 place-items-center rounded-lg bg-white ring-4 ring-gold"><span class="font-display text-5xl text-hot">7</span>' +
+            '<span class="absolute -bottom-2 -right-2 rounded bg-pachi px-1 font-mono text-[9px] font-bold text-gold ring-1 ring-gold">LOCK</span></div>';
+        }).join('') + '</div>' +
+        '<p class="relative mt-4 animate-pop rounded-md bg-pachi/80 px-3 font-display text-2xl text-gold drop-shadow-[0_0_10px_#ffcf1a] motion-reduce:animate-none">777 JACKPOT</p>'
+    };
+    if (rank === 'dark') return { full: '<div class="absolute inset-0 grid place-items-center bg-black"><span class="font-mono text-xs tracking-[.6em] text-white/30">……</span></div>' };
+    if (rank === 'off') return { full: '<div class="absolute inset-0 grid place-items-center bg-black/90"><p class="font-display text-2xl tracking-[.3em] text-white/25">全消灯</p></div>' };
+    return {};
+  }
+
+  function apply(phone, rank, opt) {
+    var f = fx(rank, opt);
+    $('[data-lamps]', phone).innerHTML = lamps(rank === 'dark' || rank === 'off' ? 'none' : rank);
+    $('[data-fx-disp]', phone).innerHTML = f.disp || '';
+    $('[data-fx-mid]', phone).innerHTML = f.mid || MID_DEFAULT;
+    $('[data-fx-full]', phone).innerHTML = f.full || '';
+  }
+  function setLines(phone, expr, out) {
+    $('[data-expr-line]', phone).textContent = expr;
+    var o = $('[data-out-line]', phone);
+    o.textContent = out;
+    o.classList.toggle('text-5xl', out.length <= 8);
+    o.classList.toggle('text-3xl', out.length > 8);
+  }
+
+  // 静的な3枚と、さわれる1枚を描く
+  document.querySelectorAll('[data-phone]').forEach(function (p) {
+    p.innerHTML = shell(p.hasAttribute('data-live'));
+    setLines(p, p.dataset.expr, p.dataset.out);
+    var r = p.dataset.phone;
+    if (p.hasAttribute('data-live')) apply(p, 'none');
+    else apply(p, r, r === 'geki' ? { push: true, shutter: 'half' } : {});
+  });
+
+  // ---- 計算（× ÷ を先に処理する） ----
+  function evaluate(s) {
+    var t = s.match(/^-?[\d.]+|[+−×÷]|[\d.]+/g);
+    if (!t) return 0;
+    var nums = [parseFloat(t[0])], ops = [];
+    for (var i = 1; i < t.length; i += 2) {
+      var op = t[i], n = parseFloat(t[i + 1]);
+      if (op === '×') nums[nums.length - 1] *= n;
+      else if (op === '÷') nums[nums.length - 1] /= n;
+      else { ops.push(op); nums.push(n); }
+    }
+    var r = nums[0];
+    ops.forEach(function (op, j) { r = op === '+' ? r + nums[j + 1] : r - nums[j + 1]; });
+    return r;
+  }
+  function fmt(n) {
+    if (!isFinite(n)) return 'E';
+    var v = parseFloat(n.toPrecision(12));
+    if (Object.is(v, -0)) v = 0;
+    var s = String(v);
+    return s.length > 12 ? v.toExponential(6) : s;
+  }
+  function rankOf(r) {
+    if (!isFinite(r)) return 'normal';
+    if (r === 0) return 'off';
+    if ([7, 77, 777, 7777, 8192].indexOf(r) >= 0) return 'premium';
+    var s = String(Math.abs(r));
+    if (s.indexOf('7') >= 0) return 'geki';
+    if ((s.length >= 2 && /^(\d)\1+$/.test(s)) || (Number.isInteger(r) && r % 100 === 0)) return 'chance';
+    return 'normal';
+  }
+
+  // ---- さわれる1枚 ----
+  var live = $('[data-live]');
+  var expr = '', justEval = false, timers = [];
+  function later(ms, fn) { timers.push(setTimeout(fn, ms)); }
+  function reset() { timers.forEach(clearTimeout); timers = []; apply(live, 'none'); }
+
+  function play(rank, line, result) {
+    if (rank !== 'geki' && rank !== 'premium') { setLines(live, line, result); apply(live, rank); return; }
+    setLines(live, line, '???');
+    apply(live, 'geki', { push: true, shutter: 'none' });
+    var done = false;
+    function go() {
+      if (done) return; done = true;
+      apply(live, 'geki', { shutter: 'anim' });
+      later(800, function () {
+        if (rank === 'geki') { apply(live, 'geki', { shutter: 'none' }); setLines(live, line, result); return; }
+        apply(live, 'dark');
+        later(900, function () { setLines(live, line, result); apply(live, 'premium', { flash: true }); });
+      });
+    }
+    $('[data-push]', live).addEventListener('click', go);
+    later(3000, go);
+  }
+
+  function press(k) {
+    reset();
+    var last = expr.slice(-1);
+    if (k === 'AC') expr = '';
+    else if (k === '⌫') expr = justEval ? '' : expr.slice(0, -1);
+    else if (OPS.indexOf(k) >= 0) {
+      if (!expr || expr === '-') return;
+      expr = OPS.indexOf(last) >= 0 ? expr.slice(0, -1) + k : expr + k;
+    } else if (k === '=') {
+      if (!expr) return;
+      var e = OPS.indexOf(last) >= 0 ? expr.slice(0, -1) : expr;
+      var r = evaluate(e), s = fmt(r);
+      expr = (s === 'E' || s.indexOf('e') >= 0) ? '' : s;
+      justEval = true;
+      play(rankOf(parseFloat(s)), e + ' =', s);
+      return;
+    } else if (k === '%') {
+      var m = expr.match(/(^-)?[\d.]+$/);
+      if (m) expr = expr.slice(0, m.index) + fmt(parseFloat(m[0]) / 100);
+    } else {
+      if (justEval) expr = '';
+      var cur = (expr.match(/[\d.]*$/) || [''])[0];
+      if (k === '.' && cur.indexOf('.') >= 0) return;
+      if (expr.length >= 15) return;
+      expr += (k === '.' && !cur) ? '0.' : k;
+    }
+    justEval = false;
+    setLines(live, '', expr || '0');
+  }
+  live.addEventListener('click', function (ev) {
+    var b = ev.target.closest('[data-k]');
+    if (b) press(b.dataset.k);
+  });
+})();
+</script>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

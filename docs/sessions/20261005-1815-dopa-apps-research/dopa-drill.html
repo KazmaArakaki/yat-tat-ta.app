@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ドパドリル 再現モック</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=M+PLUS+Rounded+1c:wght@500;800&family=Zen+Kaku+Gothic+New:wght@400;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: '#E5337A', 'dopa-soft': '#FFE6F0', 'dopa-pale': '#FFF3E4',
+        kichi: '#FF97BF', cream: '#FFF3E4', ear: '#FFE6F0', foot: '#2F79F7',
+        miss: '#8B5CF6', gold: '#F5B800', night: '#1A1033'
+      },
+      fontFamily: {
+        display: ['"Dela Gothic One"', 'sans-serif'],
+        round: ['"M PLUS Rounded 1c"', 'sans-serif'],
+        sans: ['"Zen Kaku Gothic New"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: {
+        fall: { '0%': { transform: 'translateY(-30px) rotate(0deg)' }, '100%': { transform: 'translateY(360px) rotate(540deg)' } },
+        twinkle: { '0%,100%': { opacity: '.25', transform: 'scale(.8)' }, '50%': { opacity: '1', transform: 'scale(1.15)' } },
+        pop: { '0%': { transform: 'scale(.3)', opacity: '0' }, '60%': { transform: 'scale(1.15)', opacity: '1' }, '100%': { transform: 'scale(1)' } },
+        burst: { '0%': { transform: 'scale(.1)', opacity: '1' }, '75%': { opacity: '1' }, '100%': { transform: 'scale(1.3)', opacity: '0' } },
+        shake: { '0%,100%': { transform: 'translate(0,0)' }, '25%': { transform: 'translate(-2px,1px) rotate(-.4deg)' }, '75%': { transform: 'translate(2px,-1px) rotate(.4deg)' } },
+        bob: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-6px)' } },
+        bulbs: { '0%,49%': { opacity: '1' }, '50%,100%': { opacity: '.3' } },
+        cheer: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-5px)' } },
+        coin: { '0%': { transform: 'translateY(-30px) rotateY(0deg)' }, '100%': { transform: 'translateY(360px) rotateY(720deg)' } },
+        spin: { to: { transform: 'rotate(360deg)' } }
+      },
+      animation: {
+        fall: 'fall 2.6s linear infinite', twinkle: 'twinkle 1.4s ease-in-out infinite',
+        pop: 'pop .45s ease-out both', burst: 'burst 1.8s ease-out infinite',
+        shake: 'shake .6s ease-in-out infinite', bob: 'bob 1.3s ease-in-out infinite',
+        bulbs: 'bulbs 1s steps(1) infinite', cheer: 'cheer .55s ease-in-out infinite',
+        coin: 'coin 2.2s linear infinite', spinslow: 'spin 9s linear infinite'
+      }
+    }
+  }
+}
+</script>
+</head>
+<body class="bg-paper font-sans text-ink antialiased">
+
+<!-- ドパキチ：ピンクの丸い体・クリームの顔と腹・青い足 -->
+<svg class="hidden" aria-hidden="true">
+  <symbol id="dopakichi" viewBox="0 0 120 120">
+    <ellipse cx="34" cy="26" rx="13" ry="17" fill="#FF97BF" stroke="#111" stroke-width="3"/>
+    <ellipse cx="86" cy="26" rx="13" ry="17" fill="#FF97BF" stroke="#111" stroke-width="3"/>
+    <ellipse cx="34" cy="28" rx="6" ry="9" fill="#FFE6F0"/>
+    <ellipse cx="86" cy="28" rx="6" ry="9" fill="#FFE6F0"/>
+    <ellipse cx="42" cy="106" rx="14" ry="8" fill="#2F79F7" stroke="#111" stroke-width="3"/>
+    <ellipse cx="78" cy="106" rx="14" ry="8" fill="#2F79F7" stroke="#111" stroke-width="3"/>
+    <circle cx="60" cy="66" r="42" fill="#FF97BF" stroke="#111" stroke-width="3"/>
+    <ellipse cx="60" cy="60" rx="29" ry="22" fill="#FFF3E4" stroke="#111" stroke-width="2.5"/>
+    <ellipse cx="60" cy="92" rx="17" ry="11" fill="#FFF3E4"/>
+    <circle cx="49" cy="57" r="4.5" fill="#111"/><circle cx="71" cy="57" r="4.5" fill="#111"/>
+    <circle cx="50.5" cy="55.5" r="1.6" fill="#fff"/><circle cx="72.5" cy="55.5" r="1.6" fill="#fff"/>
+    <ellipse cx="40" cy="67" rx="5" ry="3" fill="#FF97BF" opacity=".8"/>
+    <ellipse cx="80" cy="67" rx="5" ry="3" fill="#FF97BF" opacity=".8"/>
+    <path d="M53 66 Q60 73 67 66" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="hanamaru" viewBox="0 0 100 100">
+    <path d="M50 8 C75 8 92 26 90 50 C88 76 66 92 44 90 C22 88 10 68 14 46 C18 26 34 18 52 20 C70 22 80 40 76 56 C72 72 54 78 42 70 C32 63 34 48 46 44" fill="none" stroke="#E5243B" stroke-width="5" stroke-linecap="round"/>
+    <g fill="#E5243B"><circle cx="50" cy="4" r="5"/><circle cx="94" cy="44" r="5"/><circle cx="72" cy="92" r="5"/><circle cx="20" cy="88" r="5"/><circle cx="6" cy="40" r="5"/></g>
+  </symbol>
+  <symbol id="firework" viewBox="0 0 100 100">
+    <g stroke-width="4" stroke-linecap="round">
+      <path d="M50 50 L50 6 M50 50 L50 94 M50 50 L6 50 M50 50 L94 50" stroke="#FFD84D"/>
+      <path d="M50 50 L19 19 M50 50 L81 81 M50 50 L81 19 M50 50 L19 81" stroke="#FF6FB0"/>
+    </g>
+    <g fill="#fff"><circle cx="50" cy="6" r="3"/><circle cx="94" cy="50" r="3"/><circle cx="50" cy="94" r="3"/><circle cx="6" cy="50" r="3"/></g>
+  </symbol>
+  <symbol id="fan" viewBox="0 0 40 50">
+    <circle cx="20" cy="14" r="10" fill="currentColor"/>
+    <path d="M4 50 Q4 26 20 26 Q36 26 36 50Z" fill="currentColor"/>
+    <path d="M30 26 L38 4" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+<main class="min-h-screen bg-[radial-gradient(#EADFD2_1px,transparent_1px)] bg-[length:18px_18px]">
+<div class="mx-auto max-w-6xl px-4 py-8 sm:px-8">
+
+  <nav class="mb-6 font-mono text-xs text-mute">
+    <a href="index.html" class="rounded px-1 py-0.5 hover:bg-dopa-pale hover:text-ink">← 調査レポートへ戻る</a>
+    <span class="mx-1">/</span><span>ドパドリル</span>
+  </nav>
+
+  <header class="grid gap-6 border-b-2 border-ink pb-8 md:grid-cols-[1fr_auto] md:items-end">
+    <div>
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-dopa">Case 01 / 算数ドリル</p>
+      <h1 class="mt-2 font-display text-5xl leading-tight sm:text-6xl">ドパドリル</h1>
+      <p class="mt-4 max-w-2xl text-lg font-bold leading-relaxed">正解するたびに「ドパ」が貯まり、祭りが大きくなっていく算数ドリル。流行の起点になった。</p>
+      <p class="mt-3 inline-block rounded border border-dashed border-mute bg-white/70 px-3 py-1.5 text-sm text-mute">公開仕様をもとにした再現モック。実際のスクリーンショットではない。</p>
+    </div>
+    <svg viewBox="0 0 120 120" class="size-28 animate-bob motion-reduce:animate-none" role="img" aria-label="ドパキチ"><use href="#dopakichi"/></svg>
+  </header>
+
+  <!-- 演出強度カーブ -->
+  <section class="mt-8 grid gap-6 rounded-2xl border border-rule bg-white p-5 md:grid-cols-[280px_1fr] md:items-center">
+    <svg viewBox="0 0 240 130" class="w-full max-w-[280px]" role="img" aria-label="演出強度Eは問題の進行につれて0.08から1へ加速しながら上がる">
+      <line x1="20" y1="110" x2="225" y2="110" stroke="#1F1A24" stroke-width="1.5"/>
+      <line x1="20" y1="110" x2="20" y2="5" stroke="#1F1A24" stroke-width="1.5"/>
+      <rect x="20" y="5" width="60" height="105" fill="#FFF1F7"/>
+      <rect x="80" y="5" width="80" height="105" fill="#FFE0EE"/>
+      <rect x="160" y="5" width="60" height="105" fill="#FFCCE3"/>
+      <polyline fill="none" stroke="#FF4F9A" stroke-width="3" stroke-linejoin="round" points="20,102 40,97.4 60,90.6 80,82.8 100,74 120,64.6 140,54.7 160,44.1 180,33.2 200,21.8 220,10"/>
+      <circle cx="40" cy="97.4" r="4" fill="#1F1A24"/><circle cx="130" cy="59.6" r="4" fill="#1F1A24"/><circle cx="210" cy="16" r="4" fill="#1F1A24"/>
+      <g font-size="9" fill="#1F1A24" font-family="Zen Kaku Gothic New">
+        <text x="34" y="122">序盤</text><text x="112" y="122">中盤</text><text x="180" y="122">終盤</text>
+        <text x="24" y="16">E</text><text x="24" y="98">0.08</text><text x="196" y="30">1.0</text>
+      </g>
+    </svg>
+    <div>
+      <p class="font-mono text-sm">E = 0.08 + 0.92 × (i / (N−1))<sup>1.3</sup></p>
+      <p class="mt-2 leading-relaxed">i は何問目か、N は全問数。指数 1.3 のせいで、序盤はほとんど動かない。後半で一気に立ち上がる。3枚の画面は、この曲線上の黒丸の位置にあたる。</p>
+    </div>
+  </section>
+
+  <!-- 3枚の画面 -->
+  <section class="mt-10">
+    <h2 class="font-display text-2xl">同じ画面が、進むほど騒がしくなる</h2>
+    <p class="mt-2 text-sm text-mute">1枚目は触れる。テンキーで答えると、コンボに応じて演出が段階的に増える（キーボードの数字キーでも可）。</p>
+
+    <div class="mt-8 flex flex-wrap justify-center gap-x-10 gap-y-12">
+
+      <!-- ① 序盤（インタラクティブ） -->
+      <figure class="w-[330px] max-w-full">
+        <figcaption class="mb-3 flex items-baseline gap-2"><span class="font-display text-xl">序盤</span><span class="text-sm text-mute">触れるデモ</span></figcaption>
+        <div id="d-phone" class="relative h-[680px] overflow-hidden rounded-[44px] border-[10px] border-ink bg-ink shadow-[8px_8px_0_#FF97BF] motion-reduce:animate-none">
+          <div id="d-screen" class="relative flex h-full flex-col bg-white font-round transition-colors duration-500">
+            <div class="flex items-center justify-between px-4 pt-3 text-[11px] font-bold text-mute">
+              <span>🕐 <span id="d-clock">00:00</span></span><span>正解 <b id="d-ok" class="text-ink">0</b>/20</span><span>おしい <b id="d-miss" class="text-miss">0</b></span>
+            </div>
+            <div class="mx-4 mt-2 flex items-center justify-center gap-2 rounded-2xl bg-cream py-3 text-3xl font-extrabold">
+              <span id="d-q">3 + 4 =</span>
+              <span id="d-ans" class="grid h-12 min-w-[64px] place-items-center rounded-xl border-4 border-ink bg-white px-2"></span>
+            </div>
+            <div id="d-stage" class="relative flex-1 overflow-hidden">
+              <div id="fx-stars" class="pointer-events-none absolute inset-0 hidden">
+                <span class="absolute left-[10%] top-[12%] animate-twinkle text-xl text-gold motion-reduce:animate-none">★</span>
+                <span class="absolute right-[12%] top-[20%] animate-twinkle text-2xl text-gold [animation-delay:.5s] motion-reduce:animate-none">★</span>
+                <span class="absolute left-[20%] bottom-[15%] animate-twinkle text-lg text-gold [animation-delay:.9s] motion-reduce:animate-none">★</span>
+              </div>
+              <div id="fx-confetti" class="pointer-events-none absolute inset-0 hidden">
+                <i class="absolute left-[8%] top-0 h-3 w-2 animate-fall bg-dopa motion-reduce:animate-none"></i>
+                <i class="absolute left-[28%] top-0 h-2 w-3 animate-fall bg-foot [animation-delay:.7s] motion-reduce:animate-none"></i>
+                <i class="absolute left-[55%] top-0 h-3 w-2 animate-fall bg-gold [animation-delay:1.3s] motion-reduce:animate-none"></i>
+                <i class="absolute left-[78%] top-0 h-2 w-3 animate-fall bg-kichi [animation-delay:.3s] motion-reduce:animate-none"></i>
+                <i class="absolute left-[90%] top-0 h-3 w-2 animate-fall bg-miss [animation-delay:1.8s] motion-reduce:animate-none"></i>
+              </div>
+              <div id="fx-fire" class="pointer-events-none absolute inset-0 hidden">
+                <svg viewBox="0 0 100 100" class="absolute left-[4%] top-[4%] size-20 animate-burst motion-reduce:animate-none"><use href="#firework"/></svg>
+                <svg viewBox="0 0 100 100" class="absolute right-[4%] top-[14%] size-16 animate-burst [animation-delay:.8s] motion-reduce:animate-none"><use href="#firework"/></svg>
+              </div>
+              <svg id="fx-hana" viewBox="0 0 100 100" class="absolute right-3 top-3 hidden size-16 animate-pop motion-reduce:animate-none"><use href="#hanamaru"/></svg>
+              <div class="absolute inset-x-0 bottom-2 flex flex-col items-center">
+                <p id="d-say" class="mb-1 rounded-full border-2 border-ink bg-white px-3 py-0.5 text-xs font-bold">こたえを いれてね</p>
+                <svg id="d-kichi" viewBox="0 0 120 120" class="size-32 animate-bob motion-reduce:animate-none" role="img" aria-label="ドパキチ"><use href="#dopakichi"/></svg>
+              </div>
+            </div>
+            <div class="px-4">
+              <div class="flex items-end justify-between">
+                <p class="text-sm font-extrabold"><span id="d-combo" class="text-2xl">0</span> コンボ <span id="d-mult" class="ml-1 rounded bg-cream px-1.5 py-0.5 text-xs">ドパ×1.0</span></p>
+                <p id="d-dopa" class="font-extrabold text-dopa">0ドパ</p>
+              </div>
+              <div class="mt-1.5 h-2 overflow-hidden rounded-full bg-rule"><div id="d-bar" class="h-full w-0 rounded-full bg-kichi transition-all duration-300"></div></div>
+            </div>
+            <div id="d-keys" class="grid grid-cols-3 gap-1.5 p-3 pb-5 text-xl font-extrabold">
+              <button data-k="7" class="h-12 rounded-xl bg-cream active:translate-y-0.5">7</button><button data-k="8" class="h-12 rounded-xl bg-cream active:translate-y-0.5">8</button><button data-k="9" class="h-12 rounded-xl bg-cream active:translate-y-0.5">9</button>
+              <button data-k="4" class="h-12 rounded-xl bg-cream active:translate-y-0.5">4</button><button data-k="5" class="h-12 rounded-xl bg-cream active:translate-y-0.5">5</button><button data-k="6" class="h-12 rounded-xl bg-cream active:translate-y-0.5">6</button>
+              <button data-k="1" class="h-12 rounded-xl bg-cream active:translate-y-0.5">1</button><button data-k="2" class="h-12 rounded-xl bg-cream active:translate-y-0.5">2</button><button data-k="3" class="h-12 rounded-xl bg-cream active:translate-y-0.5">3</button>
+              <button data-k="0" class="col-span-2 h-12 rounded-xl bg-cream active:translate-y-0.5">0</button><button data-k="del" class="h-12 rounded-xl bg-ear text-base active:translate-y-0.5">削除</button>
+            </div>
+          </div>
+          <span class="absolute left-[44%] top-[86px] grid size-6 place-items-center rounded-full bg-dopa text-xs font-bold text-white">1</span>
+          <span class="absolute left-3 top-[300px] grid size-6 place-items-center rounded-full bg-dopa text-xs font-bold text-white">2</span>
+          <span class="absolute right-3 top-[418px] grid size-6 place-items-center rounded-full bg-dopa text-xs font-bold text-white">3</span>
+        </div>
+        <button id="d-reset" class="mt-3 rounded-full border-2 border-ink px-4 py-1 text-sm font-bold hover:bg-dopa-pale">リセット</button>
+        <ol class="mt-3 space-y-1.5 text-sm leading-relaxed">
+          <li><b class="text-dopa">1</b> 問題と答え欄。間違えると紫の点線枠になる。減点はない。</li>
+          <li><b class="text-dopa">2</b> ドパキチ。白い背景にこれだけ。演出はまだ素朴。</li>
+          <li><b class="text-dopa">3</b> コンボと倍率。20コンボで「ドパ×2 MAX」。</li>
+        </ol>
+      </figure>
+
+      <!-- ② 中盤 -->
+      <figure class="w-[330px] max-w-full">
+        <figcaption class="mb-3 flex items-baseline gap-2"><span class="font-display text-xl">中盤</span><span class="text-sm text-mute">12問目・12コンボ</span></figcaption>
+        <div class="relative h-[680px] overflow-hidden rounded-[44px] border-[10px] border-ink bg-ink shadow-[8px_8px_0_#FF97BF]">
+          <div class="relative flex h-full flex-col bg-gradient-to-b from-[#FFE3F0] via-[#FFF6D8] to-[#DDF0FF] font-round">
+            <div class="flex items-center justify-between px-4 pt-3 text-[11px] font-bold text-mute"><span>🕐 02:41</span><span>正解 <b class="text-ink">12</b>/20</span><span>おしい <b class="text-miss">1</b></span></div>
+            <div class="mx-4 mt-2 flex items-center justify-center gap-2 rounded-2xl bg-white/80 py-3 text-3xl font-extrabold">
+              <span>8 + 7 =</span><span class="grid h-12 min-w-[64px] place-items-center rounded-xl border-4 border-ink bg-white px-2 text-dopa">15</span>
+            </div>
+            <div class="relative flex-1 overflow-hidden">
+              <i class="absolute left-[10%] top-0 h-3 w-2 animate-fall bg-dopa motion-reduce:animate-none"></i>
+              <i class="absolute left-[32%] top-0 h-2 w-3 animate-fall bg-foot [animation-delay:.9s] motion-reduce:animate-none"></i>
+              <i class="absolute left-[60%] top-0 h-3 w-2 animate-fall bg-gold [animation-delay:1.5s] motion-reduce:animate-none"></i>
+              <i class="absolute left-[85%] top-0 h-2 w-3 animate-fall bg-miss [animation-delay:.4s] motion-reduce:animate-none"></i>
+              <span class="absolute left-[8%] top-[18%] animate-twinkle text-2xl text-gold motion-reduce:animate-none">★</span>
+              <span class="absolute left-[30%] top-[6%] animate-twinkle text-lg text-gold [animation-delay:.6s] motion-reduce:animate-none">★</span>
+              <svg viewBox="0 0 100 100" class="absolute right-3 top-3 size-24 animate-spinslow motion-reduce:animate-none"><use href="#hanamaru"/></svg>
+              <p class="absolute left-4 top-[42%] -rotate-6 font-display text-lg text-dopa">+3,600ドパ</p>
+              <div class="absolute inset-x-0 bottom-2 flex flex-col items-center">
+                <p class="mb-1 rounded-full border-2 border-ink bg-white px-3 py-0.5 text-xs font-bold">せいかい！ 15を はこぶよ</p>
+                <svg viewBox="0 0 120 120" class="size-32 animate-bob motion-reduce:animate-none"><use href="#dopakichi"/></svg>
+              </div>
+            </div>
+            <div class="px-4">
+              <div class="flex items-end justify-between">
+                <p class="text-sm font-extrabold"><span class="text-2xl">12</span> コンボ <span class="ml-1 rounded bg-gold px-1.5 py-0.5 text-xs">ドパ×1.6</span></p>
+                <p class="font-extrabold text-dopa">1.2万ドパ</p>
+              </div>
+              <div class="mt-1.5 h-2 overflow-hidden rounded-full bg-white"><div class="h-full w-[60%] rounded-full bg-kichi"></div></div>
+            </div>
+            <div class="grid grid-cols-3 gap-1.5 p-3 pb-5 text-xl font-extrabold">
+              <span class="grid h-12 place-items-center rounded-xl bg-white/80">7</span><span class="grid h-12 place-items-center rounded-xl bg-white/80">8</span><span class="grid h-12 place-items-center rounded-xl bg-white/80">9</span>
+              <span class="grid h-12 place-items-center rounded-xl bg-white/80">4</span><span class="grid h-12 place-items-center rounded-xl bg-white/80">5</span><span class="grid h-12 place-items-center rounded-xl bg-white/80">6</span>
+              <span class="grid h-12 place-items-center rounded-xl bg-white/80">1</span><span class="grid h-12 place-items-center rounded-xl bg-white/80">2</span><span class="grid h-12 place-items-center rounded-xl bg-white/80">3</span>
+              <span class="col-span-2 grid h-12 place-items-center rounded-xl bg-white/80">0</span><span class="grid h-12 place-items-center rounded-xl bg-ear text-base">削除</span>
+            </div>
+          </div>
+          <span class="absolute left-3 top-[40px] grid size-6 place-items-center rounded-full bg-dopa text-xs font-bold text-white">1</span>
+          <span class="absolute right-[110px] top-[140px] grid size-6 place-items-center rounded-full bg-dopa text-xs font-bold text-white">2</span>
+          <span class="absolute left-3 top-[200px] grid size-6 place-items-center rounded-full bg-dopa text-xs font-bold text-white">3</span>
+          <span class="absolute right-3 top-[404px] grid size-6 place-items-center rounded-full bg-dopa text-xs font-bold text-white">4</span>
+        </div>
+        <ol class="mt-3 space-y-1.5 text-sm leading-relaxed">
+          <li><b class="text-dopa">1</b> 背景が白からグラデーションへ変わる。</li>
+          <li><b class="text-dopa">2</b> はなまるが回る。</li>
+          <li><b class="text-dopa">3</b> 紙吹雪と星が降る。獲得ドパが飛び出す。</li>
+          <li><b class="text-dopa">4</b> 数値が「万」に届く。倍率は1.6倍。</li>
+        </ol>
+      </figure>
+
+      <!-- ③ 終盤（フィーバー） -->
+      <figure class="w-[330px] max-w-full">
+        <figcaption class="mb-3 flex items-baseline gap-2"><span class="font-display text-xl">終盤</span><span class="text-sm text-mute">エクストラ・34コンボ</span></figcaption>
+        <div class="relative h-[680px] animate-shake overflow-hidden rounded-[44px] border-[10px] border-ink bg-ink shadow-[8px_8px_0_#FF97BF] motion-reduce:animate-none">
+          <div class="relative flex h-full flex-col bg-[radial-gradient(circle_at_50%_35%,#4A1F7A,#1A1033_70%)] font-round text-white">
+            <div class="flex justify-between px-3 pt-2 text-gold">
+              <span class="animate-bulbs motion-reduce:animate-none">● ● ● ● ●</span><span class="animate-bulbs [animation-delay:.5s] motion-reduce:animate-none">● ● ● ● ●</span>
+            </div>
+            <div class="flex items-center justify-between px-4 text-[11px] font-bold text-white/70"><span>🕐 04:58</span><span>正解 <b class="text-white">34</b></span><span>♪ 128BPM</span></div>
+            <p class="mx-4 mt-1 -rotate-2 rounded-lg bg-gold py-1 text-center font-display text-lg text-ink">EXTRA FEVER!!</p>
+            <div class="mx-4 mt-2 flex items-center justify-center gap-2 rounded-2xl bg-white/10 py-2 text-3xl font-extrabold ring-2 ring-gold">
+              <span>9 × 6 =</span><span class="grid h-12 min-w-[64px] place-items-center rounded-xl border-4 border-gold bg-night px-2 text-gold">54</span>
+            </div>
+            <div class="relative flex-1 overflow-hidden">
+              <svg viewBox="0 0 100 100" class="absolute left-[2%] top-[2%] size-24 animate-burst motion-reduce:animate-none"><use href="#firework"/></svg>
+              <svg viewBox="0 0 100 100" class="absolute right-[2%] top-[10%] size-20 animate-burst [animation-delay:.7s] motion-reduce:animate-none"><use href="#firework"/></svg>
+              <svg viewBox="0 0 100 100" class="absolute left-[38%] top-0 size-16 animate-burst [animation-delay:1.2s] motion-reduce:animate-none"><use href="#firework"/></svg>
+              <span class="absolute left-[18%] top-0 grid size-5 animate-coin place-items-center rounded-full bg-gold text-[10px] font-bold text-ink motion-reduce:animate-none">ド</span>
+              <span class="absolute left-[50%] top-0 grid size-5 animate-coin place-items-center rounded-full bg-gold text-[10px] font-bold text-ink [animation-delay:.8s] motion-reduce:animate-none">パ</span>
+              <span class="absolute left-[80%] top-0 grid size-5 animate-coin place-items-center rounded-full bg-gold text-[10px] font-bold text-ink [animation-delay:1.5s] motion-reduce:animate-none">ド</span>
+              <svg viewBox="0 0 120 120" class="absolute bottom-10 left-1/2 size-36 -translate-x-1/2"><use href="#dopakichi"/></svg>
+              <div class="absolute inset-x-0 bottom-0 flex justify-around text-[#2B1650]">
+                <svg viewBox="0 0 40 50" class="h-10 w-8 animate-cheer motion-reduce:animate-none"><use href="#fan"/></svg>
+                <svg viewBox="0 0 40 50" class="h-10 w-8 animate-cheer [animation-delay:.2s] motion-reduce:animate-none"><use href="#fan"/></svg>
+                <svg viewBox="0 0 40 50" class="h-10 w-8 animate-cheer [animation-delay:.1s] motion-reduce:animate-none"><use href="#fan"/></svg>
+                <svg viewBox="0 0 40 50" class="h-10 w-8 animate-cheer [animation-delay:.35s] motion-reduce:animate-none"><use href="#fan"/></svg>
+                <svg viewBox="0 0 40 50" class="h-10 w-8 animate-cheer [animation-delay:.15s] motion-reduce:animate-none"><use href="#fan"/></svg>
+              </div>
+            </div>
+            <div class="px-4">
+              <div class="flex items-end justify-between">
+                <p class="text-sm font-extrabold"><span class="text-2xl text-gold">34</span> コンボ <span class="ml-1 rounded bg-dopa px-1.5 py-0.5 text-xs">ドパ×2 MAX</span></p>
+                <p class="font-display text-xl text-gold">3.4億ドパ</p>
+              </div>
+              <div class="mt-1.5 h-2 overflow-hidden rounded-full bg-white/20"><div class="h-full w-[92%] rounded-full bg-gradient-to-r from-kichi via-gold to-foot"></div></div>
+            </div>
+            <div class="grid grid-cols-3 gap-1.5 p-3 pb-2 text-xl font-extrabold text-ink">
+              <span class="grid h-12 place-items-center rounded-xl bg-gold">7</span><span class="grid h-12 place-items-center rounded-xl bg-gold">8</span><span class="grid h-12 place-items-center rounded-xl bg-gold">9</span>
+              <span class="grid h-12 place-items-center rounded-xl bg-gold">4</span><span class="grid h-12 place-items-center rounded-xl bg-gold">5</span><span class="grid h-12 place-items-center rounded-xl bg-gold">6</span>
+              <span class="grid h-12 place-items-center rounded-xl bg-gold">1</span><span class="grid h-12 place-items-center rounded-xl bg-gold">2</span><span class="grid h-12 place-items-center rounded-xl bg-gold">3</span>
+              <span class="col-span-2 grid h-12 place-items-center rounded-xl bg-gold">0</span><span class="grid h-12 place-items-center rounded-xl bg-ear text-base">削除</span>
+            </div>
+            <div class="flex justify-between px-3 pb-2 text-gold">
+              <span class="animate-bulbs [animation-delay:.5s] motion-reduce:animate-none">● ● ● ● ●</span><span class="animate-bulbs motion-reduce:animate-none">● ● ● ● ●</span>
+            </div>
+          </div>
+          <span class="absolute left-1 top-[14px] grid size-6 place-items-center rounded-full bg-gold text-xs font-bold text-ink">1</span>
+          <span class="absolute right-2 top-[70px] grid size-6 place-items-center rounded-full bg-gold text-xs font-bold text-ink">2</span>
+          <span class="absolute left-2 top-[190px] grid size-6 place-items-center rounded-full bg-gold text-xs font-bold text-ink">3</span>
+          <span class="absolute right-2 top-[290px] grid size-6 place-items-center rounded-full bg-gold text-xs font-bold text-ink">4</span>
+          <span class="absolute right-2 top-[392px] grid size-6 place-items-center rounded-full bg-gold text-xs font-bold text-ink">5</span>
+        </div>
+        <ol class="mt-3 space-y-1.5 text-sm leading-relaxed">
+          <li><b class="text-dopa">1</b> 画面の縁に電飾。画面ごと揺れる。</li>
+          <li><b class="text-dopa">2</b> エクストラ突入。BGMは113→128BPMへ速まる。</li>
+          <li><b class="text-dopa">3</b> 花火と、降ってくるドパ硬貨。</li>
+          <li><b class="text-dopa">4</b> 観客が跳ねる。ランキングはなく、観客は演出だけ。</li>
+          <li><b class="text-dopa">5</b> 倍率は「ドパ×2 MAX」で頭打ち。数値は「億」へ。</li>
+        </ol>
+      </figure>
+    </div>
+  </section>
+
+  <section class="mt-14 rounded-2xl border-2 border-ink bg-white p-6">
+    <h2 class="font-display text-2xl">ドパの出し方</h2>
+    <ul class="mt-4 space-y-3 leading-relaxed">
+      <li class="flex gap-3"><span class="font-display text-dopa">01</span><span><b>押した瞬間に返す。</b>ドパキチが入力した数字を運び、正解をその場で祝う。</span></li>
+      <li class="flex gap-3"><span class="font-display text-dopa">02</span><span><b>後半ほど強くする。</b>演出強度 E は指数1.3の曲線。終盤に花火・硬貨・観客が重なる。</span></li>
+      <li class="flex gap-3"><span class="font-display text-dopa">03</span><span><b>数を膨らませる。</b>ドパは内部で対数管理し、表示は「万」「億」。上限は 10<sup>9.08</sup>。</span></li>
+      <li class="flex gap-3"><span class="font-display text-dopa">04</span><span><b>失敗を罰しない。</b>誤答は紫の点線枠だけ。ゲームオーバーはない。</span></li>
+      <li class="flex gap-3"><span class="font-display text-dopa">05</span><span><b>報酬は確定。</b>スロットのような当たり外れはない。正解すれば必ず増える。</span></li>
+    </ul>
+  </section>
+
+  <footer class="mt-10 border-t border-rule pt-6 text-sm">
+    <h2 class="font-mono text-xs uppercase tracking-[0.2em] text-mute">出典</h2>
+    <ul class="mt-2 space-y-1 break-all text-mute">
+      <li><a class="underline hover:text-dopa" href="https://github.com/grmchn/dopa-drill">github.com/grmchn/dopa-drill</a>（MIT ライセンス）</li>
+      <li><a class="underline hover:text-dopa" href="https://github.com/grmchn/dopa-drill/blob/main/docs/SPEC.md">dopa-drill docs/SPEC.md</a>（演出強度・ドパ値・コンボ倍率）</li>
+      <li><a class="underline hover:text-dopa" href="https://dopa-drill.tanosix.com/">dopa-drill.tanosix.com</a>（公開版）</li>
+      <li><a class="underline hover:text-dopa" href="https://x.com/grmchn4ai/status/2103807453406388538">作者 gear machine の公開告知（X）</a></li>
+      <li><a class="underline hover:text-dopa" href="https://github.com/mayu119/product-knowledge/blob/main/references/2026-09-27-dopa-drill.md">第三者による設計分析</a></li>
+    </ul>
+  </footer>
+</div>
+</main>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var st, a, b, buf, t0, timer;
+  var STAGE_BG = ['bg-white', 'bg-gradient-to-b', 'from-[#FFE3F0]', 'via-[#FFF6D8]', 'to-[#DDF0FF]'];
+
+  function fmt(L) {
+    var v = Math.pow(10, L);
+    if (v >= 1e8) return (v / 1e8).toFixed(1) + '億ドパ';
+    if (v >= 1e4) return (v / 1e4).toFixed(1) + '万ドパ';
+    return Math.round(v).toLocaleString() + 'ドパ';
+  }
+  function next() {
+    a = 1 + Math.floor(Math.random() * 9); b = 1 + Math.floor(Math.random() * 9);
+    buf = ''; $('d-q').textContent = a + ' + ' + b + ' =';
+    paintAns(false);
+  }
+  function paintAns(miss) {
+    var el = $('d-ans');
+    el.textContent = buf;
+    el.classList.toggle('border-dashed', miss);
+    el.classList.toggle('border-miss', miss);
+    el.classList.toggle('border-ink', !miss);
+  }
+  function show(id, on) { $(id).classList.toggle('hidden', !on); }
+  function render() {
+    var c = st.combo, m = 1 + Math.min(1, c / 20);
+    $('d-combo').textContent = c;
+    $('d-mult').textContent = c >= 20 ? 'ドパ×2 MAX' : 'ドパ×' + m.toFixed(1);
+    $('d-mult').classList.toggle('bg-dopa', c >= 20);
+    $('d-mult').classList.toggle('text-white', c >= 20);
+    $('d-dopa').textContent = fmt(st.L);
+    $('d-ok').textContent = st.ok; $('d-miss').textContent = st.miss;
+    $('d-bar').className = 'h-full rounded-full transition-all duration-300 ' + (c >= 15 ? 'bg-gradient-to-r from-kichi via-gold to-foot' : 'bg-kichi');
+    $('d-bar').classList.add('w-[' + Math.min(100, st.ok * 5) + '%]');
+    // 段階：3で星、6で背景とはなまる、10で紙吹雪、15で花火と揺れ
+    show('fx-stars', c >= 3);
+    var mid = c >= 6;
+    STAGE_BG.forEach(function (k, i) { $('d-screen').classList.toggle(k, i === 0 ? !mid : mid); });
+    show('fx-hana', mid);
+    show('fx-confetti', c >= 10);
+    show('fx-fire', c >= 15);
+    $('d-phone').classList.toggle('animate-shake', c >= 15);
+  }
+  function judge() {
+    if (buf.length < String(a + b).length) return;
+    if (+buf === a + b) {
+      st.combo++; st.ok++;
+      st.L = Math.min(9.08, st.L + 0.32 * (1 + Math.min(1, st.combo / 20)));
+      $('d-say').textContent = st.combo >= 20 ? 'ドパ×2 MAX！！' : st.combo >= 10 ? st.combo + 'コンボ！すごい！' : 'せいかい！';
+      render(); next();
+    } else {
+      st.combo = 0; st.miss++;
+      $('d-say').textContent = 'おしい！もういっかい';
+      render(); paintAns(true); buf = '';
+    }
+  }
+  function press(k) {
+    if (!t0) { t0 = Date.now(); timer = setInterval(tick, 1000); }
+    if (k === 'del') { buf = buf.slice(0, -1); paintAns(false); return; }
+    if (buf.length >= 2) return;
+    buf += k; paintAns(false); judge();
+  }
+  function tick() {
+    var s = Math.floor((Date.now() - t0) / 1000);
+    $('d-clock').textContent = String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
+  }
+  function reset() {
+    st = { combo: 0, ok: 0, miss: 0, L: 0 };
+    clearInterval(timer); t0 = null; $('d-clock').textContent = '00:00';
+    $('d-say').textContent = 'こたえを いれてね';
+    render(); next();
+  }
+  $('d-keys').addEventListener('click', function (e) {
+    var k = e.target.closest('button'); if (k) press(k.dataset.k);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (/^[0-9]$/.test(e.key)) press(e.key);
+    else if (e.key === 'Backspace') press('del');
+  });
+  $('d-reset').addEventListener('click', reset);
+  reset();
+})();
+</script>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

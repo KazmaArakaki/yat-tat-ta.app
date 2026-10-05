@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>iOS 開発環境の準備</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: { rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } } },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-3xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <a href="../index.html" class="hover:text-dopa hover:underline">issues</a>
+      <span>/</span>
+      <span>開発環境</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight">iOS 開発環境の準備</h1>
+    <div class="mt-4 flex flex-wrap gap-2 font-mono text-xs font-bold">
+      <span class="rounded-full bg-dopa px-3 py-1 text-white">優先度：高</span>
+      <span class="rounded-full border border-mute bg-white px-3 py-1 text-ink">状態：未着手</span>
+    </div>
+  </header>
+
+  <!-- 概要 -->
+  <section id="summary" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916]">
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-dopa">概要</p>
+      <p class="mt-3 font-bold leading-relaxed">
+        次のセッションで、Apple ID の用意と Xcode の設定を開発者と一緒に1ステップずつ進める。<br>
+        ゴールは、空のアプリが開発者の iPhone で起動すること。
+      </p>
+    </div>
+
+    <dl class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <dt class="font-mono text-xs text-mute">優先度が高い理由</dt>
+        <dd class="mt-1 leading-relaxed">手触りの試作を始める前に必須。これが済まないと実機で何も確かめられない。</dd>
+      </div>
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <dt class="font-mono text-xs text-mute">先送りにした理由</dt>
+        <dd class="mt-1 leading-relaxed">作業は開発者の Mac で行う必要があり、2026-10-05 のセッションのコンテナではできない。開発者の希望で次のセッションに回した。</dd>
+      </div>
+    </dl>
+  </section>
+
+  <!-- 手順 -->
+  <section id="steps" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">steps</p>
+    <h2 class="mt-2 font-display text-3xl">手順</h2>
+    <p class="mt-3 text-sm text-mute">見出しだけ。中身は次のセッションで、開発者と確かめながら埋める。</p>
+
+    <ol class="mt-6 flex flex-col gap-2 text-sm">
+      <li><label class="flex items-center gap-3 rounded-xl border border-rule bg-white px-4 py-3"><input type="checkbox" class="h-4 w-4 accent-dopa"><span class="font-mono font-bold text-dopa">1</span>Apple ID の用意</label></li>
+      <li><label class="flex items-center gap-3 rounded-xl border border-rule bg-white px-4 py-3"><input type="checkbox" class="h-4 w-4 accent-dopa"><span class="font-mono font-bold text-dopa">2</span>Mac に Xcode をインストール</label></li>
+      <li><label class="flex items-center gap-3 rounded-xl border border-rule bg-white px-4 py-3"><input type="checkbox" class="h-4 w-4 accent-dopa"><span class="font-mono font-bold text-dopa">3</span>Xcode に Apple ID でサインイン</label></li>
+      <li><label class="flex items-center gap-3 rounded-xl border border-rule bg-white px-4 py-3"><input type="checkbox" class="h-4 w-4 accent-dopa"><span class="font-mono font-bold text-dopa">4</span>iPhone を接続し、デベロッパモードをオン</label></li>
+      <li><label class="flex items-center gap-3 rounded-xl border border-rule bg-white px-4 py-3"><input type="checkbox" class="h-4 w-4 accent-dopa"><span class="font-mono font-bold text-dopa">5</span>Claude Code を Mac 上で動かす準備</label></li>
+      <li><label class="flex items-center gap-3 rounded-xl border border-rule bg-white px-4 py-3"><input type="checkbox" class="h-4 w-4 accent-dopa"><span class="font-mono font-bold text-dopa">6</span>空のアプリを実機に入れて「信頼」</label></li>
+      <li><label class="flex items-center gap-3 rounded-xl border border-rule bg-white px-4 py-3"><input type="checkbox" class="h-4 w-4 accent-dopa"><span class="font-mono font-bold text-dopa">7</span>起動確認</label></li>
+    </ol>
+    <p class="mt-3 text-xs text-mute">チェックは画面上の目印。保存はされない。</p>
+  </section>
+
+  <!-- 関連 -->
+  <section id="related" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">related</p>
+    <h2 class="mt-2 font-display text-3xl">関連</h2>
+    <a href="../../sessions/20261005-1815-dopa-apps-research/index.html#if-we-build" class="group mt-6 block rounded-2xl border-2 border-ink bg-white p-5 transition hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#E5337A]">
+      <p class="font-mono text-xs text-mute">2026-10-05 ドパ〇〇アプリ調査</p>
+      <p class="mt-1 font-display text-xl group-hover:text-dopa">作るなら</p>
+      <p class="mt-2 text-sm leading-relaxed text-ink/80">iPhone 向けに Swift で作ると決めた理由と、Claude と開発者の役割分担。</p>
+    </a>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>
