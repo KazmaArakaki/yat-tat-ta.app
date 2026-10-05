@@ -92,7 +92,7 @@ tailwind.config = {
   <section id="project-yml" class="mt-16">
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">project.yml</p>
     <h2 class="mt-2 font-display text-3xl">設定ファイルの中身</h2>
-    <p class="mt-3 text-sm leading-relaxed text-ink/80">作成時の予定。実物ができたら、そちらが正。</p>
+    <p class="mt-3 text-sm leading-relaxed text-ink/80">2026-10-06 時点の写し。食い違ったら <code class="font-mono text-xs">ios/project.yml</code> が正。iPhone のみ以外の Info.plist と Swift の値は、Xcode 27 の新規 App の初期値に合わせた。</p>
     <pre class="mt-6 overflow-x-auto rounded-2xl bg-ink p-5 font-mono text-xs leading-relaxed text-white">name: YatTatTa
 options:
   deploymentTarget:
@@ -108,12 +108,27 @@ targets:
         DEVELOPMENT_TEAM: K334V22YZ3
         CODE_SIGN_STYLE: Automatic
         GENERATE_INFOPLIST_FILE: YES
+        MARKETING_VERSION: "0.1.0"
+        CURRENT_PROJECT_VERSION: "1"
         <span class="text-gold"># iPhone のみ</span>
         SUPPORTED_PLATFORMS: "iphoneos iphonesimulator"
         TARGETED_DEVICE_FAMILY: "1"
         SUPPORTS_MACCATALYST: NO
         SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO
-        SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD: NO</pre>
+        SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD: NO
+        <span class="text-gold"># Info.plist（Xcode 27 の新規 App と同じ値）</span>
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+        INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: YES
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
+        <span class="text-gold"># Swift（Xcode 27 の新規 App と同じ値）</span>
+        SWIFT_VERSION: "5.0"
+        SWIFT_APPROACHABLE_CONCURRENCY: YES
+        SWIFT_DEFAULT_ACTOR_ISOLATION: MainActor
+        ENABLE_PREVIEWS: YES
+        ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS: YES
+        <span class="text-gold"># アイコンは未作成。XcodeGen の既定 "AppIcon" を外す</span>
+        ASSETCATALOG_COMPILER_APPICON_NAME: ""</pre>
   </section>
 
   <!-- iPhone のみの意味 -->
@@ -158,6 +173,22 @@ targets:
           <p class="mt-1 text-ink/80"><code class="font-mono text-xs">ios/YatTatTa.xcodeproj</code> を Xcode で開き、実行先を iPhone にして ▶。</p></div>
       </li>
     </ol>
+  </section>
+
+  <!-- ハマりどころ -->
+  <section id="troubleshooting" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">troubleshooting</p>
+    <h2 class="mt-2 font-display text-3xl">ハマりどころ</h2>
+    <div class="mt-6 overflow-x-auto rounded-2xl border border-rule bg-white">
+      <table class="w-full min-w-[32rem] text-left text-sm">
+        <thead class="border-b-2 border-ink font-mono text-xs text-mute">
+          <tr><th class="p-3">症状</th><th class="p-3">原因</th><th class="p-3">対処</th></tr>
+        </thead>
+        <tbody class="[&_td]:p-3 [&_td]:align-top [&_tr]:border-b [&_tr]:border-rule">
+          <tr><td><code class="break-all font-mono text-xs">None of the input catalogs contained a matching … app icon set … named "AppIcon"</code></td><td>XcodeGen は既定でアイコン名 AppIcon を設定する。Xcode 27 の雛形の Assets にはアイコンがない</td><td><code class="font-mono text-xs">ASSETCATALOG_COMPILER_APPICON_NAME: ""</code>。アイコンを作ったら名前を入れる</td></tr>
+        </tbody>
+      </table>
+    </div>
   </section>
 
   <!-- 関連 -->

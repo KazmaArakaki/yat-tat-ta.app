@@ -1,0 +1,36 @@
+name: YatTatTa
+options:
+  deploymentTarget:
+    iOS: "26.0"
+targets:
+  YatTatTa:
+    type: application
+    platform: iOS
+    sources: [YatTatTa]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.yat-tat-ta
+        DEVELOPMENT_TEAM: K334V22YZ3
+        CODE_SIGN_STYLE: Automatic
+        GENERATE_INFOPLIST_FILE: YES
+        MARKETING_VERSION: "0.1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        # iPhone のみ
+        SUPPORTED_PLATFORMS: "iphoneos iphonesimulator"
+        TARGETED_DEVICE_FAMILY: "1"
+        SUPPORTS_MACCATALYST: NO
+        SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO
+        SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD: NO
+        # Info.plist（Xcode 27 の新規 App と同じ値）
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+        INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: YES
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
+        # Swift（Xcode 27 の新規 App と同じ値）
+        SWIFT_VERSION: "5.0"
+        SWIFT_APPROACHABLE_CONCURRENCY: YES
+        SWIFT_DEFAULT_ACTOR_ISOLATION: MainActor
+        ENABLE_PREVIEWS: YES
+        ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS: YES
+        # アイコンは未作成。XcodeGen の既定 "AppIcon" を外す
+        ASSETCATALOG_COMPILER_APPICON_NAME: ""

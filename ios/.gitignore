@@ -1,0 +1,3 @@
+# XcodeGen が project.yml から生成する
+*.xcodeproj/
+xcuserdata/
