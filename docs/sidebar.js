@@ -10,6 +10,10 @@
   // セッション一覧（新しい順）。新しいセッションは先頭に足す。
   var sessions = [
     {
+      path: "sessions/20261006-0019-ios-dev-environment-setup/index.html",
+      label: "10/06 iOS 開発環境の準備"
+    },
+    {
       path: "sessions/20261005-1815-dopa-apps-research/index.html",
       label: "10/05 ドパ〇〇アプリ調査",
       children: [
@@ -40,10 +44,17 @@
       items: [{ label: "セッション一覧", path: "sessions/index.html", level: 0 }].concat(sessionItems)
     },
     {
+      label: "DevOps",
+      items: [
+        { label: "開発/運用一覧", path: "devops/index.html", level: 0 },
+        { label: "iOS 開発環境", path: "devops/ios-dev-environment/index.html", level: 1 }
+      ]
+    },
+    {
       label: "Issues",
       items: [
         { label: "課題一覧", path: "issues/index.html", level: 0 },
-        { label: "iOS 開発環境の準備", path: "issues/ios-dev-environment-setup/index.html", level: 1 }
+        { label: "iOS アプリの土台を決める", path: "issues/ios-app-baseline/index.html", level: 1 }
       ]
     }
   ];

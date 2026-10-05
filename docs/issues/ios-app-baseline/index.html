@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>iOS アプリの土台を決める</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: { rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } } },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-3xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <a href="../index.html" class="hover:text-dopa hover:underline">issues</a>
+      <span>/</span>
+      <span>開発環境</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight">iOS アプリの土台を決める</h1>
+    <div class="mt-4 flex flex-wrap gap-2 font-mono text-xs font-bold">
+      <span class="rounded-full bg-dopa px-3 py-1 text-white">優先度：高</span>
+      <span class="rounded-full border border-mute bg-white px-3 py-1 text-ink">状態：未着手</span>
+    </div>
+  </header>
+
+  <!-- 概要 -->
+  <section id="summary" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916]">
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-dopa">概要</p>
+      <p class="mt-3 font-bold leading-relaxed">
+        本番アプリの Xcode プロジェクトを作る前に、4つ決める。<br>
+        このうち (a) は、テスト用アプリがそのままでは iPhone に入らないという形で、もう表に出ている。
+      </p>
+    </div>
+
+    <ol class="mt-6 flex flex-col gap-3 text-sm">
+      <li class="rounded-2xl border border-rule bg-white p-4">
+        <p class="flex items-baseline gap-3"><span class="font-mono font-bold text-dopa">a</span><span class="font-bold">最小対応 iOS バージョン（<a href="../../glossary.html#minimum-deployments" class="text-dopa underline underline-offset-4">Minimum Deployments</a>）</span></p>
+        <p class="mt-1 pl-7 leading-relaxed text-ink/80">Xcode 27 の初期値は 27.0。テスト端末の iPhone 15 Pro は iOS 26.6.1 なので、そのままでは入らない。端末の iOS を上げるか、最小を 26 にするか。</p>
+      </li>
+      <li class="rounded-2xl border border-rule bg-white p-4">
+        <p class="flex items-baseline gap-3"><span class="font-mono font-bold text-dopa">b</span><span class="font-bold">Xcode プロジェクトの置き場所</span></p>
+        <p class="mt-1 pl-7 leading-relaxed text-ink/80">リポジトリのどのディレクトリに置くか。</p>
+      </li>
+      <li class="rounded-2xl border border-rule bg-white p-4">
+        <p class="flex items-baseline gap-3"><span class="font-mono font-bold text-dopa">c</span><span class="font-bold">Bundle Identifier</span></p>
+        <p class="mt-1 pl-7 leading-relaxed text-ink/80">アプリを識別する ID を何にするか。</p>
+      </li>
+      <li class="rounded-2xl border border-rule bg-white p-4">
+        <p class="flex items-baseline gap-3"><span class="font-mono font-bold text-dopa">d</span><span class="font-bold">iPhone 専用に絞る</span></p>
+        <p class="mt-1 pl-7 leading-relaxed text-ink/80">Xcode 27 の新規 App は Mac と iPhone の両対応で作られる。iPhone だけにする設定を入れる。</p>
+      </li>
+    </ol>
+
+    <dl class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <dt class="font-mono text-xs text-mute">優先度が高い理由</dt>
+        <dd class="mt-1 leading-relaxed">アプリを書き始める前に必要。</dd>
+      </div>
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <dt class="font-mono text-xs text-mute">先送りにした理由</dt>
+        <dd class="mt-1 leading-relaxed">2026-10-06 のセッションは、環境が動くことの確認が目的だった。テスト用プロジェクトは捨てる前提。土台はアプリの中身を決めるときに一緒に決めたほうがよい。</dd>
+      </div>
+    </dl>
+  </section>
+
+  <!-- 関連 -->
+  <section id="related" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">related</p>
+    <h2 class="mt-2 font-display text-3xl">関連</h2>
+    <div class="mt-6 flex flex-col gap-3">
+      <a href="../../sessions/20261006-0019-ios-dev-environment-setup/index.html" class="group block rounded-2xl border-2 border-ink bg-white p-5 transition hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#E5337A]">
+        <p class="font-mono text-xs text-mute">2026-10-06 iOS 開発環境の構築</p>
+        <p class="mt-1 font-display text-xl group-hover:text-dopa">この課題が出たセッション</p>
+        <p class="mt-2 text-sm leading-relaxed text-ink/80">最小対応 iOS を 26.0 に下げて実機に入れた経緯。</p>
+      </a>
+      <a href="../../devops/ios-dev-environment/index.html" class="group block rounded-2xl border-2 border-ink bg-white p-5 transition hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#E5337A]">
+        <p class="font-mono text-xs text-mute">devops</p>
+        <p class="mt-1 font-display text-xl group-hover:text-dopa">iOS 開発環境</p>
+        <p class="mt-2 text-sm leading-relaxed text-ink/80">Xcode、署名チーム、実機の準備手順。</p>
+      </a>
+      <a href="../../sessions/20261005-1815-dopa-apps-research/index.html" class="group block rounded-2xl border-2 border-ink bg-white p-5 transition hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#E5337A]">
+        <p class="font-mono text-xs text-mute">2026-10-05 ドパ〇〇アプリ調査</p>
+        <p class="mt-1 font-display text-xl group-hover:text-dopa">調査レポート</p>
+        <p class="mt-2 text-sm leading-relaxed text-ink/80">何を作るかを考える材料。</p>
+      </a>
+    </div>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

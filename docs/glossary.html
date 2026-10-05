@@ -35,7 +35,7 @@ tailwind.config = {
 
   <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">glossary</p>
   <h1 class="mt-2 font-display text-4xl">用語集</h1>
-  <p class="mt-4 text-sm leading-relaxed text-ink/80">調査セッションで出てきた用語。各用語に、説明、会話での使い方、関連する用語、関連する機能を置いています。<br>このプロジェクトにはまだ機能ページがないため、「関連する機能」は調査レポートへのリンクで代えています。</p>
+  <p class="mt-4 text-sm leading-relaxed text-ink/80">セッションで出てきた用語。各用語に、説明、会話での使い方、関連する用語、関連する機能を置いています。<br>このプロジェクトにはまだ機能ページがないため、「関連する機能」は調査レポートへのリンクで代えています。</p>
 
   <nav aria-label="用語一覧" class="mt-8 flex flex-wrap gap-2 text-sm">
     <a href="#dopa-apps" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">ドパ〇〇</a>
@@ -47,6 +47,8 @@ tailwind.config = {
     <a href="#fixed-vs-variable-reward" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">確定報酬と可変報酬</a>
     <a href="#reduced-effects-mode" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">ひかえめモード</a>
     <a href="#vibe-coding" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">バイブコーディング</a>
+    <a href="#developer-team" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">Developer Team</a>
+    <a href="#minimum-deployments" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">Minimum Deployments</a>
   </nav>
 
   <!-- ドパ〇〇 -->
@@ -208,6 +210,42 @@ tailwind.config = {
     <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
       <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#dopa-apps" class="text-dopa underline underline-offset-4">ドパ〇〇</a></p></div>
       <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="sessions/20261005-1815-dopa-apps-research/index.html#why-now" class="text-signal underline underline-offset-4">調査レポート：なぜ流行ったか</a></p></div>
+    </div>
+  </section>
+
+  <!-- Developer Team（デベロッパチーム） -->
+  <section id="developer-team" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#developer-team</p>
+    <h2 class="mt-1 font-display text-2xl">Developer Team（デベロッパチーム）</h2>
+    <p class="mt-3 leading-relaxed">Xcode の Apple Accounts に出る、アプリの署名に使うチーム。有料の Apple Developer Program に登録すると使える。無料の Personal Team でも実機に入れられるが、アプリは7日で失効し、TestFlight や App Store では配布できない。本プロジェクトは開発者個人名義の有料チームで署名する。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>実機に入れるだけなら、無料の Personal Team でも足りますか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>入りますが、7日で起動しなくなります。TestFlight にも App Store にも出せません。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>本プロジェクトはどのチームで署名しますか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>開発者個人名義の、有料登録済みのチームです。iPhone 側で「信頼」を押す操作も要りませんでした。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#minimum-deployments" class="text-dopa underline underline-offset-4">Minimum Deployments</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="devops/ios-dev-environment/index.html" class="text-signal underline underline-offset-4">iOS 開発環境</a></p></div>
+    </div>
+  </section>
+
+  <!-- Minimum Deployments（最小対応 iOS） -->
+  <section id="minimum-deployments" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#minimum-deployments</p>
+    <h2 class="mt-1 font-display text-2xl">Minimum Deployments（最小対応 iOS）</h2>
+    <p class="mt-3 leading-relaxed">アプリが動く最も古い iOS のバージョン。これより古い iOS の端末は、Xcode の実行先で Incompatible と表示される。Xcode 27 で新規プロジェクトを作ると 27.0 が初期値になる。本番アプリの値は未決（課題 ios-app-baseline）。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>iPhone 15 Pro が実行先で Incompatible になっています。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>端末が iOS 26.6.1 で、プロジェクトの最小対応が初期値の 27.0 だからです。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>じゃあ 26.0 に下げれば入りますか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>入ります。テスト用はそれで済ませました。本番アプリをいくつにするかは、まだ決めていません。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#developer-team" class="text-dopa underline underline-offset-4">Developer Team</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="issues/ios-app-baseline/index.html" class="text-signal underline underline-offset-4">課題：iOS アプリの土台を決める</a></p></div>
     </div>
   </section>
 

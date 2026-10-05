@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>iOS 開発環境</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: { rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } } },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-3xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <a href="../index.html" class="hover:text-dopa hover:underline">devops</a>
+      <span>/</span>
+      <span>開発環境</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight">iOS 開発環境</h1>
+    <p class="mt-4 text-sm text-mute">2026-10-06 時点。環境を作り直すとき、ビルドや実機で詰まったときに開く。</p>
+  </header>
+
+  <!-- 構成 -->
+  <section id="structure" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916]">
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-dopa">役割分担</p>
+      <p class="mt-3 font-bold leading-relaxed">
+        コードは Claude が書く。<br>
+        iOS のビルドは Mac でしかできない。Xcode を使う作業は、開発者の Mac 上の Claude Code で行う。
+      </p>
+    </div>
+
+    <div class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <p class="font-mono text-xs text-mute">devcontainer（Linux）</p>
+        <p class="mt-1 leading-relaxed">コードと docs を書く。iOS のビルドはできない。</p>
+      </div>
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <p class="font-mono text-xs text-mute">開発者の Mac</p>
+        <p class="mt-1 leading-relaxed">Xcode でビルドし、iPhone に入れる。</p>
+      </div>
+    </div>
+
+    <dl class="mt-3 grid gap-3 text-sm sm:grid-cols-2">
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <dt class="font-mono text-xs text-mute">共有されるもの</dt>
+        <dd class="mt-1 leading-relaxed"><code class="font-mono text-xs">.claude/skills</code> と <code class="font-mono text-xs">docs</code>。リポジトリ経由で両方に届く。</dd>
+      </div>
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <dt class="font-mono text-xs text-mute">共有されないもの</dt>
+        <dd class="mt-1 leading-relaxed">Claude Code の記憶（<code class="font-mono text-xs">~/.claude/projects</code> 配下）。片方で覚えたことは、もう片方は知らない。残したい決定は docs に書く。</dd>
+      </div>
+    </dl>
+  </section>
+
+  <!-- 現在の環境 -->
+  <section id="current" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">current</p>
+    <h2 class="mt-2 font-display text-3xl">現在の環境</h2>
+    <p class="mt-3 text-sm text-mute">2026-10-06 時点。</p>
+
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full border-t-2 border-ink text-left text-sm">
+        <tbody>
+          <tr class="border-b border-rule"><th class="w-40 py-3 pr-4 font-mono text-xs font-normal text-mute">Xcode</th><td class="py-3">27.0（Build 27A266a）</td></tr>
+          <tr class="border-b border-rule"><th class="py-3 pr-4 font-mono text-xs font-normal text-mute">Claude Code（Mac）</th><td class="py-3">2.1.289</td></tr>
+          <tr class="border-b border-rule"><th class="py-3 pr-4 font-mono text-xs font-normal text-mute">テスト端末</th><td class="py-3">iPhone 15 Pro（iOS 26.6.1）</td></tr>
+          <tr class="border-b border-rule"><th class="py-3 pr-4 font-mono text-xs font-normal text-mute">Mac 側リポジトリ</th><td class="py-3 font-mono text-xs">開発者の作業ディレクトリに clone 済み</td></tr>
+          <tr class="border-b border-rule"><th class="py-3 pr-4 font-mono text-xs font-normal text-mute">署名チーム</th><td class="py-3">開発者個人名義のチーム（<a href="../../glossary.html#developer-team" class="text-signal hover:underline">Developer Team</a>、Role: Admin）</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mt-6 rounded-2xl border border-rule bg-dopa-pale p-4 text-sm leading-relaxed">
+      <p class="font-bold">署名チームは有料登録</p>
+      <p class="mt-1">個人名義で Apple Developer Program に登録している。無料の Personal Team と比べて、次の2点が違う。</p>
+      <ul class="mt-2 list-disc pl-5">
+        <li>実機に入れたアプリが7日で失効しない</li>
+        <li>iPhone で開発元を「信頼」する操作が要らない</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- セットアップ手順 -->
+  <section id="setup" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">setup</p>
+    <h2 class="mt-2 font-display text-3xl">セットアップ手順</h2>
+    <p class="mt-3 text-sm text-mute">Mac を替えたとき、作り直すときはこの順で。Xcode のダウンロード待ちを除けば 30 分ほど。</p>
+
+    <ol class="mt-6 flex flex-col gap-3 text-sm">
+      <li class="rounded-xl border border-rule bg-white px-4 py-3">
+        <p><span class="mr-2 font-mono font-bold text-dopa">1</span>Apple ID で Mac にサインインしておく。システム設定の左上に名前が出ていればよい。</p>
+      </li>
+      <li class="rounded-xl border border-rule bg-white px-4 py-3">
+        <p><span class="mr-2 font-mono font-bold text-dopa">2</span>App Store から Xcode をインストールする。空き容量は 40GB 前後必要。</p>
+        <p class="mt-1 text-ink/80">初回起動で規約に同意し、プラットフォームで iOS を選ぶ。iOS Simulator（約 8GB）は、実機テストだけなら完了を待たなくてよい。</p>
+      </li>
+      <li class="rounded-xl border border-rule bg-white px-4 py-3">
+        <p><span class="mr-2 font-mono font-bold text-dopa">3</span>コマンドラインのツールを Xcode に向ける。</p>
+<pre class="mt-2 overflow-x-auto rounded-lg bg-ink p-3 font-mono text-xs text-paper"><code>sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+xcode-select -p &amp;&amp; xcodebuild -version</code></pre>
+      </li>
+      <li class="rounded-xl border border-rule bg-white px-4 py-3">
+        <p><span class="mr-2 font-mono font-bold text-dopa">4</span>Xcode → Settings（⌘,）→ Apple Accounts で Apple ID を追加する。チームが表示されれば OK。</p>
+      </li>
+      <li class="rounded-xl border border-rule bg-white px-4 py-3">
+        <p><span class="mr-2 font-mono font-bold text-dopa">5</span>iPhone を USB で繋ぎ、「このコンピュータを信頼」を選ぶ。</p>
+        <p class="mt-1 text-ink/80">iPhone の 設定 → プライバシーとセキュリティ → デベロッパモード をオン。オフだった場合は再起動が入る。</p>
+<pre class="mt-2 overflow-x-auto rounded-lg bg-ink p-3 font-mono text-xs text-paper"><code>xcrun devicectl list devices</code></pre>
+        <p class="mt-1 text-ink/80">State が <code class="font-mono text-xs">connected</code> なら繋がっている。</p>
+      </li>
+      <li class="rounded-xl border border-rule bg-white px-4 py-3">
+        <p><span class="mr-2 font-mono font-bold text-dopa">6</span>Mac の Claude Code を確かめ、リポジトリで起動する。</p>
+<pre class="mt-2 overflow-x-auto rounded-lg bg-ink p-3 font-mono text-xs text-paper"><code>claude --version
+cd &lt;Mac 側の yat-tat-ta リポジトリ&gt;
+claude</code></pre>
+      </li>
+      <li class="rounded-xl border border-rule bg-white px-4 py-3">
+        <p><span class="mr-2 font-mono font-bold text-dopa">7</span>動作確認。Xcode で新規 App を作り、Signing &amp; Capabilities の Team を設定する。実行先を iPhone にして ▶。</p>
+        <p class="mt-1 text-ink/80">iPhone でアプリが起動すれば完了。</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ハマりどころ -->
+  <section id="troubleshooting" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">troubleshooting</p>
+    <h2 class="mt-2 font-display text-3xl">ハマりどころ</h2>
+    <p class="mt-3 text-sm text-mute">2026-10-06 の構築で実際に出たもの。</p>
+
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full min-w-[40rem] border-t-2 border-ink text-left text-sm">
+        <thead>
+          <tr class="border-b border-ink font-mono text-xs text-mute">
+            <th class="py-2 pr-4 font-normal">症状</th>
+            <th class="py-2 pr-4 font-normal">原因</th>
+            <th class="py-2 font-normal">対処</th>
+          </tr>
+        </thead>
+        <tbody class="align-top">
+          <tr class="border-b border-rule">
+            <td class="py-3 pr-4"><code class="break-all font-mono text-xs">xcode-select: error: tool 'xcodebuild' requires Xcode, but active developer directory '/Library/Developer/CommandLineTools' is a command line tools instance</code></td>
+            <td class="py-3 pr-4">Command Line Tools が選ばれている</td>
+            <td class="py-3"><a href="#setup" class="text-signal hover:underline">手順 3</a> のコマンドを実行</td>
+          </tr>
+          <tr class="border-b border-rule">
+            <td class="py-3 pr-4">実行先の一覧で iPhone が Incompatible「OS version lower than…」</td>
+            <td class="py-3 pr-4">Xcode 27 の新規プロジェクトは <a href="../../glossary.html#minimum-deployments" class="text-signal hover:underline">Minimum Deployments</a> の iOS が 27.0</td>
+            <td class="py-3">General → Minimum Deployments の iOS を端末の iOS 以下にする（今回は 26.0）。または iPhone を iOS 27 に上げる</td>
+          </tr>
+          <tr class="border-b border-rule">
+            <td class="py-3 pr-4">File → New → Project に iOS タブがない</td>
+            <td class="py-3 pr-4">Xcode 27 の新規作成画面は App / Command Line Tool / Package の3つだけ</td>
+            <td class="py-3">App を選ぶ。入力画面なしで Untitled Project（Mac / iPhone 両対応）ができる。名前と Team はあとから設定する</td>
+          </tr>
+          <tr class="border-b border-rule">
+            <td class="py-3 pr-4">実機にアプリを入れられない</td>
+            <td class="py-3 pr-4">Team が None のまま</td>
+            <td class="py-3">Signing &amp; Capabilities で Team を選ぶ</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 関連 -->
+  <section id="related" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">related</p>
+    <h2 class="mt-2 font-display text-3xl">関連</h2>
+    <a href="../../sessions/20261006-0019-ios-dev-environment-setup/index.html" class="group mt-6 block rounded-2xl border-2 border-ink bg-white p-5 transition hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#E5337A]">
+      <p class="font-mono text-xs text-mute">2026-10-06 セッション</p>
+      <p class="mt-1 font-display text-xl group-hover:text-dopa">iOS 開発環境の構築</p>
+      <p class="mt-2 text-sm leading-relaxed text-ink/80">この環境を開発者と1ステップずつ作った記録。</p>
+    </a>
+    <a href="../../issues/ios-app-baseline/index.html" class="group mt-4 block rounded-2xl border-2 border-ink bg-white p-5 transition hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#E5337A]">
+      <p class="font-mono text-xs text-mute">issues</p>
+      <p class="mt-1 font-display text-xl group-hover:text-dopa">iOS アプリの土台</p>
+      <p class="mt-2 text-sm leading-relaxed text-ink/80">プロジェクト設定でまだ決めていないこと。</p>
+    </a>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>
