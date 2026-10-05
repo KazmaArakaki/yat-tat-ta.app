@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+docker exec -itw /workspace yat-tat-ta-app /usr/bin/claude

@@ -1,0 +1,7 @@
+{
+  "name": "yat-tat-ta",
+  "dockerComposeFile": "compose.yaml",
+  "service": "app",
+  "workspaceFolder": "/workspace",
+  "postAttachCommand": "chown -R vscode:vscode /home/vscode/.claude"
+}
