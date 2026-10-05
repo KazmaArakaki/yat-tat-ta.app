@@ -64,6 +64,11 @@ tailwind.config = {
         <dd class="mt-1 text-xs text-mute">ストア公開後は変更不可。</dd>
       </div>
       <div class="rounded-2xl border border-rule bg-white p-4">
+        <dt class="font-mono text-xs text-mute">アプリ名（<a href="../../glossary.html#yat-tat-ta" class="text-dopa underline underline-offset-4">Yat Tat Ta</a>）</dt>
+        <dd class="mt-1 font-display text-lg">Yat Tat Ta</dd>
+        <dd class="mt-1 text-xs text-mute">ホーム画面の名前。全言語で同じ表記にし、言語ごとに訳さない。</dd>
+      </div>
+      <div class="rounded-2xl border border-rule bg-white p-4">
         <dt class="font-mono text-xs text-mute">対応端末</dt>
         <dd class="mt-1 font-display text-lg">iPhone のみ</dd>
       </div>
@@ -85,14 +90,14 @@ tailwind.config = {
     ├── project.yml          <span class="text-gold"># 設定の本体。コミットする</span>
     ├── YatTatTa/            <span class="text-gold"># Swift のソースとアセット</span>
     └── YatTatTa.xcodeproj   <span class="text-white/50"># 生成物。コミットしない</span></pre>
-    <p class="mt-4 text-sm leading-relaxed text-ink/80">ターゲット名 <code class="font-mono text-xs">YatTatTa</code> は仮。ホーム画面のアプリ名は未定（課題 <a href="../../issues/app-display-name/index.html" class="text-signal underline underline-offset-4">app-display-name</a>）。</p>
+    <p class="mt-4 text-sm leading-relaxed text-ink/80">ターゲット名 <code class="font-mono text-xs">YatTatTa</code> は、アプリ名 Yat Tat Ta から空白を抜いた形（Swift のモジュール名に空白とハイフンは使えない）。ホーム画面に出る名前は <code class="font-mono text-xs">INFOPLIST_KEY_CFBundleDisplayName</code> で別に決める（<a href="../../sessions/20261006-0128-app-name/index.html" class="text-signal underline underline-offset-4">2026-10-06 アプリ名を決める</a>）。</p>
   </section>
 
   <!-- project.yml -->
   <section id="project-yml" class="mt-16">
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">project.yml</p>
     <h2 class="mt-2 font-display text-3xl">設定ファイルの中身</h2>
-    <p class="mt-3 text-sm leading-relaxed text-ink/80">2026-10-06 時点の写し。食い違ったら <code class="font-mono text-xs">ios/project.yml</code> が正。iPhone のみ以外の Info.plist と Swift の値は、Xcode 27 の新規 App の初期値に合わせた。</p>
+    <p class="mt-3 text-sm leading-relaxed text-ink/80">2026-10-06 時点の写し。食い違ったら <code class="font-mono text-xs">ios/project.yml</code> が正。iPhone のみとアプリ名以外の Info.plist と Swift の値は、Xcode 27 の新規 App の初期値に合わせた。</p>
     <pre class="mt-6 overflow-x-auto rounded-2xl bg-ink p-5 font-mono text-xs leading-relaxed text-white">name: YatTatTa
 options:
   deploymentTarget:
@@ -110,6 +115,8 @@ targets:
         GENERATE_INFOPLIST_FILE: YES
         MARKETING_VERSION: "0.1.0"
         CURRENT_PROJECT_VERSION: "1"
+        <span class="text-gold"># ホーム画面のアプリ名。全言語で同じ表記</span>
+        INFOPLIST_KEY_CFBundleDisplayName: "Yat Tat Ta"
         <span class="text-gold"># iPhone のみ</span>
         SUPPORTED_PLATFORMS: "iphoneos iphonesimulator"
         TARGETED_DEVICE_FAMILY: "1"

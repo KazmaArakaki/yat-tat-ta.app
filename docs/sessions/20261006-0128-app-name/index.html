@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="session-state" content="done">
+<meta name="state" content="done">
+<title>アプリ名を決める</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: { rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } } },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-4xl">
+
+  <!-- ヘッダー -->
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <time datetime="2026-10-06T01:28">2026-10-06 01:28</time>
+      <span>/</span>
+      <span>設計セッション</span>
+      <span class="rounded-full border border-signal bg-signal/10 px-2.5 py-0.5 font-bold text-ink">状態：done</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">アプリ名</span>を決める</h1>
+  </header>
+
+  <!-- ① 結果 -->
+  <section id="result" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="relative overflow-hidden rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916] sm:p-8">
+      <div class="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-dopa-soft"></div>
+      <p class="relative font-mono text-xs uppercase tracking-[0.2em] text-dopa">結果</p>
+      <p class="relative mt-6 font-display text-5xl tracking-wide sm:text-6xl">Yat Tat Ta</p>
+      <p class="relative mt-2 text-sm text-mute">読みは「やったった」</p>
+      <p class="relative mt-6 text-lg font-bold leading-relaxed sm:text-xl">
+        ホーム画面も App Store も、どの言語でもこの名前にします。<br>
+        <code class="font-mono text-base">ios/project.yml</code> には設定済みです。
+      </p>
+    </div>
+  </section>
+
+  <!-- ② 題材より先に -->
+  <section id="before-subject" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / before subject</p>
+    <h2 class="mt-2 font-display text-3xl">題材より先に決めた</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">前回のセッションでは、名前は題材と一緒に決めるつもりでした。ドリルを作るなら「ドパドリル」、電卓なら「ドパ電卓」。<a href="../../glossary.html#dopa-apps" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパ〇〇</a> の事例は、どれも元の道具の名前を背負っています。題材が決まらないうちは、名前も決めようがないはずでした。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">ところが、名前の材料はもう手元にありました。開発者が取得したドメイン <code class="font-mono text-xs">yat-tat-ta.com</code> と、それを逆さにした <a href="../../glossary.html#bundle-identifier" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">Bundle Identifier</a> <code class="font-mono text-xs">com.yat-tat-ta</code> です。アプリ名をこれにそろえれば、ドメイン、ID、ホーム画面、ストアがすべて一つの名前で通ります。</p>
+
+    <div class="mt-6 grid gap-4 md:grid-cols-2">
+      <div class="rounded-3xl border-2 border-dashed border-mute bg-white p-5">
+        <p class="font-mono text-xs text-mute">前回の想定</p>
+        <p class="mt-1 font-display text-xl">ドパ〇〇</p>
+        <p class="mt-2 text-sm leading-relaxed">道具の名前が入る。題材を変えると名前も変わる。</p>
+      </div>
+      <div class="rounded-3xl border-2 border-dopa bg-white p-5">
+        <p class="font-mono text-xs text-dopa">採用</p>
+        <p class="mt-1 font-display text-xl">Yat Tat Ta</p>
+        <p class="mt-2 text-sm leading-relaxed">道具ではなく、使ったあとの気分の名前。題材が何でも通る。</p>
+      </div>
+    </div>
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">「やったった」は、何かをやり遂げたときの得意げなひとことです。ドパ〇〇が道具にかぶせる快感は、まさにこの瞬間を大きくしたものでした。ドリルでも電卓でも、終わったあとに出る声は同じです。</p>
+  </section>
+
+  <!-- ③ 多言語 -->
+  <section id="romaji" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / romaji</p>
+    <h2 class="mt-2 font-display text-3xl">ひらがなではなく、ローマ字で</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">日本語の名前なら「やったった」と書くのが素直です。それでもローマ字にしたのは、開発者が <a href="../../glossary.html#localization" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">多言語展開</a> を考えているからです。ひらがなは、日本語を読めない人には模様にしか見えません。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">iOS では、アプリ名も言語ごとに切り替えられます。日本では「やったった」、ほかの国では「Yat Tat Ta」と出し分けることもできました。今回はそうせず、全言語で同じ表記にしました。名前が国ごとに違うと、同じアプリだと分かりにくくなるからです。</p>
+    <ul class="mt-6 flex flex-col gap-2 text-sm leading-relaxed">
+      <li class="border-l-4 border-rule pl-3">3語に区切ると「ヤッ・タッ・タ」の拍が見えます。ドメインのハイフンと同じ位置です。</li>
+      <li class="border-l-4 border-rule pl-3">空白込みで10文字。ホーム画面のアイコン下でも省略されずに収まる長さのはずです（実機で確認する）。</li>
+    </ul>
+  </section>
+
+  <!-- ④ どこに出るか -->
+  <section id="where" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / where</p>
+    <h2 class="mt-2 font-display text-3xl">名前が出る場所は4つ</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">「アプリ名」と呼べるものは、iOS では別々の設定に分かれています。今回さわるのは1つだけです。</p>
+    <div class="mt-6 overflow-x-auto rounded-2xl border border-rule bg-white">
+      <table class="w-full min-w-[36rem] text-left text-sm">
+        <thead class="border-b-2 border-ink font-mono text-xs text-mute">
+          <tr><th class="p-3">場所</th><th class="p-3">値</th><th class="p-3">決める所</th><th class="p-3">今回</th></tr>
+        </thead>
+        <tbody class="[&_td]:p-3 [&_td]:align-top [&_tr]:border-b [&_tr]:border-rule">
+          <tr class="bg-dopa-soft"><td class="font-bold">ホーム画面</td><td class="font-mono">Yat Tat Ta</td><td><code class="font-mono text-xs">INFOPLIST_KEY_CFBundleDisplayName</code></td><td class="font-bold text-dopa">設定した</td></tr>
+          <tr><td class="font-bold">App Store</td><td class="font-mono">Yat Tat Ta</td><td>App Store Connect</td><td>登録するときに入れる</td></tr>
+          <tr><td class="font-bold">Bundle Identifier</td><td class="font-mono">com.yat-tat-ta</td><td><code class="font-mono text-xs">PRODUCT_BUNDLE_IDENTIFIER</code></td><td>変えない</td></tr>
+          <tr><td class="font-bold">ターゲット名</td><td class="font-mono">YatTatTa</td><td><code class="font-mono text-xs">project.yml</code> の <code class="font-mono text-xs">name</code></td><td>変えない。仮ではなくなった</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">ターゲット名 <code class="font-mono text-xs">YatTatTa</code> は、前回「仮」としていました。アプリ名から空白を抜いた形になったので、このまま正式とします。</p>
+    <p class="mt-4 rounded-lg border border-dashed border-mute bg-white/60 p-3 text-xs leading-relaxed">App Store の名前は、ほかのアプリと重複できません。2026-10-06 に Web 検索した範囲では、同じ名前の iOS アプリは見つかりませんでした。空いているかどうかが確定するのは、App Store Connect に登録したときです。</p>
+  </section>
+
+  <!-- ⑤ 決めたこと -->
+  <section id="decisions" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / decisions</p>
+    <h2 class="mt-2 font-display text-3xl">決めたこと</h2>
+    <ol class="mt-6 flex flex-col gap-3 text-sm leading-relaxed">
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">01</span>アプリ名は <b>Yat Tat Ta</b>（開発者が決定）。ホーム画面と App Store の両方で使う。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">02</span>アプリ名は言語ごとに訳さない。全言語で同じ表記にする。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">03</span>ターゲット名 <code class="font-mono text-xs">YatTatTa</code> を正式とする。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">04</span>アプリは多言語で展開する。進め方は課題 <a href="../../issues/localization/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">localization</a> で決める。</li>
+    </ol>
+  </section>
+
+  <!-- ⑥ 次にやること -->
+  <section id="next" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / next</p>
+    <h2 class="mt-2 font-display text-3xl">残りは実機での確認</h2>
+    <ol class="mt-6 flex flex-col gap-2 text-sm">
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">✓</span><span>Claude が <code class="font-mono text-xs">ios/project.yml</code> に <code class="font-mono text-xs">INFOPLIST_KEY_CFBundleDisplayName: "Yat Tat Ta"</code> を足し、<code class="font-mono text-xs">xcodegen generate</code> とシミュレーター向けビルドを通す</span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-mute">2</span><span>開発者が iPhone 15 Pro に入れ、ホーム画面に「Yat Tat Ta」が省略されずに出るか確かめる</span></li>
+    </ol>
+  </section>
+
+  <!-- ⑦ 先送り -->
+  <section id="deferred" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">07 / deferred</p>
+    <h2 class="mt-2 font-display text-3xl">先送りにしたこと</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-xl bg-paper p-4 leading-relaxed ring-1 ring-rule">
+        <p class="font-bold">多言語展開の進め方</p>
+        <p class="mt-1 text-ink/80">対応する言語、画面の文言の持ち方、ストアの説明文。画面の文言がまだ1つもないので、決めるのは文言を書き始める前でいい。課題 <a href="../../issues/localization/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">localization</a>。</p>
+      </li>
+      <li class="rounded-xl bg-paper p-4 leading-relaxed ring-1 ring-rule">
+        <p class="font-bold">App Store での名前の確保</p>
+        <p class="mt-1 text-ink/80">Apple Developer Program に入るまで App Store Connect に登録できない。登録したときに空きを確かめる。</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ⑧ 関連 -->
+  <section id="links" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">08 / links</p>
+    <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">完了した課題</p><a href="../../issues/app-display-name/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">app-display-name</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">新しい課題</p><a href="../../issues/localization/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">localization</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><a href="../../glossary.html#yat-tat-ta" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">Yat Tat Ta</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">設定値</p><a href="../../devops/ios-project/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">iOS プロジェクトの設定</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">前回のセッション</p><a href="../20261006-0059-ios-app-baseline/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">iOS アプリの土台を決める</a></li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

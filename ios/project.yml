@@ -15,6 +15,8 @@ targets:
         GENERATE_INFOPLIST_FILE: YES
         MARKETING_VERSION: "0.1.0"
         CURRENT_PROJECT_VERSION: "1"
+        # ホーム画面のアプリ名。全言語で同じ表記
+        INFOPLIST_KEY_CFBundleDisplayName: "Yat Tat Ta"
         # iPhone のみ
         SUPPORTED_PLATFORMS: "iphoneos iphonesimulator"
         TARGETED_DEVICE_FAMILY: "1"

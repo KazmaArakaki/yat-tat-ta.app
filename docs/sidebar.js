@@ -10,6 +10,10 @@
   // セッション一覧（新しい順）。新しいセッションは先頭に足す。
   var sessions = [
     {
+      path: "sessions/20261006-0128-app-name/index.html",
+      label: "10/06 アプリ名を決める"
+    },
+    {
       path: "sessions/20261006-0059-ios-app-baseline/index.html",
       label: "10/06 iOS アプリの土台を決める"
     },
@@ -59,7 +63,7 @@
       label: "Issues",
       items: [
         { label: "課題一覧", path: "issues/index.html", level: 0 },
-        { label: "アプリ名を決める", path: "issues/app-display-name/index.html", level: 1 }
+        { label: "多言語展開の進め方", path: "issues/localization/index.html", level: 1 }
       ]
     }
   ];

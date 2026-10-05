@@ -38,6 +38,7 @@ tailwind.config = {
   <p class="mt-4 text-sm leading-relaxed text-ink/80">セッションで出てきた用語。各用語に、説明、会話での使い方、関連する用語、関連する機能を置いています。<br>このプロジェクトにはまだ機能ページがないため、「関連する機能」は調査レポートへのリンクで代えています。</p>
 
   <nav aria-label="用語一覧" class="mt-8 flex flex-wrap gap-2 text-sm">
+    <a href="#yat-tat-ta" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">Yat Tat Ta</a>
     <a href="#dopa-apps" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">ドパ〇〇</a>
     <a href="#dopagaki" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">ドパガキ</a>
     <a href="#dopa-value" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">ドパ値</a>
@@ -51,7 +52,26 @@ tailwind.config = {
     <a href="#minimum-deployments" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">Minimum Deployments</a>
     <a href="#bundle-identifier" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">Bundle Identifier</a>
     <a href="#xcodegen" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">XcodeGen</a>
+    <a href="#localization" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">多言語展開</a>
   </nav>
+
+  <!-- Yat Tat Ta -->
+  <section id="yat-tat-ta" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#yat-tat-ta</p>
+    <h2 class="mt-1 font-display text-2xl">Yat Tat Ta（やったった）</h2>
+    <p class="mt-3 leading-relaxed">本プロジェクトのアプリ名。読みは「やったった」で、何かをやり遂げたときの得意げなひとこと。ホーム画面と App Store の両方で使い、全言語で同じ表記にする。開発者が取得したドメイン yat-tat-ta.com、<a href="#bundle-identifier" class="text-dopa underline underline-offset-4">Bundle Identifier</a> <code class="font-mono text-sm">com.yat-tat-ta</code> と同じ名前。空白を抜いた <code class="font-mono text-sm">YatTatTa</code> は Xcode のターゲット名で、利用者の目には触れない。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>題材がまだ決まっていないのに、名前を先に決めてよかったんですか。ドパドリルみたいに、道具の名前を入れるものだと思っていました。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>Yat Tat Ta は道具の名前ではなく、使い終わったときの声なんです。ドリルでも電卓でも、終わったら「やったった」と言えます。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>海外の人には「やったった」の意味は伝わりませんよね。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>意味は伝わらなくても、ローマ字なら読めます。ひらがなだと、読むこと自体ができません。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#bundle-identifier" class="text-dopa underline underline-offset-4">Bundle Identifier</a><a href="#localization" class="text-dopa underline underline-offset-4">多言語展開</a><a href="#dopa-apps" class="text-dopa underline underline-offset-4">ドパ〇〇</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="sessions/20261006-0128-app-name/index.html" class="text-signal underline underline-offset-4">セッション：アプリ名を決める</a><a href="devops/ios-project/index.html" class="text-signal underline underline-offset-4">iOS プロジェクトの設定</a></p></div>
+    </div>
+  </section>
 
   <!-- ドパ〇〇 -->
   <section id="dopa-apps" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
@@ -284,6 +304,24 @@ tailwind.config = {
     <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
       <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#bundle-identifier" class="text-dopa underline underline-offset-4">Bundle Identifier</a><a href="#minimum-deployments" class="text-dopa underline underline-offset-4">Minimum Deployments</a></p></div>
       <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="devops/ios-project/index.html" class="text-signal underline underline-offset-4">iOS プロジェクトの設定</a></p></div>
+    </div>
+  </section>
+
+  <!-- 多言語展開 -->
+  <section id="localization" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#localization</p>
+    <h2 class="mt-1 font-display text-2xl">多言語展開（ローカライズ）</h2>
+    <p class="mt-3 leading-relaxed">アプリを日本語以外の言語でも出すこと。画面の文言、App Store の説明文やスクリーンショットを言語ごとに用意する。iOS ではアプリ名も言語ごとに変えられるが、本プロジェクトではアプリ名 Yat Tat Ta だけは全言語で同じにする。対応する言語や文言の持ち方は未定。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>まだ日本語の画面しか作っていません。翻訳は出す直前でいいですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>翻訳そのものは後でいいです。ただ、文言をコードに直接書いてしまうと、あとで全部拾い直すことになります。文言を書き始める前に、置き場所だけは決めておきたいですね。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>「激熱」みたいな言葉はどうしましょう。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>直訳しても伝わらないので、その国で同じ気分になる言葉を探すことになります。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#yat-tat-ta" class="text-dopa underline underline-offset-4">Yat Tat Ta</a><a href="#kakutei-enshutsu" class="text-dopa underline underline-offset-4">確定演出／煽り演出</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="issues/localization/index.html" class="text-signal underline underline-offset-4">課題：多言語展開の進め方を決める</a><a href="sessions/20261006-0128-app-name/index.html" class="text-signal underline underline-offset-4">セッション：アプリ名を決める</a></p></div>
     </div>
   </section>
 

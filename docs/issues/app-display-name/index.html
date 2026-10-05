@@ -42,17 +42,26 @@ tailwind.config = {
     <h1 class="mt-4 font-display text-4xl leading-tight">アプリ名を決める</h1>
     <div class="mt-4 flex flex-wrap gap-2 font-mono text-xs font-bold">
       <span class="rounded-full bg-gold px-3 py-1 text-ink">優先度：中</span>
-      <span class="rounded-full border border-mute bg-white px-3 py-1 text-ink">状態：未着手</span>
+      <span class="rounded-full bg-ink px-3 py-1 text-white">状態：完了（2026-10-06）</span>
     </div>
   </header>
 
+  <!-- 結果 -->
+  <section id="resolution" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="rounded-3xl border-2 border-dopa bg-dopa-soft p-6">
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-dopa">結果</p>
+      <p class="mt-3 font-display text-3xl">Yat Tat Ta</p>
+      <p class="mt-3 leading-relaxed">ホーム画面も App Store も、全言語でこの名前にした。題材より先に、ドメイン yat-tat-ta.com にそろえて決めた。経緯は <a href="../../sessions/20261006-0128-app-name/index.html" class="text-dopa underline underline-offset-4">2026-10-06 アプリ名を決める</a>。</p>
+    </div>
+  </section>
+
   <!-- 概要 -->
-  <section id="summary" class="animate-rise mt-8 [animation-delay:100ms]">
+  <section id="summary" class="mt-12">
     <div class="rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916]">
       <p class="font-mono text-xs uppercase tracking-[0.2em] text-dopa">概要</p>
       <p class="mt-3 font-bold leading-relaxed">
         ホーム画面と App Store に出るアプリ名が、まだない。<br>
-        いまはターゲット名 <code class="font-mono">YatTatTa</code> が仮の名前として表示される。
+        （2026-10-06 時点）ターゲット名 <code class="font-mono">YatTatTa</code> が仮の名前として表示されていた。
       </p>
     </div>
 
@@ -85,6 +94,11 @@ tailwind.config = {
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">related</p>
     <h2 class="mt-2 font-display text-3xl">関連</h2>
     <div class="mt-6 flex flex-col gap-3">
+      <a href="../../sessions/20261006-0128-app-name/index.html" class="group block rounded-2xl border-2 border-ink bg-white p-5 transition hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#E5337A]">
+        <p class="font-mono text-xs text-mute">2026-10-06 アプリ名を決める</p>
+        <p class="mt-1 font-display text-xl group-hover:text-dopa">この課題を片付けたセッション</p>
+        <p class="mt-2 text-sm leading-relaxed text-ink/80">題材より先に Yat Tat Ta に決めた理由。</p>
+      </a>
       <a href="../../sessions/20261006-0059-ios-app-baseline/index.html" class="group block rounded-2xl border-2 border-ink bg-white p-5 transition hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#E5337A]">
         <p class="font-mono text-xs text-mute">2026-10-06 iOS アプリの土台</p>
         <p class="mt-1 font-display text-xl group-hover:text-dopa">この課題が出たセッション</p>
