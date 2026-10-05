@@ -1,3 +1,20 @@
 #!/usr/bin/env bash
+# Mac 上の Claude Code をリポジトリのルートで起動する。
+# iOS のビルド（Xcode）は Mac でしか動かないため、devcontainer ではなくホストで動かす。
 
-docker exec -itw /workspace yat-tat-ta-app /usr/bin/claude
+set -euo pipefail
+
+bin_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+repo_root="$(dirname "$bin_dir")"
+
+# PATH に .bin が入っていても自分自身を呼ばないよう、.bin を除いて探す。
+host_path="$(printf '%s' "$PATH" | tr ':' '\n' | grep -vxF "$bin_dir" | paste -sd: - || true)"
+claude_bin="$(PATH="$host_path" command -v claude || true)"
+
+if [ -z "$claude_bin" ]; then
+  echo "claude が見つかりません。Mac に Claude Code をインストールしてください。" >&2
+  exit 1
+fi
+
+cd "$repo_root"
+exec "$claude_bin" "$@"
