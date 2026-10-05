@@ -53,6 +53,8 @@ tailwind.config = {
     <a href="#bundle-identifier" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">Bundle Identifier</a>
     <a href="#xcodegen" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">XcodeGen</a>
     <a href="#localization" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">多言語展開</a>
+    <a href="#tezawari" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">手触り</a>
+    <a href="#sync-drift" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">同期ずれ</a>
   </nav>
 
   <!-- Yat Tat Ta -->
@@ -322,6 +324,40 @@ tailwind.config = {
     <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
       <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#yat-tat-ta" class="text-dopa underline underline-offset-4">Yat Tat Ta</a><a href="#kakutei-enshutsu" class="text-dopa underline underline-offset-4">確定演出／煽り演出</a></p></div>
       <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="issues/localization/index.html" class="text-signal underline underline-offset-4">課題：多言語展開の進め方を決める</a><a href="sessions/20261006-0128-app-name/index.html" class="text-signal underline underline-offset-4">セッション：アプリ名を決める</a></p></div>
+    </div>
+  </section>
+
+  <section id="tezawari" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#tezawari</p>
+    <h2 class="mt-1 font-display text-2xl">手触り</h2>
+    <p class="mt-3 leading-relaxed">指が画面に触れてから、音、振動、光が返ってくるまでの体感。本プロジェクトの差別化の本体。調査の段階では、タップ、音、振動、光の4つが<a href="#sync-drift" class="text-dopa underline underline-offset-4">ずれ</a>なくそろうことを売りにするつもりで Swift を選んだ。2026-10-06 の試作で、音を 150ms 遅らせても開発者の指は気づかなかったため、軸を「演出を盛っても止まらないこと」へ置き直した。Web で作られた<a href="#dopa-apps" class="text-dopa underline underline-offset-4">ドパ〇〇</a>の失敗例（ドパ九九）も、ms 単位のずれではなく処理落ちだった。Claude は振動も音の遅れも感じ取れないため、良し悪しは開発者が実機で判断する。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>手触りって、演出が派手かどうかとは違うんですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>違います。派手さは後から盛れます。手触りは、叩いたら必ず返ってくるかどうかです。盛ったせいで返事が途切れたら、手触りは壊れます。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>題材を決める前に試作するのはなぜですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>ドリルでも電卓でも、土台は同じ「叩いたら返ってくる」だからです。ここが気持ちよくなければ、題材を何にしても差別化になりません。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#sync-drift" class="text-dopa underline underline-offset-4">同期ずれ</a><a href="#effect-inflation" class="text-dopa underline underline-offset-4">演出インフレ</a><a href="#dopa-apps" class="text-dopa underline underline-offset-4">ドパ〇〇</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="sessions/20261006-0140-feel-prototype/index.html" class="text-signal underline underline-offset-4">セッション：手触りの試作</a><a href="sessions/20261005-1815-dopa-apps-research/index.html#if-we-build" class="text-signal underline underline-offset-4">調査レポート：作るなら</a></p></div>
+    </div>
+  </section>
+
+  <section id="sync-drift" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#sync-drift</p>
+    <h2 class="mt-1 font-display text-2xl">同期ずれ</h2>
+    <p class="mt-3 leading-relaxed">1回のタップに対する音、振動、光が、別々の時刻に届くこと。原因は経路ごとの遅れの違いで、音は出力バッファ、振動はアクチュエーター、光は画面の書き換え（60Hz なら最大約17ms、120Hz なら約8ms）を待つ。手触りの試作では、音を AVAudioEngine、振動を Core Haptics で別々に鳴らす「A 別々」と、Core Haptics の1つのパターンで両方を鳴らす「B 一体」を比べる。音だけをわざと 0〜150ms 遅らせて、何 ms から気づくかも確かめた。結果は、A と B の違いが分からず、150ms でも気づかなかった（開発者1人、iPhone 15 Pro）。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>画面の「タッチ→発火」が 20ms 前後で出ていれば、同期ずれはないと言えますか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>言えません。あれは iOS がタッチを届けてから、命令を出し終えるまでの時間です。音がスピーカーから出るまで、振動が手に届くまでは、アプリの中からは測れません。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>じゃあ何で判断するんですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>指です。わざと音を遅らせて、気づき始める ms を探しました。150ms でも気づかなかったので、ずれの小ささは売りになりません。気にするべきは処理落ちのほうです。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#tezawari" class="text-dopa underline underline-offset-4">手触り</a><a href="#reduced-effects-mode" class="text-dopa underline underline-offset-4">ひかえめモード</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="sessions/20261006-0140-feel-prototype/index.html#how" class="text-signal underline underline-offset-4">セッション：手触りの試作（しくみ）</a></p></div>
     </div>
   </section>
 

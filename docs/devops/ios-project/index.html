@@ -89,6 +89,8 @@ tailwind.config = {
 └── ios/
     ├── project.yml          <span class="text-gold"># 設定の本体。コミットする</span>
     ├── YatTatTa/            <span class="text-gold"># Swift のソースとアセット</span>
+    │   ├── Info.plist       <span class="text-gold"># INFOPLIST_KEY_ で書けないキーだけ</span>
+    │   └── Prototype/       <span class="text-gold"># 手触りの試作</span>
     └── YatTatTa.xcodeproj   <span class="text-white/50"># 生成物。コミットしない</span></pre>
     <p class="mt-4 text-sm leading-relaxed text-ink/80">ターゲット名 <code class="font-mono text-xs">YatTatTa</code> は、アプリ名 Yat Tat Ta から空白を抜いた形（Swift のモジュール名に空白とハイフンは使えない）。ホーム画面に出る名前は <code class="font-mono text-xs">INFOPLIST_KEY_CFBundleDisplayName</code> で別に決める（<a href="../../sessions/20261006-0128-app-name/index.html" class="text-signal underline underline-offset-4">2026-10-06 アプリ名を決める</a>）。</p>
   </section>
@@ -113,6 +115,8 @@ targets:
         DEVELOPMENT_TEAM: K334V22YZ3
         CODE_SIGN_STYLE: Automatic
         GENERATE_INFOPLIST_FILE: YES
+        <span class="text-gold"># INFOPLIST_KEY_ で書けないキーだけを置く。生成分とマージされる</span>
+        INFOPLIST_FILE: YatTatTa/Info.plist
         MARKETING_VERSION: "0.1.0"
         CURRENT_PROJECT_VERSION: "1"
         <span class="text-gold"># ホーム画面のアプリ名。全言語で同じ表記</span>
@@ -136,6 +140,24 @@ targets:
         ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS: YES
         <span class="text-gold"># アイコンは未作成。XcodeGen の既定 "AppIcon" を外す</span>
         ASSETCATALOG_COMPILER_APPICON_NAME: ""</pre>
+  </section>
+
+  <!-- Info.plist -->
+  <section id="info-plist" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">info.plist</p>
+    <h2 class="mt-2 font-display text-3xl">Info.plist に書く値</h2>
+    <p class="mt-3 text-sm leading-relaxed text-ink/80">Info.plist の値は、まず <code class="font-mono text-xs">project.yml</code> に <code class="font-mono text-xs">INFOPLIST_KEY_〇〇</code> として書く。Xcode がこの形で受け付けるのは決まったキーだけで、それ以外を書いても黙って無視される。無視されたキーだけを <code class="font-mono text-xs">ios/YatTatTa/Info.plist</code> に書く。ビルド時に、生成された値とマージされる。</p>
+    <div class="mt-6 overflow-x-auto rounded-2xl border border-rule bg-white">
+      <table class="w-full min-w-[30rem] text-left text-sm">
+        <thead class="border-b-2 border-ink font-mono text-xs text-mute">
+          <tr><th class="p-3">キー</th><th class="p-3">値</th><th class="p-3">理由</th></tr>
+        </thead>
+        <tbody class="[&_td]:p-3 [&_td]:align-top [&_tr]:border-b [&_tr]:border-rule">
+          <tr><td class="font-mono text-xs">CADisableMinimumFrameDurationOnPhone</td><td>true</td><td>ProMotion の iPhone で、アニメーションを 60Hz に絞らず 120Hz で描く（<a href="../../sessions/20261006-0140-feel-prototype/index.html#how" class="text-signal underline underline-offset-4">2026-10-06 手触りの試作</a>）</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 rounded-lg border border-dashed border-mute bg-white/60 p-3 text-xs leading-relaxed">効いたかどうかは、ビルドした .app の中の Info.plist で確かめる：<code class="font-mono">plutil -p YatTatTa.app/Info.plist</code></p>
   </section>
 
   <!-- iPhone のみの意味 -->
@@ -207,6 +229,11 @@ targets:
         <p class="font-mono text-xs text-mute">2026-10-06 セッション</p>
         <p class="mt-1 font-display text-xl group-hover:text-dopa">iOS アプリの土台を決める</p>
         <p class="mt-2 text-sm leading-relaxed text-ink/80">それぞれの値をなぜ選んだか。</p>
+      </a>
+      <a href="../../sessions/20261006-0140-feel-prototype/index.html" class="group block rounded-2xl border-2 border-ink bg-white p-5 transition hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#E5337A]">
+        <p class="font-mono text-xs text-mute">2026-10-06 セッション</p>
+        <p class="mt-1 font-display text-xl group-hover:text-dopa">手触りの試作</p>
+        <p class="mt-2 text-sm leading-relaxed text-ink/80">Info.plist を置いた理由（120Hz）。</p>
       </a>
       <a href="../ios-dev-environment/index.html" class="group block rounded-2xl border-2 border-ink bg-white p-5 transition hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#E5337A]">
         <p class="font-mono text-xs text-mute">devops</p>

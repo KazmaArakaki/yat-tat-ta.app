@@ -2,8 +2,8 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        // 題材が決まるまでは、手触りの試作画面を出す
+        FeelPrototypeView()
     }
 }
 

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>演出を盛ったときの処理落ち</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: { rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } } },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-3xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <a href="../index.html" class="hover:text-dopa hover:underline">issues</a>
+      <span>/</span>
+      <span>アプリの中身</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight">演出を盛ったときの処理落ちを確かめる</h1>
+    <div class="mt-4 flex flex-wrap gap-2 font-mono text-xs font-bold">
+      <span class="rounded-full bg-gold px-3 py-1 text-ink">優先度：中</span>
+      <span class="rounded-full border border-mute bg-white px-3 py-1 text-ink">状態：未着手</span>
+    </div>
+  </header>
+
+  <!-- 概要 -->
+  <section id="summary" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916]">
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-dopa">概要</p>
+      <p class="mt-3 font-bold leading-relaxed">
+        <a href="../../sessions/20261006-0140-feel-prototype/index.html#results" class="text-dopa underline underline-offset-4">手触りの試作</a>で、音を 150ms 遅らせても指は気づかなかった。<br>
+        差別化の軸を「ずれの小ささ」から「演出を盛っても止まらないこと」へ置き直した。その「止まらない」を確かめる。
+      </p>
+    </div>
+
+    <ol class="mt-6 flex flex-col gap-3 text-sm">
+      <li class="rounded-2xl border border-rule bg-white p-4">
+        <p class="flex items-baseline gap-3"><span class="font-mono font-bold text-dopa">a</span><span class="font-bold">何を盛るか</span></p>
+        <p class="mt-1 pl-7 leading-relaxed text-ink/80">花火、粒子、画面の揺れ、BGM と効果音の重なり。<a href="../../glossary.html#effect-inflation" class="text-dopa underline underline-offset-4">演出インフレ</a>の終盤に相当する量。</p>
+      </li>
+      <li class="rounded-2xl border border-rule bg-white p-4">
+        <p class="flex items-baseline gap-3"><span class="font-mono font-bold text-dopa">b</span><span class="font-bold">何を見るか</span></p>
+        <p class="mt-1 pl-7 leading-relaxed text-ink/80">描画が 120Hz を保つか、連打したときに音が欠けないか、「タッチ→発火」が軽い状態の 18〜28ms から伸びないか。</p>
+      </li>
+      <li class="rounded-2xl border border-rule bg-white p-4">
+        <p class="flex items-baseline gap-3"><span class="font-mono font-bold text-dopa">c</span><span class="font-bold">描画の道具</span></p>
+        <p class="mt-1 pl-7 leading-relaxed text-ink/80">いまの Core Animation で足りるか、SpriteKit や Metal が要るか。</p>
+      </li>
+    </ol>
+    <p class="mt-4 text-xs leading-relaxed text-mute">比べる相手はドパ九九の失敗。描画が毎秒3.8回まで落ち、音が詰まって入力が遅れた（<a href="../../sessions/20261005-1815-dopa-apps-research/index.html#cautions" class="underline underline-offset-4">調査レポート：作るときの注意点</a>）。</p>
+
+    <dl class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <dt class="font-mono text-xs text-mute">優先度が中の理由</dt>
+        <dd class="mt-1 leading-relaxed">差別化の軸そのものの確認になる。崩れるなら、描画の道具選びからやり直しになる。</dd>
+      </div>
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <dt class="font-mono text-xs text-mute">先送りにした理由</dt>
+        <dd class="mt-1 leading-relaxed">盛る演出の中身は題材で変わる。ドリルの花火と電卓の煽りでは、重さの出方が違う。題材を決めてから、その題材の一番重い場面で試す。</dd>
+      </div>
+    </dl>
+  </section>
+
+  <!-- 関連 -->
+  <section id="related" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">related</p>
+    <h2 class="mt-2 font-display text-3xl">関連</h2>
+    <div class="mt-6 flex flex-col gap-3">
+      <a href="../../sessions/20261006-0140-feel-prototype/index.html#results" class="group block rounded-2xl border-2 border-ink bg-white p-5 transition hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#E5337A]">
+        <p class="font-mono text-xs text-mute">2026-10-06 手触りの試作</p>
+        <p class="mt-1 font-display text-xl group-hover:text-dopa">この課題が出たセッション</p>
+        <p class="mt-2 text-sm leading-relaxed text-ink/80">150ms のずれに気づかなかった実機の結果と、軸を置き直した経緯。</p>
+      </a>
+    </div>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="session-state" content="done">
+<meta name="state" content="done">
+<title>手触りの試作</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: { rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } } },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+<style>
+  .phone { background: #121012; }
+  .pad { background: #221A1F; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+  .ring { position: absolute; border-radius: 9999px; pointer-events: none; transform: translate(-50%, -50%) scale(.15); animation: ring .32s ease-out forwards; }
+  @keyframes ring { to { transform: translate(-50%, -50%) scale(1); opacity: 0; } }
+  .glow { animation: glow .2s ease-in forwards; }
+  @keyframes glow { to { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .ring, .glow { animation-duration: .01s; } }
+</style>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-4xl">
+
+  <!-- ヘッダー -->
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <time datetime="2026-10-06T01:40">2026-10-06 01:40</time>
+      <span>/</span>
+      <span>試作セッション</span>
+      <span class="rounded-full border border-signal bg-signal/10 px-2.5 py-0.5 font-bold text-ink">状態：done</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">手触り</span>の試作</h1>
+  </header>
+
+  <!-- ① 結果 -->
+  <section id="result" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="relative overflow-hidden rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916] sm:p-8">
+      <div class="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-dopa-soft"></div>
+      <p class="relative font-mono text-xs uppercase tracking-[0.2em] text-dopa">結果</p>
+      <p class="relative mt-5 font-display text-3xl leading-snug sm:text-4xl">150ms ずらしても、<br>指は気づかなかった</p>
+      <p class="relative mt-4 text-lg font-bold leading-relaxed">
+        叩いた感じは「気持ちいい」。音と振動の鳴らし方 A と B の違いも分からなかった。<br>
+        守るべきなのは ms 単位のそろい方ではなく、演出を盛っても止まらないことだと考えを改めた。
+      </p>
+      <p class="relative mt-4 text-sm text-mute">iPhone 15 Pro、開発者1人の判定。詳しくは <a href="#results" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">06 実機での結果</a>。</p>
+    </div>
+  </section>
+
+  <!-- ② 確かめたいこと -->
+  <section id="questions" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / questions</p>
+    <h2 class="mt-2 font-display text-3xl">確かめたいのは3つ</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">前々回の調査で、差別化の本体を「タップ→音→振動→光の4つがずれずにそろう<a href="../../glossary.html#tezawari" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">手触り</a>」に置きました。Swift を選んだのもそのためです。ところが、どれくらいのずれなら人は気づくのか、その数字はまだ誰も手にしていません。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">しかも、Claude には振動も音の遅れも感じ取れません。数字の一部はアプリの中で測れても、最後に決めるのは開発者の指です。だから試作は、指で比べられる形にしました。</p>
+
+    <ol class="mt-6 grid gap-3 text-sm md:grid-cols-3">
+      <li class="rounded-2xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs font-bold text-dopa">Q1</p>
+        <p class="mt-1 font-bold leading-snug">A と B、どちらがそろって感じるか</p>
+        <p class="mt-2 leading-relaxed text-ink/80">音と振動を別々の仕組みで鳴らすか、1つの仕組みでまとめて鳴らすか。</p>
+      </li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs font-bold text-dopa">Q2</p>
+        <p class="mt-1 font-bold leading-snug">音を何 ms 遅らせると気づくか</p>
+        <p class="mt-2 leading-relaxed text-ink/80">気づき始める値が、守るべき<a href="../../glossary.html#sync-drift" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">同期ずれ</a>の上限になる。</p>
+      </li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs font-bold text-dopa">Q3</p>
+        <p class="mt-1 font-bold leading-snug">連打で強くなるのは気持ちいいか</p>
+        <p class="mt-2 leading-relaxed text-ink/80">0.45秒以内に叩き続けると8段階まで上がる。<a href="../../glossary.html#effect-inflation" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">演出インフレ</a>の、ごく小さい味見。</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ③ 画面 -->
+  <section id="screen" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / screen</p>
+    <h2 class="mt-2 font-display text-3xl">画面イメージ</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">起動するとこの画面だけが出ます。左のモックは光だけを再現していて、叩くと輪が広がり、続けて叩くと段階が上がります。音と振動は出ません。</p>
+
+    <div class="mt-8 grid items-start gap-10 md:grid-cols-[300px_1fr]">
+      <!-- モック -->
+      <div class="phone mx-auto w-[300px] rounded-[44px] border-[6px] border-ink p-3 text-[#FAF5ED] shadow-[10px_10px_0_#E5337A]">
+        <div class="mx-auto mb-3 h-5 w-24 rounded-full bg-black"></div>
+        <div class="grid grid-cols-4 gap-1 px-1 font-mono text-[9px] leading-tight">
+          <div><p class="text-[#FAF5ED]/50">段階</p><p id="m-level" class="font-bold">1 / 8</p></div>
+          <div><p class="text-[#FAF5ED]/50">タッチ→発火</p><p id="m-fire" class="font-bold">—</p></div>
+          <div><p class="text-[#FAF5ED]/50">音の出力遅延</p><p class="font-bold">— ms</p></div>
+          <div><p class="text-[#FAF5ED]/50">振動</p><p class="font-bold">動作中</p></div>
+        </div>
+        <div id="m-pad" class="pad relative mt-3 flex h-[300px] cursor-pointer select-none items-center justify-center overflow-hidden rounded-[26px]">
+          <div id="m-glow" class="pointer-events-none absolute inset-0 bg-dopa opacity-0"></div>
+          <span class="pointer-events-none font-display text-3xl text-[#FAF5ED]/25">TAP</span>
+        </div>
+        <div class="mt-3 grid grid-cols-3 gap-1.5 text-center text-xs font-bold">
+          <span class="rounded-full bg-dopa py-1.5">音</span>
+          <span class="rounded-full bg-dopa py-1.5">振動</span>
+          <span class="rounded-full bg-dopa py-1.5">光</span>
+        </div>
+        <div class="mt-2 grid grid-cols-2 rounded-lg bg-white/10 p-0.5 text-center text-[11px]">
+          <span class="rounded-md bg-white/30 py-1 font-bold">A 別々</span>
+          <span class="py-1 text-[#FAF5ED]/70">B 一体</span>
+        </div>
+        <p class="mt-2 font-mono text-[10px]">音をわざと遅らせる&nbsp; 0 ms</p>
+        <div class="mt-1 h-1 rounded-full bg-white/15"><div class="h-1 w-3 rounded-full bg-white"></div></div>
+        <div class="mx-auto mt-4 h-1 w-24 rounded-full bg-white/30"></div>
+      </div>
+
+      <!-- 注釈 -->
+      <ol class="flex flex-col gap-4 text-sm">
+        <li class="border-l-4 border-ink pl-4">
+          <p class="font-bold">上段：計測値</p>
+          <p class="mt-1 leading-relaxed text-ink/80">「タッチ→発火」は、指が触れた時刻から音・振動・光の命令を出し終えるまで。iOS がタッチをアプリに届けるまでの時間も含む（実機で 18〜28ms）。「音の出力遅延」は iOS が申告する出力バッファと出力経路の遅れの合計です。どちらも、手に届くまでの全部ではありません。</p>
+        </li>
+        <li class="border-l-4 border-dopa pl-4">
+          <p class="font-bold">中央：叩く面</p>
+          <p class="mt-1 leading-relaxed text-ink/80">指を離したときではなく、触れたときに鳴ります。複数の指で同時に叩いても、1本ずつ鳴ります。</p>
+        </li>
+        <li class="border-l-4 border-ink pl-4">
+          <p class="font-bold">音・振動・光</p>
+          <p class="mt-1 leading-relaxed text-ink/80">1つずつ切れます。光だけ消して叩くと、音と振動がどれだけ「叩いた感じ」を背負っているかが分かります。</p>
+        </li>
+        <li class="border-l-4 border-ink pl-4">
+          <p class="font-bold">A 別々 ／ B 一体</p>
+          <p class="mt-1 leading-relaxed text-ink/80">Q1 の切り替え。中身は <a href="#how" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">04 しくみ</a>。</p>
+        </li>
+        <li class="border-l-4 border-ink pl-4">
+          <p class="font-bold">音をわざと遅らせる</p>
+          <p class="mt-1 leading-relaxed text-ink/80">Q2 のつまみ。0〜150ms を 10ms 刻みで。振動と光はそのままで、音だけが遅れます。</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ④ しくみ -->
+  <section id="how" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / how</p>
+    <h2 class="mt-2 font-display text-3xl">しくみ</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">調査の段階では、音は AVAudioEngine、振動は Core Haptics と、別々の仕組みで鳴らすつもりでした。それぞれ遅れを抑えやすい道具だからです。ただ、別々の仕組みは、別々の時計で動きます。2つの遅れが同じ大きさだという保証はありません。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">Core Haptics には、振動と一緒に音のファイルを鳴らす機能があります。1つのパターンの中に置けば、同じ時計で並べてくれるはずです。はず、でしかないので、両方を作って切り替えられるようにしました。</p>
+
+    <div class="mt-8 grid gap-4 md:grid-cols-2">
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs font-bold text-dopa">A 別々（既定）</p>
+        <div class="mt-4 flex flex-col gap-2 font-mono text-xs">
+          <div class="rounded-lg bg-ink px-3 py-2 text-paper">touchesBegan</div>
+          <div class="grid grid-cols-3 gap-2 text-center">
+            <div class="rounded-lg border-2 border-signal px-1 py-2">AVAudio<br>PlayerNode</div>
+            <div class="rounded-lg border-2 border-dopa px-1 py-2">CHHaptic<br>PatternPlayer</div>
+            <div class="rounded-lg border-2 border-gold px-1 py-2">CALayer<br>アニメ</div>
+          </div>
+          <div class="grid grid-cols-3 gap-2 text-center text-mute"><span>音</span><span>振動</span><span>光</span></div>
+        </div>
+        <p class="mt-4 text-sm leading-relaxed text-ink/80">音の遅れは IO バッファの長さで決まる。5ms を希望している。</p>
+      </div>
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs font-bold text-dopa">B 一体</p>
+        <div class="mt-4 flex flex-col gap-2 font-mono text-xs">
+          <div class="rounded-lg bg-ink px-3 py-2 text-paper">touchesBegan</div>
+          <div class="grid grid-cols-3 gap-2 text-center">
+            <div class="col-span-2 rounded-lg border-2 border-dopa px-1 py-2">CHHapticPatternPlayer<br><span class="text-mute">振動＋音を1つのパターンに</span></div>
+            <div class="rounded-lg border-2 border-gold px-1 py-2">CALayer<br>アニメ</div>
+          </div>
+          <div class="grid grid-cols-3 gap-2 text-center text-mute"><span class="col-span-2">音・振動</span><span>光</span></div>
+        </div>
+        <p class="mt-4 text-sm leading-relaxed text-ink/80">音は起動時に合成してファイルに書き出し、Core Haptics に登録しておく。</p>
+      </div>
+    </div>
+
+    <h3 class="mt-12 font-bold">ずれを生まないための選択</h3>
+    <p class="mt-2 max-w-2xl text-sm leading-relaxed text-ink/80">どれも、タップの瞬間にやる仕事を減らすか、待ち時間を短くするためのものです。</p>
+    <div class="mt-4 overflow-x-auto rounded-2xl border border-rule bg-white">
+      <table class="w-full min-w-[36rem] text-left text-sm">
+        <thead class="border-b-2 border-ink font-mono text-xs text-mute">
+          <tr><th class="p-3">選んだこと</th><th class="p-3">理由</th></tr>
+        </thead>
+        <tbody class="[&_td]:p-3 [&_td]:align-top [&_tr]:border-b [&_tr]:border-rule">
+          <tr><td class="font-bold">UIKit の <code class="font-mono text-xs">touchesBegan</code> で受ける</td><td>SwiftUI のボタンは指を離したときに反応する。触れた瞬間を、間に何も挟まずに受け取りたい。</td></tr>
+          <tr><td class="font-bold">音は起動時に8段階ぶん合成しておく</td><td>叩くたびに作ると、その分だけ遅れる。外部の音素材も持たない（<a href="../../glossary.html#vibe-coding" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパ〇〇の事例</a>と同じ）。</td></tr>
+          <tr><td class="font-bold">振動のプレイヤーも先に作っておく</td><td>同じ理由。B のパターンだけは、ON/OFF と遅らせ幅を変えたときに作り直す。</td></tr>
+          <tr><td class="font-bold">音のプレイヤーを4つ順番に使う</td><td>1つだと、連打したときに前の音が途中で切れる。</td></tr>
+          <tr><td class="font-bold">画面を 120Hz で描く</td><td>iPhone 15 Pro は 120Hz で描けるが、設定しないとアニメーションは 60Hz に絞られる。光が出るまでの待ちが最大約17ms から約8ms に縮む。</td></tr>
+          <tr><td class="font-bold">面全体の光は弱く、輪は指の位置だけ</td><td>連打で画面全体が強く明滅すると、光過敏の人に負担になる（<a href="../../glossary.html#reduced-effects-mode" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ひかえめモード</a>の考え方）。</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 rounded-lg border border-dashed border-mute bg-white/60 p-3 text-xs leading-relaxed">「音をわざと遅らせる」は、A では音の再生時刻を指定し、B ではパターンの中で音の開始時刻をずらしています。どちらも時刻指定なので、遅らせ幅そのものはぶれません。</p>
+  </section>
+
+  <!-- ⑤ 実機での確かめ方 -->
+  <section id="steps" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / steps</p>
+    <h2 class="mt-2 font-display text-3xl">実機での確かめ方</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">開発者の作業です。全部で15分ほど。音が出るので、イヤホンなしで静かな場所が向いています。2026-10-06 に、この手順で実施しました。</p>
+    <ol class="mt-6 flex flex-col gap-2 text-sm">
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">1</span><span><code class="font-mono text-xs">cd ios &amp;&amp; xcodegen generate</code> を実行し、Xcode で iPhone 15 Pro に入れる（2分）</span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">2</span><span>上段の「振動」が「動作中」になっていることを見る。違えば表示をそのまま Claude に伝える</span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">3</span><span><b>Q1</b>：A と B を切り替えながら、1回ずつゆっくり叩く。そろって感じるほうを選ぶ（5分）</span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">4</span><span><b>Q2</b>：Q1 で選んだほうで、つまみを 0ms から 10ms ずつ上げる。「音が遅れた」と感じた最初の値を覚える（5分）</span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">5</span><span><b>Q3</b>：つまみを 0ms に戻して連打し、気持ちいいかを一言で。上段の「タッチ→発火」と「音の出力遅延」の値も添えて Claude に伝える（3分）</span></li>
+    </ol>
+  </section>
+
+  <!-- ⑥ 実機での結果 -->
+  <section id="results" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / results</p>
+    <h2 class="mt-2 font-display text-3xl">実機での結果</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">数十 ms のずれなら、さすがに気づくだろうと思っていました。音と触覚のずれは、そのあたりから気づく人が多いとされているからです。</p>
+
+    <div class="mt-6 overflow-x-auto rounded-2xl border border-rule bg-white">
+      <table class="w-full min-w-[36rem] text-left text-sm">
+        <thead class="border-b-2 border-ink font-mono text-xs text-mute">
+          <tr><th class="p-3">問い</th><th class="p-3">開発者の判定</th></tr>
+        </thead>
+        <tbody class="[&_td]:p-3 [&_td]:align-top [&_tr]:border-b [&_tr]:border-rule">
+          <tr><td class="font-bold">Q1 A と B</td><td>違いが分からない</td></tr>
+          <tr class="bg-dopa-soft"><td class="font-bold">Q2 音を遅らせる</td><td>150ms（つまみの最大）でも気づかない。ゆっくり叩いても、連打してリズムを見ても、崩れて感じない</td></tr>
+          <tr><td class="font-bold">Q3 連打</td><td>気持ちいい</td></tr>
+          <tr><td class="font-bold">計測値（0ms）</td><td class="font-mono text-xs">タッチ→発火 18〜28ms ／ 音の出力遅延 20.8ms</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">Q2 の答えを聞いて、最初に疑ったのはつまみのほうでした。遅らせる処理が効いていないのかもしれない。そこでシミュレーターで A を使い、叩いてから音が鳴り終わるまでを3回ずつ測りました。0ms では 188／208／199ms、150ms では 344／341／341ms。差は約140ms で、ほぼ設定どおりに遅れていました。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">つまり、遅れは本当に出ていて、指がそれを拾わなかったことになります。</p>
+
+    <div class="mt-8 grid gap-4 md:grid-cols-2">
+      <div class="rounded-3xl border-2 border-dashed border-mute bg-white p-5">
+        <p class="font-mono text-xs text-mute">調査のときの見込み</p>
+        <p class="mt-1 font-display text-xl">ずれの小ささを売りにする</p>
+        <p class="mt-2 text-sm leading-relaxed">4つが ms 単位でそろうことが、Web にはないネイティブの強み。</p>
+      </div>
+      <div class="rounded-3xl border-2 border-dopa bg-white p-5">
+        <p class="font-mono text-xs text-dopa">置き直した見込み</p>
+        <p class="mt-1 font-display text-xl">盛っても止まらない</p>
+        <p class="mt-2 text-sm leading-relaxed">150ms を拾えない指でも、入力が詰まる、描画が飛ぶ、は分かる。</p>
+      </div>
+    </div>
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">見直してみると、調査で拾った Web の失敗例も ms 単位のずれではありませんでした。ドパ九九は描画が毎秒3.8回まで落ち、音が詰まって入力が遅れています。指が気づくのは、ああいう崩れ方のほうです。ネイティブで守る価値があるのは、演出を盛ったときにもタップへの返事が途切れないこと。ただし今回の面には、盛った演出がまだ1つもありません。そこを確かめるのは課題 <a href="../../issues/heavy-effects-performance/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">heavy-effects-performance</a> です。</p>
+
+    <ul class="mt-6 flex flex-col gap-2 text-sm leading-relaxed">
+      <li class="border-l-4 border-rule pl-3">判定したのは開発者1人、端末は iPhone 15 Pro だけ。ずれに敏感な人なら気づく可能性は残る。</li>
+      <li class="border-l-4 border-rule pl-3">「タッチ→発火」の 18〜28ms は、iOS がタッチを届けるまでの時間を含む。アプリの処理だけを切り出した値ではない。</li>
+      <li class="border-l-4 border-rule pl-3">耳に届くまでの合計は、2つの計測値を足しておよそ 40〜50ms と見積もれる。スピーカーそのものの遅れは含まない。</li>
+    </ul>
+  </section>
+
+  <!-- ⑦ 決めたこと -->
+  <section id="decisions" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">07 / decisions</p>
+    <h2 class="mt-2 font-display text-3xl">決めたこと</h2>
+    <ol class="mt-6 flex flex-col gap-3 text-sm leading-relaxed">
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">01</span>試作は題材を持たない。叩く面が1枚だけの画面にする。題材が決まるまで、アプリを起動するとこの画面が出る。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">02</span>音と振動の鳴らし方は A 別々 と B 一体 の2通りを作り、実機で比べて決める。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">03</span>タップは指が触れた瞬間に受ける。離したときではない。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">04</span>画面は 120Hz で描く。<code class="font-mono text-xs">INFOPLIST_KEY_</code> で書けないキーなので、<code class="font-mono text-xs">ios/YatTatTa/Info.plist</code> を置いて生成分とマージする（<a href="../../devops/ios-project/index.html#info-plist" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">iOS プロジェクトの設定</a>に追記）。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">05</span>試作ではマナーモードでも音を鳴らす。本作りでどうするかは課題 <a href="../../issues/silent-mode-sound/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">silent-mode-sound</a> で決める。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">06</span>本作りの音と振動は <b>A 別々</b> で鳴らす。B と違いが分からなかったので、仕組みが単純なほうを取る。B のように音をファイルに書き出して登録する手間がない。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">07</span>差別化の軸を「ずれの小ささ」から「演出を盛っても止まらないこと」へ置き直す。確かめ方は課題 <a href="../../issues/heavy-effects-performance/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">heavy-effects-performance</a> で決める。</li>
+    </ol>
+  </section>
+
+  <!-- ⑦ 先送り -->
+  <section id="deferred" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">08 / deferred</p>
+    <h2 class="mt-2 font-display text-3xl">先送りにしたこと</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-xl bg-paper p-4 leading-relaxed ring-1 ring-rule">
+        <p class="font-bold">マナーモードで音を鳴らすか</p>
+        <p class="mt-1 text-ink/80">試作で「音が出ない」と迷わないよう、いまは鳴らしている。電車の中で突然鳴るアプリにしてよいかは、題材が決まってから。課題 <a href="../../issues/silent-mode-sound/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">silent-mode-sound</a>。</p>
+      </li>
+      <li class="rounded-xl bg-paper p-4 leading-relaxed ring-1 ring-rule">
+        <p class="font-bold">演出を盛ったときの処理落ち</p>
+        <p class="mt-1 text-ink/80">今回の面は輪が1つ広がるだけで、端末にとっては軽い。花火や粒子を重ねても入力と音が詰まらないかは、まだ分からない。課題 <a href="../../issues/heavy-effects-performance/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">heavy-effects-performance</a>。</p>
+      </li>
+      <li class="rounded-xl bg-paper p-4 leading-relaxed ring-1 ring-rule sm:col-span-2">
+        <p class="font-bold">手に届くまでのずれの実測（見送り）</p>
+        <p class="mt-1 text-ink/80">ハイスピード撮影などで、スピーカーと本体の振動の時刻を測る手はある。150ms を指が拾わなかったので、いまは測る理由がない。</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ⑧ 変更したファイル -->
+  <section id="files" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">09 / files</p>
+    <h2 class="mt-2 font-display text-3xl">変更したファイル</h2>
+    <div class="mt-6 overflow-x-auto rounded-2xl border border-rule bg-white">
+      <table class="w-full min-w-[36rem] text-left text-sm">
+        <tbody class="[&_td]:p-3 [&_td]:align-top [&_tr]:border-b [&_tr]:border-rule">
+          <tr><td class="font-mono text-xs">ios/YatTatTa/Prototype/FeelEngine.swift</td><td>音と振動を鳴らす。A／B の切り替え、連打の段階、計測値</td></tr>
+          <tr><td class="font-mono text-xs">ios/YatTatTa/Prototype/ToneSynth.swift</td><td>タップ音の合成。C5 から始まるペンタトニックで8段階</td></tr>
+          <tr><td class="font-mono text-xs">ios/YatTatTa/Prototype/FeelPadView.swift</td><td>叩く面。タッチの受け取りと光</td></tr>
+          <tr><td class="font-mono text-xs">ios/YatTatTa/Prototype/FeelPrototypeView.swift</td><td>試作画面の全体（計測値、切り替え、つまみ）</td></tr>
+          <tr><td class="font-mono text-xs">ios/YatTatTa/ContentView.swift</td><td>Hello, world! をやめ、試作画面を出す</td></tr>
+          <tr><td class="font-mono text-xs">ios/YatTatTa/Info.plist</td><td>新規。120Hz の設定だけを置く</td></tr>
+          <tr><td class="font-mono text-xs">ios/project.yml</td><td><code class="font-mono text-xs">INFOPLIST_FILE</code> を追加</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ⑨ 関連 -->
+  <section id="links" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">10 / links</p>
+    <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">この試作を決めた調査</p><a href="../20261005-1815-dopa-apps-research/index.html#if-we-build" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパ〇〇アプリ調査：作るなら</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><a href="../../glossary.html#tezawari" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">手触り</a><a href="../../glossary.html#sync-drift" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">同期ずれ</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">新しい課題</p><a href="../../issues/silent-mode-sound/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">silent-mode-sound</a><a href="../../issues/heavy-effects-performance/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">heavy-effects-performance</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">前回のセッション</p><a href="../20261006-0128-app-name/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">アプリ名を決める</a></li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script>
+// 画面イメージの光だけを再現する（音と振動は出ない）
+(function () {
+  var pad = document.getElementById('m-pad'), glow = document.getElementById('m-glow');
+  var levelEl = document.getElementById('m-level'), fireEl = document.getElementById('m-fire');
+  var level = 0, last = -Infinity;
+  pad.addEventListener('pointerdown', function (e) {
+    var now = performance.now();
+    level = now - last <= 450 ? Math.min(level + 1, 7) : 0;
+    last = now;
+    var t = level / 7, r = (70 + 110 * t) * 0.55;
+    var rect = pad.getBoundingClientRect();
+    var ring = document.createElement('div');
+    ring.className = 'ring';
+    ring.style.left = (e.clientX - rect.left) + 'px';
+    ring.style.top = (e.clientY - rect.top) + 'px';
+    ring.style.width = ring.style.height = (r * 2) + 'px';
+    ring.style.background = 'rgba(255,' + Math.round(150 + 64 * t) + ',' + Math.round(191 - 140 * t) + ',.9)';
+    ring.addEventListener('animationend', function () { ring.remove(); });
+    pad.appendChild(ring);
+    glow.classList.remove('glow');
+    glow.style.opacity = 0.12 + 0.18 * t;
+    void glow.offsetWidth;
+    glow.classList.add('glow');
+    levelEl.textContent = (level + 1) + ' / 8';
+    fireEl.textContent = (performance.now() - now).toFixed(1) + ' ms';
+  });
+})();
+</script>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

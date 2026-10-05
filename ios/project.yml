@@ -13,6 +13,8 @@ targets:
         DEVELOPMENT_TEAM: K334V22YZ3
         CODE_SIGN_STYLE: Automatic
         GENERATE_INFOPLIST_FILE: YES
+        # INFOPLIST_KEY_ で書けないキーだけを置く。生成分とマージされる
+        INFOPLIST_FILE: YatTatTa/Info.plist
         MARKETING_VERSION: "0.1.0"
         CURRENT_PROJECT_VERSION: "1"
         # ホーム画面のアプリ名。全言語で同じ表記
