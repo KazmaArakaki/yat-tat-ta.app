@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>アプリ名を決める</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: { rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } } },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-3xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <a href="../index.html" class="hover:text-dopa hover:underline">issues</a>
+      <span>/</span>
+      <span>アプリの中身</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight">アプリ名を決める</h1>
+    <div class="mt-4 flex flex-wrap gap-2 font-mono text-xs font-bold">
+      <span class="rounded-full bg-gold px-3 py-1 text-ink">優先度：中</span>
+      <span class="rounded-full border border-mute bg-white px-3 py-1 text-ink">状態：未着手</span>
+    </div>
+  </header>
+
+  <!-- 概要 -->
+  <section id="summary" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916]">
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-dopa">概要</p>
+      <p class="mt-3 font-bold leading-relaxed">
+        ホーム画面と App Store に出るアプリ名が、まだない。<br>
+        いまはターゲット名 <code class="font-mono">YatTatTa</code> が仮の名前として表示される。
+      </p>
+    </div>
+
+    <ol class="mt-6 flex flex-col gap-3 text-sm">
+      <li class="rounded-2xl border border-rule bg-white p-4">
+        <p class="flex items-baseline gap-3"><span class="font-mono font-bold text-dopa">a</span><span class="font-bold">ホーム画面の名前</span></p>
+        <p class="mt-1 pl-7 leading-relaxed text-ink/80">project.yml の <code class="font-mono text-xs">INFOPLIST_KEY_CFBundleDisplayName</code> で決まる。いつでも変えられる。</p>
+      </li>
+      <li class="rounded-2xl border border-rule bg-white p-4">
+        <p class="flex items-baseline gap-3"><span class="font-mono font-bold text-dopa">b</span><span class="font-bold">App Store の名前</span></p>
+        <p class="mt-1 pl-7 leading-relaxed text-ink/80">App Store Connect で登録する。ほかのアプリと同じ名前は使えない。</p>
+      </li>
+    </ol>
+    <p class="mt-4 text-xs leading-relaxed text-mute"><a href="../../glossary.html#bundle-identifier" class="text-dopa underline underline-offset-4">Bundle Identifier</a>（<code class="font-mono">com.yat-tat-ta</code>）とターゲット名は、アプリ名と別物なので変えなくてよい。</p>
+
+    <dl class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <dt class="font-mono text-xs text-mute">優先度が中の理由</dt>
+        <dd class="mt-1 leading-relaxed">仮の名前のままでも開発と実機確認はできる。TestFlight で人に配る前までに要る。</dd>
+      </div>
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <dt class="font-mono text-xs text-mute">先送りにした理由</dt>
+        <dd class="mt-1 leading-relaxed">2026-10-06 の時点で、何を作るか（題材）が決まっていない。名前は題材と一緒に決める。</dd>
+      </div>
+    </dl>
+  </section>
+
+  <!-- 関連 -->
+  <section id="related" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">related</p>
+    <h2 class="mt-2 font-display text-3xl">関連</h2>
+    <div class="mt-6 flex flex-col gap-3">
+      <a href="../../sessions/20261006-0059-ios-app-baseline/index.html" class="group block rounded-2xl border-2 border-ink bg-white p-5 transition hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#E5337A]">
+        <p class="font-mono text-xs text-mute">2026-10-06 iOS アプリの土台</p>
+        <p class="mt-1 font-display text-xl group-hover:text-dopa">この課題が出たセッション</p>
+        <p class="mt-2 text-sm leading-relaxed text-ink/80">ターゲット名を仮に YatTatTa にした経緯。</p>
+      </a>
+      <a href="../../devops/ios-project/index.html" class="group block rounded-2xl border-2 border-ink bg-white p-5 transition hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#E5337A]">
+        <p class="font-mono text-xs text-mute">devops</p>
+        <p class="mt-1 font-display text-xl group-hover:text-dopa">iOS プロジェクトの設定</p>
+        <p class="mt-2 text-sm leading-relaxed text-ink/80">名前を決めたら書き足す設定ファイル。</p>
+      </a>
+    </div>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

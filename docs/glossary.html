@@ -49,6 +49,8 @@ tailwind.config = {
     <a href="#vibe-coding" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">バイブコーディング</a>
     <a href="#developer-team" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">Developer Team</a>
     <a href="#minimum-deployments" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">Minimum Deployments</a>
+    <a href="#bundle-identifier" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">Bundle Identifier</a>
+    <a href="#xcodegen" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">XcodeGen</a>
   </nav>
 
   <!-- ドパ〇〇 -->
@@ -226,8 +228,8 @@ tailwind.config = {
       <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>開発者個人名義の、有料登録済みのチームです。iPhone 側で「信頼」を押す操作も要りませんでした。</p>
     </div>
     <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
-      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#minimum-deployments" class="text-dopa underline underline-offset-4">Minimum Deployments</a></p></div>
-      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="devops/ios-dev-environment/index.html" class="text-signal underline underline-offset-4">iOS 開発環境</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#minimum-deployments" class="text-dopa underline underline-offset-4">Minimum Deployments</a><a href="#bundle-identifier" class="text-dopa underline underline-offset-4">Bundle Identifier</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="devops/ios-dev-environment/index.html" class="text-signal underline underline-offset-4">iOS 開発環境</a><a href="devops/ios-project/index.html" class="text-signal underline underline-offset-4">iOS プロジェクトの設定</a></p></div>
     </div>
   </section>
 
@@ -235,17 +237,53 @@ tailwind.config = {
   <section id="minimum-deployments" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
     <p class="font-mono text-xs text-mute">#minimum-deployments</p>
     <h2 class="mt-1 font-display text-2xl">Minimum Deployments（最小対応 iOS）</h2>
-    <p class="mt-3 leading-relaxed">アプリが動く最も古い iOS のバージョン。これより古い iOS の端末は、Xcode の実行先で Incompatible と表示される。Xcode 27 で新規プロジェクトを作ると 27.0 が初期値になる。本番アプリの値は未決（課題 ios-app-baseline）。</p>
+    <p class="mt-3 leading-relaxed">アプリが動く最も古い iOS のバージョン。これより古い iOS の端末は、Xcode の実行先で Incompatible と表示される。Xcode 27 で新規プロジェクトを作ると 27.0 が初期値になる。本番アプリは 26.0 に決めた（2026-10-06）。</p>
     <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
     <div class="mt-2 flex flex-col gap-2 text-sm">
       <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>iPhone 15 Pro が実行先で Incompatible になっています。</p>
       <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>端末が iOS 26.6.1 で、プロジェクトの最小対応が初期値の 27.0 だからです。</p>
       <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>じゃあ 26.0 に下げれば入りますか。</p>
-      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>入ります。テスト用はそれで済ませました。本番アプリをいくつにするかは、まだ決めていません。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>入ります。本番アプリも 26.0 にしました。使いたい振動や音の機能は、どれも 26 にあります。</p>
     </div>
     <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
-      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#developer-team" class="text-dopa underline underline-offset-4">Developer Team</a></p></div>
-      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="issues/ios-app-baseline/index.html" class="text-signal underline underline-offset-4">課題：iOS アプリの土台を決める</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#developer-team" class="text-dopa underline underline-offset-4">Developer Team</a><a href="#bundle-identifier" class="text-dopa underline underline-offset-4">Bundle Identifier</a><a href="#xcodegen" class="text-dopa underline underline-offset-4">XcodeGen</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="devops/ios-project/index.html" class="text-signal underline underline-offset-4">iOS プロジェクトの設定</a><a href="issues/ios-app-baseline/index.html" class="text-signal underline underline-offset-4">課題：iOS アプリの土台を決める</a></p></div>
+    </div>
+  </section>
+
+  <!-- Bundle Identifier（バンドル ID） -->
+  <section id="bundle-identifier" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#bundle-identifier</p>
+    <h2 class="mt-1 font-display text-2xl">Bundle Identifier（バンドル ID）</h2>
+    <p class="mt-3 leading-relaxed">アプリを一意に識別する ID。逆さにしたドメイン名で書くのが慣例。App Store に一度出すと変えられず、変えると別のアプリとして扱われる。ホーム画面に出るアプリ名とは別物。本プロジェクトは開発者が取得したドメイン yat-tat-ta.com から <code class="font-mono text-sm">com.yat-tat-ta</code> にした。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>アプリ名がまだ決まっていないのに、Bundle Identifier を先に決めていいんですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>大丈夫です。ホーム画面の名前とは別の設定なので、名前はあとからいくらでも変えられます。変えられないのは Bundle Identifier のほうです。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>だから先に決めたんですね。ウィジェットを足すときは？</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b><code class="font-mono text-xs">com.yat-tat-ta.widget</code> のように、下にぶら下げます。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#minimum-deployments" class="text-dopa underline underline-offset-4">Minimum Deployments</a><a href="#developer-team" class="text-dopa underline underline-offset-4">Developer Team</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="devops/ios-project/index.html" class="text-signal underline underline-offset-4">iOS プロジェクトの設定</a><a href="issues/app-display-name/index.html" class="text-signal underline underline-offset-4">課題：アプリ名を決める</a></p></div>
+    </div>
+  </section>
+
+  <!-- XcodeGen -->
+  <section id="xcodegen" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#xcodegen</p>
+    <h2 class="mt-1 font-display text-2xl">XcodeGen</h2>
+    <p class="mt-3 leading-relaxed">YAML で書いた設定ファイル（project.yml）から、Xcode のプロジェクトファイル（.xcodeproj）を生成するツール。設定が文字で並ぶので、差分で読めて、Claude が書き換えられる。本プロジェクトでは .xcodeproj を生成物として扱い、コミットしない。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>iPhone 専用にする設定は、Xcode の画面で変えればいいですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>いいえ、<code class="font-mono text-xs">ios/project.yml</code> に書きます。Xcode の画面で変えても、次に XcodeGen で生成し直すと消えます。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>ファイルを足したときは？</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b><code class="font-mono text-xs">xcodegen generate</code> をもう一度実行します。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#bundle-identifier" class="text-dopa underline underline-offset-4">Bundle Identifier</a><a href="#minimum-deployments" class="text-dopa underline underline-offset-4">Minimum Deployments</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="devops/ios-project/index.html" class="text-signal underline underline-offset-4">iOS プロジェクトの設定</a></p></div>
     </div>
   </section>
 

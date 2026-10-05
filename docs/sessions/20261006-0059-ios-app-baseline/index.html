@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="session-state" content="done">
+<meta name="state" content="done">
+<title>iOS アプリの土台を決める</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: { rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } } },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-4xl">
+
+  <!-- ヘッダー -->
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <time datetime="2026-10-06T00:59">2026-10-06 00:59</time>
+      <span>/</span>
+      <span>設計セッション</span>
+      <span class="rounded-full border border-signal bg-signal/10 px-2.5 py-0.5 font-bold text-ink">状態：done</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl">iOS アプリの<span class="text-dopa">土台</span>を決める</h1>
+  </header>
+
+  <!-- ① 結果 -->
+  <section id="result" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="relative overflow-hidden rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916] sm:p-8">
+      <div class="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-dopa-soft"></div>
+      <p class="relative font-mono text-xs uppercase tracking-[0.2em] text-dopa">結果</p>
+      <p class="relative mt-3 text-lg font-bold leading-relaxed sm:text-xl">
+        課題 ios-app-baseline の4項目を決めました。<br>
+        次は、この設定で本番の Xcode プロジェクトを作ります。
+      </p>
+      <dl class="relative mt-6 grid gap-3 text-sm sm:grid-cols-2">
+        <div class="rounded-xl bg-paper p-4 ring-1 ring-rule">
+          <dt class="font-mono text-xs text-mute">a 最小対応 iOS</dt>
+          <dd class="mt-1 font-display text-xl">26.0</dd>
+        </div>
+        <div class="rounded-xl bg-paper p-4 ring-1 ring-rule">
+          <dt class="font-mono text-xs text-mute">b 置き場所</dt>
+          <dd class="mt-1 font-display text-xl"><code class="font-mono">ios/</code></dd>
+        </div>
+        <div class="rounded-xl bg-dopa-soft p-4">
+          <dt class="font-mono text-xs text-dopa">c Bundle Identifier</dt>
+          <dd class="mt-1 font-display text-xl"><code class="font-mono">com.yat-tat-ta</code></dd>
+        </div>
+        <div class="rounded-xl bg-paper p-4 ring-1 ring-rule">
+          <dt class="font-mono text-xs text-mute">d 対応端末</dt>
+          <dd class="mt-1 font-display text-xl">iPhone のみ</dd>
+        </div>
+      </dl>
+    </div>
+    <p class="mt-4 text-xs text-mute">設定値そのものと作り方は <a href="../../devops/ios-project/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">iOS プロジェクトの設定</a> にまとめています。ここには、なぜそう決めたかを残します。</p>
+  </section>
+
+  <!-- ② Bundle Identifier -->
+  <section id="bundle-id" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / bundle identifier</p>
+    <h2 class="mt-2 font-display text-3xl">あとから変えられないのは1つだけ</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">4つのうち3つは、ストアに出したあとでもビルド設定を変えれば済みます。<a href="../../glossary.html#bundle-identifier" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">Bundle Identifier</a> は違います。App Store に一度出すと、そのアプリの ID として固定されます。変えると別のアプリ扱いになり、レビューもダウンロード数も引き継げません。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">そこで、これだけは Claude が案を出して開発者に選んでもらいました。案は GitHub のユーザー名を使う <code class="font-mono text-xs">io.github.…</code> の形が本命のつもりでした。ところが開発者は、ドメイン <code class="font-mono text-xs">yat-tat-ta.com</code> を取得済みでした。</p>
+
+    <div class="mt-6 grid gap-4 md:grid-cols-2">
+      <div class="rounded-3xl border-2 border-dashed border-mute bg-white p-5">
+        <p class="font-mono text-xs text-mute">Claude の推奨案（不採用）</p>
+        <p class="mt-1 break-all font-mono text-base">io.github.{GitHub ユーザー名}.yattatta</p>
+        <p class="mt-2 text-sm leading-relaxed">独自ドメインなしでも他人とぶつからない形。長い。</p>
+      </div>
+      <div class="rounded-3xl border-2 border-dopa bg-white p-5">
+        <p class="font-mono text-xs text-dopa">採用</p>
+        <p class="mt-1 font-mono text-base">com.yat-tat-ta</p>
+        <p class="mt-2 text-sm leading-relaxed">取得したドメインを逆さにした形。逆ドメインの慣例どおりで、ぶつかる心配もない。</p>
+      </div>
+    </div>
+    <ul class="mt-6 flex flex-col gap-2 text-sm leading-relaxed">
+      <li class="border-l-4 border-rule pl-3">ハイフンは Bundle Identifier に使える文字です（英数字、ハイフン、ピリオド）。</li>
+      <li class="border-l-4 border-rule pl-3">ウィジェットなどの拡張を足すときは <code class="font-mono text-xs">com.yat-tat-ta.widget</code> のように下にぶら下げます。</li>
+    </ul>
+  </section>
+
+  <!-- ③ 最小対応 iOS -->
+  <section id="minimum-ios" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / minimum deployments</p>
+    <h2 class="mt-2 font-display text-3xl">端末を上げるか、下限を下げるか</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">前回のセッションでは、テスト用アプリが iPhone 15 Pro（iOS 26.6.1）に入りませんでした。Xcode 27 の初期値の <a href="../../glossary.html#minimum-deployments" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">Minimum Deployments</a> が 27.0 だったからです。端末を iOS 27 に上げれば初期値のままでも入ります。それでも下限を 26.0 に下げました。</p>
+
+    <div class="mt-6 overflow-x-auto rounded-2xl border border-rule bg-white">
+      <table class="w-full min-w-[32rem] text-left text-sm">
+        <thead class="border-b-2 border-ink font-mono text-xs text-mute">
+          <tr><th class="p-3"></th><th class="p-3">27.0（端末を上げる）</th><th class="p-3 text-dopa">26.0 ★採用</th></tr>
+        </thead>
+        <tbody class="[&_td]:p-3 [&_td]:align-top [&_tr]:border-b [&_tr]:border-rule">
+          <tr><td class="font-bold">届く人</td><td>iOS 27 に上げた人だけ。27 は 2026年9月に出たばかり。</td><td>iOS 26 のままの人にも届く。</td></tr>
+          <tr><td class="font-bold">使いたい機能</td><td>27 の新 API も条件分岐なしで使える。</td><td>Core Haptics、AVAudioEngine、SwiftUI のアニメーションはどれも 26 で使える。</td></tr>
+          <tr><td class="font-bold">テスト端末</td><td>iOS を上げる作業が要る。</td><td>いまの iPhone 15 Pro にそのまま入る。</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">差別化の中心として決めた技術（タップ、音、振動、光の同期）は、どれも 26 で足ります。27 で上げる理由は、いまのところ見当たりません。</p>
+    <p class="mt-4 rounded-lg border border-dashed border-mute bg-white/60 p-3 text-xs leading-relaxed">見直す条件：iOS 27 にしかない API が、手触りの試作で欠かせないと分かったとき。</p>
+  </section>
+
+  <!-- ④ 置き場所 -->
+  <section id="location" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / location</p>
+    <h2 class="mt-2 font-display text-3xl">プロジェクトは <code class="font-mono">ios/</code> に、設定は文字で</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">置き場所を決める前に、もう一つ決まっていたことがあります。2026-10-05 の調査で、Claude は <a href="../../glossary.html#xcodegen" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">XcodeGen</a> を使うと合意していました。XcodeGen は、YAML で書いた設定ファイルから <code class="font-mono text-xs">.xcodeproj</code> を生成するツールです。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">これで (a)(c)(d) の設定値が、すべて <code class="font-mono text-xs">ios/project.yml</code> の1ファイルに文字で並びます。Xcode の画面を開かなくても、差分で読めて、Claude が書き換えられます。<code class="font-mono text-xs">.xcodeproj</code> は生成物なので、リポジトリには入れません。</p>
+
+    <pre class="mt-6 overflow-x-auto rounded-2xl bg-ink p-5 font-mono text-xs leading-relaxed text-white">yat-tat-ta/
+├── docs/
+└── ios/
+    ├── project.yml          <span class="text-gold"># XcodeGen の設定。コミットする</span>
+    ├── YatTatTa/            <span class="text-gold"># Swift のソースとアセット</span>
+    └── YatTatTa.xcodeproj   <span class="text-white/50"># 生成物。.gitignore に入れる</span></pre>
+    <ul class="mt-6 flex flex-col gap-2 text-sm leading-relaxed">
+      <li class="border-l-4 border-rule pl-3">リポジトリ直下に置かないのは、docs と並べたときに何のファイルか分かるようにするため。</li>
+      <li class="border-l-4 border-rule pl-3">ターゲット名 <code class="font-mono text-xs">YatTatTa</code> は仮です。Swift のモジュール名にハイフンは使えないので、リポジトリ名を詰めました。ホーム画面に出る名前は別の設定で、まだ決めていません。</li>
+    </ul>
+  </section>
+
+  <!-- ⑤ iPhone のみ -->
+  <section id="iphone-only" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / iphone only</p>
+    <h2 class="mt-2 font-display text-3xl">「iPhone 専用」でも iPad には入る</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">前回のテスト用プロジェクトの設定を見ると、Xcode 27 の新規 App は Mac だけでなく iPad と Apple Vision Pro も対象に入っていました。</p>
+    <div class="mt-6 grid gap-4 md:grid-cols-2">
+      <div class="rounded-3xl border-2 border-dashed border-mute bg-white p-5">
+        <p class="font-mono text-xs text-mute">Xcode 27 の初期値</p>
+        <pre class="mt-2 overflow-x-auto font-mono text-xs leading-relaxed">SUPPORTED_PLATFORMS = iphoneos iphonesimulator
+                      macosx xros xrsimulator
+TARGETED_DEVICE_FAMILY = 1,2,7</pre>
+        <p class="mt-2 text-xs text-mute">1 = iPhone、2 = iPad、7 = Vision Pro</p>
+      </div>
+      <div class="rounded-3xl border-2 border-dopa bg-white p-5">
+        <p class="font-mono text-xs text-dopa">本番</p>
+        <pre class="mt-2 overflow-x-auto font-mono text-xs leading-relaxed">SUPPORTED_PLATFORMS = iphoneos iphonesimulator
+TARGETED_DEVICE_FAMILY = 1</pre>
+        <p class="mt-2 text-xs text-mute">ほかに Mac と Vision Pro で iPhone 版を動かす設定も NO にする</p>
+      </div>
+    </div>
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">これで完全に iPhone だけになる、と思いたいところです。実際には、App Store に出した iPhone 専用アプリは iPad でも入れられます。Apple の決まりで、iPad は iPhone アプリを iPhone サイズの画面のまま動かします。それを止める正規の設定はありません。iPad 向けの画面は作らない、という意味の「iPhone 専用」です。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">Apple シリコンの Mac も同じように iPhone アプリを動かせます。こちらは止められるので、ビルド設定と、ストア提出時の App Store Connect の両方で外します。</p>
+  </section>
+
+  <!-- ⑥ 決めたこと -->
+  <section id="decisions" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / decisions</p>
+    <h2 class="mt-2 font-display text-3xl">決めたこと</h2>
+    <ol class="mt-6 flex flex-col gap-3 text-sm leading-relaxed">
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">01</span>最小対応 iOS は 26.0。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">02</span>Xcode プロジェクトは <code class="font-mono text-xs">ios/</code> に置き、XcodeGen の <code class="font-mono text-xs">project.yml</code> で定義する。<code class="font-mono text-xs">.xcodeproj</code> はコミットしない。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">03</span>Bundle Identifier は <code class="font-mono text-xs">com.yat-tat-ta</code>（開発者が決定）。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">04</span>対応端末は iPhone のみ。Mac、iPad 向け画面、Vision Pro は対象外。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">05</span>ターゲット名は仮に <code class="font-mono text-xs">YatTatTa</code>。</li>
+    </ol>
+  </section>
+
+  <!-- ⑦ 次にやること -->
+  <section id="next" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">07 / next</p>
+    <h2 class="mt-2 font-display text-3xl">次にやること</h2>
+    <p class="mt-3 text-sm text-ink/80">レビューが済んだら、Mac 側で。合わせて 20 分ほど。</p>
+    <ol class="mt-6 flex flex-col gap-2 text-sm">
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-mute">1</span><span><code class="font-mono text-xs">brew install xcodegen</code>（まだ入っていない）</span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-mute">2</span><span>Claude が <code class="font-mono text-xs">ios/project.yml</code> と空の SwiftUI アプリを書き、<code class="font-mono text-xs">xcodegen generate</code></span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-mute">3</span><span>開発者が iPhone 15 Pro で起動を確かめる</span></li>
+    </ol>
+  </section>
+
+  <!-- ⑧ 先送り -->
+  <section id="deferred" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">08 / deferred</p>
+    <h2 class="mt-2 font-display text-3xl">先送りにしたこと</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-xl bg-paper p-4 leading-relaxed ring-1 ring-rule">
+        <p class="font-bold">ホーム画面に出るアプリ名</p>
+        <p class="mt-1 text-ink/80">題材が決まっていないので決めようがない。課題 <a href="../../issues/app-display-name/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">app-display-name</a>。</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ⑨ 関連 -->
+  <section id="links" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">09 / links</p>
+    <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">設定値と作り方</p><a href="../../devops/ios-project/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">iOS プロジェクトの設定</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">完了した課題</p><a href="../../issues/ios-app-baseline/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ios-app-baseline</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">新しい課題</p><a href="../../issues/app-display-name/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">app-display-name</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">前回のセッション</p><a href="../20261006-0019-ios-dev-environment-setup/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">iOS 開発環境の準備</a></li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>
