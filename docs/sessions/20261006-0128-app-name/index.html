@@ -90,7 +90,7 @@ tailwind.config = {
     <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">iOS では、アプリ名も言語ごとに切り替えられます。日本では「やったった」、ほかの国では「Yat Tat Ta」と出し分けることもできました。今回はそうせず、全言語で同じ表記にしました。名前が国ごとに違うと、同じアプリだと分かりにくくなるからです。</p>
     <ul class="mt-6 flex flex-col gap-2 text-sm leading-relaxed">
       <li class="border-l-4 border-rule pl-3">3語に区切ると「ヤッ・タッ・タ」の拍が見えます。ドメインのハイフンと同じ位置です。</li>
-      <li class="border-l-4 border-rule pl-3">空白込みで10文字。ホーム画面のアイコン下でも省略されずに収まる長さのはずです（実機で確認する）。</li>
+      <li class="border-l-4 border-rule pl-3">空白込みで10文字。iPhone 15 Pro のホーム画面で、省略されずに表示されることを確認しました。</li>
     </ul>
   </section>
 
@@ -131,10 +131,10 @@ tailwind.config = {
   <!-- ⑥ 次にやること -->
   <section id="next" class="mt-20">
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / next</p>
-    <h2 class="mt-2 font-display text-3xl">残りは実機での確認</h2>
+    <h2 class="mt-2 font-display text-3xl">実機で確認した</h2>
     <ol class="mt-6 flex flex-col gap-2 text-sm">
       <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">✓</span><span>Claude が <code class="font-mono text-xs">ios/project.yml</code> に <code class="font-mono text-xs">INFOPLIST_KEY_CFBundleDisplayName: "Yat Tat Ta"</code> を足し、<code class="font-mono text-xs">xcodegen generate</code> とシミュレーター向けビルドを通す</span></li>
-      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-mute">2</span><span>開発者が iPhone 15 Pro に入れ、ホーム画面に「Yat Tat Ta」が省略されずに出るか確かめる</span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">✓</span><span>開発者が iPhone 15 Pro に入れ、ホーム画面に「Yat Tat Ta」が省略されずに出ることを確かめた</span></li>
     </ol>
   </section>
 
