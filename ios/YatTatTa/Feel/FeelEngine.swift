@@ -269,8 +269,8 @@ final class FeelEngine {
 
         // 連打で前の音が切れないよう、空いている再生口を使う。低音、段階の音、フィナーレ、札の音が重なる分も含む
         audioPlayers = (0..<8).map { _ in AVAudioPlayerNode() }
-        // 声は重ならないように並べてあるが、10打ごとの声と段階の声は重なることがあるので3つ
-        voicePlayers = (0..<3).map { _ in AVAudioPlayerNode() }
+        // フィナーレは声を4つ先に預けるので、その間に鳴る10打ごとの声や段階の声の分も足して6つ
+        voicePlayers = (0..<6).map { _ in AVAudioPlayerNode() }
         audioSlots = Array(repeating: nil, count: audioPlayers.count)
         voiceSlots = Array(repeating: nil, count: voicePlayers.count)
         for player in audioPlayers + voicePlayers {

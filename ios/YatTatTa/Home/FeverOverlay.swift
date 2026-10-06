@@ -102,7 +102,7 @@ final class FeverTapUIView: UIView {
             guard let tap = model.tap(at: touch.timestamp), tap.isFever else { continue }
             pop("+\(tap.dopa)", at: touch.location(in: self), rush: tap.isRush)
             #if DEBUG
-            PerfMonitor.shared?.tapFired(touchedAt: touch.timestamp)
+            PerfMonitor.shared?.tapFired(touchedAt: touch.timestamp, at: touch.location(in: nil), in: window?.bounds.size)
             #endif
         }
     }

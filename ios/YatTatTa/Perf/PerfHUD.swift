@@ -117,6 +117,17 @@ private struct SummaryCard: View {
                 }
             }
             PhaseTable(phases: summary.phases)
+            if !summary.slowTaps.isEmpty {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(verbatim: "遅かった打（位置は 横・縦 の割合）").foregroundStyle(.white.opacity(0.5))
+                    ForEach(Array(summary.slowTaps.enumerated()), id: \.offset) { _, tap in
+                        Text(verbatim: "\(ms(tap.latency))  \(tap.phase)  \(String(format: "%.2f・%.2f", tap.x, tap.y))")
+                            .foregroundStyle(PerfGrade.latency(tap.latency).color)
+                    }
+                }
+                .padding(.top, 6)
+                .overlay(alignment: .top) { Rectangle().fill(.white.opacity(0.15)).frame(height: 1) }
+            }
             if !summary.voiceCuts.isEmpty {
                 VStack(alignment: .leading, spacing: 2) {
                     ForEach(Array(summary.voiceCuts.prefix(6).enumerated()), id: \.offset) { _, cut in
@@ -171,7 +182,7 @@ private struct PhaseTable: View {
             ForEach(phases, id: \.name) { p in
                 GridRow {
                     Text(verbatim: p.name)
-                    Text(verbatim: p.minFps.map(String.init) ?? "-")
+                    Text(verbatim: p.minFps.map { "\($0)\(p.minFpsAt60Hz ? " 60Hz" : "")" } ?? "-")
                         .foregroundStyle((p.minFps.map(PerfGrade.fps) ?? .plain).color)
                     Text(verbatim: "\(p.hitches)")
                         .foregroundStyle(PerfGrade.hitches(p.hitches).color)

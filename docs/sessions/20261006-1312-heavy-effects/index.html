@@ -236,6 +236,28 @@ tailwind.config = {
     <p class="mt-4 leading-relaxed">描画と発火のほうは、どこで落ちたのかが札から分かりません。叩いていないフィナーレの間に落ちたなら、指が何も感じなかったのもうなずけます。叩いている最中に落ちたのなら、線のほうが厳しすぎるのかもしれない。まとめの札に、場面ごと（NORMAL、CHANCE、激熱、PUSH、フィーバー、フィナーレ）の最低の描画、詰まり、発火の最大を足して、2回目で見分けます。</p>
   </section>
 
+  <section id="run2" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">実機 2回目 2026-10-06 15:04</p>
+    <h2 class="mt-2 font-display text-3xl">遅い打は、止まっていない場面で出た</h2>
+    <div class="mt-6 overflow-x-auto rounded-2xl border border-rule bg-white">
+      <table class="w-full min-w-[30rem] text-left text-sm">
+        <thead class="border-b-2 border-ink font-mono text-xs text-mute"><tr><th class="p-3">場面</th><th class="p-3">最低 fps</th><th class="p-3">≥50ms</th><th class="p-3">発火の最大</th></tr></thead>
+        <tbody class="[&_td]:p-3 [&_td]:align-top [&_tr]:border-b [&_tr]:border-rule">
+          <tr><td>NORMAL</td><td class="text-dopa font-bold">62</td><td>0</td><td>36ms</td></tr>
+          <tr><td>CHANCE</td><td>103</td><td>0</td><td class="text-dopa font-bold">152ms</td></tr>
+          <tr><td>激熱</td><td class="text-dopa font-bold">93</td><td>0</td><td class="text-dopa font-bold">116ms</td></tr>
+          <tr><td>PUSH</td><td>-</td><td>0</td><td>35ms</td></tr>
+          <tr><td>フィーバー</td><td class="text-dopa font-bold">93</td><td class="text-dopa font-bold">1</td><td class="text-dopa font-bold">65ms</td></tr>
+          <tr><td>フィナーレ</td><td>106</td><td>0</td><td>-</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 leading-relaxed">200打。発火は中央 16ms、95% 28ms のまま、最大だけが 152ms に跳ねた。切った声は 15 回から 4 回に減った。</p>
+    <p class="mt-4 leading-relaxed">152ms の打は CHANCE で出ています。アプリが 130ms も止まっていたのなら、その間は描画の合図も来ないので、50ms 以上の詰まりとして数えられるはずです。CHANCE の詰まりは 0 回でした。アプリは止まっていなかった。疑わしいのは、タッチがアプリに届く前のほうです。iOS は画面の端に触れたタッチを、ホームに戻るスワイプなどと見分けるまで渡さないことがあります。</p>
+    <p class="mt-4 leading-relaxed">NORMAL の 62 は、60 にぴったり寄っています。コマを落としたのではなく、iOS がその秒だけ画面を 60Hz に落とした可能性がある。残った声の4回は、フィナーレが声を4つ先に預けるのに、声の再生口が3つしかなかったため。「やったった！」が鳴る前に消えていました。</p>
+    <p class="mt-4 leading-relaxed">声の再生口を6つにし、まとめの札に、遅かった3打の場面と叩いた位置、60Hz で描いた秒の印を足しました。3回目で、端のせいか、60Hz のせいかを見分けます。</p>
+  </section>
+
 <section id="decisions" class="mt-20">
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">09 / decisions</p>
     <h2 class="mt-2 font-display text-3xl">決めたこと（2026-10-06 開発者がレビュー）</h2>

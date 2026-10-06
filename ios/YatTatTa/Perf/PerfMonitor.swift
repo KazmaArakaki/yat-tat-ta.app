@@ -2,6 +2,7 @@
 import Foundation
 import Observation
 import QuartzCore
+import CoreGraphics
 
 /// 計測モードで数える3つ。描画、タッチ→発火、途中で切った音
 ///
@@ -38,12 +39,23 @@ import QuartzCore
     struct PhaseStat: Equatable {
         let name: String
         var minFps: Int?
+        /// 最低の描画の1秒に、画面が 60Hz で描いたコマが混じっていたか。コマ落ちではなく、iOS が画面を落とした
+        var minFpsAt60Hz = false
         var hitches = 0
         var maxLatency: Double?
     }
 
     /// 場面の並び。まとめの札はこの順に出す
     static let phaseOrder = ["NORMAL", "CHANCE", "激熱", "PUSH", "フィーバー", "フィナーレ"]
+
+    /// 遅かった1打。画面の端を叩くと、iOS がシステムのスワイプと見分けるまでタッチを渡さないことがある
+    struct SlowTap: Equatable {
+        let latency: Double
+        let phase: String
+        /// 叩いた位置。画面の左上から、幅と高さの何割か
+        let x: Double
+        let y: Double
+    }
 
     struct Summary: Equatable {
         let run: Int
@@ -55,6 +67,7 @@ import QuartzCore
         let max: Double
         let cuts: [Cut]
         let phases: [PhaseStat]
+        let slowTaps: [SlowTap]
 
         var voiceCuts: [Cut] { cuts.filter(\.isVoice) }
     }
@@ -77,6 +90,8 @@ import QuartzCore
     @ObservationIgnored private var phases: [String: PhaseStat] = [:]
     /// この1秒の中で、場面ごとに何コマ描いたか。1秒の描画の回数は、いちばん長くいた場面に付ける
     @ObservationIgnored private var bucketPhases: [String: Int] = [:]
+    @ObservationIgnored private var bucketAt60Hz = false
+    @ObservationIgnored private var taps: [SlowTap] = []
 
     func start() {
         let link = CADisplayLink(target: FrameTarget(self), selector: #selector(FrameTarget.frame(_:)))
@@ -86,12 +101,15 @@ import QuartzCore
     }
 
     /// 指が触れた時刻（touch.timestamp）。音、振動、光の命令を出し終えたところで呼ぶ
-    func tapFired(touchedAt timestamp: TimeInterval) {
+    func tapFired(touchedAt timestamp: TimeInterval, at point: CGPoint, in size: CGSize?) {
         guard summary == nil else { return }
         if !running { begin() }
         let latency = (ProcessInfo.processInfo.systemUptime - timestamp) * 1000
         latencies.append(latency)
-        update(phase()) { $0.maxLatency = max($0.maxLatency ?? 0, latency) }
+        let name = phase()
+        update(name) { $0.maxLatency = max($0.maxLatency ?? 0, latency) }
+        let size = size ?? CGSize(width: 1, height: 1)
+        taps.append(SlowTap(latency: latency, phase: name, x: point.x / size.width, y: point.y / size.height))
     }
 
     private func update(_ name: String, _ change: (inout PhaseStat) -> Void) {
@@ -115,7 +133,8 @@ import QuartzCore
         }
         summary = Summary(run: run, taps: latencies.count, minFps: minFps, hitches: hitches,
                           median: percentile(0.5), p95: percentile(0.95), max: sorted.last ?? 0, cuts: cuts,
-                          phases: Self.phaseOrder.compactMap { phases[$0] })
+                          phases: Self.phaseOrder.compactMap { phases[$0] },
+                          slowTaps: Array(taps.sorted { $0.latency > $1.latency }.prefix(3)))
     }
 
     /// 「もう1回」。数を全部消して、次の1打を待つ
@@ -134,6 +153,8 @@ import QuartzCore
         cuts = []
         phases = [:]
         bucketPhases = [:]
+        bucketAt60Hz = false
+        taps = []
         bucketStart = 0
     }
 
@@ -150,19 +171,29 @@ import QuartzCore
             bucketStart = t
             bucketFrames = 0
             bucketPhases = [:]
+            bucketAt60Hz = false
             return
         }
         bucketFrames += 1
+        // 次のコマまでの間隔が 1/70 秒より長ければ、画面は 60Hz で描いている
+        if link.targetTimestamp - t > 1.0 / 70 { bucketAt60Hz = true }
         bucketPhases[name, default: 0] += 1
         guard t - bucketStart >= 1 else { return }
         let fps = Int((Double(bucketFrames) / (t - bucketStart)).rounded())
         minFps = min(minFps ?? fps, fps)
         if let main = bucketPhases.max(by: { $0.value < $1.value })?.key {
-            update(main) { $0.minFps = min($0.minFps ?? fps, fps) }
+            let at60Hz = bucketAt60Hz
+            update(main) {
+                if fps < $0.minFps ?? .max {
+                    $0.minFps = fps
+                    $0.minFpsAt60Hz = at60Hz
+                }
+            }
         }
         bucketStart = t
         bucketFrames = 0
         bucketPhases = [:]
+        bucketAt60Hz = false
         live = Live(fps: fps, minFps: minFps, hitches: hitches, lastLatency: latencies.last,
                     maxLatency: latencies.max(), cuts: cuts.filter(\.isVoice).count, taps: latencies.count)
     }
