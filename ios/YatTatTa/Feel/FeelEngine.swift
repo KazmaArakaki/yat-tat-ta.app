@@ -1,5 +1,9 @@
 import AVFoundation
 import CoreHaptics
+import os
+
+/// 音の出口まわりのログ。Xcode のコンソールで「[audio]」を探す
+private let audioLog = Logger(subsystem: "com.yat-tat-ta", category: "audio")
 
 /// 音と振動を鳴らす
 ///
@@ -32,6 +36,10 @@ final class FeelEngine {
     /// 声と効果音。Sounds/ のファイルか、なければ合成音
     private var sounds: [Sound: AVAudioPCMBuffer] = [:]
     private let loopPlayer = AVAudioPlayerNode()
+    /// 再生口をつなぐときの形。出口が変わってつなぎ直すときにも同じものを使う
+    private var audioFormat: AVAudioFormat?
+    private var configurationObserver: NSObjectProtocol?
+    private var routeObserver: NSObjectProtocol?
     private var looping: Sound?
     private var fadeTimer: Timer?
     private var feverTapBuffer: AVAudioPCMBuffer?
@@ -279,6 +287,19 @@ final class FeelEngine {
             audioEngine.attach(player)
             audioEngine.connect(player, to: audioEngine.mainMixerNode, format: format)
         }
+        audioFormat = format
+        logAudio("start")
+        routeObserver = NotificationCenter.default.addObserver(
+            forName: AVAudioSession.routeChangeNotification, object: nil, queue: .main
+        ) { [weak self] note in
+            let reason = (note.userInfo?[AVAudioSessionRouteChangeReasonKey] as? UInt) ?? 0
+            MainActor.assumeIsolated { self?.logAudio("route change reason=\(reason)") }
+        }
+        configurationObserver = NotificationCenter.default.addObserver(
+            forName: .AVAudioEngineConfigurationChange, object: audioEngine, queue: .main
+        ) { [weak self] _ in
+            MainActor.assumeIsolated { self?.reconnectAudio() }
+        }
         do {
             try audioEngine.start()
             (audioPlayers + voicePlayers).forEach { $0.play() }
@@ -287,11 +308,40 @@ final class FeelEngine {
         }
     }
 
+    /// 音の出口が変わったとき（AirPods をつないだ、外した）
+    ///
+    /// iOS は出口の形（サンプリングの速さ）が変わると、音の仕組みを止め、再生口と出口のつながりも切る。
+    /// 動かし直すだけでは音が出口に届かないので、全部の再生口をつなぎ直してから動かす。
+    /// 預けていた音は消えているので、再生口の空きも消しておく。ループ曲は頭から鳴らし直す。
+    private func reconnectAudio() {
+        logAudio("configuration change")
+        defer { logAudio("reconnected") }
+        guard let format = audioFormat else { return }
+        audioEngine.stop()
+        for player in [loopPlayer] + audioPlayers + voicePlayers {
+            audioEngine.disconnectNodeOutput(player)
+            audioEngine.connect(player, to: audioEngine.mainMixerNode, format: format)
+        }
+        audioSlots = Array(repeating: nil, count: audioPlayers.count)
+        voiceSlots = Array(repeating: nil, count: voicePlayers.count)
+        do {
+            try audioEngine.start()
+            (audioPlayers + voicePlayers).forEach { $0.play() }
+        } catch {
+            print("AVAudioEngine: \(error)")
+        }
+        if let sound = looping {
+            looping = nil
+            playBGM(sound)
+        }
+    }
+
     private func play(_ buffer: AVAudioPCMBuffer?, after delay: TimeInterval = 0,
                       label: String = "tone", isVoice: Bool = false) {
         guard let buffer else { return }
         if !audioEngine.isRunning {
             // 電話などで止まったエンジンは、次の1打で起こす
+            logAudio("engine stopped at play")
             try? audioEngine.start()
             (audioPlayers + voicePlayers).forEach { $0.play() }
         }
@@ -316,6 +366,20 @@ final class FeelEngine {
             ? AVAudioTime(hostTime: mach_absolute_time() + AVAudioTime.hostTime(forSeconds: delay))
             : nil
         player.scheduleBuffer(buffer, at: when, options: .interrupts)
+    }
+
+    /// 音の出口と、音の仕組みの状態を書き出す
+    private func logAudio(_ event: String) {
+        let session = AVAudioSession.sharedInstance()
+        // 出口の名前（「〇〇の AirPods」）には持ち主の名前が入ることがあるので、種類だけを出す
+        let outputs = session.currentRoute.outputs.map(\.portType.rawValue).joined(separator: ",")
+        let hardware = audioEngine.outputNode.outputFormat(forBus: 0)
+        audioLog.notice("""
+            [audio] \(event, privacy: .public) running=\(self.audioEngine.isRunning) \
+            session=\(session.sampleRate)Hz category=\(session.category.rawValue, privacy: .public) \
+            out=\(outputs, privacy: .public) hw=\(hardware.sampleRate)Hz/\(hardware.channelCount)ch \
+            volume=\(session.outputVolume) otherAudio=\(session.isOtherAudioPlaying)
+            """)
     }
 
     /// 預ける再生口を選ぶ。.interrupts で預けると、その再生口で鳴っている音も、これから鳴る予定の音も消える

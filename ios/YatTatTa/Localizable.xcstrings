@@ -35,16 +35,16 @@
     },
     "%lld回で%lldドパ。今夜のおやつのあとにでも。" : {
       "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$lld回で%2$lldドパ。今夜のおやつのあとにでも。"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%1$lld squats = %2$lld Dopa. Maybe after tonight's snack?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld回で%2$lldドパ。今夜のおやつのあとにでも。"
           }
         }
       }
@@ -109,6 +109,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "+1人"
+          }
+        }
+      }
+    },
+    "✓ 今日のぶんは済み" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "✓ Done for today"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "✓ 今日のぶんは済み"
+          }
+        }
+      }
+    },
+    "✓ 今日のぶんは済み（%lld回）" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "✓ Done for today (%lld)"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "✓ 今日のぶんは済み（%lld回）"
           }
         }
       }
@@ -225,39 +257,8 @@
         }
       }
     },
-    "✓ 今日のぶんは済み" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "✓ Done for today"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "✓ 今日のぶんは済み"
-          }
-        }
-      }
-    },
-    "✓ 今日のぶんは済み（%lld回）" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "✓ Done for today (%lld)"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "✓ 今日のぶんは済み（%lld回）"
-          }
-        }
-      }
-    },
     "あんたはえらい！" : {
+      "comment" : "声のファイルがないときの読み上げ",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -290,6 +291,7 @@
       }
     },
     "げきあつ！" : {
+      "comment" : "声のファイルがないときの読み上げ",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -317,118 +319,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "しばらく通知を止めます。また開いたら再開します。"
-          }
-        }
-      }
-    },
-    "その日まだ叩いていない夜に、1回だけ知らせます。7日開かなければ、自分から止まります。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "One reminder on evenings you haven't tapped yet. Stops on its own if you don't open the app for 7 days."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "その日まだ叩いていない夜に、1回だけ知らせます。7日開かなければ、自分から止まります。"
-          }
-        }
-      }
-    },
-    "ためた %lld ドパは、そのまま。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your %lld Dopa stays with you."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ためた %lld ドパは、そのまま。"
-          }
-        }
-      }
-    },
-    "どこでも叩け！" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "TAP ANYWHERE!"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "どこでも叩け！"
-          }
-        }
-      }
-    },
-    "やったった" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "NAILED IT"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "やったった"
-          }
-        }
-      }
-    },
-    "やったった！" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "NAILED IT!"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "やったった！"
-          }
-        }
-      }
-    },
-    "よっ、ふともも番長！" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hey, Thigh Boss!"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "よっ、ふともも番長！"
-          }
-        }
-      }
-    },
-    "よっ、太もも番長！" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "HEY, THIGH BOSS!"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "よっ、太もも番長！"
           }
         }
       }
@@ -465,7 +355,40 @@
         }
       }
     },
+    "その日まだ叩いていない夜に、1回だけ知らせます。7日開かなければ、自分から止まります。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One reminder on evenings you haven't tapped yet. Stops on its own if you don't open the app for 7 days."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "その日まだ叩いていない夜に、1回だけ知らせます。7日開かなければ、自分から止まります。"
+          }
+        }
+      }
+    },
+    "ためた %lld ドパは、そのまま。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your %lld Dopa stays with you."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ためた %lld ドパは、そのまま。"
+          }
+        }
+      }
+    },
     "チャンス！" : {
+      "comment" : "声のファイルがないときの読み上げ",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -477,6 +400,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "チャンス！"
+          }
+        }
+      }
+    },
+    "どこでも叩け！" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "TAP ANYWHERE!"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "どこでも叩け！"
           }
         }
       }
@@ -498,6 +437,7 @@
       }
     },
     "ドパ、大台突破！" : {
+      "comment" : "声のファイルがないときの読み上げ",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -514,6 +454,7 @@
       }
     },
     "ドパ、突破！" : {
+      "comment" : "声のファイルがないときの読み上げ",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -562,6 +503,7 @@
       }
     },
     "ドパドパ！" : {
+      "comment" : "声のファイルがないときの読み上げ",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -594,6 +536,7 @@
       }
     },
     "フィーバー！" : {
+      "comment" : "声のファイルがないときの読み上げ",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -625,7 +568,74 @@
         }
       }
     },
+    "やったった" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NAILED IT"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "やったった"
+          }
+        }
+      }
+    },
+    "やったった！" : {
+      "comment" : "声のファイルがないときの読み上げ",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NAILED IT!"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "やったった！"
+          }
+        }
+      }
+    },
+    "よっ、ふともも番長！" : {
+      "comment" : "声のファイルがないときの読み上げ",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hey, Thigh Boss!"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "よっ、ふともも番長！"
+          }
+        }
+      }
+    },
+    "よっ、太もも番長！" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HEY, THIGH BOSS!"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "よっ、太もも番長！"
+          }
+        }
+      }
+    },
     "ラッシュ！" : {
+      "comment" : "声のファイルがないときの読み上げ",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -658,6 +668,7 @@
       }
     },
     "今日の1回から！" : {
+      "comment" : "声のファイルがないときの読み上げ",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -786,6 +797,7 @@
       }
     },
     "今日もお疲れ！" : {
+      "comment" : "声のファイルがないときの読み上げ",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -835,32 +847,80 @@
     },
     "休み券を%lld枚使って、%lld日連続をつなぎました" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Used %1$lld Rest Pass(es) to keep your %2$lld-day streak."
+          }
+        },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "休み券を%1$lld枚使って、%2$lld日連続をつなぎました"
           }
-        },
+        }
+      }
+    },
+    "最初の1回で" : {
+      "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Used %1$lld Rest Pass(es) to keep your %2$lld-day streak."
+            "value" : "Day"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最初の1回で"
+          }
+        }
+      }
+    },
+    "最長記録" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Longest streak"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最長記録"
+          }
+        }
+      }
+    },
+    "最長記録 %lld日" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Longest streak: %lld days"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最長記録 %lld日"
           }
         }
       }
     },
     "前の7日 %lld　ベスト %lld" : {
       "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "前の7日 %1$lld　ベスト %2$lld"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prev 7 days %1$lld · Best %2$lld"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "前の7日 %1$lld　ベスト %2$lld"
           }
         }
       }
@@ -930,6 +990,7 @@
       }
     },
     "夜食のあとに、えらすぎる！" : {
+      "comment" : "声のファイルがないときの読み上げ",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -962,6 +1023,7 @@
       }
     },
     "太もも、確定！" : {
+      "comment" : "声のファイルがないときの読み上げ",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1010,6 +1072,7 @@
       }
     },
     "押せ！" : {
+      "comment" : "声のファイルがないときの読み上げ",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1090,6 +1153,7 @@
       }
     },
     "明日も、確定！" : {
+      "comment" : "声のファイルがないときの読み上げ",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1121,54 +1185,6 @@
         }
       }
     },
-    "最初の1回で" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Day"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "最初の1回で"
-          }
-        }
-      }
-    },
-    "最長記録" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Longest streak"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "最長記録"
-          }
-        }
-      }
-    },
-    "最長記録 %lld日" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Longest streak: %lld days"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "最長記録 %lld日"
-          }
-        }
-      }
-    },
     "根性" : {
       "localizations" : {
         "en" : {
@@ -1186,6 +1202,7 @@
       }
     },
     "根性、確定！" : {
+      "comment" : "声のファイルがないときの読み上げ",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1362,6 +1379,7 @@
       }
     },
     "筋肉、確定！" : {
+      "comment" : "声のファイルがないときの読み上げ",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1394,6 +1412,7 @@
       }
     },
     "継続、確定！" : {
+      "comment" : "声のファイルがないときの読み上げ",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1426,6 +1445,7 @@
       }
     },
     "自己ベスト、更新！" : {
+      "comment" : "声のファイルがないときの読み上げ",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1474,6 +1494,7 @@
       }
     },
     "連続記録、達成！" : {
+      "comment" : "声のファイルがないときの読み上げ",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1538,6 +1559,7 @@
       }
     },
     "限界突破！" : {
+      "comment" : "声のファイルがないときの読み上げ",
       "localizations" : {
         "en" : {
           "stringUnit" : {
