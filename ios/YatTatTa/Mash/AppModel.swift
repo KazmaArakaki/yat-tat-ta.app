@@ -41,6 +41,8 @@ import SwiftData
     #endif
     /// 最後の1打で節目に届くと分かった連打。PUSH に入った瞬間から立てる（虹の先バレ）
     private(set) var rainbow = false
+    /// 今日（記録日）の記録。新しい順。今日の記録のシートに並べ、そこから消せる
+    private(set) var todayRecords: [SquatRecord] = []
 
     @ObservationIgnored let feel = FeelEngine()
     @ObservationIgnored private let context: ModelContext
@@ -231,6 +233,7 @@ import SwiftData
         daily[day, default: 0] += closed.reps + closed.bonusDopa
         // session は作り直さない。叩き切ったあとの「数えない間」を残すため
         ledger = Ledger(daily: daily, today: RecordDay(now()))
+        refreshTodayRecords()
 
         // その日最初の記録が閉じたとき、連続記録が伸びる
         let extended = !wasDoneToday && ledger.streak.doneToday
@@ -384,13 +387,41 @@ import SwiftData
         daily = [:]
         for r in records { daily[r.recordDay, default: 0] += r.dopa }
         ledger = Ledger(daily: daily, today: RecordDay(now()))
+        refreshTodayRecords()
         updateNotices()
+    }
+
+    private func refreshTodayRecords() {
+        let today = ledger.today.value
+        let descriptor = FetchDescriptor<SquatRecord>(
+            predicate: #Predicate { $0.day == today },
+            sortBy: [SortDescriptor(\.startedAt, order: .reverse)])
+        todayRecords = (try? context.fetch(descriptor)) ?? []
+    }
+
+    // MARK: - 今日の記録
+
+    /// 今日の記録を1件消す。昨日より前の記録と、叩いている最中は消さない
+    ///
+    /// 連続記録、休み券、DT、DPW は保存していないので、記録を読み直せば揃う。
+    /// 出した節目の札は取り消さない。数が戻るので、次にまたいだときにもう一度出る。
+    func delete(_ record: SquatRecord) {
+        guard !session.isOpen, record.day == ledger.today.value else { return }
+        context.delete(record)
+        do {
+            try context.save()
+        } catch {
+            print("SwiftData: \(error)")
+        }
+        loadRecords()
+        rescheduleReminder()
     }
 
     /// 午前4時をまたいだら計算し直す。DPW から7日前の分が抜け、連続記録や休み券が動く
     private func refreshIfDayChanged(_ date: Date) {
         guard RecordDay(date) != ledger.today else { return }
         ledger = Ledger(daily: daily, today: RecordDay(date))
+        refreshTodayRecords()
         updateNotices()
     }
 

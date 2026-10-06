@@ -151,6 +151,17 @@ tailwind.config = {
     <p class="mt-4 text-sm leading-relaxed text-ink/80">保存の形（SquatRecord の欄）は変えない。消すのは、開発者が「消す」を押した今日の記録1件だけ。</p>
   </section>
 
+  <section id="done-impl" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">実装 2026-10-06</p>
+    <h2 class="mt-2 font-display text-3xl">作ったもの</h2>
+    <ul class="mt-6 flex flex-col gap-2 text-sm leading-relaxed">
+      <li class="rounded-2xl border border-rule bg-white p-4"><code class="font-mono text-xs">AppModel</code>：今日の記録（<code class="font-mono text-xs">todayRecords</code>）を、記録を読み直すたび、閉じるたび、日をまたぐたびに作り直す。<code class="font-mono text-xs">delete(_:)</code> は今日の記録で、叩いている最中でなければ消し、読み直して今日まだ通知を予約し直す</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><code class="font-mono text-xs">Records/TodayRecordsView.swift</code>：今日の記録のシート。スワイプしきっても消えない（「消す」を押して初めて消える）</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><code class="font-mono text-xs">StreakBar</code>、<code class="font-mono text-xs">HomeView</code>：帯の左側をボタンにし、今日の記録があれば一言に回数と「›」を足す</li>
+    </ul>
+    <p class="mt-4 text-sm leading-relaxed text-ink/80">テスト45件（うち今日の記録6件）が通った。最後の1件を消すと「今日はまだ」に戻ること、7日目の記録を消すと休み券も消えること、昨日の記録と叩いている最中は消せないことを確かめている。シミュレーターでシートの見た目を確かめた。実機でのスワイプはまだ。</p>
+  </section>
+
   <section id="decisions" class="mt-20">
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">07 / decisions</p>
     <h2 class="mt-2 font-display text-3xl">決めたこと（2026-10-06 開発者がレビュー。記録を消すことにも合意）</h2>

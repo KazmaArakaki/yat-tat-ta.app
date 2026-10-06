@@ -6,6 +6,7 @@ import SwiftUI
 struct HomeView: View {
     let model: AppModel
     @State private var showsSettings = false
+    @State private var showsToday = false
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.colorScheme) private var systemScheme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
@@ -18,7 +19,8 @@ struct HomeView: View {
 
             VStack(spacing: 0) {
                 HStack(alignment: .top) {
-                    StreakBar(streak: model.ledger.streak)
+                    StreakBar(streak: model.ledger.streak, todayCount: model.todayRecords.count,
+                              openToday: { showsToday = true }, canOpenToday: !model.session.isOpen)
                         .animation(.spring(duration: 0.5, bounce: 0.4), value: model.ledger.streak)
                     Button {
                         showsSettings = true
@@ -58,6 +60,9 @@ struct HomeView: View {
         }
         .sheet(isPresented: $showsSettings) {
             SettingsView(model: model)
+        }
+        .sheet(isPresented: $showsToday) {
+            TodayRecordsView(model: model)
         }
         .onChange(of: scenePhase) { _, phase in
             switch phase {

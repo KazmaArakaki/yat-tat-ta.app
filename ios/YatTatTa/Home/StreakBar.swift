@@ -3,21 +3,39 @@ import SwiftUI
 /// 連続記録の帯。左に日数、右に休み券
 ///
 /// 今日まだなら「1回で何日目か」を出す。途切れたあとも「0日」とは出さない。
+/// 左側（日数と一言）は、今日の記録を開くボタン。叩いている最中は押せない。
 struct StreakBar: View {
     let streak: Ledger.Streak
+    /// 今日の記録の件数
+    let todayCount: Int
+    var openToday: () -> Void = {}
+    var canOpenToday = true
 
     var body: some View {
         HStack(alignment: .top) {
-            VStack(alignment: .leading, spacing: 4) {
-                headline
-                Text(subline)
+            Button(action: openToday) {
+                VStack(alignment: .leading, spacing: 4) {
+                    headline
+                    HStack(spacing: 4) {
+                        Text(subline)
+                        if todayCount > 0 {
+                            Image(systemName: "chevron.right")
+                                .font(.system(size: 10, weight: .heavy))
+                                .foregroundStyle(Color.mute)
+                        }
+                    }
                     .font(.label(13))
                     .foregroundStyle(streak.doneToday ? Color.dopa : Color.mute)
+                }
+                .contentShape(.rect)
             }
+            .buttonStyle(.plain)
+            .disabled(!canOpenToday)
+            .accessibilityElement(children: .combine)
+            .accessibilityHint(Text("今日の記録を開きます"))
             Spacer()
             restPasses
         }
-        .accessibilityElement(children: .combine)
     }
 
     @ViewBuilder private var headline: some View {
@@ -39,7 +57,7 @@ struct StreakBar: View {
     }
 
     private var subline: LocalizedStringKey {
-        if streak.doneToday { return "✓ 今日のぶんは済み" }
+        if streak.doneToday { return todayCount > 0 ? "✓ 今日のぶんは済み（\(todayCount)回）" : "✓ 今日のぶんは済み" }
         if streak.current > 0 { return "今日はまだ。1回で\(streak.nextCount)日目" }
         if streak.best > 0 { return "最長記録 \(streak.best)日" }
         return "食べたら、しゃがんで、叩く"
