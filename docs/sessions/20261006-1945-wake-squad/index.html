@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="session-state" content="planning">
-<meta name="state" content="planning">
+<meta name="session-state" content="done">
+<meta name="state" content="done">
 <title>長押しで隊を起こす</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,7 +40,7 @@ tailwind.config = {
       <time datetime="2026-10-06T19:45">2026-10-06 19:45</time>
       <span>/</span>
       <span>改修セッション</span>
-      <span class="rounded-full border border-gold bg-gold/15 px-2.5 py-0.5 font-bold text-ink">状態：planning</span>
+      <span class="rounded-full border border-signal bg-signal/10 px-2.5 py-0.5 font-bold text-ink">状態：done</span>
     </div>
     <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl">長押しで<a href="../../glossary.html#squat-squad" class="text-dopa">隊</a>を<a href="../../glossary.html#wake-up" class="text-dopa">起こす</a></h1>
   </header>
@@ -117,7 +117,7 @@ tailwind.config = {
           <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">残りが0になった</td><td class="py-3 pr-4">最後の1打で隊が倒れ込み、1人に戻って寝る。最後の1打でフィーバーが当たったら、フィーバーが終わってから</td><td class="py-3">叩き切ったら力尽きる。次の記録も、起こすところから始める</td></tr>
           <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">時間がたった</td><td class="py-3 pr-4">寝ない。起きたまま叩かなくても、60秒止まって記録が閉じても、アプリを離れても、起きたまま</td><td class="py-3">寝るのは叩き切ったときだけ（開発者が決定）。途中で閉じた記録の続きは、起こし直さずに叩ける</td></tr>
           <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">ひかえめモード</td><td class="py-3 pr-4">ばたつきと跳ねをやめ、姿勢だけを短く切り替える。長押しの0.5秒は同じ</td><td class="py-3"><a href="../../glossary.html#reduced-effects-mode" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ひかえめモード</a>の決まり。誤タップの防ぎは残す</td></tr>
-          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">VoiceOver</td><td class="py-3 pr-4">寝ているときのダブルタップで起こす。読み上げは「長押しで起こす」</td><td class="py-3">VoiceOver では長押しが操作しにくい</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">VoiceOver</td><td class="py-3 pr-4">寝ているときのダブルタップで起こす。読み上げは「完了連打。スクワット隊が寝ています」と、ヒントの「ダブルタップで起こす」</td><td class="py-3">VoiceOver では長押しが操作しにくい。「長押しで」と読み上げると、VoiceOver の操作と食い違う（実装で変えた）</td></tr>
         </tbody>
       </table>
     </div>
@@ -171,8 +171,24 @@ tailwind.config = {
     </ol>
   </section>
 
+  <section id="build" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / build</p>
+    <h2 class="mt-2 font-display text-3xl">作ったところ</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">
+      テストは48件すべて通った。足したのは4件で、寝ていれば数えない、叩き切ったら寝る、途中で閉じても起きたまま、最後の1打でフィーバーが当たったら終わるまで起きたまま。
+      シミュレーターでは、起動直後に1人が床に寝て「長押しで起こす」と出るところまで確かめた。
+      長押しの0.5秒、じたばた、跳ね、倒れ込みは、開発者が実機で触って OK とした（2026-10-06）。0.5秒もこのままでよい。
+    </p>
+    <ul class="mt-4 flex max-w-2xl flex-col gap-2 text-sm">
+      <li class="rounded-2xl border border-rule bg-white p-4">起きた音は ToneSynth の新しい音（低い音から跳ね上がる2音）。振動は「+1人」と同じトンを使った。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">押している間のじたばたは、足首を軸にした小刻みな回転。上半身は0.5秒かけて一定の速さで起きる。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">寝た姿は、隊の真ん中に来るよう、立ったときの足首より右へずらして描く。起き上がるとき、少し左へ踏み出して見える。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">docs は、完了連打、スクワット隊の見本（「寝ている・起こす」を足した）、ホームの見本（寝た状態から長押しで起きる）を直した。</li>
+    </ul>
+  </section>
+
   <section id="links" class="mt-20">
-    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / links</p>
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">07 / links</p>
     <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
     <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
       <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">機能</p><a href="../../features/done-mash/index.html#squad" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">完了連打（スクワット隊）</a></li>
