@@ -105,7 +105,8 @@
       items: [
         { label: "開発/運用一覧", path: "devops/index.html", level: 0 },
         { label: "iOS 開発環境", path: "devops/ios-dev-environment/index.html", level: 1 },
-        { label: "iOS プロジェクトの設定", path: "devops/ios-project/index.html", level: 1 }
+        { label: "iOS プロジェクトの設定", path: "devops/ios-project/index.html", level: 1 },
+        { label: "声と効果音の出どころ", path: "devops/sound-assets/index.html", level: 1 }
       ]
     },
     {

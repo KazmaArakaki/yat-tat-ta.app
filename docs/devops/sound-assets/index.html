@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>声と効果音の出どころ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: { rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } } },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-3xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <a href="../index.html" class="hover:text-dopa hover:underline">devops</a>
+      <span>/</span>
+      <span>素材</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight">声と効果音の出どころ</h1>
+    <p class="mt-3 text-sm text-mute">2026-10-06 記録。App Store の審査で素材の権利を聞かれたとき、声や効果音を足すとき、差し替えるときに開く。</p>
+  </header>
+
+    <section id="rules" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916]">
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-dopa">決まり事</p>
+      <p class="mt-3 font-bold leading-relaxed">
+        アプリに入れる声と効果音は、商用で配ってよいと確かめた出どころのものだけを使う。<br>
+        足したり差し替えたりしたら、このページの表に1行足す。
+      </p>
+    </div>
+    <dl class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <dt class="font-mono text-xs text-mute">置き場所</dt>
+        <dd class="mt-1 font-mono text-sm font-bold">ios/YatTatTa/Sounds/</dd>
+        <dd class="mt-1 text-xs text-mute">ファイル名は Feel/Sound.swift の一覧と同じにする。wav か caf。</dd>
+      </div>
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <dt class="font-mono text-xs text-mute">取得日</dt>
+        <dd class="mt-1 font-display text-lg">2026-10-06</dd>
+        <dd class="mt-1 text-xs text-mute">27ファイルすべて。開発者が生成し、置いた。</dd>
+      </div>
+    </dl>
+  </section>
+
+  <section id="sources" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">sources</p>
+    <h2 class="mt-2 font-display text-3xl">出どころと使ってよい理由</h2>
+    <div class="mt-6 overflow-x-auto rounded-2xl border border-rule bg-white">
+      <table class="w-full min-w-[30rem] text-left text-sm">
+        <thead class="border-b-2 border-ink font-mono text-xs text-mute"><tr><th class="p-3">出どころ</th><th class="p-3">使ってよい理由（2026-10-06 に規約で確認）</th><th class="p-3">クレジット表記</th></tr></thead>
+        <tbody class="[&_td]:p-3 [&_td]:align-top [&_tr]:border-b [&_tr]:border-rule">
+          <tr><td class="font-bold">Gemini 3.8 Flash TTS<br><span class="font-mono text-xs font-normal text-mute">Gemini API</span></td><td>規約に「生成したコンテンツの所有権を Google は主張しない」とある。Gemini API は、仕事や事業の目的で開発者が使うためのものとされている。</td><td>要らない</td></tr>
+          <tr><td class="font-bold">ElevenLabs<br><span class="font-mono text-xs font-normal text-mute">有料プラン</span></td><td>規約で、有料プランの人は商用の目的で使ってよい。無料プランの人は非商用に限られるので、2026-10-06 に有料プランに入ってから生成した。</td><td>有料プランなら要らない</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 rounded-lg border border-dashed border-mute bg-white/60 p-3 text-xs leading-relaxed">規約はあとから変わることがある。ストアに出す前と、素材を足すときに、もう一度読み直す。ElevenLabs は、プランをやめたあとも、在籍中に作ったものを使い続けてよいかを申請の前に確かめる（2026-10-06 時点では未確認）。</p>
+  </section>
+
+  <section id="voices" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">voices</p>
+    <h2 class="mt-2 font-display text-3xl">声（22）</h2>
+    <p class="mt-3 text-sm leading-relaxed text-ink/80">声の役は3人。実況は Fenrir、確定は Algenib、ねぎらいは Sadachbia。Style と台詞は、<a href="../../sessions/20261006-0312-main-build/index.html#fullscreen" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">本作りの設計</a>のときに Claude が書いた案を使った。</p>
+    <div class="mt-6 overflow-x-auto rounded-2xl border border-rule bg-white">
+      <table class="w-full min-w-[30rem] text-left text-sm">
+        <thead class="border-b-2 border-ink font-mono text-xs text-mute"><tr><th class="p-3">ファイル</th><th class="p-3">出どころ</th><th class="p-3">Voice</th></tr></thead>
+        <tbody class="[&_td]:p-3 [&_td]:align-top [&_tr]:border-b [&_tr]:border-rule"><tr><td class="font-mono text-xs">voice_chance.wav</td><td>Gemini 3.8 Flash TTS</td><td>Fenrir</td></tr><tr><td class="font-mono text-xs">voice_gekiatsu.wav</td><td>Gemini 3.8 Flash TTS</td><td>Fenrir</td></tr><tr><td class="font-mono text-xs">voice_push.wav</td><td>Gemini 3.8 Flash TTS</td><td>Fenrir</td></tr><tr><td class="font-mono text-xs">voice_combo.wav</td><td>Gemini 3.8 Flash TTS</td><td>Fenrir</td></tr><tr><td class="font-mono text-xs">voice_milestone_streak.wav</td><td>Gemini 3.8 Flash TTS</td><td>Fenrir</td></tr><tr><td class="font-mono text-xs">voice_milestone_dt.wav</td><td>Gemini 3.8 Flash TTS</td><td>Fenrir</td></tr><tr><td class="font-mono text-xs">voice_milestone_best.wav</td><td>Gemini 3.8 Flash TTS</td><td>Fenrir</td></tr><tr><td class="font-mono text-xs">voice_toppa.wav</td><td>Gemini 3.8 Flash TTS</td><td>Fenrir</td></tr><tr><td class="font-mono text-xs">voice_fever.wav</td><td>Gemini 3.8 Flash TTS</td><td>Fenrir</td></tr><tr><td class="font-mono text-xs">voice_rush.wav</td><td>Gemini 3.8 Flash TTS</td><td>Fenrir</td></tr><tr><td class="font-mono text-xs">voice_yattatta.wav</td><td>Gemini 3.8 Flash TTS</td><td>Algenib</td></tr><tr><td class="font-mono text-xs">voice_kakutei_1.wav</td><td>Gemini 3.8 Flash TTS</td><td>Algenib</td></tr><tr><td class="font-mono text-xs">voice_kakutei_2.wav</td><td>Gemini 3.8 Flash TTS</td><td>Algenib</td></tr><tr><td class="font-mono text-xs">voice_kakutei_3.wav</td><td>Gemini 3.8 Flash TTS</td><td>Algenib</td></tr><tr><td class="font-mono text-xs">voice_kakutei_4.wav</td><td>Gemini 3.8 Flash TTS</td><td>Algenib</td></tr><tr><td class="font-mono text-xs">voice_kakutei_5.wav</td><td>Gemini 3.8 Flash TTS</td><td>Algenib</td></tr><tr><td class="font-mono text-xs">voice_negirai_1.wav</td><td>Gemini 3.8 Flash TTS</td><td>Sadachbia</td></tr><tr><td class="font-mono text-xs">voice_negirai_2.wav</td><td>Gemini 3.8 Flash TTS</td><td>Sadachbia</td></tr><tr><td class="font-mono text-xs">voice_negirai_3.wav</td><td>Gemini 3.8 Flash TTS</td><td>Sadachbia</td></tr><tr><td class="font-mono text-xs">voice_negirai_4.wav</td><td>Gemini 3.8 Flash TTS</td><td>Sadachbia</td></tr><tr><td class="font-mono text-xs">voice_negirai_5.wav</td><td>Gemini 3.8 Flash TTS</td><td>Sadachbia</td></tr><tr><td class="font-mono text-xs">voice_restart.wav</td><td>Gemini 3.8 Flash TTS</td><td>Sadachbia</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="sfx" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">sound effects</p>
+    <h2 class="mt-2 font-display text-3xl">効果音とループ曲（7）</h2>
+    <div class="mt-6 overflow-x-auto rounded-2xl border border-rule bg-white">
+      <table class="w-full min-w-[30rem] text-left text-sm">
+        <thead class="border-b-2 border-ink font-mono text-xs text-mute"><tr><th class="p-3">ファイル</th><th class="p-3">出どころ</th><th class="p-3">種類</th></tr></thead>
+        <tbody class="[&_td]:p-3 [&_td]:align-top [&_tr]:border-b [&_tr]:border-rule"><tr><td class="font-mono text-xs">sfx_boom.wav</td><td>ElevenLabs（有料プラン）</td><td>効果音</td></tr><tr><td class="font-mono text-xs">sfx_coins.wav</td><td>ElevenLabs（有料プラン）</td><td>効果音</td></tr><tr><td class="font-mono text-xs">sfx_fanfare.wav</td><td>ElevenLabs（有料プラン）</td><td>効果音</td></tr><tr><td class="font-mono text-xs">sfx_flame.wav</td><td>ElevenLabs（有料プラン）</td><td>効果音</td></tr><tr><td class="font-mono text-xs">sfx_bgm_mash.wav</td><td>ElevenLabs（有料プラン）</td><td>ループ曲</td></tr><tr><td class="font-mono text-xs">sfx_bgm_hot.wav</td><td>ElevenLabs（有料プラン）</td><td>ループ曲</td></tr><tr><td class="font-mono text-xs">sfx_bgm_fever.wav</td><td>ElevenLabs（有料プラン）</td><td>ループ曲</td></tr></tbody>
+      </table>
+    </div>
+    <p class="mt-4 text-xs leading-relaxed text-mute">リールの音（sfx_reel_spin、sfx_reel_stop）と voice_dopa_777 は、ドパ揃いをやめたときに消した。アプリには入っていない。</p>
+  </section>
+
+  <section id="add" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">how to add</p>
+    <h2 class="mt-2 font-display text-3xl">足すとき、差し替えるとき</h2>
+    <ol class="mt-6 flex flex-col gap-3 text-sm">
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">1</span><div>出どころの規約で、商用で配ってよいかを確かめる。無料プランでは使えないところがある（ElevenLabs など）</div></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">2</span><div>決まったファイル名で <code class="font-mono text-xs">ios/YatTatTa/Sounds/</code> に置き、<code class="font-mono text-xs">xcodegen generate</code> をやり直す。頭と終わりの無音は、アプリが読むときに切る</div></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">3</span><div>このページの表に、ファイル名、出どころ、取得日を書き足す</div></li>
+    </ol>
+  </section>
+
+  <section id="related" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">related</p>
+    <h2 class="mt-2 font-display text-3xl">関連</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">セッション</p><a href="../../sessions/20261006-0312-main-build/index.html#fullscreen" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">本作りの設計（表1-5 アセットの一覧）</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">devops</p><a href="../ios-project/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">iOS プロジェクトの設定（声と効果音の足し方）</a></li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>
