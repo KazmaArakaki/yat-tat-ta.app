@@ -47,6 +47,14 @@ import SwiftData
     private(set) var rainbow = false
     /// 今日（記録日）の記録。新しい順。今日の記録のシートに並べ、そこから消せる
     private(set) var todayRecords: [SquatRecord] = []
+    /// いま出しているスプラッシュ。消えたら nil
+    private(set) var splash: Splash?
+    /// スプラッシュを出した記録日。同じ日に開き直しても出さない
+    @ObservationIgnored private var splashDay: RecordDay?
+    #if DEBUG
+    /// 計測モードと演出の見本では、スプラッシュを出さない
+    @ObservationIgnored var splashPaused = false
+    #endif
 
     @ObservationIgnored let feel = FeelEngine()
     @ObservationIgnored private let context: ModelContext
@@ -213,7 +221,39 @@ import SwiftData
     func sceneDidBecomeActive() {
         refreshIfDayChanged(now())
         rescheduleReminder()
+        presentSplashIfNeeded()
     }
+
+    // MARK: - スプラッシュ
+
+    /// 起動したときと、その日いちばん初めに開いたときに出す。叩いている最中とフィナーレの途中は出さない
+    ///
+    /// まだ1度も叩いていない人の最初の1回だけは、はじめての幕にする。
+    func presentSplashIfNeeded() {
+        #if DEBUG
+        if splashPaused { return }
+        #endif
+        guard splashDay != ledger.today, splash == nil, !session.isOpen, finale == nil else { return }
+        splashDay = ledger.today
+        var kind = Splash.Kind.regular
+        if !defaults.bool(forKey: SettingKey.introShown) {
+            defaults.set(true, forKey: SettingKey.introShown)
+            // 記録がある人（はじめての幕より前から使っている人）には、やって見せなくてよい
+            if ledger.dopaTotal == 0 { kind = .intro }
+        }
+        splash = Splash(kind: kind, streak: ledger.streak, today: ledger.today)
+    }
+
+    func finishSplash() {
+        splash = nil
+    }
+
+    #if DEBUG
+    /// 見本。出す条件を見ずに出す
+    func showSplash(_ kind: Splash.Kind) {
+        splash = Splash(kind: kind, streak: ledger.streak, today: ledger.today)
+    }
+    #endif
 
     private func scheduleIdleClose() {
         idleTask?.cancel()

@@ -10,6 +10,10 @@ struct StreakBar: View {
     let todayCount: Int
     var openToday: () -> Void = {}
     var canOpenToday = true
+    /// スプラッシュの数が飛んでくるあいだは、日数の数字を隠す。着いた瞬間に入れ替わる
+    var hidesNumber = false
+    /// 日数の数字の位置（画面全体の座標）。スプラッシュの数が飛ぶ先
+    var onNumberFrame: (CGRect) -> Void = { _ in }
 
     var body: some View {
         HStack(alignment: .top) {
@@ -45,12 +49,14 @@ struct StreakBar: View {
                     .font(.number(44))
                     .foregroundStyle(Color.dopa)
                     .contentTransition(.numericText(value: Double(streak.current)))
+                    .modifier(NumberSlot(hidden: hidesNumber, report: onNumberFrame))
                 Text("日連続").font(.label(15, black: true))
             }
         } else {
             HStack(alignment: .firstTextBaseline, spacing: 2) {
                 Text(streak.best > 0 ? "今日の1回で" : "最初の1回で").font(.label(15, black: true))
                 Text(verbatim: "1").font(.number(44)).foregroundStyle(Color.dopa)
+                    .modifier(NumberSlot(hidden: hidesNumber, report: onNumberFrame))
                 Text("日目").font(.label(15, black: true))
             }
         }
@@ -81,5 +87,17 @@ struct StreakBar: View {
             }
         }
         .accessibilityLabel(Text("休み券 \(streak.restPasses)枚"))
+    }
+}
+
+/// 日数の数字の位置を知らせ、スプラッシュの数が飛んでくるあいだは隠す
+private struct NumberSlot: ViewModifier {
+    let hidden: Bool
+    let report: (CGRect) -> Void
+
+    func body(content: Content) -> some View {
+        content
+            .opacity(hidden ? 0 : 1)
+            .onGeometryChange(for: CGRect.self) { $0.frame(in: .global) } action: { report($0) }
     }
 }

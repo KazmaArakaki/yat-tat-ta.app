@@ -253,7 +253,7 @@ targets:
       <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4">
         <span class="font-display text-2xl text-mute">5</span>
         <div class="min-w-0"><p class="font-bold">演出を叩かずに出す（Debug ビルドだけ）</p>
-          <p class="mt-1 text-ink/80">シミュレーターでは連打できないので、起動引数で演出の画面を出す。名前は chance、hot、push、reels、gold、kakutei、negirai、heavy（一番重い場面）。Xcode なら Scheme の Run の Arguments に <code class="font-mono text-xs">-demo heavy</code> のように足す。処理落ちを測るときは <code class="font-mono text-xs">-perf</code>（<a href="../perf-check/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">処理落ちの確かめ方</a>）。</p>
+          <p class="mt-1 text-ink/80">シミュレーターでは連打できないので、起動引数で演出の画面を出す。名前は chance、hot、push、reels、gold、kakutei、negirai、heavy（一番重い場面）、splash（ふつうのスプラッシュ）、intro（はじめての幕）。スプラッシュは <code class="font-mono text-xs">-splashAt 1.0</code> を足すと、その秒で止まって消えない（見た目の確認用）。<code class="font-mono text-xs">-perf -demo splash</code> なら、30日分の仮の記録で隊列が並ぶ。Xcode なら Scheme の Run の Arguments に <code class="font-mono text-xs">-demo heavy</code> のように足す。処理落ちを測るときは <code class="font-mono text-xs">-perf</code>（<a href="../perf-check/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">処理落ちの確かめ方</a>）。</p>
           <pre class="mt-2 overflow-x-auto rounded-lg bg-ink p-3 font-mono text-xs text-white">xcrun simctl launch --terminate-running-process booted com.yat-tat-ta -demo kakutei</pre></div>
       </li>
       <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4">

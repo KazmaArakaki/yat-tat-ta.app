@@ -39,12 +39,20 @@ struct SquatFigure: View {
     }
 
     private func draw(in context: inout GraphicsContext, k: CGFloat, squat: CGFloat) {
+        Self.draw(in: context, foot: CGPoint(x: -Self.canvas.minX * k, y: -Self.canvas.minY * k), k: k, squat: squat, color: color)
+    }
+
+    /// 人形を1人描く。スプラッシュの隊列のように、1枚の Canvas に何人も描くときにも使う
+    ///
+    /// foot はかかと（点の原点）を置く位置。k は点1つぶんの大きさ。squat は 0 が立った姿、1 がしゃがんだ姿。
+    static func draw(in context: GraphicsContext, foot: CGPoint, k: CGFloat, squat: CGFloat, color: Color) {
         let a = SquatterLayer.stand, b = SquatterLayer.squat
         let mix = { (p: CGPoint, q: CGPoint) in CGPoint(x: p.x + (q.x - p.x) * squat, y: p.y + (q.y - p.y) * squat) }
         let legs = zip(a.legs, b.legs).map(mix)
         let arm = zip(a.arm, b.arm).map(mix)
         let head = mix(a.head, b.head)
-        context.translateBy(x: -Self.canvas.minX * k, y: -Self.canvas.minY * k)
+        var context = context
+        context.translateBy(x: foot.x, y: foot.y)
         context.scaleBy(x: k, y: k)
         var limbs = Path()
         limbs.addLines(legs)

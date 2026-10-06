@@ -54,6 +54,8 @@ final class FeelEngine {
     private var milestoneHaptic: CHHapticPatternPlayer?
     private var hotHaptic: CHHapticPatternPlayer?
     private var buzzes: [Buzz: CHHapticPatternPlayer] = [:]
+    /// スプラッシュの拍。飛ばしたら止めて、残りだけを鳴らし直す
+    private var beatPlayer: CHHapticPatternPlayer?
 
     /// 画面全体の演出に合わせる振動
     enum Buzz: CaseIterable {
@@ -242,6 +244,33 @@ final class FeelEngine {
     func wake() {
         play(wakeBuffer)
         buzz(.reelStop)
+    }
+
+    /// スプラッシュの拍。at 秒後に、軽い振動か（strong なら）中くらいの振動。音は出さない
+    ///
+    /// 絵と振動がずれないよう、1つの模様にまとめて鳴らす。呼ぶたびに、前の模様の残りは止める。
+    struct Beat: Equatable {
+        let at: TimeInterval
+        let strong: Bool
+    }
+
+    func beats(_ beats: [Beat]) {
+        try? beatPlayer?.stop(atTime: CHHapticTimeImmediate)
+        beatPlayer = nil
+        guard let engine = hapticEngine, !beats.isEmpty else { return }
+        let events = beats.map { beat in
+            CHHapticEvent(eventType: .hapticTransient, parameters: [
+                .init(parameterID: .hapticIntensity, value: beat.strong ? 0.8 : 0.45),
+                .init(parameterID: .hapticSharpness, value: beat.strong ? 0.6 : 0.4),
+            ], relativeTime: max(0, beat.at))
+        }
+        do {
+            let player = try engine.makePlayer(with: CHHapticPattern(events: events, parameters: []))
+            try player.start(atTime: CHHapticTimeImmediate)
+            beatPlayer = player
+        } catch {
+            print("CHHapticEngine: \(error)")
+        }
     }
 
     /// 連打の途中でまたいだ節目。札1枚ぶん

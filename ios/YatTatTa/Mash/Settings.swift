@@ -18,6 +18,8 @@ enum SettingKey {
     static let kakuteiCount = "kakuteiCount"
     /// ねぎらいの言葉を何回回したか
     static let negiraiCount = "negiraiCount"
+    /// はじめての幕を出したか。1度きり
+    static let introShown = "introShown"
 }
 
 enum TargetReps {

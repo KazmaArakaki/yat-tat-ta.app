@@ -14,6 +14,8 @@ struct HomeView: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     /// PUSH のあいだ、叩くたびに画面をわずかに膨らませる
     @State private var swell = false
+    /// 帯の日数の数字の位置。スプラッシュの数が飛ぶ先
+    @State private var streakNumberFrame: CGRect?
 
     var body: some View {
         ZStack {
@@ -22,7 +24,9 @@ struct HomeView: View {
             VStack(spacing: 0) {
                 HStack(alignment: .top) {
                     StreakBar(streak: model.ledger.streak, todayCount: model.todayRecords.count,
-                              openToday: { showsToday = true }, canOpenToday: !model.session.isOpen)
+                              openToday: { showsToday = true }, canOpenToday: !model.session.isOpen,
+                              hidesNumber: model.splash != nil && !reduceMotion,
+                              onNumberFrame: { streakNumberFrame = $0 })
                         .animation(.spring(duration: 0.5, bounce: 0.4), value: model.ledger.streak)
                     Button {
                         showsSettings = true
@@ -51,6 +55,8 @@ struct HomeView: View {
             .scaleEffect(swell ? 1.025 : 1)
 
             overlays
+
+            splash
         }
         .foregroundStyle(Color.ink)
         #if DEBUG
@@ -76,6 +82,25 @@ struct HomeView: View {
             case .inactive, .background: model.sceneDidLeave()
             @unknown default: break
             }
+        }
+    }
+
+    /// スプラッシュ。ほかの重ね物より上に置き、消えるまで叩いても数えない
+    @ViewBuilder private var splash: some View {
+        if let splash = model.splash {
+            Group {
+                switch splash.kind {
+                case .regular:
+                    SplashOverlay(splash: splash, target: streakNumberFrame,
+                                  beats: { model.feel.beats($0) }, finish: { model.finishSplash() })
+                case .intro:
+                    IntroSplash(target: streakNumberFrame,
+                                beats: { model.feel.beats($0) }, finish: { model.finishSplash() })
+                }
+            }
+            .id(splash.id)
+            // 引き継ぎで数が帯に着いたら、そのまま消す
+            .transition(.identity)
         }
     }
 
@@ -109,6 +134,13 @@ struct HomeView: View {
                 .allowsHitTesting(false)
         }
 
+        // 休み券の帯、途切れたときのカード、通知の問いかけは、スプラッシュが消えてから出す
+        if model.splash == nil {
+            notices
+        }
+    }
+
+    @ViewBuilder private var notices: some View {
         if let notice = model.restPassNotice {
             VStack {
                 RestPassBanner(notice: notice)

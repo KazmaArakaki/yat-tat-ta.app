@@ -7,8 +7,11 @@ import Foundation
 /// 例：`xcrun simctl launch booted com.yat-tat-ta -demo kakutei`
 extension AppModel {
     enum Demo: String {
-        case chance, hot, push, toppa, gold, fever, kakutei, negirai, heavy, squad
+        case chance, hot, push, toppa, gold, fever, kakutei, negirai, heavy, squad, splash, intro
     }
+
+    /// 見本の起動か。見本では、ふつうのスプラッシュを出さない
+    static var demoRequested: Bool { ProcessInfo.processInfo.arguments.contains("-demo") }
 
     func runDemoFromLaunchArguments() {
         let args = ProcessInfo.processInfo.arguments
@@ -25,6 +28,8 @@ extension AppModel {
         case .toppa: setDemoToppa(ToppaEvent(value: 300, gold: false))
         case .gold: setDemoToppa(ToppaEvent(value: 1_000, gold: true))
         case .fever: setDemoFever()
+        case .splash: showSplash(.regular)
+        case .intro: showSplash(.intro)
         case .squad:
             // 目標100で、残り3（PUSH）まで叩いた隊。20人
             targetReps = 100

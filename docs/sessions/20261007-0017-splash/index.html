@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="session-state" content="planning">
-<meta name="state" content="planning">
+<meta name="session-state" content="developing">
+<meta name="state" content="developing">
 <title>スプラッシュを作る</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -74,7 +74,7 @@ tailwind.config = {
       <time datetime="2026-10-07T00:17">2026-10-07 00:17</time>
       <span>/</span>
       <span>設計セッション</span>
-      <span class="rounded-full border border-gold bg-gold/15 px-2.5 py-0.5 font-bold text-ink">状態：planning</span>
+      <span class="rounded-full border border-gold bg-gold/15 px-2.5 py-0.5 font-bold text-ink">状態：developing</span>
     </div>
     <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl"><a href="../../glossary.html#splash" class="text-dopa">スプラッシュ</a>を作る</h1>
   </header>
@@ -269,8 +269,27 @@ tailwind.config = {
     </ol>
   </section>
 
+  <section id="build" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">12 / build</p>
+    <h2 class="mt-2 font-display text-3xl">作ったところ</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">
+      テストは69件すべて通った。足したのは Lineup の8件で、今日の席が今日の曜日の列に来ること（日曜始まりと月曜始まり）、今日済みの人形、休み券の日を挟むこと、連続より古い休み券を並べないこと、途切れたあととはじめては今日の席だけ、29日で5週、100日で8週にまとめること。
+      シミュレーター（iPhone 17）では、ふつうの幕、30日分の隊列（-perf -demo splash）、はじめての幕の場面ごと、暗い配色を、秒を止めて確かめた。入れ直して起動すると、はじめての幕が出て14秒でホームに移り、開き直すとふつうの幕になることも確かめた。
+      振動の3拍と、叩いて飛ばす手触りは、まだ実機で確かめていない。
+    </p>
+    <ul class="mt-4 flex max-w-2xl flex-col gap-2 text-sm">
+      <li class="rounded-2xl border border-rule bg-white p-4">スプラッシュは HomeView のいちばん上に重ねる。AppModel.splash があるあいだ、休み券の帯、途切れたときのカード、通知の問いかけは出さない。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">出すかどうかは AppModel.presentSplashIfNeeded。起動したとき（App の init、最初の1枚から重ねる）と、戻ってきたときに呼び、記録日が前に出した日と同じなら出さない。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">はじめての幕は、introShown が立っていなくて、記録が1件もないときだけ。前から使っている人には、introShown を立てるだけで、ふつうの幕を出す。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">数の飛ぶ先は、帯の数字が onGeometryChange で知らせる画面上の位置。幕の数は置き場所だけを取り、見える数を上に重ねて飛ばす（飛ぶ動きで測る位置がずれないように）。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">人形の描き方は SquatFigure.draw に切り出し、履歴の人形と隊列とで共有した。起動画面の地は色 LaunchBackground（Info.plist の UILaunchScreen）。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">見た目の確認用に、起動引数 <code class="font-mono text-xs">-demo splash</code>、<code class="font-mono text-xs">-demo intro</code>、<code class="font-mono text-xs">-splashAt 秒</code> を足した（<a href="../../devops/ios-project/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">iOS プロジェクト</a>）。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">文言12件に英語を入れ、<a href="../../devops/localization/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">訳語表</a>に足した。</li>
+    </ul>
+  </section>
+
   <section id="links" class="mt-20">
-    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">11 / links</p>
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">13 / links</p>
     <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
     <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
       <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">機能</p><a href="../../features/splash/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スプラッシュ</a></li>

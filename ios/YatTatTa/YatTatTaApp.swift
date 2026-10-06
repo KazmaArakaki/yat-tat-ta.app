@@ -30,6 +30,7 @@ import SwiftUI
             try? container.mainContext.save()
             let model = AppModel(context: container.mainContext, defaults: PerfSeed.defaults())
             model.remindersPaused = true
+            model.splashPaused = true
             let draw = feverDraw
             model.draw = { draw.next() }
             let monitor = PerfMonitor()
@@ -54,6 +55,11 @@ import SwiftUI
         #endif
         let model = AppModel(context: container.mainContext)
         model.feel.start()
+        #if DEBUG
+        model.splashPaused = AppModel.demoRequested
+        #endif
+        // 最初の1枚から幕を重ねる。ホームが一瞬見えてから幕が出ないように
+        model.presentSplashIfNeeded()
         _model = State(initialValue: model)
     }
 
