@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>今日の記録</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } },
+        pulse2: { '0%,100%': { transform: 'scale(1)' }, '50%': { transform: 'scale(1.04)' } }
+      },
+      animation: { rise: 'rise .5s ease-out both', pulse2: 'pulse2 1.6s ease-in-out infinite' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-4xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <a href="../index.html" class="hover:text-ink">features</a><span>/</span><span>ふり返って続ける</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">今日の記録</span></h1>
+    <p class="mt-4 max-w-2xl text-base leading-relaxed">今日叩いた<a href="../../glossary.html#record" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録</a>を並べ、間違えてできた1件を消す。消したあとの数は、残った記録から計算し直します。2026-10-06 決定。</p>
+  </header>
+
+  <section id="rules" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01 / rules</p>
+    <h2 class="mt-2 font-display text-3xl">決まりごと</h2>
+    <p class="mt-8 font-mono text-xs text-mute">表1　開き方と消し方</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[34rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">項目</th><th class="py-2 pr-4 font-bold">決まり</th><th class="py-2 pr-4 font-bold">理由</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">開く</td><td class="py-3 pr-4"><a href="../../glossary.html#streak" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">連続記録</a>の帯の左側（日数と下の一言）を押す。下からシートが出る</td><td class="py-3 pr-4">ホームに部品を足さない。「今日のぶんは済み」から今日の中身へつながる。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">並ぶもの</td><td class="py-3 pr-4">今日（<a href="../../glossary.html#record-day" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録日</a>、午前4時区切り）の記録。新しい順。時刻、回数、フィーバーのドパ</td><td class="py-3 pr-4">消したくなる間違いは、どれもその日のうちに気づく。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">消す</td><td class="py-3 pr-4">左へスワイプして「消す」。確かめの問いは挟まない。元に戻す手段はない</td><td class="py-3 pr-4">スワイプと押すことで2手。間違えて消しても、叩き直せば同じ日の記録になる。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">消せない</td><td class="py-3 pr-4">昨日より前の記録。叩いている最中の連打</td><td class="py-3 pr-4">過去を消すと、休み券が使われ直し、連続記録が過去にさかのぼって途切れることがある。</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-bold">消したあと</td><td class="py-3 pr-4">連続記録、<a href="../../glossary.html#rest-pass" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">休み券</a>、<a href="../../glossary.html#dt" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">DT</a>、<a href="../../glossary.html#dpw" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">DPW</a>を計算し直す。今日まだ通知を予約し直す。演出は出さない</td><td class="py-3 pr-4">どれも保存せず記録から計算しているので、記録1件を消せば揃う。</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">届いた<a href="../../glossary.html#milestone" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">節目</a>の札は、出したまま取り消しません。DT や連続記録が戻るので、次にまたいだときにもう一度出ます。</p>
+  </section>
+
+  <section id="screens" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / screens</p>
+    <h2 class="mt-2 font-display text-3xl">関連する画面</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><a href="../../ui/pages/home/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ホーム</a><p class="mt-1 text-ink/80">連続記録の帯の左側が入り口。今日の記録があれば、一言に回数と「›」が付く。</p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><a href="../../ui/pages/today-records/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日の記録</a><p class="mt-1 text-ink/80">下から出すシート。今日の記録が新しい順に並ぶ。</p></li>
+    </ul>
+  </section>
+
+  <section id="components" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / components</p>
+    <h2 class="mt-2 font-display text-3xl">関連するコンポーネント</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">サンプル：30日連続、今日2件（12:41 に20回、08:05 に20回とフィーバー12）。</p>
+    <div class="mt-6 grid gap-6 md:grid-cols-2">
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <div class="flex items-baseline justify-between"><a href="../../ui/components/streak-bar/index.html" class="font-mono text-xs font-bold text-dopa underline underline-offset-4">streak-bar</a><span class="font-mono text-[11px] text-mute">今日はもう叩いた</span></div>
+        <div class="mt-4 rounded-2xl bg-paper p-4">
+          <div class="flex items-center justify-between">
+            <div><p class="font-display text-3xl leading-none text-dopa">30<span class="ml-1 text-sm text-ink">日連続</span></p><p class="mt-1 text-xs font-bold text-dopa">✓ 今日のぶんは済み（2回）<span class="ml-1 text-mute">›</span></p></div>
+            <p class="flex items-center gap-1 text-[11px] text-mute">休み券<span class="h-3 w-3 rounded-sm bg-signal"></span><span class="h-3 w-3 rounded-sm bg-signal"></span></p>
+          </div>
+        </div>
+      </div>
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <div class="flex items-baseline justify-between"><span class="font-mono text-xs font-bold text-dopa">today-records</span><span class="font-mono text-[11px] text-mute">2件</span></div>
+        <div class="mt-4 rounded-2xl bg-paper p-4">
+          <p class="text-sm font-black">今日の記録 <span class="ml-1 text-[11px] font-bold text-mute">2件　52ドパ</span></p>
+          <div class="mt-3 overflow-hidden rounded-xl border-2 border-ink bg-white text-sm">
+            <div class="flex justify-between px-3 py-2"><span class="font-mono font-bold">12:41</span><span class="font-bold">20回</span></div>
+            <div class="flex justify-between border-t-2 border-rule px-3 py-2"><span class="font-mono font-bold">08:05</span><span class="font-bold">20回 <span class="ml-1 rounded-full bg-dopa-soft px-1.5 text-[10px] text-dopa">+12 フィーバー</span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="links" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / links</p>
+    <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">設計の経緯</p><a href="../../sessions/20261006-1523-today-records/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日の記録から取り消す</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">消すデータ</p><a href="../../database/squat-record/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">SquatRecord</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../glossary.html#today-records" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">今日の記録</a><a href="../../glossary.html#record" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">記録</a><a href="../../glossary.html#record-day" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">記録日</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">ほかの機能</p><a href="../streak/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">連続記録と休み券</a><a href="../done-mash/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">完了連打</a></li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

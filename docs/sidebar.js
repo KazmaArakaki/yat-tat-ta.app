@@ -10,6 +10,10 @@
   // セッション一覧（新しい順）。新しいセッションは先頭に足す。
   var sessions = [
     {
+      path: "sessions/20261006-1523-today-records/index.html",
+      label: "10/06 今日の記録から取り消す"
+    },
+    {
       path: "sessions/20261006-1312-heavy-effects/index.html",
       label: "10/06 処理落ちを確かめる"
     },
@@ -85,7 +89,8 @@
         { label: "完了連打", path: "features/done-mash/index.html", level: 1 },
         { label: "ドパの合計", path: "features/dopa-totals/index.html", level: 1 },
         { label: "連続記録と休み券", path: "features/streak/index.html", level: 1 },
-        { label: "今日まだ通知", path: "features/today-reminder/index.html", level: 1 }
+        { label: "今日まだ通知", path: "features/today-reminder/index.html", level: 1 },
+        { label: "今日の記録", path: "features/today-records/index.html", level: 1 }
       ]
     },
     {
@@ -98,7 +103,8 @@
         { label: "フィーバータイム", path: "ui/components/fever/index.html", level: 1 },
         { label: "ページ一覧", path: "ui/pages/index.html", level: 0 },
         { label: "ホーム", path: "ui/pages/home/index.html", level: 1 },
-        { label: "設定シート", path: "ui/pages/settings/index.html", level: 1 }
+        { label: "設定シート", path: "ui/pages/settings/index.html", level: 1 },
+        { label: "今日の記録", path: "ui/pages/today-records/index.html", level: 1 }
       ]
     },
     {
