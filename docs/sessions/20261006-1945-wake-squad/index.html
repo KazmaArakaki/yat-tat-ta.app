@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="session-state" content="planning">
+<meta name="state" content="planning">
+<title>長押しで隊を起こす</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: { rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } } },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-4xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <time datetime="2026-10-06T19:45">2026-10-06 19:45</time>
+      <span>/</span>
+      <span>改修セッション</span>
+      <span class="rounded-full border border-gold bg-gold/15 px-2.5 py-0.5 font-bold text-ink">状態：planning</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl">長押しで<a href="../../glossary.html#squat-squad" class="text-dopa">隊</a>を<a href="../../glossary.html#wake-up" class="text-dopa">起こす</a></h1>
+  </header>
+
+  <section id="result" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="relative overflow-hidden rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916] sm:p-8">
+      <div class="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-dopa-soft"></div>
+      <p class="relative font-mono text-xs uppercase tracking-[0.2em] text-dopa">開発者の注文</p>
+      <p class="relative mt-6 font-display text-3xl tracking-wide sm:text-4xl">寝ている → 長押しで起きる → 叩いてしゃがむ</p>
+      <p class="relative mt-6 text-lg font-bold leading-relaxed">
+        今は、叩く場所に指が触れた瞬間に記録が開く。<br>
+        ポケットの中で画面に触れても、1打目になってしまう。<br>
+        隊を寝かせておけば、起こす手間がそのまま誤タップの防ぎになる。起き上がる動きは、見ていておもしろい。
+      </p>
+    </div>
+  </section>
+
+  <section id="motion" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01 / motion</p>
+    <h2 class="mt-2 font-display text-3xl">動きの見本</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">6秒で1巡します。寝ている1人を長押しで起こし、目標4回を叩き切って、倒れ込んで寝るまで。ピンクの点は指の位置で、画面には出ません。</p>
+    <div class="mt-6 grid items-start gap-6 lg:grid-cols-[1fr_16rem]">
+      <div class="relative overflow-hidden rounded-3xl border-2 border-ink bg-paper shadow-[8px_8px_0_#1C1916]">
+        <svg viewBox="-150 -135 300 190" class="block w-full" role="img" aria-label="スクワット隊の1人が、寝た姿から長押しで起き上がり、叩くたびにしゃがむ動き">
+          <line x1="-150" y1="12" x2="150" y2="12" stroke="#E7DDCC" stroke-width="2"/>
+          <text x="0" y="45" text-anchor="middle" font-family="Noto Sans JP" font-weight="900" font-size="15" fill="#6E655C">
+            <tspan>長押しで起こす<animate attributeName="opacity" dur="6s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.2917;0.5833" values="1;0;1"/></tspan>
+          </text>
+          <text x="0" y="45" text-anchor="middle" font-family="Noto Sans JP" font-weight="900" font-size="15" fill="#E5337A" opacity="0">叩いてしゃがむ<animate attributeName="opacity" dur="6s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.2917;0.5833" values="0;1;0"/></text>
+          <g transform="translate(0,10) scale(1.3)">
+            <g>
+              <animateTransform attributeName="transform" type="translate" dur="6s" repeatCount="indefinite" keyTimes="0;0.2917;0.3083;0.3250;1" values="0,0;0,0;0,-9;0,0;0,0"/>
+              <polyline points="44,-14 40,-7 19,-7 -2,-7 -32,-7" fill="none" stroke="#1C1916" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"><animate attributeName="points" dur="6s" repeatCount="indefinite" keyTimes="0.0000;0.1667;0.1867;0.2067;0.2267;0.2500;0.2917;0.4000;0.4133;0.4333;0.4583;0.4783;0.5000;0.5200;0.5450;0.5833;1.0000" values="44,-14 40,-7 19,-7 -2,-7 -32,-7;44,-14 40,-7 19,-7 -2,-7 -32,-7;46,-18 40,-7 19,-7 -2,-7 -4,-30;42,-10 40,-7 19,-7 -2,-7 0,-33;46,-18 40,-7 19,-7 -2,-7 -4,-30;44,-14 40,-7 19,-7 -2,-7 4,-36;12,0 0,0 0,-21 0,-42 0,-72;12,0 0,0 0,-21 0,-42 0,-72;12,0 0,0 15,-15 -7,-25 3,-55;12,0 0,0 0,-21 0,-42 0,-72;12,0 0,0 15,-15 -7,-25 3,-55;12,0 0,0 0,-21 0,-42 0,-72;12,0 0,0 15,-15 -7,-25 3,-55;12,0 0,0 0,-21 0,-42 0,-72;12,0 0,0 15,-15 -7,-25 3,-55;44,-14 40,-7 19,-7 -2,-7 -32,-7;44,-14 40,-7 19,-7 -2,-7 -32,-7"/></polyline><polyline points="-32,-7 -18,-3 -6,-3" fill="none" stroke="#1C1916" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"><animate attributeName="points" dur="6s" repeatCount="indefinite" keyTimes="0.0000;0.1667;0.1867;0.2067;0.2267;0.2500;0.2917;0.4000;0.4133;0.4333;0.4583;0.4783;0.5000;0.5200;0.5450;0.5833;1.0000" values="-32,-7 -18,-3 -6,-3;-32,-7 -18,-3 -6,-3;-4,-30 4,-44 10,-58;0,-33 -10,-44 -18,-56;-4,-30 4,-44 10,-58;4,-36 16,-26 26,-18;0,-72 4,-58 6,-46;0,-72 4,-58 6,-46;3,-55 17,-55 31,-56;0,-72 4,-58 6,-46;3,-55 17,-55 31,-56;0,-72 4,-58 6,-46;3,-55 17,-55 31,-56;0,-72 4,-58 6,-46;3,-55 17,-55 31,-56;-32,-7 -18,-3 -6,-3;-32,-7 -18,-3 -6,-3"/></polyline><polyline points="44,-14 40,-7 19,-7 -2,-7 -32,-7" fill="none" stroke="#E9A800" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"><animate attributeName="points" dur="6s" repeatCount="indefinite" keyTimes="0.0000;0.1667;0.1867;0.2067;0.2267;0.2500;0.2917;0.4000;0.4133;0.4333;0.4583;0.4783;0.5000;0.5200;0.5450;0.5833;1.0000" values="44,-14 40,-7 19,-7 -2,-7 -32,-7;44,-14 40,-7 19,-7 -2,-7 -32,-7;46,-18 40,-7 19,-7 -2,-7 -4,-30;42,-10 40,-7 19,-7 -2,-7 0,-33;46,-18 40,-7 19,-7 -2,-7 -4,-30;44,-14 40,-7 19,-7 -2,-7 4,-36;12,0 0,0 0,-21 0,-42 0,-72;12,0 0,0 0,-21 0,-42 0,-72;12,0 0,0 15,-15 -7,-25 3,-55;12,0 0,0 0,-21 0,-42 0,-72;12,0 0,0 15,-15 -7,-25 3,-55;12,0 0,0 0,-21 0,-42 0,-72;12,0 0,0 15,-15 -7,-25 3,-55;12,0 0,0 0,-21 0,-42 0,-72;12,0 0,0 15,-15 -7,-25 3,-55;44,-14 40,-7 19,-7 -2,-7 -32,-7;44,-14 40,-7 19,-7 -2,-7 -32,-7"/></polyline><polyline points="-32,-7 -18,-3 -6,-3" fill="none" stroke="#E9A800" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"><animate attributeName="points" dur="6s" repeatCount="indefinite" keyTimes="0.0000;0.1667;0.1867;0.2067;0.2267;0.2500;0.2917;0.4000;0.4133;0.4333;0.4583;0.4783;0.5000;0.5200;0.5450;0.5833;1.0000" values="-32,-7 -18,-3 -6,-3;-32,-7 -18,-3 -6,-3;-4,-30 4,-44 10,-58;0,-33 -10,-44 -18,-56;-4,-30 4,-44 10,-58;4,-36 16,-26 26,-18;0,-72 4,-58 6,-46;0,-72 4,-58 6,-46;3,-55 17,-55 31,-56;0,-72 4,-58 6,-46;3,-55 17,-55 31,-56;0,-72 4,-58 6,-46;3,-55 17,-55 31,-56;0,-72 4,-58 6,-46;3,-55 17,-55 31,-56;-32,-7 -18,-3 -6,-3;-32,-7 -18,-3 -6,-3"/></polyline><circle cx="-46" cy="-12" r="12" fill="#1C1916"><animate attributeName="cx" dur="6s" repeatCount="indefinite" keyTimes="0.0000;0.1667;0.1867;0.2067;0.2267;0.2500;0.2917;0.4000;0.4133;0.4333;0.4583;0.4783;0.5000;0.5200;0.5450;0.5833;1.0000" values="-46;-46;0;5;0;10;2;2;7;2;7;2;7;2;7;-46;-46"/><animate attributeName="cy" dur="6s" repeatCount="indefinite" keyTimes="0.0000;0.1667;0.1867;0.2067;0.2267;0.2500;0.2917;0.4000;0.4133;0.4333;0.4583;0.4783;0.5000;0.5200;0.5450;0.5833;1.0000" values="-12;-12;-44;-47;-44;-50;-86;-86;-69;-86;-69;-86;-69;-86;-69;-12;-12"/></circle><circle cx="-46" cy="-12" r="8.5" fill="#E9A800"><animate attributeName="cx" dur="6s" repeatCount="indefinite" keyTimes="0.0000;0.1667;0.1867;0.2067;0.2267;0.2500;0.2917;0.4000;0.4133;0.4333;0.4583;0.4783;0.5000;0.5200;0.5450;0.5833;1.0000" values="-46;-46;0;5;0;10;2;2;7;2;7;2;7;2;7;-46;-46"/><animate attributeName="cy" dur="6s" repeatCount="indefinite" keyTimes="0.0000;0.1667;0.1867;0.2067;0.2267;0.2500;0.2917;0.4000;0.4133;0.4333;0.4583;0.4783;0.5000;0.5200;0.5450;0.5833;1.0000" values="-12;-12;-44;-47;-44;-50;-86;-86;-69;-86;-69;-86;-69;-86;-69;-12;-12"/></circle>
+            </g>
+          </g>
+          <circle cx="50" cy="-50" r="14" fill="#E5337A" opacity="0">
+            <animate attributeName="opacity" dur="6s" repeatCount="indefinite" calcMode="discrete"
+              keyTimes="0;0.1667;0.2917;0.4000;0.4133;0.4583;0.4783;0.5000;0.5200;0.5450;0.5650;1"
+              values="0;0.45;0;0;0.45;0;0.45;0;0.45;0;0.45;0"/>
+          </circle>
+        </svg>
+      </div>
+      <ol class="flex flex-col gap-3 text-sm">
+        <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">0.0〜1.0秒</p><p class="mt-1 font-bold">寝ている</p><p class="mt-1 text-ink/80">短く叩いても起きない。数えない。</p></li>
+        <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">1.0〜1.5秒</p><p class="mt-1 font-bold">押している</p><p class="mt-1 text-ink/80">手足をばたつかせ、上半身が起きてくる。</p></li>
+        <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">1.5秒</p><p class="mt-1 font-bold">起きた</p><p class="mt-1 text-ink/80">立って小さく跳ねる。短い振動と音。</p></li>
+        <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">2.4〜3.3秒</p><p class="mt-1 font-bold">叩く</p><p class="mt-1 text-ink/80">ここからは今までどおり。</p></li>
+        <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">3.3秒</p><p class="mt-1 font-bold">残り0</p><p class="mt-1 text-ink/80">最後の1打で倒れ込み、寝る。</p></li>
+      </ol>
+    </div>
+    <div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <figure class="rounded-2xl border border-rule bg-white p-3"><svg viewBox="-70 -100 140 112" class="block w-full"><line x1="-70" y1="8" x2="70" y2="8" stroke="#E7DDCC" stroke-width="2"/><g transform="translate(0,4)"><polyline points="44,-14 40,-7 19,-7 -2,-7 -32,-7" fill="none" stroke="#1C1916" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"></polyline><polyline points="-32,-7 -18,-3 -6,-3" fill="none" stroke="#1C1916" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"></polyline><polyline points="44,-14 40,-7 19,-7 -2,-7 -32,-7" fill="none" stroke="#E9A800" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"></polyline><polyline points="-32,-7 -18,-3 -6,-3" fill="none" stroke="#E9A800" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"></polyline><circle cx="-46" cy="-12" r="12" fill="#1C1916"></circle><circle cx="-46" cy="-12" r="8.5" fill="#E9A800"></circle></g></svg><figcaption class="mt-2 text-center font-mono text-xs text-mute">寝ている</figcaption></figure><figure class="rounded-2xl border border-rule bg-white p-3"><svg viewBox="-70 -100 140 112" class="block w-full"><line x1="-70" y1="8" x2="70" y2="8" stroke="#E7DDCC" stroke-width="2"/><g transform="translate(0,4)"><polyline points="46,-18 40,-7 19,-7 -2,-7 -4,-30" fill="none" stroke="#1C1916" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"></polyline><polyline points="-4,-30 4,-44 10,-58" fill="none" stroke="#1C1916" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"></polyline><polyline points="46,-18 40,-7 19,-7 -2,-7 -4,-30" fill="none" stroke="#E9A800" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"></polyline><polyline points="-4,-30 4,-44 10,-58" fill="none" stroke="#E9A800" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"></polyline><circle cx="0" cy="-44" r="12" fill="#1C1916"></circle><circle cx="0" cy="-44" r="8.5" fill="#E9A800"></circle></g></svg><figcaption class="mt-2 text-center font-mono text-xs text-mute">押している</figcaption></figure><figure class="rounded-2xl border border-rule bg-white p-3"><svg viewBox="-70 -100 140 112" class="block w-full"><line x1="-70" y1="8" x2="70" y2="8" stroke="#E7DDCC" stroke-width="2"/><g transform="translate(0,4)"><polyline points="12,0 0,0 0,-21 0,-42 0,-72" fill="none" stroke="#1C1916" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"></polyline><polyline points="0,-72 4,-58 6,-46" fill="none" stroke="#1C1916" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"></polyline><polyline points="12,0 0,0 0,-21 0,-42 0,-72" fill="none" stroke="#E9A800" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"></polyline><polyline points="0,-72 4,-58 6,-46" fill="none" stroke="#E9A800" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"></polyline><circle cx="2" cy="-86" r="12" fill="#1C1916"></circle><circle cx="2" cy="-86" r="8.5" fill="#E9A800"></circle></g></svg><figcaption class="mt-2 text-center font-mono text-xs text-mute">起きた</figcaption></figure><figure class="rounded-2xl border border-rule bg-white p-3"><svg viewBox="-70 -100 140 112" class="block w-full"><line x1="-70" y1="8" x2="70" y2="8" stroke="#E7DDCC" stroke-width="2"/><g transform="translate(0,4)"><polyline points="12,0 0,0 15,-15 -7,-25 3,-55" fill="none" stroke="#1C1916" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"></polyline><polyline points="3,-55 17,-55 31,-56" fill="none" stroke="#1C1916" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"></polyline><polyline points="12,0 0,0 15,-15 -7,-25 3,-55" fill="none" stroke="#E9A800" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"></polyline><polyline points="3,-55 17,-55 31,-56" fill="none" stroke="#E9A800" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"></polyline><circle cx="7" cy="-69" r="12" fill="#1C1916"></circle><circle cx="7" cy="-69" r="8.5" fill="#E9A800"></circle></g></svg><figcaption class="mt-2 text-center font-mono text-xs text-mute">叩いた</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="spec" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / spec</p>
+    <h2 class="mt-2 font-display text-3xl">決めたこと</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">
+      長押しの長さを先に決めました。0.5秒、iOS の長押しと同じです。
+      短くすると、画面をかすめた指でも届いてしまう。長くすると、毎食後に叩くたび連打の前で待たされる。
+      押している間に何も変わらなければ、どれだけ押せばいいか分からないはず。そこで目盛りの代わりに、隊の体が少しずつ起きてくる形にしました。
+    </p>
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full min-w-[36rem] text-left text-sm">
+        <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="py-2 pr-4">場面</th><th class="py-2 pr-4">決め</th><th class="py-2">なぜ</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">叩いていない間</td><td class="py-3 pr-4">1人が床に寝ている。下の文言は「長押しで起こす」</td><td class="py-3">叩いても始まらないことが、見て分かる</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">短く叩いた</td><td class="py-3 pr-4">何も起きない。数えない</td><td class="py-3">誤タップを防ぐのが目的</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">押している</td><td class="py-3 pr-4">手足をばたつかせ、上半身が起きてくる</td><td class="py-3">押し続ければ起きると分かる。進み具合の目盛りを兼ねる</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">0.5秒前に離した</td><td class="py-3 pr-4">パタンと寝直す</td><td class="py-3">起きなかったことがはっきり見える</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">0.5秒に届いた</td><td class="py-3 pr-4">立ち上がって小さく跳ねる。短い振動と音。文言は「叩いてしゃがむ」</td><td class="py-3">叩いてよい合図。指を離す前に分かる</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">起こした指</td><td class="py-3 pr-4">数えない。起きてから触れた指だけを1打にする</td><td class="py-3">起こすのは準備で、スクワットの1回ではない</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">残りが0になった</td><td class="py-3 pr-4">最後の1打で隊が倒れ込み、1人に戻って寝る。最後の1打でフィーバーが当たったら、フィーバーが終わってから</td><td class="py-3">叩き切ったら力尽きる。次の記録も、起こすところから始める</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">時間がたった</td><td class="py-3 pr-4">寝ない。起きたまま叩かなくても、60秒止まって記録が閉じても、アプリを離れても、起きたまま</td><td class="py-3">寝るのは叩き切ったときだけ（開発者が決定）。途中で閉じた記録の続きは、起こし直さずに叩ける</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">ひかえめモード</td><td class="py-3 pr-4">ばたつきと跳ねをやめ、姿勢だけを短く切り替える。長押しの0.5秒は同じ</td><td class="py-3"><a href="../../glossary.html#reduced-effects-mode" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ひかえめモード</a>の決まり。誤タップの防ぎは残す</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">VoiceOver</td><td class="py-3 pr-4">寝ているときのダブルタップで起こす。読み上げは「長押しで起こす」</td><td class="py-3">VoiceOver では長押しが操作しにくい</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">保存するデータは変わりません。起きているかどうかは画面の中にだけ持つので、アプリが終了して開き直したときは寝た状態から始まります。</p>
+  </section>
+
+  <section id="place" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / place</p>
+    <h2 class="mt-2 font-display text-3xl">完了連打のどこに足すか</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">
+      足すのは<a href="../../glossary.html#done-mash" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">完了連打</a>の入口の1段だけです。
+      記録の開き方と閉じ方、1打1ドパ、ドパドパ、フィーバー、フィナーレは何も変えない。
+      気になったのは<a href="../../glossary.html#touch-to-fire" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">タッチ→発火</a>の速さでした。
+      長押しを iOS の UILongPressGestureRecognizer で受けると、認識した時点で指が touchesCancelled に切り替わり、今の touchesBegan での受け方と絡みます。
+      そこで長押しも touchesBegan の中で時刻を測って受けます。起きてからの1打は、今と同じ道を通ります。
+    </p>
+    <div class="mt-6 grid gap-3 text-sm sm:grid-cols-3">
+      <div class="rounded-2xl border-2 border-ink bg-white p-4"><p class="font-mono text-xs text-mute">寝ている</p><p class="mt-2">tap は数えない。長押しだけを待つ</p></div>
+      <div class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><p class="font-mono text-xs text-dopa">起きている</p><p class="mt-2">1打目で記録が開く。時間では寝ない</p></div>
+      <div class="rounded-2xl border-2 border-ink bg-white p-4"><p class="font-mono text-xs text-mute">記録が開いている</p><p class="mt-2">今までどおり。残りが0になったら寝る</p></div>
+    </div>
+  </section>
+
+  <section id="detail" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / detail</p>
+    <h2 class="mt-2 font-display text-3xl">直す場所</h2>
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full min-w-[36rem] text-left text-sm">
+        <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="py-2 pr-4">場所</th><th class="py-2 pr-4">変更</th><th class="py-2">なぜ</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">AppModel</td><td class="py-3 pr-4"><code>squadAwake</code> と <code>wake()</code> を足す。寝ていて記録も開いていなければ <code>tap</code> は nil。叩き切って記録が閉じたとき（<code>close(completed: true)</code>）だけ寝かせる。途中で閉じたときは起きたまま</td><td class="py-3">「寝ていれば数えない」をモデルで守る。画面の作りに頼らず、テストで確かめられる</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">MashSession</td><td class="py-3 pr-4"><code>wakeHold = 0.5</code> を置く</td><td class="py-3">ほかの秒数（idleTimeout など）と並べて1か所で変えられるように</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">SquatterLayer</td><td class="py-3 pr-4">姿勢に「寝る」「起きかけ」を足す。立つ・しゃがむと同じ点の数で描く</td><td class="py-3">点の数がそろっていれば、今の path のアニメーションでそのまま形を移せる</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">SquatStageUIView</td><td class="py-3 pr-4">寝ている間の touchesBegan で長押しを測り始め、0.5秒で <code>wake()</code>。早く離したら寝直す。起こした指は離れるまで数えない。最後の1打で倒れ込ませる。文言と読み上げを切り替える</td><td class="py-3">起きてからの1打は今の道のまま。タッチ→発火を遅らせない</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">FeelEngine / ToneSynth</td><td class="py-3 pr-4">起きた瞬間の短い振動と音を1つ足す。音は ToneSynth で作り、音声ファイルは足さない</td><td class="py-3">指を離す前に「もう叩ける」と手で分かる。声にしないので多言語の作業は増えない</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">Localizable.xcstrings</td><td class="py-3 pr-4">「長押しで起こす」と英語の Hold to wake up</td><td class="py-3"><a href="../../devops/localization/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">多言語の決まり事</a>。文言を足すときは英語も同時に</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">AppModel+Demo</td><td class="py-3 pr-4"><code>-demo squad</code> は叩く前に <code>wake()</code></td><td class="py-3">寝たままでは見本の97打が全部捨てられる</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">テスト</td><td class="py-3 pr-4">寝ていれば数えない、起こせば数える、叩き切ったら寝る、途中で閉じても起きたまま、を足す。今の <code>model.tap</code> を使うテストは先に <code>wake()</code></td><td class="py-3">入口の決まりを壊さないため</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">docs</td><td class="py-3 pr-4">完了連打、スクワット隊の見本（寝ている・起きかけを足す）、ホームの見本</td><td class="py-3">実装と一緒に直す。用語集の「起こす」は先に足した</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="review" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / review</p>
+    <h2 class="mt-2 font-display text-3xl">見てほしいところ</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">注文になかった数字を1つ、こちらで決めました。実機で叩いてから詰めるつもりです。起きて10秒で寝る案は、開発者の判断でやめました（時間では寝ない）。</p>
+    <ol class="mt-4 flex max-w-2xl flex-col gap-3 text-sm">
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>長押し 0.5秒。</b>iOS の標準と同じ。毎食後の手間として長すぎないか。</li>
+    </ol>
+  </section>
+
+  <section id="links" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / links</p>
+    <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">機能</p><a href="../../features/done-mash/index.html#squad" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">完了連打（スクワット隊）</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">コンポーネント</p><a href="../../ui/components/squat-squad/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スクワット隊</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><a href="../../glossary.html#wake-up" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">起こす</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">前回のセッション</p><a href="../20261006-1929-fever-5sec/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">フィーバータイムを5秒にする</a></li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>
