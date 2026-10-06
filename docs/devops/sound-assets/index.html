@@ -55,12 +55,13 @@ tailwind.config = {
       <div class="rounded-2xl border border-rule bg-white p-4">
         <dt class="font-mono text-xs text-mute">置き場所</dt>
         <dd class="mt-1 font-mono text-sm font-bold">ios/YatTatTa/Sounds/</dd>
+        <dd class="mt-1 text-xs text-mute">声は言語ごとに ja.lproj／en.lproj に分ける。ファイル名は同じ。効果音とループ曲は分けない。</dd>
         <dd class="mt-1 text-xs text-mute">ファイル名は Feel/Sound.swift の一覧と同じにする。wav か caf。</dd>
       </div>
       <div class="rounded-2xl border border-rule bg-white p-4">
         <dt class="font-mono text-xs text-mute">取得日</dt>
         <dd class="mt-1 font-display text-lg">2026-10-06</dd>
-        <dd class="mt-1 text-xs text-mute">27ファイルすべて。開発者が生成し、置いた。</dd>
+        <dd class="mt-1 text-xs text-mute">27ファイルすべて。開発者が生成し、置いた。英語の声22本も同じ日に、同じ Gemini 3.8 Flash TTS で生成した。</dd>
       </div>
     </dl>
   </section>
@@ -82,8 +83,8 @@ tailwind.config = {
 
   <section id="voices" class="mt-16">
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">voices</p>
-    <h2 class="mt-2 font-display text-3xl">声（22）</h2>
-    <p class="mt-3 text-sm leading-relaxed text-ink/80">声の役は3人。実況は Fenrir、確定は Algenib、ねぎらいは Sadachbia。Style と台詞は、<a href="../../sessions/20261006-0312-main-build/index.html#fullscreen" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">本作りの設計</a>のときに Claude が書いた案を使った。</p>
+    <h2 class="mt-2 font-display text-3xl">声（日本語22、英語22）</h2>
+    <p class="mt-3 text-sm leading-relaxed text-ink/80">声の役は3人。実況は Fenrir、確定は Algenib、ねぎらいは Sadachbia。英語の22本は、ファイル名と声の役を日本語とそろえ、台本は<a href="../localization/index.html#voices" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">多言語の決まり事</a>のものを使った（Gemini 3.8 Flash TTS、2026-10-06）。日本語の Style と台詞は、<a href="../../sessions/20261006-0312-main-build/index.html#fullscreen" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">本作りの設計</a>のときに Claude が書いた案を使った。</p>
     <div class="mt-6 overflow-x-auto rounded-2xl border border-rule bg-white">
       <table class="w-full min-w-[30rem] text-left text-sm">
         <thead class="border-b-2 border-ink font-mono text-xs text-mute"><tr><th class="p-3">ファイル</th><th class="p-3">出どころ</th><th class="p-3">Voice</th></tr></thead>
