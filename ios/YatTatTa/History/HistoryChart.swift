@@ -186,7 +186,8 @@ struct HistoryChart: View {
         return Button {
             selected = HistorySelection(day: day, entry: entry)
         } label: {
-            SquatFigure(height: height, color: entry.bonusDopa > 0 ? .dopa : .gold)
+            // 押した人形は、立つ⇄しゃがむを繰り返す。ひかえめモードではしゃがんだまま
+            SquatFigure(height: height, color: entry.bonusDopa > 0 ? .dopa : .gold, animating: isSelected && !reduceMotion)
                 .overlay {
                     if isSelected {
                         Circle()

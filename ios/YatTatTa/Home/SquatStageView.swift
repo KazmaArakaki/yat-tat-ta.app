@@ -767,7 +767,7 @@ final class SquatterLayer: CALayer {
         let head: CGPoint
     }
 
-    private static let stand = Joints(
+    static let stand = Joints(
         legs: [.init(x: 12, y: 0), .init(x: 0, y: 0), .init(x: 0, y: -21), .init(x: 0, y: -42), .init(x: 0, y: -72)],
         arm: [.init(x: 0, y: -72), .init(x: 4, y: -58), .init(x: 6, y: -46)],
         head: .init(x: 2, y: -86))

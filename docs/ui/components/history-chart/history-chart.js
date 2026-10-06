@@ -1,6 +1,6 @@
 // 履歴のグラフの見本。iOS の HistoryChart と同じ決まりで描く。
 // 横に記録日、縦にその日の時刻（午前4時から翌朝4時、上ほど遅い）。
-// 記録1件を、スクワット隊のしゃがんだ人形1つで置く。人形の面積はドパに比例する。
+// 記録1件を、スクワット隊のしゃがんだ人形1つで置く。人形の面積はドパに比例する。押した人形は立つ⇄しゃがむを繰り返す。
 // 背景には、日ごとのドパ（dopa 色の薄い面）と7日移動平均（signal 色の線と薄い面）を重ねる。斜線は使わない。
 window.HistoryChart = (function () {
   var DAY_W = 34;      // 1日の列の幅。スマホの幅で7日ほど見える
@@ -151,6 +151,26 @@ window.HistoryChart = (function () {
     });
     el("circle", { cx: 7, cy: -69, r: 8.5, fill: "currentColor" }, fig);
 
+    // 押した人形。立つ⇄しゃがむを 0.8 秒で繰り返す（スクワット隊の点と同じ）
+    var STAND = { legs: "12,0 0,0 0,-21 0,-42 0,-72", arm: "0,-72 4,-58 6,-46", head: [2, -86] };
+    var SQUAT = { legs: "12,0 0,0 15,-15 -7,-25 3,-55", arm: "3,-55 17,-55 31,-56", head: [7, -69] };
+    var still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var moving = el("g", { id: id + "m" }, defs);
+    function swing(node, attr, a, b) {
+      if (still) return;
+      el("animate", { attributeName: attr, dur: "0.8s", repeatCount: "indefinite", values: a + ";" + b + ";" + a,
+        keyTimes: "0;0.45;1", calcMode: "spline", keySplines: ".3 0 .2 1;.4 0 .4 1" }, node);
+    }
+    [["legs", 15, ink], ["arm", 15, ink], ["legs", 9, "currentColor"], ["arm", 9, "currentColor"]].forEach(function (s) {
+      var line = el("polyline", { points: SQUAT[s[0]], fill: "none", stroke: s[2], "stroke-width": s[1], "stroke-linecap": "round", "stroke-linejoin": "round" }, moving);
+      swing(line, "points", STAND[s[0]], SQUAT[s[0]]);
+    });
+    [[12, ink], [8.5, "currentColor"]].forEach(function (c) {
+      var head = el("circle", { cx: 7, cy: -69, r: c[0], fill: c[1] }, moving);
+      swing(head, "cx", STAND.head[0], SQUAT.head[0]);
+      swing(head, "cy", STAND.head[1], SQUAT.head[1]);
+    });
+
     // 今日の列と休み券の日
     days.forEach(function (d, i) {
       if (d.today) el("rect", { x: i * DAY_W, y: 0, width: DAY_W, height: TOP + P, fill: dark ? "#3A1726" : "#FFE6F0", "fill-opacity": 0.8 }, svg);
@@ -189,7 +209,7 @@ window.HistoryChart = (function () {
     });
 
     // 人形。押すと詳細
-    var selected = null;
+    var selected = null, selectedUse = null;
     days.forEach(function (d, i) {
       d.records.forEach(function (r, k) {
         var dopa = r.reps + r.bonus, h = figureHeight(dopa), s = h / 88;
@@ -213,8 +233,11 @@ window.HistoryChart = (function () {
         }
         function pick() {
           if (selected) selected.setAttribute("opacity", 0);
+          if (selectedUse) selectedUse.setAttribute("href", "#" + id + "f");
           ring.setAttribute("opacity", 1);
+          u.setAttribute("href", "#" + id + "m");
           selected = ring;
+          selectedUse = u;
           if (opts.onSelect) opts.onSelect(d, r);
         }
         g.addEventListener("click", pick);
