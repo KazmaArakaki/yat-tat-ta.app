@@ -21,6 +21,9 @@ targets:
         INFOPLIST_FILE: YatTatTa/Info.plist
         MARKETING_VERSION: "0.1.0"
         CURRENT_PROJECT_VERSION: "1"
+        # 端末の言語が日本語でも英語でもないときに使う言語（Info.plist の CFBundleDevelopmentRegion）。
+        # 文言を書く言語（String Catalog の元の言語）は、プロジェクトの developmentLanguage の日本語のまま
+        DEVELOPMENT_LANGUAGE: en
         # ホーム画面のアプリ名。全言語で同じ表記
         INFOPLIST_KEY_CFBundleDisplayName: "Yat Tat Ta"
         # iPhone のみ

@@ -49,11 +49,22 @@ tailwind.config = {
       <ol class="mt-3 flex flex-col gap-2 font-bold leading-relaxed">
         <li><span class="mr-2 font-mono text-dopa">1</span>日本語（ja）と英語（en）で同時に出す。書くのは日本語が先、英語は String Catalog で足す。</li>
         <li><span class="mr-2 font-mono text-dopa">2</span>日本語と英語以外の端末では、英語で出す。</li>
-        <li><span class="mr-2 font-mono text-dopa">3</span>文言を足したら、同じ変更で英語も入れる。訳しかたは下の<a href="../../glossary.html#translation-table" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">訳語表</a>に合わせる。</li>
+        <li><span class="mr-2 font-mono text-dopa">3</span>文言を足したら、同じ変更で日本語と英語の両方の値を String Catalog に入れる。訳しかたは下の<a href="../../glossary.html#translation-table" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">訳語表</a>に合わせる。</li>
         <li><span class="mr-2 font-mono text-dopa">4</span>声は言語ごとに作る。足すときは、日本語と英語の2本をそろえる。</li>
         <li><span class="mr-2 font-mono text-dopa">5</span>アプリ名 Yat Tat Ta は、どの言語でも同じ表記。</li>
       </ol>
     </div>
+  </section>
+
+  <section id="how" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">how it works</p>
+    <h2 class="mt-2 font-display text-3xl">言語が選ばれるしくみ</h2>
+    <ul class="mt-6 flex flex-col gap-3 text-sm leading-relaxed">
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>文言を書く言語は日本語</b>：<code class="font-mono text-xs">project.yml</code> の <code class="font-mono text-xs">developmentLanguage: ja</code>。String Catalog のキーは日本語で書く。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>どちらでもない端末は英語</b>：アプリのビルド設定 <code class="font-mono text-xs">DEVELOPMENT_LANGUAGE: en</code> で、Info.plist の CFBundleDevelopmentRegion を en にしている。Info.plist に直接書いても、生成される値で上書きされて効かない。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>日本語の値も必ず入れる</b>：String Catalog は元の言語（日本語）の表をアプリに書き出さない。日本語の値がないと、日本語の端末でも英語の表に落ちる。キーと同じ文言でよいので、日本語の値をはっきり入れる。テスト（<code class="font-mono text-xs">LocalizationTests</code>）が、全キーに日本語と英語があること、差し込み（%lld など）の数がそろっていることを確かめる。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>空の訳は使えない</b>：値を空にすると訳がないものとして扱われ、キー（日本語）が出る。英語で要らない言葉は、文の組み立てを変えて避ける（帯の「日目」は、英語では「Day 1 starts today」の starts today にした）。</li>
+    </ul>
   </section>
 
   <section id="terms" class="mt-16">
@@ -71,7 +82,7 @@ tailwind.config = {
           <tr><td>叩いてしゃがむ</td><td class="font-bold">TAP TO SQUAT</td><td class="text-ink/70"></td></tr>
           <tr><td>今日の記録</td><td class="font-bold">Today</td><td class="text-ink/70">シートの題</td></tr>
           <tr><td>今日まだ通知</td><td class="font-bold">Not-Yet Reminder</td><td class="text-ink/70">設定の行の名前</td></tr>
-          <tr><td>目標回数</td><td class="font-bold">Squats per round</td><td class="text-ink/70"></td></tr>
+          <tr><td>目標回数</td><td class="font-bold">Squats per set</td><td class="text-ink/70">1回の完了連打は set と呼ぶ（今日の記録の「2 sets」）</td></tr>
           <tr><td>完了連打</td><td class="font-bold">Done mash</td><td class="text-ink/70">画面には出ない。VoiceOver の読み上げだけ</td></tr>
         </tbody>
       </table>

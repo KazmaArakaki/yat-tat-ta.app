@@ -94,7 +94,9 @@ final class FeelEngine {
             play(buffer, after: delay, label: sound.rawValue, isVoice: sound.isVoice)
         } else if let text = sound.spokenFallback {
             let utterance = AVSpeechUtterance(string: text)
-            utterance.voice = AVSpeechSynthesisVoice(language: "ja-JP")
+            // 画面と同じ言語で読む。日本語なら ja-JP、英語なら en-US
+            let language = Bundle.main.preferredLocalizations.first == "ja" ? "ja-JP" : "en-US"
+            utterance.voice = AVSpeechSynthesisVoice(language: language)
             utterance.rate = 0.56
             utterance.pitchMultiplier = 1.3
             utterance.preUtteranceDelay = delay

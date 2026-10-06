@@ -63,7 +63,7 @@ struct FeverResultOverlay: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            MetalText(text: "FEVER 終了", size: 44, finish: .chrome, animated: false)
+            MetalText(text: String(localized: "FEVER 終了"), size: 44, finish: .chrome, animated: false)
             MetalText(text: "+\(result.gained.formatted())", size: 96, finish: .gold)
             MetalText(text: String(localized: "ドパ"), size: 48, finish: .gold, animated: false)
         }

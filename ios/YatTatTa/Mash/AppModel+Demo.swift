@@ -35,14 +35,14 @@ extension AppModel {
             draw = lottery
         case .kakutei, .negirai:
             setDemoFinale(FinaleEvent(completed: true, reps: 20, streakExtended: 30, milestones: [.streak(30)],
-                                      kakutei: 0, negirai: Negirai(headline: "30日連続！", message: "あんたはえらい！",
+                                      kakutei: 0, negirai: Negirai(headline: String(localized: "\(30)日連続！"), message: String(localized: "あんたはえらい！"),
                                                                    voice: .voiceNegirai3)),
                           skipToNegirai: demo == .negirai)
         case .heavy:
             // 一番重い1打：連続30日、DT 1,000、DPW 自己ベストが重なる
             setDemoToppa(ToppaEvent(value: 1_000, gold: true))
             setDemoFinale(FinaleEvent(completed: true, reps: 20, streakExtended: 30, milestones: three, kakutei: 0,
-                                      negirai: Negirai(headline: "30日連続！", message: "あんたはえらい！",
+                                      negirai: Negirai(headline: String(localized: "\(30)日連続！"), message: String(localized: "あんたはえらい！"),
                                                        voice: .voiceNegirai3)),
                           skipToNegirai: false)
         }

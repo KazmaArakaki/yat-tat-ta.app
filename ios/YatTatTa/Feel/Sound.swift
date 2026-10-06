@@ -45,28 +45,28 @@ nonisolated enum Sound: String, CaseIterable, Sendable {
     /// ファイルがないときに読み上げる言葉
     var spokenFallback: String? {
         switch self {
-        case .voiceChance: "チャンス！"
-        case .voiceGekiatsu: "げきあつ！"
-        case .voicePush: "押せ！"
-        case .voiceYattatta: "やったった！"
-        case .voiceKakutei1: "筋肉、確定！"
-        case .voiceKakutei2: "太もも、確定！"
-        case .voiceKakutei3: "根性、確定！"
-        case .voiceKakutei4: "継続、確定！"
-        case .voiceKakutei5: "明日も、確定！"
-        case .voiceNegirai1: "今日もお疲れ！"
-        case .voiceNegirai2: "夜食のあとに、えらすぎる！"
-        case .voiceNegirai3: "あんたはえらい！"
-        case .voiceNegirai4: "よっ、ふともも番長！"
-        case .voiceNegirai5: "限界突破！"
-        case .voiceToppa: "ドパ、突破！"
-        case .voiceFever: "フィーバー！"
-        case .voiceRush: "ラッシュ！"
-        case .voiceMilestoneStreak: "連続記録、達成！"
-        case .voiceMilestoneDT: "ドパ、大台突破！"
-        case .voiceMilestoneBest: "自己ベスト、更新！"
-        case .voiceCombo: "ドパドパ！"
-        case .voiceRestart: "今日の1回から！"
+        case .voiceChance: String(localized: "チャンス！", comment: "声のファイルがないときの読み上げ")
+        case .voiceGekiatsu: String(localized: "げきあつ！", comment: "声のファイルがないときの読み上げ")
+        case .voicePush: String(localized: "押せ！", comment: "声のファイルがないときの読み上げ")
+        case .voiceYattatta: String(localized: "やったった！", comment: "声のファイルがないときの読み上げ")
+        case .voiceKakutei1: String(localized: "筋肉、確定！", comment: "声のファイルがないときの読み上げ")
+        case .voiceKakutei2: String(localized: "太もも、確定！", comment: "声のファイルがないときの読み上げ")
+        case .voiceKakutei3: String(localized: "根性、確定！", comment: "声のファイルがないときの読み上げ")
+        case .voiceKakutei4: String(localized: "継続、確定！", comment: "声のファイルがないときの読み上げ")
+        case .voiceKakutei5: String(localized: "明日も、確定！", comment: "声のファイルがないときの読み上げ")
+        case .voiceNegirai1: String(localized: "今日もお疲れ！", comment: "声のファイルがないときの読み上げ")
+        case .voiceNegirai2: String(localized: "夜食のあとに、えらすぎる！", comment: "声のファイルがないときの読み上げ")
+        case .voiceNegirai3: String(localized: "あんたはえらい！", comment: "声のファイルがないときの読み上げ")
+        case .voiceNegirai4: String(localized: "よっ、ふともも番長！", comment: "声のファイルがないときの読み上げ")
+        case .voiceNegirai5: String(localized: "限界突破！", comment: "声のファイルがないときの読み上げ")
+        case .voiceToppa: String(localized: "ドパ、突破！", comment: "声のファイルがないときの読み上げ")
+        case .voiceFever: String(localized: "フィーバー！", comment: "声のファイルがないときの読み上げ")
+        case .voiceRush: String(localized: "ラッシュ！", comment: "声のファイルがないときの読み上げ")
+        case .voiceMilestoneStreak: String(localized: "連続記録、達成！", comment: "声のファイルがないときの読み上げ")
+        case .voiceMilestoneDT: String(localized: "ドパ、大台突破！", comment: "声のファイルがないときの読み上げ")
+        case .voiceMilestoneBest: String(localized: "自己ベスト、更新！", comment: "声のファイルがないときの読み上げ")
+        case .voiceCombo: String(localized: "ドパドパ！", comment: "声のファイルがないときの読み上げ")
+        case .voiceRestart: String(localized: "今日の1回から！", comment: "声のファイルがないときの読み上げ")
         default: nil
         }
     }

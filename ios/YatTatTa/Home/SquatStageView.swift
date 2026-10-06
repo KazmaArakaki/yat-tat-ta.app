@@ -514,7 +514,7 @@ final class SquatStageUIView: UIView {
 
     /// 指の位置から「ドパ」の文字が飛ぶ。段階と勢いで大きくなり、速く叩き続けると「ドパドパ」になる
     private func shout(at point: CGPoint, tap: MashSession.Tap) {
-        let text = tap.isFever ? "+\(tap.dopa)" : (tap.combo >= 4 ? "ドパドパ" : "ドパ")
+        let text = tap.isFever ? "+\(tap.dopa)" : (tap.combo >= 4 ? String(localized: "ドパドパ") : String(localized: "ドパ"))
         let size = 44 + 16 * CGFloat(tap.stage.rawValue) + min(CGFloat(tap.combo), 20) * 1.2
         popText(text, at: point, size: size, rise: 160 + 60 * CGFloat(tap.stage.rawValue), spread: 140,
                 color: tap.stage >= .hot ? Palette.gold : Palette.dopa,

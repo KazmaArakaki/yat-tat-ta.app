@@ -198,19 +198,32 @@ final class ParticlesUIView: UIView {
 /// 金属の文字。黒い縁取りと奥行き、縦のグラデーションで光らせる（見本2、見本3）
 ///
 /// animated なら、光の筋が文字の上を走り続け、文字が脈打つ。
+/// 文字の幅を測り、縁取りと奥行きを含めて maxWidth に収まるまで小さくする。
+/// 言語によって文字数が大きく違う（「筋肉」と「MUSCLE」）ので、文字数では決めない。
 struct MetalText: View {
     enum Finish { case chrome, gold, dopa }
 
     let text: String
+    /// いちばん大きいときの大きさ
     let size: CGFloat
     var finish: Finish = .chrome
     var animated = true
+    /// 縁取りと奥行きを含めた幅の上限。画面の幅から左右の余白を引いた値
+    var maxWidth: CGFloat = 340
 
     @State private var sweep = false
     @State private var beat = false
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
+    /// maxWidth に収まる大きさ。縁取り（左右に 0.075 ずつ）と奥行き（0.06）の分を足して測る
+    static func fittedSize(_ text: String, size: CGFloat, maxWidth: CGFloat) -> CGFloat {
+        let font = UIFont.systemFont(ofSize: size, weight: .black)
+        let perPoint = (text as NSString).size(withAttributes: [.font: font]).width / size
+        return min(size, maxWidth / (perPoint + 0.21))
+    }
+
     var body: some View {
+        let size = Self.fittedSize(text, size: self.size, maxWidth: maxWidth)
         let font = Font.system(size: size, weight: .black)
         let moving = animated && !reduceMotion
         ZStack {

@@ -71,7 +71,7 @@ struct FinaleOverlay: View {
             ParticlesView(kind: .sparks)
             Shockwave(color: .white, lineWidth: 34)
             VStack(spacing: -10) {
-                MetalText(text: words.0, size: words.0.count > 2 ? 104 : 140)
+                MetalText(text: words.0, size: 140)
                 MetalText(text: words.1, size: 140)
                 HStack(spacing: 10) {
                     Text("やったった！").font(.label(22, black: true))
@@ -97,12 +97,13 @@ struct FinaleOverlay: View {
             ParticlesView(kind: .embers)
             VStack(spacing: 6) {
                 if let headline = negirai.headline {
-                    MetalText(text: headline, size: Self.fit(headline, max: 64), finish: .dopa)
+                    MetalText(text: headline, size: 64, finish: .dopa)
                 }
-                // 長い言葉は「、」で2行に分け、画面の幅に収まる大きさにする
+                // 長い言葉は区切りで2行に分け、2行とも同じ大きさにする
                 let lines = Self.lines(negirai.message)
+                let size = lines.map { MetalText.fittedSize($0, size: 96, maxWidth: 340) }.min() ?? 96
                 ForEach(lines, id: \.self) { line in
-                    MetalText(text: line, size: Self.fit(lines.max { $0.count < $1.count } ?? line, max: 96), finish: .gold)
+                    MetalText(text: line, size: size, finish: .gold)
                 }
                 tags.padding(.top, 20)
             }
@@ -112,14 +113,17 @@ struct FinaleOverlay: View {
         }
     }
 
-    private static func lines(_ message: String) -> [String] {
-        guard message.count > 8, let comma = message.firstIndex(of: "、") else { return [message] }
-        return [String(message[...comma]), String(message[message.index(after: comma)...])]
-    }
-
-    /// 1文字ぶんの幅を文字の大きさとほぼ同じと見て、縁取りの分を引いた幅 320pt に収める
-    private static func fit(_ text: String, max: CGFloat) -> CGFloat {
-        min(max, 320 / CGFloat(Swift.max(text.count, 1)))
+    /// 1行では小さくなりすぎる言葉を、最初の区切り（「、」「, 」「? 」）で2行に分ける
+    static func lines(_ message: String) -> [String] {
+        guard MetalText.fittedSize(message, size: 96, maxWidth: 340) < 60 else { return [message] }
+        for separator in ["、", ", ", "? "] {
+            if let range = message.range(of: separator) {
+                let first = message[..<range.upperBound].trimmingCharacters(in: .whitespaces)
+                let rest = message[range.upperBound...].trimmingCharacters(in: .whitespaces)
+                if !rest.isEmpty { return [first, rest] }
+            }
+        }
+        return [message]
     }
 
     private var tags: some View {

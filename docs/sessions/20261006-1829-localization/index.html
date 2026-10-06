@@ -103,6 +103,21 @@ tailwind.config = {
     <p class="mt-4 text-sm leading-relaxed text-ink/80">保存の形は変えない。</p>
   </section>
 
+  <section id="done-impl" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">実装 2026-10-06</p>
+    <h2 class="mt-2 font-display text-3xl">日本語の端末に、英語が出た</h2>
+    <p class="mt-4 leading-relaxed">英語を入れてシミュレーターで見ていくと、フランス語の端末ではねらいどおり英語が出ました。ところが日本語の端末でも、英語が出ていました。</p>
+    <p class="mt-4 leading-relaxed">String Catalog は、元の言語（日本語）の文言の表をアプリに書き出しません。開発の言語が日本語だったころは、表がなくてもキーの日本語がそのまま出ていたので、困らなかった。開発の言語を英語にしたことで、日本語の表が見つからないとき英語の表へ落ちるようになったのです。全キーに日本語の値をはっきり入れて直し、日本語と英語がそろっていることを確かめるテストを足しました。</p>
+    <ul class="mt-6 flex flex-col gap-2 text-sm leading-relaxed">
+      <li class="rounded-2xl border border-rule bg-white p-4">String Catalog：98件すべてに日本語と英語。読み上げの台詞、「FEVER 終了」、叩いた瞬間の「ドパ」「ドパドパ」も訳せる形にした</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><code class="font-mono text-xs">project.yml</code>：アプリの <code class="font-mono text-xs">DEVELOPMENT_LANGUAGE: en</code>。Info.plist に直接書く方法は、生成される値に上書きされて効かなかった</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><code class="font-mono text-xs">MetalText</code>：文字の幅を測り、画面に収まるまで小さくする。ねぎらいは、小さくなりすぎる言葉を「、」「, 」「? 」で2行に分ける</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">声：日本語の22本を <code class="font-mono text-xs">Sounds/ja.lproj/</code> へ移した。英語の声が届くまでは、英語の読み上げで代わる</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">帯の「今日の1回で 1 日目」は、英語では「Day 1 starts today」。空の訳はキーの日本語が出てしまうので、組み立てで避けた</li>
+    </ul>
+    <p class="mt-4 text-sm leading-relaxed text-ink/80">テスト48件（うち言語のそろい3件）が通った。シミュレーターで、英語のホーム、激熱、確定、ねぎらい、金のドパ突破、フィーバーを撮り、はみ出しがないことを確かめた。日本語の端末で日本語、フランス語の端末で英語が出ることも確かめた。英語の声22本（開発者が作成中）と、実機での確認が残る。</p>
+  </section>
+
   <section id="decisions" class="mt-20">
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / decisions</p>
     <h2 class="mt-2 font-display text-3xl">決めたこと（2026-10-06 開発者がレビュー）</h2>
