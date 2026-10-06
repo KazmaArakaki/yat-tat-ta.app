@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="session-state" content="developing">
-<meta name="state" content="developing">
+<meta name="session-state" content="done">
+<meta name="state" content="done">
 <title>スプラッシュを作る</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -74,7 +74,7 @@ tailwind.config = {
       <time datetime="2026-10-07T00:17">2026-10-07 00:17</time>
       <span>/</span>
       <span>設計セッション</span>
-      <span class="rounded-full border border-gold bg-gold/15 px-2.5 py-0.5 font-bold text-ink">状態：developing</span>
+      <span class="rounded-full border border-signal bg-signal/10 px-2.5 py-0.5 font-bold text-ink">状態：done</span>
     </div>
     <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl"><a href="../../glossary.html#splash" class="text-dopa">スプラッシュ</a>を作る</h1>
   </header>
@@ -275,7 +275,7 @@ tailwind.config = {
     <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">
       テストは69件すべて通った。足したのは Lineup の8件で、今日の席が今日の曜日の列に来ること（日曜始まりと月曜始まり）、今日済みの人形、休み券の日を挟むこと、連続より古い休み券を並べないこと、途切れたあととはじめては今日の席だけ、29日で5週、100日で8週にまとめること。
       シミュレーター（iPhone 17）では、ふつうの幕、30日分の隊列（-perf -demo splash）、はじめての幕の場面ごと、暗い配色を、秒を止めて確かめた。入れ直して起動すると、はじめての幕が出て14秒でホームに移り、開き直すとふつうの幕になることも確かめた。
-      振動の3拍と、叩いて飛ばす手触りは、まだ実機で確かめていない。
+      振動の3拍と、叩いて飛ばす手触り（はじめての幕では1回ごとに次の場面へ）は、開発者が実機で触って OK とした（2026-10-07）。
     </p>
     <ul class="mt-4 flex max-w-2xl flex-col gap-2 text-sm">
       <li class="rounded-2xl border border-rule bg-white p-4">スプラッシュは HomeView のいちばん上に重ねる。AppModel.splash があるあいだ、休み券の帯、途切れたときのカード、通知の問いかけは出さない。</li>
