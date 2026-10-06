@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="session-state" content="developing">
-<meta name="state" content="developing">
+<meta name="session-state" content="done">
+<meta name="state" content="done">
 <title>健康効果の書き方を決める</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,7 +40,7 @@ tailwind.config = {
       <time datetime="2026-10-06T12:58">2026-10-06 12:58</time>
       <span>/</span>
       <span>設計セッション</span>
-      <span class="rounded-full border border-gold bg-gold/15 px-2.5 py-0.5 font-bold text-ink">状態：developing</span>
+      <span class="rounded-full border border-signal bg-signal/10 px-2.5 py-0.5 font-bold text-ink">状態：done</span>
     </div>
     <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">健康効果</span>の書き方を決める</h1>
   </header>
@@ -106,7 +106,7 @@ tailwind.config = {
   <section id="mock" class="mt-20">
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / mock</p>
     <h2 class="mt-2 font-display text-3xl">設定シートの修正イメージ</h2>
-    <p class="mt-4 text-sm leading-relaxed text-ink/80">今日まだ通知の下に、罫線で区切って小さく置く。見出しは付けない。動く見本は <a href="../../ui/pages/settings/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ui／設定シート</a>。</p>
+    <p class="mt-4 text-sm leading-relaxed text-ink/80">今日まだ通知の下に、少し間をあけて小さく置く。見出しは付けない（中身が空の Section の footer）。動く見本は <a href="../../ui/pages/settings/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ui／設定シート</a>。</p>
     <div class="mt-6 grid gap-6 md:grid-cols-2">
       <div>
         <p class="mb-2 font-mono text-xs text-mute">before</p>
@@ -123,7 +123,7 @@ tailwind.config = {
           <p class="text-[11px] font-bold text-mute">今日まだ通知</p>
           <div class="mt-2 rounded-2xl border-2 border-ink px-3 py-3 text-sm font-bold">夜に知らせる　…　21:00</div>
           <p class="mt-2 text-[10px] leading-relaxed text-mute">その日まだ叩いていないときだけ、1回。7日開かなければ、しばらく止まります。</p>
-          <p class="mt-8 border-t-2 border-rule pt-3 text-[10px] leading-relaxed text-mute ring-2 ring-dopa ring-offset-4 rounded-sm">膝や腰が痛むとき、医師から運動を止められているときは、休んでください。食べてすぐで気分が悪いときは、少し時間をおいてから。</p>
+          <p class="mt-8 text-[10px] leading-relaxed text-mute ring-2 ring-dopa ring-offset-4 rounded-sm">膝や腰が痛むとき、医師から運動を止められているときは、休んでください。食べてすぐで気分が悪いときは、少し時間をおいてから。</p>
         </div>
       </div>
     </div>
@@ -136,7 +136,7 @@ tailwind.config = {
       <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">1</span><div><b>設定シートの一番下に注意書きを足す</b>（<code class="font-mono text-xs">Settings/SettingsView.swift</code>）。最後の Section の下に、見出しなしの Section を1つ。読む人が体に合わせて休めるようにするため。15分ほど</div></li>
       <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">2</span><div><b>文面を String Catalog に入れる</b>。ほかの文言と同じく、あとで訳せるようにするため</div></li>
     </ol>
-    <p class="mt-4 text-sm leading-relaxed text-ink/80">設計は 2026-10-06 に開発者のレビューを通った。残るのは上の実装。ストアの説明文は、ストアに出すときに <a href="../../devops/health-wording/index.html#store" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">devops の2段落</a>を使う。今回は書き置くだけ。データの変更はない。</p>
+    <p class="mt-4 text-sm leading-relaxed text-ink/80">設計は 2026-10-06 に開発者のレビューを通り、同じ日に1と2を実装した。テスト35件が通り、シミュレーター（iPhone 18 Pro）で設定シートの一番下に出ることを確かめた。実機ではまだ見ていない。ストアの説明文は、ストアに出すときに <a href="../../devops/health-wording/index.html#store" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">devops の2段落</a>を使う。今回は書き置くだけ。データの変更はない。</p>
   </section>
 
   <section id="decisions" class="mt-20">

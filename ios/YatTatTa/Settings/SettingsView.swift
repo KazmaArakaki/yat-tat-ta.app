@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// 設定シート。目標回数と今日まだ通知だけを置く
+/// 設定シート。目標回数と今日まだ通知だけを置き、一番下に注意書きを添える
 struct SettingsView: View {
     let model: AppModel
     @State private var denied = false
@@ -54,6 +54,12 @@ struct SettingsView: View {
                     }
                 } footer: {
                     Text("その日まだ叩いていない夜に、1回だけ知らせます。7日開かなければ、自分から止まります。")
+                }
+
+                // 注意書き。健康効果は書かず、休んでほしい場面だけを書く（docs/devops/health-wording）
+                Section {
+                } footer: {
+                    Text("膝や腰が痛むとき、医師から運動を止められているときは、休んでください。食べてすぐで気分が悪いときは、少し時間をおいてから。")
                 }
             }
             .scrollContentBackground(.hidden)
