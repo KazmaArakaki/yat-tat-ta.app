@@ -10,6 +10,10 @@
   // セッション一覧（新しい順）。新しいセッションは先頭に足す。
   var sessions = [
     {
+      path: "sessions/20261006-1929-fever-5sec/index.html",
+      label: "10/06 フィーバーを5秒に"
+    },
+    {
       path: "sessions/20261006-1829-localization/index.html",
       label: "10/06 多言語展開の進め方"
     },

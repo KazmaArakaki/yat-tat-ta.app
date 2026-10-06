@@ -46,7 +46,7 @@ import Testing
     @Test func フィーバーのあとに閉じると連続30日を足して札が3枚() async throws {
         let model = makeModel()
         for i in 0..<100 { _ = model.tap(at: Double(i) * 0.1) }
-        // フィーバーの10秒を待つ代わりに、フィーバー中に何打か叩いてから離れる
+        // フィーバーの5秒を待つ代わりに、フィーバー中に何打か叩いてから離れる
         for i in 0..<20 { _ = model.tap(at: 10 + Double(i) * 0.1) }
         model.sceneDidLeave()
         // ドパ突破を出している間は、フィナーレを1秒遅らせて出す

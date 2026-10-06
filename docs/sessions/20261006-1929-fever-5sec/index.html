@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="session-state" content="done">
+<meta name="state" content="done">
+<title>フィーバータイムを5秒にする</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: { rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } } },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-4xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <time datetime="2026-10-06T19:29">2026-10-06 19:29</time>
+      <span>/</span>
+      <span>改修セッション</span>
+      <span class="rounded-full border border-signal bg-signal/10 px-2.5 py-0.5 font-bold text-ink">状態：done</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl"><a href="../../glossary.html#fever" class="text-dopa">フィーバータイム</a>を5秒にする</h1>
+  </header>
+
+  <section id="result" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="relative overflow-hidden rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916] sm:p-8">
+      <div class="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-dopa-soft"></div>
+      <p class="relative font-mono text-xs uppercase tracking-[0.2em] text-dopa">結果（レビュー済み）</p>
+      <p class="relative mt-6 font-display text-3xl tracking-wide sm:text-4xl">10秒 → 5秒<br><span class="text-xl">ラッシュ 3秒 → 2秒</span></p>
+      <p class="relative mt-6 text-lg font-bold leading-relaxed">
+        10秒は長かった。<br>
+        叩き続けるうちに指が疲れ、最後のラッシュに着くころには勢いが落ちている。<br>
+        半分の5秒なら、息を止めたまま叩き切れる。
+      </p>
+    </div>
+  </section>
+
+  <section id="design" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01 / design</p>
+    <h2 class="mt-2 font-display text-3xl">変えるもの、変えないもの</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">
+      変えるのは長さだけです。当たる確率 0.51%、1打1ドパ、終わったあとの「FEVER 終了」の1.6秒は、どれもそのまま。
+      ラッシュは最後の3秒から2秒に縮めました（開発者が決定）。3秒のままだと5秒の過半がラッシュになり、始まって2秒で「ラッシュ！」が鳴ってしまう。
+      2秒なら、最初の3秒で叩き放題に慣れ、残り2秒で畳みかける配分になります。
+    </p>
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full min-w-[32rem] text-left text-sm">
+        <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="py-2 pr-4">場所</th><th class="py-2 pr-4">変更</th><th class="py-2">なぜ</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">MashSession.feverDuration</td><td class="py-3 pr-4">10 → 5</td><td class="py-3">長さの元。画面の残り秒数、BGM の切り替え、終わる時刻はすべてここから引く</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">MashSession.feverRush</td><td class="py-3 pr-4">3 → 2</td><td class="py-3">5秒の過半がラッシュにならないように</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">AppModelTests</td><td class="py-3 pr-4">ラッシュの1打を 8.0秒 → 3.0秒</td><td class="py-3">8秒ではフィーバーが終わっているため</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">FeverOverlay / AppModel / PerfSeedTests</td><td class="py-3 pr-4">コメントの「10秒」「最後の3秒」</td><td class="py-3">挙動は変わらない</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">docs</td><td class="py-3 pr-4">「10秒」を「5秒」に、ラッシュの「3秒」を「2秒」に</td><td class="py-3">完了連打、用語集、フィーバーの見本、処理落ちの確かめ方</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">保存するデータは変わりません。記録の bonusDopa は取ったドパをそのまま入れるだけなので、これまでの記録も読めます。</p>
+  </section>
+
+  <section id="links" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / links</p>
+    <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">機能</p><a href="../../features/done-mash/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">完了連打</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">コンポーネント</p><a href="../../ui/components/fever/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">フィーバー</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">前回のセッション</p><a href="../20261006-1829-localization/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">多言語展開の進め方を決める</a></li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

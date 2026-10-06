@@ -117,8 +117,8 @@ import Testing
         #expect(feverTap?.dopa == 1)
         #expect(model.remaining == 4)
         #expect(model.dopaTotal == 2)
-        // 最後の3秒はラッシュ。ドパは1のまま
-        let rush = model.tap(at: 8.0)
+        // 最後の2秒はラッシュ。ドパは1のまま
+        let rush = model.tap(at: 3.0)
         #expect(rush?.isRush == true)
         #expect(rush?.dopa == 1)
         #expect(model.fever?.gained == 2)

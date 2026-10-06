@@ -14,9 +14,9 @@ nonisolated struct MashSession: Sendable {
 
     /// フィーバータイムが当たる確率。スクワットの1打ごとに独立に引く
     static let feverChance = 0.0051
-    static let feverDuration: TimeInterval = 10
+    static let feverDuration: TimeInterval = 5
     /// 最後のこの秒数はラッシュ。演出だけが強まり、1打のドパは変わらない
-    static let feverRush: TimeInterval = 3
+    static let feverRush: TimeInterval = 2
 
     /// 叩き始めたときの目標回数。途中で設定を変えても、この連打の間は変わらない
     private(set) var target: Int
@@ -65,7 +65,7 @@ nonisolated struct MashSession: Sendable {
         let dopa: Int
         /// フィーバーの1打か
         let isFever: Bool
-        /// フィーバーの最後の3秒（ラッシュ）の1打か
+        /// フィーバーの最後の2秒（ラッシュ）の1打か
         let isRush: Bool
         /// この1打でフィーバーが当たったか
         let startedFever: Bool

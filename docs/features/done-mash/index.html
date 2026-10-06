@@ -223,8 +223,8 @@ tailwind.config = {
 
   <section id="fever" class="mt-20">
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03-5 / fever</p>
-    <h2 class="mt-2 font-display text-3xl">10秒のフィーバータイム</h2>
-    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">完了連打の1打ごとに、0.51% のくじを引きます。当たると、その1打の直後から10秒間の<a href="../../glossary.html#fever" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">フィーバータイム</a>。スクワットの残りは止まり、そのあいだは画面のどこを叩いても1打1ドパ入ります（倍率は付けない）。10秒で80打なら80ドパ。最後の3秒（ラッシュ）は演出だけが強まります。</p>
+    <h2 class="mt-2 font-display text-3xl">5秒のフィーバータイム</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">完了連打の1打ごとに、0.51% のくじを引きます。当たると、その1打の直後から5秒間の<a href="../../glossary.html#fever" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">フィーバータイム</a>。スクワットの残りは止まり、そのあいだは画面のどこを叩いても1打1ドパ入ります（倍率は付けない）。5秒で40打なら40ドパ。最後の2秒（ラッシュ）は演出だけが強まります。</p>
     <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">Yat Tat Ta の演出は、段階も確定も、くじを引かずに決めてきました。フィーバーだけが例外です。いつ来るか分からないこと自体を、開発者はドーパミンの材料に選びました（<a href="../../glossary.html#fixed-vs-variable-reward" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">可変報酬</a>）。20打の連打で当たるのは約10回に1回、1日60打なら約4日に1回。外れが続いても、当たりやすくはなりません。</p>
     <p class="mt-8 font-mono text-xs text-mute">表2-6　フィーバータイムの決まり</p>
     <div class="mt-2 overflow-x-auto">
@@ -232,7 +232,7 @@ tailwind.config = {
         <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">項目</th><th class="py-2 pr-4 font-bold">決まり</th><th class="py-2 pr-4 font-bold">理由</th></tr></thead>
         <tbody>
           <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">始まり</td><td class="py-3 pr-4">スクワットの1打ごとに 0.51%。当たった1打の直後から</td><td class="py-3 pr-4">いつ来るか分からない驚きを作る</td></tr>
-          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">長さ</td><td class="py-3 pr-4">10秒</td><td class="py-3 pr-4"></td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">長さ</td><td class="py-3 pr-4">5秒</td><td class="py-3 pr-4">2026-10-06 に10秒から短縮</td></tr>
           <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">1打のドパ</td><td class="py-3 pr-4">1打1ドパ。倍率は付けない</td><td class="py-3 pr-4">1ドパの重さをスクワットとそろえる（開発者の注文）</td></tr>
           <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">スクワットの残り</td><td class="py-3 pr-4">止まり、終わったら続きから。最後の1打で当たれば、フィーバーのあとにフィナーレ</td><td class="py-3 pr-4">フィーバーの1打はスクワットではない</td></tr>
           <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">数え方</td><td class="py-3 pr-4">DT と DPW に入れる。<a href="../../glossary.html#record" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録</a>には reps とは別の欄 bonusDopa に残す</td><td class="py-3 pr-4">何回しゃがんだかは、あとからでも出せる</td></tr>

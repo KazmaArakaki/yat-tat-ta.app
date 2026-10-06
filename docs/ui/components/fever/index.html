@@ -63,13 +63,13 @@ tailwind.config = {
 <header class="animate-rise">
   <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">ui / components / fever</p>
   <h1 class="mt-2 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">フィーバータイム</span></h1>
-  <div class="mt-4 max-w-2xl space-y-3 text-sm leading-relaxed text-ink/80"><p><a href="../../../glossary.html#done-mash" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">完了連打</a>の1打ごとに 0.51% のくじで当たる、10秒間のボーナスです（<a href="../../../glossary.html#fever" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">フィーバータイム</a>）。そのあいだは画面のどこを叩いても1打1ドパ（倍率は付けない）。最後の3秒はラッシュで、演出だけが強まる。スクワットの残りは止まり、終わったら続きから叩きます。</p><p>地は色の流れる放射線になり、金の粒が降り続けます。色を流す速さは1秒に1周まで、白い明滅は1秒3回まで。BGM は bgm_fever に切り替わります。</p></div>
+  <div class="mt-4 max-w-2xl space-y-3 text-sm leading-relaxed text-ink/80"><p><a href="../../../glossary.html#done-mash" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">完了連打</a>の1打ごとに 0.51% のくじで当たる、5秒間のボーナスです（<a href="../../../glossary.html#fever" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">フィーバータイム</a>）。そのあいだは画面のどこを叩いても1打1ドパ（倍率は付けない）。最後の2秒はラッシュで、演出だけが強まる。スクワットの残りは止まり、終わったら続きから叩きます。</p><p>地は色の流れる放射線になり、金の粒が降り続けます。色を流す速さは1秒に1周まで、白い明滅は1秒3回まで。BGM は bgm_fever に切り替わります。</p></div>
 </header>
 <section id="states" class="mt-12">
   <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">states</p>
   <h2 class="mt-2 font-display text-3xl">状態ごとの見た目</h2>
   <div data-story class="mt-6 rounded-3xl border-2 border-ink bg-white p-5 sm:p-7">
-  <div role="tablist" class="flex flex-wrap gap-2"><button type="button" role="tab" data-tab="start" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">始まった瞬間</button><button type="button" role="tab" data-tab="during" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">フィーバー中</button><button type="button" role="tab" data-tab="rush" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">ラッシュ（最後の3秒）</button><button type="button" role="tab" data-tab="end" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">終わり</button></div>
+  <div role="tablist" class="flex flex-wrap gap-2"><button type="button" role="tab" data-tab="start" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">始まった瞬間</button><button type="button" role="tab" data-tab="during" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">フィーバー中</button><button type="button" role="tab" data-tab="rush" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">ラッシュ（最後の2秒）</button><button type="button" role="tab" data-tab="end" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">終わり</button></div>
   <div class="mt-6 rounded-2xl bg-[repeating-linear-gradient(45deg,#FBF6EE_0_10px,#F5EDE0_10px_20px)] p-5 sm:p-8"><div data-panel="start" class="grid items-start gap-8 md:grid-cols-[auto_1fr]">
   <div class="w-[300px] shrink-0 rounded-[2.8rem] border-[6px] border-ink bg-ink p-1.5 shadow-[10px_10px_0_#E5337A]">
   <div class="relative flex h-[650px] flex-col items-center justify-center overflow-hidden rounded-[2.2rem]" style="background:#0E0712">
@@ -79,7 +79,7 @@ tailwind.config = {
     <span class="wave"></span>
     <div class="pointer-events-none absolute inset-0"><span class="coin" style="left:0%;top:-20px;animation-delay:0.00s"></span><span class="coin" style="left:37%;top:-20px;animation-delay:0.13s"></span><span class="coin" style="left:74%;top:-20px;animation-delay:0.26s"></span><span class="coin" style="left:16%;top:-20px;animation-delay:0.39s"></span><span class="coin" style="left:53%;top:-20px;animation-delay:0.52s"></span><span class="coin" style="left:90%;top:-20px;animation-delay:0.65s"></span><span class="coin" style="left:32%;top:-20px;animation-delay:0.78s"></span><span class="coin" style="left:69%;top:-20px;animation-delay:0.91s"></span><span class="coin" style="left:11%;top:-20px;animation-delay:1.04s"></span><span class="coin" style="left:48%;top:-20px;animation-delay:1.17s"></span><span class="coin" style="left:85%;top:-20px;animation-delay:1.30s"></span><span class="coin" style="left:27%;top:-20px;animation-delay:1.43s"></span><span class="coin" style="left:64%;top:-20px;animation-delay:1.56s"></span><span class="coin" style="left:6%;top:-20px;animation-delay:0.09s"></span><span class="coin" style="left:43%;top:-20px;animation-delay:0.22s"></span><span class="coin" style="left:80%;top:-20px;animation-delay:0.35s"></span><span class="coin" style="left:22%;top:-20px;animation-delay:0.48s"></span><span class="coin" style="left:59%;top:-20px;animation-delay:0.61s"></span></div>
     
-    <div class="relative flex flex-col items-center text-center"><p class="metal fire slam text-[64px]">FEVER!!</p><p class="metal gold slam mt-4 text-[30px]" style="animation-delay:.2s">10秒間 叩き放題</p></div>
+    <div class="relative flex flex-col items-center text-center"><p class="metal fire slam text-[64px]">FEVER!!</p><p class="metal gold slam mt-4 text-[30px]" style="animation-delay:.2s">5秒間 叩き放題</p></div>
   </div>
   </div>
   <div class="max-w-sm text-sm leading-relaxed"><p class="font-mono text-xs text-mute">state / start</p><p class="mt-1 font-display text-xl">始まった瞬間</p><div class="mt-3 space-y-2 text-ink/80"><p>当たった1打の直後。画面いっぱいに「FEVER!!」が叩きつけられ、声 voice_fever とサイレン sfx_fanfare。スクワットの残りの数は止まる。</p><p>当たる確率は画面に出さない。</p></div></div>
@@ -108,7 +108,7 @@ tailwind.config = {
     <div class="relative flex flex-col items-center text-center"><p class="metal fire slam text-[64px]">FEVER!!</p><p class="num mt-3 text-[56px] text-white" style="-webkit-text-stroke:2px #1C1916">2</p><p class="text-xs font-black text-white">のこり秒</p><p class="metal gold pulse mt-2 text-[34px]">RUSH!!</p><p class="metal gold mt-4 text-[44px]">+780 ドパ</p></div>
   </div>
   </div>
-  <div class="max-w-sm text-sm leading-relaxed"><p class="font-mono text-xs text-mute">state / rush</p><p class="mt-1 font-display text-xl">ラッシュ（最後の3秒）</p><div class="mt-3 space-y-2 text-ink/80"><p>残り3秒で「RUSH!!」。ドパは1打1のまま、放射線がさらに速く見える。</p></div></div>
+  <div class="max-w-sm text-sm leading-relaxed"><p class="font-mono text-xs text-mute">state / rush</p><p class="mt-1 font-display text-xl">ラッシュ（最後の2秒）</p><div class="mt-3 space-y-2 text-ink/80"><p>残り2秒で「RUSH!!」。ドパは1打1のまま、放射線がさらに速く見える。</p></div></div>
 </div><div data-panel="end" class="grid items-start gap-8 md:grid-cols-[auto_1fr]">
   <div class="w-[300px] shrink-0 rounded-[2.8rem] border-[6px] border-ink bg-ink p-1.5 shadow-[10px_10px_0_#E5337A]">
   <div class="relative flex h-[650px] flex-col items-center justify-center overflow-hidden rounded-[2.2rem]" style="background:#0E0712">
@@ -121,7 +121,7 @@ tailwind.config = {
     <div class="relative flex flex-col items-center text-center"><p class="metal gold slam text-[48px]">FEVER</p><p class="metal gold slam mt-1 text-[40px]" style="animation-delay:.1s">終了！</p><p class="metal gold mt-4 text-[44px]">+1040 ドパ</p></div>
   </div>
   </div>
-  <div class="max-w-sm text-sm leading-relaxed"><p class="font-mono text-xs text-mute">state / end</p><p class="mt-1 font-display text-xl">終わり</p><div class="mt-3 space-y-2 text-ink/80"><p>10秒たつと「FEVER 終了！」と合計を1秒見せ、スクワットの残りへ戻る。最後の1打で当たっていたら、ここで<a href="../../../glossary.html#finale" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">フィナーレ</a>に進む。取ったドパは DT と DPW に入り、<a href="../../../glossary.html#record" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録</a>の bonusDopa に残る。</p></div></div>
+  <div class="max-w-sm text-sm leading-relaxed"><p class="font-mono text-xs text-mute">state / end</p><p class="mt-1 font-display text-xl">終わり</p><div class="mt-3 space-y-2 text-ink/80"><p>5秒たつと「FEVER 終了！」と合計を1秒見せ、スクワットの残りへ戻る。最後の1打で当たっていたら、ここで<a href="../../../glossary.html#finale" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">フィナーレ</a>に進む。取ったドパは DT と DPW に入り、<a href="../../../glossary.html#record" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録</a>の bonusDopa に残る。</p></div></div>
 </div></div>
   </div>
 </section>

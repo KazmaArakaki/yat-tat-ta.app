@@ -549,7 +549,7 @@ struct FeverState: Equatable {
     let endsAt: Date
     /// このフィーバーで取ったドパ
     var gained = 0
-    /// 最後の3秒（ラッシュ）に入ったか
+    /// 最後の2秒（ラッシュ）に入ったか
     var rush = false
 }
 
