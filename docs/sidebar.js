@@ -130,7 +130,6 @@
       items: [
         { label: "課題一覧", path: "issues/index.html", level: 0 },
         { label: "多言語展開の進め方", path: "issues/localization/index.html", level: 1 },
-        { label: "記録の取り消し", path: "issues/undo-record/index.html", level: 1 }
       ]
     }
   ];
