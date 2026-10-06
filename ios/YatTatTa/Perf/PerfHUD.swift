@@ -116,6 +116,7 @@ private struct SummaryCard: View {
                     value("\(summary.cuts.count) 回", .plain)
                 }
             }
+            PhaseTable(phases: summary.phases)
             if !summary.voiceCuts.isEmpty {
                 VStack(alignment: .leading, spacing: 2) {
                     ForEach(Array(summary.voiceCuts.prefix(6).enumerated()), id: \.offset) { _, cut in
@@ -151,6 +152,36 @@ private struct SummaryCard: View {
 
     private func value(_ s: String, _ grade: PerfGrade) -> some View {
         Text(verbatim: s).foregroundStyle(grade.color).bold()
+    }
+}
+
+/// 場面ごとの最低の描画、詰まり、発火の最大
+private struct PhaseTable: View {
+    let phases: [PerfMonitor.PhaseStat]
+
+    var body: some View {
+        Grid(alignment: .leading, horizontalSpacing: 10, verticalSpacing: 3) {
+            GridRow {
+                Text(verbatim: "場面")
+                Text(verbatim: "最低fps")
+                Text(verbatim: "≥50ms")
+                Text(verbatim: "発火最大")
+            }
+            .foregroundStyle(.white.opacity(0.5))
+            ForEach(phases, id: \.name) { p in
+                GridRow {
+                    Text(verbatim: p.name)
+                    Text(verbatim: p.minFps.map(String.init) ?? "-")
+                        .foregroundStyle((p.minFps.map(PerfGrade.fps) ?? .plain).color)
+                    Text(verbatim: "\(p.hitches)")
+                        .foregroundStyle(PerfGrade.hitches(p.hitches).color)
+                    Text(verbatim: p.maxLatency.map(ms) ?? "-")
+                        .foregroundStyle((p.maxLatency.map(PerfGrade.latency) ?? .plain).color)
+                }
+            }
+        }
+        .padding(.top, 6)
+        .overlay(alignment: .top) { Rectangle().fill(.white.opacity(0.15)).frame(height: 1) }
     }
 }
 

@@ -216,6 +216,26 @@ tailwind.config = {
     <p class="mt-4 text-sm leading-relaxed text-ink/80">テスト39件（うち計測モード4件）が通った。シミュレーターで、29日連続、DT 900、DPW 141、ベスト 240、残り100で始まることを確かめた。Release ビルドに計測モードが入らないことも、ビルドで確かめた。実機での計測はまだ。</p>
   </section>
 
+  <section id="run1" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">実機 1回目 2026-10-06 14:33</p>
+    <h2 class="mt-2 font-display text-3xl">数字は全部外れ、指は何も感じなかった</h2>
+    <p class="mt-4 leading-relaxed">iPhone 15 Pro で100打とフィーバーを叩き切った（191打、フィーバーで92ドパ）。まとめの札は、4つの線のどれにも届きませんでした。</p>
+    <div class="mt-6 overflow-x-auto rounded-2xl border border-rule bg-white">
+      <table class="w-full min-w-[28rem] text-left text-sm">
+        <thead class="border-b-2 border-ink font-mono text-xs text-mute"><tr><th class="p-3">数えるもの</th><th class="p-3">1回目</th><th class="p-3">合格の線</th></tr></thead>
+        <tbody class="[&_td]:p-3 [&_td]:align-top [&_tr]:border-b [&_tr]:border-rule">
+          <tr><td class="font-bold">描画 最低</td><td class="font-bold text-dopa">76 fps</td><td>100 以上</td></tr>
+          <tr><td class="font-bold">50ms 以上の詰まり</td><td class="font-bold text-dopa">2 回</td><td>0 回</td></tr>
+          <tr><td class="font-bold">タッチ→発火</td><td>中央 16ms ／ 95% 28ms ／ <b class="text-dopa">最大 46ms</b></td><td>最大 40ms 以下</td></tr>
+          <tr><td class="font-bold">切った声</td><td class="font-bold text-dopa">15 回</td><td>0 回</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 leading-relaxed">それなのに、開発者の指は「遅れも抜けもなかった」。数字と指が食い違いました。</p>
+    <p class="mt-4 leading-relaxed">声のほうは、読んでいたとおりです。切れたのはほとんど10打ごとの <code class="font-mono text-xs">voice_combo</code> で、鳴り始めて0.5秒ほどで叩いた音に上書きされていました。連打の音にまぎれて、耳では気づきにくい切れ方です。声だけの再生口を3つ分け、空いている再生口から選ぶように直しました。</p>
+    <p class="mt-4 leading-relaxed">描画と発火のほうは、どこで落ちたのかが札から分かりません。叩いていないフィナーレの間に落ちたなら、指が何も感じなかったのもうなずけます。叩いている最中に落ちたのなら、線のほうが厳しすぎるのかもしれない。まとめの札に、場面ごと（NORMAL、CHANCE、激熱、PUSH、フィーバー、フィナーレ）の最低の描画、詰まり、発火の最大を足して、2回目で見分けます。</p>
+  </section>
+
 <section id="decisions" class="mt-20">
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">09 / decisions</p>
     <h2 class="mt-2 font-display text-3xl">決めたこと（2026-10-06 開発者がレビュー）</h2>

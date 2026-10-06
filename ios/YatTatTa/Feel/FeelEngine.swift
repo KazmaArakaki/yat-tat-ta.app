@@ -9,12 +9,20 @@ final class FeelEngine {
     static let levelCount = ToneSynth.semitones.count
 
     private let audioEngine = AVAudioEngine()
+    /// 叩いた音と効果音の再生口
     private var audioPlayers: [AVAudioPlayerNode] = []
-    private var nextAudioPlayer = 0
-    #if DEBUG
-    /// 再生口ごとに、いま預けている音。計測モードで、鳴り終わる前に上書きした音を数える
-    private var audioSlots: [(start: TimeInterval, end: TimeInterval, label: String, isVoice: Bool)?] = []
-    #endif
+    /// 声だけの再生口。叩いた音に上書きされて、言葉が途中で切れないように分ける
+    private var voicePlayers: [AVAudioPlayerNode] = []
+    /// 再生口ごとに、いま預けている音
+    private var audioSlots: [AudioSlot?] = []
+    private var voiceSlots: [AudioSlot?] = []
+
+    private struct AudioSlot {
+        let start: TimeInterval
+        let end: TimeInterval
+        let label: String
+        let isVoice: Bool
+    }
     private var tapBuffers: [AVAudioPCMBuffer] = []
     private var finaleBuffer: AVAudioPCMBuffer?
     private var milestoneBuffers: [AVAudioPCMBuffer] = []
@@ -259,15 +267,19 @@ final class FeelEngine {
         chanceBuffer = ToneSynth.chance(format: format)
         hotBuffer = ToneSynth.hot(format: format)
 
-        // 連打で前の音が切れないよう、8つを順番に使う。低音、段階の音、フィナーレ、札の音が重なる分も含む
+        // 連打で前の音が切れないよう、空いている再生口を使う。低音、段階の音、フィナーレ、札の音が重なる分も含む
         audioPlayers = (0..<8).map { _ in AVAudioPlayerNode() }
-        for player in audioPlayers {
+        // 声は重ならないように並べてあるが、10打ごとの声と段階の声は重なることがあるので3つ
+        voicePlayers = (0..<3).map { _ in AVAudioPlayerNode() }
+        audioSlots = Array(repeating: nil, count: audioPlayers.count)
+        voiceSlots = Array(repeating: nil, count: voicePlayers.count)
+        for player in audioPlayers + voicePlayers {
             audioEngine.attach(player)
             audioEngine.connect(player, to: audioEngine.mainMixerNode, format: format)
         }
         do {
             try audioEngine.start()
-            audioPlayers.forEach { $0.play() }
+            (audioPlayers + voicePlayers).forEach { $0.play() }
         } catch {
             print("AVAudioEngine: \(error)")
         }
@@ -279,33 +291,46 @@ final class FeelEngine {
         if !audioEngine.isRunning {
             // 電話などで止まったエンジンは、次の1打で起こす
             try? audioEngine.start()
-            audioPlayers.forEach { $0.play() }
+            (audioPlayers + voicePlayers).forEach { $0.play() }
         }
         guard audioEngine.isRunning else { return }
-        let player = audioPlayers[nextAudioPlayer]
-        #if DEBUG
-        noteSlot(nextAudioPlayer, buffer: buffer, delay: delay, label: label, isVoice: isVoice)
-        #endif
-        nextAudioPlayer = (nextAudioPlayer + 1) % audioPlayers.count
+        let now = ProcessInfo.processInfo.systemUptime
+        let start = now + delay
+        let slot = AudioSlot(start: start, end: start + Double(buffer.frameLength) / buffer.format.sampleRate,
+                             label: label, isVoice: isVoice)
+        let player: AVAudioPlayerNode
+        if isVoice {
+            let i = Self.pickSlot(voiceSlots, now: now)
+            noteCut(voiceSlots[i], now: now)
+            voiceSlots[i] = slot
+            player = voicePlayers[i]
+        } else {
+            let i = Self.pickSlot(audioSlots, now: now)
+            noteCut(audioSlots[i], now: now)
+            audioSlots[i] = slot
+            player = audioPlayers[i]
+        }
         let when = delay > 0
             ? AVAudioTime(hostTime: mach_absolute_time() + AVAudioTime.hostTime(forSeconds: delay))
             : nil
         player.scheduleBuffer(buffer, at: when, options: .interrupts)
     }
 
-    #if DEBUG
-    /// .interrupts で預けると、その再生口でまだ鳴っている音も、これから鳴る予定の音も消える
-    private func noteSlot(_ index: Int, buffer: AVAudioPCMBuffer, delay: TimeInterval, label: String, isVoice: Bool) {
-        guard let monitor = PerfMonitor.shared else { return }
-        if audioSlots.count != audioPlayers.count { audioSlots = Array(repeating: nil, count: audioPlayers.count) }
-        let now = ProcessInfo.processInfo.systemUptime
-        if let slot = audioSlots[index], slot.end > now {
-            monitor.soundCut(.init(label: slot.label, isVoice: slot.isVoice, left: slot.end - now, started: now >= slot.start))
-        }
-        let start = now + delay
-        audioSlots[index] = (start, start + Double(buffer.frameLength) / buffer.format.sampleRate, label, isVoice)
+    /// 預ける再生口を選ぶ。.interrupts で預けると、その再生口で鳴っている音も、これから鳴る予定の音も消える
+    ///
+    /// 鳴り終えた再生口があればそこを使う。なければ、いちばん早く鳴り終わる音を切る。
+    private static func pickSlot(_ slots: [AudioSlot?], now: TimeInterval) -> Int {
+        if let free = slots.firstIndex(where: { ($0?.end ?? 0) <= now }) { return free }
+        return slots.indices.min { slots[$0]!.end < slots[$1]!.end }!
     }
-    #endif
+
+    /// 計測モードで、鳴り終わる前に上書きした音を数える
+    private func noteCut(_ slot: AudioSlot?, now: TimeInterval) {
+        #if DEBUG
+        guard let monitor = PerfMonitor.shared, let slot, slot.end > now else { return }
+        monitor.soundCut(.init(label: slot.label, isVoice: slot.isVoice, left: slot.end - now, started: now >= slot.start))
+        #endif
+    }
 
     // MARK: - 振動
 

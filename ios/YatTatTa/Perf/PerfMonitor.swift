@@ -34,6 +34,17 @@ import QuartzCore
         var taps = 0
     }
 
+    /// 場面ごとの数。落ちた場所で、直すところが変わる
+    struct PhaseStat: Equatable {
+        let name: String
+        var minFps: Int?
+        var hitches = 0
+        var maxLatency: Double?
+    }
+
+    /// 場面の並び。まとめの札はこの順に出す
+    static let phaseOrder = ["NORMAL", "CHANCE", "激熱", "PUSH", "フィーバー", "フィナーレ"]
+
     struct Summary: Equatable {
         let run: Int
         let taps: Int
@@ -43,6 +54,7 @@ import QuartzCore
         let p95: Double
         let max: Double
         let cuts: [Cut]
+        let phases: [PhaseStat]
 
         var voiceCuts: [Cut] { cuts.filter(\.isVoice) }
     }
@@ -60,6 +72,11 @@ import QuartzCore
     @ObservationIgnored private var hitches = 0
     @ObservationIgnored private var latencies: [Double] = []
     @ObservationIgnored private var cuts: [Cut] = []
+    /// いまの場面の名前。計測モードの起動で、AppModel の状態から決める関数を入れる
+    @ObservationIgnored var phase: () -> String = { "NORMAL" }
+    @ObservationIgnored private var phases: [String: PhaseStat] = [:]
+    /// この1秒の中で、場面ごとに何コマ描いたか。1秒の描画の回数は、いちばん長くいた場面に付ける
+    @ObservationIgnored private var bucketPhases: [String: Int] = [:]
 
     func start() {
         let link = CADisplayLink(target: FrameTarget(self), selector: #selector(FrameTarget.frame(_:)))
@@ -72,7 +89,15 @@ import QuartzCore
     func tapFired(touchedAt timestamp: TimeInterval) {
         guard summary == nil else { return }
         if !running { begin() }
-        latencies.append((ProcessInfo.processInfo.systemUptime - timestamp) * 1000)
+        let latency = (ProcessInfo.processInfo.systemUptime - timestamp) * 1000
+        latencies.append(latency)
+        update(phase()) { $0.maxLatency = max($0.maxLatency ?? 0, latency) }
+    }
+
+    private func update(_ name: String, _ change: (inout PhaseStat) -> Void) {
+        var stat = phases[name] ?? PhaseStat(name: name)
+        change(&stat)
+        phases[name] = stat
     }
 
     func soundCut(_ cut: Cut) {
@@ -89,7 +114,8 @@ import QuartzCore
             sorted.isEmpty ? 0 : sorted[min(sorted.count - 1, Int((Double(sorted.count - 1) * p).rounded()))]
         }
         summary = Summary(run: run, taps: latencies.count, minFps: minFps, hitches: hitches,
-                          median: percentile(0.5), p95: percentile(0.95), max: sorted.last ?? 0, cuts: cuts)
+                          median: percentile(0.5), p95: percentile(0.95), max: sorted.last ?? 0, cuts: cuts,
+                          phases: Self.phaseOrder.compactMap { phases[$0] })
     }
 
     /// 「もう1回」。数を全部消して、次の1打を待つ
@@ -106,6 +132,8 @@ import QuartzCore
         hitches = 0
         latencies = []
         cuts = []
+        phases = [:]
+        bucketPhases = [:]
         bucketStart = 0
     }
 
@@ -113,18 +141,28 @@ import QuartzCore
         let t = link.timestamp
         defer { lastFrame = t }
         guard running, lastFrame > 0 else { return }
-        if t - lastFrame >= Self.hitchThreshold { hitches += 1 }
+        let name = phase()
+        if t - lastFrame >= Self.hitchThreshold {
+            hitches += 1
+            update(name) { $0.hitches += 1 }
+        }
         if bucketStart == 0 {
             bucketStart = t
             bucketFrames = 0
+            bucketPhases = [:]
             return
         }
         bucketFrames += 1
+        bucketPhases[name, default: 0] += 1
         guard t - bucketStart >= 1 else { return }
         let fps = Int((Double(bucketFrames) / (t - bucketStart)).rounded())
         minFps = min(minFps ?? fps, fps)
+        if let main = bucketPhases.max(by: { $0.value < $1.value })?.key {
+            update(main) { $0.minFps = min($0.minFps ?? fps, fps) }
+        }
         bucketStart = t
         bucketFrames = 0
+        bucketPhases = [:]
         live = Live(fps: fps, minFps: minFps, hitches: hitches, lastLatency: latencies.last,
                     maxLatency: latencies.max(), cuts: cuts.filter(\.isVoice).count, taps: latencies.count)
     }

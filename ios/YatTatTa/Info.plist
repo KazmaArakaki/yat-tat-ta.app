@@ -2,7 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<!-- ProMotion 端末で、アニメーションを 60Hz に絞らず 120Hz で描く -->
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 </dict>

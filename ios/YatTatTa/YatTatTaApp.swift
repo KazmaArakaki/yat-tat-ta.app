@@ -33,6 +33,16 @@ import SwiftUI
             let draw = feverDraw
             model.draw = { draw.next() }
             let monitor = PerfMonitor()
+            monitor.phase = {
+                if model.finale != nil { return "フィナーレ" }
+                if model.fever != nil || model.feverResult != nil { return "フィーバー" }
+                switch model.hypeStage {
+                case .normal: return "NORMAL"
+                case .chance: return "CHANCE"
+                case .hot: return "激熱"
+                case .push: return "PUSH"
+                }
+            }
             PerfMonitor.shared = monitor
             monitor.start()
             perf = monitor
