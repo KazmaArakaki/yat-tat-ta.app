@@ -31,6 +31,7 @@ extension AppModel {
             let start = ProcessInfo.processInfo.systemUptime
             let lottery = draw
             draw = { 1 }
+            wake()
             for i in 0..<97 { _ = tap(at: start + Double(i) * 0.01) }
             draw = lottery
         case .kakutei, .negirai:

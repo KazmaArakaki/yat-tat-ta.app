@@ -14,6 +14,7 @@ import Testing
         let model = AppModel(context: context, defaults: PerfSeed.defaults(), now: { [now] in now })
         let draw = PerfSeed.FeverDraw()
         model.draw = { draw.next() }
+        model.wake()
         return model
     }
 

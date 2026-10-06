@@ -22,8 +22,9 @@ import Testing
         return model
     }
 
-    /// 叩き切って1件作る。start は叩き始めの時刻（touch.timestamp と同じ時計）
+    /// 隊を起こして叩き切り、1件作る。start は叩き始めの時刻（touch.timestamp と同じ時計）
     private func mash(_ model: AppModel, from start: TimeInterval) {
+        model.wake()
         for i in 0..<5 { _ = model.tap(at: start + Double(i) * 0.2) }
     }
 
@@ -81,6 +82,7 @@ import Testing
     @Test func 叩いている最中は消せない() {
         let model = makeModel()
         mash(model, from: 0)
+        model.wake()
         _ = model.tap(at: 10)
         #expect(model.session.isOpen)
         model.delete(model.todayRecords[0])

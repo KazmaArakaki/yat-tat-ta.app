@@ -21,6 +21,10 @@ import SwiftData
     var showsReminderAsk = false
     /// ドパドパの段階。画面全体の地を変える
     private(set) var hypeStage = HypeStage.normal
+    /// スクワット隊が起きているか。寝ていて記録も開いていなければ、叩いても数えない
+    ///
+    /// 叩き切ったときだけ寝る。時間がたっても、途中で記録が閉じても起きたまま。端末には残さない。
+    private(set) var squadAwake = false
     /// 叩くたびに1増える。PUSH で画面を膨らませる合図
     private(set) var tapTick = 0
     /// ドパ突破（DT が100の倍数をまたいだ1打）
@@ -92,8 +96,16 @@ import SwiftData
 
     // MARK: - 叩く
 
+    /// 長押しで隊を起こす。うっかり触れた指で記録が始まらないように
+    func wake() {
+        guard !squadAwake else { return }
+        squadAwake = true
+        feel.wake()
+    }
+
     /// 1打。数えない間は nil
     func tap(at time: TimeInterval) -> MashSession.Tap? {
+        guard squadAwake || session.isOpen else { return nil }
         let date = now()
         if !session.isOpen { refreshIfDayChanged(date) }
         let totalBefore = dopaTotal
@@ -220,6 +232,8 @@ import SwiftData
         feverTask?.cancel()
         fever = nil
         feel.stopBGM()
+        // 叩き切ったら隊は寝る。次の記録も起こすところから
+        if completed { squadAwake = false }
         guard let closed = session.close() else { return }
 
         let wasDoneToday = ledger.streak.doneToday

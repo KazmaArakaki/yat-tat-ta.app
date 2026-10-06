@@ -48,7 +48,11 @@ final class SquatStageUIView: UIView {
     private let crowd = CALayer()
     private let halo = CAGradientLayer()
     private var members: [SquatterLayer] = []
-    private var squatting = false
+    /// 隊の全員がいまとっている姿勢
+    private var pose = SquatterLayer.Pose.lie
+    /// 寝ている隊を起こそうと押している指。wakeHold 押し続けたら起きる
+    private var wakingTouch: UITouch?
+    private var wakeWork: DispatchWorkItem?
     private var stage = HypeStage.normal
     private var comboHide: DispatchWorkItem?
     private var reduceMotion: Bool { UIAccessibility.isReduceMotionEnabled }
@@ -114,6 +118,7 @@ final class SquatStageUIView: UIView {
         isAccessibilityElement = true
         accessibilityTraits = [.button, .allowsDirectInteraction]
         setMembers(1, animated: false)
+        setPose(.lie, duration: 0)
     }
 
     required init?(coder: NSCoder) { fatalError() }
@@ -186,6 +191,9 @@ final class SquatStageUIView: UIView {
 
     func sync() {
         guard let model else { return }
+        // 寝るのは叩き切ったときだけ。起こした瞬間は wake で立たせ、ここでは寝かせる向きだけを見る
+        if isAsleep && wakingTouch == nil && pose != .lie { collapse() }
+        if !isAsleep && (pose == .lie || pose == .rise) && wakingTouch == nil { setPose(.stand, duration: 0.12) }
         // 叩き切ったあとは、フィナーレの間だけ 0 と変えた数を残す
         if let finale = model.finale, finale.completed {
             setNumber("0")
@@ -209,8 +217,11 @@ final class SquatStageUIView: UIView {
         if stage < .push {
             caption.text = model.session.isOpen ? String(localized: "スクワット 残り") : String(localized: "スクワット")
         }
-        gained.text = model.converted > 0 ? String(localized: "+\(model.converted) ドパ") : String(localized: "叩いてしゃがむ")
-        accessibilityLabel = String(localized: "完了連打。スクワット 残り \(model.remaining)")
+        gained.text = model.converted > 0 ? String(localized: "+\(model.converted) ドパ")
+            : isAsleep ? String(localized: "長押しで起こす") : String(localized: "叩いてしゃがむ")
+        accessibilityLabel = isAsleep ? String(localized: "完了連打。スクワット隊が寝ています")
+            : String(localized: "完了連打。スクワット 残り \(model.remaining)")
+        accessibilityHint = isAsleep ? String(localized: "ダブルタップで起こす") : nil
     }
 
     /// 隊の人数をそろえる。増えた人は跳ねて現れる
@@ -222,7 +233,7 @@ final class SquatStageUIView: UIView {
             members.append(member)
             crowd.addSublayer(member)
             place(member, slot: members.count - 1)
-            member.setPose(squat: squatting, duration: 0)
+            member.setPose(pose, duration: 0)
             if animated {
                 if !reduceMotion {
                     let pop = CASpringAnimation(keyPath: "transform.scale")
@@ -255,6 +266,11 @@ final class SquatStageUIView: UIView {
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let model else { return }
+        // 寝ている間は数えない。最初に触れた指で長押しを測る。起こした指は、この先も1打にならない
+        if isAsleep {
+            if wakingTouch == nil, let touch = touches.first { beginWaking(touch) }
+            return
+        }
         for touch in touches {
             let point = touch.location(in: self)
             guard let tap = model.tap(at: touch.timestamp) else { continue }
@@ -271,6 +287,8 @@ final class SquatStageUIView: UIView {
             if tap.isFinal {
                 setNumber("0")
                 if !reduceMotion { burst() }
+                // 叩き切ったら力尽きて倒れ込む。フィーバーが当たったら、終わるまで起きたまま
+                if isAsleep { collapse() }
             } else {
                 sync()
             }
@@ -281,10 +299,12 @@ final class SquatStageUIView: UIView {
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        releaseWaking(touches)
         standIfReleased(event)
     }
 
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        releaseWaking(touches)
         standIfReleased(event)
     }
 
@@ -295,6 +315,13 @@ final class SquatStageUIView: UIView {
     }
 
     override func accessibilityActivate() -> Bool {
+        // VoiceOver では長押しがしにくいので、寝ているときのダブルタップで起こす
+        if isAsleep {
+            model?.wake()
+            standUp()
+            sync()
+            return true
+        }
         _ = model?.tap(at: ProcessInfo.processInfo.systemUptime)
         squat(true)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) { self.squat(false) }
@@ -302,12 +329,87 @@ final class SquatStageUIView: UIView {
         return true
     }
 
-    /// 隊の全員が揃ってしゃがむ。しゃがむのは速く、立ち上がりは少し遅く
+    /// 隊の全員が揃ってしゃがむ。しゃがむのは速く、立ち上がりは少し遅く。寝ているときは動かない
     private func squat(_ down: Bool) {
-        guard down != squatting else { return }
-        squatting = down
-        for member in members { member.setPose(squat: down, duration: down ? 0.08 : 0.12) }
+        guard pose == .stand || pose == .squat else { return }
+        let target: SquatterLayer.Pose = down ? .squat : .stand
+        guard target != pose else { return }
+        setPose(target, duration: down ? 0.08 : 0.12, timing: down ? .easeIn : .easeOut)
     }
+
+    private func setPose(_ new: SquatterLayer.Pose, duration: CFTimeInterval, timing: CAMediaTimingFunctionName = .easeOut) {
+        pose = new
+        for member in members { member.setPose(new, duration: duration, timing: timing) }
+    }
+
+    // MARK: - 起こす
+
+    /// 隊が寝ていて、叩いても数えない間
+    private var isAsleep: Bool {
+        guard let model else { return true }
+        return !model.squadAwake && !model.session.isOpen
+    }
+
+    /// 長押しの始まり。手足をばたつかせながら、上半身が少しずつ起きてくる
+    private func beginWaking(_ touch: UITouch) {
+        wakingTouch = touch
+        if reduceMotion {
+            setPose(.rise, duration: 0)
+        } else {
+            setPose(.rise, duration: MashSession.wakeHold, timing: .linear)
+            for member in members { member.add(Self.struggle, forKey: "struggle") }
+        }
+        let work = DispatchWorkItem { [weak self] in self?.finishWaking() }
+        wakeWork = work
+        DispatchQueue.main.asyncAfter(deadline: .now() + MashSession.wakeHold, execute: work)
+    }
+
+    /// 押し続けて起きた。立ち上がって小さく跳ねる
+    private func finishWaking() {
+        wakeWork = nil
+        model?.wake()
+        standUp()
+        sync()
+    }
+
+    /// 起こしていた指が離れた。起きる前なら、パタンと寝直す
+    private func releaseWaking(_ touches: Set<UITouch>) {
+        guard let touch = wakingTouch, touches.contains(touch) else { return }
+        wakingTouch = nil
+        guard let work = wakeWork else { return }
+        work.cancel()
+        wakeWork = nil
+        collapse()
+    }
+
+    private func standUp() {
+        for member in members { member.removeAnimation(forKey: "struggle") }
+        setPose(.stand, duration: reduceMotion ? 0 : 0.12)
+        guard !reduceMotion else { return }
+        for member in members {
+            let hop = CAKeyframeAnimation(keyPath: "transform.translation.y")
+            hop.values = [0, -member.height * 0.12, 0]
+            hop.keyTimes = [0, 0.4, 1]
+            hop.duration = 0.26
+            hop.beginTime = CACurrentMediaTime() + 0.08
+            member.add(hop, forKey: "hop")
+        }
+    }
+
+    /// 床に倒れ込む
+    private func collapse() {
+        for member in members { member.removeAnimation(forKey: "struggle") }
+        setPose(.lie, duration: reduceMotion ? 0 : 0.18, timing: .easeIn)
+    }
+
+    /// 押している間の、じたばた。足首を軸に小刻みに揺れる
+    private static let struggle: CAAnimation = {
+        let shake = CAKeyframeAnimation(keyPath: "transform.rotation.z")
+        shake.values = [0, -0.07, 0.05, -0.04, 0.07, 0]
+        shake.duration = 0.16
+        shake.repeatCount = .infinity
+        return shake
+    }()
 
     // MARK: - ドパドパ
 
@@ -619,8 +721,8 @@ final class SquatStageUIView: UIView {
 
 /// スクワットをする人1人。横向きの棒人間を、太い ink の線の上に色の線を重ねて描く
 ///
-/// 立つ姿としゃがむ姿は、同じ数の点でできた線なので、線の形ごと動かせる。
-/// 位置（position）は足首の場所。
+/// どの姿勢も同じ数の点でできた線なので、線の形ごと動かせる。
+/// 位置（position）は立ったときの足首の場所。寝た姿は、隊の真ん中に来るよう右へずらして描く。
 final class SquatterLayer: CALayer {
     /// 足首から頭のてっぺんまでの高さ
     var height: CGFloat = 160 { didSet { redraw() } }
@@ -630,7 +732,12 @@ final class SquatterLayer: CALayer {
     private let body = CAShapeLayer()
     private let headOutline = CAShapeLayer()
     private let head = CAShapeLayer()
-    private var squatting = false
+    private var pose = Pose.stand
+
+    /// 姿勢。寝る→起きかけ→立つ、と立つ⇄しゃがむ
+    enum Pose {
+        case stand, squat, lie, rise
+    }
 
     init(contentsScale: CGFloat) {
         super.init()
@@ -654,27 +761,48 @@ final class SquatterLayer: CALayer {
     required init?(coder: NSCoder) { fatalError() }
 
     /// 高さ100のときの関節の位置。足首が原点、上がマイナス
-    private struct Pose {
+    private struct Joints {
         let legs: [CGPoint]   // つま先、足首、膝、腰、肩
         let arm: [CGPoint]    // 肩、肘、手
         let head: CGPoint
     }
 
-    private static let stand = Pose(
+    private static let stand = Joints(
         legs: [.init(x: 12, y: 0), .init(x: 0, y: 0), .init(x: 0, y: -21), .init(x: 0, y: -42), .init(x: 0, y: -72)],
         arm: [.init(x: 0, y: -72), .init(x: 4, y: -58), .init(x: 6, y: -46)],
         head: .init(x: 2, y: -86))
 
-    private static let squat = Pose(
+    private static let squat = Joints(
         legs: [.init(x: 12, y: 0), .init(x: 0, y: 0), .init(x: 15, y: -15), .init(x: -7, y: -25), .init(x: 3, y: -55)],
         arm: [.init(x: 3, y: -55), .init(x: 17, y: -55), .init(x: 31, y: -56)],
         head: .init(x: 7, y: -69))
 
+    /// 仰向けに寝た姿。つま先を上に向け、頭を左に置く
+    private static let lie = Joints(
+        legs: [.init(x: 44, y: -14), .init(x: 40, y: -7), .init(x: 19, y: -7), .init(x: -2, y: -7), .init(x: -32, y: -7)],
+        arm: [.init(x: -32, y: -7), .init(x: -18, y: -3), .init(x: -6, y: -3)],
+        head: .init(x: -46, y: -12))
+
+    /// 脚を伸ばしたまま、上半身だけ起こした姿。長押しの0.5秒で、寝た姿からここまで起きる
+    private static let rise = Joints(
+        legs: [.init(x: 44, y: -14), .init(x: 40, y: -7), .init(x: 19, y: -7), .init(x: -2, y: -7), .init(x: 4, y: -36)],
+        arm: [.init(x: 4, y: -36), .init(x: 16, y: -26), .init(x: 26, y: -18)],
+        head: .init(x: 10, y: -50))
+
+    private static func joints(_ pose: Pose) -> Joints {
+        switch pose {
+        case .stand: stand
+        case .squat: squat
+        case .lie: lie
+        case .rise: rise
+        }
+    }
+
     private var k: CGFloat { height / 100 }
 
-    private func path(_ pose: Pose) -> CGPath {
+    private func path(_ joints: Joints) -> CGPath {
         let p = UIBezierPath()
-        for points in [pose.legs, pose.arm] {
+        for points in [joints.legs, joints.arm] {
             p.move(to: scaled(points[0]))
             for point in points.dropFirst() { p.addLine(to: scaled(point)) }
         }
@@ -690,15 +818,15 @@ final class SquatterLayer: CALayer {
     private func redraw() {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
-        let pose = squatting ? Self.squat : Self.stand
+        let joints = Self.joints(pose)
         outline.lineWidth = 15 * k
         body.lineWidth = 9 * k
-        outline.path = path(pose)
-        body.path = path(pose)
+        outline.path = path(joints)
+        body.path = path(joints)
         headOutline.path = headPath(radius: 12 * k)
         head.path = headPath(radius: 8.5 * k)
-        headOutline.position = scaled(pose.head)
-        head.position = scaled(pose.head)
+        headOutline.position = scaled(joints.head)
+        head.position = scaled(joints.head)
         CATransaction.commit()
     }
 
@@ -712,20 +840,21 @@ final class SquatterLayer: CALayer {
         CATransaction.commit()
     }
 
-    func setPose(squat down: Bool, duration: CFTimeInterval) {
-        squatting = down
-        let pose = down ? Self.squat : Self.stand
-        let newPath = path(pose)
-        let newHead = scaled(pose.head)
+    func setPose(_ pose: Pose, duration: CFTimeInterval, timing: CAMediaTimingFunctionName = .easeOut) {
+        self.pose = pose
+        let joints = Self.joints(pose)
+        let newPath = path(joints)
+        let newHead = scaled(joints.head)
         CATransaction.begin()
         CATransaction.setAnimationDuration(duration)
-        CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: down ? .easeIn : .easeOut))
+        CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: timing))
         if duration == 0 { CATransaction.setDisableActions(true) }
         for shape in [outline, body] {
             let animation = CABasicAnimation(keyPath: "path")
             animation.fromValue = shape.presentation()?.path ?? shape.path
             animation.toValue = newPath
             animation.duration = duration
+            animation.timingFunction = CAMediaTimingFunction(name: timing)
             shape.path = newPath
             if duration > 0 { shape.add(animation, forKey: "pose") }
         }
@@ -734,6 +863,7 @@ final class SquatterLayer: CALayer {
             animation.fromValue = shape.presentation()?.position ?? shape.position
             animation.toValue = newHead
             animation.duration = duration
+            animation.timingFunction = CAMediaTimingFunction(name: timing)
             shape.position = newHead
             if duration > 0 { shape.add(animation, forKey: "pose") }
         }

@@ -8,6 +8,8 @@ nonisolated struct MashSession: Sendable {
     static let idleTimeout: TimeInterval = 60
     /// 叩き切ったあと、この秒数は叩いても数えない。勢い余った指で次の記録が始まらないように
     static let lockAfterFinale: TimeInterval = 1.2
+    /// 寝ているスクワット隊を、この秒数押し続けると起きる。iOS の長押しと同じ長さ
+    static let wakeHold: TimeInterval = 0.5
     /// この秒数以内に次を叩くと、光が強まる
     static let comboWindow: TimeInterval = 0.45
     static let levelCount = 8

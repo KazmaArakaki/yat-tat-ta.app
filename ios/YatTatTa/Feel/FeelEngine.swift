@@ -32,6 +32,7 @@ final class FeelEngine {
     private var milestoneBuffers: [AVAudioPCMBuffer] = []
     private var bassBuffer: AVAudioPCMBuffer?
     private var chanceBuffer: AVAudioPCMBuffer?
+    private var wakeBuffer: AVAudioPCMBuffer?
     private var hotBuffer: AVAudioPCMBuffer?
     /// 声と効果音。Sounds/ のファイルか、なければ合成音
     private var sounds: [Sound: AVAudioPCMBuffer] = [:]
@@ -237,6 +238,12 @@ final class FeelEngine {
         buzz(.reelStop)
     }
 
+    /// 寝ていた隊が起きた。指を離す前に、もう叩けると分かるように
+    func wake() {
+        play(wakeBuffer)
+        buzz(.reelStop)
+    }
+
     /// 連打の途中でまたいだ節目。札1枚ぶん
     func milestone() {
         try? milestoneHaptic?.start(atTime: CHHapticTimeImmediate)
@@ -275,6 +282,7 @@ final class FeelEngine {
         audioEngine.connect(loopPlayer, to: audioEngine.mainMixerNode, format: format)
         bassBuffer = ToneSynth.bass(format: format)
         chanceBuffer = ToneSynth.chance(format: format)
+        wakeBuffer = ToneSynth.wake(format: format)
         hotBuffer = ToneSynth.hot(format: format)
 
         // 連打で前の音が切れないよう、空いている再生口を使う。低音、段階の音、フィナーレ、札の音が重なる分も含む

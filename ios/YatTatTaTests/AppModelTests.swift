@@ -11,10 +11,12 @@ import Testing
         return UserDefaults(suiteName: name)!
     }()
 
-    private func makeModel(now: Date = .now) -> AppModel {
+    /// awake なら、長押しで隊を起こしたところから始める
+    private func makeModel(now: Date = .now, awake: Bool = true) -> AppModel {
         let model = AppModel(context: container.mainContext, defaults: defaults, now: { now })
         // フィーバーのくじは外れに固定する。当てたいテストだけ差し替える
         model.draw = { 1 }
+        if awake { model.wake() }
         return model
     }
 
@@ -43,8 +45,50 @@ import Testing
         let model = makeModel()
         model.targetReps = 5
         for i in 0..<5 { _ = model.tap(at: Double(i) * 0.2) }
+        model.wake()
         #expect(model.tap(at: 1.0) == nil)
         #expect(model.tap(at: 0.8 + MashSession.lockAfterFinale) != nil)
+    }
+
+    @Test func 寝ている隊は叩いても数えず起こすと数える() {
+        let model = makeModel(awake: false)
+        #expect(!model.squadAwake)
+        #expect(model.tap(at: 0) == nil)
+        #expect(!model.session.isOpen)
+        #expect(model.dopaTotal == 0)
+        model.wake()
+        #expect(model.tap(at: 1) != nil)
+        #expect(model.session.isOpen)
+    }
+
+    @Test func 叩き切ると隊は寝る() {
+        let model = makeModel()
+        model.targetReps = 5
+        for i in 0..<4 { _ = model.tap(at: Double(i) * 0.2) }
+        #expect(model.squadAwake)
+        _ = model.tap(at: 0.8)
+        #expect(!model.squadAwake)
+        #expect(model.tap(at: 10) == nil)
+    }
+
+    @Test func 途中で記録が閉じても隊は起きたまま() {
+        let model = makeModel()
+        for i in 0..<3 { _ = model.tap(at: Double(i) * 0.2) }
+        model.sceneDidLeave()
+        #expect(records().map(\.reps) == [3])
+        #expect(model.squadAwake)
+        #expect(model.tap(at: 10) != nil)
+    }
+
+    @Test func 最後の1打でフィーバーが当たったら終わるまで起きたまま() {
+        let model = makeModel()
+        model.targetReps = 2
+        _ = model.tap(at: 0)
+        model.draw = { 0 }
+        #expect(model.tap(at: 0.2)?.startedFever == true)
+        model.draw = { 1 }
+        #expect(model.tap(at: 0.4)?.isFever == true)
+        #expect(model.squadAwake)
     }
 
     @Test func 途中で離れると叩いたところまでで1件() {
@@ -99,6 +143,7 @@ import Testing
         for i in 0..<5 { _ = model.tap(at: Double(i) * 0.2) }
         #expect(model.finale?.negirai?.message == "今日もお疲れ！")
         #expect(model.finale?.kakutei == 0)
+        model.wake()
         for i in 0..<5 { _ = model.tap(at: 10 + Double(i) * 0.2) }
         #expect(model.finale?.kakutei == 1)
         #expect(model.finale?.negirai?.message != "今日もお疲れ！")

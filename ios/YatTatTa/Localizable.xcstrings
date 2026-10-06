@@ -941,6 +941,54 @@
         }
       }
     },
+    "長押しで起こす" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HOLD TO WAKE UP"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "長押しで起こす"
+          }
+        }
+      }
+    },
+    "完了連打。スクワット隊が寝ています" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done mash. The squad is asleep"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "完了連打。スクワット隊が寝ています"
+          }
+        }
+      }
+    },
+    "ダブルタップで起こす" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Double-tap to wake up"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ダブルタップで起こす"
+          }
+        }
+      }
+    },
     "叩き放題" : {
       "localizations" : {
         "en" : {
