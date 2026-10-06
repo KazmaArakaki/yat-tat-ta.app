@@ -4,13 +4,44 @@ import SwiftUI
 @main struct YatTatTaApp: App {
     private let container: ModelContainer
     @State private var model: AppModel
+    #if DEBUG
+    /// 計測モード（起動引数 -perf）のときだけある
+    private let perf: PerfMonitor?
+    private let feverDraw = PerfSeed.FeverDraw()
+    #endif
 
     init() {
+        #if DEBUG
+        let perfOn = PerfSeed.isOn
+        #else
+        let perfOn = false
+        #endif
         do {
-            container = try ModelContainer(for: SquatRecord.self)
+            // 計測モードは、メモリだけの保存先を使う。端末に保存された記録には触れない
+            container = try ModelContainer(
+                for: SquatRecord.self, configurations: ModelConfiguration(isStoredInMemoryOnly: perfOn))
         } catch {
             fatalError("SwiftData: \(error)")
         }
+        #if DEBUG
+        if perfOn {
+            let records = PerfSeed.records(today: RecordDay(.now), now: .now)
+            records.forEach(container.mainContext.insert)
+            try? container.mainContext.save()
+            let model = AppModel(context: container.mainContext, defaults: PerfSeed.defaults())
+            model.remindersPaused = true
+            let draw = feverDraw
+            model.draw = { draw.next() }
+            let monitor = PerfMonitor()
+            PerfMonitor.shared = monitor
+            monitor.start()
+            perf = monitor
+            model.feel.start()
+            _model = State(initialValue: model)
+            return
+        }
+        perf = nil
+        #endif
         let model = AppModel(context: container.mainContext)
         model.feel.start()
         _model = State(initialValue: model)
@@ -19,6 +50,17 @@ import SwiftUI
     var body: some Scene {
         WindowGroup {
             HomeView(model: model)
+                #if DEBUG
+                .overlay(alignment: .topLeading) {
+                    if let perf {
+                        PerfHUD(monitor: perf, model: model) {
+                            feverDraw.reset()
+                            model.resetForPerf(PerfSeed.records(today: RecordDay(.now), now: .now))
+                            perf.reset()
+                        }
+                    }
+                }
+                #endif
         }
         .modelContainer(container)
     }

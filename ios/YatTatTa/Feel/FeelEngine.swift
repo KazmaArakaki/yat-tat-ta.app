@@ -11,6 +11,10 @@ final class FeelEngine {
     private let audioEngine = AVAudioEngine()
     private var audioPlayers: [AVAudioPlayerNode] = []
     private var nextAudioPlayer = 0
+    #if DEBUG
+    /// 再生口ごとに、いま預けている音。計測モードで、鳴り終わる前に上書きした音を数える
+    private var audioSlots: [(start: TimeInterval, end: TimeInterval, label: String, isVoice: Bool)?] = []
+    #endif
     private var tapBuffers: [AVAudioPCMBuffer] = []
     private var finaleBuffer: AVAudioPCMBuffer?
     private var milestoneBuffers: [AVAudioPCMBuffer] = []
@@ -79,7 +83,7 @@ final class FeelEngine {
     /// 声か効果音を1つ鳴らす。声のファイルがなければ読み上げで代える
     func play(_ sound: Sound, after delay: TimeInterval = 0) {
         if let buffer = sounds[sound] {
-            play(buffer, after: delay)
+            play(buffer, after: delay, label: sound.rawValue, isVoice: sound.isVoice)
         } else if let text = sound.spokenFallback {
             let utterance = AVSpeechUtterance(string: text)
             utterance.voice = AVSpeechSynthesisVoice(language: "ja-JP")
@@ -269,7 +273,8 @@ final class FeelEngine {
         }
     }
 
-    private func play(_ buffer: AVAudioPCMBuffer?, after delay: TimeInterval = 0) {
+    private func play(_ buffer: AVAudioPCMBuffer?, after delay: TimeInterval = 0,
+                      label: String = "tone", isVoice: Bool = false) {
         guard let buffer else { return }
         if !audioEngine.isRunning {
             // 電話などで止まったエンジンは、次の1打で起こす
@@ -278,12 +283,29 @@ final class FeelEngine {
         }
         guard audioEngine.isRunning else { return }
         let player = audioPlayers[nextAudioPlayer]
+        #if DEBUG
+        noteSlot(nextAudioPlayer, buffer: buffer, delay: delay, label: label, isVoice: isVoice)
+        #endif
         nextAudioPlayer = (nextAudioPlayer + 1) % audioPlayers.count
         let when = delay > 0
             ? AVAudioTime(hostTime: mach_absolute_time() + AVAudioTime.hostTime(forSeconds: delay))
             : nil
         player.scheduleBuffer(buffer, at: when, options: .interrupts)
     }
+
+    #if DEBUG
+    /// .interrupts で預けると、その再生口でまだ鳴っている音も、これから鳴る予定の音も消える
+    private func noteSlot(_ index: Int, buffer: AVAudioPCMBuffer, delay: TimeInterval, label: String, isVoice: Bool) {
+        guard let monitor = PerfMonitor.shared else { return }
+        if audioSlots.count != audioPlayers.count { audioSlots = Array(repeating: nil, count: audioPlayers.count) }
+        let now = ProcessInfo.processInfo.systemUptime
+        if let slot = audioSlots[index], slot.end > now {
+            monitor.soundCut(.init(label: slot.label, isVoice: slot.isVoice, left: slot.end - now, started: now >= slot.start))
+        }
+        let start = now + delay
+        audioSlots[index] = (start, start + Double(buffer.frameLength) / buffer.format.sampleRate, label, isVoice)
+    }
+    #endif
 
     // MARK: - 振動
 

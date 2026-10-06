@@ -83,7 +83,8 @@ tailwind.config = {
       <li class="rounded-2xl border-2 border-ink bg-white p-4"><p class="font-mono text-xs text-mute">DT</p><p class="mt-1 font-display text-xl">1,000 突破</p><p class="mt-2 text-ink/80">900 から始める。最後の1打で金のドパ突破。</p></li>
       <li class="rounded-2xl border-2 border-ink bg-white p-4"><p class="font-mono text-xs text-mute">DPW</p><p class="mt-1 font-display text-xl">ベスト更新</p><p class="mt-2 text-ink/80">直近7日の合計が、最後の1打でベストを越える。</p></li>
     </ul>
-    <p class="mt-6 leading-relaxed">途中も重くします。60打目で隊が30人そろい、50打目でフィーバータイムが必ず当たるよう、くじを固定します。フィーバーの10秒は画面全体を叩くので、その間も測ります。100打とフィーバーで、30秒ほどの連打になります。</p>
+    <p class="mt-6 leading-relaxed">途中も重くします。60打目で隊が30人そろい、最後の1打でフィーバータイムが必ず当たるよう、くじを固定します。最後の1打は、金のドパ突破、PUSH、フィーバーの始まりが重なる1打になります。フィーバーの10秒は画面全体を叩くので、その間も測ります。フィーバーが終わると記録が閉じ、連続30日を足した札3枚のフィナーレが出ます。100打とフィーバーとフィナーレで、40秒ほどです。</p>
+    <p class="mt-4 leading-relaxed">設計のときは、フィーバーを50打目で当てるつもりでした。実装で記録の計算を読み直して、やめました。フィーバーで入るドパは叩く速さで毎回変わるので、50打目で当てると、DT 1,000 と DPW ベストをまたぐ打が毎回ずれます。最後の1打で当てれば、フィーバーのドパはまたいだあとに入るので、節目の重なる1打は動きません。いまのコードは、最後の1打で当たったフィーバーをもともと扱えるので、作り物の分岐も要りませんでした。</p>
     <p class="mt-4 rounded-lg border border-dashed border-mute bg-white/60 p-3 text-xs leading-relaxed">本作りのころは「記録を仮に入れる仕組み」を作らず、見本で代えました。端末の記録に混ざるのが怖かったからです。今回はメモリの中だけに入れ、アプリを終えれば消えます。端末に保存された記録には、読むことも書くことも一切しません。</p>
   </section>
 
@@ -112,7 +113,7 @@ tailwind.config = {
   <section id="mock" class="mt-20">
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / mock</p>
     <h2 class="mt-2 font-display text-3xl">計測の札の修正イメージ</h2>
-    <p class="mt-4 text-sm leading-relaxed text-ink/80">叩いている間は左上に小さく出し、指の届く場所をふさがない。ねぎらいが終わったら、まとめの札に変える。アプリの色とは混ぜず、開発用と一目で分かる黒にする。</p>
+    <p class="mt-4 text-sm leading-relaxed text-ink/80">叩いている間は左上（連続記録の帯の上）に小さく出し、残りの数と指の届く場所をふさがない。右の ↺ で、途中からでもやり直せる。ねぎらいが終わったら、まとめの札に変える。アプリの色とは混ぜず、開発用と一目で分かる黒にする。</p>
     <div class="mt-8 flex flex-col items-center gap-10 md:flex-row md:items-start md:justify-center">
       <figure class="flex flex-col items-center gap-3">
         <div class="relative h-[460px] w-[230px] overflow-hidden rounded-[2.2rem] border-[5px] border-ink bg-[#1A0710]">
@@ -185,7 +186,7 @@ tailwind.config = {
     <ol class="mt-6 flex flex-col gap-3 text-sm">
       <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">1</span><div><b>起動引数 <code class="font-mono text-xs">-perf</code> で、メモリだけの保存先に切り替える</b>（<code class="font-mono text-xs">YatTatTaApp.swift</code>）。叩いた記録で端末の本当の記録を汚さないため。</div></li>
       <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">2</span><div><b>仮の記録を入れる</b>（新規 <code class="font-mono text-xs">Mash/PerfSeed.swift</code>）。29日の連続、DT 900、DPW がベストの手前。目標回数は100。最後の1打で節目が3つ重なる状態を、見本ではなく本物の処理で作るため。テストで「100打目に3つ重なる」を確かめる。</div></li>
-      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">3</span><div><b>フィーバーのくじを50打目で当てる</b>。いまの <code class="font-mono text-xs">draw</code> を差し替える。0.51% のくじを待たずに、毎回同じ重さで測るため。</div></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">3</span><div><b>フィーバーのくじを100打目（最後の1打）で当てる</b>。いまの <code class="font-mono text-xs">draw</code> を差し替える。0.51% のくじを待たずに、毎回同じ重さで測るため。</div></li>
       <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">4</span><div><b>3つを数える</b>（新規 <code class="font-mono text-xs">Perf/PerfMonitor.swift</code>）。描画は CADisplayLink、発火は叩く面とフィーバーの面の touchesBegan の終わりで、切った音は FeelEngine の再生口ごとに鳴り終わる時刻を覚えて数える。</div></li>
       <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">5</span><div><b>計測の札を出す</b>（新規 <code class="font-mono text-xs">Perf/PerfHUD.swift</code>）。数字を開発者がそのまま読めて、写真1枚で Claude に渡せるようにするため。「もう1回」で仮の記録を入れ直す。</div></li>
     </ol>
@@ -197,19 +198,31 @@ tailwind.config = {
     <h2 class="mt-2 font-display text-3xl">実機での確かめ方（開発者、10分）</h2>
     <ol class="mt-6 flex flex-col gap-2 text-sm">
       <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">1</span><span>Xcode の Scheme の Arguments に <code class="font-mono text-xs">-perf</code> を足し、iPhone 15 Pro に入れる（低電力モードは切る）</span></li>
-      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">2</span><span>100打を全力で叩き切る。50打目からのフィーバーは画面全体を叩き続ける</span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">2</span><span>100打を全力で叩き切る。最後の1打で当たるフィーバーは、10秒間画面全体を叩き続ける。フィナーレは最後まで見る</span></li>
       <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">3</span><span>まとめの札をスクリーンショットする。「もう1回」で、あと2回繰り返す</span></li>
       <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">4</span><span>3枚の写真と、「指で遅れや抜けを感じたか」を一言で Claude に渡す</span></li>
     </ol>
   </section>
 
-  <section id="decisions" class="mt-20">
+    <section id="done-impl" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">実装 2026-10-06</p>
+    <h2 class="mt-2 font-display text-3xl">作ったもの</h2>
+    <ul class="mt-6 flex flex-col gap-2 text-sm leading-relaxed">
+      <li class="rounded-2xl border border-rule bg-white p-4"><code class="font-mono text-xs">Perf/PerfSeed.swift</code>：仮の記録（29日、合計900、直近6日141、ベスト240）、計測モードの設定、100打目で当たるくじ</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><code class="font-mono text-xs">Perf/PerfMonitor.swift</code>：描画、タッチ→発火、途中で切った音を数える。札は1秒ごとにだけ描き直し、札の重さを測る対象に混ぜない</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><code class="font-mono text-xs">Perf/PerfHUD.swift</code>：計測の札とまとめの札。フィナーレが消えたらまとめにする</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><code class="font-mono text-xs">FeelEngine</code>：再生口ごとに預けた音を覚え、鳴り終わる前（鳴る前も含む）に上書きしたら知らせる。<code class="font-mono text-xs">YatTatTaApp</code>：<code class="font-mono text-xs">-perf</code> でメモリだけの保存先に切り替える。叩く面2つ：命令を出し終えたところで発火を知らせる</li>
+    </ul>
+    <p class="mt-4 text-sm leading-relaxed text-ink/80">テスト39件（うち計測モード4件）が通った。シミュレーターで、29日連続、DT 900、DPW 141、ベスト 240、残り100で始まることを確かめた。Release ビルドに計測モードが入らないことも、ビルドで確かめた。実機での計測はまだ。</p>
+  </section>
+
+<section id="decisions" class="mt-20">
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">09 / decisions</p>
     <h2 class="mt-2 font-display text-3xl">決めたこと（2026-10-06 開発者がレビュー）</h2>
     <ol class="mt-6 flex flex-col gap-3 text-sm leading-relaxed">
       <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">01</span>処理落ちは、Debug ビルドの<a href="../../glossary.html#perf-mode" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">計測モード</a>（<code class="font-mono text-xs">-perf</code>）で確かめる。</li>
       <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">02</span>計測モードは、メモリだけの保存先に仮の記録を入れて始める。端末の記録には触れない。</li>
-      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">03</span>測る場面は、目標回数100、30人、50打目のフィーバー、最後の1打で節目3つ（30日、DT 1,000、DPW ベスト）。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">03</span>測る場面は、目標回数100、30人、最後の1打で当たるフィーバー、フィナーレで札3枚（30日、DT 1,000、DPW ベスト）。</li>
       <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">04</span>数えるのは、描画、<a href="../../glossary.html#touch-to-fire" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">タッチ→発火</a>、途中で切った音。合格の線は 05 の表のとおり。</li>
       <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">05</span>演出を足したり重くしたりしたら、計測モードで測り直す（<a href="../../devops/perf-check/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">devops／処理落ちの確かめ方</a>）。</li>
     </ol>

@@ -274,6 +274,9 @@ final class SquatStageUIView: UIView {
             } else {
                 sync()
             }
+            #if DEBUG
+            PerfMonitor.shared?.tapFired(touchedAt: touch.timestamp)
+            #endif
         }
     }
 

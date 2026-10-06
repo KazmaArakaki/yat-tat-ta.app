@@ -36,6 +36,8 @@ import SwiftData
     #if DEBUG
     /// 見本で、確定を飛ばしてねぎらいから出す
     @ObservationIgnored var demoSkipToNegirai = false
+    /// 計測モードでは、今日まだ通知の予約に触れない。仮の記録で予約し直さないように
+    @ObservationIgnored var remindersPaused = false
     #endif
     /// 最後の1打で節目に届くと分かった連打。PUSH に入った瞬間から立てる（虹の先バレ）
     private(set) var rainbow = false
@@ -361,6 +363,18 @@ import SwiftData
         feel.finale(kakutei: event.kakutei, negirai: voice, milestones: event.milestones, timing: timing, after: 0)
         finale = event
     }
+
+    /// 計測モードの「もう1回」。記録を仮の記録に入れ替えて、読み直す
+    func resetForPerf(_ records: [SquatRecord]) {
+        if session.isOpen { _ = session.close() }
+        idleTask?.cancel()
+        finaleTask?.cancel()
+        finale = nil
+        for record in (try? context.fetch(FetchDescriptor<SquatRecord>())) ?? [] { context.delete(record) }
+        records.forEach(context.insert)
+        try? context.save()
+        loadRecords()
+    }
     #endif
 
     // MARK: - 記録を読む
@@ -428,6 +442,9 @@ import SwiftData
     }
 
     private func rescheduleReminder() {
+        #if DEBUG
+        if remindersPaused { return }
+        #endif
         reminder.reschedule(enabled: reminderEnabled, minutes: reminderMinutes, ledger: ledger,
                             target: targetReps, now: now())
     }
