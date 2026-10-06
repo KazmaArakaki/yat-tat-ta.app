@@ -2,11 +2,15 @@ name: YatTatTa
 options:
   deploymentTarget:
     iOS: "26.0"
+  # 開発言語。文言は String Catalog（Localizable.xcstrings）に集める
+  developmentLanguage: ja
 targets:
   YatTatTa:
     type: application
     platform: iOS
     sources: [YatTatTa]
+    scheme:
+      testTargets: [YatTatTaTests]
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.yat-tat-ta
@@ -29,12 +33,31 @@ targets:
         INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
         INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: YES
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
-        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
+        # 縦だけ。連打中に横へ倒れると、ボタンの位置が動いて指が外れる
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: "UIInterfaceOrientationPortrait"
         # Swift（Xcode 27 の新規 App と同じ値）
         SWIFT_VERSION: "5.0"
         SWIFT_APPROACHABLE_CONCURRENCY: YES
         SWIFT_DEFAULT_ACTOR_ISOLATION: MainActor
         ENABLE_PREVIEWS: YES
         ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS: YES
+        # 文言を String Catalog（Localizable.xcstrings）へ書き出す
+        SWIFT_EMIT_LOC_STRINGS: YES
+        LOCALIZATION_PREFERS_STRING_CATALOGS: YES
         # アイコンは未作成。XcodeGen の既定 "AppIcon" を外す
         ASSETCATALOG_COMPILER_APPICON_NAME: ""
+  YatTatTaTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: [YatTatTaTests]
+    dependencies:
+      - target: YatTatTa
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.yat-tat-ta.tests
+        DEVELOPMENT_TEAM: K334V22YZ3
+        CODE_SIGN_STYLE: Automatic
+        GENERATE_INFOPLIST_FILE: YES
+        SWIFT_VERSION: "5.0"
+        SWIFT_APPROACHABLE_CONCURRENCY: YES
+        SWIFT_DEFAULT_ACTOR_ISOLATION: MainActor

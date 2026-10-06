@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>画面全体の演出の見本</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=M+PLUS+Rounded+1c:wght@800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } }
+      },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+<style>
+/* アプリ画面の色 */
+.app { --bg:#FBF6EE; --card:#FFFFFF; --ink:#1C1916; --mute:#6E655C; --rule:#E7DDCC; }
+.app.dark { --bg:#16120F; --card:#231D18; --ink:#F5EEE3; --mute:#A89C8E; --rule:#3A312A; }
+.screen { background:var(--bg); color:var(--ink); }
+.card { background:var(--card); border:2px solid var(--ink); box-shadow:4px 4px 0 var(--ink); border-radius:16px; }
+.mute { color:var(--mute); }
+.num { font-family:"M PLUS Rounded 1c","Noto Sans JP",sans-serif; font-weight:900; font-variant-numeric:tabular-nums; letter-spacing:-0.02em; }
+.ticket { width:20px; height:14px; border-radius:4px; background:#2F79F7; border:2px solid var(--ink); }
+/* 帯とカードは、暗転した地の上でも自分の地を持って読める */
+.bar { border-radius:16px; padding:8px 10px; margin:-8px -10px 0; transition:background .3s, box-shadow .3s; }
+.st-hot .bar, .st-push .bar { background:var(--card); box-shadow:0 0 0 2px var(--ink), 4px 4px 0 2px var(--ink); }
+
+/* 画面全体の段階 */
+.stagebg { position:absolute; inset:0; background:radial-gradient(circle at 50% 62%, #3A0F2A 0%, #12080F 70%); opacity:0; transition:opacity .35s; pointer-events:none; }
+.st-hot .stagebg, .st-push .stagebg { opacity:1; }
+.rays { position:absolute; left:50%; top:62%; width:1400px; height:1400px; margin:-700px 0 0 -700px; pointer-events:none; opacity:0; transition:opacity .4s;
+  background:repeating-conic-gradient(from 0deg, #FF3B5C 0deg 5deg, transparent 5deg 9deg, #FF9F1C 9deg 14deg, transparent 14deg 18deg, #FFE14D 18deg 23deg, transparent 23deg 27deg,
+    #3DDC84 27deg 32deg, transparent 32deg 36deg, #2F79F7 36deg 41deg, transparent 41deg 45deg, #8E5CF7 45deg 50deg, transparent 50deg 54deg);
+  -webkit-mask:radial-gradient(circle, transparent 0 60px, #000 220px); mask:radial-gradient(circle, transparent 0 60px, #000 220px); }
+.st-hot .rays { opacity:.45; } .st-push .rays { opacity:.75; }
+.reduced .rays { opacity:0 !important; }
+.edge { position:absolute; inset:0; pointer-events:none; border-radius:2.5rem; box-shadow:inset 0 0 0 0 rgba(229,51,122,0); transition:box-shadow .3s; }
+.st-chance .edge { animation:edge 1s ease-in-out infinite; }
+.st-hot .edge, .st-push .edge { box-shadow:inset 0 0 40px 6px rgba(229,51,122,.75); }
+@keyframes edge { 0%,100%{ box-shadow:inset 0 0 18px 2px rgba(229,51,122,.45);} 50%{ box-shadow:inset 0 0 46px 10px rgba(229,51,122,.85);} }
+.edge.kick { box-shadow:inset 0 0 60px 14px rgba(229,51,122,.95) !important; }
+.swell { animation:swell .16s ease-out; }
+@keyframes swell { 0%{transform:scale(1.022)} 100%{transform:none} }
+.ember { position:absolute; bottom:-10px; width:6px; height:6px; border-radius:9999px; background:#FFB13B; box-shadow:0 0 8px 2px #FF6A00; pointer-events:none; animation:ember 1.4s ease-out forwards; }
+@keyframes ember { 100%{ transform:translate(var(--dx), -560px) scale(.3); opacity:0; } }
+
+/* 叩くボタン */
+.mash { position:relative; width:212px; height:212px; border-radius:9999px; background:#E9A800; border:4px solid var(--ink);
+  box-shadow:0 8px 0 var(--ink); color:#1C1916; touch-action:manipulation; -webkit-tap-highlight-color:transparent;
+  transition:background .25s, transform .05s, box-shadow .05s; user-select:none; }
+.st-hot .mash, .st-push .mash { border-color:#1C1916; box-shadow:0 8px 0 #000; }
+.mash.down { transform:translateY(6px); box-shadow:0 2px 0 var(--ink); }
+.mash.locked { filter:saturate(.4); opacity:.65; }
+.st-chance .mash { outline:5px solid rgba(229,51,122,.7); outline-offset:2px; }
+.st-hot .mash, .st-push .mash { background:radial-gradient(circle at 50% 32%, #FFC23A 0%, #E9A800 45%, #D9402E 100%); }
+
+/* 1打ごと */
+.word { position:absolute; font-family:"Dela Gothic One",sans-serif; color:#E5337A; -webkit-text-stroke:1.5px #1C1916; pointer-events:none;
+  white-space:nowrap; animation:wordup .7s ease-out forwards; }
+.st-hot .word, .st-push .word { color:#FFD23F; }
+@keyframes wordup { 0%{ transform:translate(-50%,-50%) scale(.5) rotate(var(--r)); opacity:1;} 30%{ transform:translate(-50%,-90%) scale(1.15) rotate(var(--r)); } 100%{ transform:translate(-50%,-220%) scale(1) rotate(var(--r)); opacity:0;} }
+.ring { position:absolute; border-radius:9999px; border:4px solid #E5337A; pointer-events:none; animation:ringout .34s ease-out forwards; }
+@keyframes ringout { 0%{ transform:translate(-50%,-50%) scale(.2); opacity:.9;} 100%{ transform:translate(-50%,-50%) scale(1); opacity:0;} }
+.combo { position:absolute; left:50%; top:-46px; transform:translateX(-50%); font-family:"Dela Gothic One",sans-serif; color:#E5337A; font-size:20px;
+  -webkit-text-stroke:1px #1C1916; white-space:nowrap; opacity:0; transition:opacity .15s; pointer-events:none; }
+.combo.on { opacity:1; }
+.st-hot .combo, .st-push .combo { color:#FFD23F; }
+.flash { position:absolute; inset:0; background:#fff; opacity:0; pointer-events:none; z-index:40; }
+.flash.go { animation:flash .32s ease-out; }
+@keyframes flash { 0%{opacity:.9} 100%{opacity:0} }
+.shake { animation:shake .4s; }
+@keyframes shake { 0%,100%{transform:none} 15%{transform:translate(-9px,4px)} 35%{transform:translate(8px,-5px)} 55%{transform:translate(-6px,3px)} 75%{transform:translate(4px,-2px)} }
+.band { position:absolute; left:-20px; right:-20px; top:47%; transform:rotate(-8deg) translateX(-120%); background:#E5337A; color:#fff; z-index:20;
+  border-block:3px solid #1C1916; font-family:"Dela Gothic One",sans-serif; letter-spacing:.25em; text-align:center; font-size:30px; pointer-events:none; }
+.band.go { animation:sweep .9s cubic-bezier(.2,.8,.3,1) forwards; }
+@keyframes sweep { 0%{ transform:rotate(-8deg) translateX(-120%);} 35%,70%{ transform:rotate(-8deg) translateX(0);} 100%{ transform:rotate(-8deg) translateX(120%);} }
+.reduced .band.go { animation:fadeinout .9s forwards; transform:rotate(-8deg); }
+@keyframes fadeinout { 0%,100%{opacity:0} 25%,75%{opacity:1} }
+.stamp { position:absolute; right:14px; top:110px; width:104px; height:104px; border-radius:9999px; border:6px solid #D9402E; color:#D9402E; z-index:20;
+  background:rgba(255,255,255,.92); display:grid; place-items:center; font-family:"Dela Gothic One",sans-serif; font-size:30px; opacity:0; pointer-events:none; transform:rotate(14deg); }
+.stamp.go { animation:stamp .5s cubic-bezier(.3,1.6,.5,1) forwards; }
+@keyframes stamp { 0%{ transform:rotate(14deg) scale(2.4); opacity:0;} 100%{ transform:rotate(14deg) scale(1); opacity:1;} }
+.reduced .stamp.go { animation:none; opacity:1; }
+
+/* 全画面の重ね物の共通 */
+.over { position:absolute; inset:0; z-index:30; display:flex; flex-direction:column; align-items:center; justify-content:center; overflow:hidden; opacity:0; pointer-events:none; transition:opacity .2s; }
+.over.on { opacity:1; }
+.over .rays { opacity:.95 !important; top:50%; -webkit-mask:none; mask:none; }
+.reduced .over .rays { opacity:.95 !important; }
+.over .core { position:absolute; inset:0; background:radial-gradient(circle at 50% 50%, rgba(255,255,255,.95) 0 40px, rgba(255,255,255,.0) 230px); }
+
+/* 演出 A ドパ揃い */
+#reel { background:#0E0712; }
+.reels { position:relative; display:flex; gap:8px; padding:10px; border-radius:22px; background:linear-gradient(#5A5A66,#1D1D24); border:4px solid #000; box-shadow:0 0 0 3px #C9CBD6, 0 0 40px rgba(255,255,255,.5); }
+.reels.gold { background:linear-gradient(#FFE58A,#B86B00); box-shadow:0 0 0 3px #FFF3B0, 0 0 50px rgba(255,210,63,.9); }
+.win { width:82px; height:110px; overflow:hidden; border-radius:12px; background:linear-gradient(#fff,#E9E2D6 50%,#fff); border:3px solid #000; position:relative; }
+.strip { position:absolute; left:0; right:0; top:0; display:flex; flex-direction:column; }
+.strip span { height:110px; display:grid; place-items:center; font-family:"Dela Gothic One",sans-serif; font-size:78px; line-height:1;
+  background:linear-gradient(#FFF27A,#FF7A00 55%,#C40000); -webkit-background-clip:text; background-clip:text; color:transparent; -webkit-text-stroke:2px #3A0000; }
+.strip span.d { font-size:44px; }
+.win.spin .strip { animation:reel .18s linear infinite; }
+@keyframes reel { 0%{ transform:translateY(-440px);} 100%{ transform:translateY(0);} }
+.win.stop .strip { animation:reelstop .28s cubic-bezier(.2,1.5,.4,1) forwards; }
+@keyframes reelstop { 0%{ transform:translateY(-40px);} 100%{ transform:translateY(0);} }
+.win.hit { box-shadow:0 0 0 3px #FFE14D, 0 0 26px 6px #FFE14D; }
+.burst { position:absolute; left:50%; top:50%; width:20px; height:20px; margin:-10px; border-radius:9999px; pointer-events:none;
+  background:conic-gradient(#FF3B5C,#FF9F1C,#FFE14D,#3DDC84,#2F79F7,#8E5CF7,#FF3B5C); filter:blur(2px); opacity:0; }
+.burst.go { animation:burst .9s ease-out forwards; }
+@keyframes burst { 0%{ transform:scale(1); opacity:1;} 100%{ transform:scale(48); opacity:0;} }
+.reel-label { margin-top:22px; font-family:"Dela Gothic One",sans-serif; font-size:30px; color:#fff; -webkit-text-stroke:2px #1C1916; text-shadow:0 0 18px #E5337A; opacity:0; transform:scale(.6); transition:all .3s cubic-bezier(.2,1.6,.4,1); position:relative; }
+.reel-label.on { opacity:1; transform:none; }
+.coin { position:absolute; top:-20px; width:16px; height:16px; border-radius:9999px; background:radial-gradient(circle at 35% 30%, #FFF6C8, #FFD23F 45%, #B86B00); border:1.5px solid #6B3A00; pointer-events:none; animation:coin linear forwards; }
+@keyframes coin { 100%{ transform:translate(var(--dx), 760px) rotate(720deg); } }
+
+/* 演出 B 筋肉確定 */
+#kakutei { background:#0B0610; }
+.metal { position:relative; font-family:"Dela Gothic One",sans-serif; font-size:84px; line-height:1.02; text-align:center; letter-spacing:.02em; }
+.metal .fill { position:relative; display:block; background:linear-gradient(180deg, #FFFFFF 0%, #F6FF8A 22%, #C7F000 44%, #3E5F00 48%, #8FC400 56%, #EFFFA8 80%, #FFFFFF 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent; -webkit-text-stroke:3px #172400; }
+.metal .edge-w { position:absolute; inset:0; display:block; color:#fff; -webkit-text-stroke:14px #fff; filter:drop-shadow(0 0 14px #7CF7FF) drop-shadow(0 0 30px #fff); }
+.metal .shine { position:absolute; inset:0; background:linear-gradient(105deg, transparent 35%, rgba(255,255,255,.95) 48%, transparent 60%); mix-blend-mode:overlay;
+  -webkit-background-clip:text; background-clip:text; color:transparent; animation:shine 1s ease-in-out .3s; background-size:250% 100%; background-position:120% 0; }
+@keyframes shine { 0%{ background-position:120% 0;} 100%{ background-position:-120% 0;} }
+.drop { animation:drop .42s cubic-bezier(.25,1.5,.45,1) both; }
+@keyframes drop { 0%{ transform:translateY(-60px) scale(2.6); opacity:0; filter:blur(4px);} 70%{ opacity:1; filter:none;} 100%{ transform:none; opacity:1;} }
+.reduced .drop { animation:none; }
+.yatta-sm { margin-top:14px; font-family:"Dela Gothic One",sans-serif; font-size:24px; color:#E5337A; -webkit-text-stroke:1px #fff; text-shadow:2px 2px 0 #1C1916; position:relative; }
+
+/* 演出 C ねぎらい（金の炎） */
+#negirai { background:#2A0700; }
+.flame { position:absolute; inset:-20%; pointer-events:none;
+  background:
+    radial-gradient(ellipse 45% 30% at 50% 50%, rgba(255,255,230,.95), rgba(255,246,180,0) 70%),
+    radial-gradient(ellipse 70% 55% at 50% 55%, rgba(255,214,64,.95), rgba(255,170,0,0) 70%),
+    radial-gradient(ellipse 30% 40% at 20% 80%, rgba(255,140,0,.9), rgba(255,90,0,0) 70%),
+    radial-gradient(ellipse 30% 40% at 80% 78%, rgba(255,140,0,.9), rgba(255,90,0,0) 70%),
+    radial-gradient(ellipse 35% 45% at 30% 20%, rgba(255,190,40,.8), rgba(255,120,0,0) 70%),
+    radial-gradient(ellipse 35% 45% at 75% 22%, rgba(255,190,40,.8), rgba(255,120,0,0) 70%),
+    radial-gradient(circle at 50% 50%, #C84B00 0%, #5A1200 70%); }
+.flame.b { mix-blend-mode:screen; opacity:.55; transform:scale(1.1) rotate(8deg); }
+.on .flame { animation:flicker .5s steps(3) infinite alternate; }
+.on .flame.b { animation:flicker2 .7s steps(4) infinite alternate; }
+@keyframes flicker { 0%{ transform:scale(1) translateY(0);} 100%{ transform:scale(1.04) translateY(-6px);} }
+@keyframes flicker2 { 0%{ transform:scale(1.1) rotate(8deg);} 100%{ transform:scale(1.16) rotate(4deg) translateY(-10px);} }
+.reduced .flame, .reduced .flame.b { animation:none !important; }
+.goldtxt { position:relative; font-family:"Dela Gothic One",sans-serif; font-size:56px; line-height:1.1; text-align:center; padding:0 14px; }
+.goldtxt .fill { position:relative; display:block; background:linear-gradient(180deg,#FFFDF0 0%,#FFE58A 25%,#FFB800 47%,#8A3E00 51%,#E08A00 60%,#FFF0A8 85%,#FFFFFF 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent; -webkit-text-stroke:2.5px #5A1200; }
+.goldtxt .edge-w { position:absolute; inset:0; padding:0 14px; display:block; color:#FFF6C8; -webkit-text-stroke:12px #FFF6C8; filter:drop-shadow(0 0 16px #FF7A00) drop-shadow(0 0 30px #FFD23F); }
+.tw { position:absolute; width:4px; height:4px; background:#fff; border-radius:9999px; box-shadow:0 0 8px 3px #FFE58A; pointer-events:none; animation:tw 1.2s ease-in-out infinite; }
+@keyframes tw { 0%,100%{ transform:scale(.3); opacity:.2;} 50%{ transform:scale(1.4); opacity:1;} }
+.tags { position:relative; margin-top:14px; display:flex; flex-direction:column; align-items:center; gap:8px; }
+.tag { background:#E9A800; color:#1C1916; border:2px solid #1C1916; border-radius:9999px; padding:6px 16px; font-weight:900; font-size:15px; opacity:0; animation:tagin .35s cubic-bezier(.2,1.6,.4,1) forwards; }
+@keyframes tagin { 0%{ transform:translateY(14px); opacity:0;} 100%{ transform:none; opacity:1;} }
+.skip { position:absolute; bottom:22px; left:0; right:0; text-align:center; font-size:11px; font-weight:700; color:rgba(255,255,255,.7); opacity:0; transition:opacity .2s; }
+.skip.on { opacity:1; }
+.pill[aria-pressed="true"] { background:#1C1916; color:#FBF6EE; }
+</style>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-6xl">
+
+  <header class="animate-rise">
+    <a href="index.html#fullscreen" class="font-mono text-xs text-mute underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">← 本作りの設計 04-3 へ戻る</a>
+    <p class="mt-4 font-mono text-xs uppercase tracking-[0.2em] text-mute">修正イメージ / fullscreen</p>
+    <h1 class="mt-2 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">画面全体</span>の演出の見本</h1>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">金色のボタンを叩いてください。CHANCE で画面の四辺が光り、激熱で地が暗転して虹の放射線が回り出し、PUSH で全速になります。叩き切ると、白い閃光のあとに筋肉確定、続けて金の炎のねぎらい。「DT 287 から始める」を入れると、連打の途中で DT 300 をまたいだ1打でドパ揃いが出ます。音は鳴らず、鳴る予定の声と効果音を右の欄に時刻つきで流します。</p>
+  </header>
+
+  <section class="mt-8 flex flex-col gap-3 text-xs font-bold">
+    <div class="flex flex-wrap items-center gap-2">
+      <span class="mr-1 w-20 font-mono text-mute">目標回数</span>
+      <button type="button" class="pill rounded-full border-2 border-ink px-3 py-1" data-target="5">5</button>
+      <button type="button" class="pill rounded-full border-2 border-ink px-3 py-1" data-target="20">20</button>
+      <button type="button" class="pill rounded-full border-2 border-ink px-3 py-1" data-target="50">50</button>
+      <span class="mx-2 h-5 w-px bg-rule"></span>
+      <span class="mr-1 font-mono text-mute">DT</span>
+      <button type="button" class="pill rounded-full border-2 border-ink px-3 py-1" data-dt="450">450 から</button>
+      <button type="button" class="pill rounded-full border-2 border-ink px-3 py-1" data-dt="287">287 から始める（300 で揃う）</button>
+      <button type="button" class="pill rounded-full border-2 border-ink px-3 py-1" data-dt="987">987 から（1,000 で金のリール）</button>
+    </div>
+    <div class="flex flex-wrap items-center gap-2">
+      <span class="mr-1 w-20 font-mono text-mute">確定の言葉</span>
+      <button type="button" class="pill rounded-full border-2 border-ink px-3 py-1" data-b="-1">順に回す</button>
+      <button type="button" class="pill rounded-full border-2 border-ink px-3 py-1" data-b="0">筋肉確定</button>
+      <button type="button" class="pill rounded-full border-2 border-ink px-3 py-1" data-b="1">太もも確定</button>
+      <button type="button" class="pill rounded-full border-2 border-ink px-3 py-1" data-b="2">根性確定</button>
+      <button type="button" class="pill rounded-full border-2 border-ink px-3 py-1" data-b="3">継続確定</button>
+      <button type="button" class="pill rounded-full border-2 border-ink px-3 py-1" data-b="4">明日も確定</button>
+    </div>
+    <div class="flex flex-wrap items-center gap-2">
+      <span class="mr-1 w-20 font-mono text-mute">ねぎらい</span>
+      <button type="button" class="pill rounded-full border-2 border-ink px-3 py-1" data-c="-1">場面で選ぶ（表1-4）</button>
+      <button type="button" class="pill rounded-full border-2 border-ink px-3 py-1" data-c="0">30日連続！あんたはえらい！</button>
+      <button type="button" class="pill rounded-full border-2 border-ink px-3 py-1" data-c="1">今日もお疲れ！</button>
+      <button type="button" class="pill rounded-full border-2 border-ink px-3 py-1" data-c="2">夜食のあとに、えらすぎる！</button>
+      <button type="button" class="pill rounded-full border-2 border-ink px-3 py-1" data-c="3">あんたはえらい！</button>
+      <button type="button" class="pill rounded-full border-2 border-ink px-3 py-1" data-c="4">よっ、太もも番長！</button>
+      <button type="button" class="pill rounded-full border-2 border-ink px-3 py-1" data-c="5">限界突破！</button>
+    </div>
+    <div class="flex flex-wrap items-center gap-3">
+      <label class="flex cursor-pointer items-center gap-1.5"><input type="checkbox" id="opt-reduced" class="accent-dopa"> 視差効果を減らす</label>
+      <label class="flex cursor-pointer items-center gap-1.5"><input type="checkbox" id="opt-dark" class="accent-dopa"> 暗い配色</label>
+      <button type="button" id="reset" class="rounded-full border-2 border-ink bg-white px-3 py-1">最初から（今日まだ、29日連続に戻す）</button>
+    </div>
+  </section>
+
+  <section class="mt-6 grid items-start gap-8 lg:grid-cols-[auto_1fr]">
+    <!-- iPhone 枠 -->
+    <div class="mx-auto w-[330px] shrink-0 rounded-[3rem] border-[7px] border-ink bg-ink p-1.5 shadow-[10px_10px_0_#E5337A]">
+      <div id="app" class="app screen relative h-[690px] overflow-hidden rounded-[2.5rem]">
+        <div class="stagebg"></div>
+        <div id="rays" class="rays"></div>
+        <div id="embers" class="pointer-events-none absolute inset-0"></div>
+        <div id="shell" class="relative flex h-full flex-col px-5 pb-6 pt-12">
+          <div class="absolute left-1/2 top-2.5 h-6 w-24 -translate-x-1/2 rounded-full bg-black"></div>
+          <!-- 連続記録の帯 -->
+          <div class="bar flex items-start justify-between">
+            <div>
+              <p class="flex items-baseline gap-1"><span id="streak" class="num text-[40px] leading-none text-dopa">29</span><span class="text-sm font-black">日連続</span></p>
+              <p id="streak-sub" class="mt-1 text-[12px] font-bold mute">今日はまだ。1回で30日目</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="text-right"><p class="text-[10px] font-bold mute">休み券</p><p class="mt-1 flex gap-1"><span class="ticket"></span><span class="ticket"></span></p></div>
+              <span class="text-xl leading-none">⚙︎</span>
+            </div>
+          </div>
+
+          <!-- ボタン -->
+          <div class="relative mt-auto flex flex-col items-center">
+            <div class="relative">
+              <span id="combo" class="combo">ドパドパ ×0</span>
+              <button type="button" id="mash" class="mash grid place-items-center" aria-label="完了連打">
+                <span class="pointer-events-none text-center">
+                  <span id="cap" class="block text-[11px] font-bold opacity-70">スクワット</span>
+                  <span id="num" class="num block text-[78px] leading-[.95]">20</span>
+                  <span id="hint" class="mt-0.5 block text-[13px] font-black">叩いてドパに</span>
+                </span>
+              </button>
+            </div>
+            <p id="gained" class="num mt-5 h-8 rounded-full px-3 text-[26px] text-dopa"></p>
+          </div>
+
+          <!-- DPW と DT -->
+          <div class="mt-6 grid grid-cols-2 gap-3">
+            <div class="card p-3"><p class="font-mono text-[10px] font-bold mute">DPW</p><p id="dpw" class="num text-[28px] leading-tight">347</p><p class="text-[10px] font-bold mute">前の7日 300　ベスト 410</p></div>
+            <div class="card p-3"><p class="font-mono text-[10px] font-bold mute">DT</p><p id="dt" class="num text-[28px] leading-tight">450</p><p id="dt-sub" class="text-[10px] font-bold mute">次の節目 1,000</p></div>
+          </div>
+        </div>
+        <div id="edge" class="edge"></div>
+        <div id="fx" class="pointer-events-none absolute inset-0 z-10"></div>
+        <span id="band" class="band">CHANCE</span>
+        <span id="stamp" class="stamp">激熱</span>
+
+        <!-- 演出 A ドパ揃い -->
+        <div id="reel" class="over">
+          <div class="rays"></div><div class="core" style="opacity:.25"></div>
+          <div id="burst" class="burst"></div>
+          <div id="reels" class="reels">
+            <div class="win"><div class="strip"></div></div>
+            <div class="win"><div class="strip"></div></div>
+            <div class="win"><div class="strip"></div></div>
+          </div>
+          <p id="reel-label" class="reel-label">DT 300 ドパ</p>
+          <div id="coins" class="pointer-events-none absolute inset-0"></div>
+        </div>
+
+        <!-- 演出 B 筋肉確定 -->
+        <div id="kakutei" class="over">
+          <div class="rays"></div><div class="core"></div>
+          <div id="b-text" class="metal"></div>
+          <p class="yatta-sm drop" style="animation-delay:.35s">やったった！ <span id="b-gain" class="num">+20</span> ドパ</p>
+          <p id="skip-b" class="skip">タップで飛ばす</p>
+        </div>
+
+        <!-- 演出 C ねぎらい -->
+        <div id="negirai" class="over">
+          <div class="flame"></div><div class="flame b"></div>
+          <div id="twinkles" class="pointer-events-none absolute inset-0"></div>
+          <div id="c-text" class="goldtxt"></div>
+          <div id="c-tags" class="tags"></div>
+          <p id="skip-c" class="skip">タップで飛ばす</p>
+        </div>
+
+        <div id="flash" class="flash"></div>
+      </div>
+    </div>
+
+    <!-- 右の欄 -->
+    <div class="flex flex-col gap-4">
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs text-mute">いまの段階</p>
+        <ol id="stages" class="mt-3 grid grid-cols-5 gap-1 text-center text-[11px] font-bold">
+          <li data-st="normal" class="rounded-lg border-2 border-ink px-1 py-2">NORMAL</li>
+          <li data-st="chance" class="rounded-lg border-2 border-ink px-1 py-2">CHANCE</li>
+          <li data-st="hot" class="rounded-lg border-2 border-ink px-1 py-2">激熱</li>
+          <li data-st="push" class="rounded-lg border-2 border-ink px-1 py-2">PUSH</li>
+          <li data-st="final" class="rounded-lg border-2 border-ink px-1 py-2">確定</li>
+        </ol>
+        <dl class="mt-4 grid grid-cols-3 gap-2 text-center">
+          <div class="rounded-xl bg-paper p-2"><dt class="font-mono text-[10px] text-mute">打</dt><dd id="m-index" class="num text-xl">0 / 20</dd></div>
+          <div class="rounded-xl bg-paper p-2"><dt class="font-mono text-[10px] text-mute">放射線の速さ</dt><dd id="m-speed" class="num text-xl">0</dd></div>
+          <div class="rounded-xl bg-paper p-2"><dt class="font-mono text-[10px] text-mute">直近1秒の白い明滅</dt><dd id="m-flash" class="num text-xl">0 / 3</dd></div>
+        </dl>
+      </div>
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <div class="flex items-baseline justify-between">
+          <p class="font-mono text-xs text-mute">鳴る予定の声と効果音（このページでは鳴らない）</p>
+          <p class="font-mono text-[10px] text-mute">時刻は連打の1打目から</p>
+        </div>
+        <ul id="log" class="mt-3 flex max-h-80 flex-col gap-1 overflow-y-auto font-mono text-[11px] leading-relaxed"></ul>
+      </div>
+      <p class="rounded-lg border border-dashed border-mute bg-white/60 p-3 text-xs leading-relaxed">白く光らせる明滅は、CHANCE と激熱に入った1打、ドパ揃い、確定の閃光だけ。直近1秒で3回を超えるものは出さない（右上の数）。PUSH の1打ごとの膨らみと、金の炎のちらつきは明るさを大きく変えない。「視差効果を減らす」では、放射線、リール、火の粉、文字の落下、炎のちらつきを止め、文字と札を置くだけにする。</p>
+    </div>
+  </section>
+
+</article>
+</main>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var app = $('app'), mash = $('mash'), fx = $('fx'), shell = $('shell');
+  var COMBO_WINDOW = 450, LOCK = 1200;
+  var ORDER = ['normal', 'chance', 'hot', 'push', 'final'];
+  var B_WORDS = [['筋肉', '確定'], ['太もも', '確定'], ['根性', '確定'], ['継続', '確定'], ['明日も', '確定']];
+  var C_WORDS = ['30日連続！<br>あんたは<br>えらい！', '今日も<br>お疲れ！', '夜食のあとに、<br>えらすぎる！', 'あんたは<br>えらい！', 'よっ、<br>太もも番長！', '限界<br>突破！'];
+  var C_ROTATE = [3, 4, 5];
+
+  var target = 20, index = 0, combo = 0, lastTap = -1e9, lockedUntil = 0, stage = 'normal';
+  var dtStart = 450, dt = 450, streak = 29, doneToday = false;
+  var bPick = -1, cPick = -1, bTurn = 0, cTurn = 0, reduced = false;
+  var flashes = [], timers = [], t0 = 0, angle = 0, speed = 0, skippableAt = 0, sequence = null;
+
+  function later(fn, ms) { var id = setTimeout(fn, ms); timers.push(id); return id; }
+  function restart(el, cls) { el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); }
+  function stamp() { return t0 ? '+' + ((performance.now() - t0) / 1000).toFixed(2) + 's' : '+0.00s'; }
+  function log(text, kind) {
+    var li = document.createElement('li');
+    li.innerHTML = '<span class="text-mute">' + stamp().padStart(7, ' ') + '</span>  ' + (kind === 'v' ? '<b class="text-dopa">声</b> ' : kind === 's' ? '<b>音</b> ' : '<b class="text-mute">振</b> ') + text;
+    $('log').prepend(li);
+  }
+
+  function pushAt() { return target >= 10 ? 3 : 1; }
+  function stageOf(i) {
+    if (i >= target) return 'final';
+    if (target - i <= pushAt()) return 'push';
+    if (i / target >= 0.6) return 'hot';
+    if (i / target >= 0.3) return 'chance';
+    return 'normal';
+  }
+
+  // 白い明滅。直近1秒で3回まで
+  function flash() {
+    var now = performance.now();
+    flashes = flashes.filter(function (t) { return now - t < 1000; });
+    if (flashes.length >= 3) return false;
+    flashes.push(now); restart($('flash'), 'go');
+    return true;
+  }
+
+  // 放射線の回転。段階と打数で速くなる
+  function targetSpeed() {
+    if (stage === 'hot') return 0.04 + 0.006 * (index - Math.ceil(target * 0.6));
+    if (stage === 'push') return 0.32;
+    return 0;
+  }
+  function frame() {
+    speed += (targetSpeed() - speed) * 0.08;
+    if (!reduced) angle = (angle + speed * 6) % 360;
+    var t = 'rotate(' + angle + 'deg)';
+    document.querySelectorAll('.rays').forEach(function (r) { r.style.transform = r.closest('.over') ? 'rotate(' + (angle * 1.6) + 'deg)' : t; });
+    if (sequence && performance.now() > skippableAt) { $('skip-b').classList.add('on'); $('skip-c').classList.add('on'); }
+    requestAnimationFrame(frame);
+  }
+
+  function render() {
+    var st = index === 0 ? 'normal' : stage;
+    app.classList.remove('st-normal', 'st-chance', 'st-hot', 'st-push', 'st-final');
+    app.classList.add('st-' + (st === 'final' ? 'push' : st));
+    $('num').textContent = index >= target ? 0 : target - index;
+    $('cap').textContent = index === 0 ? 'スクワット' : (st === 'push' ? '残り' : 'スクワット 残り');
+    $('hint').textContent = index >= target ? 'やったった' : (st === 'push' ? 'PUSH' : '叩いてドパに');
+    $('num').style.fontSize = st === 'push' ? '96px' : '78px';
+    var dark = st === 'hot' || st === 'push' || st === 'final';
+    $('gained').textContent = index > 0 ? '+' + index + ' ドパ' : '';
+    $('gained').style.background = dark ? 'var(--card)' : '';
+    $('dpw').textContent = 347 + index;
+    $('dt').textContent = dt;
+    var next = [100, 1000, 10000, 100000].filter(function (n) { return n > dt; })[0];
+    $('dt-sub').textContent = '次の節目 ' + next.toLocaleString();
+    $('streak').textContent = streak;
+    $('streak-sub').textContent = doneToday ? '✓ 今日のぶんは済み' : '今日はまだ。1回で' + (streak + 1) + '日目';
+    document.querySelectorAll('#stages li').forEach(function (li) {
+      var on = li.dataset.st === st && index > 0;
+      li.style.background = on ? (li.dataset.st === 'push' || li.dataset.st === 'final' ? '#E9A800' : '#E5337A') : '';
+      li.style.color = on && li.dataset.st !== 'push' && li.dataset.st !== 'final' ? '#fff' : '';
+    });
+    $('m-index').textContent = index + ' / ' + target;
+    $('m-speed').textContent = Math.round(speed * 100);
+    var now = performance.now();
+    $('m-flash').textContent = flashes.filter(function (t) { return now - t < 1000; }).length + ' / 3';
+    $('combo').textContent = 'ドパドパ ×' + combo;
+    $('combo').classList.toggle('on', combo >= 3 && index < target);
+  }
+
+  function enter(st) {
+    if (st === 'chance') {
+      restart($('band'), 'go'); flash();
+      log('voice_chance「チャンス！」', 'v'); log('上がる3音（合成）', 's'); log('中', 'h');
+    } else if (st === 'hot') {
+      restart($('stamp'), 'go'); flash();
+      if (!reduced) restart(shell, 'shake');
+      log('voice_gekiatsu「激熱！」', 'v'); log('低い音3つ（合成）、sfx_bgm_hot のループ開始', 's'); log('重い', 'h');
+    } else if (st === 'push') {
+      $('stamp').classList.remove('go');
+      log('voice_push「押せ！」', 'v');
+    }
+  }
+
+  function word(x, y) {
+    if (reduced) return;
+    var w = document.createElement('span');
+    var big = { normal: 16, chance: 22, hot: 30, push: 36 }[stage] || 16;
+    w.className = 'word';
+    w.textContent = combo >= 4 ? 'ドパドパ' : 'ドパ';
+    w.style.left = x + 'px'; w.style.top = y + 'px';
+    w.style.fontSize = (big + Math.min(combo, 10)) + 'px';
+    w.style.setProperty('--r', (Math.random() * 24 - 12) + 'deg');
+    fx.appendChild(w); later(function () { w.remove(); }, 750);
+  }
+  function ring(x, y) {
+    var r = document.createElement('span'), size = 70 + 130 * (index / target);
+    r.className = 'ring';
+    r.style.left = x + 'px'; r.style.top = y + 'px'; r.style.width = size + 'px'; r.style.height = size + 'px';
+    fx.appendChild(r); later(function () { r.remove(); }, 360);
+  }
+  function embers(n) {
+    if (reduced) return;
+    for (var i = 0; i < n; i++) {
+      var e = document.createElement('span');
+      e.className = 'ember';
+      e.style.left = (Math.random() * 100) + '%';
+      e.style.setProperty('--dx', (Math.random() * 80 - 40) + 'px');
+      e.style.animationDuration = (1 + Math.random() * .8) + 's';
+      $('embers').appendChild(e);
+      (function (el) { later(function () { el.remove(); }, 1900); })(e);
+    }
+  }
+
+  // 演出 A ドパ揃い。叩く指は止めない（重ね物は指を通す）
+  function fillStrips(gold) {
+    document.querySelectorAll('#reels .strip').forEach(function (s) {
+      var syms = ['7', 'ド', 'パ', '★', '7'];
+      s.innerHTML = syms.map(function (c) { return '<span' + (c === '7' ? '' : ' class="d"') + '>' + c + '</span>'; }).join('');
+    });
+    $('reels').classList.toggle('gold', gold);
+  }
+  function dopa777(value) {
+    var gold = value % 1000 === 0;
+    fillStrips(gold);
+    $('reel-label').textContent = 'DT ' + value.toLocaleString() + ' ドパ';
+    $('reel-label').classList.remove('on');
+    var wins = document.querySelectorAll('#reels .win');
+    wins.forEach(function (w) { w.className = 'win' + (reduced ? ' stop hit' : ' spin'); });
+    $('reel').classList.add('on');
+    log('sfx_reel_spin（ループ）', 's');
+    var stops = reduced ? [0, 0, 0] : [650, 900, 1150];
+    wins.forEach(function (w, i) {
+      later(function () {
+        w.className = 'win stop hit';
+        if (!reduced) log('sfx_reel_stop「ガコン」' + (i + 1) + '/3', 's');
+        if (!reduced) log('鋭い', 'h');
+      }, stops[i]);
+    });
+    later(function () {
+      flash(); restart($('burst'), 'go'); $('reel-label').classList.add('on');
+      log('sfx_fanfare', 's'); log('sfx_coins「ジャラジャラ」', 's'); log('長め', 'h');
+      if (!reduced) for (var i = 0; i < 70; i++) {
+        var c = document.createElement('span');
+        c.className = 'coin';
+        c.style.left = (Math.random() * 100) + '%';
+        c.style.setProperty('--dx', (Math.random() * 60 - 30) + 'px');
+        c.style.animationDuration = (0.9 + Math.random() * .9) + 's';
+        c.style.animationDelay = (Math.random() * .5) + 's';
+        $('coins').appendChild(c);
+        (function (el) { later(function () { el.remove(); }, 2400); })(c);
+      }
+    }, (reduced ? 0 : 1150) + 80);
+    later(function () { $('reel').classList.remove('on'); }, (reduced ? 1400 : 2500));
+  }
+
+  function chooseC(extended) {
+    if (cPick >= 0) return cPick;
+    if (extended && streak === 30) return 0;
+    if (extended) return 1;
+    var h = new Date().getHours();
+    if (h >= 21 || h < 4) return 2;
+    return C_ROTATE[cTurn++ % C_ROTATE.length];
+  }
+
+  function textLayers(html) {
+    return '<span class="edge-w" aria-hidden="true">' + html + '</span><span class="fill">' + html + '</span>';
+  }
+
+  // 叩き切ったあと：確定（B）1.2秒、ねぎらい（C）1.6秒
+  function finale() {
+    var extended = !doneToday;
+    if (extended) { streak += 1; doneToday = true; }
+    var w = B_WORDS[bPick >= 0 ? bPick : (bTurn++ % B_WORDS.length)];
+    $('b-text').innerHTML = w.map(function (line, i) {
+      return '<div class="drop" style="animation-delay:' + (0.08 * i) + 's">' + textLayers(line) + '<span class="shine" aria-hidden="true">' + line + '</span></div>';
+    }).join('');
+    $('b-gain').textContent = '+' + target;
+    flash();
+    if (!reduced) restart(shell, 'shake');
+    $('kakutei').classList.add('on');
+    sequence = 'b'; skippableAt = performance.now() + LOCK;
+    log('sfx_boom「ドーン」', 's'); log('voice_kakutei_' + (B_WORDS.indexOf(w) + 1) + '「' + w.join('、') + '！」', 'v'); log('長め', 'h');
+    later(function () { log('voice_yattatta「やったった！」', 'v'); }, 450);
+    later(showC.bind(null, extended), 1200);
+  }
+
+  function showC(extended) {
+    $('kakutei').classList.remove('on');
+    var c = chooseC(extended);
+    $('c-text').innerHTML = '<div class="drop">' + textLayers(C_WORDS[c]) + '</div>';
+    $('c-tags').innerHTML = '';
+    var tags = [];
+    if (extended && streak === 30) tags.push('連続 30 日');
+    tags.forEach(function (t, i) {
+      var el = document.createElement('span'); el.className = 'tag'; el.textContent = t; el.style.animationDelay = (0.3 + 0.16 * i) + 's';
+      $('c-tags').appendChild(el);
+      later(function () { log('札「' + t + '」の音（合成）', 's'); }, 300 + 160 * i);
+    });
+    $('twinkles').innerHTML = '';
+    if (!reduced) for (var i = 0; i < 26; i++) {
+      var t = document.createElement('span'); t.className = 'tw';
+      t.style.left = Math.random() * 100 + '%'; t.style.top = Math.random() * 100 + '%';
+      t.style.animationDelay = (Math.random() * 1.2) + 's';
+      $('twinkles').appendChild(t);
+    }
+    $('negirai').classList.add('on');
+    sequence = 'c';
+    log('voice_negirai_' + (c + 1) + '「' + C_WORDS[c].replace(/<br>/g, '') + '」', 'v');
+    later(endSequence, 1600);
+  }
+
+  function endSequence() {
+    $('kakutei').classList.remove('on'); $('negirai').classList.remove('on');
+    $('skip-b').classList.remove('on'); $('skip-c').classList.remove('on');
+    sequence = null;
+    timers.forEach(clearTimeout); timers = [];
+    index = 0; combo = 0; stage = 'normal'; t0 = 0;
+    mash.classList.remove('locked'); $('stamp').classList.remove('go');
+    render();
+  }
+
+  function tap(clientX, clientY) {
+    var now = performance.now();
+    if (now < lockedUntil || index >= target) return;
+    if (index === 0) t0 = now;
+    combo = now - lastTap <= COMBO_WINDOW ? combo + 1 : 1;
+    lastTap = now;
+    index += 1;
+    var before = dt; dt += 1;
+    var box = app.getBoundingClientRect(), x = clientX - box.left, y = clientY - box.top;
+    var next = stageOf(index);
+    if (ORDER.indexOf(next) > ORDER.indexOf(stage)) { stage = next; if (next !== 'final') enter(next); }
+    ring(x, y); word(x, y - 10);
+    if (stage === 'hot' || stage === 'push') embers(stage === 'push' ? 6 : 3);
+    if (stage === 'push' && !reduced && index < target) restart(shell, 'swell');
+    if (stage === 'chance') restart($('edge'), 'kick');
+    if (Math.floor(before / 100) < Math.floor(dt / 100)) dopa777(Math.floor(dt / 100) * 100);
+    if (index >= target) {
+      lockedUntil = now + LOCK;
+      mash.classList.add('locked');
+      later(finale, 60);
+    }
+    render();
+  }
+
+  function reset() {
+    timers.forEach(clearTimeout); timers = [];
+    ['reel', 'kakutei', 'negirai'].forEach(function (id) { $(id).classList.remove('on'); });
+    sequence = null; index = 0; combo = 0; stage = 'normal'; lastTap = -1e9; lockedUntil = 0; t0 = 0;
+    dt = dtStart; streak = 29; doneToday = false; bTurn = 0; cTurn = 0;
+    fx.innerHTML = ''; $('embers').innerHTML = ''; $('log').innerHTML = '';
+    $('band').classList.remove('go'); $('stamp').classList.remove('go'); mash.classList.remove('locked');
+    render();
+  }
+
+  // B と C は叩き切って1.2秒過ぎたら、画面のどこを触っても飛ばせる
+  app.addEventListener('pointerdown', function (e) {
+    if (!sequence || performance.now() < skippableAt) return;
+    if (e.target === mash || mash.contains(e.target)) return;
+    log('飛ばした', 'h'); endSequence();
+  });
+  mash.addEventListener('pointerdown', function (e) {
+    e.preventDefault(); mash.classList.add('down');
+    if (sequence && performance.now() >= skippableAt) { endSequence(); }
+    tap(e.clientX, e.clientY);
+  });
+  ['pointerup', 'pointerleave', 'pointercancel'].forEach(function (t) { mash.addEventListener(t, function () { mash.classList.remove('down'); }); });
+  mash.addEventListener('keydown', function (e) {
+    if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); var b = mash.getBoundingClientRect(); tap(b.left + b.width / 2, b.top + b.height / 2); }
+  });
+
+  function group(attr, onPick, initial) {
+    var bs = document.querySelectorAll('[' + attr + ']');
+    function pick(b) { bs.forEach(function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); }); onPick(+b.getAttribute(attr)); }
+    bs.forEach(function (b) { b.addEventListener('click', function () { pick(b); }); });
+    bs.forEach(function (b) { b.setAttribute('aria-pressed', +b.getAttribute(attr) === initial ? 'true' : 'false'); });
+  }
+  group('data-target', function (v) { target = v; reset(); }, 20);
+  group('data-dt', function (v) { dtStart = v; reset(); }, 450);
+  group('data-b', function (v) { bPick = v; }, -1);
+  group('data-c', function (v) { cPick = v; }, -1);
+  $('opt-reduced').addEventListener('change', function (e) { reduced = e.target.checked; app.classList.toggle('reduced', reduced); reset(); });
+  $('opt-dark').addEventListener('change', function (e) { app.classList.toggle('dark', e.target.checked); });
+  $('reset').addEventListener('click', reset);
+
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    $('opt-reduced').checked = true; reduced = true; app.classList.add('reduced');
+  }
+  fillStrips(false);
+  setInterval(render, 250);
+  requestAnimationFrame(frame);
+  reset();
+})();
+</script>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

@@ -73,6 +73,16 @@ tailwind.config = {
         <dd class="mt-1 font-display text-lg">iPhone のみ</dd>
       </div>
       <div class="rounded-2xl border border-rule bg-white p-4">
+        <dt class="font-mono text-xs text-mute">画面の向き</dt>
+        <dd class="mt-1 font-display text-lg">縦だけ</dd>
+        <dd class="mt-1 text-xs text-mute">連打中に横へ倒れると、ボタンの位置が動いて指が外れる。</dd>
+      </div>
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <dt class="font-mono text-xs text-mute">開発言語と文言</dt>
+        <dd class="mt-1 font-display text-lg">日本語（ja）</dd>
+        <dd class="mt-1 text-xs text-mute">画面の文言は String Catalog（<code class="font-mono">Localizable.xcstrings</code>）に集める（課題 <a href="../../issues/localization/index.html" class="text-dopa underline underline-offset-4">localization</a> の b）。</dd>
+      </div>
+      <div class="rounded-2xl border border-rule bg-white p-4">
         <dt class="font-mono text-xs text-mute">署名チーム（<a href="../../glossary.html#developer-team" class="text-dopa underline underline-offset-4">Developer Team</a>）</dt>
         <dd class="mt-1 font-mono text-lg font-bold">K334V22YZ3</dd>
         <dd class="mt-1 text-xs text-mute">開発者個人名義。自動署名。</dd>
@@ -87,11 +97,21 @@ tailwind.config = {
     <pre class="mt-6 overflow-x-auto rounded-2xl bg-ink p-5 font-mono text-xs leading-relaxed text-white">yat-tat-ta/
 ├── docs/
 └── ios/
-    ├── project.yml          <span class="text-gold"># 設定の本体。コミットする</span>
-    ├── YatTatTa/            <span class="text-gold"># Swift のソースとアセット</span>
-    │   ├── Info.plist       <span class="text-gold"># INFOPLIST_KEY_ で書けないキーだけ</span>
-    │   └── Prototype/       <span class="text-gold"># 手触りの試作</span>
-    └── YatTatTa.xcodeproj   <span class="text-white/50"># 生成物。コミットしない</span></pre>
+    ├── project.yml              <span class="text-gold"># 設定の本体。コミットする</span>
+    ├── YatTatTa/                <span class="text-gold"># Swift のソースとアセット</span>
+    │   ├── YatTatTaApp.swift    <span class="text-gold"># 起動。SwiftData の入れ物を作る</span>
+    │   ├── Model/               <span class="text-gold"># 記録（SquatRecord）、記録日、記録からの計算（Ledger）、節目</span>
+    │   ├── Mash/                <span class="text-gold"># 叩いている途中の状態、画面が読む状態（AppModel）、端末の設定</span>
+    │   ├── Feel/                <span class="text-gold"># 音と振動、声と効果音の一覧</span>
+    │   ├── Sounds/              <span class="text-gold"># 声と効果音のファイル（開発者が用意）</span>
+    │   ├── Home/                <span class="text-gold"># ホームと、上に重ねる部品</span>
+    │   ├── Settings/            <span class="text-gold"># 設定シート</span>
+    │   ├── Reminder/            <span class="text-gold"># 今日まだ通知の予約</span>
+    │   ├── Theme/               <span class="text-gold"># 色と文字</span>
+    │   ├── Localizable.xcstrings <span class="text-gold"># 画面の文言</span>
+    │   └── Info.plist           <span class="text-gold"># INFOPLIST_KEY_ で書けないキーだけ</span>
+    ├── YatTatTaTests/           <span class="text-gold"># 計算と AppModel のテスト</span>
+    └── YatTatTa.xcodeproj       <span class="text-white/50"># 生成物。コミットしない</span></pre>
     <p class="mt-4 text-sm leading-relaxed text-ink/80">ターゲット名 <code class="font-mono text-xs">YatTatTa</code> は、アプリ名 Yat Tat Ta から空白を抜いた形（Swift のモジュール名に空白とハイフンは使えない）。ホーム画面に出る名前は <code class="font-mono text-xs">INFOPLIST_KEY_CFBundleDisplayName</code> で別に決める（<a href="../../sessions/20261006-0128-app-name/index.html" class="text-signal underline underline-offset-4">2026-10-06 アプリ名を決める</a>）。</p>
   </section>
 
@@ -99,16 +119,20 @@ tailwind.config = {
   <section id="project-yml" class="mt-16">
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">project.yml</p>
     <h2 class="mt-2 font-display text-3xl">設定ファイルの中身</h2>
-    <p class="mt-3 text-sm leading-relaxed text-ink/80">2026-10-06 時点の写し。食い違ったら <code class="font-mono text-xs">ios/project.yml</code> が正。iPhone のみとアプリ名以外の Info.plist と Swift の値は、Xcode 27 の新規 App の初期値に合わせた。</p>
+    <p class="mt-3 text-sm leading-relaxed text-ink/80">2026-10-06（本作り）時点の写し。食い違ったら <code class="font-mono text-xs">ios/project.yml</code> が正。iPhone のみとアプリ名以外の Info.plist と Swift の値は、Xcode 27 の新規 App の初期値に合わせた。</p>
     <pre class="mt-6 overflow-x-auto rounded-2xl bg-ink p-5 font-mono text-xs leading-relaxed text-white">name: YatTatTa
 options:
   deploymentTarget:
     iOS: "26.0"
+  <span class="text-gold"># 開発言語。文言は String Catalog（Localizable.xcstrings）に集める</span>
+  developmentLanguage: ja
 targets:
   YatTatTa:
     type: application
     platform: iOS
     sources: [YatTatTa]
+    scheme:
+      testTargets: [YatTatTaTests]
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.yat-tat-ta
@@ -131,15 +155,34 @@ targets:
         INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
         INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: YES
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
-        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
+        <span class="text-gold"># 縦だけ。連打中に横へ倒れると、ボタンの位置が動いて指が外れる</span>
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: "UIInterfaceOrientationPortrait"
         <span class="text-gold"># Swift（Xcode 27 の新規 App と同じ値）</span>
         SWIFT_VERSION: "5.0"
         SWIFT_APPROACHABLE_CONCURRENCY: YES
         SWIFT_DEFAULT_ACTOR_ISOLATION: MainActor
         ENABLE_PREVIEWS: YES
         ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS: YES
+        <span class="text-gold"># 文言を String Catalog（Localizable.xcstrings）へ書き出す</span>
+        SWIFT_EMIT_LOC_STRINGS: YES
+        LOCALIZATION_PREFERS_STRING_CATALOGS: YES
         <span class="text-gold"># アイコンは未作成。XcodeGen の既定 "AppIcon" を外す</span>
-        ASSETCATALOG_COMPILER_APPICON_NAME: ""</pre>
+        ASSETCATALOG_COMPILER_APPICON_NAME: ""
+  YatTatTaTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: [YatTatTaTests]
+    dependencies:
+      - target: YatTatTa
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.yat-tat-ta.tests
+        DEVELOPMENT_TEAM: K334V22YZ3
+        CODE_SIGN_STYLE: Automatic
+        GENERATE_INFOPLIST_FILE: YES
+        SWIFT_VERSION: "5.0"
+        SWIFT_APPROACHABLE_CONCURRENCY: YES
+        SWIFT_DEFAULT_ACTOR_ISOLATION: MainActor</pre>
   </section>
 
   <!-- Info.plist -->
@@ -201,6 +244,23 @@ targets:
         <div class="min-w-0"><p class="font-bold">実機で動かす</p>
           <p class="mt-1 text-ink/80"><code class="font-mono text-xs">ios/YatTatTa.xcodeproj</code> を Xcode で開き、実行先を iPhone にして ▶。</p></div>
       </li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4">
+        <span class="font-display text-2xl text-mute">4</span>
+        <div class="min-w-0"><p class="font-bold">テストを流す</p>
+          <p class="mt-1 text-ink/80">記録からの計算を変えたら必ず流す。Xcode なら ⌘U。</p>
+          <pre class="mt-2 overflow-x-auto rounded-lg bg-ink p-3 font-mono text-xs text-white">cd ios &amp;&amp; xcodebuild test -project YatTatTa.xcodeproj -scheme YatTatTa -destination 'platform=iOS Simulator,name=iPhone 17'</pre></div>
+      </li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4">
+        <span class="font-display text-2xl text-mute">5</span>
+        <div class="min-w-0"><p class="font-bold">演出を叩かずに出す（Debug ビルドだけ）</p>
+          <p class="mt-1 text-ink/80">シミュレーターでは連打できないので、起動引数で演出の画面を出す。名前は chance、hot、push、reels、gold、kakutei、negirai、heavy（一番重い場面）。Xcode なら Scheme の Run の Arguments に <code class="font-mono text-xs">-demo heavy</code> のように足す。</p>
+          <pre class="mt-2 overflow-x-auto rounded-lg bg-ink p-3 font-mono text-xs text-white">xcrun simctl launch --terminate-running-process booted com.yat-tat-ta -demo kakutei</pre></div>
+      </li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4">
+        <span class="font-display text-2xl text-mute">6</span>
+        <div class="min-w-0"><p class="font-bold">声と効果音を足す</p>
+          <p class="mt-1 text-ink/80"><code class="font-mono text-xs">ios/YatTatTa/Sounds/</code> に、決まったファイル名（<code class="font-mono text-xs">voice_chance.wav</code> など。一覧は Feel/Sound.swift）で置き、<code class="font-mono text-xs">xcodegen generate</code> をやり直す。置いていないものは、合成音か端末の読み上げで代わりに鳴る。</p></div>
+      </li>
     </ol>
   </section>
 
@@ -215,6 +275,7 @@ targets:
         </thead>
         <tbody class="[&_td]:p-3 [&_td]:align-top [&_tr]:border-b [&_tr]:border-rule">
           <tr><td><code class="break-all font-mono text-xs">None of the input catalogs contained a matching … app icon set … named "AppIcon"</code></td><td>XcodeGen は既定でアイコン名 AppIcon を設定する。Xcode 27 の雛形の Assets にはアイコンがない</td><td><code class="font-mono text-xs">ASSETCATALOG_COMPILER_APPICON_NAME: ""</code>。アイコンを作ったら名前を入れる</td></tr>
+          <tr><td>コマンドラインでビルドしても、<code class="font-mono text-xs">Localizable.xcstrings</code> に新しい文言が入らない</td><td>文言を String Catalog に書き足すのは Xcode の画面だけ。<code class="font-mono text-xs">xcodebuild</code> は書き出し用の <code class="font-mono text-xs">.stringsdata</code> を作るところまで</td><td>Xcode でビルドする。コマンドラインだけで済ませるなら、ビルドのあとに <code class="break-all font-mono text-xs">find ~/Library/Developer/Xcode/DerivedData/YatTatTa-*/Build/Intermediates.noindex/YatTatTa.build -name '*.stringsdata' | grep -v -e AppShortcuts -e GeneratedAsset | xargs xcrun xcstringstool sync YatTatTa/Localizable.xcstrings --stringsdata</code></td></tr>
         </tbody>
       </table>
     </div>

@@ -1,0 +1,146 @@
+import SwiftUI
+
+/// ホーム。上に連続記録、まん中に完了連打のボタン、下に DPW と DT
+///
+/// 画面はこの1枚だけ。フィナーレやカードは上に重ねて、用が済めば消す。
+struct HomeView: View {
+    let model: AppModel
+    @State private var showsSettings = false
+    @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.colorScheme) private var systemScheme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    /// PUSH のあいだ、叩くたびに画面をわずかに膨らませる
+    @State private var swell = false
+
+    var body: some View {
+        ZStack {
+            StageBackdrop(stage: model.hypeStage, active: model.session.isOpen, tick: model.tapTick)
+
+            VStack(spacing: 0) {
+                HStack(alignment: .top) {
+                    StreakBar(streak: model.ledger.streak)
+                        .animation(.spring(duration: 0.5, bounce: 0.4), value: model.ledger.streak)
+                    Button {
+                        showsSettings = true
+                    } label: {
+                        Image(systemName: "gearshape.fill")
+                            .font(.system(size: 20, weight: .bold))
+                            .foregroundStyle(Color.ink)
+                            .frame(width: 44, height: 44)
+                    }
+                    .accessibilityLabel(Text("設定"))
+                    .padding(.leading, 8)
+                }
+                // 上の帯と下のカードのあいだ、画面の幅いっぱいが叩く場所
+                SquatStageView(model: model)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .padding(.vertical, 8)
+                TotalsCards(dopaPerWeek: model.dopaPerWeek, previousWindow: model.ledger.previousWindow,
+                            bestWindow: model.ledger.bestWindow, dopaTotal: model.dopaTotal)
+            }
+            .padding(.horizontal, 20)
+            .padding(.top, 8)
+            .padding(.bottom, 16)
+            // 激熱で地が暗転したら、帯とカードも暗い配色にして読めるようにする
+            .environment(\.colorScheme, model.hypeStage >= .hot ? .dark : systemScheme)
+            .scaleEffect(swell ? 1.025 : 1)
+
+            overlays
+        }
+        .foregroundStyle(Color.ink)
+        #if DEBUG
+        .task { model.runDemoFromLaunchArguments() }
+        #endif
+        .onChange(of: model.tapTick) {
+            guard model.hypeStage == .push, !reduceMotion else { return }
+            swell = true
+            withAnimation(.easeOut(duration: 0.18)) { swell = false }
+        }
+        .sheet(isPresented: $showsSettings) {
+            SettingsView(model: model)
+        }
+        .onChange(of: scenePhase) { _, phase in
+            switch phase {
+            case .active: model.sceneDidBecomeActive()
+            case .inactive, .background: model.sceneDidLeave()
+            @unknown default: break
+            }
+        }
+    }
+
+    @ViewBuilder private var overlays: some View {
+        if let banner = model.stageBanner {
+            StageBannerOverlay(banner: banner)
+                .id(banner.id)
+                .transition(.opacity)
+        }
+        if let fever = model.fever {
+            FeverOverlay(model: model, state: fever)
+                .transition(.opacity)
+        }
+        if let toppa = model.toppa {
+            ToppaOverlay(event: toppa)
+                .id(toppa.id)
+                .transition(.opacity)
+        }
+        if let result = model.feverResult {
+            FeverResultOverlay(result: result)
+                .id(result.id)
+        }
+        if let finale = model.finale {
+            FinaleOverlay(event: finale, skip: { withAnimation { model.skipFinale() } }, startAtNegirai: demoNegirai)
+                .id(finale.id)
+                .transition(.opacity)
+        } else if let passing = model.passingMilestone {
+            MilestoneTag(milestone: passing.milestone)
+                .id(passing.id)
+                .transition(.scale.combined(with: .opacity))
+                .allowsHitTesting(false)
+        }
+
+        if let notice = model.restPassNotice {
+            VStack {
+                RestPassBanner(notice: notice)
+                Spacer()
+            }
+            .transition(.move(edge: .top).combined(with: .opacity))
+            .task {
+                try? await Task.sleep(for: .seconds(2))
+                withAnimation { model.restPassNotice = nil }
+            }
+        }
+
+        if let notice = model.breakNotice {
+            scrim
+            VStack {
+                Spacer()
+                StreakBreakCard(notice: notice) {
+                    withAnimation { model.breakNotice = nil }
+                }
+            }
+            .transition(.move(edge: .bottom))
+        } else if model.showsReminderAsk && model.finale == nil {
+            scrim
+            VStack {
+                Spacer()
+                ReminderAskCard(minutes: model.reminderMinutes) { yes in
+                    withAnimation { model.showsReminderAsk = false }
+                    if yes { Task { await model.enableReminder() } }
+                }
+            }
+            .transition(.move(edge: .bottom))
+        }
+    }
+
+    private var demoNegirai: Bool {
+        #if DEBUG
+        model.demoSkipToNegirai
+        #else
+        false
+        #endif
+    }
+
+    private var scrim: some View {
+        Color.black.opacity(0.35).ignoresSafeArea().transition(.opacity)
+    }
+}

@@ -59,6 +59,20 @@ tailwind.config = {
 @keyframes burst { 0%{transform:translate(0,0);opacity:1} 100%{transform:translate(var(--dx),var(--dy));opacity:0} }
 @keyframes drop { 0%{transform:translateY(-120%)} 100%{transform:none} }
 .pop { animation:pop .45s cubic-bezier(.2,1.4,.4,1) both; }
+/* 筋肉確定とねぎらい */
+.rays-s { position:absolute; left:50%; top:50%; width:900px; height:900px; margin:-450px 0 0 -450px; animation:spin-s 6s linear infinite;
+  background:repeating-conic-gradient(from 0deg, #FF3B5C 0deg 5deg, transparent 5deg 9deg, #FF9F1C 9deg 14deg, transparent 14deg 18deg, #FFE14D 18deg 23deg, transparent 23deg 27deg, #3DDC84 27deg 32deg, transparent 32deg 36deg, #2F79F7 36deg 41deg, transparent 41deg 45deg, #8E5CF7 45deg 50deg, transparent 50deg 54deg); }
+@keyframes spin-s { to { transform:rotate(360deg); } }
+.core-s { position:absolute; inset:0; background:radial-gradient(circle, rgba(255,255,255,.95) 0 34px, rgba(255,255,255,0) 190px); }
+.mtl { position:relative; font-family:"Dela Gothic One",sans-serif; font-size:72px; line-height:1.02; text-align:center; }
+.mtl .w { position:absolute; inset:0; color:#fff; -webkit-text-stroke:12px #fff; filter:drop-shadow(0 0 12px #7CF7FF); }
+.mtl .f { position:relative; background:linear-gradient(180deg,#fff 0%,#F6FF8A 22%,#C7F000 44%,#3E5F00 48%,#8FC400 56%,#EFFFA8 80%,#fff 100%); -webkit-background-clip:text; background-clip:text; color:transparent; -webkit-text-stroke:3px #172400; }
+.flame-s { position:absolute; inset:-20%; background:radial-gradient(ellipse 45% 30% at 50% 50%, rgba(255,255,230,.95), rgba(255,246,180,0) 70%), radial-gradient(ellipse 70% 55% at 50% 55%, rgba(255,214,64,.95), rgba(255,170,0,0) 70%), radial-gradient(ellipse 30% 40% at 20% 80%, rgba(255,140,0,.9), rgba(255,90,0,0) 70%), radial-gradient(ellipse 30% 40% at 80% 78%, rgba(255,140,0,.9), rgba(255,90,0,0) 70%), radial-gradient(circle at 50% 50%, #C84B00 0%, #5A1200 70%); animation:flick-s .5s steps(3) infinite alternate; }
+@keyframes flick-s { 100% { transform:scale(1.04) translateY(-6px); } }
+.gld { position:relative; font-family:"Dela Gothic One",sans-serif; font-size:46px; line-height:1.1; text-align:center; }
+.gld .w { position:absolute; inset:0; color:#FFF6C8; -webkit-text-stroke:10px #FFF6C8; filter:drop-shadow(0 0 14px #FF7A00); }
+.gld .f { position:relative; background:linear-gradient(180deg,#FFFDF0 0%,#FFE58A 25%,#FFB800 47%,#8A3E00 51%,#E08A00 60%,#FFF0A8 85%,#fff 100%); -webkit-background-clip:text; background-clip:text; color:transparent; -webkit-text-stroke:2.5px #5A1200; }
+@media (prefers-reduced-motion: reduce) { .rays-s, .flame-s { animation:none; } }
 .tabbtn[aria-selected="true"] { background:#1C1916; color:#FBF6EE; }
 </style>
 </head>
@@ -75,7 +89,7 @@ tailwind.config = {
   <h2 class="mt-2 font-display text-3xl">状態ごとの見た目</h2>
   <div data-story class="mt-6 rounded-3xl border-2 border-ink bg-white p-5 sm:p-7">
   <div class="flex flex-wrap items-center justify-between gap-3">
-    <div role="tablist" class="flex flex-wrap gap-2"><button type="button" role="tab" data-tab="plain" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">札なし</button><button type="button" role="tab" data-tab="one" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">札1枚</button><button type="button" role="tab" data-tab="three" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">札3枚</button><button type="button" role="tab" data-tab="reduced" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">視差効果を減らす</button></div>
+    <div role="tablist" class="flex flex-wrap gap-2"><button type="button" role="tab" data-tab="plain" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">札なし</button><button type="button" role="tab" data-tab="one" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">札1枚</button><button type="button" role="tab" data-tab="three" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">札3枚</button><button type="button" role="tab" data-tab="kakutei" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">筋肉確定</button><button type="button" role="tab" data-tab="negirai" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">ねぎらい</button><button type="button" role="tab" data-tab="reduced" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">視差効果を減らす</button></div>
     <label class="flex cursor-pointer items-center gap-2 font-mono text-xs text-mute"><input type="checkbox" data-dark class="accent-dopa"> 暗い配色</label>
   </div>
   <div class="mt-6 rounded-2xl bg-[repeating-linear-gradient(45deg,#FBF6EE_0_10px,#F5EDE0_10px_20px)] p-5 sm:p-8"><div data-panel="plain" class="grid items-start gap-8 md:grid-cols-[auto_1fr]">
@@ -216,6 +230,26 @@ tailwind.config = {
   </div>
 </div>
   <div class="max-w-sm text-sm leading-relaxed"><p class="font-mono text-xs text-mute">state / three</p><p class="mt-1 font-display text-xl">札3枚</p><div class="mt-3 space-y-2 text-ink/80"><p>連続30日、DT 1,000、DPW 自己ベストが同じ1打で重なる。札は少しずつ遅れて積まれ、文字が傾くほど画面が揺れる。</p><p>この場面で入力と音が詰まらないかは、課題 heavy-effects-performance で実機確認する。</p></div></div>
+</div><div data-panel="kakutei" class="grid items-start gap-8 md:grid-cols-[auto_1fr]">
+  <div class="w-[300px] shrink-0 rounded-[2.8rem] border-[6px] border-ink bg-ink p-1.5 shadow-[10px_10px_0_#E5337A]">
+  <div class="relative flex h-[650px] flex-col items-center justify-center overflow-hidden rounded-[2.2rem]" style="background:#0B0610">
+    <div class="absolute left-1/2 top-2.5 z-40 h-6 w-24 -translate-x-1/2 rounded-full bg-black"></div>
+    <div class="rays-s"></div><div class="core-s"></div>
+    <div class="mtl"><div><span class="w" aria-hidden="true">筋肉</span><span class="f">筋肉</span></div><div><span class="w" aria-hidden="true">確定</span><span class="f">確定</span></div></div>
+    <p class="relative mt-3 font-display text-[22px] text-dopa" style="-webkit-text-stroke:1px #fff;text-shadow:2px 2px 0 #1C1916">やったった！ <span class="num">+20</span> ドパ</p>
+  </div>
+  </div>
+  <div class="max-w-sm text-sm leading-relaxed"><p class="font-mono text-xs text-mute">state / kakutei</p><p class="mt-1 font-display text-xl">筋肉確定</p><div class="mt-3 space-y-2 text-ink/80"><p>叩き切った最後の1打で、白い閃光のあとに出す（<a href="../../../glossary.html#muscle-kakutei" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">筋肉確定</a>）。虹の放射線の上に、金属の文字が2行で落ちる。1.2秒。</p><p>言葉は筋肉確定、太もも確定、根性確定、継続確定、明日も確定を、記録を閉じた順に回す。下に小さく「やったった！」と変えたドパ。1.2秒が過ぎたら、触って飛ばせる。</p></div></div>
+</div><div data-panel="negirai" class="grid items-start gap-8 md:grid-cols-[auto_1fr]">
+  <div class="w-[300px] shrink-0 rounded-[2.8rem] border-[6px] border-ink bg-ink p-1.5 shadow-[10px_10px_0_#E5337A]">
+  <div class="relative flex h-[650px] flex-col items-center justify-center overflow-hidden rounded-[2.2rem]" style="background:#2A0700">
+    <div class="absolute left-1/2 top-2.5 z-40 h-6 w-24 -translate-x-1/2 rounded-full bg-black"></div>
+    <div class="flame-s"></div>
+    <div class="gld"><span class="w" aria-hidden="true">今日も<br>お疲れ！</span><span class="f">今日も<br>お疲れ！</span></div>
+    <div class="relative mt-4 flex w-52 flex-col gap-2"><p class="pop rounded-full border-2 border-ink bg-gold px-3 py-1.5 text-center text-[14px] font-black">連続 <span class="num">30</span> 日</p></div>
+  </div>
+  </div>
+  <div class="max-w-sm text-sm leading-relaxed"><p class="font-mono text-xs text-mute">state / negirai</p><p class="mt-1 font-display text-xl">ねぎらい</p><div class="mt-3 space-y-2 text-ink/80"><p>筋肉確定に続けて、金の炎の上に金の文字で声をかける（<a href="../../../glossary.html#negirai" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ねぎらい</a>）。1.6秒。節目の札はこの下に積む。</p><p>この見本は、その日の最初の記録で連続30日に届いた場面。言葉の選び方は <a href="../../../features/done-mash/index.html#kakutei" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">完了連打の表2-4</a>。途中で閉じた記録には出さない。</p></div></div>
 </div><div data-panel="reduced" class="grid items-start gap-8 md:grid-cols-[auto_1fr]">
   <div class="w-[300px] shrink-0 rounded-[2.8rem] border-[6px] border-ink bg-ink p-1.5 shadow-[10px_10px_0_#E5337A] ">
   <div class="app  a-bg relative flex h-[650px] flex-col overflow-hidden rounded-[2.2rem] px-5 pb-6 pt-11">

@@ -60,6 +60,11 @@ tailwind.config = {
 @keyframes drop { 0%{transform:translateY(-120%)} 100%{transform:none} }
 .pop { animation:pop .45s cubic-bezier(.2,1.4,.4,1) both; }
 .tabbtn[aria-selected="true"] { background:#1C1916; color:#FBF6EE; }
+.squad-pop { transform-box:fill-box; transform-origin:50% 100%; animation:squadpop .5s cubic-bezier(.2,1.6,.4,1) both; }
+@keyframes squadpop { 0%{ transform:scale(0); } 100%{ transform:scale(1); } }
+.stage { position:relative; touch-action:manipulation; user-select:none; -webkit-user-select:none; cursor:pointer; }
+.plusone { position:absolute; font-family:"M PLUS Rounded 1c",sans-serif; font-weight:900; color:#E5337A; font-size:20px; pointer-events:none; animation:fly .8s ease-out forwards; --dx:0px; --dy:-50px; }
+@media (prefers-reduced-motion: reduce) { .squad-pop { animation:none !important; } }
 </style>
 </head>
 <body class="min-h-screen bg-paper font-sans text-ink antialiased">
@@ -68,7 +73,7 @@ tailwind.config = {
 <header class="animate-rise">
   <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">ui / pages / home</p>
   <h1 class="mt-2 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">ホーム</span></h1>
-  <div class="mt-4 max-w-2xl space-y-3 text-sm leading-relaxed text-ink/80"><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">アプリの画面はこの1枚です。起動した直後の状態を描いています。29日連続で今日はまだ、休み券2枚、<a href="../../../glossary.html#target-reps" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">目標回数</a> 20、DPW 347、DT 987。</p><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">ボタンは押せます。20打を叩き切ると、連続30日目と DT 1,000 ドパが同じ最後の1打で重なります。前回のラフで「いちばん重い場面」として描いた1打です。右上の歯車は設定シートを開きます。音と振動はこのモックでは出ません。</p></div>
+  <div class="mt-4 max-w-2xl space-y-3 text-sm leading-relaxed text-ink/80"><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">アプリの画面はこの1枚です。起動した直後の状態を描いています。29日連続で今日はまだ、休み券2枚、<a href="../../../glossary.html#target-reps" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">目標回数</a> 20、DPW 347、DT 987。</p><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">画面のまん中は、どこを押しても叩けます。押すと<a href="../../../glossary.html#squat-squad" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スクワット隊</a>がしゃがみ、離すと立ち、2打ごとに1人増えます（2026-10-06 に金色のボタンから置き換えた）。20打を叩き切ると、連続30日目と DT 1,000 ドパが同じ最後の1打で重なります。前回のラフで「いちばん重い場面」として描いた1打です。右上の歯車は設定シートを開きます。音と振動はこのモックでは出ません。</p></div>
 </header>
 <div class="mt-10 flex flex-col items-center gap-10 md:flex-row md:items-start md:justify-center">
   <div class="w-[300px] shrink-0 rounded-[2.8rem] border-[6px] border-ink bg-ink p-1.5 shadow-[10px_10px_0_#E5337A] ">
@@ -84,18 +89,13 @@ tailwind.config = {
     <div class="flex items-center gap-1"><span class="text-[9px] font-bold a-mute">休み券</span><span class="ticket"></span><span class="ticket"></span></div>
   </div>
 </div>
-<div class="mt-auto flex flex-col items-center">
-  <div id="mash-wrap" class="relative">
-    <span id="mash-glow" class="glow transition-opacity duration-150" style="opacity:0"></span>
-    <button id="mash" type="button" class="mash relative grid touch-manipulation select-none place-items-center" aria-label="完了連打">
-      <span class="pointer-events-none text-center">
-        <span id="mash-top" class="block text-[11px] font-bold opacity-70">スクワット</span>
-        <span id="mash-num" class="num block text-[76px] leading-[.95]">20</span>
-        <span class="mt-0.5 block text-[12px] font-black">叩いてドパに</span>
-      </span>
-    </button>
+<div class="mt-3 flex flex-1 flex-col">
+  <div class="text-center">
+    <p id="mash-top" class="text-[11px] font-bold a-mute">スクワット</p>
+    <p id="mash-num" class="num a-ink text-[56px] leading-[.95]">20</p>
   </div>
-  <p id="gain" class="num mt-4 text-2xl text-dopa" style="visibility:hidden">+0 <span class="font-sans text-sm font-black">ドパ</span></p>
+  <div id="mash-wrap" class="stage flex-1" role="button" aria-label="完了連打。叩くとスクワット隊がしゃがむ"></div>
+  <p id="gain" class="num text-center text-2xl text-dopa" style="visibility:hidden">+0 <span class="font-sans text-sm font-black">ドパ</span></p>
 </div>
 <div class="mt-auto pt-4">
   <div class="grid grid-cols-2 gap-3">
@@ -121,7 +121,7 @@ tailwind.config = {
 </div>
   <ul class="flex max-w-xs flex-col gap-3 text-sm leading-relaxed">
   <li class="border-l-4 border-dopa pl-3"><b>連続記録の帯</b>：29日連続、今日まだ。右に休み券2枚と、設定を開く歯車。<a href="../../components/streak-bar/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4">streak-bar</a></li>
-  <li class="border-l-4 border-gold pl-3"><b>完了連打のボタン</b>：目標回数 20 の待機。叩けば残りが減り、+N ドパが増える。<a href="../../components/mash-button/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4">mash-button</a></li>
+  <li class="border-l-4 border-gold pl-3"><b>スクワット隊</b>：帯とカードのあいだが全部、叩く場所。触れるとしゃがみ、離すと立つ。2打ごとに1人増える。<a href="../../components/squat-squad/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4">squat-squad</a></li>
   <li class="border-l-4 border-ink pl-3"><b>DPW と DT</b>：叩くたびに1ずつ増える。<a href="../../components/totals-cards/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4">totals-cards</a></li>
   <li class="border-l-4 border-signal pl-3"><b>20打を叩き切ると</b>：連続30日と DT 1,000 の札が重なるフィナーレ。<a href="../../components/finale/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4">finale</a></li>
 </ul>
@@ -129,38 +129,136 @@ tailwind.config = {
 </article>
 </main>
 <script>
+// スクワット隊の見本。横向きの棒人間を SVG で描き、立つ姿としゃがむ姿のあいだを動かす
+var SQUAD = (function () {
+  var P = {
+    stand: { toe: [12, 0], ankle: [0, 0], knee: [0, -20], hip: [0, -40], sh: [0, -72], hand: [2, -46], head: [0, -88] },
+    squat: { toe: [12, 0], ankle: [0, 0], knee: [14, -14], hip: [-6, -24], sh: [4, -55], hand: [30, -57], head: [8, -70] }
+  };
+  // 手前の列から奥の列へ。列ごとの人数と大きさ
+  var ROWS = [[3, 1], [5, 0.76], [7, 0.6], [9, 0.49], [11, 0.41], [13, 0.35], [15, 0.3]];
+  var COLORS = { mix: ['#E9A800', '#E5337A', '#2F79F7'], dopa: ['#E5337A'], gold: ['#E9A800'] };
+  var SLOTS = [];
+  ROWS.forEach(function (r, ri) {
+    var order = [0];
+    for (var k = 1; k <= (r[0] - 1) / 2; k++) order.push(-k, k);
+    order.forEach(function (c) { SLOTS.push({ row: ri, col: c, scale: r[1] }); });
+  });
+  var NS = 'http://www.w3.org/2000/svg';
+  function mk(tag, attrs) { var e = document.createElementNS(NS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); return e; }
+  function lerp(a, b, t) { return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t]; }
+  function pts(list) { return list.map(function (p) { return p[0].toFixed(1) + ',' + p[1].toFixed(1); }).join(' '); }
+  function pose(t) { var o = {}; for (var k in P.stand) o[k] = lerp(P.stand[k], P.squat[k], t); return o; }
+
+  function build(el, opts) {
+    var W = el.clientWidth || 260, H = el.clientHeight || 300, unit = opts.unit || H / 235;
+    var svg = mk('svg', { viewBox: '0 0 ' + W + ' ' + H, width: W, height: H, 'aria-hidden': 'true' });
+    svg.style.cssText = 'position:absolute;inset:0;overflow:visible';
+    el.appendChild(svg);
+    var figs = [], t = opts.squat ? 1 : 0, palette = opts.palette || 'mix', count = 0, anim = null;
+    function color(i) { var c = COLORS[palette]; return c[i % c.length]; }
+    function draw() {
+      var p = pose(t);
+      figs.forEach(function (f) {
+        var body = pts([p.toe, p.ankle, p.knee, p.hip, p.sh]), arm = pts([p.sh, p.hand]);
+        f.bodyO.setAttribute('points', body); f.bodyC.setAttribute('points', body);
+        f.armO.setAttribute('points', arm); f.armC.setAttribute('points', arm);
+        f.head.setAttribute('cx', p.head[0]); f.head.setAttribute('cy', p.head[1]);
+      });
+    }
+    function figure(i, pop) {
+      var s = SLOTS[i], scale = s.scale * unit;
+      var x = W / 2 + s.col * 50 * s.scale * unit - 6 * scale, y = H * 0.96 - s.row * H * 0.1;
+      var g = mk('g', { transform: 'translate(' + x.toFixed(1) + ',' + y.toFixed(1) + ') scale(' + scale.toFixed(3) + ')' });
+      var inner = mk('g', {});
+      if (pop) inner.setAttribute('class', 'squad-pop');
+      var line = { fill: 'none', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' };
+      var f = {
+        g: g, row: s.row,
+        bodyO: mk('polyline', Object.assign({ stroke: '#1C1916', 'stroke-width': 12 }, line)),
+        armO: mk('polyline', Object.assign({ stroke: '#1C1916', 'stroke-width': 12 }, line)),
+        bodyC: mk('polyline', Object.assign({ stroke: color(i), 'stroke-width': 6.5 }, line)),
+        armC: mk('polyline', Object.assign({ stroke: color(i), 'stroke-width': 6.5 }, line)),
+        head: mk('circle', { r: 10, fill: color(i), stroke: '#1C1916', 'stroke-width': 3.5 })
+      };
+      [f.armO, f.bodyO, f.armC, f.bodyC, f.head].forEach(function (e) { inner.appendChild(e); });
+      g.appendChild(inner);
+      return f;
+    }
+    function setCount(n, pop) {
+      n = Math.max(1, Math.min(30, SLOTS.length, n));
+      while (count < n) { figs.push(figure(count, pop)); count++; }
+      while (count > n) { var f = figs.pop(); f.g.remove(); count--; }
+      // 奥の列を先に描き、手前を上に重ねる
+      figs.slice().sort(function (a, b) { return b.row - a.row; }).forEach(function (f) { svg.appendChild(f.g); });
+      draw();
+    }
+    function setPalette(p) {
+      palette = p;
+      figs.forEach(function (f, i) { [f.bodyC, f.armC].forEach(function (e) { e.setAttribute('stroke', color(i)); }); f.head.setAttribute('fill', color(i)); });
+    }
+    function animateTo(target, ms) {
+      if (anim) cancelAnimationFrame(anim);
+      var from = t, start = performance.now();
+      (function step(now) {
+        var k = Math.min(1, (now - start) / ms);
+        t = from + (target - from) * (1 - Math.pow(1 - k, 3));
+        draw();
+        if (k < 1) anim = requestAnimationFrame(step);
+      })(start);
+    }
+    setCount(opts.count || 1, false);
+    return { setCount: setCount, setPalette: setPalette, animateTo: animateTo, get count() { return count; } };
+  }
+
+  // 指が触れたらしゃがみ、指が全部離れたら立つ
+  function bindTap(area, squad, onTap) {
+    var down = 0;
+    area.addEventListener('pointerdown', function (e) {
+      down++;
+      squad.animateTo(1, 80);
+      if (onTap) onTap(e);
+    });
+    function up() { down = Math.max(0, down - 1); if (down === 0) squad.animateTo(0, 120); }
+    area.addEventListener('pointerup', up);
+    area.addEventListener('pointercancel', up);
+    area.addEventListener('pointerleave', function () { down = 0; squad.animateTo(0, 120); });
+  }
+  return { build: build, bindTap: bindTap };
+})();
+
 (function () {
-  var target = 20, left = target, gained = 0, dpw = 347, dt = 987, last = 0, locked = false;
-  var btn = document.getElementById('mash');
+  var target = 20, left = target, gained = 0, dpw = 347, dt = 987, locked = false;
+  var wrap = document.getElementById('mash-wrap');
   var num = document.getElementById('mash-num');
   var top = document.getElementById('mash-top');
   var gain = document.getElementById('gain');
-  var glow = document.getElementById('mash-glow');
-  var wrap = document.getElementById('mash-wrap');
   var dpwEl = document.getElementById('dpw'), dtEl = document.getElementById('dt'), bar = document.getElementById('dt-bar');
   var finale = document.getElementById('finale');
+  var squad = SQUAD.build(wrap, { count: 1, palette: 'mix' });
   function fmt(n) { return n.toLocaleString('en-US'); }
-  btn.addEventListener('pointerdown', function (e) {
+  SQUAD.bindTap(wrap, squad, function (e) {
     if (locked) return;
-    var now = performance.now();
-    var fast = now - last <= 450; last = now;
     left -= 1; gained += 1; dpw += 1; dt += 1;
     num.textContent = left; top.textContent = 'スクワット 残り';
     gain.innerHTML = '+' + gained + ' <span class="font-sans text-sm font-black">ドパ</span>';
     gain.style.visibility = 'visible';
     dpwEl.textContent = fmt(dpw); dtEl.textContent = fmt(dt);
     bar.style.width = Math.min(100, (dt / 1000) * 100) + '%';
-    glow.style.opacity = fast ? Math.min(1, parseFloat(glow.style.opacity || 0) + 0.2) : 0.25;
     var r = wrap.getBoundingClientRect();
     var ring = document.createElement('span');
     ring.className = 'ring';
     var size = 60 + (target - left) / target * 80;
     ring.style.cssText = 'left:' + (e.clientX - r.left) + 'px;top:' + (e.clientY - r.top) + 'px;width:' + size + 'px;height:' + size + 'px;animation:ringout .32s ease-out forwards';
     wrap.appendChild(ring); setTimeout(function () { ring.remove(); }, 340);
-    var grain = document.createElement('span');
-    grain.className = 'grain';
-    grain.style.cssText = 'left:50%;top:80%;width:9px;height:9px;--dx:0px;--dy:70px;animation:fly .4s ease-in forwards';
-    wrap.appendChild(grain); setTimeout(function () { grain.remove(); }, 420);
+    // 2打ごとに1人増える
+    if (gained % 2 === 0) {
+      squad.setCount(1 + gained / 2, true);
+      var plus = document.createElement('span');
+      plus.className = 'plusone'; plus.textContent = '+1人';
+      plus.style.left = '50%'; plus.style.top = '30%';
+      wrap.appendChild(plus); setTimeout(function () { plus.remove(); }, 820);
+    }
     if (left === 0) {
       locked = true;
       document.getElementById('streak-num').textContent = '30';
@@ -169,13 +267,11 @@ tailwind.config = {
       setTimeout(function () {
         finale.hidden = true; locked = false;
         left = target; gained = 0; num.textContent = left; top.textContent = 'スクワット';
-        gain.style.visibility = 'hidden'; glow.style.opacity = 0;
+        gain.style.visibility = 'hidden';
+        squad.setCount(1, false);
       }, 2600);
     }
   });
-  setInterval(function () {
-    if (performance.now() - last > 450) glow.style.opacity = Math.max(0, parseFloat(glow.style.opacity || 0) - 0.15);
-  }, 120);
 })();
 </script>
 <script src="../../../sidebar.js" defer></script>

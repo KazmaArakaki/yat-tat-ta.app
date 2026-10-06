@@ -175,7 +175,7 @@ tailwind.config = {
 </div><div class="rounded-2xl border-2 border-ink bg-white p-3">
   <div class="flex gap-1.5"><span class="h-12 flex-1 rounded-lg border border-ink/20" style="background:#E9A800"></span></div>
   <p class="mt-2 font-bold">gold</p><p class="font-mono text-[11px] text-mute">#E9A800</p>
-  <p class="mt-1 text-xs leading-relaxed">押せるもの。完了連打のボタンと、決める側のボタン。節目の札。</p>
+  <p class="mt-1 text-xs leading-relaxed">押せるもの。決める側のボタン。スクワット隊の先頭の1人。節目の札。</p>
 </div><div class="rounded-2xl border-2 border-ink bg-white p-3">
   <div class="flex gap-1.5"><span class="h-12 flex-1 rounded-lg border border-ink/20" style="background:#2F79F7"></span></div>
   <p class="mt-2 font-bold">signal</p><p class="font-mono text-[11px] text-mute">#2F79F7</p>
@@ -184,7 +184,7 @@ tailwind.config = {
 </section><section id="shape" class="mt-16">
   <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / shape</p>
   <h2 class="mt-2 font-display text-3xl">形と影</h2>
-  <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">枠は ink の太い線（2〜4pt）、影はぼかさずに右下か真下へずらします。押すと沈むおもちゃの見た目です。押せるものほど影を厚くします。完了連打のボタンは真下に 8pt、カードは右下に 4pt。押し込むとボタンが沈み、影が縮みます。叩いたことを、音と振動より先に目で返すためです。</p><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">角は丸くします。カードは 16pt 前後、ボタンは真円か両端の丸い形。直角は使いません。</p>
+  <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">枠は ink の太い線（2〜4pt）、影はぼかさずに右下か真下へずらします。押すと沈むおもちゃの見た目です。押せるものほど影を厚くします。カードは右下に 4pt。完了連打では、押し込む代わりにスクワット隊がしゃがみます。叩いたことを、音と振動より先に目で返すためです。</p><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">角は丸くします。カードは 16pt 前後、ボタンは真円か両端の丸い形。直角は使いません。</p>
 </section><section id="type" class="mt-16">
   <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / type</p>
   <h2 class="mt-2 font-display text-3xl">文字</h2>
@@ -192,15 +192,19 @@ tailwind.config = {
 </section><section id="layout" class="mt-16">
   <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / layout</p>
   <h2 class="mt-2 font-display text-3xl">置き方</h2>
-  <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">縦画面だけです。連打の途中で横に倒れると、ボタンの位置が動いて指が外れます。</p><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">ホームは上から、連続記録の帯、完了連打のボタン、DPW と DT のカードの順。ボタンは画面の下半分の、親指が届く高さに置きます。重ねる部品（フィナーレ、途切れたときのカード、休み券の帯、通知の問いかけ）は、ホームの上に出して用が済めば消します。画面を増やして遷移させることはしません。</p>
+  <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">縦画面だけです。連打の途中で横に倒れると、叩く場所が動いて指が外れます。</p><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">ホームは上から、連続記録の帯、叩く場所、DPW と DT のカードの順。叩く場所は帯とカードのあいだの全部で、画面の幅いっぱいに取ります。そこに<a href="../glossary.html#squat-squad" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スクワット隊</a>が立ち、隊の上に残りの数を大きく出します。2026-10-06 までは、ここに金色の丸いボタンを置いていました。的が大きいほど、連打で指が外れにくい。重ねる部品（フィナーレ、途切れたときのカード、休み券の帯、通知の問いかけ）は、ホームの上に出して用が済めば消します。画面を増やして遷移させることはしません。</p>
 </section><section id="touch" class="mt-16">
   <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / touch</p>
   <h2 class="mt-2 font-display text-3xl">叩いたときの返し方</h2>
-  <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">タップは、指が触れた瞬間に受けます（UIKit の touchesBegan）。SwiftUI のボタンは指を離したときに反応するので、連打の速さに追いつきません。複数の指で叩けば、1本ずつ数えます。<a href="../glossary.html#tezawari" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">手触り</a>の試作で決めたことの引き継ぎです。</p><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">光は指の位置から広がる輪で出し、画面全体の明滅は弱くします。連打で画面全体が強く明滅すると、光に敏感な人の負担になるからです。ボタンの外側の光は連打の速さで強まり、止まると落ちます。</p>
+  <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">タップは、指が触れた瞬間に受けます（UIKit の touchesBegan）。SwiftUI のボタンは指を離したときに反応するので、連打の速さに追いつきません。複数の指で叩けば、1本ずつ数えます。<a href="../glossary.html#tezawari" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">手触り</a>の試作で決めたことの引き継ぎです。</p><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">光は指の位置から広がる輪で出し、画面全体の明滅は弱くします。連打で画面全体が強く明滅すると、光に敏感な人の負担になるからです。画面の四辺の光は連打の速さで強まり、止まると落ちます。</p>
 </section><section id="motion" class="mt-16">
   <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / motion</p>
   <h2 class="mt-2 font-display text-3xl">動きを減らす設定</h2>
   <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">iPhone の「視差効果を減らす」が入っているときは、粒と画面の揺れを止めます。残すのは、数字の変化、指の位置の輪、文字と札。<a href="../glossary.html#reduced-effects-mode" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ひかえめモード</a>の考え方です。音と振動は変えません。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">連打の途中は、<a href="../glossary.html#dopadopa" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパドパ</a>の段階（NORMAL、CHANCE、激熱、PUSH）で隊の色、背景の放射線、揺れが変わります。どれだけ盛っても、画面全体の明滅は1秒に3回までです。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">激熱からは、画面全体が舞台になります。地が暗転し、虹の放射線が画面の端まで回る。<a href="../glossary.html#dopa-toppa" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパ突破</a>、<a href="../glossary.html#fever" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">フィーバータイム</a>、<a href="../glossary.html#muscle-kakutei" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">筋肉確定</a>、<a href="../glossary.html#negirai" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ねぎらい</a>は、画面全体に重ねて出します。ただし、上の連続記録の帯と下のカードは、自分の地を持ったまま残します。暗転した地の上でも、日数とドパが読めるようにするためです。重ね物は指を通し、連打を止めません。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">白く光らせる明滅は、どの演出を足しても合わせて1秒に3回までです。使うのは、段階に入った1打、ドパ突破、確定の閃光だけ。速い連打の1打ごとに光らせると、1秒に8回を超えるからです。PUSH の膨らみや炎のちらつきのように、明るさを大きく変えない動きは数えません。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">フィーバーの地のように色を流す演出は、1秒に1周より速くしません。色相がそれより速く入れ替わると、白く光らせなくても明滅に近い負担になるからです。「スクワット 残り」の数の<a href="../glossary.html#party-parrot" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">パーティーパロット</a>風の色の巡りも、この速さに合わせている。</p>
 </section><section id="words" class="mt-16">
   <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">07 / words</p>
   <h2 class="mt-2 font-display text-3xl">文言</h2>

@@ -56,7 +56,7 @@ tailwind.config = {
         画面は1枚。叩いてドパに変え、連続記録と2つの合計を見る。設定は下から出すシートに置く。<br>
         保存するのは「記録」1種類だけ。DT も DPW も、連続記録も休み券も、記録から計算する。
       </p>
-      <p class="relative mt-4 text-sm text-mute">設計はレビュー済み（2026-10-06）。いまは実装中（developing）。実機での確認が済んだら done にする。</p>
+      <p class="relative mt-4 text-sm text-mute">設計はレビュー済み（2026-10-06）。実装の 1〜4 は済み。実機確認の前に、連打の途中の演出を盛る注文が入り、ドパドパ（04-2、決定 17〜20）を足した。さらに画面全体の演出（04-3、決定 21〜24）を足した。声と効果音のファイルは開発者が用意中で、届くまでは合成音と読み上げで代わりに鳴らす。開発者の実機確認（10-2）が済んだら done にする。</p>
     </div>
   </section>
 
@@ -165,6 +165,202 @@ tailwind.config = {
     <p class="mt-4 rounded-lg border border-dashed border-mute bg-white/60 p-3 text-xs leading-relaxed">iPhone の「視差効果を減らす」が入っているときは、粒と画面の揺れを止め、数字の変化と輪だけにする（<a href="../../glossary.html#reduced-effects-mode" class="underline decoration-dopa/50 decoration-2 underline-offset-4">ひかえめモード</a>の考え方）。</p>
   </section>
 
+  <section id="dopadopa" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04-2 / dopadopa</p>
+    <h2 class="mt-2 font-display text-3xl">連打の途中を、パチンコのように</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">実装を見る前に、開発者から注文が入りました。「連打中にもっとドーパミンが出るように、パチンコの演出のようにドパドパと」。04 の設計で山が来るのは、最後の1打だけでした。2打目から19打目までは、音程が少しずつ上がり、輪と粒が出るだけです。20打のうち19打が、ほぼ同じ見た目で過ぎていきます。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">パチンコの演出は、当たりを告げる前に段階を踏みます。リーチがかかり、背景が変わり、「激熱」が出て、最後にボタンを押させる。ドパ〇〇の調査では、ドパ電卓がこの文法を借りていました（<a href="../../glossary.html#kakutei-enshutsu" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">確定演出／煽り演出</a>）。連打の途中に、この段階を置きます。呼び名は開発者の言葉から取って、<a href="../../glossary.html#dopadopa" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパドパ</a>とします。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">ただし、パチンコと決定的に違うところが1つあります。結果がもう決まっていることです。20回しゃがんだ人は、20打叩けば必ず20ドパ入り、必ずフィナーレが出る。外れはありません。だから段階も、くじで決めずに、何打目まで来たかで決めます。同じ20打なら、毎回同じところで激熱が来る。ドパ電卓が、入力した数で演出のランクを決めていたのと同じ作りです（<a href="../../glossary.html#fixed-vs-variable-reward" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">確定報酬</a>のまま）。</p>
+    <p class="mt-8 font-mono text-xs text-mute">表1-2　ドパドパの段階（目標回数 20 の場合）</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[40rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">段階</th><th class="py-2 pr-4 font-bold">入る1打</th><th class="py-2 pr-4 font-bold">入った瞬間</th><th class="py-2 pr-4 font-bold">その段階のあいだ、1打ごと</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">NORMAL</td><td class="py-3 pr-4">1打目</td><td class="py-3 pr-4">なし</td><td class="py-3 pr-4">いまの輪と粒。指の位置から小さな「ドパ」の文字が飛ぶ</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold text-dopa">CHANCE</td><td class="py-3 pr-4">進み具合 30%（20打なら6打目）</td><td class="py-3 pr-4">「CHANCE」の帯がボタンの上を横切る。上がる音を1つ</td><td class="py-3 pr-4">ボタンの縁が dopa 色で脈打つ。「ドパ」の文字が大きくなる</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold text-dopa">激熱</td><td class="py-3 pr-4">進み具合 60%（12打目）</td><td class="py-3 pr-4">「激熱」の判子がドンと押され、画面が1度揺れる。低い音と重い振動</td><td class="py-3 pr-4">背景に dopa の集中線がゆっくり回る。ボタンが赤みを帯びた金になる。叩く音に低音を重ねる</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold text-gold">PUSH</td><td class="py-3 pr-4">残りが3になった1打（17打目）</td><td class="py-3 pr-4">ボタンの文字が「PUSH」になる</td><td class="py-3 pr-4">残りの数を 3、2、1 と大写しにする</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-bold">確定</td><td class="py-3 pr-4">最後の1打</td><td class="py-3 pr-4" colspan="2">フィナーレ（04）</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-3 max-w-2xl text-xs leading-relaxed text-mute">目標回数が 10 より少ないときは、PUSH を残り1打にする。5打で CHANCE、激熱、PUSH が詰まりすぎないように、段階の入り口が同じ1打に重なったら、強いほうだけを出す。</p>
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">段階とは別に、速く叩き続けたときの返しを足します。0.45秒以内に叩き続けると、指の上に「ドパドパ ×12」のように続いた打数が出て、飛ぶ文字が「ドパ」から「ドパドパ」に変わる。数字は勢いを見せるだけで、ドパは増えません。前回、XP が2倍になる時間を借りなかったのと同じ理由です。1ドパが1回のスクワットでなくなる。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">もう1つ、パチンコから借りるものがあります。虹です。この連打の最後の1打で<a href="../../glossary.html#milestone" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">節目</a>に届くと分かっているとき（連続30日目になる、DT が1,000を超える）、PUSH に入った瞬間にボタンの縁が虹色に回り出します。パチンコでいう先バレで、当たりが来ることを前もって告げる演出です。ここでも、くじは引いていません。記録から計算すれば、最後の1打で何が起きるかは叩く前から分かっています。</p>
+    <p class="mt-4 rounded-lg border border-dashed border-mute bg-white/60 p-3 text-xs leading-relaxed">盛っても守るもの。画面全体の明滅は1秒に3回まで（<a href="../../glossary.html#reduced-effects-mode" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ひかえめモード</a>の考え方）。「視差効果を減らす」が入っているときは、揺れ、集中線、飛ぶ文字を止め、段階の文字（CHANCE、激熱、PUSH）とボタンの色だけを変える。音と振動は変えない。どの見た目も、修正イメージ <a href="dopadopa.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパドパの見本</a> で叩いて確かめられる。</p>
+  </section>
+
+  <section id="fullscreen" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04-3 / fullscreen</p>
+    <h2 class="mt-2 font-display text-3xl">ボタンの外へ、画面ぜんぶへ</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">ドパドパを入れても、開発者の答えは「まだドーパミンが全然足りません」でした。添えられたのは、パチンコの演出画像が3枚。7が3つ並び、虹色の光が画面の端まで噴き出している。金属の文字で「NEXT 確定」。金の炎の中に「限界突破」。どれも、画面の隅々までが演出です。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">見比べて、足りないものが分かりました。04-2 のドパドパは、ボタンのまわりで起きていました。集中線もボタンの後ろだけ、判子もボタンの角だけ。画面の上の帯と下のカードは、激熱のあいだも、明るい地のまま静かに座っている。パチンコの台に、そんな静かな場所はありません。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">そこで、演出の舞台を画面全体に広げ、3つの大きな演出を足します。どれも、くじは引きません（決定 17）。</p>
+
+    <p class="mt-8 font-mono text-xs text-mute">表1-3　画面全体の段階（04-2 の段階に重ねる）</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[36rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">段階</th><th class="py-2 pr-4 font-bold">画面の地</th><th class="py-2 pr-4 font-bold">1打ごと</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">NORMAL</td><td class="py-3 pr-4">いまの紙の色</td><td class="py-3 pr-4">変えない</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold text-dopa">CHANCE</td><td class="py-3 pr-4">画面の四辺が dopa 色に光り、脈打つ</td><td class="py-3 pr-4">四辺の光が1打ごとに強まる</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold text-dopa">激熱</td><td class="py-3 pr-4">地が暗転し、画面全体に虹色の放射線がゆっくり回る（見本2の背景）</td><td class="py-3 pr-4">放射線が1打ごとに少し速くなる。画面の端から火の粉が上がる</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-bold text-gold">PUSH</td><td class="py-3 pr-4">放射線が全速で回り、色が流れる</td><td class="py-3 pr-4">画面全体が1打ごとにわずかに膨らんで戻る</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-3 max-w-2xl text-xs leading-relaxed text-mute">上の帯と下のカードは、暗転した地の上でも読めるよう、カード自身の地を持つ。白く光らせる明滅は、どの段階でも1秒に3回まで。速い連打で1打ごとに光らせると、1秒に8回を超えるからです。</p>
+
+    <div class="mt-8 grid gap-4 md:grid-cols-3">
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs text-dopa">演出 A（見本1）</p>
+        <p class="mt-1 font-display text-lg"><a href="../../glossary.html#dopa-777" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパ揃い</a></p>
+        <p class="mt-2 text-sm leading-relaxed">DT が100の倍数をまたいだ1打で、画面全体にスロットのリールが3つ出る。回って、左から順に「7」で止まり、3つ揃った瞬間に虹の光が噴き出して、金の粒が上から降る。下に「DT 300 ドパ」。連打の途中でも出し、叩く指は止めない（演出は指を通す）。DT の節目（1,000、1万、10万）ではリールが金になる。</p>
+      </div>
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs text-dopa">演出 B（見本2）</p>
+        <p class="mt-1 font-display text-lg"><a href="../../glossary.html#muscle-kakutei" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">筋肉確定</a></p>
+        <p class="mt-2 text-sm leading-relaxed">叩き切った最後の1打で、白い閃光のあと、虹の放射線の上に金属の文字が2行でドンと落ちる。「筋肉／確定」。言葉は5つを順に回す：筋肉確定、太もも確定、根性確定、継続確定、明日も確定。フィナーレの「やったった！」は、この下に小さく残す。</p>
+      </div>
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs text-dopa">演出 C（見本3）</p>
+        <p class="mt-1 font-display text-lg"><a href="../../glossary.html#negirai" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ねぎらい</a></p>
+        <p class="mt-2 text-sm leading-relaxed">B に続けて、画面が金の炎に包まれ、金の文字でねぎらう。言葉はその場の事情で決める（表1-4）。節目の札は、この下に積む。</p>
+      </div>
+    </div>
+
+    <p class="mt-8 font-mono text-xs text-mute">表1-4　ねぎらいの言葉の選び方（上から順に、当てはまった最初の1つ）</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[34rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">場面</th><th class="py-2 pr-4 font-bold">言葉</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4">連続記録の節目に届いた</td><td class="py-3 pr-4">「30日連続！あんたはえらい！」</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4">その日の最初の記録</td><td class="py-3 pr-4">「今日もお疲れ！」</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4">21時から午前4時まで</td><td class="py-3 pr-4">「夜食のあとに、えらすぎる！」</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4">それ以外</td><td class="py-3 pr-4">「あんたはえらい！」「よっ、太もも番長！」「限界突破！」を順に回す</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">叩き切ったあとの流れは、当初は確定（B）1.4秒、ねぎらい（C）1.8秒の、合わせて3秒ほどのつもりでした。声のファイルが届いてみると、声が重ならないように鳴らすには足りません。そこで B と C の長さは、届いた声の長さから決めることにしました（B は「やったった！」と確定の声が鳴り終わるまで、C はねぎらいの声が鳴り終わるまで）。作り直した声で、B は2.3〜2.8秒、C は2.3〜3.2秒、合わせて5秒前後です。次の食事のあとに急いで叩く人を待たせないよう、叩き切って1.2秒が過ぎたら、画面のどこを触っても B と C を飛ばせるようにします。途中で閉じた記録には、B も C も出しません。叩き切った人へのねぎらいだからです。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">「筋肉確定」は健康効果を言っていないか、少し迷いました。<a href="../../glossary.html#dopa-point" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパ</a>と同じく冗談の言葉で、血糖値や糖質の吸収のような、体の中で起きることには触れていません。課題 <a href="../../issues/health-claims/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">health-claims</a> の線は越えていないと見ています。</p>
+
+    <p class="mt-8 font-mono text-xs text-mute">表1-5　足りないアセット（開発者に用意してもらうもの。声22、効果音とBGM 7。04-4 でリールの3つを外し、5つを足した）</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[40rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">ファイル名</th><th class="py-2 pr-4 font-bold">中身</th><th class="py-2 pr-4 font-bold">長さ</th><th class="py-2 pr-4 font-bold">使う場面</th></tr></thead>
+        <tbody class="[&_td]:py-2 [&_td]:pr-4 [&_td]:align-top [&_tr]:border-b [&_tr]:border-rule">
+          <tr><td class="font-mono text-xs">voice_chance</td><td>声「チャンス！」</td><td>1秒以内</td><td>CHANCE に入った1打</td></tr>
+          <tr><td class="font-mono text-xs">voice_gekiatsu</td><td>声「激熱！」</td><td>1秒以内</td><td>激熱に入った1打</td></tr>
+          <tr><td class="font-mono text-xs">voice_push</td><td>声「押せ！」</td><td>1秒以内</td><td>PUSH に入った1打</td></tr>
+          <tr><td class="font-mono text-xs">voice_yattatta</td><td>声「やったった！」</td><td>1秒以内</td><td>叩き切った最後の1打</td></tr>
+          <tr><td class="font-mono text-xs">voice_kakutei_1〜5</td><td>声「筋肉、確定！」「太もも、確定！」「根性、確定！」「継続、確定！」「明日も、確定！」</td><td>各1.5秒以内</td><td>確定（演出 B）。順に回す</td></tr>
+          <tr><td class="font-mono text-xs">voice_negirai_1〜5</td><td>声「今日もお疲れ！」「夜食のあとに、えらすぎる！」「あんたはえらい！」「よっ、太もも番長！」「限界突破！」</td><td>各2秒以内</td><td>ねぎらい（演出 C）。表1-4 で選ぶ。連続記録の節目は「30日連続！」を文字で出し、声は 3</td></tr>
+          <tr><td class="font-mono text-xs">voice_toppa</td><td>声「ドパ、突破！」</td><td>1秒以内</td><td>ドパ突破（04-4。ドパ揃いの voice_dopa_777 と入れ替え）</td></tr>
+          <tr><td class="font-mono text-xs">voice_fever</td><td>声「フィーバー！」</td><td>1秒以内</td><td>フィーバーが当たった1打</td></tr>
+          <tr><td class="font-mono text-xs">voice_rush</td><td>声「ラッシュ！」</td><td>1秒以内</td><td>フィーバーの最後の3秒に入った1打</td></tr>
+          <tr><td class="font-mono text-xs">voice_milestone_streak</td><td>声「連続記録、達成！」</td><td>1.5秒以内</td><td>連続記録の札</td></tr>
+          <tr><td class="font-mono text-xs">voice_milestone_dt</td><td>声「ドパ、大台突破！」</td><td>1.5秒以内</td><td>DT の札</td></tr>
+          <tr><td class="font-mono text-xs">voice_milestone_best</td><td>声「自己ベスト、更新！」</td><td>1.5秒以内</td><td>DPW 自己ベストの札</td></tr>
+          <tr><td class="font-mono text-xs">voice_combo</td><td>声「ドパドパ！」</td><td>0.5秒以内</td><td>「ドパドパ ×N」が10打ごとに</td></tr>
+          <tr><td class="font-mono text-xs">voice_restart</td><td>声「今日の1回から！」</td><td>1.5秒以内</td><td>途切れたときのカードのボタン</td></tr>
+                              <tr><td class="font-mono text-xs">sfx_fanfare</td><td>揃ったときのファンファーレ</td><td>2秒以内</td><td>ドパ揃い</td></tr>
+          <tr><td class="font-mono text-xs">sfx_coins</td><td>玉やメダルが流れ出る「ジャラジャラ」</td><td>1.5秒以内</td><td>ドパ揃いの金の粒</td></tr>
+          <tr><td class="font-mono text-xs">sfx_boom</td><td>確定の「ドーン」</td><td>1秒以内</td><td>確定の文字が落ちた瞬間</td></tr>
+          <tr><td class="font-mono text-xs">sfx_flame</td><td>炎が燃え上がる「ゴォッ」</td><td>1秒以内</td><td>ねぎらいの始まり</td></tr>
+          <tr><td class="font-mono text-xs">sfx_bgm_mash</td><td>最初の1打から激熱までのループ曲</td><td>4〜8秒</td><td>NORMAL、CHANCE</td></tr>
+          <tr><td class="font-mono text-xs">sfx_bgm_hot</td><td>激熱から PUSH までのループ曲</td><td>4〜8秒</td><td>激熱、PUSH</td></tr>
+          <tr><td class="font-mono text-xs">sfx_bgm_fever</td><td>フィーバーのループ曲</td><td>4〜8秒</td><td>フィーバータイム</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <ul class="mt-4 flex max-w-2xl flex-col gap-2 text-xs leading-relaxed text-ink/80">
+      <li class="border-l-4 border-ink pl-3"><b>形式</b>：WAV か CAF。44.1kHz か 48kHz。頭の無音は切っておく（叩いた瞬間に鳴らす音は、頭の無音がそのまま遅れになる）。</li>
+      <li class="border-l-4 border-ink pl-3"><b>使ってよいか</b>：App Store で配るアプリに入れてよいもの。クレジット表記が要るなら、その文言も一緒に。声は開発者の録音でも、商用で使える読み上げ（たとえば VOICEVOX。キャラクターごとにクレジットが要る）でもよい。</li>
+      <li class="border-l-4 border-ink pl-3"><b>置き場所</b>：<code class="font-mono">ios/YatTatTa/Sounds/</code> に、上のファイル名で。届くまでは、いまと同じ合成音で代わりに鳴らす。届いたファイルから順に差し替わる。</li>
+      <li class="border-l-4 border-ink pl-3"><b>画像は要らない</b>：虹の放射線、金属の文字、金の炎は、コードで描く。画像にすると、画面の大きさごとに用意が要り、文字を差し替えるたびに作り直しになるからです。</li>
+    </ul>
+    <p class="mt-4 rounded-lg border border-dashed border-mute bg-white/60 p-3 text-xs leading-relaxed">マナーモードでは声も効果音も鳴らない（07）。視差効果を減らす設定では、放射線を止め、リールは回さずに「777」をそのまま出し、文字は落とさずに置く。修正イメージは <a href="fullscreen.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">画面全体の演出の見本</a>。</p>
+  </section>
+
+  <section id="fever" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04-4 / fever</p>
+    <h2 class="mt-2 font-display text-3xl">フィーバータイムと、5倍の派手さ</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">声と効果音がそろった実機で、開発者の答えは「演出がまたフラットな感じ」でした。注文は5つ。背景をもっと盛る。文字の演出を5倍派手に。BGM をゴリゴリ鳴らす。777 のリールはやめて、100ドパごとに「100 ドパ突破」。そしてリールの代わりに、10秒間の連打でドパを大量に取れる<a href="../../glossary.html#fever" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">フィーバータイム</a>。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">いちばん大きいのは最後の1つで、これまでの決めごとを2つ動かします。1つはスクワット1回で1ドパという数え方（題材の決定 07、本作りの決定 18）。もう1つは、くじを引かないという線（決定 17）です。開発者の答えは、どちらもはっきりしていました。フィーバーのドパは DT と DPW に入れる。始まるかどうかは、1打ごとのくじで決める。</p>
+
+    <p class="mt-8 font-mono text-xs text-mute">表1-6　フィーバータイムの決まり</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[36rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">項目</th><th class="py-2 pr-4 font-bold">決まり</th><th class="py-2 pr-4 font-bold">理由</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">始まり</td><td class="py-3 pr-4">スクワットの1打ごとに 0.51% で当たる（開発者が決定）。当たった1打の直後から始まる</td><td class="py-3 pr-4">20打の連打で当たるのは約10回に1回、1日60打なら約4日に1回。いつ来るか分からないことが、ドーパミンになる</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">長さ</td><td class="py-3 pr-4">10秒（開発者が決定）</td><td class="py-3 pr-4"></td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">1打のドパ</td><td class="py-3 pr-4"><s>最初の7秒は1打10ドパ、最後の3秒は1打20ドパ（ラッシュ）</s>　追記：1打1ドパ。倍率は付けない（決定 33）。最後の3秒のラッシュは演出だけ</td><td class="py-3 pr-4">10秒で80打なら80ドパ。スクワットの連打より速く叩けるぶん、多く入る</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">スクワットの残り</td><td class="py-3 pr-4">フィーバーのあいだは止まる。終わったら続きから。最後の1打で当たったら、フィーバーのあとにフィナーレ</td><td class="py-3 pr-4">フィーバーの1打はスクワットではない。残りの数に混ぜると、何回しゃがんだかが分からなくなる</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">数え方</td><td class="py-3 pr-4">DT と DPW に入れる。<a href="../../glossary.html#record" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録</a>には、スクワットの回数とは別の欄（フィーバーのドパ）に残す（開発者が決定）</td><td class="py-3 pr-4">大量に入った手応えを、そのまま合計に乗せる。スクワットの回数は、別の欄があるのであとから出せる</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">連続記録</td><td class="py-3 pr-4">関係しない</td><td class="py-3 pr-4">続いたかどうかは、スクワットの記録があるかで決まる</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-bold">フィーバー中の当たり</td><td class="py-3 pr-4">くじを引かない</td><td class="py-3 pr-4">フィーバーの中でフィーバーが当たると、終わりがなくなる</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-3 max-w-2xl text-xs leading-relaxed text-mute">0.51% は1打ごとに独立に引く。前に外れ続けたから当たりやすくなる、という作りにはしない。当たる確率は画面には出さない。</p>
+
+    <div class="mt-8 grid gap-4 md:grid-cols-2">
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs text-dopa">777 の代わり</p>
+        <p class="mt-1 font-display text-lg"><a href="../../glossary.html#dopa-toppa" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパ突破</a></p>
+        <p class="mt-2 text-sm leading-relaxed">DT が100の倍数をまたいだ1打で、画面いっぱいに「300／ドパ突破」。金属の数字が叩きつけられ、虹の放射線と衝撃波が広がる。1,000、1万、10万は金。フィーバー中にまたいでも出す（開発者の答え「倍数関係なし」）。リールの音と声（sfx_reel_spin、sfx_reel_stop、voice_dopa_777）は使わなくなる。</p>
+      </div>
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs text-dopa">BGM</p>
+        <p class="mt-1 font-display text-lg">最初の1打から鳴らし続ける</p>
+        <p class="mt-2 text-sm leading-relaxed">これまでは激熱からだけ鳴らしていた。最初の1打で bgm_mash を鳴らし、激熱で bgm_hot、フィーバーで bgm_fever に切り替える。音量は効果音と同じ最大まで上げる。記録が閉じたら0.5秒で絞って消す。</p>
+      </div>
+    </div>
+
+    <p class="mt-8 font-mono text-xs text-mute">表1-7　5倍にするところ</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[36rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">どこ</th><th class="py-2 pr-4 font-bold">これまで</th><th class="py-2 pr-4 font-bold">これから</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">NORMAL の地</td><td class="py-3 pr-4">紙の色のまま</td><td class="py-3 pr-4">1打目から薄い放射線が回り出す。叩くたびに画面全体へ衝撃波の輪が走る</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">段階に入った1打</td><td class="py-3 pr-4">CHANCE の帯、激熱の判子</td><td class="py-3 pr-4">画面いっぱいの金属文字「CHANCE!!」「激熱!!」「PUSH!!」が叩きつけられ、放射線と粒が噴き出す（0.9秒）</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">飛ぶ「ドパ」</td><td class="py-3 pr-4">小さな文字</td><td class="py-3 pr-4">3倍の大きさの金属文字。激熱からは1打で3つ飛ぶ。画面が1打ごとに小さく揺れる</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">確定とねぎらいの文字</td><td class="py-3 pr-4">落ちて止まる</td><td class="py-3 pr-4">落ちたあとも脈打ち、光の筋が文字の上を走り続ける。文字のまわりに粒が湧く。背景の放射線は2倍の速さ</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-bold">フィーバー</td><td class="py-3 pr-4">（新規）</td><td class="py-3 pr-4">地は色が流れる放射線、上から金の粒が降り続ける。中央に「FEVER!!」、残り秒数、取ったドパの合計を大写し。1打ごとに「+10」が飛ぶ</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 rounded-lg border border-dashed border-mute bg-white/60 p-3 text-xs leading-relaxed">守るもの。白い明滅は1秒3回まで。色を流す演出は、1秒に1周より速くしない。視差効果を減らす設定では、揺れ、衝撃波、粒を止め、文字は置くだけにする。マナーモードでは BGM も鳴らない。</p>
+  </section>
+
+  <section id="squad" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04-5 / squad</p>
+    <h2 class="mt-2 font-display text-3xl">ボタンをやめて、人がしゃがむ</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">フィーバーまで入れても、開発者の答えは「もっと派手に」でした。今回の注文は、演出の量ではなく、叩く相手そのものを変えるものです。丸いボタンをやめる。画面の中央を広く叩けるようにして、そこにスクワットをする人を置く。指が触れたら人がしゃがみ、離したら立ち上がる。5回ごとに人が増え、最後は大勢でしゃがむ。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">考えてみれば、金色のボタンは何の形でもありませんでした。叩いているのはスクワットの記録なのに、画面ではただの丸を押している。人の形にすれば、1打が「しゃがんだ1回」に見えます。指を置いている間しゃがんだままなのも、本物のスクワットの、下で止まる一瞬に近い。</p>
+    <p class="mt-8 font-mono text-xs text-mute">表1-8　<a href="../../glossary.html#squat-squad" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スクワット隊</a>の決まり</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[36rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">項目</th><th class="py-2 pr-4 font-bold">決まり</th><th class="py-2 pr-4 font-bold">理由</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">叩く場所</td><td class="py-3 pr-4">上の帯と下のカードのあいだ、画面の幅いっぱい</td><td class="py-3 pr-4">丸いボタンより的が大きく、連打で指が外れない</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">人の絵</td><td class="py-3 pr-4">横向きの人を、コードで描く（太い ink の線に色を重ねた棒人間）。画像のファイルは使わない</td><td class="py-3 pr-4">立つ姿としゃがむ姿のあいだを、線の形ごと動かせる。画面の大きさを選ばない</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">動き</td><td class="py-3 pr-4">指が触れた瞬間にしゃがむ（0.08秒）、指が全部離れたら立ち上がる（0.12秒）。隊の全員が揃ってしゃがむ</td><td class="py-3 pr-4">タップは触れた瞬間に受ける（手触りの試作の決まり）。立ち上がりを少し遅くして、しゃがんだ形を目に残す</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">増え方</td><td class="py-3 pr-4">最初は1人。スクワット5回ごとに1人、手前の列から奥の列へ増える。最大24人。増えた1人は跳ねて現れ、「+1人」と音が出る</td><td class="py-3 pr-4">目標回数100で21人。奥の列ほど小さく描き、大勢に見せる</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">残りの数</td><td class="py-3 pr-4">隊の上に大きく「スクワット 残り 13」。PUSH では「PUSH!」と 3、2、1</td><td class="py-3 pr-4">ボタンの中にあった数を、隊の上へ移す</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">段階の色</td><td class="py-3 pr-4">NORMAL は人ごとに gold、dopa、signal を回す。激熱で全員 dopa、PUSH で全員 gold。虹の先バレは、隊の後ろで回る虹の輪</td><td class="py-3 pr-4">色が揃うと、隊がひとつになって盛り上がって見える</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-bold">閉じたあと</td><td class="py-3 pr-4">フィナーレのあと、隊は1人に戻る</td><td class="py-3 pr-4">次の食事の連打は、また1人から</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-3 max-w-2xl rounded-lg border border-dashed border-mute bg-white/60 p-3 text-xs leading-relaxed">追記：実機を見た開発者が「もっと人数が多いほうがドーパミンが出るかもしれない」と、5回ごとを2回ごとに改めた（決定 31）。20打で11人、目標回数100で51人。席は7列、63に増やした。51人がいっせいにしゃがむ1打は、課題 heavy-effects-performance で重さを見る。</p>
+    <p class="mt-3 max-w-2xl rounded-lg border border-dashed border-mute bg-white/60 p-3 text-xs leading-relaxed">追記：実機で51人まで増やすと、開発者の耳と指で「音声が乱れたり、ラグが出たりするかも」。上限を30人にした（決定 32）。目標回数60で30人に届き、そこからは増えない。上限に届いたあとは、1人増えるときの音も鳴らさない。</p>
+    <p class="mt-3 max-w-2xl rounded-lg border border-dashed border-mute bg-white/60 p-3 text-xs leading-relaxed">追記：開発者の注文で、「スクワット 残り」の数を<a href="../../glossary.html#party-parrot" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">パーティーパロット</a>風にした（決定 34）。叩いている間、色が虹の12色を1秒で1周し、数が小さく円を描いて首をかしげるように揺れる。揺れは段階が上がるほど速い（NORMAL 0.6秒、PUSH 0.25秒で1周）。色の速さは、1秒に1周の決まりの中に収めた。続けて、数の大きさも叩くたびに少しずつ大きくした（決定 35）。84pt から始まり、最後の1打で170pt。大きくなった1打は、少し跳ねる。</p>
+    <p class="mt-3 max-w-2xl text-xs leading-relaxed text-mute">指の位置の輪、飛ぶドパの粒、飛ぶ「ドパ」の文字、叩き切ったときの粒の噴き出しは、そのまま残す。視差効果を減らす設定でも人はしゃがむ（動きが叩いた返事そのものなので）。増えるときの跳ねだけを止める。</p>
+  </section>
+
   <section id="dpw" class="mt-20">
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / dpw</p>
     <h2 class="mt-2 font-display text-3xl">DPW を、曜日で区切るか</h2>
@@ -254,11 +450,11 @@ tailwind.config = {
     <h2 class="mt-2 font-display text-3xl">実装の順番</h2>
     <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">レビューのあと、この順で作ります。1〜4 は Claude の作業、5 は開発者の実機確認です。</p>
     <ol class="mt-6 flex flex-col gap-2 text-sm">
-      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">1</span><span><b>記録と計算</b>：SquatRecord、記録日と直近7日の決め方、DT／DPW／連続記録／休み券／節目の計算とテスト。テスト用のターゲットを project.yml に足す。</span></li>
-      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">2</span><span><b>叩く面と演出</b>：試作の FeelEngine から A の鳴らし方だけを移す。音声カテゴリを .ambient に。ボタン、粒、フィナーレ、節目の札、記録を閉じる3つの条件。</span></li>
-      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">3</span><span><b>ホームの組み立て</b>：連続記録の帯、DPW と DT のカード、途切れたときのカード、休み券の帯。試作画面と Prototype/ を消す。</span></li>
-      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">4</span><span><b>設定と通知</b>：設定シート、通知の許可と予約。文言を String Catalog に集める。</span></li>
-      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">5</span><span><b>実機で確かめる</b>（開発者、20分ほど）：叩き切る、途中で止める、マナーモード、節目が重なる1打の処理落ち。手順は実装のあとにこのページへ書き足す。</span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">1</span><span><span class="mr-2 rounded-full bg-signal/15 px-2 py-0.5 font-mono text-[11px] font-bold">済</span><b>記録と計算</b>：SquatRecord、記録日と直近7日の決め方、DT／DPW／連続記録／休み券／節目の計算とテスト。テスト用のターゲットを project.yml に足す。</span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">2</span><span><span class="mr-2 rounded-full bg-signal/15 px-2 py-0.5 font-mono text-[11px] font-bold">済</span><b>叩く面と演出</b>：試作の FeelEngine から A の鳴らし方だけを移す。音声カテゴリを .ambient に。ボタン、粒、フィナーレ、節目の札、記録を閉じる3つの条件。</span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">3</span><span><span class="mr-2 rounded-full bg-signal/15 px-2 py-0.5 font-mono text-[11px] font-bold">済</span><b>ホームの組み立て</b>：連続記録の帯、DPW と DT のカード、途切れたときのカード、休み券の帯。試作画面と Prototype/ を消す。</span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">4</span><span><span class="mr-2 rounded-full bg-signal/15 px-2 py-0.5 font-mono text-[11px] font-bold">済</span><b>設定と通知</b>：設定シート、通知の許可と予約。文言を String Catalog に集める。</span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">5</span><span><b>実機で確かめる</b>（開発者、20分ほど）：叩き切る、途中で止める、マナーモード、節目が重なる1打の処理落ち。手順は 10-2。</span></li>
     </ol>
     <p class="mt-8 font-mono text-xs text-mute">表5　project.yml で変えること</p>
     <div class="mt-2 overflow-x-auto">
@@ -272,6 +468,49 @@ tailwind.config = {
       </table>
     </div>
     <p class="mt-3 max-w-2xl text-xs leading-relaxed text-mute"><a href="../../devops/ios-project/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4">iOS プロジェクトの設定</a>のページは、実際に project.yml を変えたときに書き換える。</p>
+  </section>
+
+  <section id="device" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">10-2 / device</p>
+    <h2 class="mt-2 font-display text-3xl">実機での確かめ方</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">シミュレーターでは、画面が設計どおりに出ることと、テスト35件（記録からの計算、記録を閉じる条件、叩き切ったあとの数えない間）が通ることまで確かめました。叩いた感じ、音、振動は指でしか分かりません。開発者の作業で、全部で20分ほどです。</p>
+    <ol class="mt-6 flex flex-col gap-2 text-sm">
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">1</span><span><code class="font-mono text-xs">cd ios &amp;&amp; xcodegen generate</code> のあと、Xcode で iPhone 15 Pro に入れる（2分）</span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">2</span><span>20打を叩き切る。6打目で CHANCE、12打目で激熱、17打目で PUSH に入り、ドパドパと盛り上がるか。音が上がっていき、最後に「やったった！」と和音と粒が出るか。上の帯が「1日連続」になるか（2分）</span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">3</span><span>2 の直後に連打する。1.2秒は数えず、そのあと次の連打が始まるか。通知の問いかけは「いらない」でも「知らせて」でもよい（1分）</span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">4</span><span>7打で止めて60秒待つ。ボタンが20に戻り、DT と DPW は7増えたままか。次に7打で止めてホーム画面へ戻り、開き直して20に戻っているか（4分）</span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">5</span><span>マナーモードにして叩く。音が消え、振動は残るか。振動と光だけで「叩いた感じ」が残るかを一言で（2分）</span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">6</span><span>設定で目標回数を100にして叩き切る。途中で DT 100 の札が出るか。100打の間に音が欠けたり、指に遅れたりしないか（5分）</span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">6-2</span><span>一番重い場面を見る。Xcode の Scheme の Run の Arguments に <code class="font-mono text-xs">-demo heavy</code> を足して起動し、出ている間にボタンを連打する。ドパ揃い、確定、ねぎらい、札3枚が重なっても、叩いた音と振動が遅れないか。終わったら引数を外す（3分）。ほかに <code class="font-mono text-xs">chance</code> <code class="font-mono text-xs">hot</code> <code class="font-mono text-xs">push</code> <code class="font-mono text-xs">reels</code> <code class="font-mono text-xs">gold</code> <code class="font-mono text-xs">kakutei</code> <code class="font-mono text-xs">negirai</code> も出せる</span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">7</span><span>確かめが終わったら、アプリを長押しで削除して入れ直す。確かめで作った記録が消える（取り消しの仕組みはないので、これが唯一の消し方）（2分）</span></li>
+    </ol>
+    <p class="mt-4 rounded-lg border border-dashed border-mute bg-white/60 p-3 text-xs leading-relaxed">札が3枚重なる一番重い1打は、連続30日などの記録がないと叩いては作れない。そこで、開発用の見本（<code class="font-mono">-demo heavy</code>）で同じ画面を出し、その上で連打して確かめる（6-2、課題 <a href="../../issues/heavy-effects-performance/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">heavy-effects-performance</a>）。通知が届くかどうかも、叩いていない日の夜を待つしかないので、使いながら見る。</p>
+  </section>
+
+  <section id="files" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">10-3 / files</p>
+    <h2 class="mt-2 font-display text-3xl">変更したファイル</h2>
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full min-w-[34rem] border-collapse text-sm">
+        <tbody class="[&_td]:py-2 [&_td]:pr-4 [&_td]:align-top [&_tr]:border-b [&_tr]:border-rule">
+          <tr><td class="font-mono text-xs">ios/YatTatTa/Model/</td><td>記録（SquatRecord）、記録日（RecordDay）、記録からの計算（Ledger）、節目（Milestone）</td></tr>
+          <tr><td class="font-mono text-xs">ios/YatTatTa/Mash/</td><td>叩いている途中の状態（MashSession）、画面が読む状態と記録を閉じる処理（AppModel）、端末の設定の名前</td></tr>
+          <tr><td class="font-mono text-xs">ios/YatTatTa/Feel/</td><td>試作の FeelEngine と ToneSynth を移し、A の鳴らし方だけを残した。.ambient、フィナーレの和音、札の音と振動を足した</td></tr>
+          <tr><td class="font-mono text-xs">ios/YatTatTa/Home/</td><td>ホーム、完了連打のボタン（UIKit）、連続記録の帯、DPW と DT のカード、フィナーレ、途切れたときのカード、休み券の帯、通知の問いかけ</td></tr>
+          <tr><td class="font-mono text-xs">ios/YatTatTa/Settings/、Reminder/、Theme/</td><td>設定シート、今日まだ通知の予約、色と文字</td></tr>
+          <tr><td class="font-mono text-xs">ios/YatTatTa/Home/SquatStageView.swift</td><td>叩く場所とスクワット隊（04-5）。人の絵はコードで描き、触れたらしゃがみ、離したら立つ。2回ごとに1人増える（決定 31）。前の MashPadView.swift（丸いボタン）は消した</td></tr>
+          <tr><td class="font-mono text-xs">ios/YatTatTa/Home/FeverOverlay.swift</td><td>フィーバータイム（04-4）。画面のどこを叩いても数える面と、残り秒数、取ったドパ</td></tr>
+          <tr><td class="font-mono text-xs">ios/YatTatTa/Mash/MashSession.swift ほか</td><td>ドパドパ（04-2）。段階は MashSession.stage、虹の先バレは AppModel、段階の音と振動は FeelEngine と ToneSynth</td></tr>
+          <tr><td class="font-mono text-xs">ios/YatTatTa/Home/StageBackdrop.swift、ReelsOverlay.swift、FinaleOverlay.swift、EffectLayers.swift</td><td>画面全体の演出（04-3）。画面の地、ドパ揃い、確定とねぎらい、虹の放射線と粒と金属の文字</td></tr>
+          <tr><td class="font-mono text-xs">ios/YatTatTa/Feel/Sound.swift</td><td>声と効果音の一覧（表1-5 のファイル名）。Sounds/ にファイルがあれば読み、なければ効果音は合成音、声は端末の読み上げで代える</td></tr>
+          <tr><td class="font-mono text-xs">ios/YatTatTa/Mash/AppModel+Demo.swift</td><td>開発用の見本。起動引数 <code class="font-mono">-demo</code> で演出を叩かずに出す（Debug ビルドだけ）</td></tr>
+          <tr><td class="font-mono text-xs">ios/YatTatTa/Localizable.xcstrings</td><td>新規。画面の文言</td></tr>
+          <tr><td class="font-mono text-xs">ios/YatTatTaTests/</td><td>新規。テスト35件</td></tr>
+          <tr><td class="font-mono text-xs">ios/YatTatTa/Prototype/、ContentView.swift</td><td>削除。試作画面</td></tr>
+          <tr><td class="font-mono text-xs">ios/project.yml</td><td>縦だけ、開発言語 ja、String Catalog への書き出し、テストのターゲット（<a href="../../devops/ios-project/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">iOS プロジェクトの設定</a>も更新）</td></tr>
+        </tbody>
+      </table>
+    </div>
   </section>
 
   <section id="decisions" class="mt-20">
@@ -294,6 +533,25 @@ tailwind.config = {
       <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">14</span>画面は縦だけ。開発言語は日本語で、文言は String Catalog に集める。</li>
       <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">15</span>画面にもストアにも、健康効果はまだ書かない（課題 health-claims が決まるまで）。</li>
       <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">16</span>DPW は直近7日間（今日と前の6日）の合計にする（開発者が決定。前回の決定 08 の「週は月曜の午前4時に始まる」を改める）。比べる相手は前の7日と自己ベスト。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">17</span>連打の途中に、パチンコの文法を借りたドパドパの段階（NORMAL、CHANCE、激熱、PUSH）を置く（開発者の注文）。段階は進み具合で決め、くじにしない（開発者が決定）。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">18</span>速く叩き続けたら「ドパドパ ×N」を出す。ドパは1打で1のまま。倍率は付けない。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">19</span>最後の1打で節目に届くと分かっている連打は、PUSH に入った瞬間からボタンの縁を虹色にする（先バレ）。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">20</span>画面全体の明滅は1秒に3回まで。視差効果を減らす設定では、揺れ、集中線、飛ぶ文字を止める。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">21</span>演出の舞台を画面全体に広げる。CHANCE で四辺が光り、激熱で地が暗転して虹の放射線が回る（開発者の注文）。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">22</span>DT が100の倍数をまたいだ1打で、ドパ揃い（777のリール）を出す。連打の途中でも指は止めない。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">23</span>叩き切ったら、確定（筋肉確定など5つを順に）、ねぎらい（場面で選ぶ）の順に出す。1.2秒を過ぎたら触って飛ばせる。途中で閉じた記録には出さない。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">24</span>声と効果音は開発者に用意してもらう（表1-5）。届くまでは合成音で代える。画像は使わず、コードで描く。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">25</span>DT が100の倍数をまたいだ1打は、ドパ揃い（777）をやめて「ドパ突破」にする（開発者の注文）。決定 22 を改める。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">26</span>フィーバータイムを足す。スクワットの1打ごとに 0.51% で当たり、10秒間、1打10ドパ（最後の3秒は20ドパ）。フィーバーだけはくじで決める（開発者が決定。決定 17 の例外）。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">27</span>フィーバーのドパは DT と DPW に入れ、記録にはスクワットの回数とは別の欄に残す（開発者が決定。題材の決定 07 と決定 18 を改める）。連続記録には関係しない。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">28</span>BGM は最初の1打から鳴らし、段階とフィーバーで曲を切り替える。演出は表1-7 のとおり5倍に盛る（開発者の注文）。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">29</span>完了連打のボタンをやめ、画面中央の広い範囲を叩く場所にする（開発者の注文）。決定 01 のボタンを置き換える。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">30</span>叩く場所にスクワットをする人を描く。触れたらしゃがみ、離したら立つ。5回ごとに1人増え、全員が揃ってしゃがむ（スクワット隊、開発者の注文）。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">31</span>スクワット隊は2回ごとに1人増やす（開発者の注文。決定 30 の5回ごとを改める）。席は7列で63。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">32</span>スクワット隊の上限は30人（開発者の注文。51人では実機で音が乱れ、返事が遅れた）。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">33</span>フィーバーの倍率はやめ、1打1ドパにする（開発者の注文。決定 26 の10ドパと20ドパを改める）。ラッシュは演出だけ残す。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">34</span>「スクワット 残り」の数をパーティーパロット風に、色を巡らせて揺らす（開発者の注文）。色は1秒に1周まで。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">35</span>「スクワット 残り」の数は、叩くたびに少しずつ大きくする（開発者の注文）。84pt から最後の1打で170pt。記録が閉じたら元に戻る。</li>
     </ol>
   </section>
 

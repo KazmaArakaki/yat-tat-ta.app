@@ -11,7 +11,11 @@
   var sessions = [
     {
       path: "sessions/20261006-0312-main-build/index.html",
-      label: "10/06 本作りの設計"
+      label: "10/06 本作りの設計",
+      children: [
+        { path: "sessions/20261006-0312-main-build/dopadopa.html", label: "ドパドパの見本" },
+        { path: "sessions/20261006-0312-main-build/fullscreen.html", label: "画面全体の演出の見本" }
+      ]
     },
     {
       path: "sessions/20261006-0215-subject/index.html",
@@ -81,6 +85,9 @@
       items: [
         { label: "基本方針", path: "ui/principles.html", level: 0 },
         { label: "コンポーネント一覧", path: "ui/components/index.html", level: 0 },
+        { label: "スクワット隊", path: "ui/components/squat-squad/index.html", level: 1 },
+        { label: "ドパ突破", path: "ui/components/dopa-toppa/index.html", level: 1 },
+        { label: "フィーバータイム", path: "ui/components/fever/index.html", level: 1 },
         { label: "ページ一覧", path: "ui/pages/index.html", level: 0 },
         { label: "ホーム", path: "ui/pages/home/index.html", level: 1 },
         { label: "設定シート", path: "ui/pages/settings/index.html", level: 1 }

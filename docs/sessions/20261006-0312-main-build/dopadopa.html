@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ドパドパの見本</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=M+PLUS+Rounded+1c:wght@800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } }
+      },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+<style>
+/* アプリ画面の色 */
+.app { --bg:#FBF6EE; --card:#FFFFFF; --ink:#1C1916; --mute:#6E655C; --rule:#E7DDCC; }
+.app.dark { --bg:#16120F; --card:#231D18; --ink:#F5EEE3; --mute:#A89C8E; --rule:#3A312A; }
+.screen { background:var(--bg); color:var(--ink); }
+.card { background:var(--card); border:2px solid var(--ink); box-shadow:4px 4px 0 var(--ink); border-radius:16px; }
+.mute { color:var(--mute); }
+.num { font-family:"M PLUS Rounded 1c","Noto Sans JP",sans-serif; font-weight:900; font-variant-numeric:tabular-nums; letter-spacing:-0.02em; }
+.ticket { width:20px; height:14px; border-radius:4px; background:#2F79F7; border:2px solid var(--ink); }
+
+/* 叩くボタン。段階で色と縁が変わる */
+.mash { position:relative; width:212px; height:212px; border-radius:9999px; background:#E9A800; border:4px solid var(--ink);
+  box-shadow:0 8px 0 var(--ink); color:#1C1916; touch-action:manipulation; -webkit-tap-highlight-color:transparent;
+  transition:background .25s, transform .05s, box-shadow .05s; user-select:none; }
+.mash.down { transform:translateY(6px); box-shadow:0 2px 0 var(--ink); }
+.mash.locked { filter:saturate(.4); opacity:.65; }
+.st-chance .mash { animation:beat .9s ease-in-out infinite; }
+.st-hot .mash, .st-push .mash { background:radial-gradient(circle at 50% 32%, #FFC23A 0%, #E9A800 45%, #D9402E 100%); }
+@keyframes beat { 0%,100%{ outline:3px solid rgba(229,51,122,.35); outline-offset:2px; } 50%{ outline:8px solid rgba(229,51,122,.65); outline-offset:3px; } }
+.rainbow { position:absolute; inset:-11px; border-radius:9999px; background:conic-gradient(#E5337A,#E9A800,#3CC46B,#2F79F7,#7B4FD6,#E5337A);
+  opacity:0; transition:opacity .2s; pointer-events:none; }
+.rainbow.on { opacity:1; animation:spin 1.4s linear infinite; }
+.reduced .rainbow.on { animation:none; }
+@keyframes spin { to { transform:rotate(360deg); } }
+
+/* 背景の集中線（激熱から） */
+.lines { position:absolute; inset:-40%; background:repeating-conic-gradient(from 0deg at 50% 50%, rgba(229,51,122,.20) 0deg 4deg, transparent 4deg 14deg);
+  opacity:0; transition:opacity .4s; pointer-events:none; }
+.st-hot .lines, .st-push .lines { opacity:1; animation:spin 22s linear infinite; }
+.reduced .lines { display:none; }
+
+/* 段階に入った瞬間 */
+.band { position:absolute; left:-20px; right:-20px; top:47%; transform:rotate(-8deg) translateX(-120%); background:#E5337A; color:#fff;
+  border-block:3px solid var(--ink); font-family:"Dela Gothic One",sans-serif; letter-spacing:.25em; text-align:center; font-size:28px; pointer-events:none; }
+.band.go { animation:sweep .9s cubic-bezier(.2,.8,.3,1) forwards; }
+@keyframes sweep { 0%{ transform:rotate(-8deg) translateX(-120%);} 35%,70%{ transform:rotate(-8deg) translateX(0);} 100%{ transform:rotate(-8deg) translateX(120%);} }
+.reduced .band.go { animation:fadeinout .9s forwards; transform:rotate(-8deg); }
+@keyframes fadeinout { 0%,100%{opacity:0} 25%,75%{opacity:1} }
+.stamp { position:absolute; right:14px; top:96px; width:104px; height:104px; border-radius:9999px; border:6px solid #D9402E; color:#D9402E;
+  background:rgba(255,255,255,.9); display:grid; place-items:center; font-family:"Dela Gothic One",sans-serif; font-size:30px; opacity:0; pointer-events:none; transform:rotate(14deg); }
+.stamp.go { animation:stamp .5s cubic-bezier(.3,1.6,.5,1) forwards; }
+@keyframes stamp { 0%{ transform:rotate(14deg) scale(2.4); opacity:0;} 100%{ transform:rotate(14deg) scale(1); opacity:1;} }
+.reduced .stamp.go { animation:none; opacity:1; }
+.shake { animation:shake .38s; }
+@keyframes shake { 0%,100%{transform:none} 20%{transform:translate(-7px,3px)} 40%{transform:translate(6px,-4px)} 60%{transform:translate(-4px,2px)} 80%{transform:translate(3px,-1px)} }
+.flash { position:absolute; inset:0; background:#FFE6F0; opacity:0; pointer-events:none; }
+.flash.go { animation:flash .3s ease-out; }
+@keyframes flash { 0%{opacity:.55} 100%{opacity:0} }
+
+/* 1打ごと */
+.word { position:absolute; font-family:"Dela Gothic One",sans-serif; color:#E5337A; -webkit-text-stroke:1.5px var(--ink); pointer-events:none;
+  white-space:nowrap; animation:wordup .7s ease-out forwards; }
+@keyframes wordup { 0%{ transform:translate(-50%,-50%) scale(.5) rotate(var(--r)); opacity:1;} 30%{ transform:translate(-50%,-90%) scale(1.15) rotate(var(--r)); } 100%{ transform:translate(-50%,-190%) scale(1) rotate(var(--r)); opacity:0;} }
+.ring { position:absolute; border-radius:9999px; border:4px solid #E5337A; pointer-events:none; animation:ringout .34s ease-out forwards; }
+@keyframes ringout { 0%{ transform:translate(-50%,-50%) scale(.2); opacity:.9;} 100%{ transform:translate(-50%,-50%) scale(1); opacity:0;} }
+.grain { position:absolute; width:11px; height:11px; border-radius:9999px; background:#E5337A; pointer-events:none; animation:grain .36s ease-in forwards; }
+@keyframes grain { 100%{ transform:translate(var(--dx),var(--dy)) scale(.5); opacity:.4; } }
+.combo { position:absolute; left:50%; top:-46px; transform:translateX(-50%); font-family:"Dela Gothic One",sans-serif; color:#E5337A;
+  -webkit-text-stroke:1px var(--ink); white-space:nowrap; opacity:0; transition:opacity .15s; pointer-events:none; }
+.combo.on { opacity:1; }
+.bump { animation:bump .14s; }
+@keyframes bump { 0%{transform:scale(1.25)} 100%{transform:none} }
+
+/* フィナーレ */
+.finale { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; pointer-events:none; }
+.finale .yatta { font-family:"Dela Gothic One",sans-serif; font-size:46px; color:#E5337A; text-shadow:3px 3px 0 var(--ink); transform:rotate(-6deg); animation:popin .45s cubic-bezier(.2,1.6,.4,1) both; }
+.reduced .finale .yatta { animation:none; transform:none; }
+@keyframes popin { 0%{ transform:rotate(-6deg) scale(.3); opacity:0;} 100%{ transform:rotate(-6deg) scale(1); opacity:1;} }
+.tag { background:#E9A800; color:#1C1916; border:2px solid var(--ink); border-radius:9999px; padding:6px 16px; font-weight:900; font-size:15px; opacity:0; animation:tagin .35s cubic-bezier(.2,1.6,.4,1) forwards; }
+@keyframes tagin { 0%{ transform:translateY(14px); opacity:0;} 100%{ transform:none; opacity:1;} }
+.spark { position:absolute; width:9px; height:9px; border-radius:9999px; pointer-events:none; animation:spark 1.1s cubic-bezier(.1,.7,.3,1) forwards; }
+@keyframes spark { 100%{ transform:translate(var(--dx),var(--dy)); opacity:0; } }
+.pill[aria-pressed="true"] { background:#1C1916; color:#FBF6EE; }
+</style>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-5xl">
+
+  <header class="animate-rise">
+    <a href="index.html#dopadopa" class="font-mono text-xs text-mute underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">← 本作りの設計 04-2 へ戻る</a>
+    <p class="mt-4 font-mono text-xs uppercase tracking-[0.2em] text-mute">修正イメージ / dopadopa</p>
+    <h1 class="mt-2 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">ドパドパ</span>の見本</h1>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">金色のボタンを叩いてください。目標回数 20 なら、6打目で CHANCE、12打目で激熱、残りが3になると PUSH、最後の1打でフィナーレ。速く叩き続けると「ドパドパ ×N」が出ます。どの段階も何打目かで決まるので、何度叩いても同じ打で同じことが起きます。音と振動はこのページでは鳴らず、右の欄に文字で出ます。</p>
+  </header>
+
+  <section class="mt-8 flex flex-wrap items-center gap-2 text-xs font-bold">
+    <span class="mr-1 font-mono text-mute">目標回数</span>
+    <button type="button" class="pill rounded-full border-2 border-ink px-3 py-1" data-target="5">5</button>
+    <button type="button" class="pill rounded-full border-2 border-ink px-3 py-1" data-target="20">20</button>
+    <button type="button" class="pill rounded-full border-2 border-ink px-3 py-1" data-target="50">50</button>
+    <span class="mx-2 h-5 w-px bg-rule"></span>
+    <label class="flex cursor-pointer items-center gap-1.5"><input type="checkbox" id="opt-milestone" class="accent-dopa"> 節目あり（虹の先バレ）</label>
+    <label class="flex cursor-pointer items-center gap-1.5"><input type="checkbox" id="opt-reduced" class="accent-dopa"> 視差効果を減らす</label>
+    <label class="flex cursor-pointer items-center gap-1.5"><input type="checkbox" id="opt-dark" class="accent-dopa"> 暗い配色</label>
+    <button type="button" id="reset" class="ml-auto rounded-full border-2 border-ink bg-white px-3 py-1">最初から</button>
+  </section>
+
+  <section class="mt-6 grid items-start gap-8 lg:grid-cols-[auto_1fr]">
+    <!-- iPhone 枠 -->
+    <div class="mx-auto w-[330px] shrink-0 rounded-[3rem] border-[7px] border-ink bg-ink p-1.5 shadow-[10px_10px_0_#E5337A]">
+      <div id="app" class="app screen relative h-[690px] overflow-hidden rounded-[2.5rem]">
+        <div class="lines"></div>
+        <div id="shell" class="relative flex h-full flex-col px-5 pb-6 pt-12">
+          <div class="absolute left-1/2 top-2.5 h-6 w-24 -translate-x-1/2 rounded-full bg-black"></div>
+          <!-- 連続記録の帯 -->
+          <div class="flex items-start justify-between">
+            <div>
+              <p class="flex items-baseline gap-1"><span id="streak" class="num text-[40px] leading-none text-dopa">29</span><span class="text-sm font-black">日連続</span></p>
+              <p id="streak-sub" class="mt-1 text-[12px] font-bold mute">今日はまだ。1回で30日目</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="text-right"><p class="text-[10px] font-bold mute">休み券</p><p class="mt-1 flex gap-1"><span class="ticket"></span><span class="ticket"></span></p></div>
+              <span class="text-xl leading-none">⚙︎</span>
+            </div>
+          </div>
+
+          <!-- ボタン -->
+          <div class="relative mt-auto flex flex-col items-center">
+            <div class="relative">
+              <span id="combo" class="combo text-[20px]">ドパドパ ×0</span>
+              <span id="rainbow" class="rainbow"></span>
+              <button type="button" id="mash" class="mash grid place-items-center" aria-label="完了連打">
+                <span class="pointer-events-none text-center">
+                  <span id="cap" class="block text-[11px] font-bold opacity-70">スクワット</span>
+                  <span id="num" class="num block text-[78px] leading-[.95]">20</span>
+                  <span id="hint" class="mt-0.5 block text-[13px] font-black">叩いてドパに</span>
+                </span>
+              </button>
+            </div>
+            <p id="gained" class="num mt-5 h-8 text-[26px] text-dopa"></p>
+          </div>
+
+          <!-- DPW と DT -->
+          <div class="mt-6 grid grid-cols-2 gap-3">
+            <div class="card p-3"><p class="font-mono text-[10px] font-bold mute">DPW</p><p id="dpw" class="num text-[28px] leading-tight">347</p><p id="dpw-sub" class="text-[10px] font-bold mute">前の7日 300　ベスト 410</p></div>
+            <div class="card p-3"><p class="font-mono text-[10px] font-bold mute">DT</p><p id="dt" class="num text-[28px] leading-tight">987</p><p id="dt-sub" class="text-[10px] font-bold mute">次の節目 1,000</p></div>
+          </div>
+        </div>
+        <div id="fx" class="pointer-events-none absolute inset-0"></div>
+        <span id="band" class="band">CHANCE</span>
+        <span id="stamp" class="stamp">激熱</span>
+        <div id="flash" class="flash"></div>
+        <div id="finale" class="finale"></div>
+      </div>
+    </div>
+
+    <!-- 右の欄 -->
+    <div class="flex flex-col gap-4">
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs text-mute">いまの段階</p>
+        <ol id="stages" class="mt-3 grid grid-cols-5 gap-1 text-center text-[11px] font-bold">
+          <li data-st="normal" class="rounded-lg border-2 border-ink px-1 py-2">NORMAL</li>
+          <li data-st="chance" class="rounded-lg border-2 border-ink px-1 py-2">CHANCE</li>
+          <li data-st="hot" class="rounded-lg border-2 border-ink px-1 py-2">激熱</li>
+          <li data-st="push" class="rounded-lg border-2 border-ink px-1 py-2">PUSH</li>
+          <li data-st="final" class="rounded-lg border-2 border-ink px-1 py-2">確定</li>
+        </ol>
+        <dl class="mt-4 grid grid-cols-3 gap-2 text-center">
+          <div class="rounded-xl bg-paper p-2"><dt class="font-mono text-[10px] text-mute">打</dt><dd id="m-index" class="num text-xl">0 / 20</dd></div>
+          <div class="rounded-xl bg-paper p-2"><dt class="font-mono text-[10px] text-mute">勢い</dt><dd id="m-combo" class="num text-xl">0</dd></div>
+          <div class="rounded-xl bg-paper p-2"><dt class="font-mono text-[10px] text-mute">直近1秒の明滅</dt><dd id="m-flash" class="num text-xl">0 / 3</dd></div>
+        </dl>
+        <p id="entries" class="mt-3 text-xs leading-relaxed text-mute"></p>
+      </div>
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs text-mute">音と振動（このページでは鳴らない）</p>
+        <ul id="log" class="mt-3 flex max-h-56 flex-col gap-1 overflow-y-auto font-mono text-[11px] leading-relaxed"></ul>
+      </div>
+      <p class="rounded-lg border border-dashed border-mute bg-white/60 p-3 text-xs leading-relaxed">画面全体の明滅は、段階に入った瞬間とフィナーレだけに使い、直近1秒で3回を超えるものは出さない。「視差効果を減らす」では、揺れ、集中線、飛ぶ文字、粒を止め、段階の文字とボタンの色だけを変える。ドパは1打で1。「ドパドパ ×N」はドパを増やさない。</p>
+    </div>
+  </section>
+
+</article>
+</main>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var app = $('app'), mash = $('mash'), fx = $('fx');
+  var COMBO_WINDOW = 450, LOCK = 1200;
+  var ORDER = ['normal', 'chance', 'hot', 'push', 'final'];
+  var LABEL = { normal: 'NORMAL', chance: 'CHANCE', hot: '激熱', push: 'PUSH', final: '確定' };
+
+  var target = 20, index = 0, combo = 0, lastTap = -1e9, lockedUntil = 0, stage = 'normal';
+  var withMilestone = false, reduced = false, flashes = [], timers = [];
+  var base = {};
+
+  function pushAt() { return target >= 10 ? 3 : 1; }
+  // 何打目かで段階を決める。くじは引かない
+  function stageOf(i) {
+    if (i >= target) return 'final';
+    if (target - i <= pushAt()) return 'push';
+    if (i / target >= 0.6) return 'hot';
+    if (i / target >= 0.3) return 'chance';
+    return 'normal';
+  }
+
+  function setBase() {
+    base = withMilestone
+      ? { streak: 29, dpw: 347, best: 410, prev: 300, dt: 987 }
+      : { streak: 12, dpw: 120, best: 410, prev: 140, dt: 450 };
+  }
+
+  function log(text) {
+    var li = document.createElement('li');
+    li.textContent = String(index).padStart(2, ' ') + '打  ' + text;
+    $('log').prepend(li);
+  }
+
+  function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+
+  // 画面全体の明滅。直近1秒で3回まで
+  function flash() {
+    var now = performance.now();
+    flashes = flashes.filter(function (t) { return now - t < 1000; });
+    if (flashes.length >= 3) return false;
+    flashes.push(now);
+    var f = $('flash'); f.classList.remove('go'); void f.offsetWidth; f.classList.add('go');
+    return true;
+  }
+
+  function restart(el, cls) { el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); }
+
+  function render() {
+    var remaining = target - index;
+    var st = index === 0 ? 'normal' : stage;
+    app.classList.remove('st-normal', 'st-chance', 'st-hot', 'st-push', 'st-final');
+    app.classList.add('st-' + st);
+    $('num').textContent = index >= target ? 0 : remaining;
+    $('cap').textContent = index === 0 ? 'スクワット' : (st === 'push' ? '残り' : 'スクワット 残り');
+    $('hint').textContent = index >= target ? 'やったった' : (st === 'push' ? 'PUSH' : '叩いてドパに');
+    $('num').style.fontSize = st === 'push' ? '96px' : '78px';
+    $('gained').textContent = index > 0 ? '+' + index + ' ドパ' : '';
+    $('dpw').textContent = base.dpw + index;
+    $('dt').textContent = base.dt + index;
+    var beat = base.dpw + index > base.best;
+    $('dpw').style.color = beat ? '#E5337A' : '';
+    var next = [100, 1000, 10000, 100000].filter(function (n) { return n > base.dt + index; })[0];
+    $('dt-sub').textContent = '次の節目 ' + next.toLocaleString();
+    $('streak').textContent = base.streak;
+    $('streak-sub').textContent = '今日はまだ。1回で' + (base.streak + 1) + '日目';
+    $('rainbow').classList.toggle('on', withMilestone && (st === 'push' || st === 'final') && index < target);
+    document.querySelectorAll('#stages li').forEach(function (li) {
+      var on = li.dataset.st === st && index > 0;
+      li.style.background = on ? (li.dataset.st === 'push' || li.dataset.st === 'final' ? '#E9A800' : '#E5337A') : '';
+      li.style.color = on && li.dataset.st !== 'push' && li.dataset.st !== 'final' ? '#fff' : '';
+    });
+    $('m-index').textContent = index + ' / ' + target;
+    $('m-combo').textContent = combo;
+    var now = performance.now();
+    $('m-flash').textContent = flashes.filter(function (t) { return now - t < 1000; }).length + ' / 3';
+    var c = $('combo');
+    c.textContent = 'ドパドパ ×' + combo;
+    c.classList.toggle('on', combo >= 3 && index < target);
+    var e = ['chance', 'hot', 'push'].map(function (s) {
+      for (var i = 1; i <= target; i++) if (stageOf(i) === s) return LABEL[s] + ' ' + i + '打目';
+      return null;
+    }).filter(Boolean);
+    $('entries').textContent = '目標回数 ' + target + ' の入り口：' + e.join('、') + '、確定 ' + target + '打目。';
+  }
+
+  function enter(st) {
+    if (st === 'chance') {
+      restart($('band'), 'go'); flash();
+      log('CHANCE  ♪ 上がる音を1つ　振動：中');
+    } else if (st === 'hot') {
+      restart($('stamp'), 'go'); flash();
+      if (!reduced) restart($('shell'), 'shake');
+      log('激熱  ♪ 低い音　振動：重い');
+    } else if (st === 'push') {
+      $('stamp').classList.remove('go');
+      log('PUSH' + (withMilestone ? '  虹の先バレ（最後の1打で節目）' : ''));
+    }
+  }
+
+  function word(x, y) {
+    if (reduced) return;
+    var w = document.createElement('span');
+    var big = { normal: 16, chance: 22, hot: 28, push: 32 }[stage] || 16;
+    w.className = 'word';
+    w.textContent = combo >= 4 ? 'ドパドパ' : 'ドパ';
+    w.style.left = x + 'px'; w.style.top = y + 'px';
+    w.style.fontSize = (big + Math.min(combo, 10)) + 'px';
+    w.style.setProperty('--r', (Math.random() * 24 - 12) + 'deg');
+    fx.appendChild(w); later(function () { w.remove(); }, 750);
+  }
+
+  function ring(x, y) {
+    var r = document.createElement('span');
+    var size = 70 + 110 * (index / target);
+    r.className = 'ring';
+    r.style.left = x + 'px'; r.style.top = y + 'px'; r.style.width = size + 'px'; r.style.height = size + 'px';
+    fx.appendChild(r); later(function () { r.remove(); }, 360);
+  }
+
+  function grain(x, y) {
+    if (reduced) return;
+    var g = document.createElement('span'), to = $('gained').getBoundingClientRect(), box = app.getBoundingClientRect();
+    g.className = 'grain';
+    g.style.left = x + 'px'; g.style.top = y + 'px';
+    g.style.setProperty('--dx', (to.left + to.width / 2 - box.left - x) + 'px');
+    g.style.setProperty('--dy', (to.top + to.height / 2 - box.top - y) + 'px');
+    fx.appendChild(g);
+    later(function () { g.remove(); restart($('gained'), 'bump'); }, 360);
+  }
+
+  function sparks(cx, cy, n, colors) {
+    if (reduced) return;
+    for (var i = 0; i < n; i++) {
+      var s = document.createElement('span'), a = Math.random() * Math.PI * 2, d = 90 + Math.random() * 170;
+      s.className = 'spark';
+      s.style.background = colors[i % colors.length];
+      s.style.left = cx + 'px'; s.style.top = cy + 'px';
+      s.style.setProperty('--dx', Math.cos(a) * d + 'px');
+      s.style.setProperty('--dy', Math.sin(a) * d + 60 + 'px');
+      fx.appendChild(s);
+      (function (el) { later(function () { el.remove(); }, 1150); })(s);
+    }
+  }
+
+  function tags(list, start) {
+    list.forEach(function (t, i) {
+      var el = document.createElement('span');
+      el.className = 'tag'; el.textContent = t; el.style.animationDelay = (start + 0.16 * i) + 's';
+      $('finale').appendChild(el);
+    });
+  }
+
+  // 連打の途中でまたいだ節目は、その1打で札だけ出す
+  function passing(text) {
+    var el = document.createElement('span');
+    el.className = 'tag'; el.textContent = text;
+    el.style.position = 'absolute'; el.style.top = '150px'; el.style.left = '50%'; el.style.marginLeft = '-70px';
+    fx.appendChild(el); later(function () { el.remove(); }, 1600);
+    log('札「' + text + '」  ♪ 高い音　振動：鋭い');
+  }
+
+  function finale(cx, cy) {
+    var f = $('finale'); f.innerHTML = '';
+    var y = document.createElement('p'); y.className = 'yatta'; y.textContent = 'やったった！'; f.appendChild(y);
+    var g = document.createElement('p'); g.className = 'num'; g.style.fontSize = '24px'; g.textContent = '+' + target + ' ドパ'; f.appendChild(g);
+    var list = withMilestone ? ['連続 ' + (base.streak + 1) + ' 日'] : [];
+    tags(list, 0.25);
+    flash();
+    sparks(cx, cy, withMilestone ? 70 : 46, withMilestone ? ['#E5337A', '#E9A800', '#E9A800', '#FF97BF'] : ['#E5337A', '#FF97BF']);
+    log('確定  ♪ 和音' + (list.length ? '＋札の音 ' + list.length : '') + '　振動：長め');
+    $('streak').textContent = base.streak + 1;
+    $('streak-sub').textContent = '✓ 今日のぶんは済み';
+    mash.classList.add('locked');
+    later(function () { mash.classList.remove('locked'); }, LOCK);
+    later(function () { reset(true); }, 1800 + 500 * list.length);
+  }
+
+  function tap(clientX, clientY) {
+    var now = performance.now();
+    if (now < lockedUntil || index >= target) return;
+    combo = now - lastTap <= COMBO_WINDOW ? combo + 1 : 1;
+    lastTap = now;
+    index += 1;
+    var box = app.getBoundingClientRect(), x = clientX - box.left, y = clientY - box.top;
+    var next = stageOf(index);
+    // 入り口が同じ1打に重なったら、強いほうだけを出す
+    if (ORDER.indexOf(next) > ORDER.indexOf(stage)) { stage = next; if (next !== 'final') enter(next); }
+    if (withMilestone && base.dt < 1000 && base.dt + index === 1000) passing('DT 1,000 ドパ');
+    ring(x, y); word(x, y - 10); grain(x, y);
+    if (index >= target) {
+      lockedUntil = now + LOCK;
+      var b = mash.getBoundingClientRect();
+      finale(b.left + b.width / 2 - box.left, b.top + b.height / 2 - box.top);
+    }
+    render();
+  }
+
+  function reset(keepLog) {
+    timers.forEach(clearTimeout); timers = [];
+    index = 0; combo = 0; stage = 'normal'; lastTap = -1e9;
+    fx.innerHTML = ''; $('finale').innerHTML = '';
+    $('band').classList.remove('go'); $('stamp').classList.remove('go'); mash.classList.remove('locked');
+    if (!keepLog) $('log').innerHTML = '';
+    setBase(); render();
+  }
+
+  mash.addEventListener('pointerdown', function (e) { e.preventDefault(); mash.classList.add('down'); tap(e.clientX, e.clientY); });
+  ['pointerup', 'pointerleave', 'pointercancel'].forEach(function (t) { mash.addEventListener(t, function () { mash.classList.remove('down'); }); });
+  mash.addEventListener('keydown', function (e) {
+    if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); var b = mash.getBoundingClientRect(); tap(b.left + b.width / 2, b.top + b.height / 2); }
+  });
+
+  document.querySelectorAll('[data-target]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      target = +b.dataset.target;
+      document.querySelectorAll('[data-target]').forEach(function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); });
+      reset();
+    });
+  });
+  $('opt-milestone').addEventListener('change', function (e) { withMilestone = e.target.checked; reset(); });
+  $('opt-reduced').addEventListener('change', function (e) { reduced = e.target.checked; app.classList.toggle('reduced', reduced); reset(); });
+  $('opt-dark').addEventListener('change', function (e) { app.classList.toggle('dark', e.target.checked); });
+  $('reset').addEventListener('click', function () { reset(); });
+
+  // 「視差効果を減らす」が端末で入っていれば、最初から入れておく
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    $('opt-reduced').checked = true; reduced = true; app.classList.add('reduced');
+  }
+  document.querySelector('[data-target="20"]').setAttribute('aria-pressed', 'true');
+  document.querySelectorAll('[data-target]').forEach(function (o) { if (o.dataset.target !== '20') o.setAttribute('aria-pressed', 'false'); });
+  setInterval(function () { if (index > 0) render(); }, 250);
+  reset();
+})();
+</script>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

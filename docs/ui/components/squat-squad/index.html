@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>スクワット隊</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=M+PLUS+Rounded+1c:wght@500;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+        round: ['"M PLUS Rounded 1c"', '"Noto Sans JP"', 'sans-serif']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } }
+      },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+<style>
+.num { font-family:"M PLUS Rounded 1c","Noto Sans JP",sans-serif; font-weight:900; font-variant-numeric:tabular-nums; }
+.tabbtn[aria-selected="true"] { background:#1C1916; color:#FBF6EE; }
+.rays { position:absolute; left:50%; top:50%; width:1000px; height:1000px; margin:-500px 0 0 -500px; animation:spin 4s linear infinite;
+  background:repeating-conic-gradient(from 0deg, #FF2E63 0deg 5deg, transparent 5deg 9deg, #FF9F1C 9deg 14deg, transparent 14deg 18deg, #FFE14D 18deg 23deg, transparent 23deg 27deg, #3DDC84 27deg 32deg, transparent 32deg 36deg, #22D3EE 36deg 41deg, transparent 41deg 45deg, #8E5CF7 45deg 50deg, transparent 50deg 54deg); }
+.rays.faint { opacity:.18; }
+.rays.fast { animation-duration:1.6s; }
+.rainbow { position:absolute; left:50%; bottom:6%; width:250px; height:250px; margin-left:-125px; border-radius:9999px;
+  background:conic-gradient(#FF3B5C,#FF9F1C,#FFE14D,#3DDC84,#2F79F7,#8E5CF7,#FF3B5C); animation:spin 1.2s linear infinite;
+  -webkit-mask:radial-gradient(circle, transparent 0 108px, #000 110px 122px, transparent 124px); mask:radial-gradient(circle, transparent 0 108px, #000 110px 122px, transparent 124px); }
+.squad-pop { transform-box:fill-box; transform-origin:50% 100%; animation:squadpop .5s cubic-bezier(.2,1.6,.4,1) both; }
+@keyframes squadpop { 0%{ transform:scale(0); } 100%{ transform:scale(1); } }
+@keyframes spin { to { transform:rotate(360deg); } }
+.stage { position:relative; flex:1; touch-action:manipulation; user-select:none; -webkit-user-select:none; cursor:pointer; }
+.metal { font-family:"Dela Gothic One",sans-serif; line-height:.95; background:linear-gradient(#FFF7C2,#FFD23F 35%,#C97A00 55%,#FFE27A 70%,#9A5200); -webkit-background-clip:text; background-clip:text; color:transparent; -webkit-text-stroke:2px #1A1203; filter:drop-shadow(3px 4px 0 #000) drop-shadow(0 0 14px rgba(255,176,0,.9)); }
+@media (prefers-reduced-motion: reduce) { .rays, .rainbow, .squad-pop { animation:none !important; } }
+</style>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-5xl">
+<header class="animate-rise">
+  <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">ui / components / squat-squad</p>
+  <h1 class="mt-2 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">スクワット隊</span></h1>
+  <div class="mt-4 max-w-2xl space-y-3 text-sm leading-relaxed text-ink/80"><p>ホームのまん中に立つ、横向きの棒人間の一団です（<a href="../../../glossary.html#squat-squad" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スクワット隊</a>）。<a href="../../../glossary.html#done-mash" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">完了連打</a>では、上の帯と下のカードのあいだを画面の幅いっぱいに叩きます。指が触れた瞬間に全員が揃ってしゃがみ、指が全部離れたら立ち上がる。スクワット2回ごとに1人増えます（はじめは5回ごとだったが、開発者の注文で2回ごとにした）。</p><p>2026-10-06 に、金色の丸い<a href="../mash-button/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ボタン</a>から置き換えました。ボタンは何の形でもなく、叩いているのがスクワットの記録だと目で分かりませんでした。人の形なら、1打が「しゃがんだ1回」に見えます。</p><p>線は太い ink に色を重ねた棒で、コードで描きます。画像のファイルは使いません。立つ姿としゃがむ姿のあいだを線の形ごと動かせて、画面の大きさも選ばないからです。</p></div>
+</header>
+<section id="states" class="mt-12">
+  <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">states</p>
+  <h2 class="mt-2 font-display text-3xl">状態ごとの見た目</h2>
+  <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">どの見本も、画面の中を押すとしゃがみ、離すと立ちます。</p>
+  <div data-story class="mt-6 rounded-3xl border-2 border-ink bg-white p-5 sm:p-7">
+  <div role="tablist" class="flex flex-wrap gap-2"><button type="button" role="tab" data-tab="stand1" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">1人で立つ</button><button type="button" role="tab" data-tab="squat1" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">しゃがむ</button><button type="button" role="tab" data-tab="five" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">11人の隊</button><button type="button" role="tab" data-tab="hot" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">激熱で全員 dopa</button><button type="button" role="tab" data-tab="push" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">PUSH で全員 gold と虹の輪</button><button type="button" role="tab" data-tab="many" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">30人</button></div>
+  <div class="mt-6 rounded-2xl bg-[repeating-linear-gradient(45deg,#FBF6EE_0_10px,#F5EDE0_10px_20px)] p-5 sm:p-8"><div data-panel="stand1" class="grid items-start gap-8 md:grid-cols-[auto_1fr]">
+  <div class="w-[300px] shrink-0 rounded-[2.8rem] border-[6px] border-ink bg-ink p-1.5 shadow-[10px_10px_0_#E5337A]">
+  <div class="relative flex h-[650px] flex-col overflow-hidden rounded-[2.2rem] px-4 pb-6 pt-14" style="background:#FBF6EE">
+    <div class="absolute left-1/2 top-2.5 z-40 h-6 w-24 -translate-x-1/2 rounded-full bg-black"></div>
+    
+    <div class="relative z-10 flex flex-col items-center text-center"><p class="text-[11px] font-bold" style="color:#1C1916;opacity:.7">スクワット 残り</p><p class="num text-[64px] leading-none" style="color:#1C1916">20</p></div>
+    <div class="stage z-10 mt-2" data-squad data-count="1" data-palette="mix" data-squat="0" aria-label="叩く場所（叩くとしゃがむ）"></div>
+    <p class="relative z-10 mt-2 text-center text-[11px] font-bold" style="color:#1C1916;opacity:.6">叩き始める前</p>
+  </div>
+</div>
+  <div class="max-w-sm text-sm leading-relaxed"><p class="font-mono text-xs text-mute">state / stand1</p><p class="mt-1 font-display text-xl">1人で立つ</p><div class="mt-3 space-y-2 text-ink/80"><p>叩く前の待機。<a href="../../../glossary.html#target-reps" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">目標回数</a> 20 で、隊は1人。色は gold。</p><p>叩く場所は、上の帯と下のカードのあいだの全部。見本の中のどこを押してもしゃがみます。</p></div></div>
+</div><div data-panel="squat1" class="grid items-start gap-8 md:grid-cols-[auto_1fr]">
+  <div class="w-[300px] shrink-0 rounded-[2.8rem] border-[6px] border-ink bg-ink p-1.5 shadow-[10px_10px_0_#E5337A]">
+  <div class="relative flex h-[650px] flex-col overflow-hidden rounded-[2.2rem] px-4 pb-6 pt-14" style="background:#FBF6EE">
+    <div class="absolute left-1/2 top-2.5 z-40 h-6 w-24 -translate-x-1/2 rounded-full bg-black"></div>
+    <div class="rays faint"></div>
+    <div class="relative z-10 flex flex-col items-center text-center"><p class="text-[11px] font-bold" style="color:#1C1916;opacity:.7">スクワット 残り</p><p class="num text-[64px] leading-none" style="color:#1C1916">19</p></div>
+    <div class="stage z-10 mt-2" data-squad data-count="1" data-palette="mix" data-squat="1" aria-label="叩く場所（叩くとしゃがむ）"></div>
+    <p class="relative z-10 mt-2 text-center text-[11px] font-bold" style="color:#1C1916;opacity:.6">指が触れているあいだ</p>
+  </div>
+</div>
+  <div class="max-w-sm text-sm leading-relaxed"><p class="font-mono text-xs text-mute">state / squat1</p><p class="mt-1 font-display text-xl">しゃがむ</p><div class="mt-3 space-y-2 text-ink/80"><p>指が触れた瞬間に0.08秒でしゃがむ。腰を後ろへ引き、膝を前へ出し、腕を前に伸ばす横向きの姿。</p><p>指が全部離れたら0.12秒で立つ。立ち上がりを少し遅くして、しゃがんだ形を目に残す。指を置いたままなら、しゃがんだまま止まる。</p></div></div>
+</div><div data-panel="five" class="grid items-start gap-8 md:grid-cols-[auto_1fr]">
+  <div class="w-[300px] shrink-0 rounded-[2.8rem] border-[6px] border-ink bg-ink p-1.5 shadow-[10px_10px_0_#E5337A]">
+  <div class="relative flex h-[650px] flex-col overflow-hidden rounded-[2.2rem] px-4 pb-6 pt-14" style="background:#FBF6EE">
+    <div class="absolute left-1/2 top-2.5 z-40 h-6 w-24 -translate-x-1/2 rounded-full bg-black"></div>
+    <div class="rays faint"></div>
+    <div class="relative z-10 flex flex-col items-center text-center"><p class="text-[11px] font-bold" style="color:#1C1916;opacity:.7">スクワット 残り</p><p class="num text-[64px] leading-none" style="color:#1C1916">10</p></div>
+    <div class="stage z-10 mt-2" data-squad data-count="11" data-palette="mix" data-squat="0" aria-label="叩く場所（叩くとしゃがむ）"></div>
+    <p class="relative z-10 mt-2 text-center text-[11px] font-bold" style="color:#1C1916;opacity:.6">目標30のうち20打</p>
+  </div>
+</div>
+  <div class="max-w-sm text-sm leading-relaxed"><p class="font-mono text-xs text-mute">state / five</p><p class="mt-1 font-display text-xl">11人の隊</p><div class="mt-3 space-y-2 text-ink/80"><p>2回ごとに1人ずつ増える。20打で最初の1人と合わせて11人。手前の列の3人が埋まると、奥の列へ。</p><p>増えた1人は足元から跳ねて現れ、「+1人」と音が出る。色は人ごとに gold、dopa、signal を回す。全員が揃ってしゃがむ。</p></div></div>
+</div><div data-panel="hot" class="grid items-start gap-8 md:grid-cols-[auto_1fr]">
+  <div class="w-[300px] shrink-0 rounded-[2.8rem] border-[6px] border-ink bg-ink p-1.5 shadow-[10px_10px_0_#E5337A]">
+  <div class="relative flex h-[650px] flex-col overflow-hidden rounded-[2.2rem] px-4 pb-6 pt-14" style="background:#0E0712">
+    <div class="absolute left-1/2 top-2.5 z-40 h-6 w-24 -translate-x-1/2 rounded-full bg-black"></div>
+    <div class="rays" style="opacity:.8"></div>
+    <div class="relative z-10 flex flex-col items-center text-center"><p class="text-[11px] font-bold" style="color:#FBF6EE;opacity:.7">スクワット 残り</p><p class="num text-[64px] leading-none" style="color:#FBF6EE">8</p></div>
+    <div class="stage z-10 mt-2" data-squad data-count="3" data-palette="dopa" data-squat="0" aria-label="叩く場所（叩くとしゃがむ）"></div>
+    <p class="relative z-10 mt-2 text-center text-[11px] font-bold" style="color:#FBF6EE;opacity:.6">目標20のうち12打</p>
+  </div>
+</div>
+  <div class="max-w-sm text-sm leading-relaxed"><p class="font-mono text-xs text-mute">state / hot</p><p class="mt-1 font-display text-xl">激熱で全員 dopa</p><div class="mt-3 space-y-2 text-ink/80"><p><a href="../../../glossary.html#dopadopa" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパドパ</a>の激熱に入ると、地が暗転して虹の放射線が回り、隊の全員が dopa 色にそろう。</p><p>色がそろうと、隊がひとつになって盛り上がって見える。</p></div></div>
+</div><div data-panel="push" class="grid items-start gap-8 md:grid-cols-[auto_1fr]">
+  <div class="w-[300px] shrink-0 rounded-[2.8rem] border-[6px] border-ink bg-ink p-1.5 shadow-[10px_10px_0_#E5337A]">
+  <div class="relative flex h-[650px] flex-col overflow-hidden rounded-[2.2rem] px-4 pb-6 pt-14" style="background:#0E0712">
+    <div class="absolute left-1/2 top-2.5 z-40 h-6 w-24 -translate-x-1/2 rounded-full bg-black"></div>
+    <div class="rays fast"></div>
+    <div class="relative z-10 flex flex-col items-center text-center"><p class="metal text-[64px]">PUSH! 3</p></div>
+    <div class="stage z-10 mt-2" data-squad data-count="4" data-palette="gold" data-squat="0" aria-label="叩く場所（叩くとしゃがむ）"><div class="rainbow"></div></div>
+    <p class="relative z-10 mt-2 text-center text-[11px] font-bold" style="color:#FBF6EE;opacity:.6">目標20のうち17打</p>
+  </div>
+</div>
+  <div class="max-w-sm text-sm leading-relaxed"><p class="font-mono text-xs text-mute">state / push</p><p class="mt-1 font-display text-xl">PUSH で全員 gold と虹の輪</p><div class="mt-3 space-y-2 text-ink/80"><p>PUSH では全員が gold。隊の上の文字が「PUSH!」になり、残りを 3、2、1 と数える。</p><p>最後の1打で<a href="../../../glossary.html#milestone" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">節目</a>に届くと分かっている連打では、隊の後ろで虹の輪が回る（虹の先バレ）。くじは引いていない。</p></div></div>
+</div><div data-panel="many" class="grid items-start gap-8 md:grid-cols-[auto_1fr]">
+  <div class="w-[300px] shrink-0 rounded-[2.8rem] border-[6px] border-ink bg-ink p-1.5 shadow-[10px_10px_0_#E5337A]">
+  <div class="relative flex h-[650px] flex-col overflow-hidden rounded-[2.2rem] px-4 pb-6 pt-14" style="background:#FBF6EE">
+    <div class="absolute left-1/2 top-2.5 z-40 h-6 w-24 -translate-x-1/2 rounded-full bg-black"></div>
+    <div class="rays faint"></div>
+    <div class="relative z-10 flex flex-col items-center text-center"><p class="text-[11px] font-bold" style="color:#1C1916;opacity:.7">スクワット 残り</p><p class="num text-[64px] leading-none" style="color:#1C1916">0</p></div>
+    <div class="stage z-10 mt-2" data-squad data-count="30" data-palette="mix" data-squat="0" aria-label="叩く場所（叩くとしゃがむ）"></div>
+    <p class="relative z-10 mt-2 text-center text-[11px] font-bold" style="color:#1C1916;opacity:.6">目標100を叩き切った1打</p>
+  </div>
+</div>
+  <div class="max-w-sm text-sm leading-relaxed"><p class="font-mono text-xs text-mute">state / many</p><p class="mt-1 font-display text-xl">30人</p><div class="mt-3 space-y-2 text-ink/80"><p>目標回数60で30人に届き、そこで止まる（上限30人）。奥の列ほど小さく描き、大勢でしゃがんでいるように見せる。</p><p>叩き切ると<a href="../../../glossary.html#finale" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">フィナーレ</a>が重なり、閉じたあと隊は1人に戻る。</p></div></div>
+</div></div>
+  </div>
+</section>
+
+<section id="rules" class="mt-16">
+  <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">rules</p>
+  <h2 class="mt-2 font-display text-3xl">描き方の決まり</h2>
+  <ul class="mt-6 flex max-w-2xl flex-col gap-3 text-sm leading-relaxed">
+    <li class="border-l-4 border-ink pl-3"><b>線</b>：ink の線（太さ12）の上に、色の線（太さ6.5）を重ねる。頭は色で塗った丸に ink の縁。端と角は丸める。</li>
+    <li class="border-l-4 border-dopa pl-3"><b>2つの姿</b>：立つ姿は、つま先、足首、膝、腰、肩が縦にそろい、腕は下へ。しゃがむ姿は、腰を後ろへ引いて膝を前へ出し、上体を少し前へ倒して腕を前に伸ばす。点の数は2つの姿で同じにして、あいだを動かす。</li>
+    <li class="border-l-4 border-gold pl-3"><b>並び</b>：手前から 3人、5人、7人、9人の列。大きさは手前を1として、0.78、0.62、0.5。列の中は真ん中から、左右へ交互に埋める。</li>
+    <li class="border-l-4 border-signal pl-3"><b>視差効果を減らす</b>：人はしゃがむ（動きが叩いた返事そのものなので）。増えるときの跳ねだけを止める（<a href="../../../glossary.html#reduced-effects-mode" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ひかえめモード</a>の考え方）。</li>
+  </ul>
+</section>
+
+<section id="links" class="mt-16">
+  <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">links</p>
+  <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
+  <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2"><li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">機能</p><a href="../../../features/done-mash/index.html#squad" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">完了連打（スクワット隊）</a></li><li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">置かれる画面</p><a href="../../../ui/pages/home/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ホーム</a></li><li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">置き換える前</p><a href="../mash-button/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">完了連打のボタン（使わなくなった）</a></li><li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">決めたセッション</p><a href="../../../sessions/20261006-0312-main-build/index.html#squad" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">本作りの設計 04-5</a></li></ul>
+</section>
+</article>
+</main>
+<script>
+// スクワット隊の見本。横向きの棒人間を SVG で描き、立つ姿としゃがむ姿のあいだを動かす
+var SQUAD = (function () {
+  var P = {
+    stand: { toe: [12, 0], ankle: [0, 0], knee: [0, -20], hip: [0, -40], sh: [0, -72], hand: [2, -46], head: [0, -88] },
+    squat: { toe: [12, 0], ankle: [0, 0], knee: [14, -14], hip: [-6, -24], sh: [4, -55], hand: [30, -57], head: [8, -70] }
+  };
+  // 手前の列から奥の列へ。列ごとの人数と大きさ
+  var ROWS = [[3, 1], [5, 0.76], [7, 0.6], [9, 0.49], [11, 0.41], [13, 0.35], [15, 0.3]];
+  var COLORS = { mix: ['#E9A800', '#E5337A', '#2F79F7'], dopa: ['#E5337A'], gold: ['#E9A800'] };
+  var SLOTS = [];
+  ROWS.forEach(function (r, ri) {
+    var order = [0];
+    for (var k = 1; k <= (r[0] - 1) / 2; k++) order.push(-k, k);
+    order.forEach(function (c) { SLOTS.push({ row: ri, col: c, scale: r[1] }); });
+  });
+  var NS = 'http://www.w3.org/2000/svg';
+  function mk(tag, attrs) { var e = document.createElementNS(NS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); return e; }
+  function lerp(a, b, t) { return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t]; }
+  function pts(list) { return list.map(function (p) { return p[0].toFixed(1) + ',' + p[1].toFixed(1); }).join(' '); }
+  function pose(t) { var o = {}; for (var k in P.stand) o[k] = lerp(P.stand[k], P.squat[k], t); return o; }
+
+  function build(el, opts) {
+    var W = el.clientWidth || 260, H = el.clientHeight || 300, unit = opts.unit || H / 235;
+    var svg = mk('svg', { viewBox: '0 0 ' + W + ' ' + H, width: W, height: H, 'aria-hidden': 'true' });
+    svg.style.cssText = 'position:absolute;inset:0;overflow:visible';
+    el.appendChild(svg);
+    var figs = [], t = opts.squat ? 1 : 0, palette = opts.palette || 'mix', count = 0, anim = null;
+    function color(i) { var c = COLORS[palette]; return c[i % c.length]; }
+    function draw() {
+      var p = pose(t);
+      figs.forEach(function (f) {
+        var body = pts([p.toe, p.ankle, p.knee, p.hip, p.sh]), arm = pts([p.sh, p.hand]);
+        f.bodyO.setAttribute('points', body); f.bodyC.setAttribute('points', body);
+        f.armO.setAttribute('points', arm); f.armC.setAttribute('points', arm);
+        f.head.setAttribute('cx', p.head[0]); f.head.setAttribute('cy', p.head[1]);
+      });
+    }
+    function figure(i, pop) {
+      var s = SLOTS[i], scale = s.scale * unit;
+      var x = W / 2 + s.col * 50 * s.scale * unit - 6 * scale, y = H * 0.96 - s.row * H * 0.1;
+      var g = mk('g', { transform: 'translate(' + x.toFixed(1) + ',' + y.toFixed(1) + ') scale(' + scale.toFixed(3) + ')' });
+      var inner = mk('g', {});
+      if (pop) inner.setAttribute('class', 'squad-pop');
+      var line = { fill: 'none', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' };
+      var f = {
+        g: g, row: s.row,
+        bodyO: mk('polyline', Object.assign({ stroke: '#1C1916', 'stroke-width': 12 }, line)),
+        armO: mk('polyline', Object.assign({ stroke: '#1C1916', 'stroke-width': 12 }, line)),
+        bodyC: mk('polyline', Object.assign({ stroke: color(i), 'stroke-width': 6.5 }, line)),
+        armC: mk('polyline', Object.assign({ stroke: color(i), 'stroke-width': 6.5 }, line)),
+        head: mk('circle', { r: 10, fill: color(i), stroke: '#1C1916', 'stroke-width': 3.5 })
+      };
+      [f.armO, f.bodyO, f.armC, f.bodyC, f.head].forEach(function (e) { inner.appendChild(e); });
+      g.appendChild(inner);
+      return f;
+    }
+    function setCount(n, pop) {
+      n = Math.max(1, Math.min(30, SLOTS.length, n));
+      while (count < n) { figs.push(figure(count, pop)); count++; }
+      while (count > n) { var f = figs.pop(); f.g.remove(); count--; }
+      // 奥の列を先に描き、手前を上に重ねる
+      figs.slice().sort(function (a, b) { return b.row - a.row; }).forEach(function (f) { svg.appendChild(f.g); });
+      draw();
+    }
+    function setPalette(p) {
+      palette = p;
+      figs.forEach(function (f, i) { [f.bodyC, f.armC].forEach(function (e) { e.setAttribute('stroke', color(i)); }); f.head.setAttribute('fill', color(i)); });
+    }
+    function animateTo(target, ms) {
+      if (anim) cancelAnimationFrame(anim);
+      var from = t, start = performance.now();
+      (function step(now) {
+        var k = Math.min(1, (now - start) / ms);
+        t = from + (target - from) * (1 - Math.pow(1 - k, 3));
+        draw();
+        if (k < 1) anim = requestAnimationFrame(step);
+      })(start);
+    }
+    setCount(opts.count || 1, false);
+    return { setCount: setCount, setPalette: setPalette, animateTo: animateTo, get count() { return count; } };
+  }
+
+  // 指が触れたらしゃがみ、指が全部離れたら立つ
+  function bindTap(area, squad, onTap) {
+    var down = 0;
+    area.addEventListener('pointerdown', function (e) {
+      down++;
+      squad.animateTo(1, 80);
+      if (onTap) onTap(e);
+    });
+    function up() { down = Math.max(0, down - 1); if (down === 0) squad.animateTo(0, 120); }
+    area.addEventListener('pointerup', up);
+    area.addEventListener('pointercancel', up);
+    area.addEventListener('pointerleave', function () { down = 0; squad.animateTo(0, 120); });
+  }
+  return { build: build, bindTap: bindTap };
+})();
+
+document.querySelectorAll('[data-story]').forEach(function (story) {
+  var tabs = story.querySelectorAll('[data-tab]');
+  var panels = story.querySelectorAll('[data-panel]');
+  function show(id) {
+    tabs.forEach(function (t) { t.setAttribute('aria-selected', t.dataset.tab === id ? 'true' : 'false'); });
+    panels.forEach(function (p) { p.hidden = p.dataset.panel !== id; p.style.display = p.hidden ? 'none' : ''; });
+    var panel = story.querySelector('[data-panel="' + id + '"]');
+    panel.querySelectorAll('[data-squad]').forEach(function (el) {
+      if (el.dataset.built) return;
+      el.dataset.built = '1';
+      var squad = SQUAD.build(el, { count: +el.dataset.count, palette: el.dataset.palette, squat: el.dataset.squat === '1' });
+      SQUAD.bindTap(el, squad);
+    });
+  }
+  tabs.forEach(function (t) { t.addEventListener('click', function () { show(t.dataset.tab); }); });
+  show(tabs[0].dataset.tab);
+});
+</script>
+<script src="../../../sidebar.js" defer></script>
+</body>
+</html>

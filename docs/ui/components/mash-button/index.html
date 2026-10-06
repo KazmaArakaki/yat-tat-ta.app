@@ -59,6 +59,17 @@ tailwind.config = {
 @keyframes burst { 0%{transform:translate(0,0);opacity:1} 100%{transform:translate(var(--dx),var(--dy));opacity:0} }
 @keyframes drop { 0%{transform:translateY(-120%)} 100%{transform:none} }
 .pop { animation:pop .45s cubic-bezier(.2,1.4,.4,1) both; }
+/* ドパドパの段階 */
+.lines { position:absolute; inset:0; border-radius:1.5rem; background:repeating-conic-gradient(from 0deg at 50% 42%, rgba(229,51,122,.22) 0deg 4deg, transparent 4deg 14deg); animation:spin 18s linear infinite; pointer-events:none; }
+@keyframes spin { to { transform:rotate(360deg); } }
+.mash.hot { background:radial-gradient(circle at 50% 35%, #FFC23A 0%, #E9A800 45%, #D9402E 100%); }
+.mash.chance { box-shadow:0 8px 0 var(--a-line), 0 0 0 6px rgba(229,51,122,.55); animation:beat .9s ease-in-out infinite; }
+@keyframes beat { 0%,100%{ box-shadow:0 8px 0 var(--a-line), 0 0 0 3px rgba(229,51,122,.35);} 50%{ box-shadow:0 8px 0 var(--a-line), 0 0 0 9px rgba(229,51,122,.6);} }
+.rainbow { position:absolute; inset:-10px; border-radius:9999px; background:conic-gradient(#E5337A,#E9A800,#3CC46B,#2F79F7,#7B4FD6,#E5337A); animation:spin 1.6s linear infinite; pointer-events:none; }
+.band { position:absolute; left:-30px; right:-30px; top:44%; transform:rotate(-8deg); background:#E5337A; color:#fff; border-top:3px solid var(--a-line); border-bottom:3px solid var(--a-line); font-family:"Dela Gothic One",sans-serif; letter-spacing:.2em; text-align:center; font-size:26px; padding:2px 0; pointer-events:none; }
+.stamp { position:absolute; right:-18px; top:-18px; width:96px; height:96px; border-radius:9999px; border:5px solid #D9402E; color:#D9402E; background:rgba(255,255,255,.85); display:grid; place-items:center; font-family:"Dela Gothic One",sans-serif; font-size:28px; transform:rotate(14deg); pointer-events:none; }
+.pop-word { position:absolute; font-family:"Dela Gothic One",sans-serif; color:#E5337A; -webkit-text-stroke:1.5px var(--a-line); pointer-events:none; white-space:nowrap; }
+.combo { position:absolute; left:50%; top:-40px; transform:translateX(-50%); font-family:"Dela Gothic One",sans-serif; font-size:18px; color:#E5337A; white-space:nowrap; }
 .tabbtn[aria-selected="true"] { background:#1C1916; color:#FBF6EE; }
 </style>
 </head>
@@ -68,6 +79,7 @@ tailwind.config = {
 <header class="animate-rise">
   <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">ui / components / mash-button</p>
   <h1 class="mt-2 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">完了連打</span>のボタン</h1>
+  <p class="mt-4 max-w-2xl rounded-xl border-2 border-dashed border-dopa bg-dopa-soft/60 p-3 text-sm font-bold leading-relaxed">このボタンは使わなくなった。2026-10-06 に、画面中央の広い叩く場所と<a href="../squat-squad/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スクワット隊</a>に置き換えた（<a href="../../../sessions/20261006-0312-main-build/index.html#squad" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">本作りの設計 04-5</a>）。下は置き換える前の記録として残す。</p>
   <div class="mt-4 max-w-2xl space-y-3 text-sm leading-relaxed text-ink/80"><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">ホームのまん中に置く、金色の丸いボタンです。数字は、まだドパに変えていないスクワットの数。<a href="../../../glossary.html#done-mash" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">完了連打</a>の1打ごとに1減り、1粒の<a href="../../../glossary.html#dopa-point" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパ</a>がボタンから下へ飛びます。</p><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">指が触れた瞬間に鳴ります（touchesBegan）。離すのを待つと、連打の速さに音が追いつかなくなるからです。最初の数字は<a href="../../../glossary.html#target-reps" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">目標回数</a>で、叩き始めたときの値を最後まで使います。</p></div>
 </header>
 <section id="states" class="mt-12">
@@ -75,7 +87,7 @@ tailwind.config = {
   <h2 class="mt-2 font-display text-3xl">状態ごとの見た目</h2>
   <div data-story class="mt-6 rounded-3xl border-2 border-ink bg-white p-5 sm:p-7">
   <div class="flex flex-wrap items-center justify-between gap-3">
-    <div role="tablist" class="flex flex-wrap gap-2"><button type="button" role="tab" data-tab="idle" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">待機</button><button type="button" role="tab" data-tab="mashing" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">連打中</button><button type="button" role="tab" data-tab="locked" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">叩き切った直後</button><button type="button" role="tab" data-tab="reset" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">途中で閉じて戻る</button></div>
+    <div role="tablist" class="flex flex-wrap gap-2"><button type="button" role="tab" data-tab="idle" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">待機</button><button type="button" role="tab" data-tab="mashing" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">連打中</button><button type="button" role="tab" data-tab="locked" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">叩き切った直後</button><button type="button" role="tab" data-tab="reset" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">途中で閉じて戻る</button><button type="button" role="tab" data-tab="chance" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">CHANCE</button><button type="button" role="tab" data-tab="hot" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">激熱</button><button type="button" role="tab" data-tab="push" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">PUSH</button><button type="button" role="tab" data-tab="rainbow" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">PUSH＋虹</button></div>
     <label class="flex cursor-pointer items-center gap-2 font-mono text-xs text-mute"><input type="checkbox" data-dark class="accent-dopa"> 暗い配色</label>
   </div>
   <div class="mt-6 rounded-2xl bg-[repeating-linear-gradient(45deg,#FBF6EE_0_10px,#F5EDE0_10px_20px)] p-5 sm:p-8"><div data-panel="idle" class="grid items-start gap-8 md:grid-cols-[auto_1fr]">
@@ -142,6 +154,66 @@ tailwind.config = {
   <p class="mt-4 text-[11px] font-bold a-mute"><span class="num text-base text-dopa">+7</span> ドパで1件にしました</p>
 </div></div>
   <div class="max-w-sm text-sm leading-relaxed"><p class="font-mono text-xs text-mute">state / reset</p><p class="mt-1 font-display text-xl">途中で閉じて戻る</p><div class="mt-3 space-y-2 text-ink/80"><p>7打で手が止まり、60秒たった（またはアプリを離れた）。叩いた7ドパで<a href="../../../glossary.html#record" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録</a>を1件にして、ボタンは目標回数に戻る。</p><p>フィナーレは出さない。下の一言だけが2秒残る。</p></div></div>
+</div><div data-panel="chance" class="grid items-start gap-8 md:grid-cols-[auto_1fr]">
+  <div class="app a-bg relative w-[300px] shrink-0 overflow-hidden rounded-3xl border border-rule p-5 pt-14"><div class="relative flex flex-col items-center">
+  <div class="relative">
+    
+    <button type="button" class="mash relative grid place-items-center chance" aria-label="完了連打">
+      <span class="text-center">
+        <span class="block text-[11px] font-bold opacity-70">スクワット 残り</span>
+        <span class="num block text-[76px] leading-[.95]">14</span>
+        <span class="mt-0.5 block text-[12px] font-black">叩いてドパに</span>
+      </span>
+    </button>
+    <span class="band">CHANCE</span><span class="pop-word" style="left:72%;top:6%;font-size:20px;transform:rotate(-10deg)">ドパ</span>
+  </div>
+</div></div>
+  <div class="max-w-sm text-sm leading-relaxed"><p class="font-mono text-xs text-mute">state / chance</p><p class="mt-1 font-display text-xl">CHANCE</p><div class="mt-3 space-y-2 text-ink/80"><p><a href="../../../glossary.html#dopadopa" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパドパ</a>の2段目。目標回数 20 の6打目（進み具合30%）で入る。入った1打で「CHANCE」の帯がボタンの上を横切り、上がる音が1つ鳴る。</p><p>そのあいだ、ボタンの縁が dopa 色で脈打ち、指の位置から飛ぶ「ドパ」の文字が大きくなる。</p></div></div>
+</div><div data-panel="hot" class="grid items-start gap-8 md:grid-cols-[auto_1fr]">
+  <div class="app a-bg relative w-[300px] shrink-0 overflow-hidden rounded-3xl border border-rule p-5 pt-14"><span class="lines"></span><div class="relative flex flex-col items-center">
+  <div class="relative">
+    
+    <button type="button" class="mash relative grid place-items-center hot" aria-label="完了連打">
+      <span class="text-center">
+        <span class="block text-[11px] font-bold opacity-70">スクワット 残り</span>
+        <span class="num block text-[76px] leading-[.95]">8</span>
+        <span class="mt-0.5 block text-[12px] font-black">叩いてドパに</span>
+      </span>
+    </button>
+    <span class="stamp">激熱</span><span class="combo">ドパドパ ×9</span><span class="pop-word" style="left:-14%;top:20%;font-size:26px;transform:rotate(-14deg)">ドパドパ</span>
+  </div>
+</div></div>
+  <div class="max-w-sm text-sm leading-relaxed"><p class="font-mono text-xs text-mute">state / hot</p><p class="mt-1 font-display text-xl">激熱</p><div class="mt-3 space-y-2 text-ink/80"><p>12打目（進み具合60%）で入る。入った1打で「激熱」の判子が押され、画面が1度だけ揺れる。低い音と重い振動。</p><p>そのあいだ、背景に dopa の集中線がゆっくり回り、ボタンは赤みを帯びた金になる。この見本は0.45秒以内の連打が9打続いたところで、指の上に「ドパドパ ×9」が出ている。数は勢いだけで、ドパは増えない。</p></div></div>
+</div><div data-panel="push" class="grid items-start gap-8 md:grid-cols-[auto_1fr]">
+  <div class="app a-bg relative w-[300px] shrink-0 overflow-hidden rounded-3xl border border-rule p-5 pt-14"><span class="lines"></span><div class="relative flex flex-col items-center">
+  <div class="relative">
+    
+    <button type="button" class="mash relative grid place-items-center hot" aria-label="完了連打">
+      <span class="text-center">
+        <span class="block text-[11px] font-bold opacity-70">残り</span>
+        <span class="num block text-[76px] leading-[.95]">3</span>
+        <span class="mt-0.5 block text-[12px] font-black">PUSH</span>
+      </span>
+    </button>
+    <span class="pop-word" style="left:70%;top:-6%;font-size:30px;transform:rotate(8deg)">ドパァ</span>
+  </div>
+</div></div>
+  <div class="max-w-sm text-sm leading-relaxed"><p class="font-mono text-xs text-mute">state / push</p><p class="mt-1 font-display text-xl">PUSH</p><div class="mt-3 space-y-2 text-ink/80"><p>残りが3になった1打（17打目）で入る。ボタンの下の文字が「PUSH」になり、残りの数を 3、2、1 と大写しにする。</p><p>目標回数が10より少ないときは、残り1打から。次の1打が<a href="../../../glossary.html#finale" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">フィナーレ</a>（確定）。</p></div></div>
+</div><div data-panel="rainbow" class="grid items-start gap-8 md:grid-cols-[auto_1fr]">
+  <div class="app a-bg relative w-[300px] shrink-0 overflow-hidden rounded-3xl border border-rule p-5 pt-14"><span class="lines"></span><div class="relative flex flex-col items-center">
+  <div class="relative">
+    <span class="rainbow"></span>
+    <button type="button" class="mash relative grid place-items-center hot" aria-label="完了連打">
+      <span class="text-center">
+        <span class="block text-[11px] font-bold opacity-70">残り</span>
+        <span class="num block text-[76px] leading-[.95]">3</span>
+        <span class="mt-0.5 block text-[12px] font-black">PUSH</span>
+      </span>
+    </button>
+    
+  </div>
+</div></div>
+  <div class="max-w-sm text-sm leading-relaxed"><p class="font-mono text-xs text-mute">state / rainbow</p><p class="mt-1 font-display text-xl">PUSH＋虹</p><div class="mt-3 space-y-2 text-ink/80"><p>最後の1打で<a href="../../../glossary.html#milestone" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">節目</a>に届くと、記録から分かっている連打。PUSH に入った瞬間から、ボタンの縁が虹色に回る。パチンコでいう先バレ。</p><p>くじは引いていない。今日の1回で連続30日目になる、DT が1,000を超える、といったことは叩く前から計算で分かる。</p></div></div>
 </div></div>
 </div>
 </section>

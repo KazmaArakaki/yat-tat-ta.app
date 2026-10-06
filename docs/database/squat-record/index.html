@@ -48,9 +48,9 @@ tailwind.config = {
     <h2 class="mt-2 font-display text-3xl">ER図</h2>
     <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">ほかの表とのつながりはない。右側は表ではなく、この表から計算する数。</p>
     <div class="mt-6 overflow-x-auto rounded-2xl border border-rule bg-white p-4">
-      <svg viewBox="0 0 640 260" class="mx-auto block w-full min-w-[34rem] max-w-2xl" role="img" aria-label="SquatRecord と、そこから計算する数">
+      <svg viewBox="0 0 640 270" class="mx-auto block w-full min-w-[34rem] max-w-2xl" role="img" aria-label="SquatRecord と、そこから計算する数">
         <g font-family="JetBrains Mono, monospace" font-size="13">
-          <rect x="10" y="40" width="230" height="170" rx="10" fill="#FFFFFF" stroke="#1C1916" stroke-width="2"/>
+          <rect x="10" y="40" width="230" height="200" rx="10" fill="#FFFFFF" stroke="#1C1916" stroke-width="2"/>
           <rect x="10" y="40" width="230" height="38" rx="10" fill="#E5337A"/>
           <rect x="10" y="66" width="230" height="12" fill="#E5337A"/>
           <text x="26" y="65" fill="#FFFFFF" font-weight="700" font-size="15">SquatRecord</text>
@@ -58,18 +58,20 @@ tailwind.config = {
           <text x="26" y="134" fill="#1C1916">   startedAt</text><text x="150" y="134" fill="#6E655C">Date</text>
           <text x="26" y="164" fill="#1C1916">   day</text><text x="150" y="164" fill="#6E655C">Int</text>
           <text x="26" y="194" fill="#1C1916">   reps</text><text x="150" y="194" fill="#6E655C">Int</text>
+          <text x="26" y="224" fill="#1C1916">   bonusDopa</text><text x="150" y="224" fill="#6E655C">Int = 0</text>
         </g>
         <g fill="none" stroke="#6E655C" stroke-width="1.5" stroke-dasharray="5 4">
           <path d="M240 190 C 300 190, 300 40, 380 40"/>
+          <path d="M240 220 C 310 220, 300 50, 380 50"/>
           <path d="M240 160 C 300 160, 300 100, 380 100"/>
           <path d="M240 160 C 300 160, 300 160, 380 160"/>
           <path d="M240 160 C 300 160, 300 220, 380 220"/>
         </g>
         <g font-family="Noto Sans JP, sans-serif" font-size="13">
           <rect x="380" y="22" width="250" height="36" rx="8" fill="#FBF6EE" stroke="#6E655C" stroke-dasharray="5 4"/>
-          <text x="394" y="45" fill="#1C1916">DT：reps の合計</text>
+          <text x="394" y="45" fill="#1C1916">DT：reps + bonusDopa の合計</text>
           <rect x="380" y="82" width="250" height="36" rx="8" fill="#FBF6EE" stroke="#6E655C" stroke-dasharray="5 4"/>
-          <text x="394" y="105" fill="#1C1916">DPW、自己ベスト：直近7日ずつの reps</text>
+          <text x="394" y="105" fill="#1C1916">DPW、自己ベスト：直近7日ずつ</text>
           <rect x="380" y="142" width="250" height="36" rx="8" fill="#FBF6EE" stroke="#6E655C" stroke-dasharray="5 4"/>
           <text x="394" y="165" fill="#1C1916">連続記録、最長記録：day をたどる</text>
           <rect x="380" y="202" width="250" height="36" rx="8" fill="#FBF6EE" stroke="#6E655C" stroke-dasharray="5 4"/>
@@ -89,7 +91,8 @@ tailwind.config = {
           <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs font-bold">id</td><td class="py-3 pr-4 font-mono text-xs">UUID</td><td class="py-3 pr-4">記録を見分けるための値。作るときに振る。いまは使う場面がないが、将来の<a href="../../issues/undo-record/index.html" class="text-dopa underline underline-offset-4">取り消し</a>や書き出しで1件を指すときに要る。</td></tr>
           <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs font-bold">startedAt</td><td class="py-3 pr-4 font-mono text-xs">Date</td><td class="py-3 pr-4">叩き始めた日時。最初の1打の時刻。閉じた時刻ではないのは、60秒待って閉じた記録の時刻が、叩いた時刻から1分ずれるのを避けるため。画面には出さず、計算にも使わない。あとから振り返るときの手がかりとして残す。</td></tr>
           <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs font-bold">day</td><td class="py-3 pr-4 font-mono text-xs">Int</td><td class="py-3 pr-4"><a href="../../glossary.html#record-day" class="text-dopa underline underline-offset-4">記録日</a>。yyyymmdd の8桁（例：20261006）。午前4時より前は前の日。最初の1打の瞬間に、端末の時刻とタイムゾーンで決めて書く。あとで startedAt から計算し直さないのは、海外へ行くと過去の記録の日が動くから。連続記録も DPW の直近7日間も、この列から数える。</td></tr>
-          <tr class="align-top"><td class="py-3 pr-4 font-mono text-xs font-bold">reps</td><td class="py-3 pr-4 font-mono text-xs">Int</td><td class="py-3 pr-4">ドパに変えた回数。1以上。叩き切れば<a href="../../glossary.html#target-reps" class="text-dopa underline underline-offset-4">目標回数</a>と同じ数、途中で閉じれば叩いたところまで。目標回数をあとで変えても、過去の記録の DT が変わらないように、その場の回数を写しておく。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs font-bold">reps</td><td class="py-3 pr-4 font-mono text-xs">Int</td><td class="py-3 pr-4">ドパに変えたスクワットの回数。1以上。叩き切れば<a href="../../glossary.html#target-reps" class="text-dopa underline underline-offset-4">目標回数</a>と同じ数、途中で閉じれば叩いたところまで。目標回数をあとで変えても、過去の記録の DT が変わらないように、その場の回数を写しておく。</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-mono text-xs font-bold">bonusDopa</td><td class="py-3 pr-4 font-mono text-xs">Int（既定 0）</td><td class="py-3 pr-4"><a href="../../glossary.html#fever" class="text-dopa underline underline-offset-4">フィーバータイム</a>で取ったドパ。フィーバーの1打はスクワットではないので、reps に混ぜず別に持つ。混ぜると、あとから何回しゃがんだかが分からなくなる。DT と DPW には reps と足して入れる。連続記録は reps のある記録で決まり、この列は見ない。2026-10-06 に足した列で、既定値 0 を持つので、それより前の記録はそのまま読める（壊さない変更）。</td></tr>
         </tbody>
       </table>
     </div>

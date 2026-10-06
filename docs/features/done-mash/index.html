@@ -41,14 +41,14 @@ tailwind.config = {
       <a href="../index.html" class="hover:text-ink">features</a><span>/</span><span>記録する</span>
     </div>
     <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">完了連打</span></h1>
-    <p class="mt-4 max-w-2xl text-base leading-relaxed">スクワットを終えたら、その回数だけボタンを叩く。1打ごとにスクワット1回が1ドパに変わる。<a href="../../glossary.html#record" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録</a>を作るのは、アプリの中でこの機能だけです。</p>
+    <p class="mt-4 max-w-2xl text-base leading-relaxed">スクワットを終えたら、その回数だけ画面の中央を叩く。叩くたびに<a href="../../glossary.html#squat-squad" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スクワット隊</a>が揃ってしゃがみ、1打ごとにスクワット1回が1ドパに変わる。<a href="../../glossary.html#record" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録</a>を作るのは、アプリの中でこの機能だけです。</p>
   </header>
 
   <section id="overview" class="mt-16">
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01 / overview</p>
     <h2 class="mt-2 font-display text-3xl">何を叩いているのか</h2>
     <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80"><a href="../../glossary.html#meal-squat" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">毎食後スクワット</a>では、アプリはスクワットを数えません。数えるのは本人で、アプリが受け取るのは「終わった」という合図だけです。その合図を1回の押下ではなく、<a href="../../glossary.html#target-reps" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">目標回数</a>と同じ数の連打にしたのが<a href="../../glossary.html#done-mash" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">完了連打</a>です。20回しゃがんだら20打。</p>
-    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">ボタンに出ている数は、まだ<a href="../../glossary.html#dopa-point" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパ</a>に変えていないスクワットの数です。1打で1減り、その1がドパの粒になって飛んでいく。済ませたスクワットを、自分の指でドパに替える作業になります。アプリはスクワットをしたかを確かめません。他人と比べる場所がないので、ごまかして困るのは本人だけです。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">スクワット隊の上に出ている数は、まだ<a href="../../glossary.html#dopa-point" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパ</a>に変えていないスクワットの数です。1打で1減り、その1がドパの粒になって飛んでいく。済ませたスクワットを、自分の指でドパに替える作業になります。アプリはスクワットをしたかを確かめません。他人と比べる場所がないので、ごまかして困るのは本人だけです。</p>
     <p class="mt-8 font-mono text-xs text-mute">表1　決まりごと</p>
     <div class="mt-2 overflow-x-auto">
       <table class="w-full min-w-[34rem] border-collapse text-sm">
@@ -61,6 +61,35 @@ tailwind.config = {
         </tbody>
       </table>
     </div>
+  </section>
+
+  <section id="squad" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01-2 / squad</p>
+    <h2 class="mt-2 font-display text-3xl">叩く場所に立つスクワット隊</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">最初の版では、画面のまん中に金色の丸いボタンを置いていました。けれども丸は何の形でもなく、叩いているのがスクワットの記録だとは目で分かりません。2026-10-06 に開発者の注文で、ボタンをやめました。上の帯と下のカードのあいだを画面の幅いっぱいに叩けるようにして、そこに<a href="../../glossary.html#squat-squad" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スクワット隊</a>を立たせます。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">指が触れた瞬間に、隊の全員が揃ってしゃがむ。指が全部離れたら立ち上がる。指を置いたままなら、しゃがんだまま止まります。本物のスクワットの、下で止まる一瞬に近い形です。1打が「しゃがんだ1回」に見えるようになりました。</p>
+    <div class="mt-6 grid gap-4 md:grid-cols-3">
+      <figure class="rounded-3xl border-2 border-ink bg-white p-4"><svg viewBox="-40 -105 100 115" class="mx-auto h-40" aria-hidden="true"><g transform="translate(0,0) scale(1)"><polyline points="0,-72 2,-46" stroke="#1C1916" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="12,0 0,0 0,-20 0,-40 0,-72" stroke="#1C1916" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="0,-72 2,-46" stroke="#E9A800" stroke-width="6.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="12,0 0,0 0,-20 0,-40 0,-72" stroke="#E9A800" stroke-width="6.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="0" cy="-88" r="10" fill="#E9A800" stroke="#1C1916" stroke-width="3.5"/></g></svg><figcaption class="mt-2 text-center text-xs font-bold text-mute">立つ姿（指が離れている）</figcaption></figure>
+      <figure class="rounded-3xl border-2 border-ink bg-white p-4"><svg viewBox="-40 -105 100 115" class="mx-auto h-40" aria-hidden="true"><g transform="translate(0,0) scale(1)"><polyline points="4,-55 30,-57" stroke="#1C1916" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="12,0 0,0 14,-14 -6,-24 4,-55" stroke="#1C1916" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="4,-55 30,-57" stroke="#E9A800" stroke-width="6.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="12,0 0,0 14,-14 -6,-24 4,-55" stroke="#E9A800" stroke-width="6.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="-70" r="10" fill="#E9A800" stroke="#1C1916" stroke-width="3.5"/></g></svg><figcaption class="mt-2 text-center text-xs font-bold text-mute">しゃがむ姿（指が触れている）</figcaption></figure>
+      <figure class="rounded-3xl border-2 border-ink bg-white p-4"><svg viewBox="0 30 260 180" class="mx-auto h-40" aria-hidden="true"><g transform="translate(124.2,172) scale(0.975)"><polyline points="4,-55 30,-57" stroke="#1C1916" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="12,0 0,0 14,-14 -6,-24 4,-55" stroke="#1C1916" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="4,-55 30,-57" stroke="#E9A800" stroke-width="6.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="12,0 0,0 14,-14 -6,-24 4,-55" stroke="#E9A800" stroke-width="6.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="-70" r="10" fill="#E9A800" stroke="#1C1916" stroke-width="3.5"/></g><g transform="translate(75.4,172) scale(0.975)"><polyline points="4,-55 30,-57" stroke="#1C1916" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="12,0 0,0 14,-14 -6,-24 4,-55" stroke="#1C1916" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="4,-55 30,-57" stroke="#E5337A" stroke-width="6.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="12,0 0,0 14,-14 -6,-24 4,-55" stroke="#E5337A" stroke-width="6.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="-70" r="10" fill="#E5337A" stroke="#1C1916" stroke-width="3.5"/></g><g transform="translate(122.5,200) scale(1.25)"><polyline points="4,-55 30,-57" stroke="#1C1916" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="12,0 0,0 14,-14 -6,-24 4,-55" stroke="#1C1916" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="4,-55 30,-57" stroke="#E9A800" stroke-width="6.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="12,0 0,0 14,-14 -6,-24 4,-55" stroke="#E9A800" stroke-width="6.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="-70" r="10" fill="#E9A800" stroke="#1C1916" stroke-width="3.5"/></g><g transform="translate(60.0,200) scale(1.25)"><polyline points="4,-55 30,-57" stroke="#1C1916" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="12,0 0,0 14,-14 -6,-24 4,-55" stroke="#1C1916" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="4,-55 30,-57" stroke="#E5337A" stroke-width="6.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="12,0 0,0 14,-14 -6,-24 4,-55" stroke="#E5337A" stroke-width="6.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="-70" r="10" fill="#E5337A" stroke="#1C1916" stroke-width="3.5"/></g><g transform="translate(185.0,200) scale(1.25)"><polyline points="4,-55 30,-57" stroke="#1C1916" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="12,0 0,0 14,-14 -6,-24 4,-55" stroke="#1C1916" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="4,-55 30,-57" stroke="#2F79F7" stroke-width="6.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="12,0 0,0 14,-14 -6,-24 4,-55" stroke="#2F79F7" stroke-width="6.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="-70" r="10" fill="#2F79F7" stroke="#1C1916" stroke-width="3.5"/></g></svg><figcaption class="mt-2 text-center text-xs font-bold text-mute">5人の隊が揃ってしゃがむ（20打）</figcaption></figure>
+    </div>
+    <p class="mt-8 font-mono text-xs text-mute">表1-2　スクワット隊の決まり</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[36rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">項目</th><th class="py-2 pr-4 font-bold">決まり</th><th class="py-2 pr-4 font-bold">理由</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">叩く場所</td><td class="py-3 pr-4">上の帯と下のカードのあいだ、画面の幅いっぱい</td><td class="py-3 pr-4">丸いボタンより的が大きく、連打で指が外れない</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">人の絵</td><td class="py-3 pr-4">横向きの人を、コードで描く（太い ink の線に色を重ねた棒人間）。画像のファイルは使わない</td><td class="py-3 pr-4">立つ姿としゃがむ姿のあいだを、線の形ごと動かせる。画面の大きさを選ばない</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">動き</td><td class="py-3 pr-4">指が触れた瞬間にしゃがむ（0.08秒）、指が全部離れたら立ち上がる（0.12秒）。隊の全員が揃ってしゃがむ</td><td class="py-3 pr-4">タップは触れた瞬間に受ける（<a href="../../glossary.html#tezawari" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">手触り</a>の試作の決まり）。立ち上がりを少し遅くして、しゃがんだ形を目に残す</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">増え方</td><td class="py-3 pr-4">最初は1人。スクワット2回ごとに1人、手前の列から奥の列へ増える。上限は30人。増えた1人は跳ねて現れ、「+1人」と音が出る</td><td class="py-3 pr-4">目標回数60で30人に届き、そこで止まる。51人では実機で音が乱れ、返事が遅れた奥の列ほど小さく描き、大勢に見せる</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">残りの数</td><td class="py-3 pr-4">隊の上に大きく「スクワット 残り 13」。PUSH では「PUSH!」と 3、2、1</td><td class="py-3 pr-4">ボタンの中にあった数を、隊の上へ移す</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">段階の色</td><td class="py-3 pr-4">NORMAL は人ごとに gold、dopa、signal を回す。激熱で全員 dopa、PUSH で全員 gold。虹の先バレは、隊の後ろで回る虹の輪</td><td class="py-3 pr-4">色が揃うと、隊がひとつになって盛り上がって見える</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-bold">閉じたあと</td><td class="py-3 pr-4">フィナーレのあと、隊は1人に戻る</td><td class="py-3 pr-4">次の食事の連打は、また1人から</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-3 max-w-2xl text-xs leading-relaxed text-mute">指の位置の輪、飛ぶドパの粒、飛ぶ「ドパ」の文字、叩き切ったときの粒の噴き出しは、ボタンのときから変えない。視差効果を減らす設定でも人はしゃがむ。動きが、叩いた返事そのものだからです。増えるときの跳ねだけを止める。決めた経緯は<a href="../../sessions/20261006-0312-main-build/index.html#squad" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">本作りの設計 04-5</a>。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">隊の上の「スクワット 残り」の数は、叩いている間<a href="../../glossary.html#party-parrot" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">パーティーパロット</a>風に動く。色が虹の12色を1秒で1周し、数が小さく円を描いて揺れる。揺れは段階が上がるほど速い。数の大きさも叩くたびに少しずつ大きくなり、84pt から最後の1打で170pt になる。</p>
   </section>
 
   <section id="closing" class="mt-20">
@@ -76,7 +105,7 @@ tailwind.config = {
       <div class="rounded-3xl border-2 border-ink bg-white p-5">
         <p class="font-mono text-xs text-mute">閉じる 2</p>
         <p class="mt-1 font-display text-lg">60秒叩かなかった</p>
-        <p class="mt-2 text-sm leading-relaxed">叩いたところまでで1件。フィナーレは出さず、ボタンは目標回数に戻る。スクワットを終えてから叩くので、途中で1分空くのはやめたときだけ。</p>
+        <p class="mt-2 text-sm leading-relaxed">叩いたところまでで1件。フィナーレは出さず、残りの数は目標回数に、隊は1人に戻る。スクワットを終えてから叩くので、途中で1分空くのはやめたときだけ。</p>
       </div>
       <div class="rounded-3xl border-2 border-ink bg-white p-5">
         <p class="font-mono text-xs text-mute">閉じる 3</p>
@@ -84,7 +113,7 @@ tailwind.config = {
         <p class="mt-2 text-sm leading-relaxed">ホームに戻った、電話が来た。2 と同じ閉じ方。離れたまま終了されても、叩いた分は消えない。</p>
       </div>
     </div>
-    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">7打で止めた記録も、7ドパの1件として残り、その日の<a href="../../glossary.html#streak" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">連続記録</a>もつながります。継続の条件は「その日に完了連打を1回」で、目標回数に届いたかは問いません。閉じないまま待ち続けると、昼に7打で止めた人が夜に開いたとき、ボタンに「13」が残ってしまいます。</p>
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">7打で止めた記録も、7ドパの1件として残り、その日の<a href="../../glossary.html#streak" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">連続記録</a>もつながります。継続の条件は「その日に完了連打を1回」で、目標回数に届いたかは問いません。閉じないまま待ち続けると、昼に7打で止めた人が夜に開いたとき、残りの数に「13」が残ってしまいます。</p>
     <p class="mt-4 rounded-lg border border-dashed border-mute bg-white/60 p-3 text-xs leading-relaxed">間違えて叩いた記録を消す仕組みはない（開発者が決定）。課題 <a href="../../issues/undo-record/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">undo-record</a>。アプリが異常終了したときは、開いていた1件が消える。</p>
   </section>
 
@@ -98,8 +127,8 @@ tailwind.config = {
         <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">出すもの</th><th class="py-2 pr-4 font-bold">強さを決めるもの</th></tr></thead>
         <tbody>
           <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">音の高さ、振動の強さ</td><td class="py-3 pr-4">進み具合。目標回数を8つに割り、何打目かで8段階のどれかを鳴らす。最後の1打がいちばん高く強い</td></tr>
-          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">ボタンの光、指の位置の輪</td><td class="py-3 pr-4">連打の速さ。0.45秒以内に次を叩くと明るくなり、止まると落ちる</td></tr>
-          <tr class="align-top"><td class="py-3 pr-4 font-bold">ドパの粒</td><td class="py-3 pr-4">いつも同じ。1打で1粒、ボタンから「+N ドパ」へ飛ぶ</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">指の位置の輪、四辺の光</td><td class="py-3 pr-4">連打の速さ。0.45秒以内に次を叩くと明るくなり、止まると落ちる</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-bold">ドパの粒</td><td class="py-3 pr-4">いつも同じ。1打で1粒、指の位置から「+N ドパ」へ飛ぶ</td></tr>
         </tbody>
       </table>
     </div>
@@ -111,11 +140,136 @@ tailwind.config = {
     </ul>
   </section>
 
+  <section id="dopadopa" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03-2 / dopadopa</p>
+    <h2 class="mt-2 font-display text-3xl">連打の途中のドパドパ</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">上の表だけでは、20打のうち19打がほぼ同じ見た目で過ぎます。山は最後の1打にしかありません。そこで連打の途中に、パチンコの文法を借りた段階を置きます。これを<a href="../../glossary.html#dopadopa" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパドパ</a>と呼びます（開発者の注文から）。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">パチンコは、当たるかどうか分からないから煽ります。完了連打は、叩き切れば必ずフィナーレが出る。外れがないので、段階はくじで決めず、何打目まで来たかで決めます。同じ目標回数なら、毎回同じ打で激熱が来ます。</p>
+    <p class="mt-8 font-mono text-xs text-mute">表2-2　ドパドパの段階（目標回数 20 の場合）</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[40rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">段階</th><th class="py-2 pr-4 font-bold">入る1打</th><th class="py-2 pr-4 font-bold">入った瞬間</th><th class="py-2 pr-4 font-bold">その段階のあいだ、1打ごと</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">NORMAL</td><td class="py-3 pr-4">1打目</td><td class="py-3 pr-4">なし</td><td class="py-3 pr-4">輪と粒。指の位置から小さな「ドパ」の文字が飛ぶ</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold text-dopa">CHANCE</td><td class="py-3 pr-4">進み具合 30%（6打目）</td><td class="py-3 pr-4">画面いっぱいに「CHANCE!!」。上がる音を1つ</td><td class="py-3 pr-4">画面の四辺が dopa 色で脈打つ。「ドパ」の文字が大きくなる</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold text-dopa">激熱</td><td class="py-3 pr-4">進み具合 60%（12打目）</td><td class="py-3 pr-4">「激熱」の判子が押され、画面が1度揺れる。低い音と重い振動</td><td class="py-3 pr-4">地が暗転して虹の放射線が回る。隊の全員が dopa 色になる。叩く音に低音を重ねる</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold text-gold">PUSH</td><td class="py-3 pr-4">残りが3になった1打（17打目）</td><td class="py-3 pr-4">隊の上の文字が「PUSH!」になり、隊の全員が gold になる</td><td class="py-3 pr-4">残りの数を 3、2、1 と大写しにする</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-bold">確定</td><td class="py-3 pr-4">最後の1打</td><td class="py-3 pr-4" colspan="2">フィナーレ</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-3 max-w-2xl text-xs leading-relaxed text-mute">目標回数が 10 より少ないときは、PUSH を残り1打にする。段階の入り口が同じ1打に重なったら、強いほうだけを出す。</p>
+    <ul class="mt-6 flex max-w-2xl flex-col gap-3 text-sm leading-relaxed">
+      <li class="border-l-4 border-dopa pl-3"><b>勢いの表示</b>：0.45秒以内に叩き続けると、指の上に「ドパドパ ×N」と続いた打数が出て、飛ぶ文字が「ドパ」から「ドパドパ」に変わる。数は勢いを見せるだけで、ドパは1打で1のまま。<a href="../../glossary.html#combo-multiplier" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">コンボ倍率</a>は付けない。付けると、1ドパが1回のスクワットでなくなる。</li>
+      <li class="border-l-4 border-gold pl-3"><b>虹の先バレ</b>：最後の1打で<a href="../../glossary.html#milestone" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">節目</a>に届くと記録から分かっているとき、PUSH に入った瞬間から、隊の後ろで虹の輪が回る（04-2 ではボタンの縁だった）。パチンコの先バレと同じく当たりを前もって告げるが、くじは引いていない。</li>
+      <li class="border-l-4 border-ink pl-3"><b>守るもの</b>：画面全体の明滅は1秒に3回まで。「視差効果を減らす」が入っていれば、揺れ、集中線、飛ぶ文字を止め、段階の文字と隊の色だけを変える（<a href="../../glossary.html#reduced-effects-mode" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ひかえめモード</a>の考え方）。音と振動は変えない。</li>
+    </ul>
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">叩いて確かめられる見本は <a href="../../sessions/20261006-0312-main-build/dopadopa.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパドパの見本</a>。決めた経緯は<a href="../../sessions/20261006-0312-main-build/index.html#dopadopa" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">本作りの設計 04-2</a>。</p>
+  </section>
+
+  <section id="fullscreen" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03-3 / fullscreen</p>
+    <h2 class="mt-2 font-display text-3xl">画面ぜんぶが鳴る</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">ドパドパだけでは、まだ足りませんでした。集中線も判子もボタンのまわりで起き、上の帯と下のカードは激熱のあいだも静かなまま。パチンコの台には、そんな静かな場所はありません。そこで、段階の舞台を画面全体へ広げます。</p>
+    <p class="mt-8 font-mono text-xs text-mute">表2-3　画面全体の段階（ドパドパの段階に重ねる）</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[36rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">段階</th><th class="py-2 pr-4 font-bold">画面の地</th><th class="py-2 pr-4 font-bold">1打ごと</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold text-dopa">CHANCE</td><td class="py-3 pr-4">画面の四辺が dopa 色に光って脈打つ</td><td class="py-3 pr-4">四辺の光が1打ごとに強まる</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold text-dopa">激熱</td><td class="py-3 pr-4">地が暗転し、画面全体に虹色の放射線がゆっくり回る</td><td class="py-3 pr-4">放射線が少しずつ速くなり、画面の端から火の粉が上がる</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-bold text-gold">PUSH</td><td class="py-3 pr-4">放射線が全速で回る</td><td class="py-3 pr-4">画面全体がわずかに膨らんで戻る</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-3 max-w-2xl text-xs leading-relaxed text-mute">上の帯と下のカードは自分の地を持ち、暗転した地の上でも読める。白く光らせる明滅は1秒に3回まで。速い連打で1打ごとに光らせると、1秒に8回を超えるからです。</p>
+  </section>
+
+  <section id="kakutei" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03-4 / kakutei</p>
+    <h2 class="mt-2 font-display text-3xl">叩き切ったあとの3秒</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">最後の1打のあと、演出は2つ続きます。合わせて3秒ほど。04 の設計では2秒で終わっていたので、1秒伸びました。</p>
+    <div class="mt-6 grid gap-4 md:grid-cols-2">
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs text-dopa">1.2秒</p>
+        <p class="mt-1 font-display text-lg"><a href="../../glossary.html#muscle-kakutei" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">筋肉確定</a></p>
+        <p class="mt-2 text-sm leading-relaxed">白い閃光のあと、虹の放射線の上に金属の文字が2行で落ちる。言葉は筋肉確定、太もも確定、根性確定、継続確定、明日も確定を、記録を閉じた順に回す。下に小さく「やったった！」と変えたドパ。</p>
+      </div>
+      <div id="negirai" class="rounded-3xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs text-dopa">1.6秒</p>
+        <p class="mt-1 font-display text-lg"><a href="../../glossary.html#negirai" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ねぎらい</a></p>
+        <p class="mt-2 text-sm leading-relaxed">画面が金の炎に包まれ、金の文字でねぎらう。節目の札はこの下に積む。言葉は下の表のとおり、その場の事情で選ぶ。</p>
+      </div>
+    </div>
+    <p class="mt-8 font-mono text-xs text-mute">表2-4　ねぎらいの言葉（上から順に、当てはまった最初の1つ）</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[30rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">場面</th><th class="py-2 pr-4 font-bold">言葉</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4"><a href="../../glossary.html#streak" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">連続記録</a>の節目に届いた</td><td class="py-3 pr-4">「30日連続！あんたはえらい！」</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4">その日の最初の記録</td><td class="py-3 pr-4">「今日もお疲れ！」</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4">21時から午前4時まで</td><td class="py-3 pr-4">「夜食のあとに、えらすぎる！」</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4">それ以外</td><td class="py-3 pr-4">「あんたはえらい！」「よっ、太もも番長！」「限界突破！」を順に回す</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <ul class="mt-6 flex max-w-2xl flex-col gap-3 text-sm leading-relaxed">
+      <li class="border-l-4 border-dopa pl-3"><b>飛ばせる</b>：叩き切って1.2秒が過ぎたら、画面のどこを触っても飛ばせる。次の食事のあとに急いで叩く人を待たせないため。</li>
+      <li class="border-l-4 border-gold pl-3"><b>途中で閉じた記録には出さない</b>：叩き切った人へのねぎらいだから。届いた節目の札だけを出す。</li>
+      <li class="border-l-4 border-ink pl-3"><b>健康効果は言わない</b>：「筋肉確定」は冗談の言葉で、体の中で起きることには触れない（課題 <a href="../../issues/health-claims/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">health-claims</a>）。</li>
+    </ul>
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">声と効果音は開発者に用意してもらい、届くまでは合成音で代える（<a href="../../sessions/20261006-0312-main-build/index.html#fullscreen" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">本作りの設計 04-3</a> の表1-5）。叩いて確かめられる見本は <a href="../../sessions/20261006-0312-main-build/fullscreen.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">画面全体の演出の見本</a>。</p>
+  </section>
+
+  <section id="fever" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03-5 / fever</p>
+    <h2 class="mt-2 font-display text-3xl">10秒のフィーバータイム</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">完了連打の1打ごとに、0.51% のくじを引きます。当たると、その1打の直後から10秒間の<a href="../../glossary.html#fever" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">フィーバータイム</a>。スクワットの残りは止まり、そのあいだは画面のどこを叩いても1打1ドパ入ります（倍率は付けない）。10秒で80打なら80ドパ。最後の3秒（ラッシュ）は演出だけが強まります。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">Yat Tat Ta の演出は、段階も確定も、くじを引かずに決めてきました。フィーバーだけが例外です。いつ来るか分からないこと自体を、開発者はドーパミンの材料に選びました（<a href="../../glossary.html#fixed-vs-variable-reward" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">可変報酬</a>）。20打の連打で当たるのは約10回に1回、1日60打なら約4日に1回。外れが続いても、当たりやすくはなりません。</p>
+    <p class="mt-8 font-mono text-xs text-mute">表2-6　フィーバータイムの決まり</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[36rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">項目</th><th class="py-2 pr-4 font-bold">決まり</th><th class="py-2 pr-4 font-bold">理由</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">始まり</td><td class="py-3 pr-4">スクワットの1打ごとに 0.51%。当たった1打の直後から</td><td class="py-3 pr-4">いつ来るか分からない驚きを作る</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">長さ</td><td class="py-3 pr-4">10秒</td><td class="py-3 pr-4"></td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">1打のドパ</td><td class="py-3 pr-4">1打1ドパ。倍率は付けない</td><td class="py-3 pr-4">1ドパの重さをスクワットとそろえる（開発者の注文）</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">スクワットの残り</td><td class="py-3 pr-4">止まり、終わったら続きから。最後の1打で当たれば、フィーバーのあとにフィナーレ</td><td class="py-3 pr-4">フィーバーの1打はスクワットではない</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">数え方</td><td class="py-3 pr-4">DT と DPW に入れる。<a href="../../glossary.html#record" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録</a>には reps とは別の欄 bonusDopa に残す</td><td class="py-3 pr-4">何回しゃがんだかは、あとからでも出せる</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">連続記録</td><td class="py-3 pr-4">関係しない</td><td class="py-3 pr-4">続いたかどうかはスクワットの記録で決まる</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-bold">フィーバー中のくじ</td><td class="py-3 pr-4">引かない</td><td class="py-3 pr-4">終わりがなくなる</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-3 max-w-2xl text-xs leading-relaxed text-mute">見た目は <a href="../../ui/components/fever/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">コンポーネント：フィーバータイム</a>。当たる確率は画面に出さない。</p>
+  </section>
+
+  <section id="x5" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03-6 / x5</p>
+    <h2 class="mt-2 font-display text-3xl">5倍に盛ったところ</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">声と効果音がそろった実機でも、開発者の答えは「演出がまたフラット」でした。背景も文字も BGM も、まだ静かだった。注文は「5倍くらい派手に」。</p>
+    <p class="mt-8 font-mono text-xs text-mute">表2-7　これまでと、これから</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[36rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">どこ</th><th class="py-2 pr-4 font-bold">これまで</th><th class="py-2 pr-4 font-bold">これから</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">NORMAL の地</td><td class="py-3 pr-4">紙の色のまま</td><td class="py-3 pr-4">1打目から薄い放射線が回る。叩くたびに画面全体へ衝撃波の輪</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">段階に入った1打</td><td class="py-3 pr-4">CHANCE の帯、激熱の判子</td><td class="py-3 pr-4">画面いっぱいの金属文字「CHANCE!!」「激熱!!」「PUSH!!」と、噴き出す放射線と粒（0.9秒）</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">飛ぶ「ドパ」</td><td class="py-3 pr-4">小さな文字</td><td class="py-3 pr-4">3倍の金属文字。激熱からは1打で3つ。画面が1打ごとに小さく揺れる</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">確定とねぎらいの文字</td><td class="py-3 pr-4">落ちて止まる</td><td class="py-3 pr-4">落ちたあとも脈打ち、光の筋が走り続け、まわりに粒が湧く。放射線は2倍の速さ</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">BGM</td><td class="py-3 pr-4">激熱からだけ</td><td class="py-3 pr-4">最初の1打から bgm_mash、激熱で bgm_hot、フィーバーで bgm_fever。音量は最大、記録が閉じたら0.5秒で絞る</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-bold">100ドパごと</td><td class="py-3 pr-4">777 のリール（ドパ揃い）</td><td class="py-3 pr-4"><a href="../../glossary.html#dopa-toppa" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパ突破</a>（<a href="../dopa-totals/index.html#dopa-toppa" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパの合計</a>）</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 rounded-lg border border-dashed border-mute bg-white/60 p-3 text-xs leading-relaxed">盛っても守るもの。白い明滅は1秒3回まで。色を流す演出は1秒に1周より速くしない。視差効果を減らす設定では、揺れ、衝撃波、粒を止め、文字は置くだけ。マナーモードでは BGM も鳴らない。</p>
+  </section>
+
   <section id="screens" class="mt-20">
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / screens</p>
     <h2 class="mt-2 font-display text-3xl">関連する画面</h2>
     <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
-      <li class="rounded-2xl border border-rule bg-white p-4"><a href="../../ui/pages/home/index.html" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ホーム</a><p class="mt-1 text-ink/80">画面のまん中が叩くボタン。この機能の舞台。</p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><a href="../../ui/pages/home/index.html" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ホーム</a><p class="mt-1 text-ink/80">画面のまん中が叩く場所で、スクワット隊が立つ。この機能の舞台。</p></li>
       <li class="rounded-2xl border border-rule bg-white p-4"><a href="../../ui/pages/settings/index.html" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">設定シート</a><p class="mt-1 text-ink/80">目標回数を 5〜100 の5刻みで変える。次に叩き始めた記録から効く。</p></li>
     </ul>
   </section>
@@ -123,20 +277,17 @@ tailwind.config = {
   <section id="components" class="mt-20">
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / components</p>
     <h2 class="mt-2 font-display text-3xl">関連するコンポーネント</h2>
-    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">サンプル：目標回数 20 のうち7打目まで叩いたところと、叩き切った1打。状態ごとの見本は各コンポーネントのページにある。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">サンプル：目標回数 20 のうち7打目を叩いた瞬間と、叩き切った1打。状態ごとの見本は各コンポーネントのページにある。</p>
     <div class="mt-6 grid gap-6 md:grid-cols-2">
       <div class="rounded-3xl border-2 border-ink bg-white p-5">
-        <div class="flex items-baseline justify-between"><a href="../../ui/components/mash-button/index.html" class="font-mono text-xs font-bold text-dopa underline underline-offset-4">mash-button</a><span class="font-mono text-[11px] text-mute">7 / 20 打</span></div>
-        <div class="mt-4 flex flex-col items-center rounded-2xl bg-paper py-8">
-          <div class="grid h-44 w-44 animate-pulse2 place-items-center rounded-full border-4 border-ink bg-gold shadow-[0_8px_0_#1C1916]">
-            <span class="text-center">
-              <span class="block font-mono text-[10px] text-ink/70">スクワット</span>
-              <span class="block font-display text-5xl leading-none">13</span>
-              <span class="mt-1 block text-[11px] font-black">叩いてドパに</span>
-            </span>
-          </div>
-          <p class="mt-4 font-display text-xl text-dopa">+7 ドパ</p>
+        <div class="flex items-baseline justify-between"><a href="../../ui/components/squat-squad/index.html" class="font-mono text-xs font-bold text-dopa underline underline-offset-4">squat-squad</a><span class="font-mono text-[11px] text-mute">7 / 20 打</span></div>
+        <div class="mt-4 flex flex-col items-center rounded-2xl bg-paper py-6">
+          <p class="text-[11px] font-bold text-ink/70">スクワット 残り</p>
+          <p class="font-display text-5xl leading-none">13</p>
+          <svg viewBox="0 30 260 180" class="mt-2 h-44 w-full" aria-hidden="true"><g transform="translate(60.0,200) scale(1.25)"><polyline points="4,-55 30,-57" stroke="#1C1916" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="12,0 0,0 14,-14 -6,-24 4,-55" stroke="#1C1916" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="4,-55 30,-57" stroke="#E5337A" stroke-width="6.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="12,0 0,0 14,-14 -6,-24 4,-55" stroke="#E5337A" stroke-width="6.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="-70" r="10" fill="#E5337A" stroke="#1C1916" stroke-width="3.5"/></g><g transform="translate(185.0,200) scale(1.25)"><polyline points="4,-55 30,-57" stroke="#1C1916" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="12,0 0,0 14,-14 -6,-24 4,-55" stroke="#1C1916" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="4,-55 30,-57" stroke="#2F79F7" stroke-width="6.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="12,0 0,0 14,-14 -6,-24 4,-55" stroke="#2F79F7" stroke-width="6.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="-70" r="10" fill="#2F79F7" stroke="#1C1916" stroke-width="3.5"/></g><g transform="translate(122.5,200) scale(1.25)"><polyline points="4,-55 30,-57" stroke="#1C1916" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="12,0 0,0 14,-14 -6,-24 4,-55" stroke="#1C1916" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="4,-55 30,-57" stroke="#E9A800" stroke-width="6.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="12,0 0,0 14,-14 -6,-24 4,-55" stroke="#E9A800" stroke-width="6.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="-70" r="10" fill="#E9A800" stroke="#1C1916" stroke-width="3.5"/></g></svg>
+          <p class="mt-2 font-display text-xl text-dopa">+7 ドパ</p>
         </div>
+        <p class="mt-3 text-xs leading-relaxed text-mute">7打目で指が触れている瞬間。5打で1人増えて3人に、全員が揃ってしゃがんでいる。</p>
       </div>
       <div class="rounded-3xl border-2 border-ink bg-white p-5">
         <div class="flex items-baseline justify-between"><a href="../../ui/components/finale/index.html" class="font-mono text-xs font-bold text-dopa underline underline-offset-4">finale</a><span class="font-mono text-[11px] text-mute">20 / 20 打</span></div>
@@ -160,7 +311,7 @@ tailwind.config = {
     <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
       <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">設計の経緯</p><a href="../../sessions/20261006-0312-main-build/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">本作りの設計</a><a href="../../sessions/20261006-0215-subject/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">題材を決める</a></li>
       <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">保存するデータ</p><a href="../../database/squat-record/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">SquatRecord</a></li>
-      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../glossary.html#done-mash" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">完了連打</a><a href="../../glossary.html#target-reps" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">目標回数</a><a href="../../glossary.html#record" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録</a><a href="../../glossary.html#finale" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">フィナーレ</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../glossary.html#done-mash" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">完了連打</a><a href="../../glossary.html#squat-squad" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スクワット隊</a><a href="../../glossary.html#target-reps" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">目標回数</a><a href="../../glossary.html#record" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録</a><a href="../../glossary.html#finale" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">フィナーレ</a></p></li>
       <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">ほかの機能</p><a href="../dopa-totals/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパの合計</a><a href="../streak/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">連続記録と休み券</a></li>
     </ul>
   </section>
