@@ -80,6 +80,9 @@ tailwind.config = {
     <a href="#today-reminder" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">今日まだ通知</a>
     <a href="#health-claim" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">健康効果</a>
     <a href="#caution-note" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">注意書き</a>
+    <a href="#frame-drop" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">処理落ち</a>
+    <a href="#perf-mode" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">計測モード</a>
+    <a href="#touch-to-fire" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">タッチ→発火</a>
   </nav>
 
   <!-- Yat Tat Ta -->
@@ -806,6 +809,57 @@ tailwind.config = {
     <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
       <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#health-claim" class="text-dopa underline underline-offset-4">健康効果</a><a href="#target-reps" class="text-dopa underline underline-offset-4">目標回数</a><a href="#meal-squat" class="text-dopa underline underline-offset-4">毎食後スクワット</a></p></div>
       <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="ui/pages/settings/index.html" class="text-signal underline underline-offset-4">画面：設定シート</a><a href="devops/health-wording/index.html#caution" class="text-signal underline underline-offset-4">devops：健康効果の書き方（注意書き）</a></p></div>
+    </div>
+  </section>
+
+  <section id="frame-drop" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#frame-drop</p>
+    <h2 class="mt-1 font-display text-2xl">処理落ち</h2>
+    <p class="mt-3 leading-relaxed">演出が重くて、描画が止まる、叩いた返事が遅れる、音が欠けること。Yat Tat Ta は「演出を盛っても止まらないこと」を差別化の軸にしているので、処理落ちはその軸が崩れたことを意味する。比べる相手は、描画が毎秒3.8回まで落ちたドパ九九。実機の<a href="#perf-mode" class="text-dopa underline underline-offset-4">計測モード</a>で、描画、<a href="#touch-to-fire" class="text-dopa underline underline-offset-4">タッチ→発火</a>、途中で切った音の3つを数えて確かめる。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>スクワット隊を51人にしたとき、音が変になったのも処理落ちですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>そう呼んでいます。ただ、描画が重かったのか、音の再生口が足りずに声を切ったのかは分かっていません。計測モードで、どちらかを数で見ます。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>処理落ちしていないって、どうやって言うんですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>100打を3回叩いて、描画の最低が毎秒100以上、発火が最大40ms以下、声を1回も切らない。そのうえで、開発者の指が遅れを感じないことです。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#perf-mode" class="text-dopa underline underline-offset-4">計測モード</a><a href="#touch-to-fire" class="text-dopa underline underline-offset-4">タッチ→発火</a><a href="#effect-inflation" class="text-dopa underline underline-offset-4">演出インフレ</a><a href="#squat-squad" class="text-dopa underline underline-offset-4">スクワット隊</a><a href="#sync-drift" class="text-dopa underline underline-offset-4">同期ずれ</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="devops/perf-check/index.html" class="text-signal underline underline-offset-4">devops：処理落ちの確かめ方</a><a href="issues/heavy-effects-performance/index.html" class="text-signal underline underline-offset-4">課題：演出を盛ったときの処理落ち</a><a href="sessions/20261006-1312-heavy-effects/index.html" class="text-signal underline underline-offset-4">セッション：処理落ちを確かめる</a></p></div>
+    </div>
+  </section>
+
+  <section id="perf-mode" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#perf-mode</p>
+    <h2 class="mt-1 font-display text-2xl">計測モード</h2>
+    <p class="mt-3 leading-relaxed">起動引数 <code class="font-mono text-xs">-perf</code> で入る、Debug ビルドだけの起動の仕方。端末の記録は読まず、メモリの中だけに仮の記録を入れて始める。目標回数100を叩き切ると、30人の<a href="#squat-squad" class="text-dopa underline underline-offset-4">スクワット隊</a>、50打目の<a href="#fever" class="text-dopa underline underline-offset-4">フィーバータイム</a>、最後の1打で重なる3つの<a href="#milestone" class="text-dopa underline underline-offset-4">節目</a>まで、本物の処理のまま通る。左上に計測の札を出し、終わるとまとめの札に変わる。<code class="font-mono text-xs">-demo heavy</code> は作り物のフィナーレを置くだけで、計測モードとは違う。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>計測モードで叩いた100回は、記録に残りますか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>残りません。メモリの中だけです。アプリを終えれば消えて、端末に保存されたふだんの記録には触りません。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>-demo heavy と何が違うんですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>demo heavy は一番重い画面を置くだけです。計測モードは実際に100打叩いて、その結果として節目が3つ重なります。測りたいのは叩いている最中なので、こちらを使います。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#frame-drop" class="text-dopa underline underline-offset-4">処理落ち</a><a href="#touch-to-fire" class="text-dopa underline underline-offset-4">タッチ→発火</a><a href="#squat-squad" class="text-dopa underline underline-offset-4">スクワット隊</a><a href="#fever" class="text-dopa underline underline-offset-4">フィーバータイム</a><a href="#milestone" class="text-dopa underline underline-offset-4">節目</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="devops/perf-check/index.html" class="text-signal underline underline-offset-4">devops：処理落ちの確かめ方</a><a href="sessions/20261006-1312-heavy-effects/index.html#heaviest" class="text-signal underline underline-offset-4">セッション：一番重い連打の作り方</a></p></div>
+    </div>
+  </section>
+
+  <section id="touch-to-fire" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#touch-to-fire</p>
+    <h2 class="mt-1 font-display text-2xl">タッチ→発火</h2>
+    <p class="mt-3 leading-relaxed">指が画面に触れた時刻から、音、振動、光の命令を出し終えるまでの時間。iOS がタッチをアプリに届けるまでの時間も含む。<a href="sessions/20261006-0140-feel-prototype/index.html" class="text-signal underline underline-offset-4">手触りの試作</a>で測り、軽い状態の実機では 18〜28ms だった。スピーカーや振動の部品が動くまでの遅れは含まないので、手に届くまでの全部ではない。<a href="#perf-mode" class="text-dopa underline underline-offset-4">計測モード</a>では最大 40ms 以下を合格とする。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>タッチ→発火が 25ms なら、25ms で音が聞こえるんですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>いいえ。命令を出し終えるまでです。音はそこから、出力の遅れの約20ms があとに続きます。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>盛った演出で伸びたら、どこが悪いんですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>叩いた1打の処理か、そのとき画面の更新でアプリが詰まっているかです。描画の数字と合わせて見ます。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#frame-drop" class="text-dopa underline underline-offset-4">処理落ち</a><a href="#sync-drift" class="text-dopa underline underline-offset-4">同期ずれ</a><a href="#tezawari" class="text-dopa underline underline-offset-4">手触り</a><a href="#perf-mode" class="text-dopa underline underline-offset-4">計測モード</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="sessions/20261006-0140-feel-prototype/index.html" class="text-signal underline underline-offset-4">セッション：手触りの試作</a><a href="sessions/20261006-1312-heavy-effects/index.html#measure" class="text-signal underline underline-offset-4">セッション：何を数えるか</a></p></div>
     </div>
   </section>
 

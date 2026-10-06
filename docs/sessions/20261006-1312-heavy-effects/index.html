@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="session-state" content="developing">
+<meta name="state" content="developing">
+<title>演出を盛ったときの処理落ちを確かめる</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } },
+        tick: { '0%,100%': { opacity: '1' }, '50%': { opacity: '.35' } }
+      },
+      animation: { rise: 'rise .5s ease-out both', tick: 'tick 1s steps(1) infinite' }
+    }
+  }
+}
+</script>
+<style>
+.hud { background: rgba(10,10,10,.78); color: #F2F2F2; backdrop-filter: blur(6px); }
+.hud .ok { color: #5BE38A; } .hud .ng { color: #FF5A6E; } .hud .warn { color: #FFD24D; }
+</style>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-4xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <time datetime="2026-10-06T13:12">2026-10-06 13:12</time>
+      <span>/</span>
+      <span>設計セッション</span>
+      <span class="rounded-full border border-gold bg-gold/15 px-2.5 py-0.5 font-bold text-ink">状態：developing</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl">演出を盛ったときの<span class="text-dopa">処理落ち</span>を確かめる</h1>
+  </header>
+
+  <section id="result" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="relative overflow-hidden rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916] sm:p-8">
+      <div class="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-dopa-soft"></div>
+      <p class="relative font-mono text-xs uppercase tracking-[0.2em] text-dopa">このセッションで作るもの（レビュー済み）</p>
+      <p class="relative mt-6 font-display text-3xl tracking-wide sm:text-4xl">計測モード <span class="font-mono text-2xl">-perf</span></p>
+      <p class="relative mt-6 text-lg font-bold leading-relaxed">
+        一番重い連打を、本物の処理のまま、何度でも作れるようにする。<br>
+        叩いている間の描画、タッチから発火まで、途中で切った音を数え、最後に1枚の札で見せる。<br>
+        記録は端末に保存しない。
+      </p>
+    </div>
+  </section>
+
+  <section id="position" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01 / position</p>
+    <h2 class="mt-2 font-display text-3xl">「止まらない」は、まだ誰も測っていない</h2>
+    <p class="mt-4 leading-relaxed"><a href="../20261006-0140-feel-prototype/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">手触りの試作</a>で、差別化の軸を「演出を盛っても止まらないこと」に置き直しました。それから本作りで、演出は試作の何倍にも増えています。スクワット隊、ドパドパの3段階、画面全体の放射線、フィーバータイム、ドパ突破、筋肉確定、ねぎらいの金の炎。</p>
+    <p class="mt-4 leading-relaxed">崩れた記録は1つだけあります。スクワット隊を51人に増やしたとき、音が乱れ、叩いた返事が遅れた。上限を30人にして、そのあとは指の感覚で「大丈夫そう」と見てきました。30人なら大丈夫なのか、どこまで余裕があるのかは、数字では分かっていません。</p>
+    <p class="mt-4 leading-relaxed">このセッションは、機能を足しません。4つの機能のうち<a href="../../features/done-mash/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">完了連打</a>の演出を、外から測る道具を作ります。作るものはすべて Debug ビルドの中だけにあり、ストアに出すアプリには入りません。</p>
+  </section>
+
+  <section id="heaviest" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / heaviest</p>
+    <h2 class="mt-2 font-display text-3xl">一番重い連打は、どう作ればいいのか</h2>
+    <p class="mt-4 leading-relaxed">いまある見本 <code class="font-mono text-sm">-demo heavy</code> は、一番重い画面を出せます。ただ、作り物のフィナーレを置くだけです。札3枚もねぎらいも、叩いた結果として出てくるわけではありません。測りたいのは、30人がしゃがみ、段階が上がり、最後の1打で節目が3つ重なる、その連打そのものです。</p>
+    <p class="mt-4 leading-relaxed">そこで、記録のほうを用意します。計測モードで起動すると、端末の記録は読まず、メモリの中だけに仮の記録を入れて始めます。仮の記録は、目標回数100を叩き切った最後の1打で、次の3つが同時に起きるように組みます。</p>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-3">
+      <li class="rounded-2xl border-2 border-ink bg-white p-4"><p class="font-mono text-xs text-mute">連続記録</p><p class="mt-1 font-display text-xl">30日目</p><p class="mt-2 text-ink/80">昨日まで29日続き、今日はまだ。</p></li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-4"><p class="font-mono text-xs text-mute">DT</p><p class="mt-1 font-display text-xl">1,000 突破</p><p class="mt-2 text-ink/80">900 から始める。最後の1打で金のドパ突破。</p></li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-4"><p class="font-mono text-xs text-mute">DPW</p><p class="mt-1 font-display text-xl">ベスト更新</p><p class="mt-2 text-ink/80">直近7日の合計が、最後の1打でベストを越える。</p></li>
+    </ul>
+    <p class="mt-6 leading-relaxed">途中も重くします。60打目で隊が30人そろい、50打目でフィーバータイムが必ず当たるよう、くじを固定します。フィーバーの10秒は画面全体を叩くので、その間も測ります。100打とフィーバーで、30秒ほどの連打になります。</p>
+    <p class="mt-4 rounded-lg border border-dashed border-mute bg-white/60 p-3 text-xs leading-relaxed">本作りのころは「記録を仮に入れる仕組み」を作らず、見本で代えました。端末の記録に混ざるのが怖かったからです。今回はメモリの中だけに入れ、アプリを終えれば消えます。端末に保存された記録には、読むことも書くことも一切しません。</p>
+  </section>
+
+  <section id="measure" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / measure</p>
+    <h2 class="mt-2 font-display text-3xl">指の代わりに、何を数えるか</h2>
+    <p class="mt-4 leading-relaxed">Claude には、音の遅れも振動の抜けも感じ取れません。手触りの試作と同じく、最後に決めるのは開発者の指です。ただ、指が「なんか重い」と言ったとき、どこが重いのかまでは指では分かりません。数えるのは3つです。</p>
+    <div class="mt-6 flex flex-col gap-3 text-sm">
+      <div class="rounded-2xl border border-rule bg-white p-5">
+        <p class="font-bold"><span class="mr-2 font-mono text-dopa">1</span>描画</p>
+        <p class="mt-2 leading-relaxed text-ink/80">1秒ごとの描画の回数と、50ms 以上止まった回数。画面の書き換えの合図（CADisplayLink）を受けて数えます。</p>
+      </div>
+      <div class="rounded-2xl border border-rule bg-white p-5">
+        <p class="font-bold"><span class="mr-2 font-mono text-dopa">2</span>タッチ→発火</p>
+        <p class="mt-2 leading-relaxed text-ink/80">指が触れた時刻から、音、振動、光の命令を出し終えるまで。試作で測ったものと同じ定義で、軽い状態では 18〜28ms でした。</p>
+      </div>
+      <div class="rounded-2xl border border-rule bg-white p-5">
+        <p class="font-bold"><span class="mr-2 font-mono text-dopa">3</span>途中で切った音</p>
+        <p class="mt-2 leading-relaxed text-ink/80">鳴り終わる前に、次の音に場所を譲った音の数と名前。</p>
+      </div>
+    </div>
+    <p class="mt-6 leading-relaxed">3つめは、測る前から怪しいと見ています。音は8つの再生口を順番に使い回していて、次の音が来ると、前の音がまだ鳴っていても止めて上書きします。1秒に10回叩けば、同じ再生口には0.8秒で戻ってくる。「激熱！」の声が1秒あれば、言い終わる前に叩いた音に切られます。51人のときの「音が乱れた」の正体は、描画の重さではなく、こちらだったのかもしれません。</p>
+    <p class="mt-4 leading-relaxed">1の描画には、数えきれない分があります。CADisplayLink が見ているのはアプリの側の詰まりです。放射線や粒のように、画面を合成する側（render server）が重くて飛んだコマは、アプリの中からは見えません。そこで、札の数字がきれいなのに指が重いと言ったときだけ、Instruments の Animation Hitches で同じ連打を録ります。</p>
+  </section>
+
+  <section id="mock" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / mock</p>
+    <h2 class="mt-2 font-display text-3xl">計測の札の修正イメージ</h2>
+    <p class="mt-4 text-sm leading-relaxed text-ink/80">叩いている間は左上に小さく出し、指の届く場所をふさがない。ねぎらいが終わったら、まとめの札に変える。アプリの色とは混ぜず、開発用と一目で分かる黒にする。</p>
+    <div class="mt-8 flex flex-col items-center gap-10 md:flex-row md:items-start md:justify-center">
+      <figure class="flex flex-col items-center gap-3">
+        <div class="relative h-[460px] w-[230px] overflow-hidden rounded-[2.2rem] border-[5px] border-ink bg-[#1A0710]">
+          <div class="absolute inset-0 bg-[conic-gradient(from_0deg,#E5337A33,#E9A80033,#2F79F733,#E5337A33)]"></div>
+          <div class="hud absolute left-3 top-9 rounded-lg px-2.5 py-2 font-mono text-[9px] leading-[1.55]">
+            <p><span class="text-white/50">fps </span><span class="ok">118</span><span class="text-white/50"> 最低 </span><span class="warn">104</span></p>
+            <p><span class="text-white/50">詰まり ≥50ms </span><span class="ok">0</span></p>
+            <p><span class="text-white/50">発火 </span><span class="ok">23</span><span class="text-white/50">ms 最大 </span><span class="ok">31</span></p>
+            <p><span class="text-white/50">切った音 </span><span class="ng">2</span></p>
+            <p class="mt-0.5 text-white/40">PUSH・隊30・打72</p>
+          </div>
+          <div class="absolute inset-x-0 bottom-28 text-center font-display text-6xl text-gold">28</div>
+          <div class="absolute inset-x-0 bottom-20 text-center text-[10px] font-bold text-white/70">スクワット 残り</div>
+        </div>
+        <figcaption class="font-mono text-xs text-mute">叩いている間</figcaption>
+      </figure>
+      <figure class="flex flex-col items-center gap-3">
+        <div class="relative h-[460px] w-[230px] overflow-hidden rounded-[2.2rem] border-[5px] border-ink bg-paper">
+          <div class="hud absolute inset-x-4 top-24 rounded-2xl p-4 font-mono text-[10px] leading-relaxed">
+            <p class="text-[9px] tracking-[0.2em] text-white/50">PERF / 1回目</p>
+            <p class="mt-2 text-[13px] font-bold">打 100　フィーバー 41</p>
+            <div class="mt-3 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1">
+              <span class="text-white/50">描画 最低</span><span><b class="warn">104</b> fps</span>
+              <span class="text-white/50">≥50ms</span><span><b class="ok">0</b> 回</span>
+              <span class="text-white/50">発火</span><span>中央 <b class="ok">22</b> / 95% <b class="ok">29</b> / 最大 <b class="ok">34</b> ms</span>
+              <span class="text-white/50">切った音</span><span><b class="ng">2</b> 回</span>
+            </div>
+            <p class="mt-2 border-t border-white/15 pt-2 text-white/60">voice_gekiatsu（0.62秒で）<br>voice_fever（0.71秒で）</p>
+            <p class="mt-3 rounded-md bg-white/10 px-2 py-1.5 text-center text-white/80">もう1回</p>
+          </div>
+        </div>
+        <figcaption class="font-mono text-xs text-mute">ねぎらいのあと</figcaption>
+      </figure>
+    </div>
+    <p class="mt-6 text-center text-xs text-mute">数字は見本。緑は合格の線の内側、黄は線の近く、赤は外側。</p>
+  </section>
+
+  <section id="criteria" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / criteria</p>
+    <h2 class="mt-2 font-display text-3xl">どこまでなら「止まっていない」と言えるか</h2>
+    <p class="mt-4 leading-relaxed">線は、試作の数字とドパ九九の崩れ方から引きました。ドパ九九は描画が毎秒3.8回まで落ちています。そこまで行かなくても、50ms 止まれば指は引っかかりを感じやすい。iPhone 15 Pro を、低電力モードを切った状態で測ります。</p>
+    <div class="mt-6 overflow-x-auto rounded-2xl border border-rule bg-white">
+      <table class="w-full min-w-[30rem] text-left text-sm">
+        <thead class="border-b-2 border-ink font-mono text-xs text-mute"><tr><th class="p-3">数えるもの</th><th class="p-3">合格</th><th class="p-3">線の理由</th></tr></thead>
+        <tbody class="[&_td]:p-3 [&_td]:align-top [&_tr]:border-b [&_tr]:border-rule">
+          <tr><td class="font-bold">描画</td><td>1秒の最低が 100 以上、50ms 以上の詰まりが 0 回</td><td>120Hz の端末で、1割落ちまでは目に見えにくい。50ms は3コマ分の空白</td></tr>
+          <tr><td class="font-bold">タッチ→発火</td><td>最大 40ms 以下</td><td>軽い状態の上限 28ms に、1コマ（8ms）と少しの余裕</td></tr>
+          <tr><td class="font-bold">途中で切った音</td><td>声は 0 回</td><td>叩いた音どうしが切り合うのは連打の音として聞こえる。声が切れると言葉が欠ける</td></tr>
+          <tr><td class="font-bold">開発者の指</td><td>遅れも抜けも感じない</td><td>最後はこれで決める</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="branches" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / branches</p>
+    <h2 class="mt-2 font-display text-3xl">落ちたら、どこを直すか</h2>
+    <ul class="mt-6 flex flex-col gap-3 text-sm leading-relaxed">
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>全部合格</b>：描画の道具は Core Animation のままで足りる。課題を完了にする。演出を足したら、このモードで測り直す。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>声を切っている</b>：声だけ別の再生口に分け、叩いた音に上書きされないようにする。このセッションの中で直す（30分ほど）。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>発火が遅い、アプリ側の詰まりがある</b>：叩いた1打で何が重いかを Instruments の Time Profiler で見る。まず疑うのは、30人の線の形をまとめて動かすところ。奥の列を線の少ない描き方に変える案がある。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>札の数字はきれいで、指が重い</b>：合成する側の詰まり。Animation Hitches で録り、重なる全画面の層（放射線、粒、炎）を減らす。それでも足りなければ SpriteKit か Metal を検討する。ここは新しい課題に分ける。</li>
+    </ul>
+  </section>
+
+  <section id="impl" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">07 / implementation</p>
+    <h2 class="mt-2 font-display text-3xl">実装でやること</h2>
+    <p class="mt-4 text-sm text-ink/80">すべて <code class="font-mono text-xs">#if DEBUG</code> の中。所要はあわせて2時間ほど。</p>
+    <ol class="mt-6 flex flex-col gap-3 text-sm">
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">1</span><div><b>起動引数 <code class="font-mono text-xs">-perf</code> で、メモリだけの保存先に切り替える</b>（<code class="font-mono text-xs">YatTatTaApp.swift</code>）。叩いた記録で端末の本当の記録を汚さないため。</div></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">2</span><div><b>仮の記録を入れる</b>（新規 <code class="font-mono text-xs">Mash/PerfSeed.swift</code>）。29日の連続、DT 900、DPW がベストの手前。目標回数は100。最後の1打で節目が3つ重なる状態を、見本ではなく本物の処理で作るため。テストで「100打目に3つ重なる」を確かめる。</div></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">3</span><div><b>フィーバーのくじを50打目で当てる</b>。いまの <code class="font-mono text-xs">draw</code> を差し替える。0.51% のくじを待たずに、毎回同じ重さで測るため。</div></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">4</span><div><b>3つを数える</b>（新規 <code class="font-mono text-xs">Perf/PerfMonitor.swift</code>）。描画は CADisplayLink、発火は叩く面とフィーバーの面の touchesBegan の終わりで、切った音は FeelEngine の再生口ごとに鳴り終わる時刻を覚えて数える。</div></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">5</span><div><b>計測の札を出す</b>（新規 <code class="font-mono text-xs">Perf/PerfHUD.swift</code>）。数字を開発者がそのまま読めて、写真1枚で Claude に渡せるようにするため。「もう1回」で仮の記録を入れ直す。</div></li>
+    </ol>
+    <p class="mt-4 text-sm leading-relaxed text-ink/80">データベースの形は変えない。端末に保存された記録には触れない。</p>
+  </section>
+
+  <section id="steps" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">08 / steps</p>
+    <h2 class="mt-2 font-display text-3xl">実機での確かめ方（開発者、10分）</h2>
+    <ol class="mt-6 flex flex-col gap-2 text-sm">
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">1</span><span>Xcode の Scheme の Arguments に <code class="font-mono text-xs">-perf</code> を足し、iPhone 15 Pro に入れる（低電力モードは切る）</span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">2</span><span>100打を全力で叩き切る。50打目からのフィーバーは画面全体を叩き続ける</span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">3</span><span>まとめの札をスクリーンショットする。「もう1回」で、あと2回繰り返す</span></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-xl text-dopa">4</span><span>3枚の写真と、「指で遅れや抜けを感じたか」を一言で Claude に渡す</span></li>
+    </ol>
+  </section>
+
+  <section id="decisions" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">09 / decisions</p>
+    <h2 class="mt-2 font-display text-3xl">決めたこと（2026-10-06 開発者がレビュー）</h2>
+    <ol class="mt-6 flex flex-col gap-3 text-sm leading-relaxed">
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">01</span>処理落ちは、Debug ビルドの<a href="../../glossary.html#perf-mode" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">計測モード</a>（<code class="font-mono text-xs">-perf</code>）で確かめる。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">02</span>計測モードは、メモリだけの保存先に仮の記録を入れて始める。端末の記録には触れない。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">03</span>測る場面は、目標回数100、30人、50打目のフィーバー、最後の1打で節目3つ（30日、DT 1,000、DPW ベスト）。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">04</span>数えるのは、描画、<a href="../../glossary.html#touch-to-fire" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">タッチ→発火</a>、途中で切った音。合格の線は 05 の表のとおり。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">05</span>演出を足したり重くしたりしたら、計測モードで測り直す（<a href="../../devops/perf-check/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">devops／処理落ちの確かめ方</a>）。</li>
+    </ol>
+  </section>
+
+  <section id="links" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">10 / links</p>
+    <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">課題</p><a href="../../issues/heavy-effects-performance/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">heavy-effects-performance</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">決まり事</p><a href="../../devops/perf-check/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">処理落ちの確かめ方</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../glossary.html#frame-drop" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">処理落ち</a><a href="../../glossary.html#perf-mode" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">計測モード</a><a href="../../glossary.html#touch-to-fire" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">タッチ→発火</a><a href="../../glossary.html#squat-squad" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">スクワット隊</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">前回のセッション</p><a href="../20261006-1258-health-claims/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">健康効果の書き方を決める</a></li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

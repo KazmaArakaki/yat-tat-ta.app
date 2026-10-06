@@ -10,6 +10,10 @@
   // セッション一覧（新しい順）。新しいセッションは先頭に足す。
   var sessions = [
     {
+      path: "sessions/20261006-1312-heavy-effects/index.html",
+      label: "10/06 処理落ちを確かめる"
+    },
+    {
       path: "sessions/20261006-1258-health-claims/index.html",
       label: "10/06 健康効果の書き方を決める"
     },
@@ -111,7 +115,8 @@
         { label: "iOS 開発環境", path: "devops/ios-dev-environment/index.html", level: 1 },
         { label: "iOS プロジェクトの設定", path: "devops/ios-project/index.html", level: 1 },
         { label: "声と効果音の出どころ", path: "devops/sound-assets/index.html", level: 1 },
-        { label: "健康効果の書き方", path: "devops/health-wording/index.html", level: 1 }
+        { label: "健康効果の書き方", path: "devops/health-wording/index.html", level: 1 },
+        { label: "処理落ちの確かめ方", path: "devops/perf-check/index.html", level: 1 }
       ]
     },
     {
