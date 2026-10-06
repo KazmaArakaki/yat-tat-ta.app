@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>履歴</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=M+PLUS+Rounded+1c:wght@500;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+        round: ['"M PLUS Rounded 1c"', '"Noto Sans JP"', 'sans-serif']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } }
+      },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+<style>
+/* アプリ画面の色。明るい配色と暗い配色を、.app と .app.dark で切り替える */
+.app { --a-bg:#FBF6EE; --a-card:#FFFFFF; --a-ink:#1C1916; --a-mute:#6E655C; --a-rule:#E7DDCC; --a-line:#1C1916; --a-soft:#FFE6F0; }
+.app.dark { --a-bg:#16120F; --a-card:#231D18; --a-ink:#F5EEE3; --a-mute:#A89C8E; --a-rule:#3A312A; --a-line:#F5EEE3; --a-soft:#3A1726; }
+.a-bg { background:var(--a-bg); color:var(--a-ink); }
+.a-card { background:var(--a-card); }
+.a-ink { color:var(--a-ink); }
+.a-mute { color:var(--a-mute); }
+.a-line { border-color:var(--a-line); }
+.a-rule { border-color:var(--a-rule); }
+.a-soft { background:var(--a-soft); }
+.a-shadow { box-shadow:4px 4px 0 var(--a-line); }
+.a-shadow-lg { box-shadow:0 8px 0 var(--a-line); }
+.num { font-family:"M PLUS Rounded 1c","Noto Sans JP",sans-serif; font-weight:900; font-variant-numeric:tabular-nums; letter-spacing:-0.02em; }
+.ticket { width:14px; height:18px; border-radius:3px; background:#2F79F7; position:relative; }
+.ticket::after { content:""; position:absolute; left:2px; right:2px; top:8px; border-top:2px dotted rgba(255,255,255,.75); }
+.ticket.empty { background:transparent; border:2px dashed var(--a-rule); }
+.mash { width:200px; height:200px; border-radius:9999px; background:#E9A800; border:4px solid var(--a-line); box-shadow:0 8px 0 var(--a-line); color:#1C1916; transition:transform .06s; }
+.mash:active { transform:translateY(6px); box-shadow:0 2px 0 var(--a-line); }
+.glow { position:absolute; inset:-22px; border-radius:9999px; background:radial-gradient(circle, rgba(229,51,122,.55) 0%, rgba(229,51,122,0) 70%); pointer-events:none; }
+.ring { position:absolute; border-radius:9999px; border:3px solid #E5337A; pointer-events:none; }
+.grain { position:absolute; border-radius:9999px; background:#E5337A; pointer-events:none; }
+@keyframes pop { 0%{transform:scale(.3);opacity:0} 60%{transform:scale(1.08);opacity:1} 100%{transform:scale(1)} }
+@keyframes ringout { 0%{transform:translate(-50%,-50%) scale(.2);opacity:1} 100%{transform:translate(-50%,-50%) scale(1);opacity:0} }
+@keyframes fly { 0%{transform:translate(0,0) scale(1);opacity:1} 100%{transform:translate(var(--dx),var(--dy)) scale(.4);opacity:0} }
+@keyframes burst { 0%{transform:translate(0,0);opacity:1} 100%{transform:translate(var(--dx),var(--dy));opacity:0} }
+@keyframes drop { 0%{transform:translateY(-120%)} 100%{transform:none} }
+.pop { animation:pop .45s cubic-bezier(.2,1.4,.4,1) both; }
+.tabbtn[aria-selected="true"] { background:#1C1916; color:#FBF6EE; }
+</style>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-5xl">
+<header class="animate-rise">
+  <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">ui / pages / history</p>
+  <h1 class="mt-2 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">履歴</span></h1>
+  <div class="mt-4 max-w-2xl space-y-3 text-sm leading-relaxed text-ink/80"><p>ホームの DPW か DT のカードを押すと、下から出すシートです。これまでの<a href="../../../glossary.html#record" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録</a>を、日付と時刻の上に<a href="../../../glossary.html#squat-squad" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スクワット隊</a>の人形で並べます。背景の薄い面は、日ごとのドパと<a href="../../../glossary.html#moving-average" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">7日移動平均</a>です。</p><p>このモックでは、グラフを横にドラッグするか、ホイールを回すと過去の日へ戻れます。人形を押すと、下にその記録が出ます。サンプルは30日分で、今日（10/6）は2件、休み券を使った日が2日あります。</p></div>
+</header>
+<div class="mt-10 flex flex-col items-center gap-10 md:flex-row md:items-start md:justify-center">
+  <div class="w-[300px] shrink-0 rounded-[2.8rem] border-[6px] border-ink bg-ink p-1.5 shadow-[10px_10px_0_#E5337A]">
+  <div class="app a-bg relative flex h-[650px] flex-col overflow-hidden rounded-[2.2rem] px-5 pb-6 pt-11">
+    <div class="absolute left-1/2 top-2.5 z-40 h-6 w-24 -translate-x-1/2 rounded-full bg-black"></div>
+    <div class="pointer-events-none opacity-40">
+      <p class="num a-ink text-[40px] leading-none"><span class="text-dopa">30</span><span class="ml-1 font-sans text-sm font-bold">日連続</span></p>
+    </div>
+    <div class="absolute inset-0 z-20 bg-black/30"></div>
+    <div class="a-card absolute inset-x-0 bottom-0 top-12 z-30 flex flex-col rounded-t-[1.8rem] border-t-2 a-line px-3 pt-3" style="animation:rise .35s ease-out both">
+      <div class="mx-auto h-1.5 w-10 rounded-full bg-rule"></div>
+      <div class="mt-3 flex items-center justify-between px-2">
+        <p class="text-base font-black a-ink">履歴</p>
+        <a href="../home/index.html" class="rounded-full border-2 border-ink bg-gold px-3 py-1 text-xs font-black text-ink shadow-[0_3px_0_#1C1916]">閉じる</a>
+      </div>
+      <div class="mt-2 flex items-center gap-3 px-2 text-[10px] font-bold a-mute">
+        <span class="flex items-center gap-1"><span class="inline-block h-2.5 w-3.5 rounded-sm border-t-2 border-dopa bg-dopa/20"></span>日ごとのドパ</span>
+        <span class="flex items-center gap-1"><span class="inline-block h-2.5 w-3.5 rounded-sm border-t-2 border-signal bg-signal/15"></span>7日移動平均</span>
+      </div>
+      <div id="chart" class="mt-2"></div>
+      <div id="detail" class="mx-2 mt-2 rounded-2xl border-2 a-line a-card px-3 py-2.5 shadow-[3px_3px_0_#1C1916]"></div>
+    </div>
+  </div>
+  </div>
+  <ul class="flex max-w-xs flex-col gap-3 text-sm leading-relaxed">
+    <li class="border-l-4 border-dopa pl-3"><b>人形</b>：記録1件。縦の位置が叩き始めた時刻、大きさがその記録のドパ（面積で比例）。フィーバーで取った記録は dopa 色。</li>
+    <li class="border-l-4 border-signal pl-3"><b>薄い面</b>：dopa 色が日ごとのドパ、signal 色が7日移動平均。斜線は使わず、縁の線と薄い塗りで見分ける。目盛りは付けず、数は下の詳細で読む。</li>
+    <li class="border-l-4 border-gold pl-3"><b>開いた直後</b>：今日が右端。左へなぞると過去の日。下は今日の合計。</li>
+    <li class="border-l-4 border-ink pl-3"><b>見るだけ</b>：ここでは消せない。今日の1件を消すのは<a href="../today-records/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日の記録</a>から。</li>
+    <li class="border-l-4 border-rule pl-3"><b>青い札</b>：<a href="../../../glossary.html#rest-pass" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">休み券</a>を使った日。</li>
+  </ul>
+</div>
+</article>
+</main>
+<script src="../../components/history-chart/history-chart.js"></script>
+<script>
+(function () {
+  var days = HistoryChart.sample({ days: 30, seed: 11, rest: [9, 20], todayRecords: [{ min: 4 * 60 + 5, reps: 20, bonus: 12 }, { min: 8 * 60 + 41, reps: 20, bonus: 0 }] });
+  var today = days[days.length - 1];
+  var detail = document.getElementById('detail');
+  function dayLine(d) {
+    return '<p class="text-[10px] font-bold a-mute">' + HistoryChart.label(d) + (d.today ? ' 今日' : '') + '　' + d.records.length + '件　<span class="num a-ink">' + d.dopa + '</span>ドパ　7日平均 <span class="num a-ink">' + Math.round(d.avg) + '</span></p>';
+  }
+  function show(d, r) {
+    if (!r) {
+      detail.innerHTML = dayLine(d) + '<p class="mt-1.5 text-[11px] font-bold a-ink">人形を押すと、その記録が出ます。</p>';
+      return;
+    }
+    detail.innerHTML = dayLine(d) +
+      '<div class="mt-1 flex items-baseline justify-between"><p class="num text-xl a-ink">' + HistoryChart.clock(r.min) + '</p>' +
+      '<p class="a-ink"><span class="num text-2xl">' + r.reps + '</span><span class="ml-0.5 text-xs font-bold">回</span>' +
+      (r.bonus ? '<span class="ml-1.5 rounded-full a-soft px-1.5 py-0.5 text-[10px] font-bold text-dopa">+' + r.bonus + ' フィーバー</span>' : '') + '</p></div>';
+  }
+  show(today, null);
+  HistoryChart.render(document.getElementById('chart'), days, { height: 400, onSelect: show });
+})();
+</script>
+<script src="../../../sidebar.js" defer></script>
+</body>
+</html>

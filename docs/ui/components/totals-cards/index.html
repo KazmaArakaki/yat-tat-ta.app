@@ -68,7 +68,7 @@ tailwind.config = {
 <header class="animate-rise">
   <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">ui / components / totals-cards</p>
   <h1 class="mt-2 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">DPW</span> と <span class="text-dopa">DT</span> のカード</h1>
-  <div class="mt-4 max-w-2xl space-y-3 text-sm leading-relaxed text-ink/80"><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">画面の下に2枚並べます。左が<a href="../../../glossary.html#dpw" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">DPW</a>、右が<a href="../../../glossary.html#dt" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">DT</a>。叩くたびに、どちらも1ずつ増えます。</p><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">DPW の比べる相手は前の7日と<a href="../../../glossary.html#best-week" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">自己ベスト</a>、DT は次の<a href="../../../glossary.html#milestone" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">節目</a>です。DT の下の細い棒は、ひとつ前の節目から次の節目までの進み具合を表します。</p></div>
+  <div class="mt-4 max-w-2xl space-y-3 text-sm leading-relaxed text-ink/80"><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">画面の下に2枚並べます。左が<a href="../../../glossary.html#dpw" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">DPW</a>、右が<a href="../../../glossary.html#dt" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">DT</a>。叩くたびに、どちらも1ずつ増えます。</p><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">DPW の比べる相手は前の7日と<a href="../../../glossary.html#best-week" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">自己ベスト</a>、DT は次の<a href="../../../glossary.html#milestone" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">節目</a>です。DT の下の細い棒は、ひとつ前の節目から次の節目までの進み具合を表します。</p><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">どちらのカードも押せます。右上の「›」が目印で、押すと<a href="../../pages/history/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">履歴</a>が開きます。叩いている最中は押せません（2026-10-06 に足した）。</p></div>
 </header>
 <section id="states" class="mt-12">
   <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">states</p>
@@ -81,11 +81,11 @@ tailwind.config = {
   <div class="mt-6 rounded-2xl bg-[repeating-linear-gradient(45deg,#FBF6EE_0_10px,#F5EDE0_10px_20px)] p-5 sm:p-8"><div data-panel="normal" class="grid items-start gap-8 md:grid-cols-[auto_1fr]">
   <div class="app a-bg w-[300px] shrink-0 rounded-3xl border border-rule p-5"><div class="grid grid-cols-2 gap-3">
   <div class="a-card a-shadow relative rounded-2xl border-2 a-line px-3 py-2.5">
-    <p class="font-mono text-[9px] font-bold tracking-widest a-mute">DPW</p>
+    <span class="a-mute absolute right-2.5 top-1.5 text-sm font-bold">›</span><p class="font-mono text-[9px] font-bold tracking-widest a-mute">DPW</p>
     <p class="num text-[30px] leading-none">347</p><p class="mt-1 text-[9px] font-bold a-mute">前の7日 300　ベスト 410</p>
   </div>
   <div class="a-card a-shadow relative rounded-2xl border-2 a-line px-3 py-2.5">
-    <p class="font-mono text-[9px] font-bold tracking-widest a-mute">DT</p>
+    <span class="a-mute absolute right-2.5 top-1.5 text-sm font-bold">›</span><p class="font-mono text-[9px] font-bold tracking-widest a-mute">DT</p>
     <p class="num text-[30px] leading-none">987</p>
     <div class="mt-1.5 h-1.5 overflow-hidden rounded-full a-soft"><div class="h-full rounded-full bg-dopa" style="width:98.7%"></div></div>
     <p class="mt-1 text-[9px] font-bold a-mute">次の節目 1,000</p>
@@ -95,11 +95,11 @@ tailwind.config = {
 </div><div data-panel="best" class="grid items-start gap-8 md:grid-cols-[auto_1fr]">
   <div class="app a-bg w-[300px] shrink-0 rounded-3xl border border-rule p-5"><div class="grid grid-cols-2 gap-3">
   <div class="a-card a-shadow relative rounded-2xl border-2 border-dopa px-3 py-2.5">
-    <p class="font-mono text-[9px] font-bold tracking-widest a-mute">DPW</p>
+    <span class="a-mute absolute right-2.5 top-1.5 text-sm font-bold">›</span><p class="font-mono text-[9px] font-bold tracking-widest a-mute">DPW</p>
     <p class="num text-[30px] leading-none text-dopa">423</p><p class="mt-1 text-[9px] font-bold a-mute">前の7日 300　ベスト 410</p><span class="absolute -right-2 -top-2.5 rotate-6 rounded-full border-2 border-ink bg-gold px-1.5 py-0.5 text-[8px] font-black text-ink">ベスト更新中</span>
   </div>
   <div class="a-card a-shadow relative rounded-2xl border-2 a-line px-3 py-2.5">
-    <p class="font-mono text-[9px] font-bold tracking-widest a-mute">DT</p>
+    <span class="a-mute absolute right-2.5 top-1.5 text-sm font-bold">›</span><p class="font-mono text-[9px] font-bold tracking-widest a-mute">DT</p>
     <p class="num text-[30px] leading-none">987</p>
     <div class="mt-1.5 h-1.5 overflow-hidden rounded-full a-soft"><div class="h-full rounded-full bg-dopa" style="width:98.7%"></div></div>
     <p class="mt-1 text-[9px] font-bold a-mute">次の節目 1,000</p>
@@ -109,11 +109,11 @@ tailwind.config = {
 </div><div data-panel="first" class="grid items-start gap-8 md:grid-cols-[auto_1fr]">
   <div class="app a-bg w-[300px] shrink-0 rounded-3xl border border-rule p-5"><div class="grid grid-cols-2 gap-3">
   <div class="a-card a-shadow relative rounded-2xl border-2 a-line px-3 py-2.5">
-    <p class="font-mono text-[9px] font-bold tracking-widest a-mute">DPW</p>
+    <span class="a-mute absolute right-2.5 top-1.5 text-sm font-bold">›</span><p class="font-mono text-[9px] font-bold tracking-widest a-mute">DPW</p>
     <p class="num text-[30px] leading-none">60</p><p class="mt-1 text-[9px] font-bold a-mute">比べるのは8日目から</p>
   </div>
   <div class="a-card a-shadow relative rounded-2xl border-2 a-line px-3 py-2.5">
-    <p class="font-mono text-[9px] font-bold tracking-widest a-mute">DT</p>
+    <span class="a-mute absolute right-2.5 top-1.5 text-sm font-bold">›</span><p class="font-mono text-[9px] font-bold tracking-widest a-mute">DT</p>
     <p class="num text-[30px] leading-none">60</p>
     <div class="mt-1.5 h-1.5 overflow-hidden rounded-full a-soft"><div class="h-full rounded-full bg-dopa" style="width:60%"></div></div>
     <p class="mt-1 text-[9px] font-bold a-mute">次の節目 100</p>
@@ -130,6 +130,7 @@ tailwind.config = {
   <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
     <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">機能</p><a href="../../../features/dopa-totals/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa" >ドパの合計</a></li>
     <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">置かれる画面</p><a href="../../../ui/pages/home/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ホーム</a></li>
+    <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">押すと開く画面</p><a href="../../pages/history/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">履歴</a></li>
     <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">方針</p><a href="../../../ui/principles.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">UI の基本方針</a></li>
     <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">決めたセッション</p><a href="../../../sessions/20261006-0312-main-build/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">本作りの設計</a></li>
   </ul>

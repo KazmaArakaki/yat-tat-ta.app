@@ -85,6 +85,8 @@ tailwind.config = {
     <a href="#perf-mode" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">計測モード</a>
     <a href="#touch-to-fire" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">タッチ→発火</a>
     <a href="#today-records" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">今日の記録</a>
+    <a href="#history" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">履歴</a>
+    <a href="#moving-average" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">7日移動平均</a>
     <a href="#translation-table" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">訳語表</a>
   </nav>
 
@@ -489,7 +491,7 @@ tailwind.config = {
       <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>減ります。午前4時を過ぎるたびに、7日前の1日分が抜けるからです。叩かなくても減りますが、画面で減ったことを強調はしません。</p>
     </div>
     <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
-      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#dt" class="text-dopa underline underline-offset-4">DT</a><a href="#streak" class="text-dopa underline underline-offset-4">連続記録</a><a href="#dopa-point" class="text-dopa underline underline-offset-4">ドパ</a><a href="#best-week" class="text-dopa underline underline-offset-4">自己ベスト</a><a href="#milestone" class="text-dopa underline underline-offset-4">節目</a><a href="#record-day" class="text-dopa underline underline-offset-4">記録日</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#dt" class="text-dopa underline underline-offset-4">DT</a><a href="#streak" class="text-dopa underline underline-offset-4">連続記録</a><a href="#dopa-point" class="text-dopa underline underline-offset-4">ドパ</a><a href="#best-week" class="text-dopa underline underline-offset-4">自己ベスト</a><a href="#milestone" class="text-dopa underline underline-offset-4">節目</a><a href="#record-day" class="text-dopa underline underline-offset-4">記録日</a><a href="#moving-average" class="text-dopa underline underline-offset-4">7日移動平均</a><a href="#history" class="text-dopa underline underline-offset-4">履歴</a></p></div>
       <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="features/dopa-totals/index.html" class="text-signal underline underline-offset-4">機能：ドパの合計</a><a href="sessions/20261006-0215-subject/index.html#points" class="text-signal underline underline-offset-4">セッション：題材を決める（ドパ）</a><a href="sessions/20261006-0215-subject/duolingo.html" class="text-signal underline underline-offset-4">調査：Duolingo の継続の仕組み</a></p></div>
     </div>
   </section>
@@ -540,7 +542,7 @@ tailwind.config = {
       <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>いまは消せません。取り消しは課題として残してあります。</p>
     </div>
     <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
-      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#done-mash" class="text-dopa underline underline-offset-4">完了連打</a><a href="#record-day" class="text-dopa underline underline-offset-4">記録日</a><a href="#dopa-point" class="text-dopa underline underline-offset-4">ドパ</a><a href="#streak" class="text-dopa underline underline-offset-4">連続記録</a><a href="#rest-pass" class="text-dopa underline underline-offset-4">休み券</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#done-mash" class="text-dopa underline underline-offset-4">完了連打</a><a href="#record-day" class="text-dopa underline underline-offset-4">記録日</a><a href="#dopa-point" class="text-dopa underline underline-offset-4">ドパ</a><a href="#streak" class="text-dopa underline underline-offset-4">連続記録</a><a href="#rest-pass" class="text-dopa underline underline-offset-4">休み券</a><a href="#history" class="text-dopa underline underline-offset-4">履歴</a></p></div>
       <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="features/done-mash/index.html" class="text-signal underline underline-offset-4">機能：完了連打</a><a href="database/squat-record/index.html" class="text-signal underline underline-offset-4">データ：SquatRecord</a><a href="sessions/20261006-0312-main-build/index.html#closing" class="text-signal underline underline-offset-4">セッション：本作りの設計（閉じ方）</a></p></div>
     </div>
   </section>
@@ -895,8 +897,42 @@ tailwind.config = {
       <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>「今日はまだ。1回で30日目」に戻ります。今日はまだ終わっていないので、途切れはしません。</p>
     </div>
     <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
-      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#record" class="text-dopa underline underline-offset-4">記録</a><a href="#record-day" class="text-dopa underline underline-offset-4">記録日</a><a href="#streak" class="text-dopa underline underline-offset-4">連続記録</a><a href="#rest-pass" class="text-dopa underline underline-offset-4">休み券</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#record" class="text-dopa underline underline-offset-4">記録</a><a href="#record-day" class="text-dopa underline underline-offset-4">記録日</a><a href="#streak" class="text-dopa underline underline-offset-4">連続記録</a><a href="#rest-pass" class="text-dopa underline underline-offset-4">休み券</a><a href="#history" class="text-dopa underline underline-offset-4">履歴</a></p></div>
       <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="features/today-records/index.html" class="text-signal underline underline-offset-4">機能：今日の記録</a><a href="ui/pages/today-records/index.html" class="text-signal underline underline-offset-4">画面：今日の記録</a><a href="sessions/20261006-1523-today-records/index.html" class="text-signal underline underline-offset-4">セッション：今日の記録から取り消す</a></p></div>
+    </div>
+  </section>
+
+  <section id="history" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#history</p>
+    <h2 class="mt-1 font-display text-2xl">履歴</h2>
+    <p class="mt-3 leading-relaxed">これまでの<a href="#record" class="text-dopa underline underline-offset-4">記録</a>を1枚のグラフで見せる画面と、その機能。横に<a href="#record-day" class="text-dopa underline underline-offset-4">記録日</a>、縦にその日の時刻（午前4時から翌朝4時まで）を取り、記録1件を<a href="#squat-squad" class="text-dopa underline underline-offset-4">スクワット隊</a>の人形1つで置く。<a href="#dopa-point" class="text-dopa underline underline-offset-4">ドパ</a>の多い記録ほど人形が大きい。背景には、日ごとのドパと<a href="#moving-average" class="text-dopa underline underline-offset-4">7日移動平均</a>の2枚の面グラフを重ねる。人形を押すと、その記録の時刻、回数、<a href="#fever" class="text-dopa underline underline-offset-4">フィーバー</a>のドパが出る。ホームの<a href="#dpw" class="text-dopa underline underline-offset-4">DPW</a>か<a href="#dt" class="text-dopa underline underline-offset-4">DT</a>のカードを押して開く。見るだけの画面で、記録は消せない（消すのは<a href="#today-records" class="text-dopa underline underline-offset-4">今日の記録</a>）。開発者の手描きのラフから、2026-10-06 に設計。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>先週の火曜、昼に叩いたか覚えてないんですけど、確かめられますか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>DPW のカードを押すと履歴が出ます。火曜の列の、12時あたりに人形がいれば叩いています。押せば何回だったかも出ます。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>人形の大きさがばらばらなのは、なぜですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>その1件で取ったドパの量です。フィーバーで多めに取った記録は、大きく描かれます。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#record" class="text-dopa underline underline-offset-4">記録</a><a href="#record-day" class="text-dopa underline underline-offset-4">記録日</a><a href="#moving-average" class="text-dopa underline underline-offset-4">7日移動平均</a><a href="#dpw" class="text-dopa underline underline-offset-4">DPW</a><a href="#dt" class="text-dopa underline underline-offset-4">DT</a><a href="#squat-squad" class="text-dopa underline underline-offset-4">スクワット隊</a><a href="#today-records" class="text-dopa underline underline-offset-4">今日の記録</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="features/history/index.html" class="text-signal underline underline-offset-4">機能：履歴</a><a href="ui/pages/history/index.html" class="text-signal underline underline-offset-4">画面：履歴</a><a href="sessions/20261006-2326-squat-history/index.html" class="text-signal underline underline-offset-4">セッション：スクワットの履歴を見る</a></p></div>
+    </div>
+  </section>
+
+  <section id="moving-average" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#moving-average</p>
+    <h2 class="mt-1 font-display text-2xl">7日移動平均</h2>
+    <p class="mt-3 leading-relaxed">ある<a href="#record-day" class="text-dopa underline underline-offset-4">記録日</a>とその前の6日の<a href="#dopa-point" class="text-dopa underline underline-offset-4">ドパ</a>を足して、7で割った数。その日で終わる<a href="#dpw" class="text-dopa underline underline-offset-4">DPW</a>を7で割った数と同じ。<a href="#history" class="text-dopa underline underline-offset-4">履歴</a>のグラフで、日ごとのドパの面に重ねて描く。日ごとのドパは叩いた日と叩かなかった日で大きく上下するので、その上下をならした「ここ1週間の1日あたり」を見せるために置いた。記録を始めた日より前は0ドパとして数えるので、始めて7日目までは低く出る。画面では小数を四捨五入して整数で見せる。2026-10-06 に開発者のラフから決めた。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>DPW があるのに、7日移動平均も要るんですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>中身は同じで、7で割っただけです。日ごとのドパと同じ目盛りに載せたいので、1日あたりにしています。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>始めたばかりで線が低いのは、サボったせいですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>違います。始める前の日を0ドパとして数えているからです。8日目からは、叩いた分だけがそのまま出ます。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#dpw" class="text-dopa underline underline-offset-4">DPW</a><a href="#dopa-point" class="text-dopa underline underline-offset-4">ドパ</a><a href="#history" class="text-dopa underline underline-offset-4">履歴</a><a href="#record-day" class="text-dopa underline underline-offset-4">記録日</a><a href="#best-week" class="text-dopa underline underline-offset-4">自己ベスト</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="features/history/index.html" class="text-signal underline underline-offset-4">機能：履歴</a><a href="ui/pages/history/index.html" class="text-signal underline underline-offset-4">画面：履歴</a><a href="sessions/20261006-2326-squat-history/index.html" class="text-signal underline underline-offset-4">セッション：スクワットの履歴を見る</a></p></div>
     </div>
   </section>
 

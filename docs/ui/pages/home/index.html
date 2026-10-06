@@ -73,7 +73,7 @@ tailwind.config = {
 <header class="animate-rise">
   <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">ui / pages / home</p>
   <h1 class="mt-2 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">ホーム</span></h1>
-  <div class="mt-4 max-w-2xl space-y-3 text-sm leading-relaxed text-ink/80"><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">アプリの画面はこの1枚です。起動した直後の状態を描いています。29日連続で今日はまだ、休み券2枚、<a href="../../../glossary.html#target-reps" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">目標回数</a> 20、DPW 347、DT 987。</p><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">画面のまん中は、どこを押しても叩けます。起動した直後の<a href="../../../glossary.html#squat-squad" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スクワット隊</a>は床に寝ていて、0.5秒の長押しで<a href="../../../glossary.html#wake-up" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">起こす</a>まで叩いても数えません。起きたあとは押すとしゃがみ、離すと立ち、2打ごとに1人増えます（2026-10-06 に金色のボタンから置き換えた）。20打を叩き切ると、連続30日目と DT 1,000 ドパが同じ最後の1打で重なります。前回のラフで「いちばん重い場面」として描いた1打です。右上の歯車は設定シートを開きます。音と振動はこのモックでは出ません。</p></div>
+  <div class="mt-4 max-w-2xl space-y-3 text-sm leading-relaxed text-ink/80"><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">アプリの画面はこの1枚です。起動した直後の状態を描いています。29日連続で今日はまだ、休み券2枚、<a href="../../../glossary.html#target-reps" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">目標回数</a> 20、DPW 347、DT 987。</p><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">画面のまん中は、どこを押しても叩けます。起動した直後の<a href="../../../glossary.html#squat-squad" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スクワット隊</a>は床に寝ていて、0.5秒の長押しで<a href="../../../glossary.html#wake-up" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">起こす</a>まで叩いても数えません。起きたあとは押すとしゃがみ、離すと立ち、2打ごとに1人増えます（2026-10-06 に金色のボタンから置き換えた）。20打を叩き切ると、連続30日目と DT 1,000 ドパが同じ最後の1打で重なります。前回のラフで「いちばん重い場面」として描いた1打です。右上の歯車は設定シートを、下の DPW と DT のカードは<a href="../history/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">履歴</a>を開きます。音と振動はこのモックでは出ません。</p></div>
 </header>
 <div class="mt-10 flex flex-col items-center gap-10 md:flex-row md:items-start md:justify-center">
   <div class="w-[300px] shrink-0 rounded-[2.8rem] border-[6px] border-ink bg-ink p-1.5 shadow-[10px_10px_0_#E5337A] ">
@@ -100,17 +100,19 @@ tailwind.config = {
 </div>
 <div class="mt-auto pt-4">
   <div class="grid grid-cols-2 gap-3">
-    <div class="a-card a-shadow relative rounded-2xl border-2 a-line px-3 py-2.5">
+    <a href="../history/index.html" class="a-card a-shadow relative block rounded-2xl border-2 a-line px-3 py-2.5">
+      <span class="a-mute absolute right-2.5 top-1.5 text-sm font-bold">›</span>
       <p class="font-mono text-[9px] font-bold tracking-widest a-mute">DPW</p>
       <p id="dpw" class="num text-[30px] leading-none">347</p>
       <p class="mt-1 text-[9px] font-bold a-mute">前の7日 300　ベスト 410</p>
-    </div>
-    <div class="a-card a-shadow relative rounded-2xl border-2 a-line px-3 py-2.5">
+    </a>
+    <a href="../history/index.html" class="a-card a-shadow relative block rounded-2xl border-2 a-line px-3 py-2.5">
+      <span class="a-mute absolute right-2.5 top-1.5 text-sm font-bold">›</span>
       <p class="font-mono text-[9px] font-bold tracking-widest a-mute">DT</p>
       <p id="dt" class="num text-[30px] leading-none">987</p>
       <div class="mt-1.5 h-1.5 overflow-hidden rounded-full a-soft"><div id="dt-bar" class="h-full rounded-full bg-dopa" style="width:98.7%"></div></div>
       <p class="mt-1 text-[9px] font-bold a-mute">次の節目 1,000</p>
-    </div>
+    </a>
   </div>
 </div>
 <div id="finale" hidden><div class="absolute inset-0 z-30 flex flex-col items-center justify-center backdrop-blur-[2px]" style="background:color-mix(in srgb, var(--a-bg) 72%, transparent)">
@@ -123,7 +125,7 @@ tailwind.config = {
   <ul class="flex max-w-xs flex-col gap-3 text-sm leading-relaxed">
   <li class="border-l-4 border-dopa pl-3"><b>連続記録の帯</b>：29日連続、今日まだ。右に休み券2枚と、設定を開く歯車。<a href="../../components/streak-bar/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4">streak-bar</a></li>
   <li class="border-l-4 border-gold pl-3"><b>スクワット隊</b>：帯とカードのあいだが全部、叩く場所。最初は寝ていて、0.5秒の長押しで起きる。起きたら触れるとしゃがみ、離すと立つ。叩き切ると倒れ込んで寝る。2打ごとに1人増える。<a href="../../components/squat-squad/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4">squat-squad</a></li>
-  <li class="border-l-4 border-ink pl-3"><b>DPW と DT</b>：叩くたびに1ずつ増える。<a href="../../components/totals-cards/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4">totals-cards</a></li>
+  <li class="border-l-4 border-ink pl-3"><b>DPW と DT</b>：叩くたびに1ずつ増える。押すと<a href="../history/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4">履歴</a>が開く。<a href="../../components/totals-cards/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4">totals-cards</a></li>
   <li class="border-l-4 border-signal pl-3"><b>20打を叩き切ると</b>：連続30日と DT 1,000 の札が重なるフィナーレ。<a href="../../components/finale/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4">finale</a></li>
 </ul>
 </div>

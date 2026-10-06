@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="session-state" content="planning">
+<meta name="state" content="planning">
+<title>スクワットの履歴を見る</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: { rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } } },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-4xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <time datetime="2026-10-06T23:26">2026-10-06 23:26</time>
+      <span>/</span>
+      <span>設計セッション</span>
+      <span class="rounded-full border border-gold bg-gold/15 px-2.5 py-0.5 font-bold text-ink">状態：planning</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl">スクワットの<a href="../../glossary.html#history" class="text-dopa">履歴</a>を見る</h1>
+  </header>
+
+  <section id="order" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="relative overflow-hidden rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916] sm:p-8">
+      <div class="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-dopa-soft"></div>
+      <p class="relative font-mono text-xs uppercase tracking-[0.2em] text-dopa">開発者の注文</p>
+      <p class="relative mt-6 font-display text-3xl tracking-wide sm:text-4xl">いつ、どれだけ叩いたかを1枚で</p>
+      <p class="relative mt-6 text-lg font-bold leading-relaxed">
+        記録は全部残っているのに、見られるのは今日の分だけ。<br>
+        開発者が手描きのラフを1枚くれた。縦に時刻、横に日付、叩いたところに人形。<br>
+        人形は量が多いほど大きく、背景には日ごとのドパと7日移動平均の網掛け。押せば詳細が出る（網掛けは、レビューで薄い面に改めた）。
+      </p>
+    </div>
+  </section>
+
+  <section id="rough" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01 / rough</p>
+    <h2 class="mt-2 font-display text-3xl">ラフの読み方</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">
+      ラフで迷ったのは縦軸の向きでした。グラフの縦は量に使うものだと思い込んでいた。
+      ところが目盛りは 9:00 と 12:00 で、12:00 のほうが上にあります。縦は時刻で、量は人形の大きさと背景の面が受け持つ。
+      読み方を、書き込みごとに並べます。
+    </p>
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full min-w-[36rem] text-left text-sm">
+        <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="py-2 pr-4">ラフの書き込み</th><th class="py-2 pr-4">読み方</th><th class="py-2">こちらで補ったこと</th></tr></thead>
+        <tbody><tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">縦の目盛り 9:00、12:00</td><td class="py-3 pr-4">縦はその日の時刻。12:00 が 9:00 より上にあるので、上ほど遅い</td><td class="py-3">範囲は午前4時から翌朝4時。<a href="../../glossary.html#record-day" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録日</a>の区切りに合わせ、夜食のあとの1件もその日の列に入れる</td></tr><tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">横の 9/9、9/10</td><td class="py-3 pr-4">横は日付</td><td class="py-3">1日1列、1画面に7日ほど。横になぞって過去へ戻る。開いた直後は今日が右端</td></tr><tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">「スクワットをした日時をアイコンで表示」「量が大きければアイコンも大きくなる」</td><td class="py-3 pr-4"><a href="../../glossary.html#record" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録</a>1件をアイコン1つで、その日のその時刻に置く</td><td class="py-3">アイコンは<a href="../../glossary.html#squat-squad" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スクワット隊</a>のしゃがんだ人形。面積をドパに比例させる。フィーバーのドパがある記録は dopa 色</td></tr><tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">網掛けの「DOPA 日毎獲得量」と「DOPA 7日移動平均」</td><td class="py-3 pr-4">2枚の面グラフを背景に重ねる</td><td class="py-3">同じ目盛りに載せ、数字は出さない。斜線は使わず、色の違う縁の線と薄い塗りで見分ける（開発者のレビュー）。<a href="../../glossary.html#moving-average" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">7日移動平均</a>は DPW を7で割った数</td></tr><tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">「タップで詳細表示」</td><td class="py-3 pr-4">アイコンを押すと、その記録の詳細が出る</td><td class="py-3">時刻、回数、フィーバーのドパ。その日の件数と合計、7日移動平均も添える</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="place" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / place</p>
+    <h2 class="mt-2 font-display text-3xl">どこから開くか</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">
+      最初は、<a href="../../glossary.html#today-records" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日の記録</a>のシートを広げるつもりでした。記録を見せる場所はもうあり、そこに過去の日を足せば済む、と。
+      ただ、ラフの中身は今日の記録の続きというより、<a href="../../glossary.html#dpw" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">DPW</a>と<a href="../../glossary.html#dt" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">DT</a>の内訳です。日ごとのドパを積めば DT、7日分を足せば DPW になる。
+      開発者は DPW と DT のカードを入口に選びました。今日の記録のシートは、今日の1件を消す場所のまま残ります。
+    </p>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">
+      カードを押せるようにするだけなので、ホームの部品は増えません。今日の記録の帯と同じく、右上に「›」を付けて押せることを示します。
+    </p>
+  </section>
+
+  <section id="mock" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / mock</p>
+    <h2 class="mt-2 font-display text-3xl">修正イメージ</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">左：ホームのカード（「›」が付くだけ）。右：履歴のシート。グラフは横になぞれて、人形を押すと下の行が変わります。全画面の動く見本は <a href="../../ui/pages/history/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ui／履歴</a>、状態ごとの見た目は <a href="../../ui/components/history-chart/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ui／履歴のグラフ</a>。</p>
+    <div class="mt-6 grid items-start gap-6 md:grid-cols-[14rem_1fr]">
+      <figure>
+        <div class="grid grid-cols-2 gap-2 rounded-2xl bg-white p-3 ring-1 ring-rule">
+          <div class="relative rounded-xl border-2 border-ink bg-white px-2 py-2 shadow-[3px_3px_0_#1C1916] outline outline-2 outline-offset-4 outline-dopa"><span class="absolute right-1.5 top-0.5 text-xs font-bold text-mute">›</span><p class="font-mono text-[8px] font-bold text-mute">DPW</p><p class="font-display text-xl leading-none">347</p></div>
+          <div class="relative rounded-xl border-2 border-ink bg-white px-2 py-2 shadow-[3px_3px_0_#1C1916] outline outline-2 outline-offset-4 outline-dopa"><span class="absolute right-1.5 top-0.5 text-xs font-bold text-mute">›</span><p class="font-mono text-[8px] font-bold text-mute">DT</p><p class="font-display text-xl leading-none">987</p></div>
+        </div>
+        <figcaption class="mt-2 text-center font-mono text-xs text-mute">ホームのカード（枠が押せる）</figcaption>
+      </figure>
+      <figure>
+        <div class="max-w-[320px] rounded-[1.6rem] border-2 border-ink bg-white p-3 shadow-[6px_6px_0_#1C1916]">
+          <div class="flex items-center justify-between px-1"><p class="text-sm font-black">履歴</p><span class="rounded-full border-2 border-ink bg-gold px-2.5 py-0.5 text-[10px] font-black shadow-[0_2px_0_#1C1916]">閉じる</span></div>
+          <div class="mt-1 flex gap-3 px-1 text-[9px] font-bold text-mute"><span><span class="mr-0.5 inline-block h-2 w-3 rounded-sm border-t-2 border-dopa bg-dopa/20 align-middle"></span>日ごとのドパ</span><span><span class="mr-0.5 inline-block h-2 w-3 rounded-sm border-t-2 border-signal bg-signal/15 align-middle"></span>7日移動平均</span></div>
+          <div id="chart" class="mt-1"></div>
+          <p id="detail" class="mx-1 mt-2 rounded-xl border-2 border-ink px-2 py-1.5 text-[10px] font-bold"></p>
+        </div>
+        <figcaption class="mt-2 font-mono text-xs text-mute">履歴のシート</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="spec" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / spec</p>
+    <h2 class="mt-2 font-display text-3xl">端の場面</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">見え方の決まりは<a href="../../features/history/index.html#rules" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">機能ページ</a>にまとめました。ここには、ラフに描かれていない場面だけを置きます。</p>
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full min-w-[36rem] text-left text-sm">
+        <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="py-2 pr-4">場面</th><th class="py-2 pr-4">決め</th><th class="py-2">なぜ</th></tr></thead>
+        <tbody><tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">記録がない</td><td class="py-3 pr-4">7日分の空の列と「叩くと、ここに人形が並びます。」</td><td class="py-3">空のグラフだけでは、壊れて見える</td></tr><tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">始めて7日目まで</td><td class="py-3 pr-4">列は少なくとも7日分。最初の記録日より前の列は空</td><td class="py-3">1画面に7日という見え方を、初日から崩さない</td></tr><tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">人形が重なる</td><td class="py-3 pr-4">新しい記録を上に描く。押せる範囲は30pt 四方以上</td><td class="py-3">同じ時間帯に2件叩くことは少ない。重なっても押し分けられればよい</td></tr><tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">叩いている最中</td><td class="py-3 pr-4">DPW と DT のカードは押せない</td><td class="py-3">開いている連打はまだ記録ではない。今日の記録と同じ決まり</td></tr><tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">開いたまま午前4時をまたぐ</td><td class="py-3 pr-4">開き直すまで描き直さない</td><td class="py-3">見ている途中で列がずれると、押そうとした人形が逃げる</td></tr><tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">ひかえめモード</td><td class="py-3 pr-4">開いたときの人形の弾みを出さない</td><td class="py-3"><a href="../../glossary.html#reduced-effects-mode" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ひかえめモード</a>の決まり</td></tr><tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">VoiceOver</td><td class="py-3 pr-4">日の列を1つの要素にし、「10月3日 土曜、2件、42ドパ、7日平均32」と読む。人形はその中の要素で「19時40分、10回、フィーバー12ドパ」</td><td class="py-3">グラフの形は聞いても分からない。数で読めれば足りる</td></tr></tbody>
+      </table>
+    </div>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">保存するデータは変わりません。<a href="../../glossary.html#record" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録</a>の叩き始めた時刻（startedAt）と記録日（day）、回数、フィーバーのドパから、すべて描けます。</p>
+  </section>
+
+  <section id="detail-impl" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / detail</p>
+    <h2 class="mt-2 font-display text-3xl">作る場所</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">所要はあわせて3〜4時間。グラフの描き方（重さ）がいちばん読めないところです。</p>
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full min-w-[36rem] text-left text-sm">
+        <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="py-2 pr-4">場所</th><th class="py-2 pr-4">変更</th><th class="py-2">なぜ</th></tr></thead>
+        <tbody><tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">Model/History.swift（新規）</td><td class="py-3 pr-4">記録の一覧と今日から、日の列を作る。列ごとにドパの合計、7日移動平均、人形（4時からの分、回数、フィーバーのドパ、記録の id）。最初の列は「最初の記録日」と「今日の6日前」の早いほう</td><td class="py-3">計算を画面から切り離し、テストで確かめる。Ledger と同じく保存しない</td></tr><tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">AppModel</td><td class="py-3 pr-4"><code>history()</code> を足す。全記録を読み、休み券の日（<code>ledger.streak.restPassDays</code>）と合わせて History を返す</td><td class="py-3">シートを開くときに1回だけ読む。叩くたびには作らない</td></tr><tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">History/HistoryView.swift（新規）</td><td class="py-3 pr-4">シート本体。見出し、凡例、グラフ、詳細の行。<code>.presentationDetents([.large])</code></td><td class="py-3">今日の記録、設定と同じく、ホームに重ねて閉じれば戻る</td></tr><tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">History/HistoryChart.swift（新規）</td><td class="py-3 pr-4">横の ScrollView に日の列を LazyHStack で並べ、人形を置く。面グラフは ScrollView の後ろに置いた Canvas 1枚に、見えている範囲だけ描く（<code>onScrollGeometryChange</code> でずれを受ける）。<code>.defaultScrollAnchor(.trailing)</code> で今日を右端に</td><td class="py-3">1年分を1枚の絵にすると幅が1万2千pt を超え、メモリを食う。見えている7日分だけなら軽い</td></tr><tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">SquatFigure（新規の Shape）</td><td class="py-3 pr-4">しゃがんだ人形を描く。点は SquatterLayer の「しゃがむ」と同じものを1か所に置いて共有する</td><td class="py-3">隊と同じ姿にする。片方だけ直して形がずれることを防ぐ</td></tr><tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">TotalsCards、HomeView</td><td class="py-3 pr-4">2枚のカードを Button にし、右上に「›」。叩いている最中は押せない。シートを出す</td><td class="py-3">入口をカードに置く（開発者が決定）</td></tr><tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">Localizable.xcstrings</td><td class="py-3 pr-4">「履歴」「日ごとのドパ」「7日移動平均」「人形を押すと、その記録が出ます。」「叩くと、ここに人形が並びます。」と、VoiceOver の読み上げ。英語も同時に</td><td class="py-3"><a href="../../devops/localization/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">多言語の決まり事</a>。訳語表に History と 7-day average を足す</td></tr><tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">テスト</td><td class="py-3 pr-4">7日移動平均、始める前の日を0として数えること、午前1時の記録が前の日の列の上端に入ること、記録がないとき7列、最初の列の決め方</td><td class="py-3">グラフの形はシミュレーターで見るしかないが、数は機械で確かめられる</td></tr><tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">docs</td><td class="py-3 pr-4">実装でずれたところを、機能、画面、コンポーネントの見本に戻す</td><td class="py-3">見本と実物を揃えておく</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="review" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / review</p>
+    <h2 class="mt-2 font-display text-3xl">見てほしいところ</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">ラフにない数と形を、こちらで決めました。開発者がレビューし、5つともこのままでよいとした（2026-10-06）。同じレビューで、背景の面の斜線をやめた。</p>
+    <ol class="mt-4 flex max-w-2xl flex-col gap-3 text-sm"><li class="rounded-2xl border border-rule bg-white p-4"><b>人形はしゃがんだ姿にそろえた。</b>ラフの 9/10 は立ち姿に見えました。姿で何かを分けているのか読み取れなかったので、1つにしています。</li><li class="rounded-2xl border border-rule bg-white p-4"><b>1画面に7日、開いた直後は今日が右端。</b>DPW の7日と同じ幅です。30日を一度に見たいなら、列を細くする案もあります。</li><li class="rounded-2xl border border-rule bg-white p-4"><b>人形の大きさは面積をドパに比例（14〜46pt）。</b>20ドパで約29pt、52ドパで約47pt（上限で46pt）。差が小さく見えるなら、高さを比例させる手もあります。</li><li class="rounded-2xl border border-rule bg-white p-4"><b>休み券の日に青い札を足した。</b>ラフにはありません。人形のない列が、途切れた日に見えないようにするためです。</li><li class="rounded-2xl border border-rule bg-white p-4"><b>面グラフに目盛りの数字を出さない。</b>数は詳細の行で読みます。目盛りを足すと、時刻の目盛りと2つになって混ざります。</li></ol>
+  </section>
+
+  <section id="decisions" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">07 / decisions</p>
+    <h2 class="mt-2 font-display text-3xl">決めたこと</h2>
+    <ol class="mt-6 flex max-w-2xl flex-col gap-3 text-sm"><li class="flex gap-3 rounded-2xl border border-rule bg-white p-4"><span class="font-mono text-xs font-bold text-dopa">01</span><span>履歴を作る。縦に時刻、横に日付。記録1件を人形1つで置き、ドパが多いほど大きく。背景に日ごとのドパと7日移動平均。押すと詳細（開発者のラフ）。</span></li><li class="flex gap-3 rounded-2xl border border-rule bg-white p-4"><span class="font-mono text-xs font-bold text-dopa">02</span><span>入口は DPW と DT のカード。今日の記録のシートはそのまま残す（開発者が決定）。</span></li><li class="flex gap-3 rounded-2xl border border-rule bg-white p-4"><span class="font-mono text-xs font-bold text-dopa">03</span><span>見るだけ。消すのは今日の記録から。</span></li><li class="flex gap-3 rounded-2xl border border-rule bg-white p-4"><span class="font-mono text-xs font-bold text-dopa">04</span><span>保存の形（SquatRecord）は変えない。</span></li><li class="flex gap-3 rounded-2xl border border-rule bg-white p-4"><span class="font-mono text-xs font-bold text-dopa">05</span><span>背景の面に斜線は使わない。縁の線と薄い塗りで描く（開発者のレビュー）。</span></li></ol>
+  </section>
+
+  <section id="links" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">08 / links</p>
+    <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">機能</p><a href="../../features/history/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">履歴</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">画面とコンポーネント</p><a href="../../ui/pages/history/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">履歴（画面）</a><a href="../../ui/components/history-chart/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">履歴のグラフ</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../glossary.html#history" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">履歴</a><a href="../../glossary.html#moving-average" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">7日移動平均</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">前回のセッション</p><a href="../20261006-1945-wake-squad/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">長押しで隊を起こす</a></li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script src="../../ui/components/history-chart/history-chart.js"></script>
+<script>
+(function () {
+  var H = HistoryChart, detail = document.getElementById('detail');
+  var days = H.sample({ days: 30, seed: 11, rest: [9, 20], todayRecords: [{ min: 4 * 60 + 5, reps: 20, bonus: 12 }, { min: 8 * 60 + 41, reps: 20, bonus: 0 }] });
+  function show(d, r) {
+    detail.textContent = H.label(d) + '　' + (r ? H.clock(r.min) + '　' + r.reps + '回' + (r.bonus ? ' +' + r.bonus + ' フィーバー' : '') : d.records.length + '件　' + d.dopa + 'ドパ　7日平均 ' + Math.round(d.avg));
+  }
+  show(days[days.length - 1], null);
+  H.render(document.getElementById('chart'), days, { height: 340, onSelect: show });
+})();
+</script>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>履歴のグラフ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=M+PLUS+Rounded+1c:wght@500;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+        round: ['"M PLUS Rounded 1c"', '"Noto Sans JP"', 'sans-serif']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } }
+      },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+<style>
+/* アプリ画面の色。明るい配色と暗い配色を、.app と .app.dark で切り替える */
+.app { --a-bg:#FBF6EE; --a-card:#FFFFFF; --a-ink:#1C1916; --a-mute:#6E655C; --a-rule:#E7DDCC; --a-line:#1C1916; --a-soft:#FFE6F0; }
+.app.dark { --a-bg:#16120F; --a-card:#231D18; --a-ink:#F5EEE3; --a-mute:#A89C8E; --a-rule:#3A312A; --a-line:#F5EEE3; --a-soft:#3A1726; }
+.a-bg { background:var(--a-bg); color:var(--a-ink); }
+.a-card { background:var(--a-card); }
+.a-ink { color:var(--a-ink); }
+.a-mute { color:var(--a-mute); }
+.a-line { border-color:var(--a-line); }
+.a-rule { border-color:var(--a-rule); }
+.a-soft { background:var(--a-soft); }
+.a-shadow { box-shadow:4px 4px 0 var(--a-line); }
+.a-shadow-lg { box-shadow:0 8px 0 var(--a-line); }
+.num { font-family:"M PLUS Rounded 1c","Noto Sans JP",sans-serif; font-weight:900; font-variant-numeric:tabular-nums; letter-spacing:-0.02em; }
+.ticket { width:14px; height:18px; border-radius:3px; background:#2F79F7; position:relative; }
+.ticket::after { content:""; position:absolute; left:2px; right:2px; top:8px; border-top:2px dotted rgba(255,255,255,.75); }
+.ticket.empty { background:transparent; border:2px dashed var(--a-rule); }
+.mash { width:200px; height:200px; border-radius:9999px; background:#E9A800; border:4px solid var(--a-line); box-shadow:0 8px 0 var(--a-line); color:#1C1916; transition:transform .06s; }
+.mash:active { transform:translateY(6px); box-shadow:0 2px 0 var(--a-line); }
+.glow { position:absolute; inset:-22px; border-radius:9999px; background:radial-gradient(circle, rgba(229,51,122,.55) 0%, rgba(229,51,122,0) 70%); pointer-events:none; }
+.ring { position:absolute; border-radius:9999px; border:3px solid #E5337A; pointer-events:none; }
+.grain { position:absolute; border-radius:9999px; background:#E5337A; pointer-events:none; }
+@keyframes pop { 0%{transform:scale(.3);opacity:0} 60%{transform:scale(1.08);opacity:1} 100%{transform:scale(1)} }
+@keyframes ringout { 0%{transform:translate(-50%,-50%) scale(.2);opacity:1} 100%{transform:translate(-50%,-50%) scale(1);opacity:0} }
+@keyframes fly { 0%{transform:translate(0,0) scale(1);opacity:1} 100%{transform:translate(var(--dx),var(--dy)) scale(.4);opacity:0} }
+@keyframes burst { 0%{transform:translate(0,0);opacity:1} 100%{transform:translate(var(--dx),var(--dy));opacity:0} }
+@keyframes drop { 0%{transform:translateY(-120%)} 100%{transform:none} }
+.pop { animation:pop .45s cubic-bezier(.2,1.4,.4,1) both; }
+.tabbtn[aria-selected="true"] { background:#1C1916; color:#FBF6EE; }
+[data-panel][hidden] { display:none !important; }
+</style>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-5xl">
+<header class="animate-rise">
+  <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">ui / components / history-chart</p>
+  <h1 class="mt-2 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">履歴</span>のグラフ</h1>
+  <div class="mt-4 max-w-2xl space-y-3 text-sm leading-relaxed text-ink/80"><p><a href="../../pages/history/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">履歴</a>のシートのまん中に置くグラフです。横に<a href="../../../glossary.html#record-day" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録日</a>、縦にその日の時刻（午前4時から翌朝4時、上ほど遅い）。<a href="../../../glossary.html#record" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録</a>1件を<a href="../../../glossary.html#squat-squad" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スクワット隊</a>のしゃがんだ人形1つで置きます。</p><p>人形の面積は、その記録の<a href="../../../glossary.html#dopa-point" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパ</a>に比例させます（高さは平方根）。10ドパで約21pt、20ドパで約29pt、52ドパで約47pt。14pt より小さくも 46pt より大きくもしません。</p><p>背景の面は2枚です。斜線は使わず、縁の線と薄い塗りで描きます。dopa 色が日ごとのドパ、signal 色が<a href="../../../glossary.html#moving-average" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">7日移動平均</a>。どちらも同じ目盛りで、いちばん多い日の1.15倍が上端です。目盛りの数字は出しません。</p></div>
+</header>
+<section id="states" class="mt-12">
+  <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">states</p>
+  <h2 class="mt-2 font-display text-3xl">状態ごとの見た目</h2>
+  <div data-story class="mt-6 rounded-3xl border-2 border-ink bg-white p-5 sm:p-7">
+  <div class="flex flex-wrap items-center justify-between gap-3">
+    <div role="tablist" class="flex flex-wrap gap-2"><button type="button" role="tab" data-tab="normal" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">30日分</button><button type="button" role="tab" data-tab="picked" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">人形を押した</button><button type="button" role="tab" data-tab="first" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">はじめの3日</button><button type="button" role="tab" data-tab="empty" class="tabbtn rounded-full border-2 border-ink px-3 py-1 text-xs font-bold">記録なし</button></div>
+    <label class="flex cursor-pointer items-center gap-2 font-mono text-xs text-mute"><input type="checkbox" data-dark class="accent-dopa"> 暗い配色</label>
+  </div>
+  <div class="mt-6 rounded-2xl bg-[repeating-linear-gradient(45deg,#FBF6EE_0_10px,#F5EDE0_10px_20px)] p-5 sm:p-8"><div data-panel="normal" class="grid items-start gap-8 md:grid-cols-[auto_1fr]">
+  <div class="app a-bg w-[300px] shrink-0 rounded-3xl border border-rule p-3"><div class="a-card rounded-2xl p-1"><div data-chart="normal"></div><div data-detail="normal" class="mx-1 mb-1 mt-2 rounded-xl border-2 a-line px-3 py-2 text-[10px] font-bold a-mute"></div></div></div>
+  <div class="max-w-sm text-sm leading-relaxed"><p class="font-mono text-xs text-mute">state / normal</p><p class="mt-1 font-display text-xl">30日分</p><div class="mt-3 space-y-2 text-ink/80"><p>開いた直後。今日（10/6）が右端に来て、7日ほどが見える。左へなぞると過去の日へ戻る。</p><p>朝、昼、夜の3つの帯に人形が並ぶ。dopa 色の人形はフィーバーでドパを足した記録。青い札は休み券を使った日。</p></div></div>
+</div><div data-panel="picked" class="grid items-start gap-8 md:grid-cols-[auto_1fr]">
+  <div class="app a-bg w-[300px] shrink-0 rounded-3xl border border-rule p-3"><div class="a-card rounded-2xl p-1"><div data-chart="picked"></div><div data-detail="picked" class="mx-1 mb-1 mt-2 rounded-xl border-2 a-line px-3 py-2 text-[10px] font-bold a-mute"></div></div></div>
+  <div class="max-w-sm text-sm leading-relaxed"><p class="font-mono text-xs text-mute">state / picked</p><p class="mt-1 font-display text-xl">人形を押した</p><div class="mt-3 space-y-2 text-ink/80"><p>押した人形に点線の輪が付き、下の詳細がその記録に変わる。時刻、回数、フィーバーのドパ。上の行は、その日の件数、合計、7日移動平均。</p><p>別の人形を押せば切り替わる。消すボタンは出さない。</p></div></div>
+</div><div data-panel="first" class="grid items-start gap-8 md:grid-cols-[auto_1fr]">
+  <div class="app a-bg w-[300px] shrink-0 rounded-3xl border border-rule p-3"><div class="a-card rounded-2xl p-1"><div data-chart="first"></div><div data-detail="first" class="mx-1 mb-1 mt-2 rounded-xl border-2 a-line px-3 py-2 text-[10px] font-bold a-mute"></div></div></div>
+  <div class="max-w-sm text-sm leading-relaxed"><p class="font-mono text-xs text-mute">state / first</p><p class="mt-1 font-display text-xl">はじめの3日</p><div class="mt-3 space-y-2 text-ink/80"><p>記録を始めて3日目。列は少なくとも7日分を出すので、左の4日は空いている。</p><p>7日移動平均は、始める前の日を0ドパとして数えるので、日ごとのドパよりずっと低い。8日目から追いつく。</p></div></div>
+</div><div data-panel="empty" class="grid items-start gap-8 md:grid-cols-[auto_1fr]">
+  <div class="app a-bg w-[300px] shrink-0 rounded-3xl border border-rule p-3"><div class="a-card rounded-2xl p-1"><div data-chart="empty"></div><div data-detail="empty" class="mx-1 mb-1 mt-2 rounded-xl border-2 a-line px-3 py-2 text-[10px] font-bold a-mute"></div></div></div>
+  <div class="max-w-sm text-sm leading-relaxed"><p class="font-mono text-xs text-mute">state / empty</p><p class="mt-1 font-display text-xl">記録なし</p><div class="mt-3 space-y-2 text-ink/80"><p>まだ1度も叩いていない。7日分の空の列と、「叩くと、ここに人形が並びます。」だけを出す。</p><p>DPW と DT のカードは 0 でも押せる。</p></div></div>
+</div></div>
+  </div>
+</section>
+
+<section id="links" class="mt-16">
+  <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">links</p>
+  <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
+  <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+    <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">機能</p><a href="../../../features/history/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">履歴</a></li>
+    <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">置かれる画面</p><a href="../../pages/history/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">履歴</a></li>
+    <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">人形のもと</p><a href="../squat-squad/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スクワット隊</a></li>
+    <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">決めたセッション</p><a href="../../../sessions/20261006-2326-squat-history/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スクワットの履歴を見る</a></li>
+  </ul>
+</section>
+</article>
+</main>
+<script src="history-chart.js"></script>
+<script>
+(function () {
+  var H = HistoryChart;
+  var todayRecords = [{ min: 4 * 60 + 5, reps: 20, bonus: 12 }, { min: 8 * 60 + 41, reps: 20, bonus: 0 }];
+  var normal = H.sample({ days: 30, seed: 11, rest: [9, 20], todayRecords: todayRecords });
+  var first = H.sample({ days: 7, seed: 5, todayRecords: [{ min: 4 * 60 + 30, reps: 20, bonus: 0 }] });
+  first.forEach(function (d, i) { if (i < 4) d.records = []; });
+  H.withTotals(first);
+  var empty = H.sample({ days: 7, todayRecords: [] });
+  empty.forEach(function (d) { d.records = []; });
+  H.withTotals(empty);
+  var data = { normal: normal, picked: normal, first: first, empty: empty };
+  function line(d) {
+    return H.label(d) + (d.today ? ' 今日' : '') + '　' + d.records.length + '件　' + d.dopa + 'ドパ　7日平均 ' + Math.round(d.avg);
+  }
+  function detail(key, d, r) {
+    var box = document.querySelector('[data-detail="' + key + '"]');
+    if (key === 'empty') { box.innerHTML = '<p class="py-1 text-center text-[11px] a-ink">叩くと、ここに人形が並びます。</p>'; return; }
+    box.innerHTML = '<p>' + line(d) + '</p>' + (r
+      ? '<p class="mt-1 flex items-baseline justify-between a-ink"><span class="num text-lg">' + H.clock(r.min) + '</span><span><span class="num text-xl">' + r.reps + '</span><span class="ml-0.5 text-xs">回</span>' + (r.bonus ? '<span class="ml-1.5 rounded-full a-soft px-1.5 py-0.5 text-[10px] text-dopa">+' + r.bonus + ' フィーバー</span>' : '') + '</span></p>'
+      : '<p class="mt-1 text-[11px] a-ink">人形を押すと、その記録が出ます。</p>');
+  }
+  var story = document.querySelector('[data-story]');
+  var tabs = story.querySelectorAll('[data-tab]'), panels = story.querySelectorAll('[data-panel]');
+  var darkBox = story.querySelector('[data-dark]'), current = 'normal';
+  function draw(key) {
+    var days = data[key], dark = darkBox.checked;
+    detail(key, days[days.length - 1], null);
+    var picked = false;
+    H.render(story.querySelector('[data-chart="' + key + '"]'), days, {
+      height: 360, dark: dark,
+      onSelect: function (d, r) { detail(key, d, r); },
+      // 「人形を押した」は、2日前のフィーバーの記録を押したところ
+      preselect: key === 'picked' ? function (d, r) {
+        if (picked || r.bonus === 0 || days.indexOf(d) < days.length - 4) return false;
+        picked = true; return true;
+      } : null
+    });
+  }
+  function show(id) {
+    current = id;
+    tabs.forEach(function (t) { t.setAttribute('aria-selected', t.dataset.tab === id ? 'true' : 'false'); });
+    panels.forEach(function (p) { p.hidden = p.dataset.panel !== id; });
+    draw(id);
+  }
+  tabs.forEach(function (t) { t.addEventListener('click', function () { show(t.dataset.tab); }); });
+  darkBox.addEventListener('change', function () {
+    story.querySelectorAll('.app').forEach(function (a) { a.classList.toggle('dark', darkBox.checked); });
+    draw(current);
+  });
+  show('normal');
+})();
+</script>
+<script src="../../../sidebar.js" defer></script>
+</body>
+</html>

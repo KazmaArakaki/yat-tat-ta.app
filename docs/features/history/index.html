@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>履歴</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } },
+        pulse2: { '0%,100%': { transform: 'scale(1)' }, '50%': { transform: 'scale(1.04)' } }
+      },
+      animation: { rise: 'rise .5s ease-out both', pulse2: 'pulse2 1.6s ease-in-out infinite' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-4xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <a href="../index.html" class="hover:text-ink">features</a><span>/</span><span>ふり返って続ける</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">履歴</span></h1>
+    <p class="mt-4 max-w-2xl text-base leading-relaxed">これまでの<a href="../../glossary.html#record" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録</a>を、日付と時刻の上に人形で並べる。DPW と DT のカードは「どれだけ」を1つの数で見せるけれど、いつ叩いたかは見せません。履歴はその内訳です。2026-10-06 設計（開発者の手描きのラフから）。</p>
+  </header>
+
+  <section id="rules" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01 / rules</p>
+    <h2 class="mt-2 font-display text-3xl">決まりごと</h2>
+    <p class="mt-8 font-mono text-xs text-mute">表1　開き方と見え方</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[34rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">項目</th><th class="py-2 pr-4 font-bold">決まり</th><th class="py-2 pr-4 font-bold">理由</th></tr></thead>
+        <tbody><tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">開く</td><td class="py-3 pr-4">ホームの<a href="../../glossary.html#dpw" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">DPW</a>か<a href="../../glossary.html#dt" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">DT</a>のカードを押す。下から全画面のシートが出る。叩いている最中は押せない</td><td class="py-3 pr-4">グラフの中身は、カードの数の内訳。ホームに部品を足さない。</td></tr><tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">横軸</td><td class="py-3 pr-4"><a href="../../glossary.html#record-day" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録日</a>。1日1列で、1画面に7日ほど。開いた直後は今日が右端。左へなぞると過去へ戻る</td><td class="py-3 pr-4">DPW と同じ「直近7日」が最初に目に入る。</td></tr><tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">縦軸</td><td class="py-3 pr-4">その日の時刻。下が午前4時、上が翌朝4時。3時間ごとに目盛り</td><td class="py-3 pr-4">記録日の区切りに合わせる。夜食のあとの1件も、その日の列の上端に入る。</td></tr><tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">人形</td><td class="py-3 pr-4"><a href="../../glossary.html#record" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録</a>1件を<a href="../../glossary.html#squat-squad" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スクワット隊</a>のしゃがんだ人形1つで置く。面積をドパに比例させる（14〜46pt）。フィーバーのドパがある記録は dopa 色</td><td class="py-3 pr-4">何時に、どれだけ叩いたかが1つの印で読める。</td></tr><tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">背景の面</td><td class="py-3 pr-4">日ごとのドパ（dopa 色）と<a href="../../glossary.html#moving-average" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">7日移動平均</a>（signal 色）を、縁の線と薄い塗りで重ねる。斜線は使わない。同じ目盛りで、数字は出さない</td><td class="py-3 pr-4">上下の激しい日ごとの量と、ならした1週間の調子を同時に見る。数は詳細で読む。</td></tr><tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">詳細</td><td class="py-3 pr-4">人形を押すと、下にその記録の時刻、回数、フィーバーのドパ。上の行に、その日の件数、合計、7日移動平均</td><td class="py-3 pr-4">グラフの上に数字を並べると人形が隠れる。</td></tr><tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">休み券の日</td><td class="py-3 pr-4"><a href="../../glossary.html#rest-pass" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">休み券</a>を使った日の列に、帯と同じ青い札を置く</td><td class="py-3 pr-4">人形のない列が「途切れ」ではないと分かる。</td></tr><tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">見るだけ</td><td class="py-3 pr-4">消せない。今日の1件を消すのは<a href="../../glossary.html#today-records" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日の記録</a>から</td><td class="py-3 pr-4">昨日より前を消さない決まり（今日の記録の設計）を崩さない。</td></tr></tbody>
+      </table>
+    </div>
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">保存するものは増えません。人形の位置は記録の叩き始めた時刻（startedAt）から、面の高さは記録を日ごとに足して出します。7日移動平均は、その日で終わる DPW を7で割った数です。記録を始める前の日は0ドパとして数えるので、始めて7日目までは低く出ます。</p>
+  </section>
+
+  <section id="screens" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / screens</p>
+    <h2 class="mt-2 font-display text-3xl">関連する画面</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><a href="../../ui/pages/home/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ホーム</a><p class="mt-1 text-ink/80">DPW と DT のカードが入り口。どちらの右上にも「›」が付く。</p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><a href="../../ui/pages/history/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">履歴</a><p class="mt-1 text-ink/80">下から出す全画面のシート。グラフと、押した記録の詳細。</p></li>
+    </ul>
+  </section>
+
+  <section id="components" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / components</p>
+    <h2 class="mt-2 font-display text-3xl">関連するコンポーネント</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">サンプル：30日分。今日（10/6）は2件で、08:05 に20回とフィーバー12、12:41 に20回。人形を押すと下の行が変わります。</p>
+    <div class="mt-6 grid gap-6 md:grid-cols-2">
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <div class="flex items-baseline justify-between"><a href="../../ui/components/history-chart/index.html" class="font-mono text-xs font-bold text-dopa underline underline-offset-4">history-chart</a><span class="font-mono text-[11px] text-mute">30日分</span></div>
+        <div class="mt-4 rounded-2xl bg-paper p-2"><div id="chart"></div><p id="detail" class="mt-2 px-2 pb-1 text-[11px] font-bold text-mute"></p></div>
+      </div>
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <div class="flex items-baseline justify-between"><a href="../../ui/components/totals-cards/index.html" class="font-mono text-xs font-bold text-dopa underline underline-offset-4">totals-cards</a><span class="font-mono text-[11px] text-mute">入り口</span></div>
+        <div class="mt-4 grid grid-cols-2 gap-3 rounded-2xl bg-paper p-4">
+          <a href="../../ui/pages/history/index.html" class="relative block rounded-2xl border-2 border-ink bg-white px-3 py-2.5 shadow-[4px_4px_0_#1C1916] hover:bg-dopa-pale"><span class="absolute right-2.5 top-1.5 text-sm font-bold text-mute">›</span><p class="font-mono text-[9px] font-bold tracking-widest text-mute">DPW</p><p class="font-display text-2xl leading-none">347</p><p class="mt-1 text-[9px] font-bold text-mute">前の7日 300　ベスト 410</p></a>
+          <a href="../../ui/pages/history/index.html" class="relative block rounded-2xl border-2 border-ink bg-white px-3 py-2.5 shadow-[4px_4px_0_#1C1916] hover:bg-dopa-pale"><span class="absolute right-2.5 top-1.5 text-sm font-bold text-mute">›</span><p class="font-mono text-[9px] font-bold tracking-widest text-mute">DT</p><p class="font-display text-2xl leading-none">987</p><p class="mt-1 text-[9px] font-bold text-mute">次の節目 1,000</p></a>
+        </div>
+        <p class="mt-3 text-xs leading-relaxed text-mute">どちらを押しても同じ履歴が開く。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="links" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / links</p>
+    <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">設計の経緯</p><a href="../../sessions/20261006-2326-squat-history/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スクワットの履歴を見る</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">読むデータ</p><a href="../../database/squat-record/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">SquatRecord</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../glossary.html#history" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">履歴</a><a href="../../glossary.html#moving-average" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">7日移動平均</a><a href="../../glossary.html#record" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">記録</a><a href="../../glossary.html#record-day" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">記録日</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">ほかの機能</p><a href="../dopa-totals/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパの合計</a><a href="../today-records/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日の記録</a></li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script src="../../ui/components/history-chart/history-chart.js"></script>
+<script>
+(function () {
+  var H = HistoryChart, detail = document.getElementById('detail');
+  var days = H.sample({ days: 30, seed: 11, rest: [9, 20], todayRecords: [{ min: 4 * 60 + 5, reps: 20, bonus: 12 }, { min: 8 * 60 + 41, reps: 20, bonus: 0 }] });
+  function show(d, r) {
+    detail.textContent = H.label(d) + '　' + (r ? H.clock(r.min) + '　' + r.reps + '回' + (r.bonus ? ' +' + r.bonus + ' フィーバー' : '') : d.records.length + '件　' + d.dopa + 'ドパ　7日平均 ' + Math.round(d.avg));
+  }
+  show(days[days.length - 1], null);
+  H.render(document.getElementById('chart'), days, { height: 320, onSelect: show });
+})();
+</script>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

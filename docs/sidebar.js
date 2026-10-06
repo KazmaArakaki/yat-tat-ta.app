@@ -10,6 +10,10 @@
   // セッション一覧（新しい順）。新しいセッションは先頭に足す。
   var sessions = [
     {
+      path: "sessions/20261006-2326-squat-history/index.html",
+      label: "10/06 スクワットの履歴を見る"
+    },
+    {
       path: "sessions/20261006-1945-wake-squad/index.html",
       label: "10/06 長押しで隊を起こす"
     },
@@ -102,7 +106,8 @@
         { label: "ドパの合計", path: "features/dopa-totals/index.html", level: 1 },
         { label: "連続記録と休み券", path: "features/streak/index.html", level: 1 },
         { label: "今日まだ通知", path: "features/today-reminder/index.html", level: 1 },
-        { label: "今日の記録", path: "features/today-records/index.html", level: 1 }
+        { label: "今日の記録", path: "features/today-records/index.html", level: 1 },
+        { label: "履歴", path: "features/history/index.html", level: 1 }
       ]
     },
     {
@@ -113,10 +118,12 @@
         { label: "スクワット隊", path: "ui/components/squat-squad/index.html", level: 1 },
         { label: "ドパ突破", path: "ui/components/dopa-toppa/index.html", level: 1 },
         { label: "フィーバータイム", path: "ui/components/fever/index.html", level: 1 },
+        { label: "履歴のグラフ", path: "ui/components/history-chart/index.html", level: 1 },
         { label: "ページ一覧", path: "ui/pages/index.html", level: 0 },
         { label: "ホーム", path: "ui/pages/home/index.html", level: 1 },
         { label: "設定シート", path: "ui/pages/settings/index.html", level: 1 },
-        { label: "今日の記録", path: "ui/pages/today-records/index.html", level: 1 }
+        { label: "今日の記録", path: "ui/pages/today-records/index.html", level: 1 },
+        { label: "履歴", path: "ui/pages/history/index.html", level: 1 }
       ]
     },
     {

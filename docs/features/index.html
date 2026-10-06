@@ -32,7 +32,7 @@ tailwind.config = {
   <div class="mx-auto max-w-3xl">
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">features</p>
     <h1 class="mt-2 font-display text-4xl">機能一覧</h1>
-    <p class="mt-4 text-sm leading-relaxed text-ink/80">Yat Tat Ta の機能は4つです。どれも同じ<a href="../glossary.html#record" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録</a>を読み書きします。記録を作るのは完了連打だけで、ほかの3つは記録から数を計算して見せます。設計の経緯は <a href="../sessions/20261006-0312-main-build/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">本作りの設計</a>（2026-10-06）。</p>
+    <p class="mt-4 text-sm leading-relaxed text-ink/80">Yat Tat Ta の機能は6つです。どれも同じ<a href="../glossary.html#record" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録</a>を読み書きします。記録を作るのは完了連打だけ、消すのは今日の記録だけで、ほかの4つは記録から数や形を計算して見せます。設計の経緯は <a href="../sessions/20261006-0312-main-build/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">本作りの設計</a>（2026-10-06）。</p>
 
     <section class="mt-12">
       <p class="font-mono text-xs uppercase tracking-[0.2em] text-dopa">記録する</p>
@@ -69,6 +69,13 @@ tailwind.config = {
             <p class="font-mono text-xs text-mute">today-records</p>
             <h2 class="mt-1 font-display text-xl group-hover:text-dopa">今日の記録</h2>
             <p class="mt-2 text-sm leading-relaxed text-ink/80">連続記録の帯から開く。今日の記録を並べ、間違えてできた1件を左へスワイプして消す。</p>
+          </a>
+        </li>
+        <li class="border-b border-rule">
+          <a href="history/index.html" class="group block py-5">
+            <p class="font-mono text-xs text-mute">history</p>
+            <h2 class="mt-1 font-display text-xl group-hover:text-dopa">履歴</h2>
+            <p class="mt-2 text-sm leading-relaxed text-ink/80">DPW と DT のカードから開く。縦に時刻、横に日付を取り、記録1件を人形1つで置く。背景に日ごとのドパと7日移動平均。</p>
           </a>
         </li>
       </ul>
