@@ -40,6 +40,11 @@ nonisolated struct RecordDay: Hashable, Comparable, Sendable, CustomStringConver
         Self.utc.dateComponents([.day], from: other.noonUTC, to: noonUTC).day!
     }
 
+    /// 記録日の正午。日付を画面に出すために使う
+    func noon(calendar: Calendar = .current) -> Date {
+        calendar.date(from: DateComponents(year: value / 10000, month: value / 100 % 100, day: value % 100, hour: 12))!
+    }
+
     // 日の足し引きは、夏時間のない UTC の暦で行う
     private static let utc: Calendar = {
         var c = Calendar(identifier: .gregorian)

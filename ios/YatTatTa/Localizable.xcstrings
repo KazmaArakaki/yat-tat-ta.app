@@ -17,6 +17,70 @@
         }
       }
     },
+    "%@、%lld件、%lldドパ、7日平均%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@, %2$lld sets, %3$lld Dopa, 7-day average %4$lld"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@、%lld件、%lldドパ、7日平均%lld"
+          }
+        }
+      }
+    },
+    "%@、%lld回" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@, %2$lld squats"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@、%lld回"
+          }
+        }
+      }
+    },
+    "%@、%lld回、フィーバー%lldドパ" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@, %2$lld squats, %3$lld Fever Dopa"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@、%lld回、フィーバー%lldドパ"
+          }
+        }
+      }
+    },
+    "%@、休み券を使った日、7日平均%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@, Rest Pass used, 7-day average %2$lld"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@、休み券を使った日、7日平均%lld"
+          }
+        }
+      }
+    },
     "%lld件　%lldドパ" : {
       "localizations" : {
         "en" : {
@@ -29,6 +93,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld件　%lldドパ"
+          }
+        }
+      }
+    },
+    "%lld件　%lldドパ　7日平均 %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld sets · %2$lld Dopa · 7-day avg %3$lld"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld件　%lldドパ　7日平均 %lld"
           }
         }
       }
@@ -157,6 +237,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "1打で1ドパ。今日の分は、まだ0です。"
+          }
+        }
+      }
+    },
+    "7日移動平均" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7-day average"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7日移動平均"
           }
         }
       }
@@ -651,6 +747,38 @@
         }
       }
     },
+    "人形を押すと、その記録が出ます。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap a squatter to see that set."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "人形を押すと、その記録が出ます。"
+          }
+        }
+      }
+    },
+    "今日" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Today"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "今日"
+          }
+        }
+      }
+    },
     "今日の1回から" : {
       "localizations" : {
         "en" : {
@@ -1005,6 +1133,22 @@
         }
       }
     },
+    "叩くと、ここに人形が並びます。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Each set you tap shows up here as a squatter."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "叩くと、ここに人形が並びます。"
+          }
+        }
+      }
+    },
     "回" : {
       "localizations" : {
         "en" : {
@@ -1119,6 +1263,38 @@
         }
       }
     },
+    "履歴" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "History"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "履歴"
+          }
+        }
+      }
+    },
+    "履歴を開きます" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opens your history"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "履歴を開きます"
+          }
+        }
+      }
+    },
     "押せ！" : {
       "comment" : "声のファイルがないときの読み上げ",
       "localizations" : {
@@ -1148,6 +1324,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "日"
+          }
+        }
+      }
+    },
+    "日ごとのドパ" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daily Dopa"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "日ごとのドパ"
           }
         }
       }

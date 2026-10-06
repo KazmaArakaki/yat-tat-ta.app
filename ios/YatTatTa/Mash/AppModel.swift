@@ -431,6 +431,14 @@ import SwiftData
         rescheduleReminder()
     }
 
+    // MARK: - 履歴
+
+    /// 履歴のグラフ。シートを開くときに1回だけ作る。叩くたびには作らない
+    func history() -> History {
+        let records = (try? context.fetch(FetchDescriptor<SquatRecord>())) ?? []
+        return History(records: records, restPassDays: ledger.streak.restPassDays, today: ledger.today)
+    }
+
     /// 午前4時をまたいだら計算し直す。DPW から7日前の分が抜け、連続記録や休み券が動く
     private func refreshIfDayChanged(_ date: Date) {
         guard RecordDay(date) != ledger.today else { return }

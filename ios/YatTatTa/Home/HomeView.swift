@@ -7,6 +7,8 @@ struct HomeView: View {
     let model: AppModel
     @State private var showsSettings = false
     @State private var showsToday = false
+    /// 開いた時点の履歴。開くたびに記録を読み直す
+    @State private var history: History?
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.colorScheme) private var systemScheme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
@@ -38,7 +40,8 @@ struct HomeView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .padding(.vertical, 8)
                 TotalsCards(dopaPerWeek: model.dopaPerWeek, previousWindow: model.ledger.previousWindow,
-                            bestWindow: model.ledger.bestWindow, dopaTotal: model.dopaTotal)
+                            bestWindow: model.ledger.bestWindow, dopaTotal: model.dopaTotal,
+                            openHistory: { history = model.history() }, canOpenHistory: !model.session.isOpen)
             }
             .padding(.horizontal, 20)
             .padding(.top, 8)
@@ -63,6 +66,9 @@ struct HomeView: View {
         }
         .sheet(isPresented: $showsToday) {
             TodayRecordsView(model: model)
+        }
+        .sheet(isPresented: Binding(get: { history != nil }, set: { if !$0 { history = nil } })) {
+            if let history { HistoryView(history: history) }
         }
         .onChange(of: scenePhase) { _, phase in
             switch phase {

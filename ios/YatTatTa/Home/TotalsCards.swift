@@ -1,17 +1,37 @@
 import SwiftUI
 
 /// DPW と DT のカード。叩くたびに、どちらも1ずつ増える
+///
+/// どちらを押しても履歴が開く。叩いている最中は押せない。
 struct TotalsCards: View {
     let dopaPerWeek: Int
     let previousWindow: Int
     let bestWindow: Int?
     let dopaTotal: Int
+    var openHistory: () -> Void = {}
+    var canOpenHistory = true
 
     var body: some View {
         HStack(spacing: 12) {
-            dpw
-            dt
+            opener(dpw)
+            opener(dt)
         }
+    }
+
+    /// カードを押せるようにし、右上に「›」を付ける
+    private func opener(_ card: some View) -> some View {
+        Button(action: openHistory) {
+            card.overlay(alignment: .topTrailing) {
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 10, weight: .heavy))
+                    .foregroundStyle(Color.mute)
+                    .padding(10)
+            }
+        }
+        .buttonStyle(.plain)
+        .disabled(!canOpenHistory)
+        .accessibilityElement(children: .combine)
+        .accessibilityHint(Text("履歴を開きます"))
     }
 
     private var beatsBest: Bool { bestWindow.map { dopaPerWeek > $0 } ?? false }

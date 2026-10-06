@@ -760,8 +760,8 @@ final class SquatterLayer: CALayer {
 
     required init?(coder: NSCoder) { fatalError() }
 
-    /// 高さ100のときの関節の位置。足首が原点、上がマイナス
-    private struct Joints {
+    /// 高さ100のときの関節の位置。足首が原点、上がマイナス。履歴の人形（SquatFigure）も同じ点で描く
+    struct Joints {
         let legs: [CGPoint]   // つま先、足首、膝、腰、肩
         let arm: [CGPoint]    // 肩、肘、手
         let head: CGPoint
@@ -772,7 +772,7 @@ final class SquatterLayer: CALayer {
         arm: [.init(x: 0, y: -72), .init(x: 4, y: -58), .init(x: 6, y: -46)],
         head: .init(x: 2, y: -86))
 
-    private static let squat = Joints(
+    static let squat = Joints(
         legs: [.init(x: 12, y: 0), .init(x: 0, y: 0), .init(x: 15, y: -15), .init(x: -7, y: -25), .init(x: 3, y: -55)],
         arm: [.init(x: 3, y: -55), .init(x: 17, y: -55), .init(x: 31, y: -56)],
         head: .init(x: 7, y: -69))
