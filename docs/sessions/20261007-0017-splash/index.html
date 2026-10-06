@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="session-state" content="planning">
+<meta name="state" content="planning">
+<title>スプラッシュを作る</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=M+PLUS+Rounded+1c:wght@500;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+        round: ['"M PLUS Rounded 1c"', '"Noto Sans JP"', 'sans-serif']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } }
+      },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+<style>
+/* アプリ画面の色。明るい配色と暗い配色を、.app と .app.dark で切り替える */
+.app { --a-bg:#FBF6EE; --a-card:#FFFFFF; --a-ink:#1C1916; --a-mute:#6E655C; --a-rule:#E7DDCC; --a-line:#1C1916; --a-soft:#FFE6F0; }
+.app.dark { --a-bg:#16120F; --a-card:#231D18; --a-ink:#F5EEE3; --a-mute:#A89C8E; --a-rule:#3A312A; --a-line:#F5EEE3; --a-soft:#3A1726; }
+.a-bg { background:var(--a-bg); color:var(--a-ink); }
+.a-card { background:var(--a-card); }
+.a-ink { color:var(--a-ink); }
+.a-mute { color:var(--a-mute); }
+.a-line { border-color:var(--a-line); }
+.a-rule { border-color:var(--a-rule); }
+.a-soft { background:var(--a-soft); }
+.a-shadow { box-shadow:4px 4px 0 var(--a-line); }
+.a-shadow-lg { box-shadow:0 8px 0 var(--a-line); }
+.num { font-family:"M PLUS Rounded 1c","Noto Sans JP",sans-serif; font-weight:900; font-variant-numeric:tabular-nums; letter-spacing:-0.02em; }
+.ticket { width:14px; height:18px; border-radius:3px; background:#2F79F7; position:relative; }
+.ticket::after { content:""; position:absolute; left:2px; right:2px; top:8px; border-top:2px dotted rgba(255,255,255,.75); }
+.ticket.empty { background:transparent; border:2px dashed var(--a-rule); }
+.mash { width:200px; height:200px; border-radius:9999px; background:#E9A800; border:4px solid var(--a-line); box-shadow:0 8px 0 var(--a-line); color:#1C1916; transition:transform .06s; }
+.mash:active { transform:translateY(6px); box-shadow:0 2px 0 var(--a-line); }
+.glow { position:absolute; inset:-22px; border-radius:9999px; background:radial-gradient(circle, rgba(229,51,122,.55) 0%, rgba(229,51,122,0) 70%); pointer-events:none; }
+.ring { position:absolute; border-radius:9999px; border:3px solid #E5337A; pointer-events:none; }
+.grain { position:absolute; border-radius:9999px; background:#E5337A; pointer-events:none; }
+@keyframes pop { 0%{transform:scale(.3);opacity:0} 60%{transform:scale(1.08);opacity:1} 100%{transform:scale(1)} }
+@keyframes ringout { 0%{transform:translate(-50%,-50%) scale(.2);opacity:1} 100%{transform:translate(-50%,-50%) scale(1);opacity:0} }
+@keyframes fly { 0%{transform:translate(0,0) scale(1);opacity:1} 100%{transform:translate(var(--dx),var(--dy)) scale(.4);opacity:0} }
+@keyframes burst { 0%{transform:translate(0,0);opacity:1} 100%{transform:translate(var(--dx),var(--dy));opacity:0} }
+@keyframes drop { 0%{transform:translateY(-120%)} 100%{transform:none} }
+.pop { animation:pop .45s cubic-bezier(.2,1.4,.4,1) both; }
+.tabbtn[aria-selected="true"] { background:#1C1916; color:#FBF6EE; }
+[data-panel][hidden] { display:none !important; }
+</style>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-5xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <time datetime="2026-10-07T00:17">2026-10-07 00:17</time>
+      <span>/</span>
+      <span>設計セッション</span>
+      <span class="rounded-full border border-gold bg-gold/15 px-2.5 py-0.5 font-bold text-ink">状態：planning</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl"><a href="../../glossary.html#splash" class="text-dopa">スプラッシュ</a>を作る</h1>
+  </header>
+
+  <section id="order" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="relative overflow-hidden rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916] sm:p-8">
+      <div class="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-dopa-soft"></div>
+      <p class="relative font-mono text-xs uppercase tracking-[0.2em] text-dopa">開発者の注文</p>
+      <p class="relative mt-6 font-display text-3xl tracking-wide sm:text-4xl">スクワットを続けたくなるスプラッシュを</p>
+      <p class="relative mt-6 text-lg font-bold leading-relaxed">
+        考え抜いてほしい。Apple Design Award を狙えるくらいまで。
+      </p>
+    </div>
+  </section>
+
+  <section id="question" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01 / question</p>
+    <h2 class="mt-2 font-display text-3xl">ロゴを見て、しゃがむ人はいない</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>スプラッシュと聞いて、最初に浮かんだのはロゴでした。地の色に名前を置き、少し待ってホームへ。1.5秒はそれで埋まる。</p>
+      <p>ただ、ロゴを見てスクワットをしたくなる人はいません。Apple の Human Interface Guidelines も、起動の画面を広告に使うなと書いています。起動の一瞬に置いてよいのは、使う人にとって意味のあるものだけです。</p>
+      <p>毎食後にこのアプリを開く人にとって、意味のあるものは何か。答えはホームの左上にもう出ていました。「29日連続」。けれど、あそこにあるのは 44pt の数字が1つだけです。29日ぶんの重みは、数字1つでは伝わらない。</p>
+    </div>
+  </section>
+
+  <section id="concept" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / concept</p>
+    <h2 class="mt-2 font-display text-3xl">29人の隊列と、空いた席</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>29日を29人で見せます。<a href="../../glossary.html#squat-squad" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スクワット隊</a>と同じ人形を1日に1人、曜日にそろえて並べる。1行が1週間で、<a href="../../glossary.html#rest-pass" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">休み券</a>を使った日には青い札が入ります。</p>
+      <p>隊列は、古い日から順に1回ずつしゃがむ。波は0.55秒で今日まで流れ、最後の1か所で止まります。そこだけ人形がいない。床の印に上から光だけが差している。<a href="../../glossary.html#today-seat" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日の席</a>です。</p>
+    </div>
+    <ol class="mt-6 grid max-w-3xl gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border-2 border-ink bg-white p-5 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">01 積み上げが人数で見える</p><p class="mt-2 leading-relaxed">数字の29は読み流せても、29人の隊列は読み流せない。ここで手放すには惜しい量だと、目で分かります。</p></li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-5 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">02 空いた席は埋めたくなる</p><p class="mt-2 leading-relaxed">並びの最後が1つだけ欠けていると、人はそこを閉じたくなる。「今日まだ」を、責める文を1行も書かずに伝えられます。</p></li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-5 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">03 名前が3拍で言い切る</p><p class="mt-2 leading-relaxed">Yat Tat Ta は「やったった」。1語ずつ落ちてつぶれる3回が隊列の波と重なり、3拍めの「Ta」で波が今日の席に届く。名前の意味が、説明なしで手に入ります。</p></li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-5 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">04 幕とホームのつなぎ目がない</p><p class="mt-2 leading-relaxed">最後に大きな数だけが飛び、<a href="../../glossary.html#streak" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">連続記録</a>の帯の数になる。スプラッシュで見た29が、ホームで叩く理由のまま残ります。</p></li>
+    </ol>
+    <p class="mt-6 max-w-2xl text-sm font-bold leading-relaxed">ロゴは、どこにも出てきません。名前の3語がその代わりをします。</p>
+  </section>
+
+  <section id="intro" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / intro</p>
+    <h2 class="mt-2 font-display text-3xl">はじめての1回は、やって見せる</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>最初の案では、はじめての起動は今日の席が1つあるだけでした。並べる日がないのだから、席1つで足りる。そう考えていた。</p>
+      <p>開発者のレビューは「初めての時はもっと丁寧に、これからスクワットすることに対する期待感を持たせるように」。読み返すと、席1つの画面は、まだ何も始めていない人に「ここが空いています」と言っているだけでした。何で埋まるのか、埋めると何が起きるのかは、どこにも書いていない。</p>
+      <p>そこで、はじめての1回だけは14.0秒の<a href="../../glossary.html#intro-splash" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">はじめての幕</a>にします。中身は3つの場面です。</p>
+    </div>
+    <ol class="mt-6 grid max-w-3xl gap-3 text-sm sm:grid-cols-3">
+      <li class="rounded-2xl border-2 border-ink bg-white p-5 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">2.6秒〜 やって見せる</p><p class="mt-2 leading-relaxed">大きな人形が1人、「食べたら、」で立ち、「しゃがんで、」でゆっくりしゃがみ、「叩く。」で足元からドパの粒が出る。毎日やることの全部が、1人の動きに入っている。</p></li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-5 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">7.0秒〜 来週を先に見せる</p><p class="mt-2 leading-relaxed">その人形が縮んで、今週の隊列の左端の席に入る。右に明日からの席と休み券の札。明日からの6人が1人ずつ立って、いっしょに消える。1週間続けた自分たちの姿を、始める前に見る。</p></li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-5 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">11.0秒〜 1人目を指す</p><p class="mt-2 leading-relaxed">ほかの席が引き、今日の席だけが大きく残る。「最初の1回で1日目」「1人目は、今日のあなたです。」</p></li>
+    </ol>
+    <div class="mt-8 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>2回めのレビューは「もっと丁寧に。一呼吸おいて。」でした。6.0秒の版を見返すと、場面と場面が切れ目なくつながっていた。名前が落ちきる前に人形が立ち、人形が縮む前に席が並ぶ。全部が見えているのに、どれも眺める時間がない。</p>
+      <p>そこで、場面のあいだに間を入れて、14.0秒にしました。足したのは動きではなく、何も起きない時間です。</p>
+    </div>
+    <ul class="mt-4 grid max-w-3xl gap-2 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>始まる前に0.6秒。</b>地の色だけを見せてから、名前を落とす。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>名前を眺める1.2秒。</b>3語が落ちきったあと、何も動かさない。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>言葉は1つずつ。</b>「食べたら、」「しゃがんで、」「叩く。」を1行に並べず、前の言葉が消えてから次を出す。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>しゃがみは1.4秒。</b>下りて、とどまって、上る。ふつうのスクワットの速さに近づけた。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>叩いたあとに0.4秒。</b>言葉が消え、人形だけが立っている。ここで最初の場面が終わる。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>「1日目」と「1人目」のあいだに0.6秒。</b>数を読んでから、一言を読む。</li>
+    </ul>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">動きの入りと止まりは、すべてゆっくりした曲線（sine）にそろえました。叩くと次の場面の頭へ進みます。一度に最後まで飛ばすと、せっかくの間を叩き1つで全部捨てることになるからです。</p>
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">一瞬だけ立つ6人が、期待のいちばんの材料です。見せてすぐ消すので、手に入るものではなく、これから手に入るものとして残る。見せるのは1度きりです。</p>
+  </section>
+
+  <section id="seat-shape" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03b / seat</p>
+    <h2 class="mt-2 font-display text-3xl">今日の席は、光の差す床</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>最初の版では、今日の席を「立った人形の点線」で描いていました。空いた場所を、いるはずの人の輪郭で示せば伝わる、と考えた。</p>
+      <p>開発者のレビューは「点線のスクワット人間が違和感あります」。並べて見直すと、点線の人形は空いた席には見えません。体が欠けた人形、幽霊のような人形に見える。隊列の中で、そこだけ別の生き物になっていた。</p>
+      <p>空いていることは、人の形ではなく、場所の形で見せることにしました。床に dopa の丸い印を置き、上から薄い光を差す。舞台に光だけが当たっていて、立つ人をまだ待っている形です。ほかの人形の足元にも薄い影を落としたので、印が「人の立つ場所」だと読めます。今日叩いたあとは、その印の上に人形が立ちます。</p>
+    </div>
+  </section>
+
+  <section id="mock" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / mock</p>
+    <h2 class="mt-2 font-display text-3xl">修正イメージ</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">状態を切り替えて再生できます。はじめての幕は「はじめての起動」のタブ。暗い配色とひかえめモードも確かめられる。枠を押すと、その場でホームへの引き継ぎに飛びます。部品ごとの見た目は <a href="../../ui/components/splash/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ui／スプラッシュ</a>。</p>
+    <div data-story class="mt-6 rounded-3xl border-2 border-ink bg-white p-5 sm:p-7"></div>
+  </section>
+
+  <section id="spec" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / spec</p>
+    <h2 class="mt-2 font-display text-3xl">端の場面</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">出すときと時刻の表は<a href="../../features/splash/index.html#rules" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">機能ページ</a>にまとめました。ここには、判断が要った場面だけを置きます。</p>
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full min-w-[36rem] text-left text-sm">
+        <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="py-2 pr-4">場面</th><th class="py-2 pr-4">決め</th><th class="py-2">なぜ</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">1日に何度も開く</td><td class="py-3 pr-4">起動したときと、その日最初に開いたときだけ</td><td class="py-3">毎回出すと、2回目からはただの待ち時間になる。1日の最初の1回だけ、席が空いていることを見せる</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">今日もう叩いた</td><td class="py-3 pr-4">出す。今日の席には人形が立っていて、波が届くと2回しゃがむ。一言は「✓ 今日のぶんは済み」</td><td class="py-3">済んだ日も、積み上げは見たい。急かすことは何も言わない</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">はじめての起動</td><td class="py-3 pr-4">はじめての幕（14.0秒）を1度だけ。見せたことを端末の設定 introShown に残す</td><td class="py-3">開発者のレビュー。何をするアプリかと、続けると何が起きるかを、始める前に見せる</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">はじめての幕のあと、まだ叩いていない</td><td class="py-3 pr-4">ふつうの幕。隊列なしで今日の席だけを大きく、「最初の1回で1日目」</td><td class="py-3">やって見せるのは1度で足りる。2度目からの14秒は待ち時間</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">途切れたあと</td><td class="py-3 pr-4">前の連続の人形は並べない。今日の席だけを大きく出し、一言は最長記録</td><td class="py-3">灰色の人形を並べれば、欠けた列が先に目に入る（<a href="../../ui/principles.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">文言の決まり</a>）</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">100日を超える</td><td class="py-3 pr-4">8週を超えたら、古い週を「＋N日」にまとめる。波の長さは0.55秒のまま</td><td class="py-3">12週まで並べると、人形が点にしか見えなかった（見本で確かめた）。人数が多いほど、波は速く走って見える</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">次の1回で節目</td><td class="py-3 pr-4">一言の横に gold の「<a href="../../glossary.html#milestone" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">節目</a>」の札</td><td class="py-3">あと1回で何が起きるかを、起動した瞬間に見せる</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">早く叩きたい</td><td class="py-3 pr-4">どこを叩いても引き継ぎ（最後の0.4秒）へ飛ぶ。その1打は数えない</td><td class="py-3">見ていない1打を記録に混ぜない</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">ほかの重ね物</td><td class="py-3 pr-4">途切れたときのカードと休み券の帯は、スプラッシュが消えてから出す</td><td class="py-3">どちらも「最初に開いたとき」に出るので、必ずぶつかる</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">ひかえめモード</td><td class="py-3 pr-4">落下、波、輪、飛ぶ数をやめる。置いたまま0.9秒、0.25秒で溶かす。振動の3拍は変えない</td><td class="py-3"><a href="../../glossary.html#reduced-effects-mode" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ひかえめモード</a>の決まり。音と振動は変えない</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">VoiceOver</td><td class="py-3 pr-4">幕全体を1つの要素にし、「Yat Tat Ta。29日連続。今日の1回で30日目。」と読む。読み終わるまで幕を残す</td><td class="py-3">隊列の形は聞いても分からない。1.65秒で切ると、読み上げが途中で消える</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">起動画面</td><td class="py-3 pr-4">iOS が出す起動画面の地を、paper（暗い配色では #16120F）にする</td><td class="py-3">いまは白（暗い配色では黒）。スプラッシュの地と色が違うと、切り替わる瞬間にちらつく</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="award" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / award</p>
+    <h2 class="mt-2 font-display text-3xl">賞の6部門に当ててみる</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">Apple Design Award は、6つの部門で選ばれます。この幕で届くところと、届かないところを分けました。</p>
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full min-w-[36rem] text-left text-sm">
+        <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="py-2 pr-4">部門</th><th class="py-2 pr-4">この幕で効くところ</th><th class="py-2">手当て</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">Delight and Fun</td><td class="py-3 pr-4">名前を踏む3拍、古い日から流れる波</td><td class="py-3">毎日見ると飽きる。だから1日1回に絞った</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">Inclusivity</td><td class="py-3 pr-4">ひかえめモード、VoiceOver の1文、音を出さないこと</td><td class="py-3">今日の席は色ではなく形（人形のいない床の印と光）で分かる。dopa と gold の見分けがつかなくても読める</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">Interaction</td><td class="py-3 pr-4">どこを叩いても飛ばせる。数が帯まで飛ぶ</td><td class="py-3">飛ばした1打を数えない</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">Visuals and Graphics</td><td class="py-3 pr-4">隊、履歴と同じ人形。起動画面と同じ地</td><td class="py-3">新しい絵柄を足さない</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">Innovation／Social Impact</td><td class="py-3 pr-4">この幕だけでは決まらない</td><td class="py-3">賞はアプリ全体に贈られる。幕は、毎食後スクワットという題材の入口として働けば足りる</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="rejected" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">07 / rejected</p>
+    <h2 class="mt-2 font-display text-3xl">選ばなかった案</h2>
+    <ul class="mt-6 grid max-w-3xl gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>起動の声「やったった」を鳴らす。</b>声の音源はもうあります（voice_yattatta）。ただ、開くのは食事のあと。店の中で起動の声が鳴ると、次から開かなくなる。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>途切れた日を灰色の人形で並べる。</b>形としてはきれいでした。けれど、最初に目に入るのが欠けた場所になる。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>DPW や DT も並べる。</b>1.65秒で読める数は1つまで。ほかの数はホームのカードで読める。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>今日の席から隊がステージへ歩いて行く。</b>ホームの隊は寝ていて、長押しで起こす決まり。立って歩いて来た隊が寝直すのは、話がねじれる。</li>
+    </ul>
+  </section>
+
+  <section id="detail-impl" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">08 / detail</p>
+    <h2 class="mt-2 font-display text-3xl">作る場所</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">所要はあわせて6〜7時間（はじめての幕で2時間増えた）。数を帯の位置へ飛ばす引き継ぎと、人形を今日の席へ縮めて入れる動きが、読めないところです。記録の保存の形は変わりません。端末の設定に introShown を1つ足します。</p>
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full min-w-[36rem] text-left text-sm">
+        <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="py-2 pr-4">場所</th><th class="py-2 pr-4">変更</th><th class="py-2">なぜ</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">Model/Lineup.swift（新規）</td><td class="py-3 pr-4">Ledger.Streak と今日と週の始まり（Calendar.firstWeekday）から、隊列のマスを作る。マスは「人形」「休み券」「今日の席」「今日済み」「空き」。8週を超えたぶんの日数も返す</td><td class="py-3">並べ方を画面から切り離し、テストで確かめる。Ledger と同じく保存しない</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">History/SquatFigure.swift</td><td class="py-3 pr-4">人形を描く処理を、Canvas の中から呼べる静的な関数に切り出す</td><td class="py-3">隊列の数十人を1枚の Canvas で描く。履歴の人形と同じ形のまま</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">Home/SplashOverlay.swift（新規）</td><td class="py-3 pr-4">名前、隊列、数と一言。TimelineView の時刻から、拍、波、輪、引き継ぎを描く。叩くと引き継ぎへ飛ぶ。VoiceOver では1つの要素</td><td class="py-3">時刻を1つの表（T）に集め、見本の splash.js と同じ秒にそろえる</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">Home/IntroSplash.swift（新規）</td><td class="py-3 pr-4">はじめての幕。大きな人形のやって見せる動き、今週の7つの席、明日からの6人、今日の席への寄せ。時刻は表 INTRO に集める。1回叩くごとに次の場面の頭へ</td><td class="py-3">ふつうの幕と場面の数が違うので、別の View にする。人形の描き方、席、引き継ぎは SplashOverlay と共有</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">Mash/Settings.swift</td><td class="py-3 pr-4">SettingKey.introShown（Bool）を足す。はじめての幕を出し始めたときに true</td><td class="py-3">1度きりにするため。消えても、もう1度はじめての幕が出るだけ</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">Home/StreakBar.swift</td><td class="py-3 pr-4">日数の数字の位置を anchorPreference で上へ渡す。スプラッシュが飛んでいるあいだは数字を隠す</td><td class="py-3">飛ぶ先を、帯の実際の位置から決める。端末の大きさが違っても同じ所に着く</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">HomeView、AppModel</td><td class="py-3 pr-4">スプラッシュを出すかどうか（起動したとき、記録日が変わって戻ったとき、叩いている最中でないとき）。途切れたときのカードと休み券の帯は、幕が消えてから</td><td class="py-3">重ね物の順番をホームの1か所で決める</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">Feel/FeelEngine.swift</td><td class="py-3 pr-4">振動の3拍（0.15秒 弱、0.45秒 弱、0.75秒 中）を1つの CHHapticPattern で鳴らす。はじめての幕は、名前の3拍と「叩く」「今日の席」の5つ</td><td class="py-3">1つの模様にすれば、絵と振動がずれない</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">Assets、Info.plist</td><td class="py-3 pr-4">色 LaunchBackground（paper と #16120F）を足し、UILaunchScreen の UIColorName に指定する</td><td class="py-3">起動画面からスプラッシュへ、色を変えずにつなぐ</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">Localizable.xcstrings</td><td class="py-3 pr-4">「＋%lld日」と VoiceOver の1文。はじめての幕の「食べたら、」「しゃがんで、」「叩く。」「1日1回で、1人ずつ。」「来週には、7人の隊になる。」「1人目は、今日のあなたです。」。英語も同時に。ほかの文は帯と同じものを使う</td><td class="py-3"><a href="../../devops/localization/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">多言語の決まり事</a></td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">テスト</td><td class="py-3 pr-4">Lineup：曜日のそろえ方、休み券の日、今日済み、途切れたあと、はじめて、8週を超えたとき</td><td class="py-3">動きはシミュレーターで見るしかないが、並び方は機械で確かめられる</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono text-xs">docs</td><td class="py-3 pr-4">実装でずれたところを、機能、部品の見本、用語に戻す。UI の基本方針の「重ねる部品」にスプラッシュを足す</td><td class="py-3">見本と実物をそろえておく</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="review" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">09 / review</p>
+    <h2 class="mt-2 font-display text-3xl">見てほしいところ</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">注文にない数と振る舞いを、こちらで決めました。1回めと2回めのレビュー（2026-10-07）で、はじめての起動をやり直しています（03 / intro）。3回めのレビューで、今日の席の形を替えました（03b / seat）。開発者は、ここまでの形でよいとした（2026-10-07）。</p>
+    <ol class="mt-4 flex max-w-2xl flex-col gap-3 text-sm">
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>出すのは、起動したときと、その日最初に開いたときだけ。</b>起動するたびに必ず、のほうが分かりやすくはあります。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>音は出さない。</b>声の「やったった」を鳴らす案は捨てました。振動の3拍だけです。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>長さは1.65秒。</b>波と3拍を見せるのに要る最短です。叩けば0.4秒で終わる。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>途切れたあとは、前の隊列を見せない。</b>最長記録の数だけを一言に出します。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>隊列は8週まで。</b>それより前は「＋N日」の札1枚にまとめます。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>はじめての幕は14.0秒、1度きり。</b>場面ごとの間（0.4〜0.6秒）を足したぶん長くなりました。叩くたびに次の場面へ進むので、急ぐ人は数回でホームへ移れます。</li>
+    </ol>
+  </section>
+
+  <section id="decisions" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">10 / decisions</p>
+    <h2 class="mt-2 font-display text-3xl">決めたこと</h2>
+    <ol class="mt-6 flex max-w-2xl flex-col gap-3 text-sm">
+      <li class="flex gap-3 rounded-2xl border border-rule bg-white p-4"><span class="font-mono text-xs font-bold text-dopa">01</span><span>スプラッシュはロゴではなく、いまの連続の日を人形で並べた隊列と、今日の席を見せる。</span></li>
+      <li class="flex gap-3 rounded-2xl border border-rule bg-white p-4"><span class="font-mono text-xs font-bold text-dopa">02</span><span>名前の3拍と隊列の波を重ね、3拍めで今日の席に届く。振動も3拍。</span></li>
+      <li class="flex gap-3 rounded-2xl border border-rule bg-white p-4"><span class="font-mono text-xs font-bold text-dopa">03</span><span>最後は大きな数だけが連続記録の帯へ飛んで、ホームに引き継ぐ。</span></li>
+      <li class="flex gap-3 rounded-2xl border border-rule bg-white p-4"><span class="font-mono text-xs font-bold text-dopa">04</span><span>ホームの上に重ねる部品にする。画面は増やさない。保存の形（SquatRecord）は変えない。</span></li>
+      <li class="flex gap-3 rounded-2xl border border-rule bg-white p-4"><span class="font-mono text-xs font-bold text-dopa">05</span><span>はじめての起動は、これからスクワットすることへの期待を持たせるよう丁寧に（開発者のレビュー）。1人の人形でやって見せ、今週の席と明日からの6人を見せる、はじめての幕にする。</span></li>
+      <li class="flex gap-3 rounded-2xl border border-rule bg-white p-4"><span class="font-mono text-xs font-bold text-dopa">06</span><span>はじめての幕は、場面ごとに一呼吸おいて14.0秒にする。言葉は1つずつ。叩くと次の場面へ進む（開発者のレビュー「もっと丁寧に。一呼吸おいて。」）。</span></li>
+      <li class="flex gap-3 rounded-2xl border border-rule bg-white p-4"><span class="font-mono text-xs font-bold text-dopa">07</span><span>今日の席は、点線の人形ではなく、人形のいない床の印に光が差す形にする（開発者のレビュー「点線のスクワット人間が違和感あります」）。</span></li>
+    </ol>
+  </section>
+
+  <section id="links" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">11 / links</p>
+    <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">機能</p><a href="../../features/splash/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スプラッシュ</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">コンポーネント</p><a href="../../ui/components/splash/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スプラッシュ</a><a href="../../ui/components/streak-bar/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">連続記録の帯</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../glossary.html#splash" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">スプラッシュ</a><a href="../../glossary.html#today-seat" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">今日の席</a><a href="../../glossary.html#intro-splash" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">はじめての幕</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">前回のセッション</p><a href="../20261006-2326-squat-history/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スクワットの履歴を見る</a></li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script src="../../ui/components/splash/splash.js"></script>
+<script src="../../ui/components/splash/states.js"></script>
+<script>Splash.stage(document.querySelector('[data-story]'), SPLASH_STATES, 'milestone');</script>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

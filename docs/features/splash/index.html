@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>スプラッシュ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } },
+        pulse2: { '0%,100%': { transform: 'scale(1)' }, '50%': { transform: 'scale(1.04)' } }
+      },
+      animation: { rise: 'rise .5s ease-out both', pulse2: 'pulse2 1.6s ease-in-out infinite' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-4xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <a href="../index.html" class="hover:text-ink">features</a><span>/</span><span>ふり返って続ける</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">スプラッシュ</span></h1>
+    <p class="mt-4 max-w-2xl text-base leading-relaxed">起動した瞬間に、これまで続けた日を<a href="../../glossary.html#squat-squad" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スクワット隊</a>の人形で並べ、空いている<a href="../../glossary.html#today-seat" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日の席</a>を見せる。1.65秒で、大きな数だけがホームの<a href="../../glossary.html#streak" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">連続記録</a>の帯へ飛んで終わる。叩けばその場で終わる。インストールして最初の1回だけは、14.0秒の<a href="../../glossary.html#intro-splash" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">はじめての幕</a>で、これから毎日やることを1人の人形でやって見せる。2026-10-07 設計。</p>
+  </header>
+
+  <section id="rules" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01 / rules</p>
+    <h2 class="mt-2 font-display text-3xl">決まりごと</h2>
+    <p class="mt-8 font-mono text-xs text-mute">表1　出すときと出し方</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[34rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">項目</th><th class="py-2 pr-4 font-bold">決まり</th><th class="py-2 pr-4 font-bold">理由</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">出すとき</td><td class="py-3 pr-4">アプリを起動したとき。もう1つ、裏から戻ったときに<a href="../../glossary.html#record-day" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録日</a>が変わっていたとき（その日いちばん初めに開いたとき）</td><td class="py-3 pr-4">毎食後に開くたびに出すと、2回目からは待たされるだけになる。1日の最初の1回だけ、今日の席が空いていることを見せる</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">はじめての起動</td><td class="py-3 pr-4">インストールして最初の1回だけ、<a href="../../glossary.html#intro-splash" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">はじめての幕</a>（14.0秒、表3）を出す。見せたことは端末の設定（UserDefaults の introShown）に残し、2回目からはふつうの幕</td><td class="py-3 pr-4">まだ並べる日がない人に、これから並ぶものを先に見せる。毎回6秒は長いので、1度きり</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">出さないとき</td><td class="py-3 pr-4">叩いている最中、フィナーレの途中、計測モード（-perf）、演出の確認用の起動引数があるとき</td><td class="py-3 pr-4">連打と計測を止めない</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">長さ</td><td class="py-3 pr-4">1.65秒。ひかえめモードでは1.15秒。はじめての幕だけ14.0秒。場面ごとに一呼吸おく</td><td class="py-3 pr-4">起動の準備（記録の読み込みと音の用意）はこの間に済む。待たせた感じが出ない長さ</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">飛ばす</td><td class="py-3 pr-4">画面のどこを叩いても、その場で引き継ぎ（最後の0.4秒）へ飛ぶ。はじめての幕では、1回叩くごとに次の場面の頭へ進む（一度に最後までは飛ばない）。どの1打もスクワットに数えない</td><td class="py-3 pr-4">早く叩きたい人を待たせない。数えると、見ていない1打が記録に混ざる</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">隊列</td><td class="py-3 pr-4">いまの連続の日を1日1人で並べる。7列で曜日にそろえ、古い日が左上、今日が右下。<a href="../../glossary.html#rest-pass" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">休み券</a>の日は青い札。8週を超えたら古い週を「＋N日」にまとめる</td><td class="py-3 pr-4">続けた日数を、数ではなく人数で見せる</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">今日の席</td><td class="py-3 pr-4">今日まだなら、隊列の最後は人形がいない床の印で、上から薄い光が差している。今日済みなら、その印の上に人形が立っている。まだ1度も叩いていないときは、今日の席だけを大きく出す</td><td class="py-3 pr-4">空きを埋められるのは今日の1回だけ、という形にする</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">途切れたあと</td><td class="py-3 pr-4">前の連続の人形は並べない。今日の席だけを大きく出し、一言は最長記録</td><td class="py-3 pr-4">失ったものを先に見せない（<a href="../../ui/principles.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">文言の決まり</a>）</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">文言</td><td class="py-3 pr-4">数と一言は、連続記録の帯と同じ文。次の1回で<a href="../../glossary.html#milestone" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">節目</a>に届くなら「節目」の札</td><td class="py-3 pr-4">引き継いだあとも同じ文が帯に残る。読み直さなくてよい</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">音と振動</td><td class="py-3 pr-4">音は出さない。振動は Yat、Tat、Ta の3拍（弱、弱、中）</td><td class="py-3 pr-4">開くのは食事のあと。店の中で起動の音が鳴ると困る。振動なら手の中で済む</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">VoiceOver</td><td class="py-3 pr-4">幕全体を1つの要素にし、「Yat Tat Ta。29日連続。今日の1回で30日目。」と読む。読み終わるまで幕を残す</td><td class="py-3 pr-4">隊列の形は聞いても分からない。1.65秒で切ると、読み上げが途中で消える</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">起動画面</td><td class="py-3 pr-4">iOS が出す起動画面の地を、paper（暗い配色では #16120F）にする</td><td class="py-3 pr-4">スプラッシュの地と同じ色にして、切り替わる瞬間のちらつきをなくす</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">ほかの重ね物</td><td class="py-3 pr-4"><a href="../../ui/components/streak-break-card/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">途切れたときのカード</a>、<a href="../../ui/components/rest-pass-banner/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">休み券の帯</a>は、スプラッシュが消えてから出す</td><td class="py-3 pr-4">2つ重ねると、どちらも読めない</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="mt-10 font-mono text-xs text-mute">表2　時刻（ふつうの場合）</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[34rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">秒</th><th class="py-2 pr-4 font-bold">起きること</th><th class="py-2 pr-4 font-bold">振動</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono">0</td><td class="py-3 pr-4">起動画面（地の色だけ）から、そのまま隊列と数が見えている</td><td class="py-3 pr-4">—</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono">0.15</td><td class="py-3 pr-4">「Yat」が落ちる。隊列のいちばん古い日から、しゃがむ波が始まる</td><td class="py-3 pr-4">弱</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono">0.45</td><td class="py-3 pr-4">「Tat」が落ちる。波は隊列のなかほど</td><td class="py-3 pr-4">弱</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono">0.75</td><td class="py-3 pr-4">「Ta」が落ちる。波が今日の席に届き、dopa の輪が広がる。一言が出る</td><td class="py-3 pr-4">中</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono">1.25</td><td class="py-3 pr-4">引き継ぎ。大きな数が帯の位置へ縮みながら飛び、ほかは消える</td><td class="py-3 pr-4">—</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono">1.65</td><td class="py-3 pr-4">ホームだけになる</td><td class="py-3 pr-4">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="mt-10 font-mono text-xs text-mute">表3　はじめての幕の時刻</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[34rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">秒</th><th class="py-2 pr-4 font-bold">起きること</th><th class="py-2 pr-4 font-bold">振動</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono">0〜0.6</td><td class="py-3 pr-4">地の色だけ。何も出さずに一呼吸</td><td class="py-3 pr-4">—</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono">0.6〜1.4</td><td class="py-3 pr-4">「Yat」「Tat」「Ta」が0.4秒おきに落ちる（ふつうの幕の1.3倍の間）</td><td class="py-3 pr-4">弱、弱、弱</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono">1.4〜2.6</td><td class="py-3 pr-4">名前だけを眺める間。最後の0.6秒で、名前が小さく上へ退く</td><td class="py-3 pr-4">—</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono">2.6</td><td class="py-3 pr-4">まん中に大きな人形が1人、0.6秒かけて静かに立つ。言葉「食べたら、」</td><td class="py-3 pr-4">—</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono">3.8</td><td class="py-3 pr-4">言葉が「しゃがんで、」に替わる。人形は0.6秒で下り、0.2秒とどまり、0.6秒で上る</td><td class="py-3 pr-4">—</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono">5.4</td><td class="py-3 pr-4">言葉が「叩く。」（dopa）に替わる。0.3秒おいて、足元から輪とドパの粒が0.9秒かけて広がる</td><td class="py-3 pr-4">中</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono">6.6〜7.0</td><td class="py-3 pr-4">言葉が消え、人形だけが立っている。一呼吸</td><td class="py-3 pr-4">—</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono">7.0</td><td class="py-3 pr-4">人形が0.9秒かけて縮み、今週の隊列の左端（今日）の席へ入り、すっと消える。光の差す床の印だけが残る</td><td class="py-3 pr-4">—</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono">8.0</td><td class="py-3 pr-4">右へ明日からの席（床の印の輪郭だけ）が0.12秒おきに並ぶ。7つめは休み券の札。言葉「1日1回で、1人ずつ。」</td><td class="py-3 pr-4">—</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono">8.8</td><td class="py-3 pr-4">明日からの6人が0.15秒おきに1人ずつ立って、しゃがむ。言葉「来週には、7人の隊になる。」</td><td class="py-3 pr-4">—</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono">10.4〜10.9</td><td class="py-3 pr-4">6人がいっしょに消える</td><td class="py-3 pr-4">—</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono">11.0</td><td class="py-3 pr-4">言葉とほかの席が引き、今日の席がまん中へ寄って大きくなる</td><td class="py-3 pr-4">—</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono">12.0</td><td class="py-3 pr-4">今日の席に輪が広がる。「最初の1回で1日目」。0.6秒おいて「1人目は、今日のあなたです。」</td><td class="py-3 pr-4">中</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono">12.6〜13.6</td><td class="py-3 pr-4">そのまま。今日の席がゆっくり（1.8秒周期で）濃淡を繰り返す</td><td class="py-3 pr-4">—</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-mono">13.6〜14.0</td><td class="py-3 pr-4">引き継ぎ。数「1」が帯へ飛ぶ</td><td class="py-3 pr-4">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">動きはすべて、ゆっくり入ってゆっくり止まる曲線（sine）でつなぐ。言葉は1つずつ出し、前の言葉が消えてから次を出す。ひかえめモードでは、人形は動かさず、立つ姿としゃがんだ姿を切り替えるだけにする。輪、粒、明日からの6人は出さない。言葉と振動は同じ時刻のまま。</p>
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80"><a href="../../glossary.html#reduced-effects-mode" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ひかえめモード</a>では、名前の落下、波、輪、飛ぶ数をやめ、全部を置いたまま0.9秒見せて、0.25秒で溶かす。振動の3拍は、ふつうの場合と同じ時刻に鳴らす（音と振動は変えない決まり）。</p>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">記録の保存の形は変わりません。端末の設定に、はじめての幕を見せたかどうか（introShown）を1つ足すだけです。隊列は<a href="../../glossary.html#streak" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">連続記録</a>の計算（Ledger.Streak の日数と休み券を使った日）からそのまま作ります。</p>
+  </section>
+
+  <section id="screens" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / screens</p>
+    <h2 class="mt-2 font-display text-3xl">関連する画面</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><a href="../../ui/pages/home/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ホーム</a><p class="mt-1 text-ink/80">スプラッシュはホームの上に重ねて出し、消えたらホームだけが残る。画面は増えない。</p></li>
+    </ul>
+  </section>
+
+  <section id="components" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / components</p>
+    <h2 class="mt-2 font-display text-3xl">関連するコンポーネント</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">サンプル：29日連続、今日はまだ。休み券を2回使っていて、次の1回で30日の節目。枠の中を押すと飛ばせます。</p>
+    <div class="mt-6 grid gap-6 md:grid-cols-[auto_1fr]">
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <div class="flex items-baseline justify-between gap-6"><a href="../../ui/components/splash/index.html" class="font-mono text-xs font-bold text-dopa underline underline-offset-4">splash</a><button type="button" id="replay" class="rounded-full border-2 border-ink bg-gold px-3 py-0.5 text-[11px] font-black shadow-[0_2px_0_#1C1916]">▶ もう一度</button></div>
+        <div id="splash" class="mt-4"></div>
+      </div>
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <a href="../../ui/components/streak-bar/index.html" class="font-mono text-xs font-bold text-dopa underline underline-offset-4">streak-bar</a>
+        <p class="mt-3 text-sm leading-relaxed text-ink/80">引き継ぐ先。スプラッシュの大きな数は、この帯の日数そのものになる。飛んでいるあいだ、帯の数は隠しておき、着いた瞬間に入れ替える。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="links" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / links</p>
+    <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">設計の経緯</p><a href="../../sessions/20261007-0017-splash/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スプラッシュを作る</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../glossary.html#splash" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">スプラッシュ</a><a href="../../glossary.html#today-seat" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">今日の席</a><a href="../../glossary.html#intro-splash" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">はじめての幕</a><a href="../../glossary.html#streak" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">連続記録</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">ほかの機能</p><a href="../streak/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">連続記録と休み券</a><a href="../history/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">履歴</a></li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script src="../../ui/components/splash/splash.js"></script>
+<script src="../../ui/components/splash/states.js"></script>
+<script>
+(function () {
+  var st = SPLASH_STATES[0], box = document.getElementById('splash');
+  function play() { Splash.render(box, st.opts); }
+  document.getElementById('replay').addEventListener('click', play);
+  play();
+})();
+</script>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

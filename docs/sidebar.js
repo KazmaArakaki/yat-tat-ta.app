@@ -10,6 +10,10 @@
   // セッション一覧（新しい順）。新しいセッションは先頭に足す。
   var sessions = [
     {
+      path: "sessions/20261007-0017-splash/index.html",
+      label: "10/07 スプラッシュを作る"
+    },
+    {
       path: "sessions/20261006-2326-squat-history/index.html",
       label: "10/06 スクワットの履歴を見る"
     },
@@ -107,7 +111,8 @@
         { label: "連続記録と休み券", path: "features/streak/index.html", level: 1 },
         { label: "今日まだ通知", path: "features/today-reminder/index.html", level: 1 },
         { label: "今日の記録", path: "features/today-records/index.html", level: 1 },
-        { label: "履歴", path: "features/history/index.html", level: 1 }
+        { label: "履歴", path: "features/history/index.html", level: 1 },
+        { label: "スプラッシュ", path: "features/splash/index.html", level: 1 }
       ]
     },
     {
@@ -116,6 +121,7 @@
         { label: "基本方針", path: "ui/principles.html", level: 0 },
         { label: "コンポーネント一覧", path: "ui/components/index.html", level: 0 },
         { label: "スクワット隊", path: "ui/components/squat-squad/index.html", level: 1 },
+        { label: "スプラッシュ", path: "ui/components/splash/index.html", level: 1 },
         { label: "ドパ突破", path: "ui/components/dopa-toppa/index.html", level: 1 },
         { label: "フィーバータイム", path: "ui/components/fever/index.html", level: 1 },
         { label: "履歴のグラフ", path: "ui/components/history-chart/index.html", level: 1 },
