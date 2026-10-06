@@ -10,6 +10,10 @@
   // セッション一覧（新しい順）。新しいセッションは先頭に足す。
   var sessions = [
     {
+      path: "sessions/20261006-1258-health-claims/index.html",
+      label: "10/06 健康効果の書き方を決める"
+    },
+    {
       path: "sessions/20261006-0312-main-build/index.html",
       label: "10/06 本作りの設計",
       children: [
@@ -106,14 +110,14 @@
         { label: "開発/運用一覧", path: "devops/index.html", level: 0 },
         { label: "iOS 開発環境", path: "devops/ios-dev-environment/index.html", level: 1 },
         { label: "iOS プロジェクトの設定", path: "devops/ios-project/index.html", level: 1 },
-        { label: "声と効果音の出どころ", path: "devops/sound-assets/index.html", level: 1 }
+        { label: "声と効果音の出どころ", path: "devops/sound-assets/index.html", level: 1 },
+        { label: "健康効果の書き方", path: "devops/health-wording/index.html", level: 1 }
       ]
     },
     {
       label: "Issues",
       items: [
         { label: "課題一覧", path: "issues/index.html", level: 0 },
-        { label: "健康効果の書き方", path: "issues/health-claims/index.html", level: 1 },
         { label: "多言語展開の進め方", path: "issues/localization/index.html", level: 1 },
         { label: "演出を盛ったときの処理落ち", path: "issues/heavy-effects-performance/index.html", level: 1 },
         { label: "記録の取り消し", path: "issues/undo-record/index.html", level: 1 }

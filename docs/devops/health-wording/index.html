@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>健康効果の書き方</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: { rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } } },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-3xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <a href="../index.html" class="hover:text-dopa hover:underline">devops</a>
+      <span>/</span>
+      <span>文言</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight">健康効果の書き方</h1>
+    <p class="mt-3 text-sm text-mute">2026-10-06 決定。画面の文言を足すとき、App Store の説明文を書くとき、ほかの言語に訳すときに開く。</p>
+  </header>
+
+  <section id="rules" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916]">
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-dopa">決まり事</p>
+      <ol class="mt-3 flex flex-col gap-2 font-bold leading-relaxed">
+        <li><span class="mr-2 font-mono text-dopa">1</span>アプリの画面には、<a href="../../glossary.html#health-claim" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">健康効果</a>を書かない。</li>
+        <li><span class="mr-2 font-mono text-dopa">2</span>App Store の説明文には、食後に体を動かすことについての研究を、一般論として1文だけ書く。</li>
+        <li><span class="mr-2 font-mono text-dopa">3</span><a href="../../glossary.html#caution-note" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">注意書き</a>は、設定シートの一番下と、説明文の終わりに置く。</li>
+      </ol>
+    </div>
+    <dl class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <dt class="font-mono text-xs text-mute">決めたセッション</dt>
+        <dd class="mt-1 font-bold"><a href="../../sessions/20261006-1258-health-claims/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">健康効果の書き方を決める</a></dd>
+      </div>
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <dt class="font-mono text-xs text-mute">文言の置き場所</dt>
+        <dd class="mt-1 font-mono text-sm font-bold">String Catalog</dd>
+        <dd class="mt-1 text-xs text-mute">画面の注意書きも、ほかの文言と同じく String Catalog に置く。</dd>
+      </div>
+    </dl>
+  </section>
+
+  <section id="why" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">why</p>
+    <h2 class="mt-2 font-display text-3xl">なぜ画面に書かないのか</h2>
+    <p class="mt-4 leading-relaxed">研究が支えているのは「食後に少し体を動かすと、血糖値の上がり方がゆるやかになる」までです。「スクワット20回で」は、どの研究も確かめていません。画面に効果を書くと、毎回の1打がその効果を約束しているように読めます。</p>
+    <p class="mt-4 leading-relaxed">もう1つは、画面の空気です。<a href="../../glossary.html#muscle-kakutei" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">筋肉確定</a>も<a href="../../glossary.html#negirai" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ねぎらい</a>も冗談で、叩いた人をほめるだけです。そこに血糖値の話が混ざると、続かなかった日が「体に悪いことをした日」に変わります。責めない文を書く、という<a href="../../ui/principles.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">UI の基本方針</a>とぶつかります。</p>
+  </section>
+
+  <section id="words" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">words</p>
+    <h2 class="mt-2 font-display text-3xl">書いてよい言葉、書かない言葉</h2>
+    <div class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <div class="rounded-2xl border-2 border-ink bg-white p-5">
+        <p class="font-mono text-xs font-bold text-signal">ストアの説明文で書いてよい</p>
+        <ul class="mt-3 flex flex-col gap-2 leading-relaxed">
+          <li>食後に少し体を動かす</li>
+          <li>血糖値の上がり方がゆるやかになる</li>
+          <li>〜という研究があります</li>
+          <li>食後のスクワットを記録するアプリ</li>
+        </ul>
+      </div>
+      <div class="rounded-2xl border-2 border-dopa bg-dopa-soft p-5">
+        <p class="font-mono text-xs font-bold text-dopa">どこにも書かない</p>
+        <ul class="mt-3 flex flex-col gap-2 leading-relaxed">
+          <li>糖質の吸収を抑える<span class="block text-xs text-ink/70">研究と合わない。理由は下に</span></li>
+          <li>糖尿病、予防、改善、治す<span class="block text-xs text-ink/70">病気の名前と、病気に効くと読める語</span></li>
+          <li>痩せる、ダイエット、脂肪を燃やす</li>
+          <li>〇% 下がる のような数字</li>
+          <li>20回で、このアプリで、のように回数やアプリと効果を結ぶ文</li>
+        </ul>
+      </div>
+    </div>
+    <p class="mt-6 leading-relaxed">「糖質の吸収を抑える」は、開発者の動機に入っていた言い方です。けれども、食べた糖が腸から吸収される量は、食後に体を動かしても変わりません。変わるのは、そのあとです。動いた筋肉が血液の中の糖を取り込むので、血糖値が上がりきらずに済む。研究が測っているのも、この血糖値の上がり方です。</p>
+    <p class="mt-4 rounded-lg border border-dashed border-mute bg-white/60 p-3 text-xs leading-relaxed">迷ったときの見分け方：その文が「このアプリを使うと体がこうなる」と読めるなら書かない。「こういう研究がある」で止まっているなら、ストアの説明文に限って書いてよい。</p>
+  </section>
+
+  <section id="store" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">app store</p>
+    <h2 class="mt-2 font-display text-3xl">ストアの説明文に入れる2つの段落</h2>
+    <p class="mt-4 text-sm leading-relaxed text-ink/80">説明文の残り（何をするアプリか、演出の紹介）はストアに出すときに書く。この2段落は、そのまま入れる。</p>
+    <div class="mt-6 flex flex-col gap-3">
+      <div class="rounded-2xl border border-rule bg-white p-5">
+        <p class="font-mono text-xs text-mute">動機の段落（説明文の前半）</p>
+        <p class="mt-2 leading-relaxed">食後に少し体を動かすと、血糖値の上がり方がゆるやかになる、という研究があります。でも、食べたあとにしゃがむのは、地味で、忘れます。Yat Tat Ta は、終わったスクワットの回数だけボタンを叩いて、ドパに変えるアプリです。</p>
+      </div>
+      <div class="rounded-2xl border border-rule bg-white p-5">
+        <p class="font-mono text-xs text-mute">注意書きの段落（説明文の終わり）</p>
+        <p class="mt-2 leading-relaxed">Yat Tat Ta はスクワットの回数を記録するアプリで、医療のためのアプリではありません。膝や腰が痛むとき、医師から運動を止められているときは、休んでください。食べてすぐで気分が悪いときは、少し時間をおいてから。持病のある人は、始める前に医師に相談してください。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="caution" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">caution</p>
+    <h2 class="mt-2 font-display text-3xl">画面の注意書き</h2>
+    <p class="mt-4 leading-relaxed">設定シートの一番下に、小さく常に出します。初回起動の説明画面は作りません。画面は1枚という方針で、最初に何かを読ませる画面がないからです。文面はストアの段落を短くしたもの。</p>
+    <div class="mt-6 rounded-2xl border-2 border-ink bg-white p-5">
+      <p class="font-mono text-xs text-mute">設定シート、一番下</p>
+      <p class="mt-2 text-sm leading-relaxed">膝や腰が痛むとき、医師から運動を止められているときは、休んでください。食べてすぐで気分が悪いときは、少し時間をおいてから。</p>
+    </div>
+    <p class="mt-4 text-sm leading-relaxed text-ink/80">見た目は<a href="../../ui/pages/settings/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">設定シートの見本</a>。「休んでください」で止め、「無理をしないで」は使いません。何が無理かを読む人に決めさせる言葉だからです。</p>
+  </section>
+
+  <section id="sources" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">sources</p>
+    <h2 class="mt-2 font-display text-3xl">出典と、言える範囲</h2>
+    <div class="mt-6 overflow-x-auto rounded-2xl border border-rule bg-white">
+      <table class="w-full min-w-[32rem] text-left text-sm">
+        <thead class="border-b-2 border-ink font-mono text-xs text-mute"><tr><th class="p-3">出典</th><th class="p-3">わかったこと</th><th class="p-3">使い方</th></tr></thead>
+        <tbody class="[&_td]:p-3 [&_td]:align-top [&_tr]:border-b [&_tr]:border-rule">
+          <tr><td class="font-bold"><a href="https://doi.org/10.1007/s40279-022-01649-4" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">Buffey ほか 2022</a><span class="block text-xs font-normal text-mute">Sports Medicine、メタ分析</span></td><td>健康な大人で、座りっぱなしを2〜5分の軽い歩行で区切ると、食後の血糖値が下がった（立つだけより大きい）。</td><td>「食後に少し体を動かすと」の根拠</td></tr>
+          <tr><td class="font-bold"><a href="https://doi.org/10.2337/dc15-2336" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">Dempsey ほか 2016</a><span class="block text-xs font-normal text-mute">Diabetes Care、ランダム化クロスオーバー</span></td><td>2型糖尿病の人で、30分ごとに3分、ハーフスクワットなどの自重の運動をはさむと、食後の血糖値の上がり方が小さくなった。</td><td>スクワットに近い運動の例。ただし対象は2型糖尿病の人で、30分ごとに繰り返している</td></tr>
+          <tr><td class="font-bold"><a href="https://doi.org/10.1080/02640414.2020.1847478" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">Journal of Sports Sciences 2021</a><span class="block text-xs font-normal text-mute">ランダム化クロスオーバー</span></td><td>若い健康な人で、座りっぱなしを自重の運動で区切ったら、食後の血糖値はかえって高かった。</td><td>スクワットなら誰でも下がる、とは言えない根拠。だから回数やアプリと効果を結ばない</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 text-sm leading-relaxed text-ink/80">3つを並べると、歩くことについては結果がそろっていて、自重の運動については分かれています。ストアの文の主語を「スクワット」ではなく「食後に少し体を動かす」にしたのは、このためです。</p>
+  </section>
+
+  <section id="review" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">review &amp; law</p>
+    <h2 class="mt-2 font-display text-3xl">審査と法律で気にすること</h2>
+    <ul class="mt-6 flex flex-col gap-3 text-sm leading-relaxed">
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>App Store 審査ガイドライン 1.4.1</b>：健康の数値を測ると言うアプリは、根拠を求められる。Yat Tat Ta は何も測らないので当たらない。ただ「医師に相談を」と促すよう書かれているので、ストアの注意書きに入れた。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>App Store 審査ガイドライン 2.3</b>：説明文はアプリの中身と合っていること。説明文に書いた効果を、アプリが確かめているように読ませない。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>プログラムの医療機器該当性に関するガイドライン（厚生労働省）</b>：運動の記録や、一般論としての情報だけを出すプログラムは、医療機器にあたらない例に挙がっている。病気の名前を出して効くと書くと、この線から外れていく。</li>
+    </ul>
+    <p class="mt-4 rounded-lg border border-dashed border-mute bg-white/60 p-3 text-xs leading-relaxed">審査ガイドラインは 2026-10-06 に読んだ。ストアに出す前に、もう一度読み直す。景品表示法など、専門家に確かめてはいない。</p>
+  </section>
+
+  <section id="locales" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">other languages</p>
+    <h2 class="mt-2 font-display text-3xl">ほかの言語に訳すとき</h2>
+    <p class="mt-4 leading-relaxed">健康についての広告で許される範囲は、国ごとに違います。日本語の文を訳すだけで済むとは限りません。どの国から出すかは<a href="../../issues/localization/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">多言語展開の進め方</a>で決め、出す国ごとに、動機の段落を入れてよいかを確かめます。確かめられない国では、動機の段落を外し、注意書きだけを残します。</p>
+  </section>
+
+  <section id="related" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">related</p>
+    <h2 class="mt-2 font-display text-3xl">関連</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">セッション</p><a href="../../sessions/20261006-1258-health-claims/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">健康効果の書き方を決める</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../glossary.html#health-claim" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">健康効果</a><a href="../../glossary.html#caution-note" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">注意書き</a><a href="../../glossary.html#meal-squat" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">毎食後スクワット</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">UI</p><a href="../../ui/pages/settings/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">設定シート</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">課題（決定済み）</p><a href="../../issues/health-claims/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">health-claims</a></li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

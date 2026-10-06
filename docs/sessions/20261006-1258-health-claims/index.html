@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="session-state" content="developing">
+<meta name="state" content="developing">
+<title>健康効果の書き方を決める</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: { rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } } },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-4xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <time datetime="2026-10-06T12:58">2026-10-06 12:58</time>
+      <span>/</span>
+      <span>設計セッション</span>
+      <span class="rounded-full border border-gold bg-gold/15 px-2.5 py-0.5 font-bold text-ink">状態：developing</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">健康効果</span>の書き方を決める</h1>
+  </header>
+
+  <section id="result" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="relative overflow-hidden rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916] sm:p-8">
+      <div class="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-dopa-soft"></div>
+      <p class="relative font-mono text-xs uppercase tracking-[0.2em] text-dopa">結果（レビュー済み）</p>
+      <p class="relative mt-6 font-display text-3xl tracking-wide sm:text-4xl">画面には書かない。<br>ストアに1文だけ。</p>
+      <p class="relative mt-6 text-lg font-bold leading-relaxed">
+        アプリの画面は、これまでどおり健康効果に触れない。<br>
+        App Store の説明文にだけ、「食後に少し体を動かすと、血糖値の上がり方がゆるやかになる、という研究があります」と書く。<br>
+        注意書きは、設定シートの一番下と、説明文の終わりに置く。
+      </p>
+      <p class="relative mt-4 text-sm text-mute">決まり事の本体は <a href="../../devops/health-wording/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">devops／健康効果の書き方</a>。</p>
+    </div>
+  </section>
+
+  <section id="position" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01 / position</p>
+    <h2 class="mt-2 font-display text-3xl">どこに効く決定か</h2>
+    <p class="mt-4 leading-relaxed">4つの機能（<a href="../../features/done-mash/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">完了連打</a>、<a href="../../features/dopa-totals/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパの合計</a>、<a href="../../features/streak/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">連続記録と休み券</a>、<a href="../../features/today-reminder/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日まだ通知</a>）のどれも、ふるまいは変わりません。変わるのは文言だけで、場所は2つ。画面の中では設定シートに注意書きが1つ増え、画面の外では App Store の説明文の一部が決まります。記録のデータには触れません。</p>
+    <p class="mt-4 leading-relaxed">本作りでは「この課題が決まるまで書かない」として、画面から健康効果を外していました。その状態を、仮の置き方から決まった置き方に変えるのが、このセッションです。</p>
+  </section>
+
+  <section id="absorb" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / absorb</p>
+    <h2 class="mt-2 font-display text-3xl">糖質の吸収は、抑えられるのか</h2>
+    <p class="mt-4 leading-relaxed">題材の出発点は、開発者の「食後に20回ほどスクワットすると、糖質の吸収を抑えられる」でした。調べる前は、言い方を少しやわらげれば、そのまま書けるだろうと考えていました。</p>
+    <p class="mt-4 leading-relaxed">研究を読むと、測っているものが違いました。どの研究も、測っているのは食後の血糖値です。食べた糖は、体を動かしても変わらず腸から吸収されます。動いた筋肉が血液の中の糖を取り込むので、血糖値が上がりきらずに済む。起きているのは、吸収のあとの話でした。</p>
+    <p class="mt-4 font-bold leading-relaxed">「糖質の吸収を抑える」は、やわらげても書けない。書けるのは「血糖値の上がり方がゆるやかになる」のほうです。</p>
+  </section>
+
+  <section id="squat" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / squat</p>
+    <h2 class="mt-2 font-display text-3xl">スクワットでも同じことが言えるのか</h2>
+    <p class="mt-4 leading-relaxed">歩くことについては、結果がそろっています。健康な大人でも、2〜5分の軽い歩行で座りっぱなしを区切ると、食後の血糖値が下がる（Buffey ほか 2022 のメタ分析）。</p>
+    <p class="mt-4 leading-relaxed">スクワットに近い運動では、結果が分かれました。2型糖尿病の人が30分ごとに3分、ハーフスクワットなどをはさむと、血糖値の上がり方が小さくなった研究があります（Dempsey ほか 2016）。一方で、若い健康な人が自重の運動で区切ったら、かえって血糖値が高かった研究もあります（Journal of Sports Sciences 2021）。食後に1回だけ20回しゃがむ、という形を確かめた研究は見つかりませんでした。</p>
+    <p class="mt-4 leading-relaxed">なので、主語を「スクワット」にはしません。「食後に少し体を動かすと」なら、歩く研究が支えてくれます。回数とも、アプリとも結びません。出典の一覧は <a href="../../devops/health-wording/index.html#sources" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">devops の出典の表</a>に置きました。</p>
+  </section>
+
+  <section id="where" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / where</p>
+    <h2 class="mt-2 font-display text-3xl">その1文を、どこに置くか</h2>
+    <p class="mt-4 leading-relaxed">書ける文が1つ見つかったなら、画面にも出したくなります。叩き切った瞬間に「血糖値、ゆるやか確定」と出せば、ドパが体の役に立っている気がしてくるはずです。</p>
+    <p class="mt-4 leading-relaxed">そうしたかった、とは思います。ただ、画面の上ではその1文が「今の20打で血糖値が下がった」と読めてしまう。研究はそこまで言っていません。それに、効果を画面で約束すると、叩かなかった日は「体に悪いことをした日」になります。<a href="../../ui/principles.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">UI の基本方針</a>で避けてきた、失うことを先に見せる文です。</p>
+    <p class="mt-4 leading-relaxed">ストアの説明文は、まだ入れていない人が読むものです。「なぜ食後にしゃがむのか」に答える場所で、そこでなら「という研究があります」で止めた一般論として読まれます。だから、ストアに1文だけ置きます。</p>
+    <div class="mt-6 grid gap-3 text-sm sm:grid-cols-3">
+      <div class="rounded-2xl border-2 border-ink bg-white p-4"><p class="font-mono text-xs text-mute">アプリの画面</p><p class="mt-1 font-display text-xl">書かない</p><p class="mt-2 text-ink/80">筋肉確定などの冗談は、これまでどおり使ってよい。</p></div>
+      <div class="rounded-2xl border-2 border-signal bg-white p-4"><p class="font-mono text-xs text-mute">ストアの説明文</p><p class="mt-1 font-display text-xl">1文だけ</p><p class="mt-2 text-ink/80">「〜という研究があります」で止める。</p></div>
+      <div class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><p class="font-mono text-xs text-mute">注意書き</p><p class="mt-1 font-display text-xl">両方に</p><p class="mt-2 text-ink/80">設定シートの一番下と、説明文の終わり。</p></div>
+    </div>
+  </section>
+
+  <section id="caution" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / caution</p>
+    <h2 class="mt-2 font-display text-3xl">注意書きを、誰が読むのか</h2>
+    <p class="mt-4 leading-relaxed">膝や腰を痛めている人、持病で運動を止められている人、満腹ですぐ動くと気分が悪くなる人。読んでほしいのはこの3つの人です。</p>
+    <p class="mt-4 leading-relaxed">初回起動の説明画面に出す手もありました。けれども Yat Tat Ta は画面が1枚で、最初に何かを読ませる画面を持っていません。注意書きのためだけに1枚足すと、叩くまでの手数が増えます。設定シートなら、目標回数を決めに来た人の目に入ります。回数を決める場所は、体と相談する場所でもあるからです。</p>
+    <p class="mt-4 leading-relaxed">文面では「無理をしないで」を使いませんでした。何が無理かを、読む人に決めさせる言葉だからです。「膝や腰が痛むとき」「医師から運動を止められているとき」と、休む場面をそのまま書きます。</p>
+  </section>
+
+  <section id="mock" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / mock</p>
+    <h2 class="mt-2 font-display text-3xl">設定シートの修正イメージ</h2>
+    <p class="mt-4 text-sm leading-relaxed text-ink/80">今日まだ通知の下に、罫線で区切って小さく置く。見出しは付けない。動く見本は <a href="../../ui/pages/settings/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ui／設定シート</a>。</p>
+    <div class="mt-6 grid gap-6 md:grid-cols-2">
+      <div>
+        <p class="mb-2 font-mono text-xs text-mute">before</p>
+        <div class="rounded-[1.8rem] border-2 border-ink bg-white px-5 pb-6 pt-4 text-ink">
+          <p class="text-[11px] font-bold text-mute">今日まだ通知</p>
+          <div class="mt-2 rounded-2xl border-2 border-ink px-3 py-3 text-sm font-bold">夜に知らせる　…　21:00</div>
+          <p class="mt-2 text-[10px] leading-relaxed text-mute">その日まだ叩いていないときだけ、1回。7日開かなければ、しばらく止まります。</p>
+          <div class="mt-16"></div>
+        </div>
+      </div>
+      <div>
+        <p class="mb-2 font-mono text-xs text-dopa">after</p>
+        <div class="rounded-[1.8rem] border-2 border-ink bg-white px-5 pb-6 pt-4 text-ink">
+          <p class="text-[11px] font-bold text-mute">今日まだ通知</p>
+          <div class="mt-2 rounded-2xl border-2 border-ink px-3 py-3 text-sm font-bold">夜に知らせる　…　21:00</div>
+          <p class="mt-2 text-[10px] leading-relaxed text-mute">その日まだ叩いていないときだけ、1回。7日開かなければ、しばらく止まります。</p>
+          <p class="mt-8 border-t-2 border-rule pt-3 text-[10px] leading-relaxed text-mute ring-2 ring-dopa ring-offset-4 rounded-sm">膝や腰が痛むとき、医師から運動を止められているときは、休んでください。食べてすぐで気分が悪いときは、少し時間をおいてから。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="impl" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">07 / implementation</p>
+    <h2 class="mt-2 font-display text-3xl">実装でやること</h2>
+    <ol class="mt-6 flex flex-col gap-3 text-sm">
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">1</span><div><b>設定シートの一番下に注意書きを足す</b>（<code class="font-mono text-xs">Settings/SettingsView.swift</code>）。最後の Section の下に、見出しなしの Section を1つ。読む人が体に合わせて休めるようにするため。15分ほど</div></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">2</span><div><b>文面を String Catalog に入れる</b>。ほかの文言と同じく、あとで訳せるようにするため</div></li>
+    </ol>
+    <p class="mt-4 text-sm leading-relaxed text-ink/80">設計は 2026-10-06 に開発者のレビューを通った。残るのは上の実装。ストアの説明文は、ストアに出すときに <a href="../../devops/health-wording/index.html#store" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">devops の2段落</a>を使う。今回は書き置くだけ。データの変更はない。</p>
+  </section>
+
+  <section id="decisions" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">08 / decisions</p>
+    <h2 class="mt-2 font-display text-3xl">決めたこと（2026-10-06 開発者がレビュー）</h2>
+    <ol class="mt-6 flex flex-col gap-3 text-sm leading-relaxed">
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">01</span>「糖質の吸収を抑える」は、どこにも書かない。研究が測っているのは血糖値の上がり方で、吸収ではない。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">02</span>アプリの画面には健康効果を書かない。筋肉確定などの冗談の言葉は、体の中で起きることに触れない限り使ってよい。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">03</span>App Store の説明文には「食後に少し体を動かすと、血糖値の上がり方がゆるやかになる、という研究があります」を1文だけ書く。主語はスクワットにせず、回数やアプリと効果を結ばない。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">04</span>病気の名前（糖尿病など）、予防、改善、痩せる、効果の数字は、どこにも書かない。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">05</span>注意書きは、設定シートの一番下に常に出し、ストアの説明文の終わりにも置く。初回起動の説明画面は作らない。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">06</span>ほかの言語では、出す国ごとに動機の段落を入れてよいかを確かめる。確かめられない国では、注意書きだけを残す。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">07</span>文言の決まり事は <a href="../../devops/health-wording/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">devops／健康効果の書き方</a>に置き、課題 health-claims は決定済みにする。</li>
+    </ol>
+  </section>
+
+  <section id="docs" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">09 / docs</p>
+    <h2 class="mt-2 font-display text-3xl">更新したドキュメント</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-xl bg-paper p-4 leading-relaxed ring-1 ring-rule"><p class="font-bold">devops／健康効果の書き方 <span class="ml-1 font-mono text-[11px] text-dopa">新規</span></p><p class="mt-1 text-ink/80">決まり事、書かない言葉、ストアの2段落、出典。</p></li>
+      <li class="rounded-xl bg-paper p-4 leading-relaxed ring-1 ring-rule"><p class="font-bold">用語集 <span class="ml-1 font-mono text-[11px] text-dopa">新規</span> <span class="ml-1 font-mono text-[11px] text-mute">更新</span></p><p class="mt-1 text-ink/80"><a href="../../glossary.html#health-claim" class="underline decoration-dopa/50 decoration-2 underline-offset-4">健康効果</a>と<a href="../../glossary.html#caution-note" class="underline decoration-dopa/50 decoration-2 underline-offset-4">注意書き</a>を足し、<a href="../../glossary.html#meal-squat" class="underline decoration-dopa/50 decoration-2 underline-offset-4">毎食後スクワット</a>と<a href="../../glossary.html#muscle-kakutei" class="underline decoration-dopa/50 decoration-2 underline-offset-4">筋肉確定</a>を直した。</p></li>
+      <li class="rounded-xl bg-paper p-4 leading-relaxed ring-1 ring-rule"><p class="font-bold">ui／設定シート、UI の基本方針 <span class="ml-1 font-mono text-[11px] text-mute">更新</span></p><p class="mt-1 text-ink/80">注意書きを見本に足し、文言の方針から「課題が決まるまで」を外した。</p></li>
+      <li class="rounded-xl bg-paper p-4 leading-relaxed ring-1 ring-rule"><p class="font-bold">課題 health-claims <span class="ml-1 font-mono text-[11px] text-mute">決定済み</span></p><p class="mt-1 text-ink/80">結論を書き足し、サイドバーから外した。課題一覧からは開ける。</p></li>
+    </ul>
+  </section>
+
+  <section id="links" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">10 / links</p>
+    <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">決まり事</p><a href="../../devops/health-wording/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">健康効果の書き方</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">課題</p><a href="../../issues/health-claims/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">health-claims</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">この課題が出たセッション</p><a href="../20261006-0215-subject/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">題材を決める</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">前回のセッション</p><a href="../20261006-0312-main-build/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">本作りの設計</a></li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

@@ -42,12 +42,25 @@ tailwind.config = {
     <h1 class="mt-4 font-display text-4xl leading-tight">健康効果の書き方を決める</h1>
     <div class="mt-4 flex flex-wrap gap-2 font-mono text-xs font-bold">
       <span class="rounded-full border border-ink bg-white px-3 py-1 text-ink">優先度：中</span>
-      <span class="rounded-full border border-mute bg-white px-3 py-1 text-ink">状態：未着手</span>
+      <span class="rounded-full bg-ink px-3 py-1 text-white">状態：完了 2026-10-06</span>
     </div>
   </header>
 
+  <!-- 結論 -->
+  <section id="result" class="animate-rise mt-8 [animation-delay:50ms]">
+    <div class="rounded-3xl border-2 border-signal bg-white p-6">
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-signal">結論 2026-10-06</p>
+      <ol class="mt-3 flex flex-col gap-2 text-sm leading-relaxed">
+        <li><b class="mr-2 font-mono text-signal">a</b>研究が測っているのは食後の血糖値の上がり方で、糖質の吸収ではない。「糖質の吸収を抑える」はどこにも書かない。スクワットそのものの結果は分かれている。</li>
+        <li><b class="mr-2 font-mono text-signal">b</b>画面には書かない。App Store の説明文にだけ「食後に少し体を動かすと、血糖値の上がり方がゆるやかになる、という研究があります」と1文書く。</li>
+        <li><b class="mr-2 font-mono text-signal">c</b>注意書きは、設定シートの一番下と、説明文の終わりに置く。</li>
+      </ol>
+      <p class="mt-4 text-sm">決まり事：<a href="../../devops/health-wording/index.html" class="text-dopa underline underline-offset-4">devops／健康効果の書き方</a>　経緯：<a href="../../sessions/20261006-1258-health-claims/index.html" class="text-dopa underline underline-offset-4">健康効果の書き方を決める</a></p>
+    </div>
+  </section>
+
   <!-- 概要 -->
-  <section id="summary" class="animate-rise mt-8 [animation-delay:100ms]">
+  <section id="summary" class="animate-rise mt-10 [animation-delay:100ms]">
     <div class="rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916]">
       <p class="font-mono text-xs uppercase tracking-[0.2em] text-dopa">概要</p>
       <p class="mt-3 font-bold leading-relaxed">
