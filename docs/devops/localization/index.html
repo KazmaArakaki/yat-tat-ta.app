@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>多言語の決まり事</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: { rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } } },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-3xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <a href="../index.html" class="hover:text-dopa hover:underline">devops</a>
+      <span>/</span>
+      <span>文言</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight">多言語の決まり事</h1>
+    <p class="mt-3 text-sm text-mute">2026-10-06 決定。画面の文言を足すとき、声を足すとき、英語のストアを直すときに開く。</p>
+  </header>
+
+  <section id="rules" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916]">
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-dopa">決まり事</p>
+      <ol class="mt-3 flex flex-col gap-2 font-bold leading-relaxed">
+        <li><span class="mr-2 font-mono text-dopa">1</span>日本語（ja）と英語（en）で同時に出す。書くのは日本語が先、英語は String Catalog で足す。</li>
+        <li><span class="mr-2 font-mono text-dopa">2</span>日本語と英語以外の端末では、英語で出す。</li>
+        <li><span class="mr-2 font-mono text-dopa">3</span>文言を足したら、同じ変更で英語も入れる。訳しかたは下の<a href="../../glossary.html#translation-table" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">訳語表</a>に合わせる。</li>
+        <li><span class="mr-2 font-mono text-dopa">4</span>声は言語ごとに作る。足すときは、日本語と英語の2本をそろえる。</li>
+        <li><span class="mr-2 font-mono text-dopa">5</span>アプリ名 Yat Tat Ta は、どの言語でも同じ表記。</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="terms" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">translation table</p>
+    <h2 class="mt-2 font-display text-3xl">訳語表：アプリの言葉</h2>
+    <div class="mt-6 overflow-x-auto rounded-2xl border border-rule bg-white">
+      <table class="w-full min-w-[30rem] text-left text-sm">
+        <thead class="border-b-2 border-ink font-mono text-xs text-mute"><tr><th class="p-3">日本語</th><th class="p-3">英語</th><th class="p-3">メモ</th></tr></thead>
+        <tbody class="[&_td]:p-3 [&_td]:align-top [&_tr]:border-b [&_tr]:border-rule">
+          <tr><td>ドパ</td><td class="font-bold">Dopa</td><td class="text-ink/70">作った単位。訳さず、そのまま名前にする。複数形にしない（1 Dopa、20 Dopa）</td></tr>
+          <tr><td>DT／DPW</td><td class="font-bold">DT／DPW</td><td class="text-ink/70">画面の略語はそのまま。意味は Dopa Total／Dopa Per Week</td></tr>
+          <tr><td>連続記録</td><td class="font-bold">streak</td><td class="text-ink/70">帯では「30 days in a row」と言い切る</td></tr>
+          <tr><td>休み券</td><td class="font-bold">Rest Pass</td><td class="text-ink/70">Duolingo の Streak Freeze とは別の名前にする</td></tr>
+          <tr><td>スクワット 残り</td><td class="font-bold">SQUATS LEFT</td><td class="text-ink/70"></td></tr>
+          <tr><td>叩いてしゃがむ</td><td class="font-bold">TAP TO SQUAT</td><td class="text-ink/70"></td></tr>
+          <tr><td>今日の記録</td><td class="font-bold">Today</td><td class="text-ink/70">シートの題</td></tr>
+          <tr><td>今日まだ通知</td><td class="font-bold">Not-Yet Reminder</td><td class="text-ink/70">設定の行の名前</td></tr>
+          <tr><td>目標回数</td><td class="font-bold">Squats per round</td><td class="text-ink/70"></td></tr>
+          <tr><td>完了連打</td><td class="font-bold">Done mash</td><td class="text-ink/70">画面には出ない。VoiceOver の読み上げだけ</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="hype" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">hype words</p>
+    <h2 class="mt-2 font-display text-3xl">訳語表：演出の言葉</h2>
+    <p class="mt-4 leading-relaxed">パチンコの言葉は、意味が伝わる英語に置き換えます。勢いは保ちたいので、大きな文字で出るものは大文字にし、「!!」の数も日本語に合わせます。</p>
+    <div class="mt-6 overflow-x-auto rounded-2xl border border-rule bg-white">
+      <table class="w-full min-w-[30rem] text-left text-sm">
+        <thead class="border-b-2 border-ink font-mono text-xs text-mute"><tr><th class="p-3">日本語</th><th class="p-3">英語</th><th class="p-3">メモ</th></tr></thead>
+        <tbody class="[&_td]:p-3 [&_td]:align-top [&_tr]:border-b [&_tr]:border-rule">
+          <tr><td>チャンス</td><td class="font-bold">CHANCE!</td><td class="text-ink/70"></td></tr>
+          <tr><td>激熱!!</td><td class="font-bold">RED HOT!!</td><td class="text-ink/70"></td></tr>
+          <tr><td>PUSH</td><td class="font-bold">PUSH!!</td><td class="text-ink/70">もとから英語</td></tr>
+          <tr><td>ドパドパ ×N</td><td class="font-bold">DOPA DOPA ×N</td><td class="text-ink/70"></td></tr>
+          <tr><td>ドパ突破</td><td class="font-bold">DOPA BREAK!</td><td class="text-ink/70">金のときも同じ言葉</td></tr>
+          <tr><td>叩き放題</td><td class="font-bold">ALL YOU CAN TAP</td><td class="text-ink/70">食べ放題（all you can eat）にかけた。食後のアプリなので</td></tr>
+          <tr><td>FEVER 終了</td><td class="font-bold">FEVER OVER</td><td class="text-ink/70"></td></tr>
+          <tr><td>やったった！</td><td class="font-bold">NAILED IT!</td><td class="text-ink/70"></td></tr>
+          <tr><td>〇〇／確定</td><td class="font-bold">〇〇／LOCKED IN</td><td class="text-ink/70">2行の上が言葉、下が LOCKED IN。筋肉 MUSCLE、太もも THIGHS、根性 GRIT、継続 STREAK、明日も TOMORROW</td></tr>
+          <tr><td>あんたはえらい！</td><td class="font-bold">YOU'RE AMAZING!</td><td class="text-ink/70"></td></tr>
+          <tr><td>今日もお疲れ！</td><td class="font-bold">GOOD WORK TODAY!</td><td class="text-ink/70"></td></tr>
+          <tr><td>夜食のあとに、えらすぎる！</td><td class="font-bold">LATE-NIGHT SNACK? STILL SQUATTING!</td><td class="text-ink/70"></td></tr>
+          <tr><td>よっ、太もも番長！</td><td class="font-bold">HEY, THIGH BOSS!</td><td class="text-ink/70"></td></tr>
+          <tr><td>限界突破！</td><td class="font-bold">LIMIT BROKEN!</td><td class="text-ink/70"></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 rounded-lg border border-dashed border-mute bg-white/60 p-3 text-xs leading-relaxed">英語は日本語より文字が多い。大きな文字（金属の文字）は、文字数で大きさを決めていたのをやめ、画面の幅に収まるまで縮める。</p>
+  </section>
+
+  <section id="voices" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">voices</p>
+    <h2 class="mt-2 font-display text-3xl">英語の声の台本（22本）</h2>
+    <p class="mt-4 leading-relaxed">ファイル名は日本語と同じにして、言語ごとのフォルダに分けます（<code class="font-mono text-sm">Sounds/ja.lproj/</code> と <code class="font-mono text-sm">Sounds/en.lproj/</code>）。iOS が端末の言語に合うほうを選びます。声の役（実況 Fenrir、確定 Algenib、ねぎらい Sadachbia）と作り方は<a href="../sound-assets/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">声と効果音の出どころ</a>と同じです。</p>
+    <div class="mt-6 overflow-x-auto rounded-2xl border border-rule bg-white">
+      <table class="w-full min-w-[32rem] text-left text-sm">
+        <thead class="border-b-2 border-ink font-mono text-xs text-mute"><tr><th class="p-3">ファイル</th><th class="p-3">日本語</th><th class="p-3">英語</th></tr></thead>
+        <tbody class="[&_td]:p-3 [&_td]:align-top [&_tr]:border-b [&_tr]:border-rule">
+          <tr><td class="font-mono text-xs">voice_chance</td><td>チャンス！</td><td class="font-bold">Chance!</td></tr>
+          <tr><td class="font-mono text-xs">voice_gekiatsu</td><td>激熱！</td><td class="font-bold">Red hot!</td></tr>
+          <tr><td class="font-mono text-xs">voice_push</td><td>押せ！</td><td class="font-bold">Push!</td></tr>
+          <tr><td class="font-mono text-xs">voice_combo</td><td>ドパドパ！</td><td class="font-bold">Dopa dopa!</td></tr>
+          <tr><td class="font-mono text-xs">voice_toppa</td><td>ドパ、突破！</td><td class="font-bold">Dopa break!</td></tr>
+          <tr><td class="font-mono text-xs">voice_fever</td><td>フィーバー！</td><td class="font-bold">Fever!</td></tr>
+          <tr><td class="font-mono text-xs">voice_rush</td><td>ラッシュ！</td><td class="font-bold">Rush!</td></tr>
+          <tr><td class="font-mono text-xs">voice_yattatta</td><td>やったった！</td><td class="font-bold">Nailed it!</td></tr>
+          <tr><td class="font-mono text-xs">voice_kakutei_1〜5</td><td>筋肉／太もも／根性／継続／明日も、確定！</td><td class="font-bold">Muscle / Thighs / Grit / Streak / Tomorrow, locked in!</td></tr>
+          <tr><td class="font-mono text-xs">voice_negirai_1</td><td>今日もお疲れ！</td><td class="font-bold">Good work today!</td></tr>
+          <tr><td class="font-mono text-xs">voice_negirai_2</td><td>夜食のあとに、えらすぎる！</td><td class="font-bold">Late-night snack? Still squatting!</td></tr>
+          <tr><td class="font-mono text-xs">voice_negirai_3</td><td>あんたはえらい！</td><td class="font-bold">You're amazing!</td></tr>
+          <tr><td class="font-mono text-xs">voice_negirai_4</td><td>よっ、ふともも番長！</td><td class="font-bold">Hey, Thigh Boss!</td></tr>
+          <tr><td class="font-mono text-xs">voice_negirai_5</td><td>限界突破！</td><td class="font-bold">Limit broken!</td></tr>
+          <tr><td class="font-mono text-xs">voice_milestone_streak</td><td>連続記録、達成！</td><td class="font-bold">Streak milestone!</td></tr>
+          <tr><td class="font-mono text-xs">voice_milestone_dt</td><td>ドパ、大台突破！</td><td class="font-bold">Dopa milestone!</td></tr>
+          <tr><td class="font-mono text-xs">voice_milestone_best</td><td>自己ベスト、更新！</td><td class="font-bold">New best week!</td></tr>
+          <tr><td class="font-mono text-xs">voice_restart</td><td>今日の1回から！</td><td class="font-bold">Start again today!</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 text-sm leading-relaxed text-ink/80">フィナーレの声の間合いは、ファイルの長さから計算しているので、英語の声が長くても合う。声のファイルが届く前は、端末の英語の読み上げで代える。</p>
+  </section>
+
+  <section id="store" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">app store (en)</p>
+    <h2 class="mt-2 font-display text-3xl">英語のストアの説明文</h2>
+    <p class="mt-4 leading-relaxed">英語のストアには、食後の運動と血糖値の研究の1文（動機の段落）を入れません。英語のストアはアメリカやイギリスなど多くの国に並ぶのに、健康の広告の決まりを国ごとに確かめていないからです。<a href="../health-wording/index.html#locales" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">健康効果の書き方</a>の「確かめられない国では、注意書きだけを残す」に従います。</p>
+    <div class="mt-6 flex flex-col gap-3">
+      <div class="rounded-2xl border border-rule bg-white p-5"><p class="font-mono text-xs text-mute">サブタイトル（30文字まで）</p><p class="mt-2 font-bold">Eat. Squat. Tap for Dopa.</p></div>
+      <div class="rounded-2xl border border-rule bg-white p-5"><p class="font-mono text-xs text-mute">説明文の頭</p><p class="mt-2 leading-relaxed">Ate something? Do your squats, then tap once for every rep. Each tap turns a squat into Dopa, with over-the-top pachinko-style effects: RED HOT!!, FEVER!!, and a final tap that locks it all in. Keep your streak going, beat your best week, and watch your Dopa pile up.</p></div>
+      <div class="rounded-2xl border border-rule bg-white p-5"><p class="font-mono text-xs text-mute">注意書き（説明文の終わり）</p><p class="mt-2 leading-relaxed">Yat Tat Ta is an app for logging squats, not a medical app. If your knees or back hurt, or a doctor has told you not to exercise, please rest. If you feel unwell right after eating, wait a little before you start. If you have a medical condition, talk to your doctor first.</p></div>
+    </div>
+  </section>
+
+  <section id="check" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">check</p>
+    <h2 class="mt-2 font-display text-3xl">英語で確かめるとき</h2>
+    <ol class="mt-6 flex flex-col gap-3 text-sm">
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">1</span><div>Xcode の Scheme の Run の Options で、App Language を English にする</div></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">2</span><div><code class="font-mono text-xs">-demo</code> の見本（chance、hot、push、toppa、gold、fever、kakutei、negirai）を順に出し、大きな文字が画面からはみ出さないかを見る</div></li>
+      <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">3</span><div>設定、今日の記録、途切れたときのカード、通知の問いかけを開き、文が切れていないかを見る</div></li>
+    </ol>
+  </section>
+
+  <section id="related" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">related</p>
+    <h2 class="mt-2 font-display text-3xl">関連</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">セッション</p><a href="../../sessions/20261006-1829-localization/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">多言語展開の進め方を決める</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../glossary.html#localization" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">多言語展開</a><a href="../../glossary.html#translation-table" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">訳語表</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">devops</p><a href="../sound-assets/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">声と効果音の出どころ</a><a href="../health-wording/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">健康効果の書き方</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">課題</p><a href="../../issues/localization/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">localization</a></li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

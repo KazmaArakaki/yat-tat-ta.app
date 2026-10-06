@@ -10,6 +10,10 @@
   // セッション一覧（新しい順）。新しいセッションは先頭に足す。
   var sessions = [
     {
+      path: "sessions/20261006-1829-localization/index.html",
+      label: "10/06 多言語展開の進め方"
+    },
+    {
       path: "sessions/20261006-1523-today-records/index.html",
       label: "10/06 今日の記録から取り消す"
     },
@@ -122,7 +126,8 @@
         { label: "iOS プロジェクトの設定", path: "devops/ios-project/index.html", level: 1 },
         { label: "声と効果音の出どころ", path: "devops/sound-assets/index.html", level: 1 },
         { label: "健康効果の書き方", path: "devops/health-wording/index.html", level: 1 },
-        { label: "処理落ちの確かめ方", path: "devops/perf-check/index.html", level: 1 }
+        { label: "処理落ちの確かめ方", path: "devops/perf-check/index.html", level: 1 },
+        { label: "多言語の決まり事", path: "devops/localization/index.html", level: 1 }
       ]
     },
     {
