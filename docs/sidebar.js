@@ -134,7 +134,6 @@
       label: "Issues",
       items: [
         { label: "課題一覧", path: "issues/index.html", level: 0 },
-        { label: "多言語展開の進め方", path: "issues/localization/index.html", level: 1 },
       ]
     }
   ];

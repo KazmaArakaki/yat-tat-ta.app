@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="session-state" content="developing">
-<meta name="state" content="developing">
+<meta name="session-state" content="done">
+<meta name="state" content="done">
 <title>多言語展開の進め方を決める</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,7 +40,7 @@ tailwind.config = {
       <time datetime="2026-10-06T18:29">2026-10-06 18:29</time>
       <span>/</span>
       <span>設計セッション</span>
-      <span class="rounded-full border border-gold bg-gold/15 px-2.5 py-0.5 font-bold text-ink">状態：developing</span>
+      <span class="rounded-full border border-signal bg-signal/10 px-2.5 py-0.5 font-bold text-ink">状態：done</span>
     </div>
     <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">多言語展開</span>の進め方を決める</h1>
   </header>
@@ -115,7 +115,7 @@ tailwind.config = {
       <li class="rounded-2xl border border-rule bg-white p-4">声：日本語の22本を <code class="font-mono text-xs">Sounds/ja.lproj/</code> へ移した。英語の声が届くまでは、英語の読み上げで代わる</li>
       <li class="rounded-2xl border border-rule bg-white p-4">帯の「今日の1回で 1 日目」は、英語では「Day 1 starts today」。空の訳はキーの日本語が出てしまうので、組み立てで避けた</li>
     </ul>
-    <p class="mt-4 text-sm leading-relaxed text-ink/80">テスト48件（うち言語のそろい3件）が通った。シミュレーターで、英語のホーム、激熱、確定、ねぎらい、金のドパ突破、フィーバーを撮り、はみ出しがないことを確かめた。日本語の端末で日本語、フランス語の端末で英語が出ることも確かめた。英語の声22本（開発者が作成中）と、実機での確認が残る。</p>
+    <p class="mt-4 text-sm leading-relaxed text-ink/80">テスト48件（うち言語のそろい3件）が通った。シミュレーターで、英語のホーム、激熱、確定、ねぎらい、金のドパ突破、フィーバーを撮り、はみ出しがないことを確かめた。日本語の端末で日本語、フランス語の端末で英語が出ることも確かめた。開発者が英語の声22本を作り、実機で確かめた（英語の声が順に鳴る、フィナーレの声が重ならない、英語の画面が切れない）。AirPods をつないだまま Xcode から実行すると音が鳴らない現象が出たが、ホーム画面からの起動では起きないので、開発環境のハマりどころに記録した。出口が変わったら再生口をつなぎ直す処理は入れた。</p>
   </section>
 
   <section id="decisions" class="mt-20">
