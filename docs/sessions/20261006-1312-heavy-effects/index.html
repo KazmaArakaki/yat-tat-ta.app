@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="session-state" content="developing">
-<meta name="state" content="developing">
+<meta name="session-state" content="done">
+<meta name="state" content="done">
 <title>演出を盛ったときの処理落ちを確かめる</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,7 +47,7 @@ tailwind.config = {
       <time datetime="2026-10-06T13:12">2026-10-06 13:12</time>
       <span>/</span>
       <span>設計セッション</span>
-      <span class="rounded-full border border-gold bg-gold/15 px-2.5 py-0.5 font-bold text-ink">状態：developing</span>
+      <span class="rounded-full border border-signal bg-signal/10 px-2.5 py-0.5 font-bold text-ink">状態：done</span>
     </div>
     <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl">演出を盛ったときの<span class="text-dopa">処理落ち</span>を確かめる</h1>
   </header>
@@ -258,6 +258,35 @@ tailwind.config = {
     <p class="mt-4 leading-relaxed">声の再生口を6つにし、まとめの札に、遅かった3打の場面と叩いた位置、60Hz で描いた秒の印を足しました。3回目で、端のせいか、60Hz のせいかを見分けます。</p>
   </section>
 
+  <section id="run3" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">実機 3回目 2026-10-06 15:12</p>
+    <h2 class="mt-2 font-display text-3xl">端でも 60Hz でもなく、重い場面そのもの</h2>
+    <div class="mt-6 overflow-x-auto rounded-2xl border border-rule bg-white">
+      <table class="w-full min-w-[30rem] text-left text-sm">
+        <thead class="border-b-2 border-ink font-mono text-xs text-mute"><tr><th class="p-3">場面</th><th class="p-3">最低 fps</th><th class="p-3">≥50ms</th><th class="p-3">発火の最大</th></tr></thead>
+        <tbody class="[&_td]:p-3 [&_td]:align-top [&_tr]:border-b [&_tr]:border-rule">
+          <tr><td>NORMAL</td><td class="font-bold text-dopa">98</td><td>0</td><td>36ms</td></tr>
+          <tr><td>CHANCE</td><td>100</td><td>0</td><td>35ms</td></tr>
+          <tr><td>激熱</td><td class="font-bold text-dopa">89</td><td>0</td><td class="font-bold text-dopa">73ms</td></tr>
+          <tr><td>PUSH</td><td>-</td><td>0</td><td class="font-bold text-dopa">47ms</td></tr>
+          <tr><td>フィーバー</td><td class="font-bold text-dopa">93</td><td class="font-bold text-dopa">1</td><td class="font-bold text-dopa">52ms</td></tr>
+          <tr><td>フィナーレ</td><td class="font-bold text-dopa">78</td><td class="font-bold text-dopa">1</td><td>-</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 leading-relaxed">219打。切った声は 0 回になった。発火は中央 16ms、95% 27ms、最大 73ms。60Hz の印はどの場面にも付かなかった。</p>
+    <p class="mt-4 leading-relaxed">2回目の見立ては、どちらも外れました。遅かった3打は画面の中ほど（縦 0.46〜0.61）を叩いていて、端のせいではない。描画の落ち込みも、iOS が 60Hz に切り替えたのではなく、本当にコマを落としていました。遅い打は激熱、PUSH、フィーバーに集まっています。重い場面で、アプリが 30〜45ms ほど手を取られているのでしょう。50ms に届かないので詰まりには数えられず、発火の遅れだけが表に出ています。</p>
+    <p class="mt-4 leading-relaxed">ドパ九九の毎秒 3.8 回と比べれば、桁が2つ違います。指も、3回とも遅れを感じていません。ただ、決めた線には届いていない。</p>
+  </section>
+
+  <section id="closing" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">結論 2026-10-06</p>
+    <h2 class="mt-2 font-display text-3xl">線を、指と基準値の2段にした</h2>
+    <p class="mt-4 leading-relaxed">最初の線は、試作の数字から引いたものでした。3回測って分かったのは、指はこの重さに何も感じないということです。描画が 78 まで落ちても、発火が 73ms に伸びても、遅れも抜けも感じなかった。指が拾ったのは、声が切れるような崩れ方だけでした（それも耳ではほとんど気づけていない）。</p>
+    <p class="mt-4 leading-relaxed">重い場面をさらに掘る手もありました。開発者は、3回目の数字を基準値にして、課題を閉じるほうを選びました。最後に決めるのは指。数字は、演出を足したときに、いまより悪くなっていないかを見るために使う。直したのは声の切れ方だけです。</p>
+    <p class="mt-4 leading-relaxed">描画の道具は、Core Animation のままで足ります。SpriteKit や Metal に移す理由は、いまのところ見つかっていません。</p>
+  </section>
+
 <section id="decisions" class="mt-20">
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">09 / decisions</p>
     <h2 class="mt-2 font-display text-3xl">決めたこと（2026-10-06 開発者がレビュー）</h2>
@@ -265,7 +294,9 @@ tailwind.config = {
       <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">01</span>処理落ちは、Debug ビルドの<a href="../../glossary.html#perf-mode" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">計測モード</a>（<code class="font-mono text-xs">-perf</code>）で確かめる。</li>
       <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">02</span>計測モードは、メモリだけの保存先に仮の記録を入れて始める。端末の記録には触れない。</li>
       <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">03</span>測る場面は、目標回数100、30人、最後の1打で当たるフィーバー、フィナーレで札3枚（30日、DT 1,000、DPW ベスト）。</li>
-      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">04</span>数えるのは、描画、<a href="../../glossary.html#touch-to-fire" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">タッチ→発火</a>、途中で切った音。合格の線は 05 の表のとおり。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">04</span>数えるのは、描画、<a href="../../glossary.html#touch-to-fire" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">タッチ→発火</a>、途中で切った音。合格は、開発者の指と、声を切らないこと。数字は実機3回目を基準値にし、1割以上悪くならないかを見る（05 の線から、実機で測ったあとに改めた）。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">06</span>声は専用の再生口（6つ）で鳴らし、どちらの再生口も空いているものから選ぶ。</li>
+      <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">07</span>描画の道具は Core Animation のまま。課題 heavy-effects-performance は完了。</li>
       <li class="border-l-4 border-ink pl-3"><span class="mr-2 font-mono font-bold text-dopa">05</span>演出を足したり重くしたりしたら、計測モードで測り直す（<a href="../../devops/perf-check/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">devops／処理落ちの確かめ方</a>）。</li>
     </ol>
   </section>

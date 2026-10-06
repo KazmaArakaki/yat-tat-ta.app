@@ -50,16 +50,6 @@ tailwind.config = {
           </a>
         </li>
         <li class="border-b border-rule">
-          <a href="heavy-effects-performance/index.html" class="group block py-5">
-            <div class="flex flex-wrap items-center gap-3">
-              <h3 class="font-display text-lg group-hover:text-dopa">演出を盛ったときの処理落ちを確かめる</h3>
-              <span class="rounded-full bg-gold px-2.5 py-0.5 font-mono text-[11px] font-bold text-ink">優先度：中</span>
-              <span class="rounded-full border border-dopa bg-dopa-soft px-2.5 py-0.5 font-mono text-[11px] font-bold text-ink">進行中</span>
-            </div>
-            <p class="mt-2 text-sm leading-relaxed text-ink/80">差別化の軸を「盛っても止まらないこと」に置き直した。一番重い場面は、連続記録が伸びる演出と節目が重なる、完了連打の最後の1打。そこで描画と音が崩れないか試す。</p>
-          </a>
-        </li>
-        <li class="border-b border-rule">
           <a href="undo-record/index.html" class="group block py-5">
             <div class="flex flex-wrap items-center gap-3">
               <h3 class="font-display text-lg group-hover:text-dopa">間違えて作った記録を取り消せるようにするか</h3>
@@ -67,6 +57,15 @@ tailwind.config = {
               <span class="rounded-full border border-mute bg-white px-2.5 py-0.5 font-mono text-[11px] font-bold text-ink">未着手</span>
             </div>
             <p class="mt-2 text-sm leading-relaxed text-ink/80">本作りでは作らないと決めた。休み券は記録から計算するので、作るときも食い違いは起きない。</p>
+          </a>
+        </li>
+        <li class="border-b border-rule opacity-60">
+          <a href="heavy-effects-performance/index.html" class="group block py-5">
+            <div class="flex flex-wrap items-center gap-3">
+              <h3 class="font-display text-lg line-through decoration-2 group-hover:text-dopa">演出を盛ったときの処理落ちを確かめる</h3>
+              <span class="rounded-full bg-ink px-2.5 py-0.5 font-mono text-[11px] font-bold text-white">完了 2026-10-06</span>
+            </div>
+            <p class="mt-2 text-sm leading-relaxed text-ink/80">計測モードで3回測った。指は遅れを感じず、切れていた声を直した。Core Animation のままで足りる。3回目を基準値にした。</p>
           </a>
         </li>
         <li class="border-b border-rule opacity-60">

@@ -43,9 +43,9 @@ tailwind.config = {
           <div>
             <div class="flex flex-wrap items-center gap-3">
               <h2 class="font-display text-xl group-hover:text-dopa">演出を盛ったときの処理落ちを確かめる</h2>
-              <span class="rounded-full border border-gold bg-gold/15 px-2.5 py-0.5 font-mono text-[11px] font-bold text-ink">developing／レビュー済み</span>
+              <span class="rounded-full border border-signal bg-signal/10 px-2.5 py-0.5 font-mono text-[11px] font-bold text-ink">done／レビュー済み</span>
             </div>
-            <p class="mt-2 text-sm leading-relaxed text-ink/80">Debug ビルドに計測モード（-perf）を作る。仮の記録をメモリにだけ入れ、30人、フィーバー、節目3つが重なる100打を本物の処理で叩き、描画、タッチ→発火、途中で切った音を数える。</p>
+            <p class="mt-2 text-sm leading-relaxed text-ink/80">計測モード（-perf）で一番重い100打を実機で3回測った。切れていた声を専用の再生口で直し、指で遅れを感じないことと、3回目の数字を基準値にして完了。</p>
           </div>
         </a>
       </li>

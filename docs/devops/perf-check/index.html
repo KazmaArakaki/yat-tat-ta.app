@@ -47,7 +47,7 @@ tailwind.config = {
     <div class="rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916]">
       <p class="font-mono text-xs uppercase tracking-[0.2em] text-dopa">決まり事</p>
       <p class="mt-3 font-bold leading-relaxed">
-        演出を足したり重くしたりしたら、実機の<a href="../../glossary.html#perf-mode" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">計測モード</a>で100打を3回叩き、合格の線に収まるかを見る。<br>
+        演出を足したり重くしたりしたら、実機の<a href="../../glossary.html#perf-mode" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">計測モード</a>で100打を叩き、指と基準値で確かめる。<br>
         結果は、その演出を作ったセッションのページに書く。
       </p>
     </div>
@@ -89,19 +89,34 @@ tailwind.config = {
 
   <section id="criteria" class="mt-16">
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">criteria</p>
-    <h2 class="mt-2 font-display text-3xl">合格の線</h2>
+    <h2 class="mt-2 font-display text-3xl">合格の線と基準値</h2>
+    <p class="mt-4 leading-relaxed">最後に決めるのは開発者の指です。指で遅れも抜けも感じず、声を1回も切っていなければ合格。札の数字は、演出を足す前より悪くなっていないかを見るために使います。比べる相手は、2026-10-06 の実機3回目の数字（基準値）です。</p>
     <div class="mt-6 overflow-x-auto rounded-2xl border border-rule bg-white">
       <table class="w-full min-w-[28rem] text-left text-sm">
         <thead class="border-b-2 border-ink font-mono text-xs text-mute"><tr><th class="p-3">数えるもの</th><th class="p-3">合格</th></tr></thead>
         <tbody class="[&_td]:p-3 [&_td]:align-top [&_tr]:border-b [&_tr]:border-rule">
-          <tr><td class="font-bold">描画</td><td>1秒の最低が 100 以上、50ms 以上の詰まりが 0 回</td></tr>
-          <tr><td class="font-bold"><a href="../../glossary.html#touch-to-fire" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">タッチ→発火</a></td><td>最大 40ms 以下</td></tr>
-          <tr><td class="font-bold">途中で切った音</td><td>声は 0 回（叩いた音どうしは数えない）</td></tr>
           <tr><td class="font-bold">開発者の指</td><td>遅れも抜けも感じない</td></tr>
+          <tr><td class="font-bold">途中で切った音</td><td>声は 0 回（叩いた音どうしは数えない）</td></tr>
+          <tr><td class="font-bold"><a href="../../glossary.html#touch-to-fire" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">タッチ→発火</a> 95%</td><td>32ms 以下（基準値 27ms）</td></tr>
+          <tr><td class="font-bold">場面ごとの数字</td><td>下の基準値から1割以上悪くならない</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="mt-4 text-sm leading-relaxed text-ink/80">線を引いた理由は<a href="../../sessions/20261006-1312-heavy-effects/index.html#criteria" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">セッションのページ</a>。</p>
+    <div class="mt-6 overflow-x-auto rounded-2xl border border-rule bg-white">
+      <table class="w-full min-w-[30rem] text-left text-sm">
+        <thead class="border-b-2 border-ink font-mono text-xs text-mute"><tr><th class="p-3">基準値の場面</th><th class="p-3">最低 fps</th><th class="p-3">≥50ms</th><th class="p-3">発火の最大</th></tr></thead>
+        <tbody class="[&_td]:p-3 [&_td]:align-top [&_tr]:border-b [&_tr]:border-rule">
+          <tr><td>NORMAL</td><td>98</td><td>0</td><td>36ms</td></tr>
+          <tr><td>CHANCE</td><td>100</td><td>0</td><td>35ms</td></tr>
+          <tr><td>激熱</td><td>89</td><td>0</td><td>73ms</td></tr>
+          <tr><td>PUSH</td><td>-</td><td>0</td><td>47ms</td></tr>
+          <tr><td>フィーバー</td><td>93</td><td>1</td><td>52ms</td></tr>
+          <tr><td>フィナーレ</td><td>78</td><td>1</td><td>-</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 text-sm leading-relaxed text-ink/80">札の色もこの線で塗る。赤は基準値から1割以上悪い（描画の最低 70 未満、詰まり 3 回以上、発火の最大 80ms 超）。黄は基準値の範囲だが、最初に決めた線（描画 100、発火 40ms）の外。1回の数字はぶれるので、赤が出たら3回叩いて、続けて出るかを見る。</p>
+    <p class="mt-4 text-sm leading-relaxed text-ink/80">線を2段にした経緯は<a href="../../sessions/20261006-1312-heavy-effects/index.html#closing" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">セッションのページ</a>。</p>
   </section>
 
   <section id="blind" class="mt-16">

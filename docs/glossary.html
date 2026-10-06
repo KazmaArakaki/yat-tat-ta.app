@@ -819,9 +819,9 @@ tailwind.config = {
     <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
     <div class="mt-2 flex flex-col gap-2 text-sm">
       <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>スクワット隊を51人にしたとき、音が変になったのも処理落ちですか。</p>
-      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>そう呼んでいます。ただ、描画が重かったのか、音の再生口が足りずに声を切ったのかは分かっていません。計測モードで、どちらかを数で見ます。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>そう呼んでいます。計測モードで測ったら、声が叩いた音に上書きされて切れていました。声を専用の再生口で鳴らして直しています。</p>
       <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>処理落ちしていないって、どうやって言うんですか。</p>
-      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>100打を3回叩いて、描画の最低が毎秒100以上、発火が最大40ms以下、声を1回も切らない。そのうえで、開発者の指が遅れを感じないことです。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>開発者の指が遅れも抜けも感じず、声を1回も切らないことです。数字は、2026-10-06 に測った基準値より悪くなっていないかを見ます。</p>
     </div>
     <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
       <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#perf-mode" class="text-dopa underline underline-offset-4">計測モード</a><a href="#touch-to-fire" class="text-dopa underline underline-offset-4">タッチ→発火</a><a href="#effect-inflation" class="text-dopa underline underline-offset-4">演出インフレ</a><a href="#squat-squad" class="text-dopa underline underline-offset-4">スクワット隊</a><a href="#sync-drift" class="text-dopa underline underline-offset-4">同期ずれ</a></p></div>
@@ -849,7 +849,7 @@ tailwind.config = {
   <section id="touch-to-fire" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
     <p class="font-mono text-xs text-mute">#touch-to-fire</p>
     <h2 class="mt-1 font-display text-2xl">タッチ→発火</h2>
-    <p class="mt-3 leading-relaxed">指が画面に触れた時刻から、音、振動、光の命令を出し終えるまでの時間。iOS がタッチをアプリに届けるまでの時間も含む。<a href="sessions/20261006-0140-feel-prototype/index.html" class="text-signal underline underline-offset-4">手触りの試作</a>で測り、軽い状態の実機では 18〜28ms だった。スピーカーや振動の部品が動くまでの遅れは含まないので、手に届くまでの全部ではない。<a href="#perf-mode" class="text-dopa underline underline-offset-4">計測モード</a>では最大 40ms 以下を合格とする。</p>
+    <p class="mt-3 leading-relaxed">指が画面に触れた時刻から、音、振動、光の命令を出し終えるまでの時間。iOS がタッチをアプリに届けるまでの時間も含む。<a href="sessions/20261006-0140-feel-prototype/index.html" class="text-signal underline underline-offset-4">手触りの試作</a>で測り、軽い状態の実機では 18〜28ms だった。スピーカーや振動の部品が動くまでの遅れは含まないので、手に届くまでの全部ではない。<a href="#perf-mode" class="text-dopa underline underline-offset-4">計測モード</a>では、95% が 32ms 以下で、基準値（最大 73ms）より悪くならないことを見る。</p>
     <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
     <div class="mt-2 flex flex-col gap-2 text-sm">
       <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>タッチ→発火が 25ms なら、25ms で音が聞こえるんですか。</p>
