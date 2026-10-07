@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SNS で発信するときの決まり事</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: { rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } } },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+<style>
+.lnk { text-decoration:underline; text-decoration-color:rgba(229,51,122,.5); text-decoration-thickness:2px; text-underline-offset:4px; }
+.lnk:hover { text-decoration-color:#E5337A; }
+</style>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-4xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <a href="../index.html" class="hover:text-dopa hover:underline">devops</a>
+      <span>/</span>
+      <span>発信</span>
+      <span class="rounded-full border border-dopa bg-dopa-soft px-2.5 py-0.5 font-bold text-ink">提案：開発者のレビュー待ち</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl">SNS で発信するときの決まり事</h1>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">投稿や動画を出す前に開く。決まりは7つと、出す直前の点検が5つ。どれも<a href="../../sessions/20261007-1727-sns-marketing/index.html" class="lnk">SNS で売る事例の調査</a>から引いた。</p>
+  </header>
+
+  <section id="why" class="mt-14">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">why</p>
+    <h2 class="mt-2 font-display text-3xl">ストアで避けた言葉は、SNS でも避ける</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>App Store の説明文には、健康の効果も、パチンコの語も、慎重に外しました。説明文は審査の人が読み、年齢制限の答えと照らされるからです。</p>
+      <p>SNS の投稿は、誰にも審査されません。だから緩めていい、と考えたくなる。けれども、投稿のほうが条件は悪いのです。説明文には研究の1文の前後に注意書きを置けましたが、15秒の動画のキャプションにはその余地がない。<a href="../app-store/index.html" class="lnk">掲載情報</a>でキーワードに健康の語を入れなかったのと、同じ理由です。</p>
+      <p>しかも、ステマ規制で処分されるのは、投稿を頼んだ側です。インフルエンサーではなく、アプリを作った人が問われます。</p>
+    </div>
+  </section>
+
+  <section id="rules" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">rules</p>
+    <h2 class="mt-2 font-display text-3xl">決まり</h2>
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full min-w-[40rem] text-left text-sm">
+        <caption class="pb-2 text-left font-mono text-xs text-mute">表1　SNS で発信するときの決まり（2026-10-07 に読んだ規約と法令による）</caption>
+        <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="py-2 pr-3">#</th><th class="py-2 pr-3">決まり</th><th class="py-2 pr-3">理由</th></tr></thead>
+        <tbody class="[&>tr]:border-b [&>tr]:border-rule [&_td]:py-3 [&_td]:pr-3 [&_td]:align-top">
+          <tr><td class="font-mono font-bold text-dopa">1</td><td class="font-bold">健康の効果を書かない。研究の1文も投稿には書かない。ダイエット、痩せる、血糖値の語も使わない</td><td>投稿は前後の文脈を持てない。書いてよい範囲は<a href="../health-wording/index.html" class="lnk">健康効果の書き方</a>のストアの説明文だけで、SNS はキーワードと同じ扱いにする</td></tr>
+          <tr><td class="font-mono font-bold text-dopa">2</td><td class="font-bold">パチンコ、スロット、ギャンブル、くじ、当たりの語を書かない。演出の言葉（激熱、FEVER）は、画面にあるとおり見せてよい</td><td>ストアの掲載情報の決まり4と揃える。ストアで避けた語を SNS で使えば、ストアで避けた意味が薄れる。<a href="../../glossary.html#dopa-apps" class="lnk">ドパ〇〇</a>の他のアプリがパチンコ風を名乗っていても、真似しない</td></tr>
+          <tr><td class="font-mono font-bold text-dopa">3</td><td class="font-bold">人に頼んだ投稿、物や値引きやお金を渡した投稿には、冒頭に分かりやすく「PR」か「広告」を出させる。TikTok はブランドコンテンツの設定、X は Paid Partnership のラベルを使う。自分のアカウントは、プロフィールに作った本人だと書く</td><td><a href="../../glossary.html#stealth-marketing" class="lnk">ステマ規制</a>（2023/10/1 施行）。処分されるのは頼んだ側。ハッシュタグの山に #PR を紛れ込ませるのも、分かりにくい表示とされうる。表示のない投稿は TikTok のおすすめに載らないことがある</td></tr>
+          <tr><td class="font-mono font-bold text-dopa">4</td><td class="font-bold">★やレビューと引き換えに、何も渡さない。アプリの中で評価を頼むなら、Apple の仕組み（SKStoreReviewController）だけを使う</td><td>App Store 審査ガイドライン 5.6.1 と 3.2.2。お金や見返りでレビューを集めると、Developer Program から除かれることもある。高評価と引き換えの割引は、日本でステマ規制の措置命令になった（2024/6、2025/3）</td></tr>
+          <tr><td class="font-mono font-bold text-dopa">5</td><td class="font-bold">動画に映すのは、ストアに出ている版の本物の画面。まだない機能や、作り物の映像を映さない</td><td>審査ガイドライン 2.3.1（誤解を招く宣伝）。優良誤認も疑われうる。<a href="../../sessions/20261007-1727-sns-marketing/cases.html#s8" class="lnk">Pushscroll</a> は作る前に「動くアプリ」風の動画で需要を試したが、この手は使わない</td></tr>
+          <tr><td class="font-mono font-bold text-dopa">6</td><td class="font-bold">Reddit などのコミュニティでは、場の決まりを先に読む。アプリに触れる投稿は全体の1〜2割まで。アカウントを1つにし、仲間に投票を頼まない</td><td>複数のアカウントや身内の投票は見抜かれ、永久 BAN になった例がある（<a href="../../sessions/20261007-1727-sns-marketing/cases.html#f5" class="lnk">F5</a>）</td></tr>
+          <tr><td class="font-mono font-bold text-dopa">7</td><td class="font-bold">動画の主役は<a href="../../glossary.html#squat-squad" class="lnk">スクワットマン</a>。AI で作った人を映さない。もし使うことになったら、TikTok と YouTube の AI 生成の表示を付け、実在の利用者の感想のように見せない</td><td>開発者が決定（2026-10-07）。スクワットマンはアプリの本物の素材で、明らかにアニメなので AI の表示も要らない。本物に見える AI の人は、TikTok と YouTube で表示が要り、架空の利用者に感想を言わせれば誤解を招く宣伝になる</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="check" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">check</p>
+    <h2 class="mt-2 font-display text-3xl">出す直前の点検（約1分）</h2>
+    <ol class="mt-6 flex max-w-2xl flex-col gap-2 text-sm">
+      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><b class="font-mono text-dopa">1</b>　体がどうなる、と読める言葉はないか（痩せる、血糖値、健康に）</li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><b class="font-mono text-dopa">2</b>　パチンコ、ギャンブルの語はないか（キャプション、ハッシュタグ、動画の文字）</li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><b class="font-mono text-dopa">3</b>　映っている画面は、ストアに出ている版のものか</li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><b class="font-mono text-dopa">4</b>　人に頼んだ投稿なら、冒頭に PR の表示があるか</li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><b class="font-mono text-dopa">5</b>　「★5を付けて」「レビューで〇〇」と書いていないか</li>
+    </ol>
+  </section>
+
+  <section id="make" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">make</p>
+    <h2 class="mt-2 font-display text-3xl">動画の作り方（約3分）</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p><code class="font-mono text-xs">cd ios &amp;&amp; Design/reel.sh</code> を実行すると、ios/Design/Reels/reel-ja.mp4 ができる。iPhone 18 Pro のシミュレーターで、演出の見本 <code class="font-mono text-xs">-demo reel</code> を見本の記録で流して録り、アプリが書いた音、上の帯の文字、終わりのアイコンとアプリ名を重ねる。</p>
+      <p>X に出す動画と本文の型は<a href="../../sessions/20261007-1727-sns-marketing/x-video.html" class="lnk">X の縦型動画のグッドとバッド</a>に従う。上の帯に出す文字は <code class="font-mono text-xs">ios/Design/compose_reel.py</code> の <code class="font-mono text-xs">CAPTIONS</code>、終わりの画面の文字は <code class="font-mono text-xs">CARD_TITLE</code> と <code class="font-mono text-xs">CARD_LINE</code> で変える。表1の1と2に従う。叩く間隔やフィーバーを当てる打数は、アプリの <code class="font-mono text-xs">AppModel.Reel</code> にある。作り方を決めたセッションは<a href="../../sessions/20261007-1727-sns-marketing/index.html#reel" class="lnk">SNS で売る事例の調査</a>。</p>
+    </div>
+  </section>
+
+  <section id="sources" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">sources</p>
+    <h2 class="mt-2 font-display text-3xl">出典と、確かめていないこと</h2>
+    <ul class="mt-6 max-w-2xl space-y-2 text-sm leading-relaxed [&_a]:break-all">
+      <li>消費者庁「ステルスマーケティングに関する景品表示法の規制」 <a class="lnk" href="https://www.caa.go.jp/policies/policy/representation/fair_labeling/stealth_marketing/">caa.go.jp</a></li>
+      <li>App Store Review Guidelines（2.3.1、3.2.2、5.6.1） <a class="lnk" href="https://developer.apple.com/app-store/review/guidelines/">developer.apple.com</a> と、評価とレビューの頼み方 <a class="lnk" href="https://developer.apple.com/app-store/ratings-and-reviews/">developer.apple.com</a></li>
+      <li>TikTok のブランドコンテンツ <a class="lnk" href="https://www.tiktok.com/creator-academy/article/create-branded-content">tiktok.com</a></li>
+      <li>YouTube の AI で作った・加工した内容の開示 <a class="lnk" href="https://blog.youtube/news-and-events/disclosing-ai-generated-content/">blog.youtube</a>。TikTok の AI 生成の表示は業者の解説（<a class="lnk" href="https://storrito.com/resources/tiktoks-2026-ai-labeling-rules-and-what-they-signal-for-platform-governance/">storrito.com</a>）で読んだだけで、公式の文面は未確認</li>
+      <li>X の Paid Partnerships ポリシー（2026年3月にラベルを導入） <a class="lnk" href="https://help.x.com/en/rules-and-policies/paid-partnerships-policy">help.x.com</a></li>
+    </ul>
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">景品表示法は、専門家に確かめていません。人にお金を払って投稿を頼むときは、その前に消費者庁の Q&amp;A を読み直します。X のプラットフォームの操作についての規約は、取りにいくと読めませんでした。</p>
+  </section>
+
+  <section id="related" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">related</p>
+    <h2 class="mt-2 font-display text-3xl">関連</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">セッション</p><a href="../../sessions/20261007-1727-sns-marketing/index.html" class="mt-1 block font-bold lnk">SNS で売る事例の調査</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">決まり事</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../health-wording/index.html" class="font-bold lnk">健康効果の書き方</a><a href="../app-store/index.html" class="font-bold lnk">App Store の掲載情報</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../glossary.html#stealth-marketing" class="font-bold lnk">ステマ規制</a><a href="../../glossary.html#hook" class="font-bold lnk">フック</a></p></li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

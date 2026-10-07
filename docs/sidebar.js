@@ -10,6 +10,14 @@
   // セッション一覧（新しい順）。新しいセッションは先頭に足す。
   var sessions = [
     {
+      path: "sessions/20261007-1727-sns-marketing/index.html",
+      label: "10/07 SNS で売る事例の調査",
+      children: [
+        { path: "sessions/20261007-1727-sns-marketing/cases.html", label: "SNS の事例18件" },
+        { path: "sessions/20261007-1727-sns-marketing/x-video.html", label: "X の縦型動画のグッドとバッド" }
+      ]
+    },
+    {
       path: "sessions/20261007-1523-app-store-review/index.html",
       label: "10/07 App Store の審査に出す準備",
       children: [
@@ -182,7 +190,8 @@
         { label: "健康効果の書き方", path: "devops/health-wording/index.html", level: 1 },
         { label: "処理落ちの確かめ方", path: "devops/perf-check/index.html", level: 1 },
         { label: "多言語の決まり事", path: "devops/localization/index.html", level: 1 },
-        { label: "App Store の掲載情報", path: "devops/app-store/index.html", level: 1 }
+        { label: "App Store の掲載情報", path: "devops/app-store/index.html", level: 1 },
+        { label: "SNS で発信するときの決まり事", path: "devops/sns-marketing/index.html", level: 1 }
       ]
     },
     {
@@ -190,6 +199,7 @@
       items: [
         { label: "課題一覧", path: "issues/index.html", level: 0 },
         { label: "読み取りの費用", path: "issues/firestore-read-cost/index.html", level: 1 },
+        { label: "叩いた結果を外に出す口", path: "issues/share-result/index.html", level: 1 },
       ]
     }
   ];

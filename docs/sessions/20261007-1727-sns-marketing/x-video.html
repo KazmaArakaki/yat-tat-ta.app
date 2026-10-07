@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>X の縦型動画のグッドとバッド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: { rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } } },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+<style>
+.lnk { text-decoration:underline; text-decoration-color:rgba(229,51,122,.5); text-decoration-thickness:2px; text-underline-offset:4px; }
+.lnk:hover { text-decoration-color:#E5337A; }
+.src a { word-break: break-all; }
+</style>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-5xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <a href="index.html" class="hover:text-dopa hover:underline">10/07 SNS で売る事例の調査</a>
+      <span>/</span>
+      <span>X の縦型動画</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl">X の縦型動画のグッドとバッド</h1>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">最初に狙うのは、X の日本語のタイムライン（開発者が決定、2026-10-07）。2026-10-07 に、X が公開しているおすすめ欄のコード、X の幹部の発言、日本の個人開発の投稿を読んで調べた。投稿の数字は同じ日に第三者のミラー（fxtwitter）から取ったもので、投稿した時点の値ではない。</p>
+  </header>
+
+  <section id="why-not" class="mt-14">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01 / why not</p>
+    <h2 class="mt-2 font-display text-3xl">見本の1本は、なぜ訴求にならないのか</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>FEVER は4秒で来るし、最後は筋肉確定で終わる。型どおりに作ったのだから、少なくとも止まって見てはもらえるはずだ、と思っていました。</p>
+      <p>ところが、タイムラインで流れてくる側に立つと、見え方がまるで違います。X の動画は、音を消したまま自動で再生されます。X のプロダクト責任者は「多くの人は無音で見ている。字幕を付けるとエンゲージメントが5倍」と書いている。Yat Tat Ta の演出の半分は声です。CHANCE も激熱も筋肉確定も、無音では派手な画面が明滅しているだけになる。</p>
+      <p>もっと根の深い穴もありました。</p>
+    </div>
+    <div class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <div class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs font-bold text-violet">穴1　何のアプリか分からない</p><p class="mt-2 leading-relaxed">映っているのは画面だけ。人がスクワットを終えて、その回数を叩く、という使い方がどこにも出てこない。動画に添える本文も、まだ書いていなかった。</p></div>
+      <div class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs font-bold text-violet">穴2　叩いているのが見えない</p><p class="mt-2 leading-relaxed">シミュレーターの録画には指が写らない。数字が減り、画面が騒ぐのは見えても、「1打ごとに」騒いでいる手応えが伝わらない。</p></div>
+      <div class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs font-bold text-violet">穴3　無音で半分が消える</p><p class="mt-2 leading-relaxed">声と効果音の演出が、自動再生では鳴らない。音で掴むつもりだった設計が、X では最初の1秒から効かない。</p></div>
+      <div class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs font-bold text-violet">穴4　掴みが見る人の話になっていない</p><p class="mt-2 leading-relaxed">「食後のスクワット20回、地味すぎる。」は、食後にスクワットをしている人にしか刺さらない。そんな人は、タイムラインにほとんどいない。</p></div>
+    </div>
+  </section>
+
+  <section id="algorithm" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / algorithm</p>
+    <h2 class="mt-2 font-display text-3xl">X は何で表示を決めているか</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>動画なら、最後まで見られた割合で決まる。そう考えたくなります。2026年に X が公開したおすすめ欄のコードを読むと、そうなっていませんでした。「質のよい動画の視聴」の重みも、続きを見た秒数の重みも、初期値は 0.0 です。</p>
+      <p>効いているのは、見た人がそのあと何をするかでした。点数は「その人がその行動を取りそうな確率 × 重み」の合計です。</p>
+    </div>
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full min-w-[34rem] text-left text-sm">
+        <caption class="pb-2 text-left font-mono text-xs text-mute">表1　おすすめ欄の重み（xai-org/x-algorithm の初期値、2026-10-07 に読んだもの。実験で上書きされることがある）</caption>
+        <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="py-2 pr-3">行動</th><th class="py-2 pr-3">重み</th><th class="py-2 pr-3">Yat Tat Ta にとっての意味</th></tr></thead>
+        <tbody class="[&>tr]:border-b [&>tr]:border-rule [&_td]:py-2.5 [&_td]:pr-3 [&_td]:align-top">
+          <tr><td class="font-bold">リンクをコピーして共有</td><td class="font-mono">20</td><td>「これ見て」と人に送りたくなるか</td></tr>
+          <tr><td class="font-bold">返信、引用、DM で共有</td><td class="font-mono">5</td><td>一言言いたくなるか。相互フォローからの返信はさらに +15</td></tr>
+          <tr><td class="font-bold">投稿者をフォロー</td><td class="font-mono">4</td><td>次も見たいと思わせるか</td></tr>
+          <tr><td class="font-bold">いいね</td><td class="font-mono">0.5</td><td>思ったより効かない</td></tr>
+          <tr><td class="font-bold">質のよい動画の視聴、続きを見た秒数</td><td class="font-mono">0.0</td><td>完走させる工夫は、点数には直接効かない</td></tr>
+          <tr><td class="font-bold">興味なし、ミュート</td><td class="font-mono">−47.5、−58.8</td><td>売り込みに見えた瞬間に大きく減る</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">ほかに、コードには次の仕組みがある。同じ人の連投は2本目から点数が下がる。48時間を過ぎた投稿は候補から外れる。フォロワー5万以下の人の、投稿から2時間以内・表示200未満の投稿を押し上げる実験がある（全員に効くとは限らない）。</p>
+    <p class="src mt-3 font-mono text-[11px] text-mute">出典 <a class="lnk" href="https://github.com/xai-org/x-algorithm">xai-org/x-algorithm</a>（home-mixer/params/param.rs ほか） / <a class="lnk" href="https://techcrunch.com/2026/08/13/x-open-sources-its-ranking-algorithm-letting-users-see-if-theyve-been-shadowbanned/">TechCrunch 2026-08-13</a> / <a class="lnk" href="https://x.com/nikitabier/status/2053650151076692170">Nikita Bier 2026-05-11（無音と字幕）</a></p>
+  </section>
+
+  <section id="patterns" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / patterns</p>
+    <h2 class="mt-2 font-display text-3xl">グッドとバッド</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>いちばん示唆が大きかったのは、ドパドリルの作者自身の投稿どうしの差です。素のプレイ動画に一段落の本文を付けた初出は38万表示。翌日、同じ作者が出した作り込んだ紹介動画（PV）は1.2万表示でした。録画しただけ、は悪くなかった。何が起きるアプリかを本文で言い切り、動画の中で演出が膨らんでいく。この2つがそろっていたかどうかの差に見えます（因果は確かめていない）。</p>
+    </div>
+
+    <div class="mt-8 grid gap-5 lg:grid-cols-2">
+      <div class="rounded-2xl border-2 border-dopa bg-dopa-soft p-5">
+        <p class="font-mono text-xs font-bold text-dopa">GOOD</p>
+        <ol class="mt-3 space-y-3 text-sm leading-relaxed">
+          <li><b>1. 本文の一段落で、何に何をかぶせたかと、山場を言い切る</b><br><span class="text-ink/75">ドパドリルの初出の型。Musk も「面白い説明を添えた投稿は配信される」と書いている。</span></li>
+          <li><b>2. 動画は静かに始め、膨らませ、山場で終える</b><br><span class="text-ink/75">伸びたプレイ動画（53秒、72秒）はどちらも流れそのもの。説明する PV は伸びなかった。</span></li>
+          <li><b>3. 無音でも分かる文字を重ねる</b><br><span class="text-ink/75">自動再生は無音が既定。声の演出があるアプリほど要る。</span></li>
+          <li><b>4. 縦型 9:16、10秒を超えて60秒以内</b><br><span class="text-ink/75">2026年2月の没入型プレイヤーは縦型を切り取らずに全画面で出す。伸びた例は30〜72秒。いちばん効く長さは確かめられていない。</span></li>
+          <li><b>5. 人に送りたくなる、言いたくなる一点を入れる</b><br><span class="text-ink/75">共有20、引用と返信5（表1）。ドパドリルは「○○版を作った」という改造と引用の連鎖で広がった。</span></li>
+        </ol>
+      </div>
+      <div class="rounded-2xl border border-rule bg-white p-5">
+        <p class="font-mono text-xs font-bold text-violet">BAD</p>
+        <ol class="mt-3 space-y-3 text-sm leading-relaxed">
+          <li><b>1. 画面を録っただけで、本文にも画面にも「何のアプリか」がない</b><br><span class="text-ink/75">X の幹部「投稿はそれだけで成立する内容に」。見本の1本がこれだった。</span></li>
+          <li><b>2. 機能と使い方を説明する紹介動画</b><br><span class="text-ink/75">ドパドリルの PV は1.2万表示。同じ作者のプレイ動画は38万と47万。</span></li>
+          <li><b>3. 声と効果音に頼る</b><br><span class="text-ink/75">無音の自動再生で、演出の半分が消える。</span></li>
+          <li><b>4. 同じ話題を数時間おきに連投する</b><br><span class="text-ink/75">2本目から点数が下がる仕組みがある。PV の失速は、2時間前の投稿と重なっていた。</span></li>
+          <li><b>5. 刺激の言葉だけで、中身が分からない本文</b><br><span class="text-ink/75">「脳汁あふれる」だけの別のドパ系の投稿は、フォロワー4.7万で1.2万表示（1例だけなので根拠は弱い）。売り込みに見えると、興味なしとミュートで大きく減る。</span></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="mt-6 max-w-3xl rounded-2xl border border-dashed border-rule p-5 text-sm leading-relaxed text-ink/80">
+      <p><b>言われているが、根拠が弱いもの</b></p>
+      <ul class="mt-2 list-disc space-y-1 pl-5">
+        <li>「リンクはリプ欄に」：X の幹部と Musk が、2026-07 に「もう要らない、ペナルティは1年以上前からない」と書いた。本文にリンクを入れた個人開発の投稿でも215万表示が出ている。ただ、リンク先へ飛ばれると投稿への反応が減る理屈は、幹部自身が認めている。</li>
+        <li>「最初の3秒で離れられると評価が下がる」：業者の主張で、コードでは確かめられない。コードにあるのは、止まって見たら +0.05、素通りされたら −0.02 だけ。</li>
+        <li>「Premium は表示が何倍」：公開中のコードに倍率は見当たらない。公式にあるのは「返信が上に出やすい」まで。</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="cases" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / cases</p>
+    <h2 class="mt-2 font-display text-3xl">日本の個人開発の投稿</h2>
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full min-w-[44rem] text-left text-sm">
+        <caption class="pb-2 text-left font-mono text-xs text-mute">表2　伸びた投稿と伸びなかった投稿（数字は 2026-10-07 時点、fxtwitter 経由）</caption>
+        <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="py-2 pr-3">投稿</th><th class="py-2 pr-3">動画</th><th class="py-2 pr-3">本文の型</th><th class="py-2 pr-3">表示／いいね</th></tr></thead>
+        <tbody class="[&>tr]:border-b [&>tr]:border-rule [&_td]:py-2.5 [&_td]:pr-3 [&_td]:align-top">
+          <tr><td><a class="lnk font-bold" href="https://x.com/grmchn4ai/status/2103807453406388538">ドパドリル 初出</a><br><span class="font-mono text-[11px] text-mute">9/26 20:22</span></td><td>縦長 1:2、53秒、素のプレイ</td><td>何を作ったか → 正解でドパ、演出がインフレ → 全問正解でフィーバー。リンクもタグもなし</td><td class="font-mono">38.4万／2,820</td></tr>
+          <tr><td><a class="lnk font-bold" href="https://x.com/grmchn4ai/status/2104139747988025645">ドパドリル 遊べる版</a><br><span class="font-mono text-[11px] text-mute">9/27 18:23</span></td><td>9:16、72秒</td><td>リンクあり。「演出だけ見たい人は『1ねんせい』か自動プレイを」と見どころへの近道を書いた</td><td class="font-mono">47.2万／929</td></tr>
+          <tr><td><a class="lnk font-bold" href="https://x.com/kuuhugu/status/2106238803514196322">SlothMon</a><br><span class="font-mono text-[11px] text-mute">10/3 13:23、フォロワー592</span></td><td>横長、操作の様子</td><td>絵文字付きの箇条書きで、得られることを4行。リンクと #個人開発</td><td class="font-mono">215.7万／2.0万</td></tr>
+          <tr><td><a class="lnk font-bold" href="https://x.com/asao_straight/status/2042573266787930240">2sec</a><br><span class="font-mono text-[11px] text-mute">4/10 20:59、フォロワー1,274</span></td><td>9:16、52秒</td><td>困りごとの一言 → 使い方を一行 → 誰に使ってほしいか。リンクはリプ欄</td><td class="font-mono">15.0万／267</td></tr>
+          <tr class="bg-white/60"><td><a class="lnk font-bold" href="https://x.com/grmchn4ai/status/2104172434438103227">ドパドリル PV</a><br><span class="font-mono text-[11px] text-mute">9/27 20:32</span></td><td>9:16、30秒、作り込んだ紹介</td><td>「使い方や特徴を説明してます」。2時間前に同じ話題の投稿</td><td class="font-mono">1.2万／34</td></tr>
+          <tr class="bg-white/60"><td><a class="lnk font-bold" href="https://x.com/G_Godaka/status/2084882101095301196">ドパガキ氷</a><br><span class="font-mono text-[11px] text-mute">8/5 15:00、フォロワー4.7万</span></td><td>4:5、35秒</td><td>「刺激たっぷり脳汁あふれる…おすすめです」</td><td class="font-mono">1.2万／85</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">SlothMon はフォロワー592人で215万表示。フォロワーの数より、本文と動画の中身のほうが効いている、と読める例です。</p>
+  </section>
+
+  <section id="next" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / next</p>
+    <h2 class="mt-2 font-display text-3xl">Yat Tat Ta の次の1本</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">提案です。<a href="../../devops/sns-marketing/index.html" class="lnk">発信の決まり事</a>の1（健康の効果を書かない）と2（パチンコの語を書かない）を守っています。</p>
+
+    <div class="mt-6 grid gap-5 lg:grid-cols-2">
+      <div class="rounded-2xl border-2 border-ink bg-white p-5 shadow-[4px_4px_0_#1C1916]">
+        <p class="font-mono text-xs font-bold text-dopa">本文の案</p>
+        <p class="mt-3 whitespace-pre-line text-sm leading-relaxed">食後のスクワット、終わったら回数だけボタンを叩くアプリを作りました。
+叩くたびに演出がインフレして、ときどき FEVER。最後の1打で「筋肉、確定！」と叫ばれます。
+地味な20回が、毎回お祭りになる。
+
+App Store：（公開後のリンク）
+#個人開発</p>
+        <p class="mt-3 text-xs leading-relaxed text-ink/60">「何に（食後のスクワット）、何をかぶせたか（叩くたびに演出がインフレ）、山場（FEVER、筋肉確定）」の順。ドパドリルの初出の型に合わせた。リンクは本文に入れる。</p>
+      </div>
+      <div class="rounded-2xl border-2 border-ink bg-white p-5 shadow-[4px_4px_0_#1C1916]">
+        <p class="font-mono text-xs font-bold text-dopa">動画の流れの案（約20秒）</p>
+        <ol class="mt-3 space-y-2 text-sm leading-relaxed">
+          <li><span class="font-mono text-xs text-mute">0〜2秒</span>　寝ているスクワットマン。文字「スクワット、終わった？」</li>
+          <li><span class="font-mono text-xs text-mute">2〜4秒</span>　文字「1回＝1打」。叩いた場所に指の印が出て、1打ずつ数字が減る</li>
+          <li><span class="font-mono text-xs text-mute">4〜10秒</span>　CHANCE、激熱と膨らむ。声の言葉は画面の文字で見える</li>
+          <li><span class="font-mono text-xs text-mute">10〜15秒</span>　FEVER。文字「5秒間、叩き放題」</li>
+          <li><span class="font-mono text-xs text-mute">15〜20秒</span>　筋肉確定。最後に「Yat Tat Ta」とアプリのアイコン</li>
+        </ol>
+        <p class="mt-3 rounded-xl bg-dopa-soft p-3 text-xs leading-relaxed">この流れで2本めを作った（2026-10-07、24秒）。文字は画面にかぶせず、上の帯に出した。作り方は<a href="index.html#reel" class="lnk">セッションのページ</a>。</p>
+        <p class="mt-3 text-xs leading-relaxed text-ink/60">見本の1本からの直し：叩いた場所の印（穴2）、無音でも読める文字（穴1、3）、見る人に向けた掴み（穴4）、山場を後ろへずらして膨らみを見せる（GOOD 2）、終わりにアプリ名。</p>
+      </div>
+    </div>
+
+    <div class="mt-6 max-w-3xl rounded-2xl border border-rule bg-white p-5 text-sm leading-relaxed">
+      <p class="font-bold">出し方</p>
+      <ul class="mt-2 list-disc space-y-1 pl-5">
+        <li>公開日の21〜22時台に1本（平日に X が最も見られる時間帯。<a class="lnk" href="https://www.videor.co.jp/digestplus/article/76087.html">ビデオリサーチ</a>）。押し上げの実験は投稿から2時間以内が対象なので、人の多い時間に出す意味はある。</li>
+        <li>同じ話題を、その日のうちに重ねて出さない。</li>
+        <li>付いた返信には返す。相互フォローの返信は重みが大きい。</li>
+        <li>ハッシュタグは #個人開発 の1つだけ。効くかどうかは確かめられていない。</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="unverified" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / unverified</p>
+    <h2 class="mt-2 font-display text-3xl">確かめられなかったこと</h2>
+    <ul class="mt-6 max-w-2xl list-disc space-y-1 pl-5 text-sm leading-relaxed text-ink/80">
+      <li>縦型動画が、ふだんのタイムラインで何対何に切り取られて見えるか（公式の仕様が見つからない）</li>
+      <li>本番で使われている重みの実際の値（実験で上書きされる）</li>
+      <li>サムネイルを決めると、ふだんの投稿に効くか</li>
+      <li>縦型の動画専用フィードが、日本で使えるか</li>
+      <li>X の公式ヘルプの本文（取りにいくと 403 で読めず、検索の抜粋だけ）</li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

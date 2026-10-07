@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SNS の事例18件</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: { rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } } },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+<style>
+.lnk { text-decoration:underline; text-decoration-color:rgba(229,51,122,.5); text-decoration-thickness:2px; text-underline-offset:4px; }
+.lnk:hover { text-decoration-color:#E5337A; }
+.src a { word-break: break-all; }
+</style>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-5xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <a href="index.html" class="hover:text-dopa hover:underline">10/07 SNS で売る事例の調査</a>
+      <span>/</span>
+      <span>事例</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl">SNS の事例18件</h1>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">2026-10-07 に Web で調べた。数字にはすべて出典を付けた。出典どうしで数字が合わないものは両方を書き、本文を読めなかったものは「未確認」とした。読み方と、ここから何を決めるかは<a href="index.html" class="lnk">セッションのページ</a>にある。</p>
+    <nav class="mt-6 flex flex-wrap gap-2 text-sm">
+      <a href="#success" class="rounded-full border-2 border-ink bg-white px-4 py-1.5 font-bold hover:bg-dopa-soft">成功 10件</a>
+      <a href="#failure" class="rounded-full border-2 border-ink bg-white px-4 py-1.5 font-bold hover:bg-dopa-soft">失敗 8件</a>
+      <a href="#unverified" class="rounded-full border border-ink bg-white px-4 py-1.5 hover:bg-dopa-soft">未確認と食い違い</a>
+    </nav>
+  </header>
+
+  <!-- ===================== 成功 ===================== -->
+  <section id="success" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01 / success</p>
+    <h2 class="mt-2 font-display text-3xl">成功事例</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">日本の事例が4件、海外が6件。規模は、1人か、2〜3人の小さなチームに絞った。★は Yat Tat Ta にいちばん近い事例。</p>
+
+    <div class="mt-8 grid gap-5 lg:grid-cols-2">
+
+      <!-- S1 -->
+      <div id="s1" class="rounded-2xl border border-rule bg-white p-5">
+        <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1"><span class="font-mono text-xs font-bold text-dopa">S1</span><h3 class="font-display text-xl">よりしろ</h3><span class="font-mono text-xs text-mute">日本 / X / 1人</span></div>
+        <p class="mt-2 text-sm text-ink/70">Claude API で、認知行動療法の考え方を使って自己分析する日記。月額480円と980円。</p>
+        <dl class="mt-4 space-y-3 text-sm leading-relaxed">
+          <div><dt class="font-bold">やったこと</dt><dd>「4か月かけて個人で作った」というリリース告知を、X に1本だけ投稿した。拡散は翌日の夜から加速した。</dd></div>
+          <div><dt class="font-bold">数字</dt><dd>翌日に600DL、ランキングは圏外から50位へ。その翌日から 60 → 29 → 13 → 13 → 7件/日。2週間で731DL、課金59件。流入はほぼすべて X から。PR TIMES での配信（約90社）は、ほぼ反応なし。</dd></div>
+          <div><dt class="font-bold">効いた理由と教訓</dt><dd>作り手の物語と、共感を呼ぶ題材が重なった。課金に進む割合は高かったが、本人がいちばんの課題に挙げたのは「見つけてもらう仕組み」だった。</dd></div>
+        </dl>
+        <p class="src mt-4 font-mono text-[11px] text-mute">出典 <a class="lnk" href="https://note.yokoichi.jp/n/n5f2c9dd4d6f7">note.yokoichi.jp</a></p>
+      </div>
+
+      <!-- S2 -->
+      <div id="s2" class="rounded-2xl border border-rule bg-white p-5">
+        <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1"><span class="font-mono text-xs font-bold text-dopa">S2</span><h3 class="font-display text-xl">IsTalk - トーク分析</h3><span class="font-mono text-xs text-mute">日本 / TikTok と友達の紹介 / 1人</span></div>
+        <p class="mt-2 text-sm text-ink/70">LINE のトークを分析して、結果を見せるアプリ。</p>
+        <dl class="mt-4 space-y-3 text-sm leading-relaxed">
+          <div><dt class="font-bold">やったこと</dt><dd>「85%の人は TikTok か友達の紹介で知った」と本人が書いている。ストアのスクリーンショットを作り直し、見た人が DL する割合を 24.2% から 37.5% に上げた。</dd></div>
+          <div><dt class="font-bold">数字</dt><dd>ユーティリティで1位（2024年3月）。新しい利用者が月20万人近く。サブスクは4,600人超、月の収入は250万円（サブスクと広告）。</dd></div>
+          <div><dt class="font-bold">効いた理由（推定）</dt><dd>分析の結果が、人に見せたくなる画面になっている。どんな動画が伸びたかは有料の部分にあり、<b>未確認</b>。</dd></div>
+        </dl>
+        <p class="src mt-4 font-mono text-[11px] text-mute">出典 <a class="lnk" href="https://note.com/keitaaaan/n/n6b4ff16d9835">note.com/keitaaaan</a></p>
+      </div>
+
+      <!-- S3 -->
+      <div id="s3" class="rounded-2xl border border-rule bg-white p-5">
+        <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1"><span class="font-mono text-xs font-bold text-dopa">S3</span><h3 class="font-display text-xl">ポルン</h3><span class="font-mono text-xs text-mute">日本 / X・TikTok ほか / 1人</span></div>
+        <p class="mt-2 text-sm text-ink/70">iOS のプライベートブラウザ。</p>
+        <dl class="mt-4 space-y-3 text-sm leading-relaxed">
+          <div><dt class="font-bold">やったこと</dt><dd>X と TikTok で発信した。ただ「ほとんどの投稿は無風」で、ネタを考え続けるのが重かったという。並行して、ランディングページ、検索向けのブログ、タイトルとサブタイトルの調整、レビューへの返信を続けた。</dd></div>
+          <div><dt class="font-bold">数字</dt><dd>約3年で10万DL、月に使う人が3万人。カテゴリの最高は11位。</dd></div>
+          <div><dt class="font-bold">教訓</dt><dd>SNS は当たり外れが大きい。効いたのは、地味な施策を何本も並べて続けたこと。「宣伝をしない多言語対応」は、やらなくてよかったと書いている。</dd></div>
+        </dl>
+        <p class="src mt-4 font-mono text-[11px] text-mute">出典 <a class="lnk" href="https://revent.8card.net/columns/8945t7emls">revent.8card.net</a></p>
+      </div>
+
+      <!-- S4 -->
+      <div id="s4" class="rounded-2xl border border-rule bg-white p-5">
+        <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1"><span class="font-mono text-xs font-bold text-dopa">S4</span><h3 class="font-display text-xl">ねこあつめ</h3><span class="font-mono text-xs text-mute">日本 / Twitter の口コミ / 小さなチーム</span></div>
+        <p class="mt-2 text-sm text-ink/70">庭に来る猫を眺めて、写真に撮るゲーム。</p>
+        <dl class="mt-4 space-y-3 text-sm leading-relaxed">
+          <div><dt class="font-bold">やったこと</dt><dd>広告はほとんど打っていない。遊び方が「スクリーンショットを撮ること」そのもので、撮った画面がタイムラインに流れた。</dd></div>
+          <div><dt class="font-bold">数字</dt><dd>目標は半年で5万DLだったが、2015年3月に150万DL。7,000回以上リツイートされた投稿もある。チームの人数は<b>未確認</b>。</dd></div>
+          <div><dt class="font-bold">効いた理由</dt><dd>遊んだ結果が、そのまま投稿したくなる絵になる。</dd></div>
+        </dl>
+        <p class="src mt-4 font-mono text-[11px] text-mute">出典 <a class="lnk" href="https://weekly.ascii.jp/elem/000/002/631/2631251/">weekly.ascii.jp</a></p>
+      </div>
+
+      <!-- S5 -->
+      <div id="s5" class="rounded-2xl border border-rule bg-white p-5">
+        <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1"><span class="font-mono text-xs font-bold text-dopa">S5</span><h3 class="font-display text-xl">Wordle</h3><span class="font-mono text-xs text-mute">海外 / Twitter / 1人</span></div>
+        <p class="mt-2 text-sm text-ink/70">1日1問、全員が同じ単語を当てるパズル。</p>
+        <dl class="mt-4 space-y-3 text-sm leading-relaxed">
+          <div><dt class="font-bold">やったこと</dt><dd>利用者が勝手に始めた「絵文字のマス目で結果を貼る」遊びを、作者が Share のボタンとして取り込んだ。マス目は答えを明かさない。</dd></div>
+          <div><dt class="font-bold">数字</dt><dd>2021/11/1 に90人、2022/1/2 に30万人超、翌週に200万人超。1/1〜13 に Twitter で120万回共有された。NYT が買い取った。</dd></div>
+          <div><dt class="font-bold">効いた理由</dt><dd>共有の形を作者が発明したのではなく、利用者がすでにやっていることを公式にした。</dd></div>
+        </dl>
+        <p class="src mt-4 font-mono text-[11px] text-mute">出典 <a class="lnk" href="https://en.wikipedia.org/wiki/Wordle">Wikipedia: Wordle</a></p>
+      </div>
+
+      <!-- S6 -->
+      <div id="s6" class="rounded-2xl border border-rule bg-white p-5">
+        <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1"><span class="font-mono text-xs font-bold text-dopa">S6</span><h3 class="font-display text-xl">Flappy Bird</h3><span class="font-mono text-xs text-mute">海外 / YouTube / 1人</span></div>
+        <p class="mt-2 text-sm text-ink/70">画面を叩いて鳥を飛ばす、極端に難しいゲーム。</p>
+        <dl class="mt-4 space-y-3 text-sm leading-relaxed">
+          <div><dt class="font-bold">やったこと</dt><dd>本人の宣伝はツイート数件だけ。半年以上は反応がなかった。火が付いたのは、有名な YouTuber のレビュー動画からだった。</dd></div>
+          <div><dt class="font-bold">数字</dt><dd>2013年5月に公開し、2014年1月に米国・中国・英国の無料ランキングで1位。最盛期の広告収入は1日約5万ドル。2014/2/10 に本人がストアから下ろした。</dd></div>
+          <div><dt class="font-bold">効いた理由と教訓</dt><dd>失敗の場面が、人に見せたくなる絵だった。一方で、過熱は作者を消耗させた。</dd></div>
+        </dl>
+        <p class="src mt-4 font-mono text-[11px] text-mute">出典 <a class="lnk" href="https://en.wikipedia.org/wiki/Flappy_Bird">Wikipedia: Flappy Bird</a> / <a class="lnk" href="https://www.rollingstone.com/culture/rs-gaming/the-flight-of-the-birdman-flappy-bird-creator-dong-nguyen-speaks-out-112457/">Rolling Stone</a></p>
+      </div>
+
+      <!-- S7 -->
+      <div id="s7" class="rounded-2xl border border-rule bg-white p-5">
+        <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1"><span class="font-mono text-xs font-bold text-dopa">S7</span><h3 class="font-display text-xl">Locket Widget</h3><span class="font-mono text-xs text-mute">海外 / TikTok と友達の招待 / 始めは1人</span></div>
+        <p class="mt-2 text-sm text-ink/70">友達のホーム画面に、写真を直接届けるウィジェット。</p>
+        <dl class="mt-4 space-y-3 text-sm leading-relaxed">
+          <div><dt class="font-bold">やったこと</dt><dd>自分の TikTok に使い方の動画を出した。有料のインフルエンサーも、TikTok の広告も使っていない。</dd></div>
+          <div><dt class="font-bold">数字</dt><dd>2022/1/1 に公開。自分の動画は数日で約10万再生、英国の利用者の動画は1日で500万再生超。1/10 に米国の総合1位、1/11 に登録200万人超。</dd></div>
+          <div><dt class="font-bold">効いた理由</dt><dd>友達を招かないと使えない。ホーム画面に写真が届く様子は、画面を見せるだけで伝わる。</dd></div>
+        </dl>
+        <p class="src mt-4 font-mono text-[11px] text-mute">出典 <a class="lnk" href="https://techcrunch.com/2022/01/11/locket-an-app-for-sharing-photos-to-friends-homescreens-hits-the-top-of-the-app-store">TechCrunch</a></p>
+      </div>
+
+      <!-- S8 -->
+      <div id="s8" class="rounded-2xl border-2 border-dopa bg-dopa-soft p-5">
+        <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1"><span class="font-mono text-xs font-bold text-dopa">S8 ★</span><h3 class="font-display text-xl">Pushscroll</h3><span class="font-mono text-xs text-mute">海外 / TikTok・Instagram Reels / 2人</span></div>
+        <p class="mt-2 text-sm text-ink/70">腕立てやスクワットをすると、スマホでスクロールできる時間が増える。回数はカメラで数える。</p>
+        <dl class="mt-4 space-y-3 text-sm leading-relaxed">
+          <div><dt class="font-bold">やったこと</dt><dd>最初の5,000ドルをインフルエンサーに使い、ほぼ空振りした。お金が尽きて自分たちで撮り始めたら、それが当たった。型は「最初の1〜2秒で問いを投げ（腕立て20回でスクロール依存が止まるなら？）、7〜10秒以内にアプリが動くところを見せる」。当たった型は、効かなくなるまで繰り返した。</dd></div>
+          <div><dt class="font-bold">数字（出典で違う）</dt><dd>Starter Story では、合計4,000万再生超、30万DL、月3万ドル。Braavo では、1年で収入100万ドル超、最盛期の月の売上が約10万ドル。App Store の評価は 4.7（1.8万件）。</dd></div>
+          <div><dt class="font-bold">効いた理由</dt><dd>「腕立て → スクロール」の3語で伝わり、撮るだけで絵になる。</dd></div>
+          <div><dt class="font-bold">真似しないこと</dt><dd>作る前に、既存の映像を編集して「動くアプリ」に見せた動画で需要を試している。日本では優良誤認を疑われうるし、App Store の 2.3.1（誤解を招く宣伝）とも相性が悪い。</dd></div>
+        </dl>
+        <p class="src mt-4 font-mono text-[11px] text-mute">出典 <a class="lnk" href="https://www.starterstory.com/Pushscroll">Starter Story</a> / <a class="lnk" href="https://www.getbraavo.com/blog/from-0-to-1m-the-organic-growth-playbook-behind-pushscroll/">Braavo</a> / <a class="lnk" href="https://apps.apple.com/us/app/pushscroll-exercise-to-scroll/id6741765734">App Store</a></p>
+      </div>
+
+      <!-- S9 -->
+      <div id="s9" class="rounded-2xl border-2 border-dopa bg-dopa-soft p-5">
+        <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1"><span class="font-mono text-xs font-bold text-dopa">S9 ★</span><h3 class="font-display text-xl">Wayk</h3><span class="font-mono text-xs text-mute">海外 / TikTok / 3人</span></div>
+        <p class="mt-2 text-sm text-ink/70">腕立てなどのミッションをこなさないと止まらない目覚まし。</p>
+        <dl class="mt-4 space-y-3 text-sm leading-relaxed">
+          <div><dt class="font-bold">やったこと</dt><dd>Pushscroll など隣のアプリで当たっている型を、そのまま使った。「POV のキャプション、本物のリアクション、動くアプリの画面。短く、荒く」。まず自分たちで撮って効くと確かめ、それから外部の作り手に同じ型で撮ってもらった。ミッションの種類ごとに、別の掴みとして試した。</dd></div>
+          <div><dt class="font-bold">数字</dt><dd>30日で TikTok 2,500万再生、10万DL超、App Store 15位。収入は<b>未確認</b>。</dd></div>
+          <div><dt class="font-bold">教訓</dt><dd>「クリエイティブであろうとするのをやめた」。Reddit と Twitter はまったく効かず、効いたのは TikTok だけだった。</dd></div>
+        </dl>
+        <p class="src mt-4 font-mono text-[11px] text-mute">出典 <a class="lnk" href="https://read.first1000.co/p/how-an-alarm-app-got-25-million-views">First 1000</a></p>
+      </div>
+
+      <!-- S10 -->
+      <div id="s10" class="rounded-2xl border border-rule bg-white p-5 lg:col-span-2">
+        <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1"><span class="font-mono text-xs font-bold text-dopa">S10</span><h3 class="font-display text-xl">Puff Count と HabitKit</h3><span class="font-mono text-xs text-mute">海外 / TikTok と<a href="../../glossary.html#build-in-public" class="lnk">ビルド・イン・パブリック</a> / どちらも1人</span></div>
+        <div class="mt-4 grid gap-5 text-sm leading-relaxed sm:grid-cols-2">
+          <div>
+            <p class="font-bold">Puff Count（禁煙の支え）</p>
+            <p class="mt-1">自分で撮った TikTok を数百本出した。ニコチンの害を教える動画が中心。月の売上は4万ドル超で、のちに売却した。累計の利用者は80万とも100万超ともあり、出典で違う。日本語の記事にある1,200万DLは他と合わず、<b>未確認</b>。</p>
+            <p class="src mt-2 font-mono text-[11px] text-mute">出典 <a class="lnk" href="https://www.starterstory.com/puff-count-breakdown">Starter Story</a> / <a class="lnk" href="https://x.com/StevenCravotta/status/1859641480832483763">本人の投稿</a></p>
+          </div>
+          <div>
+            <p class="font-bold">HabitKit（習慣トラッカー）</p>
+            <p class="mt-1">X で作る過程を公開し続け、フォロワーは1.8万。それでも本人は「成長も収入も、ストアのランキング次第」と言う。他人の YouTube 動画（100万再生超）で30秒紹介されると、米国のランキングが上がった。タイムズスクエアの看板は、測れるほどの DL を生まなかった。月の売上は1.5万〜3万ドルで、12〜1月が山。</p>
+            <p class="src mt-2 font-mono text-[11px] text-mute">出典 <a class="lnk" href="https://happybootstrapping.com/p/30000-per-month-sebastian-ruhls-journey">Happy Bootstrapping</a> / <a class="lnk" href="https://subclub.com/episode/from-corporate-web-developer-to-full-time-indie-hacker-sebastian-rohl-habitkit">Sub Club</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-5 rounded-2xl border border-dashed border-rule p-5 text-sm leading-relaxed text-ink/80">
+      <p><b>参考：Finch</b>（ゲーム感覚のセルフケア、小さなチーム、出資なし）。年の売上は3,000万〜4,000万ドル。公式 TikTok の最大の動画は6,340万再生。ただ、いまは Meta の広告で600本以上の素材を回している。SNS の投稿だけで伸びた例としては数えない。</p>
+      <p class="src mt-2 font-mono text-[11px] text-mute">出典 <a class="lnk" href="https://blog.sparrowapps.io/p/finch-how-a-self-care-app-hit-30m-arr-without-vc-money">Sparrow</a></p>
+    </div>
+  </section>
+
+  <!-- ===================== 失敗 ===================== -->
+  <section id="failure" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / failure</p>
+    <h2 class="mt-2 font-display text-3xl">失敗事例</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">「宣伝ばかりでフォロワーが離れた」という、数字の付いた振り返りは見つからなかった。代わりに、ローンチの一発に頼った例と、お金や規約で失った例が集まった。</p>
+
+    <div class="mt-8 grid gap-5 lg:grid-cols-2">
+
+      <div id="f1" class="rounded-2xl border border-rule bg-white p-5">
+        <div class="flex flex-wrap items-baseline gap-x-3"><span class="font-mono text-xs font-bold text-violet">F1</span><h3 class="font-display text-xl">バズは1週間で元に戻る</h3></div>
+        <p class="mt-3 text-sm leading-relaxed">成功の S1（よりしろ）の続き。600DL/日が、1週間で7DL/日に戻った。PR TIMES での配信は、ほぼ無風だった。</p>
+        <p class="src mt-4 font-mono text-[11px] text-mute">出典 <a class="lnk" href="https://note.yokoichi.jp/n/n5f2c9dd4d6f7">note.yokoichi.jp</a></p>
+      </div>
+
+      <div id="f2" class="rounded-2xl border border-rule bg-white p-5">
+        <div class="flex flex-wrap items-baseline gap-x-3"><span class="font-mono text-xs font-bold text-violet">F2</span><h3 class="font-display text-xl">Product Hunt で上位でも、何も起きない</h3></div>
+        <ul class="mt-3 space-y-2 text-sm leading-relaxed">
+          <li><b>Reaktr</b>（日本、1人）：その日の2位。初日のアクセス約700が毎日半分になり、約25人/日で止まった。有料の契約は0。「まだ何も起きていない」。</li>
+          <li><b>AutoRepurpose</b>：その日の1位。2週間で客足が落ち、月の売上は0ドル。「PH の客は、自分の客ではないかもしれない」。</li>
+          <li><b>MakerPulse</b>：支持者を集めずに出し、upvote は自分を入れて3。</li>
+          <li><b>Lifestack</b>：週の1位。上位の他社が有料の宣伝サービスを使っているのを見て、自分も100ドル払った。残ったのは主にリンクと信用だった。</li>
+        </ul>
+        <p class="src mt-4 font-mono text-[11px] text-mute">出典 <a class="lnk" href="https://zenn.dev/sabigara/articles/4a4866fece771d">Zenn (Reaktr)</a> / <a class="lnk" href="https://taishi.substack.com/p/try-something-beyond-product-hunt">Substack</a> / <a class="lnk" href="https://zenn.dev/ykiki/articles/3d03600c89f3d5">Zenn (MakerPulse)</a> / <a class="lnk" href="https://note.com/naomike/n/n6157a39031eb">note (Lifestack)</a></p>
+      </div>
+
+      <div id="f3" class="rounded-2xl border border-rule bg-white p-5">
+        <div class="flex flex-wrap items-baseline gap-x-3"><span class="font-mono text-xs font-bold text-violet">F3</span><h3 class="font-display text-xl">インフルエンサーに先に払って空振り</h3></div>
+        <p class="mt-3 text-sm leading-relaxed">成功の S8（Pushscroll）の始まり。最初の5,000ドルは、ほぼ何も生まなかった。伸びたのは、自分たちで型を見つけてからだった。</p>
+        <p class="src mt-4 font-mono text-[11px] text-mute">出典 <a class="lnk" href="https://www.getbraavo.com/blog/from-0-to-1m-the-organic-growth-playbook-behind-pushscroll/">Braavo</a></p>
+      </div>
+
+      <div id="f4" class="rounded-2xl border border-rule bg-white p-5">
+        <div class="flex flex-wrap items-baseline gap-x-3"><span class="font-mono text-xs font-bold text-violet">F4</span><h3 class="font-display text-xl">広告は「ブラックホール」</h3></div>
+        <p class="mt-3 text-sm leading-relaxed">家計簿の個人開発者。Apple の検索広告に1日約10ドルを何年も払ってきた。Google の広告は半年でクリックがほぼ0。1件の DL にかかった費用は、Apple が4.36ドル、Reddit の広告が0.82ドルだった。US$0.99 のアプリなら、Apple の値でも売上の4倍を払う計算になる。</p>
+        <p class="src mt-4 font-mono text-[11px] text-mute">出典 <a class="lnk" href="https://mattcorey.substack.com/p/rethinking-my-indie-app-advertising">Substack</a></p>
+      </div>
+
+      <div id="f5" class="rounded-2xl border border-rule bg-white p-5">
+        <div class="flex flex-wrap items-baseline gap-x-3"><span class="font-mono text-xs font-bold text-violet">F5</span><h3 class="font-display text-xl">Reddit で連投して、永久 BAN</h3></div>
+        <p class="mt-3 text-sm leading-relaxed">いくつものアカウントで、同じ製品に触れる投稿を続けた。最初のアカウントは約5週間で永久 BAN、投稿30件が消された。健全なアカウントを育て直すのに5か月。本人の教訓は「製品に触れる投稿は全体の1〜2割まで」「60日以上ふつうに参加してから」「仲間の upvote は見抜かれる」。</p>
+        <p class="src mt-4 font-mono text-[11px] text-mute">出典 <a class="lnk" href="https://www.indiehackers.com/post/reddit-killed-my-first-account-and-taught-me-exactly-what-not-to-do-expensive-lessons-learned-h6ecUkvMCcYZgmSf6RDx">Indie Hackers</a></p>
+      </div>
+
+      <div id="f6" class="rounded-2xl border border-rule bg-white p-5">
+        <div class="flex flex-wrap items-baseline gap-x-3"><span class="font-mono text-xs font-bold text-violet">F6</span><h3 class="font-display text-xl">見ている人が、客ではない</h3></div>
+        <p class="mt-3 text-sm leading-relaxed">Indie Hackers の投稿が500回読まれ、コメントが50件付いた。客は0人。「開発者からの拍手は、投稿の出来を測っているだけ」。HabitKit の作者も、売上を公開したら、似たアプリが出てきたと話している。</p>
+        <p class="src mt-4 font-mono text-[11px] text-mute">出典 <a class="lnk" href="https://superframeworks.com/articles/build-in-public-audience-is-not-your-market">Superframeworks</a> / <a class="lnk" href="https://subclub.com/episode/from-corporate-web-developer-to-full-time-indie-hacker-sebastian-rohl-habitkit">Sub Club</a></p>
+      </div>
+
+      <div id="f7" class="rounded-2xl border border-rule bg-white p-5">
+        <div class="flex flex-wrap items-baseline gap-x-3"><span class="font-mono text-xs font-bold text-violet">F7</span><h3 class="font-display text-xl">出しても DL がほぼ0</h3></div>
+        <p class="mt-3 text-sm leading-relaxed">半年かけた iOS アプリの初日は「数回」で、そのあとグラフは動かなかった。宣伝の記述はない。10年で68本を出した別の開発者は、定番アプリの劣化版はどれも振るわず、その年いちばん DL されたのは気分転換に1週間で作ったゲームだったと書いている。</p>
+        <p class="src mt-4 font-mono text-[11px] text-mute">出典 <a class="lnk" href="https://qiita.com/gts/items/8c94ac8b76d7caa1b530">Qiita</a> / <a class="lnk" href="https://note.com/dancingpandor/n/n28fbc6ffc4a5">note</a></p>
+      </div>
+
+      <div id="f8" class="rounded-2xl border border-rule bg-white p-5">
+        <div class="flex flex-wrap items-baseline gap-x-3"><span class="font-mono text-xs font-bold text-violet">F8</span><h3 class="font-display text-xl">ステマで処分</h3></div>
+        <p class="mt-3 text-sm leading-relaxed">アプリの例ではない。<a href="../../glossary.html#stealth-marketing" class="lnk">ステマ規制</a>の最初の措置命令は 2024/6/6、高評価の投稿を条件に割引した医療法人だった。その後も、インフルエンサーの投稿（RIZAP の chocoZAP、2024/8）、Google マップの高評価と引き換えの割引（2025/3）などが続き、2024年度は6件。処分されるのは頼んだ側で、頼まれた側ではない。</p>
+        <p class="src mt-4 font-mono text-[11px] text-mute">出典 <a class="lnk" href="https://www.advertimes.com/20240620/article464264/">AdverTimes</a> / <a class="lnk" href="https://www.advertimes.com/20241209/article482069/">AdverTimes</a> / <a class="lnk" href="https://www.ushijima-law.gr.jp/client-alert_seminar/client-alert/20241115stealth/">牛島総合法律事務所</a> / <a class="lnk" href="https://www.caa.go.jp/policies/policy/representation/fair_labeling/stealth_marketing/">消費者庁</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 未確認 ===================== -->
+  <section id="unverified" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / unverified</p>
+    <h2 class="mt-2 font-display text-3xl">未確認と、数字の食い違い</h2>
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full min-w-[36rem] text-left text-sm">
+        <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="py-2 pr-3">事例</th><th class="py-2 pr-3">確かめられなかったこと</th></tr></thead>
+        <tbody class="[&>tr]:border-b [&>tr]:border-rule [&_td]:py-2.5 [&_td]:pr-3 [&_td]:align-top">
+          <tr><td class="font-bold">S2 IsTalk</td><td>TikTok で伸びた動画の型、撮った人、再生数（有料の部分）。伸びた時期も、要約では2021年冬、本文では2024年3月の1位と食い違う</td></tr>
+          <tr><td class="font-bold">S4 ねこあつめ</td><td>チームの人数</td></tr>
+          <tr><td class="font-bold">S8 Pushscroll</td><td>月3万ドルと、最盛期の約10万ドル。時期が違うだけかもしれない</td></tr>
+          <tr><td class="font-bold">S9 Wayk</td><td>収入</td></tr>
+          <tr><td class="font-bold">S10 Puff Count</td><td>DL 数（80万、100万超、1,200万）</td></tr>
+          <tr><td class="font-bold">X の規約</td><td>プラットフォームの操作についての規約は、取りにいくと 403 で読めなかった</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

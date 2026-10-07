@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>叩いた結果を外に出す口</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: { rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } } },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-3xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <a href="../index.html" class="hover:text-dopa hover:underline">issues</a>
+      <span>/</span>
+      <span>アプリの中身</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight">叩いた結果を外に出す口</h1>
+    <div class="mt-4 flex flex-wrap gap-2 font-mono text-xs font-bold">
+      <span class="rounded-full border border-ink bg-white px-3 py-1 text-ink">優先度：中</span>
+      <span class="rounded-full border border-dopa bg-dopa-soft px-3 py-1 text-ink">状態：未着手</span>
+    </div>
+  </header>
+
+  <section id="summary" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916]">
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-dopa">概要</p>
+      <p class="mt-3 font-bold leading-relaxed">いまの Yat Tat Ta には、使った結果をアプリの外へ持ち出す手段がない。<br>利用者が自分から投稿したくなる画面（<a href="../../glossary.html#muscle-kakutei" class="text-dopa underline underline-offset-4">筋肉確定</a>の瞬間、<a href="../../glossary.html#streak" class="text-dopa underline underline-offset-4">連続記録</a>の日数）を、画像か短い動画で共有シートに渡せるようにしたい。</p>
+    </div>
+
+    <h2 class="mt-10 font-display text-2xl">なぜ要るか</h2>
+    <div class="mt-3 space-y-3 text-sm leading-relaxed"><p>SNS で長く伸びた事例の多くは、利用者の投稿が宣伝を運んでいた。ねこあつめは遊ぶとスクリーンショットになり、Wordle は答えを明かさない絵文字のマス目を貼れた（<a href="../../sessions/20261007-1727-sns-marketing/cases.html" class="text-dopa underline underline-offset-4">事例</a>）。開発者の投稿だけでは、出せる本数に上限がある。</p><p>Wordle の共有のボタンは、利用者が先に始めていた遊びを公式にしたものだった。Yat Tat Ta でも、公開後に利用者が何を撮って貼っているかを見てから、形を決めるほうが当たりやすい。</p></div>
+    <h2 class="mt-10 font-display text-2xl">作るときに確かめること</h2>
+    <div class="mt-3 space-y-3 text-sm leading-relaxed"><ol class="list-decimal space-y-2 pl-5"><li>年齢制限の答え。いまは「ソーシャルメディアなし」「ユーザー生成コンテンツなし」。iOS の共有シートに画像を渡すだけなら、アプリの中に人の投稿は現れないので変わらない見込み。作る前に Apple の定義を読み直す。</li><li>出す画像の文言は、<a href="../../devops/sns-marketing/index.html" class="text-dopa underline underline-offset-4">SNS で発信するときの決まり事</a>の1と2に従う。健康の効果も、パチンコの語も入れない。</li><li>サーバーには何も送らない。画像は端末の中で作る。<a href="../../glossary.html#privacy-policy" class="text-dopa underline underline-offset-4">プライバシーポリシー</a>を変えずに済む。</li></ol></div>
+    <dl class="mt-10 grid gap-3 text-sm sm:grid-cols-2">
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <dt class="font-mono text-xs text-mute">優先度が中の理由</dt>
+        <dd class="mt-1 leading-relaxed">SNS で売るなら、効き目は大きい。けれど、開発者が自分で撮る動画は、この口がなくても始められる。</dd>
+      </div>
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <dt class="font-mono text-xs text-mute">先送りにした理由</dt>
+        <dd class="mt-1 leading-relaxed">1.0 (1) は審査に出したところで、出し直すと審査が始めからになる。利用者が実際に何を貼るかを見てから形を決めたい。公開から2週間たったら、利用者の投稿を探して取りかかるかを決める。</dd>
+      </div>
+    </dl>
+    <p class="mt-6 text-sm">見つけたセッション：<a href="../../sessions/20261007-1727-sns-marketing/index.html" class="text-dopa underline underline-offset-4">SNS で売る事例の調査</a></p>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

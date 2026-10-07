@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="session-state" content="developing">
+<meta name="state" content="developing">
+<title>SNS で売る事例の調査</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=M+PLUS+Rounded+1c:wght@500;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+        round: ['"M PLUS Rounded 1c"', '"Noto Sans JP"', 'sans-serif']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } }
+      },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+<style>
+.lnk { text-decoration:underline; text-decoration-color:rgba(229,51,122,.5); text-decoration-thickness:2px; text-underline-offset:4px; }
+.lnk:hover { text-decoration-color:#E5337A; }
+</style>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-5xl">
+
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <time datetime="2026-10-07T17:27">2026-10-07 17:27</time>
+      <span>/</span>
+      <span>調査セッション</span>
+      <span class="rounded-full border border-dopa bg-dopa-soft px-2.5 py-0.5 font-bold text-ink">状態：developing</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl">SNS で売る事例の調査</h1>
+  </header>
+
+  <section id="order" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="relative overflow-hidden rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916] sm:p-8">
+      <div class="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-dopa-soft"></div>
+      <p class="relative font-mono text-xs uppercase tracking-[0.2em] text-dopa">開発者の注文</p>
+      <p class="relative mt-6 font-display text-3xl leading-snug tracking-wide sm:text-4xl">リリースに並行してマーケティングも進めたい。SNS を使った個人開発アプリの成功事例と失敗事例を調べて、まとめる</p>
+      <p class="relative mt-4 text-sm text-ink/70">1.0 (1) を App Store の審査に出したところ（<a href="../20261007-1523-app-store-review/index.html" class="lnk">前回のセッション</a>）。公開は手動なので、通ったあとの公開日はこちらで選べる。</p>
+    </div>
+  </section>
+
+  <section id="question" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01 / question</p>
+    <h2 class="mt-2 font-display text-3xl">一度バズれば、あとは回る？</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>個人開発のアプリが X で跳ねた話は、毎週のように流れてきます。<a href="../../glossary.html#dopa-apps" class="lnk">ドパ〇〇</a>の波も、9月下旬に X で起きたばかりです。1本の投稿が当たれば、あとはランキングが客を連れてくる。そう思いたくなります。</p>
+      <p>ところが、数字を残した人の記録は逆を向いていました。日記アプリのよりしろは、X の告知1本で1日600DL を取り、1週間後には7DL に戻っています。Product Hunt でその日の1位を取った AutoRepurpose は、2週間後の月の売上が0ドルでした。</p>
+      <p>跳ねること自体は起きる。続かないのです。だから調べたかったのは、続く流入を作った人が何を繰り返していたか、のほうでした。</p>
+    </div>
+  </section>
+
+  <section id="cases" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / cases</p>
+    <h2 class="mt-2 font-display text-3xl">集めた事例</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">成功10件、失敗8件。規模は1人か、2〜3人までに絞りました。★は Yat Tat Ta にいちばん近い2件です。</p>
+    <div class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <p class="font-mono text-xs text-dopa">成功</p>
+        <ul class="mt-2 space-y-1 leading-relaxed">
+          <li><a href="cases.html#s1" class="lnk">よりしろ</a>：X の告知1本で600DL/日</li>
+          <li><a href="cases.html#s2" class="lnk">IsTalk</a>：85%が TikTok か友達の紹介から</li>
+          <li><a href="cases.html#s4" class="lnk">ねこあつめ</a>：遊ぶとスクリーンショットになる</li>
+          <li><a href="cases.html#s5" class="lnk">Wordle</a>：利用者の共有の形を、ボタンにした</li>
+          <li><a href="cases.html#s8" class="lnk">Pushscroll ★</a>：運動 × スマホ。自分で撮った縦動画で4,000万再生</li>
+          <li><a href="cases.html#s9" class="lnk">Wayk ★</a>：隣のアプリの型を借り、30日で2,500万再生</li>
+          <li>ほか <a href="cases.html#s3" class="lnk">ポルン</a>、<a href="cases.html#s6" class="lnk">Flappy Bird</a>、<a href="cases.html#s7" class="lnk">Locket</a>、<a href="cases.html#s10" class="lnk">Puff Count と HabitKit</a></li>
+        </ul>
+      </div>
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <p class="font-mono text-xs text-violet">失敗</p>
+        <ul class="mt-2 space-y-1 leading-relaxed">
+          <li><a href="cases.html#f1" class="lnk">バズは1週間で戻る</a></li>
+          <li><a href="cases.html#f2" class="lnk">Product Hunt で上位でも、客が来ない</a>（4件）</li>
+          <li><a href="cases.html#f3" class="lnk">インフルエンサーに先に払って空振り</a></li>
+          <li><a href="cases.html#f4" class="lnk">検索広告は1DL 4.36ドル</a></li>
+          <li><a href="cases.html#f5" class="lnk">Reddit で連投して永久 BAN</a></li>
+          <li>ほか <a href="cases.html#f6" class="lnk">見ている人が客ではない</a>、<a href="cases.html#f7" class="lnk">出しても DL が0</a>、<a href="cases.html#f8" class="lnk">ステマで処分</a></li>
+        </ul>
+      </div>
+    </div>
+    <a href="cases.html" class="mt-6 block max-w-3xl rounded-2xl border-2 border-ink bg-white p-5 shadow-[4px_4px_0_#1C1916] transition hover:-translate-y-0.5">
+      <p class="font-mono text-xs font-bold text-dopa">事例</p>
+      <p class="mt-1 font-display text-xl">SNS の事例18件</p>
+      <p class="mt-1 text-sm text-ink/70">1件ずつ、やったこと、数字、効いた理由、出典。未確認のものと、出典で数字が食い違うものの表。</p>
+    </a>
+  </section>
+
+  <section id="patterns" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / patterns</p>
+    <h2 class="mt-2 font-display text-3xl">続いた人が繰り返していたこと</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>続いた事例に、1本の神投稿はありません。あったのは、同じ型の縦動画を何十本、何百本と出し続けたことです。Puff Count は数百本。Pushscroll は、当たった型を効かなくなるまで繰り返しました。Wayk に至っては、型を Pushscroll から借りています。</p>
+      <p>その型も、驚くほど似ていました。最初の1〜2秒の<a href="../../glossary.html#hook" class="lnk">フック</a>で問いを投げ、7〜10秒以内にアプリが動くところを見せる。撮り方は荒くていい。Wayk の人たちは「クリエイティブであろうとするのをやめた」と言っています。</p>
+    </div>
+    <div class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <div class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4">
+        <p class="font-mono text-xs text-dopa">効いた</p>
+        <ol class="mt-2 list-decimal space-y-1.5 pl-5 leading-relaxed">
+          <li>使った結果が、そのまま投稿できる絵になる（ねこあつめ、Wordle、IsTalk）</li>
+          <li>3語で言えて、撮るだけで伝わる（腕立て → スクロール）</li>
+          <li>本人が撮った荒い縦動画を、同じ型で出し続ける</li>
+          <li>他人が動画にしてくれる（Flappy Bird、HabitKit）</li>
+          <li>ストアの土台。スクリーンショットの直しで DL の割合が 24.2% → 37.5%（IsTalk）</li>
+        </ol>
+      </div>
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <p class="font-mono text-xs text-violet">失敗した</p>
+        <ol class="mt-2 list-decimal space-y-1.5 pl-5 leading-relaxed">
+          <li>ローンチの1日に賭けて、翌週の手がない</li>
+          <li>開発者仲間を客と取り違える（Product Hunt、ビルド・イン・パブリック）</li>
+          <li>型が見つかる前に、広告やインフルエンサーにお金を使う</li>
+          <li>場の決まりを無視して宣伝を連投する（Reddit）</li>
+          <li>そもそも撮っても絵にならない、定番の劣化版</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section id="fit" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / fit</p>
+    <h2 class="mt-2 font-display text-3xl">Yat Tat Ta に当てはめると</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>いちばん近いのは Pushscroll と Wayk です。どちらも、地味な運動に、画面の側の大きな見返りを付けたアプリでした。Yat Tat Ta なら「スクワット20回、叩くとこうなる」。3語には収まりませんが、撮れば一瞬で伝わります。CHANCE、激熱、<a href="../../glossary.html#fever" class="lnk">FEVER</a>、最後の<a href="../../glossary.html#muscle-kakutei" class="lnk">筋肉確定</a>。演出そのものが、7秒以内に見せる山になる。</p>
+      <p>逆に、足りないものも2つ見えました。</p>
+      <p>1つは、使った結果を外に出す口です。ねこあつめや Wordle のように、利用者が自分で投稿したくなる画面が、いまのアプリにはありません。年齢制限の答えで「ソーシャルメディアなし」と答えた作りなので、足すなら次の版です。<a href="../../issues/share-result/index.html" class="lnk">課題</a>に積みました。</p>
+      <p>もう1つは値段です。集めた事例は、ほとんどが無料で入れてサブスクで払う形でした。US$0.99 の買い切りは、動画から来た人の前に「払う」壁を1枚置きます。この壁を越えるかどうかは、事例からは確かめられませんでした。ストアのスクリーンショットとプレビュー動画で、演出を先に見せきるしかない。<a href="../../devops/app-store/index.html#screenshots" class="lnk">いまの6枚</a>が、その役を担えるかは、出してから数字で見ます。</p>
+    </div>
+  </section>
+
+  <section id="proposals" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / proposals</p>
+    <h2 class="mt-2 font-display text-3xl">提案</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">決定は1つ（動画の主役）。残りは提案で、下の「開発者に決めてほしいこと」の答えで変わります。</p>
+    <ul class="mt-6 flex max-w-3xl flex-col gap-2 text-sm">
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>提案</b>　主な場所は縦動画（TikTok、YouTube Shorts、Instagram Reels）。同じ1本を3か所に出す。X は、公開日の告知と、ドパ〇〇の流れに乗る1本に使う。X だけに頼ると、よりしろと同じく1週間で戻る。<br><span class="text-ink/70">→ 開発者の判断で、まず X の日本語から始める（2026-10-07）。縦型動画の場所を広げるのは、X で当たる型が見えてから。</span></li>
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　動画の主役は<a href="../../glossary.html#squat-squad" class="lnk">スクワットマン</a>。開発者は映らない。AI で作った人も使わない（開発者が決定、2026-10-07）。アプリに入っている本物の素材なので、作り物の映像を映さないという決まりに触れず、AI 生成の表示も要らない。画面は、スクリーンショットと同じ演出の見本（<code class="font-mono text-xs">-demo</code>、<code class="font-mono text-xs">-seed</code>）をシミュレーターで録画すれば、叩かずに FEVER も筋肉確定も何度でも撮れる。<br><span class="text-ink/70">型は1つから始める。1〜2秒め「食後のスクワット20回、地味すぎる」→ スクワットマンがしゃがむ → 叩き始めた画面 → 7秒以内に FEVER か筋肉確定。事例で効いていた本物の人のリアクションは無いので、掴みは声と演出の騒がしさで作る。最初の5本ほどの再生の落ち方を見て、型を直す。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>提案</b>　開発者が<a href="../../glossary.html#meal-squat" class="lnk">毎食後スクワット</a>を続ける連載にする。映るのはスクワットマンと画面だけで、日数と回数は開発者の本物の記録を使う。1日1本、連続記録の日数をそのまま題に入れる。ネタを毎回考えなくて済む形にしておかないと、ポルンのように投稿が重くなる。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>提案</b>　広告とインフルエンサーには、自分の動画で当たる型が見つかるまでお金を使わない。US$0.99 では、1DL に4ドルの広告は割に合わない。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>提案</b>　発信の決まり事（健康効果の言い方、ステマ規制、レビューの頼み方）は<a href="../../devops/sns-marketing/index.html" class="lnk">SNS で発信するときの決まり事</a>にまとめた。投稿の前に開く。</li>
+    </ul>
+  </section>
+
+  <section id="ask" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / developer</p>
+    <h2 class="mt-2 font-display text-3xl">開発者に決めてほしいこと</h2>
+    <ol class="mt-6 grid max-w-3xl gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><p class="font-mono text-xs font-bold text-dopa">1　決定</p><p class="mt-2"><s>動画に体を映すか。</s>開発者は映らない。主役はスクワットマン（2026-10-07）。</p></li>
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><p class="font-mono text-xs font-bold text-dopa">2　決定</p><p class="mt-2"><s>どの SNS から始めるか。</s>まず X（2026-10-07）。投稿の型は<a href="x-video.html" class="lnk">X の縦型動画のグッドとバッド</a>。</p></li>
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><p class="font-mono text-xs font-bold text-dopa">3　決定</p><p class="mt-2"><s>言語。</s>まず日本語（2026-10-07）。</p></li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">4</p><p class="mt-2">1日に使える時間。型を決めておけば、撮って出すまで1本15分ほどの見込み。</p></li>
+    </ol>
+  </section>
+
+  <section id="reel" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">07 / sample</p>
+    <h2 class="mt-2 font-display text-3xl">見本の動画を1本作る</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>投稿の自動化を決める前に、1本を作って型を目で確かめることにしました（開発者の依頼、2026-10-07）。</p>
+      <p>シミュレーターでは連打できません。スクリーンショットのときと同じく、演出の見本に叩かせます。ただ、今回は止まった1枚ではなく、1打めからフィナーレまでの流れが要る。そこで、時間をかけて叩き続ける見本 <code class="font-mono text-xs">reel</code> を足しました。</p>
+      <p>もう1つの壁は音でした。シミュレーターの画面の録画には、音が入りません。演出の半分は声なので、音のない動画では掴みが作れない。アプリが鳴らした音を、そのままファイルにも書く口（<code class="font-mono text-xs">-recordAudio</code>）を足し、録画とあとで重ねます。</p>
+    </div>
+    <ol class="mt-6 flex max-w-3xl flex-col gap-3 text-sm">
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>1. 演出の見本 <code class="font-mono text-xs">-demo reel</code></b><br><span class="text-ink/70">1.5秒待ってスクワットマンを起こし、0.3秒おきに20回叩く。6打めでフィーバーを当て、5秒の間は0.11秒おきに叩く。フィナーレが消えたら、音の始まりの時刻を Documents の reel.json に書いて終わる。Debug のビルドにだけ入る。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>2. 鳴らした音をファイルに書く <code class="font-mono text-xs">FeelEngine.startRecording</code></b><br><span class="text-ink/70">音はすべて AVAudioEngine の1つのミキサーを通るので、そこで聞き取って Documents の reel.caf に書く。Debug のビルドにだけ入る。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>3. <code class="font-mono text-xs">ios/Design/reel.sh</code></b><br><span class="text-ink/70">ビルド、録画、音を重ねる、掴みの文字を入れる、1080 × 1920 に整える、までを1本のスクリプトで。録画の始まりとアプリの音の始まりは、Mac の時計の時刻で合わせる。できあがりは ios/Design/Reels/reel-ja.mp4（Git には入れない）。</span></li>
+    </ol>
+    <ul class="mt-6 flex max-w-3xl flex-col gap-2 text-sm">
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4">1本めを作った（2026-10-07）。19秒。0〜3秒に掴みの文字「食後のスクワット20回、地味すぎる。」、約4秒で FEVER、約13秒で筋肉確定、最後にねぎらい。音は入っている（平均 −12.4 dB）。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">掴みの文字は、連続記録の帯と残りの回数の上にかぶる。最初の3秒だけなので、そのままにした。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">アプリの画面は縦に長い（1206 × 2622）ので、1920 の高さに合わせると左右に紙の色の余白が出る。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">保存している記録には触れない。見本の記録（<code class="font-mono text-xs">-seed</code>）はメモリだけで開く。</li>
+    </ul>
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">開発者が見て「そもそも訴求になっていない」と判断した（2026-10-07）。X では動画が無音で自動再生され、声の演出が消える。何のアプリかも、叩いていることも、画面からは分からない。最初に狙う場所を X の日本語に絞り、型から調べ直した。</p>
+    <a href="x-video.html" class="mt-6 block max-w-3xl rounded-2xl border-2 border-ink bg-white p-5 shadow-[4px_4px_0_#1C1916] transition hover:-translate-y-0.5">
+      <p class="font-mono text-xs font-bold text-dopa">調査</p>
+      <p class="mt-1 font-display text-xl">X の縦型動画のグッドとバッド</p>
+      <p class="mt-1 text-sm text-ink/70">見本の1本の4つの穴、X のおすすめ欄の重み、日本の個人開発の投稿6件、次の1本の本文と動画の流れの案。</p>
+    </a>
+    <ul class="mt-6 flex max-w-3xl flex-col gap-2 text-sm">
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4">2本めを、調べた型で作り直した（開発者の依頼、2026-10-07）。24秒。上の帯に場面ごとの文字（スクワット、終わった？ → 1回＝1打 → 叩くたびに、どんどん派手に → FEVER！5秒間、叩き放題 → 最後の1打で、筋肉確定。）、約10秒で FEVER、約16秒で筋肉確定、最後の2.5秒にアイコンとアプリ名。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">叩いた場所に指の印（白い丸）を出す。<code class="font-mono text-xs">AppModel.demoTouch</code> を見本のときだけ立て、ホームの一番上に描く。Debug のビルドにだけ入る。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">叩く間隔を 0.6秒から 0.28秒へ詰め、勢いが付いていくように見せる。フィーバーは激熱のあとの14打めに移した。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">文字は帯の中にだけ出し、アプリの画面にかぶせない（1本めの穴）。帯の文字を出す時刻は、アプリが reel.json に書く場面の時刻（最初の1打、CHANCE、FEVER など）から決める。組み立ては <code class="font-mono text-xs">ios/Design/compose_reel.py</code>。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">終わりの画面のアイコンは、AppIcon.icon の SVG を Quick Look で PNG にしてから重ねる。ImageMagick だけでは人形の線が描けなかった。</li>
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4">左右の白い余白を、スクワットマンの隊列で埋めた（開発者の依頼、2026-10-07）。片側に2列、26人ずつ。起こすまでは寝ていて、叩き始めると1.2秒に1回しゃがみ、フィーバーの間は0.4秒に1回になる。少しずつ遅れて動き、波のように見える。右の隊列は反転して、画面のほうを向く。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">隊列の絵は <code class="font-mono text-xs">ios/Design/reel_squad.swift</code> が CoreGraphics で描く。関節の位置と色はアプリの SquatterLayer と同じ点をそのまま写した。アプリの人形を直したら、ここも直す。</li>
+    </ul>
+  </section>
+
+  <section id="links" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">08 / links</p>
+    <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">開発/運用</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../devops/sns-marketing/index.html" class="font-bold lnk">SNS で発信するときの決まり事</a><a href="../../devops/app-store/index.html" class="font-bold lnk">App Store の掲載情報</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../glossary.html#hook" class="font-bold lnk">フック</a><a href="../../glossary.html#build-in-public" class="font-bold lnk">ビルド・イン・パブリック</a><a href="../../glossary.html#stealth-marketing" class="font-bold lnk">ステマ規制</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">課題</p><a href="../../issues/share-result/index.html" class="mt-1 block font-bold lnk">叩いた結果を外に出す口</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">前のセッション</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../20261007-1523-app-store-review/index.html" class="font-bold lnk">App Store の審査に出す準備</a><a href="../20261005-1815-dopa-apps-research/index.html" class="font-bold lnk">ドパ〇〇アプリ調査</a></p></li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>
