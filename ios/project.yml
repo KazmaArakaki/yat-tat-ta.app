@@ -51,7 +51,8 @@ targets:
         GENERATE_INFOPLIST_FILE: YES
         # INFOPLIST_KEY_ で書けないキーだけを置く。生成分とマージされる
         INFOPLIST_FILE: YatTatTa/Info.plist
-        MARKETING_VERSION: "0.1.0"
+        # App Store Connect のバージョンとそろえる。TestFlight に上げるたびに CURRENT_PROJECT_VERSION を1つ上げる
+        MARKETING_VERSION: "1.0"
         CURRENT_PROJECT_VERSION: "1"
         # 端末の言語が日本語でも英語でもないときに使う言語（Info.plist の CFBundleDevelopmentRegion）。
         # 文言を書く言語（String Catalog の元の言語）は、プロジェクトの developmentLanguage の日本語のまま

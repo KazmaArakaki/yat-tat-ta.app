@@ -270,6 +270,12 @@ targets:
   </section>
 
   <!-- ハマりどころ -->
+  <section id="testflight" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">testflight</p>
+    <h2 class="mt-2 font-display text-3xl">TestFlight に出す（約40分）</h2>
+    <ol class="mt-6 flex flex-col gap-3 text-sm"><li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">1</span><div><b>ビルド番号を上げる</b><br><code class="font-mono text-xs">project.yml</code> の <code class="font-mono text-xs">CURRENT_PROJECT_VERSION</code> を1つ上げて <code class="font-mono text-xs">xcodegen generate</code>。同じ番号のビルドは受け付けられない。<code class="font-mono text-xs">MARKETING_VERSION</code> は App Store Connect のバージョン（いまは 1.0）とそろえる。</div></li><li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">2</span><div><b>アーカイブを作る（約5分）</b><br>Xcode の実行先を「Any iOS Device (arm64)」にして、Product → Archive。Release でビルドされ、本番用の Firebase の設定が入る。</div></li><li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">3</span><div><b>アップロードする（約5分）</b><br>Organizer の「Distribute App」→「App Store Connect」→「Upload」。署名は自動のまま。</div></li><li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">4</span><div><b>処理を待つ（10〜30分）</b><br>App Store Connect の「TestFlight」タブにビルドが出る。輸出コンプライアンスは Info.plist の ITSAppUsesNonExemptEncryption（false）で答えてあるので、聞かれない。</div></li><li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">5</span><div><b>テスターに配る（約3分）</b><br>「内部テスト」のグループにビルドを足す。iPhone の TestFlight アプリから入れる。TestFlight のアプリは本番の Firebase に書く。</div></li></ol>
+  </section>
+
   <section id="troubleshooting" class="mt-16">
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">troubleshooting</p>
     <h2 class="mt-2 font-display text-3xl">ハマりどころ</h2>
