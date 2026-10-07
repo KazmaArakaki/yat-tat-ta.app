@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="session-state" content="planning">
+<meta name="state" content="planning">
+<title>Firebase を開発用と本番用に分ける</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=M+PLUS+Rounded+1c:wght@500;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+        round: ['"M PLUS Rounded 1c"', '"Noto Sans JP"', 'sans-serif']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } }
+      },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+<style>
+.app { --a-bg:#FBF6EE; --a-card:#FFFFFF; --a-ink:#1C1916; --a-mute:#6E655C; --a-rule:#E7DDCC; --a-line:#1C1916; --a-soft:#FFE6F0; }
+.app.dark { --a-bg:#16120F; --a-card:#231D18; --a-ink:#F5EEE3; --a-mute:#A89C8E; --a-rule:#3A312A; --a-line:#F5EEE3; --a-soft:#3A1726; }
+.a-bg { background:var(--a-bg); color:var(--a-ink); }
+.a-card { background:var(--a-card); }
+.a-ink { color:var(--a-ink); }
+.a-mute { color:var(--a-mute); }
+.a-line { border-color:var(--a-line); }
+.a-rule { border-color:var(--a-rule); }
+.a-soft { background:var(--a-soft); }
+.lnk { text-decoration:underline; text-decoration-color:rgba(229,51,122,.5); text-decoration-thickness:2px; text-underline-offset:4px; }
+.lnk:hover { text-decoration-color:#E5337A; }
+.tabbtn[aria-selected="true"] { background:#1C1916; color:#FBF6EE; }
+.flow-arrow { font-family:"JetBrains Mono",monospace; color:#6E655C; }
+</style>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-5xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <time datetime="2026-10-07T13:18">2026-10-07 13:18</time>
+      <span>/</span>
+      <span>設計セッション</span>
+      <span class="rounded-full border border-gold bg-gold/15 px-2.5 py-0.5 font-bold text-ink">状態：planning</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl"><a href="../../glossary.html#firebase-environment" class="text-dopa">Firebase</a> を開発用と本番用に分ける</h1>
+  </header>
+
+  <section id="order" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="relative overflow-hidden rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916] sm:p-8">
+      <div class="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-dopa-soft"></div>
+      <p class="relative font-mono text-xs uppercase tracking-[0.2em] text-dopa">開発者の注文</p>
+      <p class="relative mt-6 font-display text-3xl leading-snug tracking-wide sm:text-4xl">firebase-environmentsを進めてください</p>
+      <p class="relative mt-4 text-sm text-ink/70">課題 <a href="../../issues/firebase-environments/index.html" class="lnk">firebase-environments</a>（優先度：高）。開発用と本番用の Firebase を分け、<a href="../../glossary.html#app-check" class="lnk">App Check</a> を入れる。</p>
+    </div>
+  </section>
+
+  <section id="why" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01 / why now</p>
+    <h2 class="mt-2 font-display text-3xl">いまの1つのプロジェクトで困ること</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>前のセッションでアカウントの削除を実機で試したとき、消えたのは本番のデータベースの記録でした。まだ利用者がいないので、何も困りません。ところが、リリースしたあとに同じ試し方をすると、試すたびに本番のデータベースへ手を入れることになります。ルールの書き間違い1つで、利用者の記録が読めなくなる。</p>
+      <p>分けるなら、利用者が0人のいまがいちばん安い。利用者が入ってからでは、分ける作業がそのまま記録の引っ越しになるからです。</p>
+      <p>App Check も同じ理由で、いま入れます。アプリに埋め込む鍵は誰でも取り出せるので、アプリを通さずに Firebase へ大量に問い合わせることはできてしまう。他人の記録が読まれないのはルールが守っていますが、問い合わせの数は費用になって返ってきます。</p>
+    </div>
+  </section>
+
+  <section id="envs" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / environments</p>
+    <h2 class="mt-2 font-display text-3xl">どちらを本番にするか</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>いまの <code class="font-mono text-xs">yat-tat-ta</code> を開発用に回し、本番を新しく作る手も考えました。名前の見た目は、そのほうがすっきりします。とはいえ、App Store Connect に入れたプライバシーポリシーとサポートの URL（yat-tat-ta.web.app）は、いまのプロジェクトの Hosting に結びついています。本番を作り直すと、この URL ごと引っ越すことになる。</p>
+      <p>そこで、いまの <code class="font-mono text-xs">yat-tat-ta</code> を本番に残し、開発用の <code class="font-mono text-xs">yat-tat-ta-dev</code> を新しく作ります。プロジェクトの ID は Firebase の全体で重ならない名前に限られるので、取れなければ Firebase が付ける末尾の文字ごと使います。</p>
+    </div>
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full min-w-[640px] border-collapse text-left text-sm">
+        <caption class="mb-2 text-left font-mono text-xs text-mute">表1　開発用と本番用</caption>
+        <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="py-2 pr-3">項目</th><th class="py-2 pr-3">開発用</th><th class="py-2">本番用</th></tr></thead>
+        <tbody class="[&>tr]:border-b [&>tr]:border-rule [&_td]:py-2.5 [&_td]:pr-3 [&_td]:align-top"><tr><td><b>Firebase のプロジェクト</b></td><td><code class="font-mono text-xs">yat-tat-ta-dev</code>（新しく作る）</td><td><code class="font-mono text-xs">yat-tat-ta</code>（いまのもの）</td></tr><tr><td><b>使うビルド</b></td><td>Debug（Xcode の Run）</td><td>Release（TestFlight、App Store）</td></tr><tr><td><b>設定ファイル</b></td><td><code class="font-mono text-xs">ios/Firebase/Dev/GoogleService-Info.plist</code></td><td><code class="font-mono text-xs">ios/Firebase/Prod/GoogleService-Info.plist</code></td></tr><tr><td><b>App Check</b></td><td>デバッグ用のトークン。端末ごとに Firebase に登録する</td><td>App Attest。本物のアプリかを Apple が確かめる</td></tr><tr><td><b>Firestore のルール</b></td><td>本番と同じものを反映する</td><td>いまのもの</td></tr><tr><td><b>公開ページ（Hosting）</b></td><td>使わない</td><td>yat-tat-ta.web.app（App Store Connect に入れた URL）</td></tr><tr><td><b>入っている記録</b></td><td>開発者の試し打ち。消してよい</td><td>利用者の記録</td></tr></tbody>
+      </table>
+    </div>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">TestFlight で配るビルドは Release なので、本番に書きます。リリースの前に試してもらう人の記録も、そのまま本番に残ります。</p>
+  </section>
+
+  <section id="appcheck" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / app check</p>
+    <h2 class="mt-2 font-display text-3xl">App Check で断るもの</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>App Check を入れると、Firestore は本物の Yat Tat Ta から来た問い合わせだけを受け付けます。本物かどうかは、Release では App Attest で Apple が確かめます。シミュレーターでは App Attest が動かないので、Debug ではデバッグ用のトークンを使います。トークンは端末ごとに1つ出るので、Firebase の画面に登録します。</p>
+      <p>断り始めるのは、両方のプロジェクトで最初からにします。古いアプリがまだ出回っていないので、断っても困る人がいません。開発用でも断らせておけば、トークンの登録を忘れたときにすぐ気付けて、本番で初めてつまずくことがない。</p>
+      <p>Authentication（Apple のログイン）には、今回は App Check をかけません。ログインの問い合わせは Apple の証明書がないと通らず、Firestore ほど数で費用がかさまないからです。</p>
+    </div>
+  </section>
+
+  <section id="decisions" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / decisions</p>
+    <h2 class="mt-2 font-display text-3xl">決めたこと</h2>
+    <ul class="mt-6 flex max-w-3xl flex-col gap-2 text-sm">
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　本番はいまの <code class="font-mono text-xs">yat-tat-ta</code>、開発用に <code class="font-mono text-xs">yat-tat-ta-dev</code> を作る。Hosting の URL を変えないため（開発者がレビューで合意、2026-10-07）。</li>
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　Debug は開発用、Release は本番用。設定ファイルはビルドの途中でアプリへ写す。</li>
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　App Check は Release が App Attest、Debug がデバッグ用のトークン。両方のプロジェクトで、Firestore への問い合わせを最初から断らせる。Authentication にはかけない。</li>
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　Apple のログインは、本番と同じ Services ID と鍵を開発用でも使う。Services ID に開発用のドメインを足すだけで済む。</li>
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　<code class="font-mono text-xs">firebase deploy</code> は毎回 <code class="font-mono text-xs">-P dev</code> か <code class="font-mono text-xs">-P prod</code> を付ける。既定のプロジェクトは置かない。</li>
+    </ul>
+  </section>
+
+  <section id="impl" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / implementation</p>
+    <h2 class="mt-2 font-display text-3xl">作るもの</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">本番のデータベースの記録には触れません。開発用のデータベースは空から始めます。</p>
+    <ol class="mt-6 flex max-w-3xl flex-col gap-3 text-sm"><li class="rounded-2xl border border-rule bg-white p-4"><b>1. <code class="font-mono text-xs">GoogleService-Info.plist</code> を <code class="font-mono text-xs">YatTatTa/</code> から外し、<code class="font-mono text-xs">ios/Firebase/Dev/</code> と <code class="font-mono text-xs">ios/Firebase/Prod/</code> に置く。どちらも Git に入れない</b><br><span class="text-ink/70"><code class="font-mono text-xs">YatTatTa/</code> の中に置くと、xcodegen が両方をアプリに入れてしまう。本番のアプリに開発用のプロジェクトの名前を残さない。</span></li><li class="rounded-2xl border border-rule bg-white p-4"><b>2. <code class="font-mono text-xs">project.yml</code> の Debug と Release に <code class="font-mono text-xs">FIREBASE_ENV</code>（Dev か Prod）を設け、ビルドの途中でその設定ファイルをアプリへ写すスクリプトを足す</b><br><span class="text-ink/70">Swift のコードに切り替えを書かずに済む。写す元と先をスクリプトの入出力に書いておけば、Xcode のスクリプトの制限（sandbox）の中でも動く。</span></li><li class="rounded-2xl border border-rule bg-white p-4"><b>3. SDK に FirebaseAppCheck を足し、<code class="font-mono text-xs">FirebaseApp.configure()</code> の前に、Release は App Attest、Debug はデバッグ用の仕組みを選ぶ</b><br><span class="text-ink/70">App Check は、Firebase につなぐ前に選んでおく決まり。シミュレーターでは App Attest が動かないので、Debug はデバッグ用にする。</span></li><li class="rounded-2xl border border-rule bg-white p-4"><b>4. App Attest の entitlement（<code class="font-mono text-xs">com.apple.developer.devicecheck.appattest-environment</code>）を足す</b><br><span class="text-ink/70">本物のアプリかを Apple に確かめてもらうのに要る。</span></li><li class="rounded-2xl border border-rule bg-white p-4"><b>5. <code class="font-mono text-xs">firebase/.firebaserc</code> に dev と prod の名前を付け、既定のプロジェクトをなくす</b><br><span class="text-ink/70"><code class="font-mono text-xs">firebase deploy</code> を付け忘れのまま打つと、エラーで止まる。開発用のつもりで本番のルールを書き換える事故を防ぐ。</span></li><li class="rounded-2xl border border-rule bg-white p-4"><b>6. テスト：Release と Debug で写す設定ファイルを取り違えていないかを、ビルドの設定から確かめる</b><br><span class="text-ink/70">テストはアプリの外から Firebase に触れないので、確かめられるのは設定まで。取り違えると、開発の試し打ちが利用者の記録に混ざる。</span></li><li class="rounded-2xl border border-rule bg-white p-4"><b>7. 開発者が実機で確かめる：Debug で叩くと開発用に、TestFlight（Release）で叩くと本番に記録が入る。Firebase の App Check の画面で、問い合わせが「確認済み」になる</b><br><span class="text-ink/70">App Attest は実機の Release でしか動かない。シミュレーターでは確かめられない。</span></li></ol>
+  </section>
+
+  <section id="ask" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / developer</p>
+    <h2 class="mt-2 font-display text-3xl">開発者にお願いすること（約30分）</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">Firebase と Apple Developer の画面での作業です。手順は<a href="../../devops/firebase/index.html#environments" class="lnk">Firebase の準備と運用</a>に書きました。</p>
+    <ol class="mt-6 grid max-w-3xl gap-3 text-sm sm:grid-cols-2"><li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">1　約10分</p><p class="mt-2">Firebase で開発用のプロジェクト <code class="font-mono text-xs">yat-tat-ta-dev</code> を作り、iOS アプリ（com.yat-tat-ta）を登録する。Google アナリティクスは入れない。</p></li><li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">2　約5分</p><p class="mt-2">Firestore を東京（asia-northeast1）に本番モードで作る。</p></li><li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">3　約5分</p><p class="mt-2">Authentication で Apple を有効にし、本番と同じ Services ID と鍵を入れる。Apple Developer の Services ID の設定に、開発用のドメインと Return URL を足す。</p></li><li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">4　約3分</p><p class="mt-2">設定ファイルを2つ置く。開発用は <code class="font-mono text-xs">ios/Firebase/Dev/</code>、いまの本番用は <code class="font-mono text-xs">ios/YatTatTa/</code> から <code class="font-mono text-xs">ios/Firebase/Prod/</code> へ移す。</p></li><li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">5　約5分</p><p class="mt-2">両方のプロジェクトの App Check で、iOS アプリに App Attest を登録する。Apple Developer で App ID に App Attest を足す。</p></li></ol>
+  </section>
+
+  <section id="links" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">07 / links</p>
+    <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">課題</p><a href="../../issues/firebase-environments/index.html" class="mt-1 block font-bold lnk">firebase-environments</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">開発/運用</p><a href="../../devops/firebase/index.html" class="mt-1 block font-bold lnk">Firebase の準備と運用</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../glossary.html#firebase-environment" class="font-bold lnk">開発用と本番用</a><a href="../../glossary.html#app-check" class="font-bold lnk">App Check</a><a href="../../glossary.html#firestore" class="font-bold lnk">Firestore</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">前回のセッション</p><a href="../20261007-1215-privacy-policy/index.html" class="mt-1 block font-bold lnk">プライバシーポリシーを出す</a></li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

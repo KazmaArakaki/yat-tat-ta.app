@@ -96,6 +96,8 @@ tailwind.config = {
     <a href="#account" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">アカウント</a>
     <a href="#firestore" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">Firestore</a>
     <a href="#privacy-policy" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">プライバシーポリシー</a>
+    <a href="#firebase-environment" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">開発用と本番用</a>
+    <a href="#app-check" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">App Check</a>
     <a href="#translation-table" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">訳語表</a>
   </nav>
 
@@ -1098,6 +1100,40 @@ tailwind.config = {
     <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
       <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#account" class="text-dopa underline underline-offset-4">アカウント</a><a href="#firestore" class="text-dopa underline underline-offset-4">Firestore</a><a href="#record" class="text-dopa underline underline-offset-4">記録</a><a href="#health-claim" class="text-dopa underline underline-offset-4">健康効果</a></p></div>
       <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="sessions/20261007-1215-privacy-policy/index.html" class="text-signal underline underline-offset-4">セッション：プライバシーポリシーを出す</a><a href="devops/firebase/index.html#hosting" class="text-signal underline underline-offset-4">運用：公開ページ</a><a href="features/account/index.html" class="text-signal underline underline-offset-4">機能：アカウント</a></p></div>
+    </div>
+  </section>
+
+  <section id="firebase-environment" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#firebase-environment</p>
+    <h2 class="mt-1 font-display text-2xl">開発用と本番用（Firebase の環境）</h2>
+    <p class="mt-3 leading-relaxed">Firebase のプロジェクトを2つに分けたときの呼び名。開発用は <code class="font-mono text-xs">yat-tat-ta-dev</code> で、Xcode から Run した Debug のビルドが書く。本番用は <code class="font-mono text-xs">yat-tat-ta</code> で、TestFlight と App Store の Release のビルドが書き、利用者の<a href="#record" class="text-dopa underline underline-offset-4">記録</a>が入る。公開ページ（<a href="#privacy-policy" class="text-dopa underline underline-offset-4">プライバシーポリシー</a>）も本番用に置く。開発中にルールやアカウントの削除を試しても、利用者の記録に触れないために分けた（2026-10-07 設計）。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>アカウントの削除をもう一度試したいんですが、本番の記録が消えませんか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>Xcode から入れたアプリなら、開発用に書いているので消えません。本番に書くのは TestFlight と App Store のアプリだけです。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>TestFlight で試してもらった人の記録はどうなりますか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>本番に残ります。TestFlight は Release のビルドなので、利用者と同じ扱いです。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#firestore" class="text-dopa underline underline-offset-4">Firestore</a><a href="#app-check" class="text-dopa underline underline-offset-4">App Check</a><a href="#account" class="text-dopa underline underline-offset-4">アカウント</a><a href="#privacy-policy" class="text-dopa underline underline-offset-4">プライバシーポリシー</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="devops/firebase/index.html#environments" class="text-signal underline underline-offset-4">運用：開発用と本番用</a><a href="sessions/20261007-1318-firebase-environments/index.html" class="text-signal underline underline-offset-4">セッション：Firebase を開発用と本番用に分ける</a></p></div>
+    </div>
+  </section>
+
+  <section id="app-check" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#app-check</p>
+    <h2 class="mt-1 font-display text-2xl">App Check</h2>
+    <p class="mt-3 leading-relaxed">Firebase への問い合わせが、本物の Yat Tat Ta から来たものかを確かめる仕組み。確かめられない問い合わせを、<a href="#firestore" class="text-dopa underline underline-offset-4">Firestore</a> が断る。Release のビルドでは App Attest で Apple が確かめ、シミュレーターでも動く Debug のビルドでは、端末ごとに出るデバッグ用のトークンを Firebase に登録して通す。アプリに埋め込む鍵は誰でも取り出せるので、アプリを通さない大量の問い合わせで費用がかさむのを防ぐ。他人の記録を読ませないのは、App Check ではなく Firestore のルールの仕事（2026-10-07 設計）。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>シミュレーターで起動したら、記録が保存されません。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>App Check のデバッグ用のトークンが登録されていないはずです。Xcode のコンソールに出ているトークンを、開発用のプロジェクトに登録してください。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>App Check があれば、ルールはゆるくしてもいいですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>いいえ。App Check は本物のアプリかを見るだけです。本物のアプリを使う人どうしで、他人の記録を読ませないのはルールです。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#firebase-environment" class="text-dopa underline underline-offset-4">開発用と本番用</a><a href="#firestore" class="text-dopa underline underline-offset-4">Firestore</a><a href="#account" class="text-dopa underline underline-offset-4">アカウント</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="devops/firebase/index.html#environments" class="text-signal underline underline-offset-4">運用：開発用と本番用</a><a href="sessions/20261007-1318-firebase-environments/index.html" class="text-signal underline underline-offset-4">セッション：Firebase を開発用と本番用に分ける</a></p></div>
     </div>
   </section>
 
