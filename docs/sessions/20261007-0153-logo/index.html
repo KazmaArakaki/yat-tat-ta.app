@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="session-state" content="developing">
-<meta name="state" content="developing">
+<meta name="session-state" content="done">
+<meta name="state" content="done">
 <title>ロゴを作る</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -74,7 +74,7 @@ tailwind.config = {
       <time datetime="2026-10-07T01:53">2026-10-07 01:53</time>
       <span>/</span>
       <span>設計セッション</span>
-      <span class="rounded-full border border-gold bg-gold/15 px-2.5 py-0.5 font-bold text-ink">状態：developing</span>
+      <span class="rounded-full border border-signal bg-signal/10 px-2.5 py-0.5 font-bold text-ink">状態：done</span>
     </div>
     <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl"><a href="../../glossary.html#logo" class="text-dopa">ロゴ</a>を作る</h1>
   </header>
@@ -221,7 +221,7 @@ tailwind.config = {
       <li class="rounded-2xl border border-rule bg-white p-4"><code class="font-mono text-xs">AppIcon.icon</code> は <code class="font-mono text-xs">icon.json</code> を手で書いた。<code class="font-mono text-xs">xcrun actool</code> で組み、出てきた 120px の PNG で、層の重なりと色がねらいどおりだと確かめた。</li>
       <li class="rounded-2xl border border-rule bg-white p-4">暗い配色では、地を #16120F、輪を gold に差し替え、ずらした影の層を消す（<code class="font-mono text-xs">fill-specializations</code> と <code class="font-mono text-xs">hidden-specializations</code>）。</li>
       <li class="rounded-2xl border border-rule bg-white p-4">シミュレーター（iPhone 17）のホーム画面に、明るい版が出ることを確かめた。暗い版は、シミュレーターの配色を暗くしてもほかのアプリのアイコンごと切り替わらず、確かめられていない。</li>
-      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>残り</b>　開発者が実機で、明るい、暗い、色付き、クリアの4通りを確かめる（ホーム画面を長押し →「編集」→「カスタマイズ」）。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">開発者が実機で、明るい、暗い、色付き、クリアの4通りを確かめ、どれも人形が見えて形が崩れないことを OK とした（2026-10-07）。</li>
     </ul>
   </section>
 
