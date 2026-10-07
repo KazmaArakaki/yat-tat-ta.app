@@ -8,6 +8,10 @@ import Foundation
 extension AppModel {
     enum Demo: String {
         case chance, hot, push, toppa, gold, fever, kakutei, negirai, heavy, squad, splash, intro
+        /// チュートリアルの場面。tutorial は場面1から、ほかはその場面から
+        case tutorial, tutorialMash = "tutorial-mash", tutorialAfter = "tutorial-after",
+             tutorialStreak = "tutorial-streak", tutorialTotals = "tutorial-totals",
+             tutorialGear = "tutorial-gear", tutorialFinish = "tutorial-finish"
     }
 
     /// 見本の起動か。見本では、ふつうのスプラッシュを出さない
@@ -28,6 +32,18 @@ extension AppModel {
         case .toppa: setDemoToppa(ToppaEvent(value: 300, gold: false))
         case .gold: setDemoToppa(ToppaEvent(value: 1_000, gold: true))
         case .fever: setDemoFever()
+        case .tutorial: startTutorial()
+        case .tutorialMash:
+            // 練習を激熱（6打目）まで叩いたところ
+            startTutorial()
+            wake()
+            let start = ProcessInfo.processInfo.systemUptime
+            for i in 0..<6 { _ = tap(at: start + Double(i) * 0.1) }
+        case .tutorialAfter: setDemoTutorial(.after)
+        case .tutorialStreak: setDemoTutorial(.streak)
+        case .tutorialTotals: setDemoTutorial(.totals)
+        case .tutorialGear: setDemoTutorial(.gear)
+        case .tutorialFinish: setDemoTutorial(.finish)
         case .splash: showSplash(.regular)
         case .intro: showSplash(.intro)
         case .squad:

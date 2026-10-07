@@ -75,7 +75,12 @@ struct FinaleOverlay: View {
                 MetalText(text: words.1, size: 140)
                 HStack(spacing: 10) {
                     Text("やったった！").font(.label(22, black: true))
-                    Text("+\(event.reps) ドパ").font(.number(22))
+                    // 練習はドパに数えない
+                    if event.practice {
+                        Text("練習 \(event.reps)回").font(.label(22, black: true))
+                    } else {
+                        Text("+\(event.reps) ドパ").font(.number(22))
+                    }
                 }
                 .foregroundStyle(.white)
                 .shadow(color: .black, radius: 0, x: 2, y: 2)

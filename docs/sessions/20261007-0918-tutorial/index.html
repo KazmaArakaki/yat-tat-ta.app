@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="session-state" content="planning">
-<meta name="state" content="planning">
+<meta name="session-state" content="developing">
+<meta name="state" content="developing">
 <title>チュートリアルを入れる</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -66,7 +66,7 @@ tailwind.config = {
       <time datetime="2026-10-07T09:18">2026-10-07 09:18</time>
       <span>/</span>
       <span>設計セッション</span>
-      <span class="rounded-full border border-gold bg-gold/10 px-2.5 py-0.5 font-bold text-ink">状態：planning</span>
+      <span class="rounded-full border border-gold bg-gold/10 px-2.5 py-0.5 font-bold text-ink">状態：developing</span>
     </div>
     <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl"><a href="../../glossary.html#tutorial" class="text-dopa">チュートリアル</a>を入れる</h1>
   </header>
@@ -126,7 +126,7 @@ tailwind.config = {
           <tr><td><b>「+N ドパ」</b></td><td>出さない。飛ぶドパの粒と文字は出す</td><td>増えたように見せると、カードの 0 と食い違う</td></tr>
           <tr><td><b>フィーバーのくじ</b></td><td>引かない</td><td>練習で当たると、本番の驚きを先に使ってしまう</td></tr>
           <tr><td><b>節目、ドパ突破、虹の先バレ</b></td><td>出さない</td><td>どれも記録の数から決まる。練習は数を動かさない</td></tr>
-          <tr><td><b>フィナーレ</b></td><td>筋肉確定（1.2秒）と「やったった！」に「練習 10回」の札（1.6秒）。言葉は回さず、いつも「筋肉」</td><td>本番のごほうびを1度見せておく。言葉を回すと、本番の1回目が2番目の言葉から始まってしまう</td></tr>
+          <tr><td><b>フィナーレ</b></td><td>本番と同じ2段。確定は「筋肉確定」で、下の「+N ドパ」の代わりに「練習 10回」。ねぎらいは「あんたはえらい！」。言葉は回さない。長さは本番と同じく声の長さで決まる（約3秒）</td><td>本番のごほうびを1度見せておく。言葉を回すと、本番の1回目が2番目の言葉から始まってしまう</td></tr>
           <tr><td><b>今日まだ通知の問いかけ</b></td><td>出さない</td><td>問いかけは「初めて叩き切ったあと」。練習は数えない</td></tr>
           <tr><td><b>60秒止まったとき</b></td><td>閉じない。案内を出したまま待つ</td><td>記録がないので、閉じても残すものがない</td></tr>
           <tr><td><b>終わったあとの隊</b></td><td>倒れ込んで寝る</td><td>本番でも叩き切ったら寝る。最初の本番も起こすところから</td></tr>
@@ -198,8 +198,20 @@ tailwind.config = {
     </ul>
   </section>
 
+  <section id="build" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">08 / build</p>
+    <h2 class="mt-2 font-display text-3xl">作ったところ</h2>
+    <ul class="mt-6 flex max-w-3xl flex-col gap-2 text-sm">
+      <li class="rounded-2xl border border-rule bg-white p-4">練習のフィナーレは、本番と同じ2段（確定とねぎらい）にした。確定の下の「+N ドパ」を「練習 10回」に替え、ねぎらいは「あんたはえらい！」に固定。設計では1段に縮める案だったが、本番のごほうびをそのまま1度見せるほうを取った。長さは声で決まり、約3秒。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">照らす場所の位置は <code class="font-mono text-xs">onGeometryChange</code> で画面全体の座標を測って渡す。穴は当たり判定からも抜いてあり、叩く場面ではそのまま下の隊に指が届く。叩く場所はもとから広いので、穴を広げずにそのまま照らす（広げるとカードにかかった）。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">文言20個を日本語と英語で足した。英語は訳語表に3行足した。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">テストを10個足した（<code class="font-mono text-xs">TutorialTests</code>）。練習で記録が増えない、くじを引かない、問いかけが出ない、途中でスキップやアプリを離れたら練習を捨てる、記録がある人には出ない、など。全79個が通る。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">シミュレーターで、7つの場面を起動引数（<code class="font-mono text-xs">-demo tutorial</code>、<code class="font-mono text-xs">tutorial-mash</code> ほか）で開き、照らす位置と吹き出しを日本語と英語で確かめた。長押しと連打の手触り、通しの時間はまだ。実機で確かめる。</li>
+    </ul>
+  </section>
+
   <section id="links" class="mt-20">
-    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">08 / links</p>
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">09 / links</p>
     <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
     <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
       <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">機能</p><a href="../../features/tutorial/index.html" class="mt-1 block font-bold lnk">チュートリアル</a></li>

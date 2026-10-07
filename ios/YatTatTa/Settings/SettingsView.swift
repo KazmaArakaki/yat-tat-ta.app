@@ -56,6 +56,17 @@ struct SettingsView: View {
                     Text("その日まだ叩いていない夜に、1回だけ知らせます。7日開かなければ、自分から止まります。")
                 }
 
+                // チュートリアルを見直す。練習は記録を動かさないので、何度やってもよい
+                Section {
+                    Button {
+                        dismiss()
+                        model.startTutorial()
+                    } label: {
+                        Text("使い方をもう一度").font(.label(16)).foregroundStyle(Color.ink)
+                    }
+                    .disabled(model.session.isOpen)
+                }
+
                 // 注意書き。健康効果は書かず、休んでほしい場面だけを書く（docs/devops/health-wording）
                 Section {
                 } footer: {

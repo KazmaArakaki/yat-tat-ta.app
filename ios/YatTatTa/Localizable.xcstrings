@@ -2022,6 +2022,326 @@
           }
         }
       }
+    },
+    "%lld / %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld / %2$lld"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld / %lld"
+          }
+        }
+      }
+    },
+    "1回に叩く数は、いま%lld回。ここで%lld〜%lld回に変えられます。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You tap %1$lld times per set right now. Change it here, from %2$lld to %3$lld."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1回に叩く数は、いま%lld回。ここで%lld〜%lld回に変えられます。"
+          }
+        }
+      }
+    },
+    "いまのは練習" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "That was practice"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "いまのは練習"
+          }
+        }
+      }
+    },
+    "ためたドパ" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your Dopa"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ためたドパ"
+          }
+        }
+      }
+    },
+    "はじめる" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Let's go"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "はじめる"
+          }
+        }
+      }
+    },
+    "スキップ" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skip"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "スキップ"
+          }
+        }
+      }
+    },
+    "スクワット1回が1ドパ。DPW は7日間、DT はこれまでの全部。押すと、履歴。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One squat is 1 Dopa. DPW counts the last 7 days, DT counts everything. Tap for your History."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "スクワット1回が1ドパ。DPW は7日間、DT はこれまでの全部。押すと、履歴。"
+          }
+        }
+      }
+    },
+    "スクワット1回で、1回叩く" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One squat, one tap"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "スクワット1回で、1回叩く"
+          }
+        }
+      }
+    },
+    "タップで次へ ›" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap to continue ›"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "タップで次へ ›"
+          }
+        }
+      }
+    },
+    "使い方をもう一度" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Replay the Tutorial"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "使い方をもう一度"
+          }
+        }
+      }
+    },
+    "叩いた日は、ここが1日伸びます。休んだ日は、休み券がつなぎます。押すと、今日の記録。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Each day you tap adds a day here. A Rest Pass covers a day you skip. Tap it to see Today."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "叩いた日は、ここが1日伸びます。休んだ日は、休み券がつなぎます。押すと、今日の記録。"
+          }
+        }
+      }
+    },
+    "回数を変える" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change the count"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "回数を変える"
+          }
+        }
+      }
+    },
+    "最初の1回で、1日目。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Day 1 starts with your first tap."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最初の1回で、1日目。"
+          }
+        }
+      }
+    },
+    "本番は、しゃがんだ回数だけ叩きます。いまは練習。しゃがまずに%lld回どうぞ。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "For real, you tap once for every squat you did. This is practice, so no squats needed. Tap %lld times."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "本番は、しゃがんだ回数だけ叩きます。いまは練習。しゃがまずに%lld回どうぞ。"
+          }
+        }
+      }
+    },
+    "続けた日" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your streak"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "続けた日"
+          }
+        }
+      }
+    },
+    "練習 %lld回" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PRACTICE ×%lld"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "練習 %lld回"
+          }
+        }
+      }
+    },
+    "練習 残り" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PRACTICE LEFT"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "練習 残り"
+          }
+        }
+      }
+    },
+    "練習は記録に残りません。本番は、食べてしゃがんだあとに。途中でやめても、叩いた分は残ります。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Practice isn't logged. Do the real thing after you eat and squat. If you stop partway, the taps you made still count."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "練習は記録に残りません。本番は、食べてしゃがんだあとに。途中でやめても、叩いた分は残ります。"
+          }
+        }
+      }
+    },
+    "隊は寝ています。ポケットの中で数えないように。画面を長押しして起こしてください。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The squad is asleep, so nothing counts from your pocket. Press and hold the screen to wake them up."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "隊は寝ています。ポケットの中で数えないように。画面を長押しして起こしてください。"
+          }
+        }
+      }
+    },
+    "隊を起こす" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wake the squad"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "隊を起こす"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

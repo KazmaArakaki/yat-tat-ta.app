@@ -194,6 +194,8 @@ final class SquatStageUIView: UIView {
         // 寝るのは叩き切ったときだけ。起こした瞬間は wake で立たせ、ここでは寝かせる向きだけを見る
         if isAsleep && wakingTouch == nil && pose != .lie { collapse() }
         if !isAsleep && (pose == .lie || pose == .rise) && wakingTouch == nil { setPose(.stand, duration: 0.12) }
+        // チュートリアルの間は、下の文字を吹き出しが代わりに言う。練習のドパは数えないので「+N ドパ」も出さない
+        gained.isHidden = model.tutorial != nil
         // 叩き切ったあとは、フィナーレの間だけ 0 と変えた数を残す
         if let finale = model.finale, finale.completed {
             setNumber("0")
@@ -215,7 +217,8 @@ final class SquatStageUIView: UIView {
         setNumberFont(Self.numberBaseSize + (Self.numberMaxSize - Self.numberBaseSize) * min(progress, 1))
         setParrot(model.session.isOpen ? stage : nil)
         if stage < .push {
-            caption.text = model.session.isOpen ? String(localized: "スクワット 残り") : String(localized: "スクワット")
+            caption.text = model.isPracticing && model.tutorial == .mash ? String(localized: "練習 残り")
+                : model.session.isOpen ? String(localized: "スクワット 残り") : String(localized: "スクワット")
         }
         gained.text = model.converted > 0 ? String(localized: "+\(model.converted) ドパ")
             : isAsleep ? String(localized: "長押しで起こす") : String(localized: "叩いてしゃがむ")

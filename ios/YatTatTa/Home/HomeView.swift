@@ -16,6 +16,8 @@ struct HomeView: View {
     @State private var swell = false
     /// 帯の日数の数字の位置。スプラッシュの数が飛ぶ先
     @State private var streakNumberFrame: CGRect?
+    /// チュートリアルで照らす場所の位置（画面全体の座標）
+    @State private var tutorialFrames: [TutorialTarget: CGRect] = [:]
 
     var body: some View {
         ZStack {
@@ -28,6 +30,7 @@ struct HomeView: View {
                               hidesNumber: model.splash != nil && !reduceMotion,
                               onNumberFrame: { streakNumberFrame = $0 })
                         .animation(.spring(duration: 0.5, bounce: 0.4), value: model.ledger.streak)
+                        .measure(.streak, into: $tutorialFrames)
                     Button {
                         showsSettings = true
                     } label: {
@@ -37,15 +40,18 @@ struct HomeView: View {
                             .frame(width: 44, height: 44)
                     }
                     .accessibilityLabel(Text("設定"))
+                    .measure(.gear, into: $tutorialFrames)
                     .padding(.leading, 8)
                 }
                 // 上の帯と下のカードのあいだ、画面の幅いっぱいが叩く場所
                 SquatStageView(model: model)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .measure(.stage, into: $tutorialFrames)
                     .padding(.vertical, 8)
                 TotalsCards(dopaPerWeek: model.dopaPerWeek, previousWindow: model.ledger.previousWindow,
                             bestWindow: model.ledger.bestWindow, dopaTotal: model.dopaTotal,
                             openHistory: { history = model.history() }, canOpenHistory: !model.session.isOpen)
+                    .measure(.totals, into: $tutorialFrames)
             }
             .padding(.horizontal, 20)
             .padding(.top, 8)
@@ -53,6 +59,8 @@ struct HomeView: View {
             // 激熱で地が暗転したら、帯とカードも暗い配色にして読めるようにする
             .environment(\.colorScheme, model.hypeStage >= .hot ? .dark : systemScheme)
             .scaleEffect(swell ? 1.025 : 1)
+
+            tutorial
 
             overlays
 
@@ -82,6 +90,17 @@ struct HomeView: View {
             case .inactive, .background: model.sceneDidLeave()
             @unknown default: break
             }
+        }
+    }
+
+    /// チュートリアル。段階の文字やフィナーレより下に置き、練習のフィナーレの間は引っ込める
+    @ViewBuilder private var tutorial: some View {
+        if let step = model.tutorial, model.finale == nil {
+            TutorialOverlay(step: step, frames: tutorialFrames, targetReps: model.targetReps,
+                            firstTime: model.ledger.dopaTotal == 0,
+                            advance: { withAnimation { model.advanceTutorial() } },
+                            end: { withAnimation { model.endTutorial() } })
+                .transition(.opacity)
         }
     }
 
@@ -134,8 +153,8 @@ struct HomeView: View {
                 .allowsHitTesting(false)
         }
 
-        // 休み券の帯、途切れたときのカード、通知の問いかけは、スプラッシュが消えてから出す
-        if model.splash == nil {
+        // 休み券の帯、途切れたときのカード、通知の問いかけは、スプラッシュとチュートリアルが消えてから出す
+        if model.splash == nil && model.tutorial == nil {
             notices
         }
     }
@@ -185,5 +204,12 @@ struct HomeView: View {
 
     private var scrim: some View {
         Color.black.opacity(0.35).ignoresSafeArea().transition(.opacity)
+    }
+}
+
+private extension View {
+    /// チュートリアルで照らすために、画面全体の座標で位置を測る
+    func measure(_ target: TutorialTarget, into frames: Binding<[TutorialTarget: CGRect]>) -> some View {
+        onGeometryChange(for: CGRect.self) { $0.frame(in: .global) } action: { frames.wrappedValue[target] = $0 }
     }
 }

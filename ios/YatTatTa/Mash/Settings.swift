@@ -20,6 +20,8 @@ enum SettingKey {
     static let negiraiCount = "negiraiCount"
     /// はじめての幕を出したか。1度きり
     static let introShown = "introShown"
+    /// チュートリアルを終えたか、スキップしたか。途中で終了されたら立たない
+    static let tutorialShown = "tutorialShown"
 }
 
 enum TargetReps {

@@ -49,6 +49,10 @@ import SwiftData
     private(set) var todayRecords: [SquatRecord] = []
     /// いま出しているスプラッシュ。消えたら nil
     private(set) var splash: Splash?
+    /// いま出しているチュートリアルの場面。出していなければ nil
+    ///
+    /// 出している間の連打は練習連打。記録を作らず、フィーバーのくじも引かない。
+    private(set) var tutorial: TutorialStep?
     /// スプラッシュを出した記録日。同じ日に開き直しても出さない
     @ObservationIgnored private var splashDay: RecordDay?
     #if DEBUG
@@ -95,33 +99,47 @@ import SwiftData
         }
     }
 
-    /// ボタンに出す数。叩いていなければ目標回数
-    var remaining: Int { session.isOpen ? session.remaining : targetReps }
+    /// ボタンに出す数。叩いていなければ目標回数（練習連打の場面なら練習の回数）
+    var remaining: Int {
+        if session.isOpen { return session.remaining }
+        return tutorial == .mash ? TutorialStep.practiceReps : targetReps
+    }
     /// この連打で入ったドパ（スクワットとフィーバー）
     var converted: Int { session.dopa }
-    var dopaTotal: Int { ledger.dopaTotal + session.dopa }
-    var dopaPerWeek: Int { ledger.dopaPerWeek + session.dopa }
+    /// チュートリアルの間の連打は練習。ドパの合計に足さない
+    var isPracticing: Bool { tutorial != nil }
+    var dopaTotal: Int { ledger.dopaTotal + (isPracticing ? 0 : session.dopa) }
+    var dopaPerWeek: Int { ledger.dopaPerWeek + (isPracticing ? 0 : session.dopa) }
 
     // MARK: - 叩く
 
     /// 長押しで隊を起こす。うっかり触れた指で記録が始まらないように
     func wake() {
         guard !squadAwake else { return }
+        // チュートリアルでは、起こす場面でだけ起きる
+        if let tutorial, tutorial != .wake { return }
         squadAwake = true
         feel.wake()
+        if tutorial == .wake { tutorial = .mash }
     }
 
     /// 1打。数えない間は nil
     func tap(at time: TimeInterval) -> MashSession.Tap? {
         guard squadAwake || session.isOpen else { return nil }
+        // チュートリアルでは、練習連打の場面でだけ数える
+        if let tutorial, tutorial != .mash { return nil }
+        let practice = isPracticing
         let date = now()
         if !session.isOpen { refreshIfDayChanged(date) }
         let totalBefore = dopaTotal
         let weekBefore = dopaPerWeek
         let wasOpen = session.isOpen
-        guard let tap = session.tap(at: time, date: date, target: targetReps, draw: draw) else { return nil }
+        // 練習はいつも同じ回数で、くじは外れに固定する
+        guard let tap = session.tap(at: time, date: date, target: practice ? TutorialStep.practiceReps : targetReps,
+                                    draw: practice ? { 1.0 } : draw) else { return nil }
         if !wasOpen { feel.playBGM(.bgmMash) }
 
+        // 練習はドパの合計を動かさないので、節目もドパ突破も起きない
         let crossed = Milestone.dopaTotal(from: totalBefore, to: dopaTotal)
             + [Milestone.bestWindow(best: ledger.bestWindow, from: weekBefore, to: dopaPerWeek)].compactMap { $0 }
         session.milestones += crossed
@@ -138,7 +156,7 @@ import SwiftData
             // スクワット隊が1人増える
             if tap.index % SquatStageUIView.recruitEvery == 0 && !tap.isFinal
                 && 1 + tap.index / SquatStageUIView.recruitEvery <= SquatStageUIView.maxMembers { feel.recruit() }
-            if tap.stage == .push && tap.enteredStage { rainbow = finalTapReachesMilestone() }
+            if tap.stage == .push && tap.enteredStage && !practice { rainbow = finalTapReachesMilestone() }
             feel.tap(level: tap.level, heavy: tap.stage >= .hot)
             if tap.enteredStage && !tap.isFinal {
                 feel.enter(tap.stage)
@@ -162,7 +180,8 @@ import SwiftData
                 feel.milestone()
                 showPassing(first)
             }
-            if !tap.isFever { scheduleIdleClose() }
+            // 練習は60秒止まっても閉じない。閉じても残すものがない
+            if !tap.isFever && !practice { scheduleIdleClose() }
         }
         return tap
     }
@@ -233,7 +252,7 @@ import SwiftData
         #if DEBUG
         if splashPaused { return }
         #endif
-        guard splashDay != ledger.today, splash == nil, !session.isOpen, finale == nil else { return }
+        guard splashDay != ledger.today, splash == nil, tutorial == nil, !session.isOpen, finale == nil else { return }
         splashDay = ledger.today
         var kind = Splash.Kind.regular
         if !defaults.bool(forKey: SettingKey.introShown) {
@@ -246,6 +265,39 @@ import SwiftData
 
     func finishSplash() {
         splash = nil
+        presentTutorialIfNeeded()
+    }
+
+    // MARK: - チュートリアル
+
+    /// スプラッシュが消えたとき。まだ終えていなくて、記録が1件もない人にだけ出す
+    func presentTutorialIfNeeded() {
+        guard !defaults.bool(forKey: SettingKey.tutorialShown), ledger.dopaTotal == 0 else { return }
+        startTutorial()
+    }
+
+    /// 場面1から始める。設定シートの「使い方をもう一度」からも呼ぶ。叩いている最中とフィナーレの途中は始めない
+    func startTutorial() {
+        guard !session.isOpen, finale == nil else { return }
+        squadAwake = false
+        tutorial = .wake
+    }
+
+    /// どこかを叩いたとき。叩けば進む場面でだけ進む
+    func advanceTutorial() {
+        guard let tutorial, tutorial.advancesByTap, let next = tutorial.next else { return }
+        self.tutorial = next
+    }
+
+    /// 「はじめる」とスキップ。どちらも見せたことにする
+    ///
+    /// 練習の途中なら練習を捨てる。隊は寝かせて、本番は起こすところから。
+    func endTutorial() {
+        guard tutorial != nil else { return }
+        if session.isOpen { close(completed: false) }
+        tutorial = nil
+        squadAwake = false
+        defaults.set(true, forKey: SettingKey.tutorialShown)
     }
 
     #if DEBUG
@@ -275,6 +327,11 @@ import SwiftData
         // 叩き切ったら隊は寝る。次の記録も起こすところから
         if completed { squadAwake = false }
         guard let closed = session.close() else { return }
+        // 練習は記録を作らない。途中で閉じたら捨てるだけ
+        if isPracticing {
+            if completed { showPracticeFinale(reps: closed.reps) }
+            return
+        }
 
         let wasDoneToday = ledger.streak.doneToday
         let day = RecordDay(closed.startedAt)
@@ -329,14 +386,34 @@ import SwiftData
             try? await Task.sleep(for: .seconds(event.duration))
             guard !Task.isCancelled else { return }
             self?.finale = nil
+            self?.finaleDidEnd(event)
         }
     }
 
     /// 叩き切って1.2秒を過ぎたら、触って確定とねぎらいを飛ばせる
     func skipFinale() {
-        guard finale != nil else { return }
+        guard let event = finale else { return }
         finaleTask?.cancel()
         finale = nil
+        finaleDidEnd(event)
+    }
+
+    /// 練習のフィナーレが終わったら、チュートリアルを「いまのは練習」へ
+    private func finaleDidEnd(_ event: FinaleEvent) {
+        if event.practice && tutorial == .mash { tutorial = .after }
+    }
+
+    /// 練習連打を叩き切ったとき。確定とねぎらいを本番と同じに見せる
+    ///
+    /// 言葉は回さず、いつも「筋肉確定」と「あんたはえらい！」。回すと、本番の1回目が2番目の言葉から始まる。
+    private func showPracticeFinale(reps: Int) {
+        let negirai = Negirai(headline: nil, message: String(localized: "あんたはえらい！"), voice: .voiceNegirai3)
+        let timing = feel.finaleTiming(kakutei: 0, negirai: negirai.voice)
+        let event = FinaleEvent(completed: true, reps: reps, streakExtended: nil, milestones: [], kakutei: 0,
+                                negirai: negirai, kakuteiDuration: timing.kakutei, negiraiDuration: timing.negirai,
+                                practice: true)
+        feel.finale(kakutei: 0, negirai: negirai.voice, milestones: [], timing: timing, after: 0)
+        show(event)
     }
 
     private func showToppa(_ event: ToppaEvent) {
@@ -401,6 +478,10 @@ import SwiftData
 
     #if DEBUG
     func setDemoStage(_ stage: HypeStage) { hypeStage = stage }
+    func setDemoTutorial(_ step: TutorialStep) {
+        squadAwake = false
+        tutorial = step
+    }
     func setDemoToppa(_ event: ToppaEvent) { showToppa(event) }
     func setDemoBanner(_ stage: HypeStage) {
         hypeStage = stage
@@ -562,6 +643,8 @@ struct FinaleEvent: Equatable, Identifiable {
     /// 確定を見せる長さと、ねぎらいを見せる長さ。声の長さから決める（FeelEngine.finaleTiming）
     var kakuteiDuration: TimeInterval = 1.4
     var negiraiDuration: TimeInterval = 1.8
+    /// 練習連打のフィナーレ。ドパの数の代わりに「練習 N回」を出す
+    var practice = false
     /// 叩き切ってから、触って飛ばせるようになるまで
     static let skippableAfter: TimeInterval = 1.2
 

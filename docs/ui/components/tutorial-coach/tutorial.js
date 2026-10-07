@@ -294,10 +294,10 @@ var TUTORIAL = (function () {
 
     function finale() {
       fin.classList.remove('hidden'); fin.classList.add('flex');
-      fin.innerHTML = '<p class="metal font-display text-[52px] leading-[1.05] text-center">筋肉<br>確定</p>';
+      fin.innerHTML = '<div class="text-center"><p class="metal font-display text-[52px] leading-[1.05]">筋肉<br>確定</p>' +
+        '<p class="mt-4 text-sm font-black text-[#F5EEE3]">やったった！　練習 <span class="num">10</span> 回</p></div>';
       later(function () {
-        fin.innerHTML = '<p class="pop font-display text-[44px] leading-none text-gold [text-shadow:3px_3px_0_#1C1916]">やったった！</p>' +
-          '<p class="pop mt-4 rounded-full border-2 border-[#F5EEE3] px-4 py-1 text-sm font-black text-[#F5EEE3]" style="animation-delay:200ms">練習 <span class="num">10</span> 回</p>';
+        fin.innerHTML = '<p class="metal text-center font-display text-[40px] leading-tight">あんたは<br>えらい！</p>';
       }, 1200);
       later(function () {
         fin.classList.add('hidden'); fin.classList.remove('flex');
