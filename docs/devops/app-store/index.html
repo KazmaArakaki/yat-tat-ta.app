@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>App Store の掲載情報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: { rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } } },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+<style>
+.lnk { text-decoration:underline; text-decoration-color:rgba(229,51,122,.5); text-decoration-thickness:2px; text-underline-offset:4px; }
+.lnk:hover { text-decoration-color:#E5337A; }
+.copy-src { white-space:pre-wrap; }
+.copybtn[data-done="1"] { background:#1C1916; color:#FBF6EE; }
+</style>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-4xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <a href="../index.html" class="hover:text-dopa hover:underline">devops</a>
+      <span>/</span>
+      <span>文言</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight">App Store の<a href="../../glossary.html#store-listing" class="text-dopa">掲載情報</a></h1>
+    <p class="mt-3 text-sm text-mute">2026-10-07 設計。App Store Connect に文言を入れるとき、スクリーンショットを撮り直すとき、審査から問い合わせが来たときに開く。</p>
+  </header>
+
+  <section id="rules" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916]">
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-dopa">決まり事</p>
+      <ol class="mt-3 flex flex-col gap-2 font-bold leading-relaxed">
+        <li><span class="mr-2 font-mono text-dopa">1</span>掲載情報の元はこのページ。App Store Connect の文言を直したら、同じ日にこのページも直す。</li>
+        <li><span class="mr-2 font-mono text-dopa">2</span>日本語と英語は同時に直す。片方だけ直すと、国によって書いてあることが食い違う。</li>
+        <li><span class="mr-2 font-mono text-dopa">3</span>健康のことは<a href="../health-wording/index.html" class="lnk">健康効果の書き方</a>に、訳語は<a href="../localization/index.html" class="lnk">多言語の決まり事</a>に従う。</li>
+        <li><span class="mr-2 font-mono text-dopa">4</span>パチンコ、スロット、ギャンブル、くじ、当たりの語を、掲載情報に書かない。</li>
+        <li><span class="mr-2 font-mono text-dopa">5</span>スクリーンショットはスクリプトで撮り直す。手で撮ったものを混ぜない。</li>
+      </ol>
+    </div>
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">4つめの決まりには理由があります。年齢制限の質問の「疑似ギャンブル」は、賭けることと定義されています。叩いても何も賭けない Yat Tat Ta は「なし」と答えられる。けれども、説明文に「パチンコ風」とあれば、審査の人は疑似ギャンブルを疑うかもしれません。疑われたら最低でも 13+ に上がります。演出の言葉（激熱、FEVER）は画面にあるとおり見せ、それが何に似ているかは書かないことにしました（開発者が決定、2026-10-07）。</p>
+  </section>
+
+  <section id="listing" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">listing</p>
+    <h2 class="mt-2 font-display text-3xl">短い欄</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">App Store Connect の「App 情報」と、バージョンのページに入れる欄です。上限は App Store Connect が数える文字数で、2026-10-07 に数えて収まることを確かめました。</p>
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full min-w-[720px] border-collapse text-left text-sm">
+        <caption class="mb-2 text-left font-mono text-xs text-mute">表1　短い欄（日本語と英語）</caption>
+        <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="w-32 py-2 pr-3">欄</th><th class="py-2 pr-3">日本語</th><th class="py-2 pr-3">英語</th><th class="w-20 py-2">上限</th></tr></thead>
+        <tbody class="[&>tr]:border-b [&>tr]:border-rule [&_td]:py-2.5 [&_td]:pr-3 [&_td]:align-top">
+          <tr><td><b>名前</b></td><td>Yat Tat Ta</td><td>Yat Tat Ta</td><td class="font-mono text-xs">30</td></tr>
+          <tr><td><b>サブタイトル</b></td><td>食べたら、しゃがんで、叩く。<br><span class="text-xs text-mute">14字。はじめての幕の3つの言葉をつなげた1文</span></td><td>Eat. Squat. Tap for Dopa.<br><span class="text-xs text-mute">25字。2026-10-06 に決めたもの</span></td><td class="font-mono text-xs">30</td></tr>
+          <tr><td><b>プロモーション用テキスト</b></td><td>食後のスクワットが終わったら、回数だけ叩く。叩くたびに CHANCE、激熱!!、FEVER。最後の1打で筋肉確定。地味な20回が、毎回お祭りになります。<br><span class="text-xs text-mute">76字</span></td><td>Done with your after-meal squats? Tap once for every rep. CHANCE!, RED HOT!!, FEVER!!, then one last tap locks it all in. Twenty quiet squats, turned into a party.<br><span class="text-xs text-mute">163字</span></td><td class="font-mono text-xs">170</td></tr>
+          <tr><td><b>キーワード</b></td><td class="font-mono text-xs">スクワット,食後,運動,習慣,記録,筋トレ,継続,連続記録,カウンター,連打,太もも,毎日,ストリーク,フィットネス,宅トレ<br><span class="font-sans text-mute">62字</span></td><td class="font-mono text-xs">squat,workout,habit,tracker,streak,exercise,fitness,counter,after meal,daily,legs,routine,reps,home<br><span class="font-sans text-mute">99字</span></td><td class="font-mono text-xs">100</td></tr>
+          <tr><td><b>カテゴリ</b></td><td colspan="2">プライマリ：ヘルスケア／フィットネス。セカンダリ：エンターテインメント</td><td></td></tr>
+          <tr><td><b>サポート URL</b></td><td>https://yat-tat-ta.web.app/</td><td>https://yat-tat-ta.web.app/en/</td><td></td></tr>
+          <tr><td><b>プライバシーポリシー URL</b></td><td>https://yat-tat-ta.web.app/privacy/</td><td>https://yat-tat-ta.web.app/privacy/en/</td><td></td></tr>
+          <tr><td><b>著作権</b></td><td colspan="2">2026 Kazma Arakaki</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">キーワードには、ダイエット、血糖値、痩せる、を入れません。説明文と違い、キーワードは研究の1文という前後の文脈を持てないからです。名前とサブタイトルにある語（Yat Tat Ta、食べたら、Squat など）は、キーワードに重ねても検索の効きが変わらないので、別の語に枠を使いました。</p>
+  </section>
+
+  <section id="description" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">description</p>
+    <h2 class="mt-2 font-display text-3xl">説明文</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">上限は4,000字。日本語の最初の段落と最後の段落は、<a href="../health-wording/index.html#store" class="lnk">健康効果の書き方</a>で決めた文をそのまま使っています。英語には研究の1文を入れません（<a href="../localization/index.html#store" class="lnk">多言語の決まり事</a>）。英語の最初の段落にあった「pachinko-style」は、決まり事の4にあわせて「arcade-style」に改めました。</p>
+    <div class="mt-6 grid gap-4 lg:grid-cols-2">
+      <div class="rounded-2xl border-2 border-ink bg-white p-5">
+        <div class="flex items-center justify-between"><p class="font-mono text-xs font-bold text-dopa">日本語</p><button class="copybtn rounded-full border border-ink px-3 py-1 font-mono text-[11px]" data-copy="desc-ja">コピー</button></div>
+        <p id="desc-ja" class="copy-src mt-3 text-sm leading-relaxed">食後に少し体を動かすと、血糖値の上がり方がゆるやかになる、という研究があります。でも、食べたあとにしゃがむのは、地味で、忘れます。Yat Tat Ta は、終わったスクワットの回数だけボタンを叩いて、ドパに変えるアプリです。
+
+叩くたびに、画面が騒ぎます。CHANCE、激熱!!、PUSH!!。ときどき FEVER。最後の1打で「筋肉、確定！」の声が鳴り、ねぎらいの一言が出ます。
+
+■ できること
+・終わったスクワットの回数だけ叩く。1打がスクワット1回、1ドパ
+・続けた日を連続記録に。7日続けるごとに休み券が1枚
+・直近7日のドパ（DPW）を、前の7日と自己ベストに並べる
+・いつ何回しゃがんだかを、人形の履歴で見返す
+・まだ叩いていない夜に、1回だけお知らせ
+・Apple でログイン。機種を変えても、記録はそのまま
+
+Yat Tat Ta はスクワットの回数を記録するアプリで、医療のためのアプリではありません。膝や腰が痛むとき、医師から運動を止められているときは、休んでください。食べてすぐで気分が悪いときは、少し時間をおいてから。持病のある人は、始める前に医師に相談してください。</p>
+      </div>
+      <div class="rounded-2xl border-2 border-ink bg-white p-5">
+        <div class="flex items-center justify-between"><p class="font-mono text-xs font-bold text-dopa">英語</p><button class="copybtn rounded-full border border-ink px-3 py-1 font-mono text-[11px]" data-copy="desc-en">コピー</button></div>
+        <p id="desc-en" class="copy-src mt-3 text-sm leading-relaxed" lang="en">Ate something? Do your squats, then tap once for every rep. Each tap turns a squat into Dopa, with over-the-top arcade-style effects: RED HOT!!, FEVER!!, and a final tap that locks it all in. Keep your streak going, beat your best week, and watch your Dopa pile up.
+
+WHAT YOU CAN DO
+- Tap once for every squat you finished. One tap, one squat, one Dopa.
+- Build a streak. Every 7 days in a row earns a Rest Pass.
+- Put your last 7 days of Dopa (DPW) next to the 7 days before and your best week.
+- Look back at every set in History, one Squatman per set.
+- Get one reminder on nights you haven't tapped yet.
+- Sign in with Apple. Switch phones. Keep every set.
+
+Yat Tat Ta is an app for logging squats, not a medical app. If your knees or back hurt, or a doctor has told you not to exercise, please rest. If you feel unwell right after eating, wait a little before you start. If you have a medical condition, talk to your doctor first.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="age-rating" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">age rating</p>
+    <h2 class="mt-2 font-display text-3xl">年齢制限の答え：9+</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">「ある」と答えるのは1つだけです。健康やウェルネスの話題は、Apple の定義に「運動のすすめ」が例として挙がっています。食後にしゃがむことをすすめ、日本語の説明文には研究の1文もある。「ない」と言い張る理由がないので、正直に答えて 9+ にしました（開発者が決定、2026-10-07）。</p>
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full min-w-[640px] border-collapse text-left text-sm">
+        <caption class="mb-2 text-left font-mono text-xs text-mute">表2　年齢制限の質問と答え（Apple の定義は 2026-10-07 に読んだもの）</caption>
+        <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="py-2 pr-3">分類</th><th class="py-2 pr-3">質問</th><th class="py-2 pr-3">答え</th><th class="py-2">理由</th></tr></thead>
+        <tbody class="[&>tr]:border-b [&>tr]:border-rule [&_td]:py-2.5 [&_td]:pr-3 [&_td]:align-top">
+          <tr><td rowspan="2">App 内の管理</td><td>ペアレンタルコントロール</td><td>なし</td><td>年齢で中身を切り替える仕組みがない</td></tr>
+          <tr><td>年齢の確認</td><td>なし</td><td>年齢を聞かない</td></tr>
+          <tr><td rowspan="5">機能</td><td>制限のない Web アクセス</td><td>なし</td><td>開くのは自分のプライバシーポリシーのページだけ。Safari に渡す</td></tr>
+          <tr><td>ユーザー生成コンテンツ</td><td>なし</td><td>人に見せる投稿がない</td></tr>
+          <tr><td>ソーシャルメディア</td><td>なし</td><td></td></tr>
+          <tr><td>メッセージとチャット</td><td>なし</td><td></td></tr>
+          <tr><td>広告</td><td>なし</td><td>広告の SDK を入れていない</td></tr>
+          <tr><td rowspan="3">成熟したテーマ</td><td>下品な言葉や品のないユーモア</td><td>なし</td><td>ねぎらい（「あんたはえらい！」など）は、ほめ言葉だけ</td></tr>
+          <tr><td>ホラーや恐怖</td><td>なし</td><td></td></tr>
+          <tr><td>アルコール、タバコ、薬物</td><td>なし</td><td></td></tr>
+          <tr class="bg-dopa-soft"><td rowspan="2">医療やウェルネス</td><td><b>健康やウェルネスの話題</b></td><td><b>あり</b></td><td>食後のスクワットをすすめる。これで 9+</td></tr>
+          <tr><td>医療や治療の情報</td><td>なし</td><td>診断も、病気の扱い方も書かない。注意書きの「医師に相談を」は治療の情報にあたらない</td></tr>
+          <tr><td rowspan="3">性的な表現</td><td>成熟した、または示唆的なテーマ</td><td>なし</td><td></td></tr>
+          <tr><td>性的なコンテンツやヌード</td><td>なし</td><td></td></tr>
+          <tr><td>露骨な性的コンテンツとヌード</td><td>なし</td><td></td></tr>
+          <tr><td rowspan="4">暴力</td><td>アニメやファンタジーの暴力</td><td>なし</td><td>スクワットマンはしゃがむだけ。ドパ突破の爆発も、誰かを傷つける絵ではない</td></tr>
+          <tr><td>リアルな暴力</td><td>なし</td><td></td></tr>
+          <tr><td>長く続く、または残虐なリアルな暴力</td><td>なし</td><td></td></tr>
+          <tr><td>銃やその他の武器</td><td>なし</td><td></td></tr>
+          <tr><td rowspan="4">偶然に左右される活動</td><td>ギャンブル</td><td>なし</td><td>お金を賭けない</td></tr>
+          <tr><td><b>疑似ギャンブル</b></td><td><b>なし</b></td><td>定義は「お金を使わない賭け」。賭けるものがない。フィーバーは叩いた回数とは別に、ときどき起きる演出で、外れても何も失わない</td></tr>
+          <tr><td>ルートボックス</td><td>なし</td><td>買うものも、引くものもない</td></tr>
+          <tr><td>コンテスト</td><td>なし</td><td>人と競わない。自己ベストは自分の記録とだけ比べる</td></tr>
+          <tr><td>子ども向け</td><td>Kids カテゴリ</td><td>入れない</td><td>子ども向けに作っていない</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">質問の並びと言い方は、App Store Connect の画面と少し違うことがあります。答えるときは、画面の質問の定義を読み、この表の理由と照らしてください。</p>
+  </section>
+
+  <section id="review" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">app review</p>
+    <h2 class="mt-2 font-display text-3xl"><a href="../../glossary.html#review-note" class="lnk">審査メモ</a></h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">「App Review に関する情報」の「メモ」に入れます。審査の人が英語で読むので、英語だけです。デモ用のアカウントは作りません。ログインは Apple だけなので、審査の人は自分の Apple ID で入れます。「サインインが必要」の欄はチェックを外し、そのかわりメモの2段落めでログインのことを説明します。</p>
+    <div class="mt-6 rounded-2xl border-2 border-ink bg-white p-5">
+      <div class="flex items-center justify-between"><p class="font-mono text-xs font-bold text-dopa">メモ（英語）</p><button class="copybtn rounded-full border border-ink px-3 py-1 font-mono text-[11px]" data-copy="review-note">コピー</button></div>
+      <p id="review-note" class="copy-src mt-3 text-sm leading-relaxed" lang="en">Yat Tat Ta logs squats done after meals. When the user finishes their squats, they tap the button once for every rep.
+
+Sign-in: Sign in with Apple is the only sign-in method, so no demo account is needed. Please sign in with any Apple ID. We receive only the Firebase user ID, never the name or email address. Records are kept in the user's account so they come back on a new iPhone or after reinstalling, which is why sign-in comes first.
+
+How to try it: After signing in, a short intro and a tutorial appear. Long-press the Squatman in the middle to wake him, then tap 20 times. The last tap plays the finale.
+
+Effects: CHANCE, RED HOT and FEVER are sound and visual effects that appear while tapping. There is no betting, no currency, no purchase, no prize and no advertising.
+
+Account deletion: Settings (gear icon, top right) > Delete Account.</p>
+    </div>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">連絡先の名前、電話番号、メールアドレスは、開発者が自分のものを入れます。このページには残しません。</p>
+  </section>
+
+  <section id="other" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">other answers</p>
+    <h2 class="mt-2 font-display text-3xl">そのほかの答え</h2>
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full min-w-[640px] border-collapse text-left text-sm">
+        <caption class="mb-2 text-left font-mono text-xs text-mute">表3　そのほかの欄</caption>
+        <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="py-2 pr-3">欄</th><th class="py-2 pr-3">答え</th><th class="py-2">理由</th></tr></thead>
+        <tbody class="[&>tr]:border-b [&>tr]:border-rule [&_td]:py-2.5 [&_td]:pr-3 [&_td]:align-top">
+          <tr><td><b>価格</b></td><td>無料。App 内課金なし</td><td></td></tr>
+          <tr><td><b>配信する国と地域</b></td><td>中国本土を除く、すべて</td><td>中国本土は、アプリを出すのに ICP の登録番号が要る。持っていない</td></tr>
+          <tr><td><b>コンテンツの権利</b></td><td>他者のコンテンツを含まない</td><td>声と効果音は、商用で配ってよい出どころで開発者が作った（<a href="../sound-assets/index.html" class="lnk">声と効果音の出どころ</a>）</td></tr>
+          <tr><td><b>輸出コンプライアンス</b></td><td>聞かれない</td><td>Info.plist の ITSAppUsesNonExemptEncryption を false にしてある</td></tr>
+          <tr><td><b>App のプライバシー</b></td><td>公開済み</td><td>ユーザ ID とフィットネス、トラッキングなし（<a href="../../sessions/20261007-1215-privacy-policy/index.html#label" class="lnk">プライバシーポリシーを出す</a>）</td></tr>
+          <tr><td><b>ビルド</b></td><td>1.0 (1)</td><td>TestFlight で確かめたもの。スクリーンショットの仕組みは Debug にしか入らないので、撮るために出し直さなくてよい</td></tr>
+          <tr><td><b>バージョンの公開</b></td><td>手動で公開</td><td>通ったあと、開発者が公開する日を選ぶ</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="screenshots" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">screenshots</p>
+    <h2 class="mt-2 font-display text-3xl">スクリーンショット</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">6枚を、日本語と英語、2つの大きさで撮ります。どれも上に<a href="../../glossary.html#caption-band" class="lnk">見出しの帯</a>を付け、その下に画面を少し縮めて置きます（開発者が決定、2026-10-07）。シミュレーターでは連打できないので、演出の見本（<code class="font-mono text-xs">-demo</code>）に見本の記録（<code class="font-mono text-xs">-seed</code>）を入れて、叩いたあとの画面を出します。</p>
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full min-w-[720px] border-collapse text-left text-sm">
+        <caption class="mb-2 text-left font-mono text-xs text-mute">表4　6枚の中身と見出し</caption>
+        <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="py-2 pr-3">#</th><th class="py-2 pr-3">画面</th><th class="py-2 pr-3">起動引数</th><th class="py-2 pr-3">見出し（日本語）</th><th class="py-2">見出し（英語）</th></tr></thead>
+        <tbody class="[&>tr]:border-b [&>tr]:border-rule [&_td]:py-2.5 [&_td]:pr-3 [&_td]:align-top">
+          <tr><td class="font-mono">1</td><td>PUSH まで叩いた完了連打。スクワットマンが並ぶ</td><td class="font-mono text-xs">-demo squad</td><td>スクワット1回を、<b class="text-dopa">1打</b>で。</td><td lang="en">One <b class="text-dopa">tap</b> for every squat.</td></tr>
+          <tr><td class="font-mono">2</td><td>フィーバータイム</td><td class="font-mono text-xs">-demo fever</td><td>ときどき、<b class="text-dopa">FEVER</b>。</td><td lang="en">Sometimes, <b class="text-dopa">FEVER!!</b></td></tr>
+          <tr><td class="font-mono">3</td><td>フィナーレの筋肉確定</td><td class="font-mono text-xs">-demo kakutei</td><td>最後の1打で、<b class="text-dopa">筋肉確定</b>。</td><td lang="en">The last tap <b class="text-dopa">locks it in.</b></td></tr>
+          <tr><td class="font-mono">4</td><td>ホーム。連続記録の帯と DPW、DT のカード</td><td class="font-mono text-xs">-demo home</td><td>続けた日と、<b class="text-dopa">今週のドパ</b>。</td><td lang="en">Your streak, your <b class="text-dopa">best week.</b></td></tr>
+          <tr><td class="font-mono">5</td><td>履歴のシート</td><td class="font-mono text-xs">-demo history</td><td>いつ何回しゃがんだか、<b class="text-dopa">全部残る</b>。</td><td lang="en">Every set, <b class="text-dopa">on the record.</b></td></tr>
+          <tr><td class="font-mono">6</td><td>スプラッシュ。続けた日の隊列と、空いた今日の席</td><td class="font-mono text-xs">-demo splash -splashAt …</td><td>今日の席は、<b class="text-dopa">あなたの1回</b>で埋まる。</td><td lang="en">Today's seat is <b class="text-dopa">yours to fill.</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">起動引数には、どれも <code class="font-mono text-xs">-seed</code> を足します。色の付いた語は、帯の中でドパの色にする語です。見た目は<a href="../../sessions/20261007-1523-app-store-review/screenshots.html" class="lnk">見出しの帯の見本</a>にあります。</p>
+
+    <h3 class="mt-10 font-display text-xl">大きさ</h3>
+    <div class="mt-4 overflow-x-auto">
+      <table class="w-full min-w-[560px] border-collapse text-left text-sm">
+        <caption class="mb-2 text-left font-mono text-xs text-mute">表5　撮る大きさ（Apple の仕様は 2026-10-07 に読んだもの）</caption>
+        <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="py-2 pr-3">App Store Connect の枠</th><th class="py-2 pr-3">撮るシミュレーター</th><th class="py-2">扱い</th></tr></thead>
+        <tbody class="[&>tr]:border-b [&>tr]:border-rule [&_td]:py-2.5 [&_td]:pr-3 [&_td]:align-top">
+          <tr><td><b>iPhone 6.9 インチ</b></td><td>iPhone 18 Pro Max</td><td>大きい画面の iPhone に出る。6.5 インチの枠にも縮めて使われる</td></tr>
+          <tr><td><b>iPhone 6.3 インチ</b></td><td>iPhone 18 Pro</td><td>Apple の仕様では、Dynamic Island のある中くらいの画面の枠が必須。ここが空だと、大きい画面のものを縮めて使うとも書いてあり、どちらが効くか読み切れなかったので、両方撮る</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 id="shoot" class="mt-10 font-display text-xl">撮り直し方（約10分）</h3>
+    <ol class="mt-4 flex max-w-3xl flex-col gap-3 text-sm">
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>1. <code class="font-mono text-xs">ios/</code> で <code class="font-mono text-xs">Design/screenshots.sh</code> を実行する</b><br><span class="text-ink/70">Debug でシミュレーター用にビルドし、2台のシミュレーターで、状態表示（時刻 9:41、電池満タン）をそろえてから、日本語と英語で6枚ずつ撮る。撮ったままの画像は <code class="font-mono text-xs">Design/Screenshots/raw/</code> に入る。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>2. スクリプトが続けて <code class="font-mono text-xs">Design/compose_screenshots.swift</code> を呼び、見出しの帯を付ける</b><br><span class="text-ink/70">できあがりは <code class="font-mono text-xs">Design/Screenshots/{ja,en}/{6.9,6.3}/</code> に、1から6の番号で入る。Git には入れない。いつでも撮り直せるから。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>3. 24枚を目で見て、App Store Connect の言語と枠ごとに、番号の順に上げる</b><br><span class="text-ink/70">演出の途中を撮るので、待ち時間がずれると狙った場面にならないことがある。ずれていたら、スクリプトの待ち時間を直して撮り直す。</span></li>
+    </ol>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">見出しを変えるときは <code class="font-mono text-xs">compose_screenshots.swift</code> の中の表と、このページの表4を同じ変更で直します。</p>
+  </section>
+
+  <section id="related" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">related</p>
+    <h2 class="mt-2 font-display text-3xl">関連</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">セッション</p><a href="../../sessions/20261007-1523-app-store-review/index.html" class="mt-1 block font-bold lnk">App Store の審査に出す準備</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../glossary.html#store-listing" class="font-bold lnk">掲載情報</a><a href="../../glossary.html#review-note" class="font-bold lnk">審査メモ</a><a href="../../glossary.html#caption-band" class="font-bold lnk">見出しの帯</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">devops</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../health-wording/index.html" class="font-bold lnk">健康効果の書き方</a><a href="../localization/index.html" class="font-bold lnk">多言語の決まり事</a><a href="../sound-assets/index.html" class="font-bold lnk">声と効果音の出どころ</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">機能</p><a href="../../features/account/index.html" class="mt-1 block font-bold lnk">アカウント</a></li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script>
+document.querySelectorAll('.copybtn').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var text = document.getElementById(b.dataset.copy).innerText;
+    navigator.clipboard.writeText(text).then(function () {
+      b.dataset.done = '1'; b.textContent = 'コピーした';
+      setTimeout(function () { b.dataset.done = ''; b.textContent = 'コピー'; }, 1500);
+    });
+  });
+});
+</script>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

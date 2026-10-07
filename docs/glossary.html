@@ -99,6 +99,9 @@ tailwind.config = {
     <a href="#firebase-environment" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">開発用と本番用</a>
     <a href="#app-check" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">App Check</a>
     <a href="#translation-table" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">訳語表</a>
+    <a href="#store-listing" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">掲載情報</a>
+    <a href="#review-note" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">審査メモ</a>
+    <a href="#caption-band" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">見出しの帯</a>
   </nav>
 
   <!-- Yat Tat Ta -->
@@ -1151,6 +1154,57 @@ tailwind.config = {
     <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
       <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#localization" class="text-dopa underline underline-offset-4">多言語展開</a><a href="#dopa-point" class="text-dopa underline underline-offset-4">ドパ</a><a href="#muscle-kakutei" class="text-dopa underline underline-offset-4">筋肉確定</a><a href="#dopadopa" class="text-dopa underline underline-offset-4">ドパドパ</a></p></div>
       <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="devops/localization/index.html" class="text-signal underline underline-offset-4">devops：多言語の決まり事</a><a href="sessions/20261006-1829-localization/index.html" class="text-signal underline underline-offset-4">セッション：多言語展開の進め方を決める</a></p></div>
+    </div>
+  </section>
+
+  <section id="store-listing" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#store-listing</p>
+    <h2 class="mt-1 font-display text-2xl">掲載情報（App Store）</h2>
+    <p class="mt-3 leading-relaxed">App Store の店先に並ぶもの全部の呼び名。名前、サブタイトル、プロモーション用テキスト、説明文、キーワード、カテゴリ、スクリーンショット。日本語と英語の2組を持ち、元の文は devops の「App Store の掲載情報」に置く。App Store Connect を直したら同じ日にそのページも直し、2つの言語を同時に直す。<a href="#health-claim" class="text-dopa underline underline-offset-4">健康効果</a>は日本語の説明文に研究の1文だけ。パチンコ、スロット、ギャンブルの語は書かない。年齢制限の疑似ギャンブルと受け取られないため（2026-10-07 決定）。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>キーワードに「ダイエット」を入れたら、検索に引っかかりやすくなりませんか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>入れません。説明文なら研究の1文として前後の文脈を付けられますが、キーワードは語だけが並ぶので、痩せると約束しているように読めます。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>英語の説明文の pachinko-style は、言い方としては伝わりやすいんですが。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>伝わりやすいぶん、審査の人に疑似ギャンブルを疑わせます。掲載情報では arcade-style にして、激熱や FEVER は画面のまま見せます。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#review-note" class="text-dopa underline underline-offset-4">審査メモ</a><a href="#caption-band" class="text-dopa underline underline-offset-4">見出しの帯</a><a href="#health-claim" class="text-dopa underline underline-offset-4">健康効果</a><a href="#translation-table" class="text-dopa underline underline-offset-4">訳語表</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="devops/app-store/index.html" class="text-signal underline underline-offset-4">devops：App Store の掲載情報</a><a href="sessions/20261007-1523-app-store-review/index.html" class="text-signal underline underline-offset-4">セッション：App Store の審査に出す準備</a></p></div>
+    </div>
+  </section>
+
+  <section id="review-note" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#review-note</p>
+    <h2 class="mt-1 font-display text-2xl">審査メモ</h2>
+    <p class="mt-3 leading-relaxed">App Store Connect の「App Review に関する情報」のメモ欄に入れる、審査の人あての英語の文。ログインが Apple だけでデモ用のアカウントが要らないこと、最初にログインを求める理由（記録を<a href="#account" class="text-dopa underline underline-offset-4">アカウント</a>に置き、機種を替えても戻すため）、試し方（スクワットマンを長押しで起こして20回叩く）、演出に賭けも通貨も購入もないこと、<a href="#account" class="text-dopa underline underline-offset-4">アカウント</a>の削除の場所を書く。審査ガイドライン 5.1.1 の「ログインを求める理由」と、演出が疑似ギャンブルに見える心配に、先に答えておくためのもの（2026-10-07 設計）。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>審査の人にデモ用のアカウントを渡さなくていいんですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>ログインは Apple だけなので、審査の人は自分の Apple ID で入れます。渡すかわりに、審査メモでそう書いておきます。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>審査で「ログインなしで使わせて」と言われたら？</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>まず審査メモのとおり、記録を機種変更で戻すためだと返事をします。それでも通らなければ、ログインせずに始める作りを考えます。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#store-listing" class="text-dopa underline underline-offset-4">掲載情報</a><a href="#account" class="text-dopa underline underline-offset-4">アカウント</a><a href="#fever" class="text-dopa underline underline-offset-4">フィーバータイム</a><a href="#wake-up" class="text-dopa underline underline-offset-4">起こす</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="devops/app-store/index.html#review" class="text-signal underline underline-offset-4">devops：審査メモ</a><a href="features/account/index.html" class="text-signal underline underline-offset-4">機能：アカウント</a><a href="sessions/20261007-1523-app-store-review/index.html" class="text-signal underline underline-offset-4">セッション：App Store の審査に出す準備</a></p></div>
+    </div>
+  </section>
+
+  <section id="caption-band" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#caption-band</p>
+    <h2 class="mt-1 font-display text-2xl">見出しの帯</h2>
+    <p class="mt-3 leading-relaxed">App Store のスクリーンショットの上に載せる、一言の見出しの帯。紙の色の地に丸ゴシックの太字で2行まで書き、1語だけドパの色にする。その下に、シミュレーターで撮った画面を幅の82%に縮めて置く。帯はアプリの中では描かず、撮ったあとの画像に Swift のスクリプトで描き足す。文言は日本語と英語で6枚ぶん（例：「スクワット1回を、1打で。」）（2026-10-07 決定）。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>見出しの言葉、アプリの String Catalog に足しますか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>足しません。アプリの画面には出ない言葉なので、スクリーンショットを作るスクリプトの中の表に置きます。掲載情報のページの表と、同じ変更で直します。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>帯を付けたら、画面の下が切れちゃいますね。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>DPW と DT のカードの下あたりが切れます。6枚とも、見せたい場面は画面の上から3分の2に入っているので、それで足ります。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#store-listing" class="text-dopa underline underline-offset-4">掲載情報</a><a href="#dopa-point" class="text-dopa underline underline-offset-4">ドパ</a><a href="#squat-squad" class="text-dopa underline underline-offset-4">スクワットマン</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="devops/app-store/index.html#screenshots" class="text-signal underline underline-offset-4">devops：スクリーンショット</a><a href="sessions/20261007-1523-app-store-review/screenshots.html" class="text-signal underline underline-offset-4">見本：見出しの帯の見本</a></p></div>
     </div>
   </section>
 

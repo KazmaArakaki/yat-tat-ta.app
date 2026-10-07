@@ -10,6 +10,13 @@
   // セッション一覧（新しい順）。新しいセッションは先頭に足す。
   var sessions = [
     {
+      path: "sessions/20261007-1523-app-store-review/index.html",
+      label: "10/07 App Store の審査に出す準備",
+      children: [
+        { path: "sessions/20261007-1523-app-store-review/screenshots.html", label: "見出しの帯の見本" }
+      ]
+    },
+    {
       path: "sessions/20261007-1318-firebase-environments/index.html",
       label: "10/07 Firebase を開発用と本番用に分ける"
     },
@@ -174,7 +181,8 @@
         { label: "声と効果音の出どころ", path: "devops/sound-assets/index.html", level: 1 },
         { label: "健康効果の書き方", path: "devops/health-wording/index.html", level: 1 },
         { label: "処理落ちの確かめ方", path: "devops/perf-check/index.html", level: 1 },
-        { label: "多言語の決まり事", path: "devops/localization/index.html", level: 1 }
+        { label: "多言語の決まり事", path: "devops/localization/index.html", level: 1 },
+        { label: "App Store の掲載情報", path: "devops/app-store/index.html", level: 1 }
       ]
     },
     {
