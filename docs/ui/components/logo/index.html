@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ロゴ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=M+PLUS+Rounded+1c:wght@500;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+        round: ['"M PLUS Rounded 1c"', '"Noto Sans JP"', 'sans-serif']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } }
+      },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+<style>
+/* アプリ画面の色。明るい配色と暗い配色を、.app と .app.dark で切り替える */
+.app { --a-bg:#FBF6EE; --a-card:#FFFFFF; --a-ink:#1C1916; --a-mute:#6E655C; --a-rule:#E7DDCC; --a-line:#1C1916; --a-soft:#FFE6F0; }
+.app.dark { --a-bg:#16120F; --a-card:#231D18; --a-ink:#F5EEE3; --a-mute:#A89C8E; --a-rule:#3A312A; --a-line:#F5EEE3; --a-soft:#3A1726; }
+.a-bg { background:var(--a-bg); color:var(--a-ink); }
+.a-card { background:var(--a-card); }
+.a-ink { color:var(--a-ink); }
+.a-mute { color:var(--a-mute); }
+.a-line { border-color:var(--a-line); }
+.a-rule { border-color:var(--a-rule); }
+.a-soft { background:var(--a-soft); }
+.a-shadow { box-shadow:4px 4px 0 var(--a-line); }
+.a-shadow-lg { box-shadow:0 8px 0 var(--a-line); }
+.num { font-family:"M PLUS Rounded 1c","Noto Sans JP",sans-serif; font-weight:900; font-variant-numeric:tabular-nums; letter-spacing:-0.02em; }
+.ticket { width:14px; height:18px; border-radius:3px; background:#2F79F7; position:relative; }
+.ticket::after { content:""; position:absolute; left:2px; right:2px; top:8px; border-top:2px dotted rgba(255,255,255,.75); }
+.ticket.empty { background:transparent; border:2px dashed var(--a-rule); }
+.mash { width:200px; height:200px; border-radius:9999px; background:#E9A800; border:4px solid var(--a-line); box-shadow:0 8px 0 var(--a-line); color:#1C1916; transition:transform .06s; }
+.mash:active { transform:translateY(6px); box-shadow:0 2px 0 var(--a-line); }
+.glow { position:absolute; inset:-22px; border-radius:9999px; background:radial-gradient(circle, rgba(229,51,122,.55) 0%, rgba(229,51,122,0) 70%); pointer-events:none; }
+.ring { position:absolute; border-radius:9999px; border:3px solid #E5337A; pointer-events:none; }
+.grain { position:absolute; border-radius:9999px; background:#E5337A; pointer-events:none; }
+@keyframes pop { 0%{transform:scale(.3);opacity:0} 60%{transform:scale(1.08);opacity:1} 100%{transform:scale(1)} }
+@keyframes ringout { 0%{transform:translate(-50%,-50%) scale(.2);opacity:1} 100%{transform:translate(-50%,-50%) scale(1);opacity:0} }
+@keyframes fly { 0%{transform:translate(0,0) scale(1);opacity:1} 100%{transform:translate(var(--dx),var(--dy)) scale(.4);opacity:0} }
+@keyframes burst { 0%{transform:translate(0,0);opacity:1} 100%{transform:translate(var(--dx),var(--dy));opacity:0} }
+@keyframes drop { 0%{transform:translateY(-120%)} 100%{transform:none} }
+.pop { animation:pop .45s cubic-bezier(.2,1.4,.4,1) both; }
+.tabbtn[aria-selected="true"] { background:#1C1916; color:#FBF6EE; }
+</style>
+</head>
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-5xl">
+<header class="animate-rise">
+  <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">ui / components / logo</p>
+  <h1 class="mt-2 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">ロゴ</span></h1>
+  <div class="mt-4 max-w-2xl space-y-3 text-sm leading-relaxed text-ink/80">
+    <p><a href="../../../glossary.html#yat-tat-ta" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">Yat Tat Ta</a> の<a href="../../../glossary.html#logo" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ロゴ</a>は2つです。絵のマークと、名前の文字組みのワードマーク。マークはそのままアプリアイコンになります。</p>
+    <p>マークの人形は、<a href="../../../glossary.html#squat-squad" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スクワット隊</a>の人形と同じ点で描いた、しゃがんだ1人です。地の金は「押せるもの」の色。アイコンそのものが、食べたあとに押す的になります。</p>
+  </div>
+</header>
+
+<section id="mark" class="mt-12">
+  <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">mark</p>
+  <h2 class="mt-2 font-display text-3xl">マーク（アプリアイコン）</h2>
+  <div class="mt-6 grid gap-4 sm:grid-cols-3">
+    <figure class="rounded-3xl border-2 border-ink bg-white p-5"><div data-icon="a" data-mode="light" data-size="160"></div><figcaption class="mt-4 text-sm leading-relaxed"><p class="font-mono text-xs text-mute">appearance / light</p><p class="mt-1 font-display text-xl">明るい</p><p class="mt-2 text-ink/80">地 gold、人形 dopa、枠とずらした影と輪は ink。</p></figcaption></figure>
+    <figure class="rounded-3xl border-2 border-ink bg-white p-5"><div data-icon="a" data-mode="dark" data-size="160"></div><figcaption class="mt-4 text-sm leading-relaxed"><p class="font-mono text-xs text-mute">appearance / dark</p><p class="mt-1 font-display text-xl">暗い</p><p class="mt-2 text-ink/80">地は暗い配色の paper（#16120F）。輪を gold に替え、ずらした影は消す。</p></figcaption></figure>
+    <figure class="rounded-3xl border-2 border-ink bg-white p-5"><div data-icon="a" data-mode="tinted" data-size="160"></div><figcaption class="mt-4 text-sm leading-relaxed"><p class="font-mono text-xs text-mute">appearance / tinted</p><p class="mt-1 font-display text-xl">色付き・クリア</p><p class="mt-2 text-ink/80">iOS が明るい版の層から作る。見本は色付きのおおよその見え方。</p></figcaption></figure>
+  </div>
+  <h3 class="mt-10 font-display text-xl">出る大きさ</h3>
+  <p class="mt-2 max-w-2xl text-sm leading-relaxed text-ink/80">いちばん小さいのは通知の横の 20pt。人形の線は 1024 四方で 68px の太さがあり、20pt でもつぶれません。</p>
+  <div class="mt-4 flex flex-wrap items-end gap-6 rounded-2xl bg-[repeating-linear-gradient(45deg,#FBF6EE_0_10px,#F5EDE0_10px_20px)] p-6">
+    <figure class="text-center"><div data-icon="a" data-size="120"></div><figcaption class="mt-2 font-mono text-[11px] text-mute">App Store</figcaption></figure>
+    <figure class="text-center"><div data-icon="a" data-size="60"></div><figcaption class="mt-2 font-mono text-[11px] text-mute">ホーム 60pt</figcaption></figure>
+    <figure class="text-center"><div data-icon="a" data-size="40"></div><figcaption class="mt-2 font-mono text-[11px] text-mute">Spotlight 40pt</figcaption></figure>
+    <figure class="text-center"><div data-icon="a" data-size="29"></div><figcaption class="mt-2 font-mono text-[11px] text-mute">設定 29pt</figcaption></figure>
+    <figure class="text-center"><div data-icon="a" data-size="20"></div><figcaption class="mt-2 font-mono text-[11px] text-mute">通知 20pt</figcaption></figure>
+  </div>
+</section>
+
+<section id="wordmark" class="mt-16">
+  <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">wordmark</p>
+  <h2 class="mt-2 font-display text-3xl">ワードマーク</h2>
+  <div class="mt-4 max-w-2xl space-y-3 text-sm leading-relaxed text-ink/80">
+    <p>丸ゴシックの Black で「Yat Tat Ta」。3語のあいだを空け、Ta だけ dopa にします。<a href="../splash/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スプラッシュ</a>で1語ずつ落ちる名前と同じ形です。アプリでは SF Pro Rounded の Black（<code class="font-mono text-xs">Wordmark</code>）、この見本では M PLUS Rounded 1c で代えています。</p>
+  </div>
+  <div class="mt-6 grid gap-4 sm:grid-cols-2">
+    <div class="flex items-center gap-4 rounded-2xl border-2 border-ink bg-paper p-6"><div data-icon="a" data-size="56"></div><p class="num text-4xl text-ink">Yat Tat <span class="text-dopa">Ta</span></p></div>
+    <div class="flex items-center gap-4 rounded-2xl border-2 border-ink p-6" style="background:#16120F"><div data-icon="a" data-size="56"></div><p class="num text-4xl" style="color:#F5EEE3">Yat Tat <span class="text-dopa">Ta</span></p></div>
+  </div>
+</section>
+
+<section id="rules" class="mt-16">
+  <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">rules</p>
+  <h2 class="mt-2 font-display text-3xl">使うときの決まり</h2>
+  <ul class="mt-6 flex max-w-3xl flex-col gap-2 text-sm">
+    <li class="rounded-2xl border border-rule bg-white p-4">マークとワードマークを横に並べるときは、マークの高さを文字の高さの1.4倍にする。</li>
+    <li class="rounded-2xl border border-rule bg-white p-4">暗い地の上でも、並べるマークは明るい版にする。暗い版は暗い地に溶けて、角が見えなくなる。</li>
+    <li class="rounded-2xl border border-rule bg-white p-4">新しい色を足さない。使うのは gold、dopa、ink、paper と、その暗い配色だけ（<a href="../../principles.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">UI の基本方針</a>）。</li>
+    <li class="rounded-2xl border border-rule bg-white p-4">Ta 以外を dopa にしない。名前の中で色が付くのは、3拍めだけ。</li>
+    <li class="rounded-2xl border border-rule bg-white p-4">アプリの中（スプラッシュを含む）にはマークを出さない。起動の一瞬は、続けた日の隊列に使う。</li>
+  </ul>
+</section>
+
+<section id="source" class="mt-16">
+  <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">source</p>
+  <h2 class="mt-2 font-display text-3xl">元のファイル</h2>
+  <div class="mt-6 overflow-x-auto rounded-2xl border border-rule bg-white">
+    <table class="w-full min-w-[32rem] text-left text-sm">
+      <thead class="border-b-2 border-ink font-mono text-xs text-mute"><tr><th class="p-3">ファイル</th><th class="p-3">中身</th></tr></thead>
+      <tbody class="[&_td]:p-3 [&_td]:align-top [&_tr]:border-b [&_tr]:border-rule">
+        <tr><td><code class="font-mono text-xs">ios/YatTatTa/AppIcon.icon</code></td><td>Icon Composer のアイコン。<code class="font-mono text-xs">icon.json</code> に地の色、層の重なり、暗い配色での差し替えを書く</td></tr>
+        <tr><td><code class="font-mono text-xs">ios/YatTatTa/AppIcon.icon/Assets/*.svg</code></td><td>層の絵。上から人形（doll）、ずらした影（shadow）、輪（ring）。手で直さない</td></tr>
+        <tr><td><code class="font-mono text-xs">ios/Design/app_icon.py</code></td><td>層の SVG を書き出すスクリプト。人形の点を直したら、ここも直して実行し直す</td></tr>
+        <tr><td><code class="font-mono text-xs">docs/ui/components/logo/logo.js</code></td><td>この見本の描画。点と大きさはスクリプトと同じ</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="links" class="mt-16">
+  <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">links</p>
+  <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
+  <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+    <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">決めたセッション</p><a href="../../../sessions/20261007-0153-logo/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ロゴを作る</a></li>
+    <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">設定</p><a href="../../../devops/ios-project/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">iOS プロジェクトの設定</a></li>
+  </ul>
+</section>
+</article>
+</main>
+<script src="logo.js"></script>
+<script src="../../../sidebar.js" defer></script>
+</body>
+</html>

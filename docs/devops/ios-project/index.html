@@ -166,8 +166,8 @@ targets:
         <span class="text-gold"># 文言を String Catalog（Localizable.xcstrings）へ書き出す</span>
         SWIFT_EMIT_LOC_STRINGS: YES
         LOCALIZATION_PREFERS_STRING_CATALOGS: YES
-        <span class="text-gold"># アイコンは未作成。XcodeGen の既定 "AppIcon" を外す</span>
-        ASSETCATALOG_COMPILER_APPICON_NAME: ""
+        <span class="text-gold"># アイコンは Icon Composer の YatTatTa/AppIcon.icon。層の SVG は Design/app_icon.py で書き出す</span>
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
   YatTatTaTests:
     type: bundle.unit-test
     platform: iOS
@@ -274,7 +274,7 @@ targets:
           <tr><th class="p-3">症状</th><th class="p-3">原因</th><th class="p-3">対処</th></tr>
         </thead>
         <tbody class="[&_td]:p-3 [&_td]:align-top [&_tr]:border-b [&_tr]:border-rule">
-          <tr><td><code class="break-all font-mono text-xs">None of the input catalogs contained a matching … app icon set … named "AppIcon"</code></td><td>XcodeGen は既定でアイコン名 AppIcon を設定する。Xcode 27 の雛形の Assets にはアイコンがない</td><td><code class="font-mono text-xs">ASSETCATALOG_COMPILER_APPICON_NAME: ""</code>。アイコンを作ったら名前を入れる</td></tr>
+          <tr><td><code class="break-all font-mono text-xs">None of the input catalogs contained a matching … app icon set … named "AppIcon"</code></td><td>XcodeGen は既定でアイコン名 AppIcon を設定する。Xcode 27 の雛形の Assets にはアイコンがない</td><td>アイコンがなかった間は <code class="font-mono text-xs">ASSETCATALOG_COMPILER_APPICON_NAME: ""</code> で外していた。2026-10-07 からは <code class="font-mono text-xs">AppIcon.icon</code> があるので <code class="font-mono text-xs">AppIcon</code>（<a href="../../ui/components/logo/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4">ロゴ</a>）</td></tr>
           <tr><td>コマンドラインでビルドしても、<code class="font-mono text-xs">Localizable.xcstrings</code> に新しい文言が入らない</td><td>文言を String Catalog に書き足すのは Xcode の画面だけ。<code class="font-mono text-xs">xcodebuild</code> は書き出し用の <code class="font-mono text-xs">.stringsdata</code> を作るところまで</td><td>Xcode でビルドする。コマンドラインだけで済ませるなら、ビルドのあとに <code class="break-all font-mono text-xs">find ~/Library/Developer/Xcode/DerivedData/YatTatTa-*/Build/Intermediates.noindex/YatTatTa.build -name '*.stringsdata' | grep -v -e AppShortcuts -e GeneratedAsset | xargs xcrun xcstringstool sync YatTatTa/Localizable.xcstrings --stringsdata</code></td></tr>
         </tbody>
       </table>

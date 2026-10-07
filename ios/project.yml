@@ -47,8 +47,8 @@ targets:
         # 文言を String Catalog（Localizable.xcstrings）へ書き出す
         SWIFT_EMIT_LOC_STRINGS: YES
         LOCALIZATION_PREFERS_STRING_CATALOGS: YES
-        # アイコンは未作成。XcodeGen の既定 "AppIcon" を外す
-        ASSETCATALOG_COMPILER_APPICON_NAME: ""
+        # アイコンは Icon Composer の YatTatTa/AppIcon.icon。層の SVG は Design/app_icon.py で書き出す
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
   YatTatTaTests:
     type: bundle.unit-test
     platform: iOS

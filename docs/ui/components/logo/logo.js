@@ -1,4 +1,5 @@
-// ロゴの候補を SVG で描く。人形の点は ios/YatTatTa/Home/SquatStageView.swift の SquatterLayer と同じ
+// ロゴのマークを SVG で描く。アプリのアイコンは ios/Design/app_icon.py が書き出す層から作る（A の点と大きさはそちらと同じ）
+// B と C は 2026-10-07 のセッションで比べた没案。人形の点は ios/YatTatTa/Home/SquatStageView.swift の SquatterLayer と同じ
 (function () {
   var POSE = {
     stand: { legs: [[12, 0], [0, 0], [0, -21], [0, -42], [0, -72]], arm: [[0, -72], [4, -58], [6, -46]], head: [2, -86] },

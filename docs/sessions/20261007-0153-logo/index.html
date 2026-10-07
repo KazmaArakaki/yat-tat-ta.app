@@ -161,12 +161,12 @@ tailwind.config = {
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / appearance</p>
     <h2 class="mt-2 font-display text-3xl">A を3通りの見た目で</h2>
     <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
-      <p>iOS 26 からは、使う人がアイコンの見た目を選べます。明るい、暗い、色付き、クリア。アイコンを1枚しか渡さないと、暗いと色付きは iOS が勝手に作ります。金の地を勝手に暗くされると、人形まで沈む。だから、暗いと色付きは自分で描きます。</p>
+      <p>iOS 26 からは、使う人がアイコンの見た目を選べます。明るい、暗い、色付き、クリア。アイコンを1枚しか渡さないと、暗いは iOS が勝手に作ります。金の地を勝手に暗くされると、人形まで沈む。だから暗いは自分で色を決めます。色付きとクリアは、層を分けておけば iOS が層ごとに塗り分けます。</p>
     </div>
     <div class="mt-6 grid max-w-3xl grid-cols-3 gap-4">
       <figure class="rounded-2xl border border-rule bg-white p-4"><div data-icon="a" data-mode="light" data-size="120"></div><figcaption class="mt-3 text-xs leading-relaxed"><b>明るい</b><br>金の地、dopa の人形、ink の枠とずらした影。アプリのボタンと同じおもちゃの見た目。</figcaption></figure>
       <figure class="rounded-2xl border border-rule bg-white p-4"><div data-icon="a" data-mode="dark" data-size="120"></div><figcaption class="mt-3 text-xs leading-relaxed"><b>暗い</b><br>地は暗い配色の paper（#16120F）。金は輪に回す。人形は dopa のまま。</figcaption></figure>
-      <figure class="rounded-2xl border border-rule bg-white p-4"><div data-icon="a" data-mode="tinted" data-size="120"></div><figcaption class="mt-3 text-xs leading-relaxed"><b>色付き</b><br>iOS が明るさだけを読んで色を塗る。人形をいちばん明るく、輪を中くらいに。</figcaption></figure>
+      <figure class="rounded-2xl border border-rule bg-white p-4"><div data-icon="a" data-mode="tinted" data-size="120"></div><figcaption class="mt-3 text-xs leading-relaxed"><b>色付き</b><br>iOS が層の明るさを読んで色を塗る。見本はおおよその見え方。</figcaption></figure>
     </div>
     <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">クリアは、明るい版から iOS が作ります。輪郭が人形1人しかないので、ガラス越しでも形が崩れません。</p>
   </section>
@@ -192,11 +192,11 @@ tailwind.config = {
 
   <section id="detail-impl" class="mt-20">
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / implementation</p>
-    <h2 class="mt-2 font-display text-3xl">決まったら作るもの</h2>
-    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">案が決まってからの作業です。データの保存の形は変わりません。</p>
+    <h2 class="mt-2 font-display text-3xl">作るもの</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">データの保存の形は変わりません。</p>
     <ol class="mt-6 flex max-w-3xl flex-col gap-3 text-sm">
-      <li class="rounded-2xl border border-rule bg-white p-4"><b>1. 元の絵を SVG で置く</b>（<code class="font-mono text-xs">ios/Design/AppIcon/</code> に明るい、暗い、色付きの3枚）<br><span class="text-ink/70">人形の点がアプリと同じだと確かめられる形で残すため。PNG だけだと、人形を直したときに描き直せない。</span></li>
-      <li class="rounded-2xl border border-rule bg-white p-4"><b>2. Icon Composer で <code class="font-mono text-xs">AppIcon.icon</code> を作る</b>（地、輪、人形の3層）<br><span class="text-ink/70">iOS 26 のガラスの見た目は、層が分かれていないと付かない。人形だけが浮き、地は奥に残る。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>1. 層の SVG を書き出すスクリプト <code class="font-mono text-xs">ios/Design/app_icon.py</code></b><br><span class="text-ink/70">人形の点を、アプリの <code class="font-mono text-xs">SquatterLayer</code> と同じ数で持つため。絵だけを置くと、人形を直したときに描き直せない。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>2. Icon Composer の <code class="font-mono text-xs">YatTatTa/AppIcon.icon</code></b>（地の色と、人形、ずらした影、輪の3層）<br><span class="text-ink/70">iOS 26 のガラスの見た目は、層が分かれていないと付かない。人形だけが浮き、地は奥に残る。</span></li>
       <li class="rounded-2xl border border-rule bg-white p-4"><b>3. <code class="font-mono text-xs">project.yml</code> の <code class="font-mono text-xs">ASSETCATALOG_COMPILER_APPICON_NAME</code> を <code class="font-mono text-xs">AppIcon</code> にする</b><br><span class="text-ink/70">いまは空にして、XcodeGen の既定を外している。これを戻さないとアイコンが入らない。</span></li>
       <li class="rounded-2xl border border-rule bg-white p-4"><b>4. ロゴの見本ページ <code class="font-mono text-xs">ui/components/logo/</code> を作る</b><br><span class="text-ink/70">App Store の画面やドメイン yat-tat-ta.com でロゴを使うとき、色と並べ方をここで引く。</span></li>
       <li class="rounded-2xl border border-rule bg-white p-4"><b>5. 開発者が実機のホーム画面で、3通りの見た目を確かめる</b><br><span class="text-ink/70">シミュレーターではガラスの見え方が実機と違う。</span></li>
@@ -209,16 +209,28 @@ tailwind.config = {
     <ul class="mt-6 flex max-w-3xl flex-col gap-2 text-sm">
       <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　マークは A「しゃがむ1人」（開発者が決定、2026-10-07）。</li>
       <li class="rounded-2xl border border-rule bg-white p-4"><b>決定</b>　ワードマークはスプラッシュの「Yat Tat Ta」（Ta だけ dopa）を正式にする。</li>
-      <li class="rounded-2xl border border-rule bg-white p-4"><b>決定</b>　アイコンは明るい、暗い、色付きを自分で描く。クリアは iOS に任せる。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>決定</b>　アイコンは明るいと暗いの色を自分で決める。色付きとクリアは iOS が層から作る。</li>
       <li class="rounded-2xl border border-rule bg-white p-4"><b>決定</b>　ロゴの色は、アプリの色の決まり（<a href="../../ui/principles.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">UI の基本方針</a>）の外に置かない。新しい色は足さない。</li>
     </ul>
   </section>
 
+  <section id="build" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">08 / build</p>
+    <h2 class="mt-2 font-display text-3xl">作ったところ</h2>
+    <ul class="mt-6 flex max-w-3xl flex-col gap-2 text-sm">
+      <li class="rounded-2xl border border-rule bg-white p-4"><code class="font-mono text-xs">AppIcon.icon</code> は <code class="font-mono text-xs">icon.json</code> を手で書いた。<code class="font-mono text-xs">xcrun actool</code> で組み、出てきた 120px の PNG で、層の重なりと色がねらいどおりだと確かめた。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">暗い配色では、地を #16120F、輪を gold に差し替え、ずらした影の層を消す（<code class="font-mono text-xs">fill-specializations</code> と <code class="font-mono text-xs">hidden-specializations</code>）。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">シミュレーター（iPhone 17）のホーム画面に、明るい版が出ることを確かめた。暗い版は、シミュレーターの配色を暗くしてもほかのアプリのアイコンごと切り替わらず、確かめられていない。</li>
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>残り</b>　開発者が実機で、明るい、暗い、色付き、クリアの4通りを確かめる（ホーム画面を長押し →「編集」→「カスタマイズ」）。</li>
+    </ul>
+  </section>
+
   <section id="links" class="mt-20">
-    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">08 / links</p>
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">09 / links</p>
     <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
     <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
       <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../glossary.html#logo" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">ロゴ</a><a href="../../glossary.html#yat-tat-ta" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">Yat Tat Ta</a><a href="../../glossary.html#squat-squad" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">スクワット隊</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">コンポーネント</p><a href="../../ui/components/logo/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ロゴ</a></li>
       <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">方針</p><a href="../../ui/principles.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">UI の基本方針</a></li>
       <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">名前を決めたセッション</p><a href="../20261006-0128-app-name/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">アプリ名を決める</a></li>
       <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">前回のセッション</p><a href="../20261007-0017-splash/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スプラッシュを作る</a></li>
@@ -247,7 +259,7 @@ tailwind.config = {
   });
 })();
 </script>
-<script src="logo.js"></script>
+<script src="../../ui/components/logo/logo.js"></script>
 <script src="../../sidebar.js" defer></script>
 </body>
 </html>
