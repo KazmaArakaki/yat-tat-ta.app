@@ -10,6 +10,10 @@
   // セッション一覧（新しい順）。新しいセッションは先頭に足す。
   var sessions = [
     {
+      path: "sessions/20261007-1215-privacy-policy/index.html",
+      label: "10/07 プライバシーポリシーを出す"
+    },
+    {
       path: "sessions/20261007-0957-firestore/index.html",
       label: "10/07 記録を Firestore に移す"
     },

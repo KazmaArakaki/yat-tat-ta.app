@@ -20,6 +20,8 @@ services:
     volumes:
       - ./reverse-proxy/etc/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ../docs:/etc/nginx/html
+      # Firebase Hosting で出す公開ページ（プライバシーポリシーとサポート）
+      - ../firebase/public:/etc/nginx/site
     environment:
       VIRTUAL_HOST: "*.yat-tat-ta.localhost"
     networks:

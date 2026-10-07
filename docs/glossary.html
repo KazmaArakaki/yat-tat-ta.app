@@ -95,6 +95,7 @@ tailwind.config = {
     <a href="#practice-mash" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">練習連打</a>
     <a href="#account" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">アカウント</a>
     <a href="#firestore" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">Firestore</a>
+    <a href="#privacy-policy" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">プライバシーポリシー</a>
     <a href="#translation-table" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">訳語表</a>
   </nav>
 
@@ -1080,6 +1081,23 @@ tailwind.config = {
     <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
       <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#account" class="text-dopa underline underline-offset-4">アカウント</a><a href="#record" class="text-dopa underline underline-offset-4">記録</a><a href="#dt" class="text-dopa underline underline-offset-4">DT</a><a href="#perf-mode" class="text-dopa underline underline-offset-4">計測モード</a></p></div>
       <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="devops/firebase/index.html" class="text-signal underline underline-offset-4">運用：Firebase の準備と運用</a><a href="database/index.html" class="text-signal underline underline-offset-4">データベース</a><a href="sessions/20261007-0957-firestore/index.html" class="text-signal underline underline-offset-4">セッション：記録を Firestore に移す</a></p></div>
+    </div>
+  </section>
+
+  <section id="privacy-policy" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#privacy-policy</p>
+    <h2 class="mt-1 font-display text-2xl">プライバシーポリシー</h2>
+    <p class="mt-3 leading-relaxed">アプリが利用者のどの情報を集め、何に使い、どこに預け、どう消せるかを書いた公開のページ。<a href="#account" class="text-dopa underline underline-offset-4">アカウント</a>を作って<a href="#record" class="text-dopa underline underline-offset-4">記録</a>を <a href="#firestore" class="text-dopa underline underline-offset-4">Firestore</a> に置くようになり、リリース前に必要になった。Firebase Hosting で日本語（/privacy/）と英語（/privacy/en/）を出し、ログイン画面と設定シートから開く。冒頭に「集めるのはログインの番号と記録だけ」「広告や分析に使わない」「いつでも全部消せる」の3行を置く。運営者は App Store の販売元と同じ個人名、問い合わせ先は support@yat-tat-ta.com（2026-10-07 決定）。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>目標回数も、プライバシーポリシーに書きますか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>書きます。ただし「端末の中だけに置いて、外へ送らない」ものとしてです。何を送らないかも、預けるものの大きさを知る手がかりになります。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>ポリシーを直したら、アプリも出し直しですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>いいえ。アプリは URL を開くだけなので、ページを公開し直せば済みます。ページの改定日だけは忘れずに書きます。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#account" class="text-dopa underline underline-offset-4">アカウント</a><a href="#firestore" class="text-dopa underline underline-offset-4">Firestore</a><a href="#record" class="text-dopa underline underline-offset-4">記録</a><a href="#health-claim" class="text-dopa underline underline-offset-4">健康効果</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="sessions/20261007-1215-privacy-policy/index.html" class="text-signal underline underline-offset-4">セッション：プライバシーポリシーを出す</a><a href="devops/firebase/index.html#hosting" class="text-signal underline underline-offset-4">運用：公開ページ</a><a href="features/account/index.html" class="text-signal underline underline-offset-4">機能：アカウント</a></p></div>
     </div>
   </section>
 

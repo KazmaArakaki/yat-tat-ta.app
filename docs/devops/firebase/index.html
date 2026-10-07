@@ -47,7 +47,7 @@ tailwind.config = {
     <div class="rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916]">
       <p class="font-mono text-xs uppercase tracking-[0.2em] text-dopa">決まり事</p>
       <ul class="mt-3 list-disc space-y-2 pl-5 font-bold leading-relaxed">
-        <li>Firebase で使うのは、Authentication（Apple のログイン）と <a href="../../glossary.html#firestore" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">Firestore</a> の2つだけ。</li>
+        <li>Firebase で使うのは、Authentication（Apple のログイン）、<a href="../../glossary.html#firestore" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">Firestore</a>、Hosting（公開ページ）の3つだけ。</li>
         <li><code class="font-mono text-sm">GoogleService-Info.plist</code> は Git に入れない。</li>
         <li>テストと<a href="../../glossary.html#perf-mode" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">計測モード</a>は Firestore に触れない。メモリ版の RecordStore を使う。</li>
         <li>記録の列を足したり変えたりしたら、同じコミットでルールも直し、反映する。</li>
@@ -103,6 +103,22 @@ service cloud.firestore {
     }
   }
 }</pre>
+  </section>
+
+  <section id="hosting" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">hosting</p>
+    <h2 class="mt-2 font-display text-3xl">公開ページ</h2>
+    <div class="mt-3 space-y-3 text-sm leading-relaxed text-ink/80">
+      <p><a href="../../glossary.html#privacy-policy" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">プライバシーポリシー</a>とサポートのページを、Firebase Hosting で <code class="font-mono text-xs">https://yat-tat-ta.web.app/</code> に出しています。元のファイルは <code class="font-mono text-xs">firebase/public/</code> です。</p>
+    </div>
+    <ul class="mt-4 flex flex-col gap-2 text-sm">
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>出す前の確認</b>：開発用のコンテナの reverse-proxy が、<code class="font-mono text-xs">firebase/public/</code> を <code class="font-mono text-xs">http://site.yat-tat-ta.localhost/</code> で返す（<code class="font-mono text-xs">.devcontainer/reverse-proxy</code>）。ファイルを直せば、再読み込みで反映される。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>出し方</b>：<code class="font-mono text-xs">firebase/</code> で <code class="font-mono text-xs">npx firebase-tools deploy --only hosting</code>。ルールとは別に出せる。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>日本語と英語は同時に直す</b>：<code class="font-mono text-xs">/privacy/</code> と <code class="font-mono text-xs">/privacy/en/</code>、<code class="font-mono text-xs">/</code> と <code class="font-mono text-xs">/en/</code>。片方だけ直すと、言語で書いてあることが食い違う。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>ポリシーを変えたら改定日を書く</b>：制定日の下に「改定日：」を足す。集める情報を増やすときは、出す前にポリシーを直す。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>外のフォントやスクリプトを読み込まない</b>：開いた人の情報を、ほかのサービスへ送らないため。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>URL を変えない</b>：アプリと App Store Connect が同じ URL を開く。変えるとアプリを出し直すことになる。</li>
+    </ul>
   </section>
 
   <section id="links" class="mt-16">
