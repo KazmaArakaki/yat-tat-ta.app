@@ -177,7 +177,6 @@
       label: "Issues",
       items: [
         { label: "課題一覧", path: "issues/index.html", level: 0 },
-        { label: "プライバシーポリシー", path: "issues/privacy-policy/index.html", level: 1 },
         { label: "Firebase の環境を分ける", path: "issues/firebase-environments/index.html", level: 1 },
         { label: "読み取りの費用", path: "issues/firestore-read-cost/index.html", level: 1 },
       ]
