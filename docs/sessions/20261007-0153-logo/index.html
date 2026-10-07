@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="session-state" content="developing">
+<meta name="state" content="developing">
+<title>ロゴを作る</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=M+PLUS+Rounded+1c:wght@500;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+        round: ['"M PLUS Rounded 1c"', '"Noto Sans JP"', 'sans-serif']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } }
+      },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+<style>
+/* アプリ画面の色。明るい配色と暗い配色を、.app と .app.dark で切り替える */
+.app { --a-bg:#FBF6EE; --a-card:#FFFFFF; --a-ink:#1C1916; --a-mute:#6E655C; --a-rule:#E7DDCC; --a-line:#1C1916; --a-soft:#FFE6F0; }
+.app.dark { --a-bg:#16120F; --a-card:#231D18; --a-ink:#F5EEE3; --a-mute:#A89C8E; --a-rule:#3A312A; --a-line:#F5EEE3; --a-soft:#3A1726; }
+.a-bg { background:var(--a-bg); color:var(--a-ink); }
+.a-card { background:var(--a-card); }
+.a-ink { color:var(--a-ink); }
+.a-mute { color:var(--a-mute); }
+.a-line { border-color:var(--a-line); }
+.a-rule { border-color:var(--a-rule); }
+.a-soft { background:var(--a-soft); }
+.a-shadow { box-shadow:4px 4px 0 var(--a-line); }
+.a-shadow-lg { box-shadow:0 8px 0 var(--a-line); }
+.num { font-family:"M PLUS Rounded 1c","Noto Sans JP",sans-serif; font-weight:900; font-variant-numeric:tabular-nums; letter-spacing:-0.02em; }
+.ticket { width:14px; height:18px; border-radius:3px; background:#2F79F7; position:relative; }
+.ticket::after { content:""; position:absolute; left:2px; right:2px; top:8px; border-top:2px dotted rgba(255,255,255,.75); }
+.ticket.empty { background:transparent; border:2px dashed var(--a-rule); }
+.mash { width:200px; height:200px; border-radius:9999px; background:#E9A800; border:4px solid var(--a-line); box-shadow:0 8px 0 var(--a-line); color:#1C1916; transition:transform .06s; }
+.mash:active { transform:translateY(6px); box-shadow:0 2px 0 var(--a-line); }
+.glow { position:absolute; inset:-22px; border-radius:9999px; background:radial-gradient(circle, rgba(229,51,122,.55) 0%, rgba(229,51,122,0) 70%); pointer-events:none; }
+.ring { position:absolute; border-radius:9999px; border:3px solid #E5337A; pointer-events:none; }
+.grain { position:absolute; border-radius:9999px; background:#E5337A; pointer-events:none; }
+@keyframes pop { 0%{transform:scale(.3);opacity:0} 60%{transform:scale(1.08);opacity:1} 100%{transform:scale(1)} }
+@keyframes ringout { 0%{transform:translate(-50%,-50%) scale(.2);opacity:1} 100%{transform:translate(-50%,-50%) scale(1);opacity:0} }
+@keyframes fly { 0%{transform:translate(0,0) scale(1);opacity:1} 100%{transform:translate(var(--dx),var(--dy)) scale(.4);opacity:0} }
+@keyframes burst { 0%{transform:translate(0,0);opacity:1} 100%{transform:translate(var(--dx),var(--dy));opacity:0} }
+@keyframes drop { 0%{transform:translateY(-120%)} 100%{transform:none} }
+.pop { animation:pop .45s cubic-bezier(.2,1.4,.4,1) both; }
+.tabbtn[aria-selected="true"] { background:#1C1916; color:#FBF6EE; }
+[data-panel][hidden] { display:none !important; }
+</style>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-5xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <time datetime="2026-10-07T01:53">2026-10-07 01:53</time>
+      <span>/</span>
+      <span>設計セッション</span>
+      <span class="rounded-full border border-gold bg-gold/15 px-2.5 py-0.5 font-bold text-ink">状態：developing</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl"><a href="../../glossary.html#logo" class="text-dopa">ロゴ</a>を作る</h1>
+  </header>
+
+  <section id="order" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="relative overflow-hidden rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916] sm:p-8">
+      <div class="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-dopa-soft"></div>
+      <p class="relative font-mono text-xs uppercase tracking-[0.2em] text-dopa">開発者の注文</p>
+      <p class="relative mt-6 font-display text-3xl tracking-wide sm:text-4xl">ロゴを作りたい。</p>
+    </div>
+  </section>
+
+  <section id="question" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01 / question</p>
+    <h2 class="mt-2 font-display text-3xl">ロゴがいちばん見られる場所</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>前のセッションで、<a href="../../glossary.html#splash" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スプラッシュ</a>からロゴを外しました。起動の一瞬は、続けた日の隊列に使う。ロゴを見てしゃがむ人はいないからです。</p>
+      <p>では、ロゴはどこに出るのか。毎食後にこのアプリを開く人は、1日3回、ホーム画面のアイコンを押します。押す前の0.5秒、指が探すのはそのアイコンです。ところが今、そこにあるのは iOS が出す白い板でした。<code class="font-mono text-xs">project.yml</code> の <code class="font-mono text-xs">ASSETCATALOG_COMPILER_APPICON_NAME</code> は空のままです。</p>
+      <p>だから今回作るロゴは2つです。</p>
+    </div>
+    <ol class="mt-6 grid max-w-3xl gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border-2 border-ink bg-white p-5 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">01 マーク ＝ アプリアイコン</p><p class="mt-2 leading-relaxed">ホーム画面、設定、通知、App Store に出る絵。60pt で毎日見られ、通知の横では 20pt まで縮む。今回の本題。</p></li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-5 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">02 ワードマーク ＝ 名前の文字組み</p><p class="mt-2 leading-relaxed">「Yat Tat Ta」の書き方。スプラッシュでもう使っている形を、正式なものにする。</p></li>
+    </ol>
+  </section>
+
+  <section id="candidates" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / candidates</p>
+    <h2 class="mt-2 font-display text-3xl">マークの3案</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>アプリの中で、いちばんこのアプリらしいものは何か。答えは2つに割れました。叩くとしゃがむ<a href="../../glossary.html#squat-squad" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スクワット隊</a>の人形と、3拍で落ちる名前です。人形を1人で描くか、3人で描くか、名前で描くか。3案はその3通りです。</p>
+      <p>人形は、アプリで描いている点（<code class="font-mono text-xs">SquatterLayer</code> の立つ姿としゃがむ姿）をそのまま使いました。アイコンの人形とアプリの人形は、同じ人です。</p>
+    </div>
+    <div class="mt-8 grid gap-5 lg:grid-cols-3">
+      <div class="rounded-3xl border-2 border-ink bg-white p-6 shadow-[6px_6px_0_#1C1916]">
+        <div class="flex items-center justify-between"><p class="font-display text-2xl">A しゃがむ1人</p><span class="rounded-full bg-dopa px-2.5 py-0.5 text-xs font-bold text-white">採用</span></div>
+        <div class="mt-5 flex items-end gap-4"><div data-icon="a" data-size="150"></div><div data-icon="a" data-size="60"></div><div data-icon="a" data-size="29"></div></div>
+        <p class="mt-5 text-sm leading-relaxed">金の地に、dopa の人形がしゃがんでいる。足元に輪。</p>
+        <ul class="mt-3 space-y-1 text-xs leading-relaxed text-ink/80">
+          <li>＋ 29pt でも人形と分かる。線が太く、形が1つしかない</li>
+          <li>＋ 金は「押せるもの」の色。アイコン自体が叩く的になる</li>
+          <li>－ 名前の3拍は入らない</li>
+        </ul>
+      </div>
+      <div class="rounded-3xl border-2 border-ink bg-white p-6 shadow-[6px_6px_0_#1C1916]">
+        <p class="font-display text-2xl">B 3拍</p>
+        <div class="mt-5 flex items-end gap-4"><div data-icon="b" data-size="150"></div><div data-icon="b" data-size="60"></div><div data-icon="b" data-size="29"></div></div>
+        <p class="mt-5 text-sm leading-relaxed">立つ、半分、しゃがむ。3人で Yat、Tat、Ta。最後の1人だけ dopa。</p>
+        <ul class="mt-3 space-y-1 text-xs leading-relaxed text-ink/80">
+          <li>＋ 名前の拍とスクワットの動きが1枚に入る</li>
+          <li>－ 60pt で1人あたり15pt。29pt では棒の束に見える</li>
+          <li>－ 地が paper。白い壁紙の上で輪郭が消える</li>
+        </ul>
+      </div>
+      <div class="rounded-3xl border-2 border-ink bg-white p-6 shadow-[6px_6px_0_#1C1916]">
+        <p class="font-display text-2xl">C 名前を積む</p>
+        <div class="mt-5 flex items-end gap-4"><div data-icon="c" data-size="150"></div><div data-icon="c" data-size="60"></div><div data-icon="c" data-size="29"></div></div>
+        <p class="mt-5 text-sm leading-relaxed">Yat、Tat、Ta を3段に。Ta だけ dopa で、着地でつぶれた形。</p>
+        <ul class="mt-3 space-y-1 text-xs leading-relaxed text-ink/80">
+          <li>＋ 名前をそのまま覚えてもらえる</li>
+          <li>－ アイコンの下にも名前が出る。同じ文字が2回並ぶ</li>
+          <li>－ スクワットのアプリだと、絵からは分からない</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="home" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / home screen</p>
+    <h2 class="mt-2 font-display text-3xl">ほかのアプリと並べる</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">アイコン1つを大きく見ると、どの案もそれなりに見えます。困るのは、ほかのアプリの中に置いたときです。灰色の板は、ほかのアプリの代わり。指で探すつもりで見比べてください。</p>
+    <div class="mt-6 grid gap-5 sm:grid-cols-2">
+      <div class="rounded-[2.2rem] border-2 border-ink p-6" style="background:linear-gradient(160deg,#c9d6e8,#f1e4d6 55%,#e9c9c0)">
+        <div class="grid grid-cols-4 gap-x-4 gap-y-5" data-home="light"></div>
+      </div>
+      <div class="rounded-[2.2rem] border-2 border-ink p-6" style="background:linear-gradient(160deg,#141a2a,#2a1f2b 55%,#1b1411)">
+        <div class="grid grid-cols-4 gap-x-4 gap-y-5" data-home="dark"></div>
+      </div>
+    </div>
+    <p class="mt-3 text-xs text-mute">左が明るい壁紙と明るいアイコン、右が暗い壁紙と暗いアイコン。上の段から A、B、C。</p>
+  </section>
+
+  <section id="modes" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / appearance</p>
+    <h2 class="mt-2 font-display text-3xl">A を3通りの見た目で</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>iOS 26 からは、使う人がアイコンの見た目を選べます。明るい、暗い、色付き、クリア。アイコンを1枚しか渡さないと、暗いと色付きは iOS が勝手に作ります。金の地を勝手に暗くされると、人形まで沈む。だから、暗いと色付きは自分で描きます。</p>
+    </div>
+    <div class="mt-6 grid max-w-3xl grid-cols-3 gap-4">
+      <figure class="rounded-2xl border border-rule bg-white p-4"><div data-icon="a" data-mode="light" data-size="120"></div><figcaption class="mt-3 text-xs leading-relaxed"><b>明るい</b><br>金の地、dopa の人形、ink の枠とずらした影。アプリのボタンと同じおもちゃの見た目。</figcaption></figure>
+      <figure class="rounded-2xl border border-rule bg-white p-4"><div data-icon="a" data-mode="dark" data-size="120"></div><figcaption class="mt-3 text-xs leading-relaxed"><b>暗い</b><br>地は暗い配色の paper（#16120F）。金は輪に回す。人形は dopa のまま。</figcaption></figure>
+      <figure class="rounded-2xl border border-rule bg-white p-4"><div data-icon="a" data-mode="tinted" data-size="120"></div><figcaption class="mt-3 text-xs leading-relaxed"><b>色付き</b><br>iOS が明るさだけを読んで色を塗る。人形をいちばん明るく、輪を中くらいに。</figcaption></figure>
+    </div>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">クリアは、明るい版から iOS が作ります。輪郭が人形1人しかないので、ガラス越しでも形が崩れません。</p>
+  </section>
+
+  <section id="wordmark" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / wordmark</p>
+    <h2 class="mt-2 font-display text-3xl">ワードマークは、もうある</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>名前の書き方は、スプラッシュで決まっていました。丸ゴシックの Black、3語を空けて並べ、Ta だけ dopa。3拍めで隊列の波が今日の席に届く、あの Ta です。新しく作る理由は見当たりません。これを正式なワードマークにします。</p>
+    </div>
+    <div class="mt-6 grid max-w-3xl gap-4 sm:grid-cols-2">
+      <div class="flex items-center gap-4 rounded-2xl border-2 border-ink bg-paper p-6">
+        <div data-icon="a" data-size="56"></div>
+        <p class="num text-4xl text-ink">Yat Tat <span class="text-dopa">Ta</span></p>
+      </div>
+      <div class="flex items-center gap-4 rounded-2xl border-2 border-ink p-6" style="background:#16120F">
+        <div data-icon="a" data-size="56"></div>
+        <p class="num text-4xl" style="color:#F5EEE3">Yat Tat <span class="text-dopa">Ta</span></p>
+      </div>
+    </div>
+    <p class="mt-3 max-w-2xl text-xs leading-relaxed text-mute">アプリでは SF Pro Rounded の Black（<code class="font-mono">Wordmark</code>）。この見本では M PLUS Rounded 1c で代えている。マークと並べるときは、マークの高さを文字の高さの1.4倍にする。</p>
+  </section>
+
+  <section id="detail-impl" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / implementation</p>
+    <h2 class="mt-2 font-display text-3xl">決まったら作るもの</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">案が決まってからの作業です。データの保存の形は変わりません。</p>
+    <ol class="mt-6 flex max-w-3xl flex-col gap-3 text-sm">
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>1. 元の絵を SVG で置く</b>（<code class="font-mono text-xs">ios/Design/AppIcon/</code> に明るい、暗い、色付きの3枚）<br><span class="text-ink/70">人形の点がアプリと同じだと確かめられる形で残すため。PNG だけだと、人形を直したときに描き直せない。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>2. Icon Composer で <code class="font-mono text-xs">AppIcon.icon</code> を作る</b>（地、輪、人形の3層）<br><span class="text-ink/70">iOS 26 のガラスの見た目は、層が分かれていないと付かない。人形だけが浮き、地は奥に残る。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>3. <code class="font-mono text-xs">project.yml</code> の <code class="font-mono text-xs">ASSETCATALOG_COMPILER_APPICON_NAME</code> を <code class="font-mono text-xs">AppIcon</code> にする</b><br><span class="text-ink/70">いまは空にして、XcodeGen の既定を外している。これを戻さないとアイコンが入らない。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>4. ロゴの見本ページ <code class="font-mono text-xs">ui/components/logo/</code> を作る</b><br><span class="text-ink/70">App Store の画面やドメイン yat-tat-ta.com でロゴを使うとき、色と並べ方をここで引く。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>5. 開発者が実機のホーム画面で、3通りの見た目を確かめる</b><br><span class="text-ink/70">シミュレーターではガラスの見え方が実機と違う。</span></li>
+    </ol>
+  </section>
+
+  <section id="decisions" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">07 / decisions</p>
+    <h2 class="mt-2 font-display text-3xl">決めること</h2>
+    <ul class="mt-6 flex max-w-3xl flex-col gap-2 text-sm">
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　マークは A「しゃがむ1人」（開発者が決定、2026-10-07）。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>決定</b>　ワードマークはスプラッシュの「Yat Tat Ta」（Ta だけ dopa）を正式にする。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>決定</b>　アイコンは明るい、暗い、色付きを自分で描く。クリアは iOS に任せる。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>決定</b>　ロゴの色は、アプリの色の決まり（<a href="../../ui/principles.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">UI の基本方針</a>）の外に置かない。新しい色は足さない。</li>
+    </ul>
+  </section>
+
+  <section id="links" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">08 / links</p>
+    <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../glossary.html#logo" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">ロゴ</a><a href="../../glossary.html#yat-tat-ta" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">Yat Tat Ta</a><a href="../../glossary.html#squat-squad" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">スクワット隊</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">方針</p><a href="../../ui/principles.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">UI の基本方針</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">名前を決めたセッション</p><a href="../20261006-0128-app-name/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">アプリ名を決める</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">前回のセッション</p><a href="../20261007-0017-splash/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スプラッシュを作る</a></li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script>
+// ホーム画面の見本。上から A、B、C の段。ほかのアプリは灰色の板で代える
+(function () {
+  var others = { light: ['#7aa7d9', '#f2f2f2', '#4cae6a', '#ff9f43', '#ffffff', '#3b3b3b', '#e85d5d', '#9b8cf0', '#f2f2f2'], dark: ['#2d4f7a', '#2b2b2b', '#2f6e44', '#8a5420', '#333333', '#111111', '#7a2f2f', '#4a3f80', '#2b2b2b'] };
+  document.querySelectorAll('[data-home]').forEach(function (grid) {
+    var mode = grid.dataset.home, n = 0;
+    ['a', 'b', 'c'].forEach(function (id) {
+      [0, 1, 2, 3].forEach(function (col) {
+        var cell = document.createElement('div');
+        cell.className = 'flex flex-col items-center gap-1';
+        var mine = col === (id === 'a' ? 1 : id === 'b' ? 2 : 0);
+        var box = mine ? '' : '<div style="width:56px;height:56px;border-radius:12.5px;background:' + others[mode][n++ % 9] + ';opacity:.85"></div>';
+        cell.innerHTML = (mine ? '<div data-icon="' + id + '" data-mode="' + mode + '" data-size="56"></div>' : box) +
+          '<span style="font:600 10px/1 -apple-system,sans-serif;color:' + (mode === 'dark' ? '#eee' : '#222') + '">' + (mine ? 'Yat Tat Ta' : '&nbsp;') + '</span>';
+        grid.appendChild(cell);
+      });
+    });
+  });
+})();
+</script>
+<script src="logo.js"></script>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>
