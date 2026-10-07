@@ -74,6 +74,24 @@ final class FeelEngine {
         startHaptics()
     }
 
+    #if DEBUG
+    /// 鳴らした音を全部、ファイルに書き始める。SNS の動画用（シミュレーターの画面の録画には音が入らない）
+    func startRecording(to url: URL) {
+        let mixer = audioEngine.mainMixerNode
+        let format = mixer.outputFormat(forBus: 0)
+        try? FileManager.default.removeItem(at: url)
+        guard let file = try? AVAudioFile(forWriting: url, settings: format.settings,
+                                          commonFormat: format.commonFormat, interleaved: format.isInterleaved) else { return }
+        mixer.installTap(onBus: 0, bufferSize: 4096, format: format) { buffer, _ in
+            try? file.write(from: buffer)
+        }
+    }
+
+    func stopRecording() {
+        audioEngine.mainMixerNode.removeTap(onBus: 0)
+    }
+    #endif
+
     /// 1打ぶん。level は進み具合の段階（0〜7）。heavy は激熱から。叩く音に低音を重ねる
     func tap(level: Int, heavy: Bool = false) {
         try? tapHaptics[safe: level]?.start(atTime: CHHapticTimeImmediate)

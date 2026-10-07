@@ -43,6 +43,8 @@ import Observation
     @ObservationIgnored var demoOpensHistory = false
     /// 計測モードでは、今日まだ通知の予約に触れない。仮の記録で予約し直さないように
     @ObservationIgnored var remindersPaused = false
+    /// 演出の見本（reel）で叩いた場所。動画に指の印を出す
+    var demoTouch: DemoTouch?
     #endif
     /// 最後の1打で節目に届くと分かった連打。PUSH に入った瞬間から立てる（虹の先バレ）
     private(set) var rainbow = false

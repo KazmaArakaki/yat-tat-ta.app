@@ -5,3 +5,4 @@ xcuserdata/
 Firebase/*/GoogleService-Info.plist
 # スクリーンショットは Design/screenshots.sh でいつでも撮り直せる（docs/devops/app-store#screenshots）
 Design/Screenshots/
+Design/Reels/

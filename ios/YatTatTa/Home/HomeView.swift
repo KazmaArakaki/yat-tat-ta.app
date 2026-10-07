@@ -67,6 +67,12 @@ struct HomeView: View {
             overlays
 
             splash
+
+            #if DEBUG
+            if let touch = model.demoTouch {
+                DemoTouchMark(touch: touch).id(touch.id)
+            }
+            #endif
         }
         .foregroundStyle(Color.ink)
         #if DEBUG
@@ -218,3 +224,26 @@ private extension View {
         onGeometryChange(for: CGRect.self) { $0.frame(in: .global) } action: { frames.wrappedValue[target] = $0 }
     }
 }
+
+#if DEBUG
+/// 演出の見本（reel）で叩いた場所に出す指の印。シミュレーターの録画には指が写らないので、動画のために描く
+private struct DemoTouchMark: View {
+    let touch: AppModel.DemoTouch
+    @State private var fading = false
+
+    var body: some View {
+        GeometryReader { geometry in
+            Circle()
+                .fill(.white.opacity(0.75))
+                .overlay(Circle().stroke(Color.ink.opacity(0.45), lineWidth: 3))
+                .frame(width: 66, height: 66)
+                .scaleEffect(fading ? 1.5 : 0.85)
+                .opacity(fading ? 0 : 1)
+                .position(x: geometry.size.width * touch.x, y: geometry.size.height * touch.y)
+        }
+        .ignoresSafeArea()
+        .allowsHitTesting(false)
+        .onAppear { withAnimation(.easeOut(duration: 0.35)) { fading = true } }
+    }
+}
+#endif
