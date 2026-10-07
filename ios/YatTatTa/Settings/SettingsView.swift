@@ -73,6 +73,17 @@ struct SettingsView: View {
 
                 if let account { accountSection(account) }
 
+                // 集める情報と使い方。Safari で開く
+                Section {
+                    Link(destination: Legal.privacyPolicy) {
+                        HStack {
+                            Text("プライバシーポリシー").font(.label(16)).foregroundStyle(Color.ink)
+                            Spacer()
+                            Image(systemName: "arrow.up.right").font(.system(size: 13, weight: .bold)).foregroundStyle(Color.mute)
+                        }
+                    }
+                }
+
                 // 注意書き。健康効果は書かず、休んでほしい場面だけを書く（docs/devops/health-wording）
                 Section {
                 } footer: {

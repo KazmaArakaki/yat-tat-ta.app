@@ -248,7 +248,12 @@ targets:
         <span class="font-display text-2xl text-mute">4</span>
         <div class="min-w-0"><p class="font-bold">テストを流す</p>
           <p class="mt-1 text-ink/80">記録からの計算を変えたら必ず流す。Xcode なら ⌘U。</p>
-          <pre class="mt-2 overflow-x-auto rounded-lg bg-ink p-3 font-mono text-xs text-white">cd ios &amp;&amp; xcodebuild test -project YatTatTa.xcodeproj -scheme YatTatTa -destination 'platform=iOS Simulator,name=iPhone 17'</pre></div>
+          <pre class="mt-2 overflow-x-auto rounded-lg bg-ink p-3 font-mono text-xs text-white">cd ios &amp;&amp; xcodebuild test -project YatTatTa.xcodeproj -scheme YatTatTa -destination 'platform=iOS Simulator,name=iPhone 17'</pre>
+          <p class="mt-2 text-ink/80">Xcode を開いたままコマンドラインで流すときは、ビルドの置き場を分け、Swift Package は Xcode が取ってきたものを読むだけにする。同じ置き場に両方が同時にダウンロードすると、Firebase の部品が「もうある」でつまずき、Xcode のビルドが通らなくなる（2026-10-07）。</p>
+          <pre class="mt-2 overflow-x-auto rounded-lg bg-ink p-3 font-mono text-xs text-white">cd ios &amp;&amp; xcodebuild test -project YatTatTa.xcodeproj -scheme YatTatTa -destination 'platform=iOS Simulator,name=iPhone 17' \
+  -derivedDataPath /tmp/yat-tat-ta-cli \
+  -clonedSourcePackagesDirPath "$(ls -d ~/Library/Developer/Xcode/DerivedData/YatTatTa-*/SourcePackages | head -1)" \
+  -disableAutomaticPackageResolution</pre></div>
       </li>
       <li class="flex gap-4 rounded-2xl border border-rule bg-white p-4">
         <span class="font-display text-2xl text-mute">5</span>

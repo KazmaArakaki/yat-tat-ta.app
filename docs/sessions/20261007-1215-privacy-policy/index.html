@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="session-state" content="planning">
-<meta name="state" content="planning">
+<meta name="session-state" content="done">
+<meta name="state" content="done">
 <title>プライバシーポリシーを出す</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,7 +58,7 @@ tailwind.config = {
       <time datetime="2026-10-07T12:15">2026-10-07 12:15</time>
       <span>/</span>
       <span>設計セッション</span>
-      <span class="rounded-full border border-gold bg-gold/15 px-2.5 py-0.5 font-bold text-ink">状態：planning</span>
+      <span class="rounded-full border border-signal bg-signal/10 px-2.5 py-0.5 font-bold text-ink">状態：done</span>
     </div>
     <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl"><a href="../../glossary.html#privacy-policy" class="text-dopa">プライバシーポリシー</a>を出す</h1>
   </header>
@@ -163,8 +163,20 @@ tailwind.config = {
     <ol class="mt-6 flex max-w-3xl flex-col gap-3 text-sm"><li class="rounded-2xl border border-rule bg-white p-4"><b>1. <code class="font-mono text-xs">firebase/public/</code> に公開ページを置く（日本語と英語のポリシー、サポートページ、共通のスタイル）。<code class="font-mono text-xs">firebase.json</code> に Hosting を足す</b><br><span class="text-ink/70">ポリシーの文面そのもの。ルールと同じ firebase-tools で出せて、Git のリモートが要らない。</span></li><li class="rounded-2xl border border-rule bg-white p-4"><b>2. ログイン画面の「名前とメールアドレスは受け取りません。」の下に「プライバシーポリシー」のリンク</b><br><span class="text-ink/70">ログインする前に、何を預けるかを読めるようにする。見本（ページ：ログイン画面）にはもう置いてある。</span></li><li class="rounded-2xl border border-rule bg-white p-4"><b>3. 設定シートのアカウントの欄の下に「プライバシーポリシー」の行</b><br><span class="text-ink/70">ログインしたあとにも読み返せる場所が要る。</span></li><li class="rounded-2xl border border-rule bg-white p-4"><b>4. URL を1か所（<code class="font-mono text-xs">Legal</code>）にまとめ、端末の言語が日本語なら <code class="font-mono text-xs">/privacy/</code>、それ以外は <code class="font-mono text-xs">/privacy/en/</code> を開く</b><br><span class="text-ink/70">開発の言語を英語にしているので、日本語でも英語でもない端末には英語を出す、という多言語の決まりとそろえる。</span></li><li class="rounded-2xl border border-rule bg-white p-4"><b>5. 文言を日本語と英語で足す</b><br><span class="text-ink/70">多言語の決まり事で、文言を足すときは2言語同時。</span></li><li class="rounded-2xl border border-rule bg-white p-4"><b>6. 開発者が公開する（<code class="font-mono text-xs">npx firebase-tools deploy --only hosting</code>）。App Store Connect にポリシーとサポートの URL を入れ、プライバシーの表示を埋める</b><br><span class="text-ink/70">公開と App Store Connect の操作は、開発者のアカウントでしかできない。</span></li></ol>
   </section>
 
+  <section id="build" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">07 / build</p>
+    <h2 class="mt-2 font-display text-3xl">作ったところ</h2>
+    <ul class="mt-6 flex max-w-3xl flex-col gap-2 text-sm">
+      <li class="rounded-2xl border border-rule bg-white p-4">開発用のコンテナの reverse-proxy に <code class="font-mono text-xs">site.yat-tat-ta.localhost</code> を足し、開発者が公開ページの見た目と運営者名を確かめた（2026-10-07）。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">URL を <code class="font-mono text-xs">Legal</code> にまとめた。言語は、アプリが文言に使っている言語（<code class="font-mono text-xs">Bundle.main.preferredLocalizations</code>）で選ぶ。アプリが英語で出ているのに、ポリシーだけ日本語で開くことがない。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">ログイン画面の一番下と、設定シートのアカウントの欄の下に「プライバシーポリシー」を置いた。文言を1つ足した（Privacy Policy）。テストを2つ足し、全87個が通る。</li>
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4">開発者が Firebase Hosting に公開し（2026-10-07）、iPhone の Safari での表示と、設定シートから開けることを確かめた。URL は https://yat-tat-ta.web.app/privacy/ と /privacy/en/、サポートは / と /en/。残りは App Store Connect への入力で、課題に残した。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">Xcode を開いたままコマンドラインでビルドするときは、別のビルド置き場（<code class="font-mono text-xs">-derivedDataPath</code>）を使い、ダウンロード済みの部品を読むだけにする（<code class="font-mono text-xs">-clonedSourcePackagesDirPath</code>、<code class="font-mono text-xs">-disableAutomaticPackageResolution</code>）。前のセッションの、ダウンロードのぶつかりを避けるため。</li>
+    </ul>
+  </section>
+
   <section id="links" class="mt-20">
-    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">07 / links</p>
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">08 / links</p>
     <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
     <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
       <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">課題</p><a href="../../issues/privacy-policy/index.html" class="mt-1 block font-bold lnk">privacy-policy</a></li>

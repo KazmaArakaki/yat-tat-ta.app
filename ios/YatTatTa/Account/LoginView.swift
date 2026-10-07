@@ -52,11 +52,16 @@ struct LoginView: View {
                     ProgressView().tint(colorScheme == .dark ? .black : .white)
                 }
             }
-            Text("名前とメールアドレスは受け取りません。")
-                .font(.label(11))
-                .foregroundStyle(Color.mute)
-                .frame(maxWidth: .infinity)
-                .padding(.top, 12)
+            VStack(spacing: 4) {
+                Text("名前とメールアドレスは受け取りません。")
+                Link(destination: Legal.privacyPolicy) {
+                    Text("プライバシーポリシー").underline()
+                }
+            }
+            .font(.label(11))
+            .foregroundStyle(Color.mute)
+            .frame(maxWidth: .infinity)
+            .padding(.top, 12)
         }
         .font(.system(size: 30, weight: .black, design: .rounded))
         .foregroundStyle(Color.ink)
