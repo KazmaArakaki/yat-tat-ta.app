@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>プライバシーポリシーと App Store のプライバシーの表示</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: { rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } } },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-3xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <a href="../index.html" class="hover:text-dopa hover:underline">issues</a>
+      <span>/</span>
+      <span>サーバー</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight">プライバシーポリシーと App Store のプライバシーの表示</h1>
+    <div class="mt-4 flex flex-wrap gap-2 font-mono text-xs font-bold">
+      <span class="rounded-full border border-ink bg-white px-3 py-1 text-ink">優先度：高</span>
+      <span class="rounded-full border border-dopa bg-dopa-soft px-3 py-1 text-ink">状態：未着手</span>
+    </div>
+  </header>
+
+  <section id="summary" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916]">
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-dopa">概要</p>
+      <p class="mt-3 font-bold leading-relaxed">記録を <a href="../../glossary.html#firestore" class="text-dopa underline underline-offset-4">Firestore</a> に置き、Apple のログインで<a href="../../glossary.html#account" class="text-dopa underline underline-offset-4">アカウント</a>を作るようになった。<br>リリースまでに、プライバシーポリシーを書いて公開し、App Store Connect のプライバシーの表示を埋める。</p>
+    </div>
+    
+    <h2 class="mt-10 font-display text-2xl">やること</h2>
+    <div class="mt-3 space-y-3 text-sm leading-relaxed"><ol class="list-decimal space-y-2 pl-5"><li>プライバシーポリシーを書く。集めるもの（Apple のログインで割り当てられる番号、スクワットの記録）、置き場所（Google の Firebase、東京）、使い道（記録を残して見せるだけ）、消し方（設定シートのアカウントの削除）。</li><li>公開する場所を決める。URL が要る。</li><li>ログイン画面の「プライバシーポリシー」の行から開く。App Store Connect にも同じ URL を入れる。</li><li>App Store Connect のプライバシーの表示を埋める。スクワットの回数を「フィットネス」、番号を「ユーザ ID」として、利用者に結びつくデータに申告することになりそうだが、区分は申請のときに Apple の説明で確かめる。</li></ol></div>
+    <h2 class="mt-10 font-display text-2xl">気をつけること</h2>
+    <div class="mt-3 space-y-3 text-sm leading-relaxed"><p>健康についての書き方は、プライバシーポリシーでも<a href="../../devops/health-wording/index.html" class="text-dopa underline underline-offset-4">健康効果の書き方</a>に従う。「健康のために記録を集める」のような書き方はしない。</p></div>
+    <dl class="mt-10 grid gap-3 text-sm sm:grid-cols-2">
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <dt class="font-mono text-xs text-mute">優先度が高の理由</dt>
+        <dd class="mt-1 leading-relaxed">App Store の審査は、プライバシーポリシーの URL がないアプリを通さない。リリースの前に必ず要る。</dd>
+      </div>
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <dt class="font-mono text-xs text-mute">先送りにした理由</dt>
+        <dd class="mt-1 leading-relaxed">アプリの作りは、ポリシーの文面を待たずに進められる。公開する場所を決めるのも、作りとは別の判断になる。</dd>
+      </div>
+    </dl>
+    <p class="mt-6 text-sm">見つけたセッション：<a href="../../sessions/20261007-0957-firestore/index.html" class="text-dopa underline underline-offset-4">記録を Firestore に移す</a></p>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

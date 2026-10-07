@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Firebase の準備と運用</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: { rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } } },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-3xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <a href="../index.html" class="hover:text-dopa hover:underline">devops</a>
+      <span>/</span>
+      <span>サーバー</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight">Firebase の準備と運用</h1>
+    <p class="mt-3 text-sm text-mute">2026-10-07 設計。Firebase の設定を触るとき、記録の列を変えるとき、ルールを変えるときに開く。</p>
+  </header>
+
+  <section id="rules" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916]">
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-dopa">決まり事</p>
+      <ul class="mt-3 list-disc space-y-2 pl-5 font-bold leading-relaxed">
+        <li>Firebase で使うのは、Authentication（Apple のログイン）と <a href="../../glossary.html#firestore" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">Firestore</a> の2つだけ。</li>
+        <li><code class="font-mono text-sm">GoogleService-Info.plist</code> は Git に入れない。</li>
+        <li>テストと<a href="../../glossary.html#perf-mode" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">計測モード</a>は Firestore に触れない。メモリ版の RecordStore を使う。</li>
+        <li>記録の列を足したり変えたりしたら、同じコミットでルールも直し、反映する。</li>
+      </ul>
+    </div>
+    <dl class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <dt class="font-mono text-xs text-mute">置き場所</dt>
+        <dd class="mt-1 font-mono text-sm font-bold">users/{uid}/records/{recordId}</dd>
+        <dd class="mt-1 text-xs text-mute">列は<a href="../../database/squat-record/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">SquatRecord</a>。</dd>
+      </div>
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <dt class="font-mono text-xs text-mute">プロジェクト</dt>
+        <dd class="mt-1 font-bold">1つ（開発と本番が同じ）</dd>
+        <dd class="mt-1 text-xs text-mute">リリースまでに分ける（課題 <a href="../../issues/firebase-environments/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">firebase-environments</a>）。</dd>
+      </div>
+    </dl>
+  </section>
+
+  <section id="setup" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">setup</p>
+    <h2 class="mt-2 font-display text-3xl">最初の準備（約35分）</h2>
+    <p class="mt-3 text-sm leading-relaxed text-ink/80">開発者のアカウントでしかできない作業です。実装を始める前に1回だけ。</p>
+    <ol class="mt-6 flex flex-col gap-3 text-sm"><li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">1</span><div><b>Firebase のプロジェクトを作る（約10分）</b><br>Firebase コンソールでプロジェクトを作る。Google アナリティクスは入れない（集める理由がなく、プライバシーの表示が増える）。iOS アプリを足し、バンドル ID に <code class="font-mono text-xs">com.yat-tat-ta</code> を入れる。</div></li><li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">2</span><div><b>設定ファイルを置く（約2分）</b><br>ダウンロードした <code class="font-mono text-xs">GoogleService-Info.plist</code> を <code class="font-mono text-xs">ios/YatTatTa/</code> に置く。<code class="font-mono text-xs">.gitignore</code> に入れてあるので、Git には入らない。ないままビルドすると、起動した瞬間に落ちる。</div></li><li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">3</span><div><b>Firestore を作る（約5分）</b><br>Firestore Database を作る。場所は東京（asia-northeast1）。あとから変えられない。始めは本番モード（全部断る）で作り、すぐ下のルールを反映する。</div></li><li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">4</span><div><b>Apple のログインを有効にする（約15分）</b><br>Authentication の Sign-in method で Apple を有効にする。Apple Developer の Keys で Sign in with Apple の鍵を作り、Team ID（K334V22YZ3）、鍵の ID、鍵のファイルを Firebase の Apple の欄に登録する。この鍵がないと、アカウントを削除するときに Apple との連携を切れない。</div></li><li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">5</span><div><b>ルールを反映する（約3分）</b><br>リポジトリの <code class="font-mono text-xs">firebase/</code> で <code class="font-mono text-xs">firebase deploy --only firestore:rules</code> を実行する（Firebase CLI）。ルールを変えたら、そのたびに反映する。</div></li></ol>
+  </section>
+
+  <section id="security" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">security rules</p>
+    <h2 class="mt-2 font-display text-3xl">ルール</h2>
+    <div class="mt-3 space-y-3 text-sm leading-relaxed text-ink/80">
+      <p>アプリに埋め込む鍵は、誰でも取り出せます。他人の記録を読ませない、壊れた記録を書かせないのは、このルールです。置き場所は <code class="font-mono text-xs">firebase/firestore.rules</code>。</p>
+      <p>createdAt はサーバーの時刻（serverTimestamp）でしか書けません。電波のないところで叩いた記録も、送られた時点でサーバーが時刻を入れるので、ルールを通ります。</p>
+    </div>
+    <pre class="mt-4 overflow-x-auto rounded-2xl border-2 border-ink bg-ink p-5 font-mono text-xs leading-relaxed text-paper">rules_version = &#x27;2&#x27;;
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isValidRecord(d) {
+      return d.keys().hasOnly([&#x27;startedAt&#x27;, &#x27;day&#x27;, &#x27;reps&#x27;, &#x27;bonusDopa&#x27;, &#x27;createdAt&#x27;])
+        &amp;&amp; d.keys().hasAll([&#x27;startedAt&#x27;, &#x27;day&#x27;, &#x27;reps&#x27;, &#x27;bonusDopa&#x27;, &#x27;createdAt&#x27;])
+        &amp;&amp; d.startedAt is timestamp
+        &amp;&amp; d.day is int &amp;&amp; d.day &gt;= 20260101 &amp;&amp; d.day &lt;= 99991231
+        &amp;&amp; d.reps is int &amp;&amp; d.reps &gt;= 1 &amp;&amp; d.reps &lt;= 1000
+        &amp;&amp; d.bonusDopa is int &amp;&amp; d.bonusDopa &gt;= 0
+        &amp;&amp; d.createdAt == request.time;
+    }
+
+    // 自分の棚だけ。記録は足すか消すだけで、書き換えない
+    match /users/{uid}/records/{recordId} {
+      allow read, delete: if request.auth != null &amp;&amp; request.auth.uid == uid;
+      allow create: if request.auth != null &amp;&amp; request.auth.uid == uid
+        &amp;&amp; isValidRecord(request.resource.data);
+      allow update: if false;
+    }
+  }
+}</pre>
+  </section>
+
+  <section id="links" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">links</p>
+    <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
+    <ul class="mt-4 flex flex-col gap-2 text-sm">
+      <li><a href="../../sessions/20261007-0957-firestore/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">セッション：記録を Firestore に移す</a></li>
+      <li><a href="../../features/account/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">機能：アカウント</a></li>
+      <li><a href="../ios-project/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">iOS プロジェクトの設定</a></li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

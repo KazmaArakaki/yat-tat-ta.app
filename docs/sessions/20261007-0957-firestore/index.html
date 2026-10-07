@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="session-state" content="planning">
+<meta name="state" content="planning">
+<title>記録を Firestore に移す</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=M+PLUS+Rounded+1c:wght@500;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+        round: ['"M PLUS Rounded 1c"', '"Noto Sans JP"', 'sans-serif']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } }
+      },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+<style>
+.app { --a-bg:#FBF6EE; --a-card:#FFFFFF; --a-ink:#1C1916; --a-mute:#6E655C; --a-rule:#E7DDCC; --a-line:#1C1916; --a-soft:#FFE6F0; }
+.app.dark { --a-bg:#16120F; --a-card:#231D18; --a-ink:#F5EEE3; --a-mute:#A89C8E; --a-rule:#3A312A; --a-line:#F5EEE3; --a-soft:#3A1726; }
+.a-bg { background:var(--a-bg); color:var(--a-ink); }
+.a-card { background:var(--a-card); }
+.a-ink { color:var(--a-ink); }
+.a-mute { color:var(--a-mute); }
+.a-line { border-color:var(--a-line); }
+.a-rule { border-color:var(--a-rule); }
+.a-soft { background:var(--a-soft); }
+.lnk { text-decoration:underline; text-decoration-color:rgba(229,51,122,.5); text-decoration-thickness:2px; text-underline-offset:4px; }
+.lnk:hover { text-decoration-color:#E5337A; }
+.tabbtn[aria-selected="true"] { background:#1C1916; color:#FBF6EE; }
+.flow-arrow { font-family:"JetBrains Mono",monospace; color:#6E655C; }
+</style>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-5xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <time datetime="2026-10-07T09:57">2026-10-07 09:57</time>
+      <span>/</span>
+      <span>設計セッション</span>
+      <span class="rounded-full border border-gold bg-gold/15 px-2.5 py-0.5 font-bold text-ink">状態：planning</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl">記録を <a href="../../glossary.html#firestore" class="text-dopa">Firestore</a> に移す</h1>
+  </header>
+
+  <section id="order" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="relative overflow-hidden rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916] sm:p-8">
+      <div class="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-dopa-soft"></div>
+      <p class="relative font-mono text-xs uppercase tracking-[0.2em] text-dopa">開発者の注文</p>
+      <p class="relative mt-6 font-display text-2xl leading-snug tracking-wide sm:text-3xl">新しいiPhoneに買い換えたら<br>スクワットの記録は無くなる？</p>
+      <p class="relative mt-6 border-t-2 border-dashed border-rule pt-6 text-base font-bold leading-relaxed sm:text-lg">iPhone版が安定したらAndroid版も考えており、今後機能追加する際にデータベースが必要になるかもしれないので、今のリリース前段階でデータベース接続に移行したい。</p>
+    </div>
+  </section>
+
+  <section id="now" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01 / now</p>
+    <h2 class="mt-2 font-display text-3xl">いまの記録が消えるとき</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>いまの<a href="../../glossary.html#record" class="lnk">記録</a>は、SwiftData で iPhone の中にだけ置いています。サーバーもアカウントもありません。それでも、たいていの機種変更では残るはずです。クイックスタートでも iCloud バックアップからの復元でも、アプリの中身ごと新しい iPhone へ移るからです。</p>
+      <p>消えるのは、「新しい iPhone として設定」して App Store から入れ直したときと、アプリを削除したときです。どちらも、利用者の側からは「普通に機種変更しただけ」に見えるかもしれません。</p>
+      <p>iCloud に同期する手（CloudKit）も考えました。ログインなしで、設定を足すだけで済みます。ただし CloudKit は Apple の端末どうしでしか同期できず、Android 版を出すと記録が分かれる。将来の機能でデータベースが要る可能性もあるので、リリース前のいま、サーバーのデータベースへ移すことにしました（開発者が決定、2026-10-07）。</p>
+    </div>
+  </section>
+
+  <section id="decisions" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / decisions</p>
+    <h2 class="mt-2 font-display text-3xl">決めたこと</h2>
+    <ul class="mt-6 flex max-w-3xl flex-col gap-2 text-sm">
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　データベースは Firestore（Firebase）。iOS と Android の両方に公式の SDK があり、電波がないあいだの書き込みを端末に溜めておける（開発者が決定、2026-10-07）。</li>
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　最初の起動で Apple でログインしてもらう。ログインしないと叩けない。全員の記録が必ず<a href="../../glossary.html#account" class="lnk">アカウント</a>に残る（開発者が決定、2026-10-07）。</li>
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　SwiftData はやめ、Firestore に一本化する。端末側の保存は Firestore のキャッシュに任せる（開発者が決定、2026-10-07）。</li>
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　いま端末にある記録（開発中のテストデータ）は捨てる。移す処理は作らない（開発者が決定、2026-10-07）。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>提案</b>　Apple のボタンは「Appleで続ける」。名前とメールアドレスは求めない。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>提案</b>　設定シートにアカウントの欄を足し、ログアウトとアカウントの削除を置く。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>提案</b>　端末の設定（目標回数、通知、見せた印）は UserDefaults に残す。サーバーへは移さない。</li>
+    </ul>
+  </section>
+
+  <section id="flow" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / flow</p>
+    <h2 class="mt-2 font-display text-3xl">ログインはどこに入るか</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>何をするアプリかを見せてからログインを頼む順も考えました。<a href="../../glossary.html#intro-splash" class="lnk">はじめての幕</a>の14秒を先に見せれば、ボタンを押す理由が伝わる。とはいえ、幕は<a href="../../glossary.html#splash" class="lnk">スプラッシュ</a>と<a href="../../glossary.html#tutorial" class="lnk">チュートリアル</a>につながっていて、あいだにログインを挟むと流れが3つに切れます。</p>
+      <p>そこで、ログインを一番前に置きます。ログイン画面の一行目は「機種を変えても、記録はそのまま。」です。ボタンを押す理由は、この一行で伝えます。</p>
+    </div>
+    <ol class="mt-6 flex flex-wrap items-center gap-2 text-sm font-bold">
+      <li class="rounded-2xl border-2 border-ink bg-white px-4 py-3 shadow-[4px_4px_0_#1C1916]">ログイン画面<span class="block text-[11px] font-normal text-mute">まだログインしていない人だけ</span></li>
+      <li class="flow-arrow">→</li>
+      <li class="rounded-2xl border border-rule bg-white px-4 py-3">スプラッシュ<span class="block text-[11px] font-normal text-mute">いまどおり</span></li>
+      <li class="flow-arrow">→</li>
+      <li class="rounded-2xl border border-rule bg-white px-4 py-3">はじめての幕<span class="block text-[11px] font-normal text-mute">端末で1度</span></li>
+      <li class="flow-arrow">→</li>
+      <li class="rounded-2xl border border-rule bg-white px-4 py-3">チュートリアル<span class="block text-[11px] font-normal text-mute">記録が1件もない人</span></li>
+      <li class="flow-arrow">→</li>
+      <li class="rounded-2xl border border-rule bg-white px-4 py-3">ホーム</li>
+    </ol>
+    <div class="mt-8 grid items-start gap-8 md:grid-cols-[316px_1fr]">
+      <a href="../../ui/pages/login/index.html" class="group block w-[300px] rounded-[2.8rem] border-[6px] border-ink bg-ink p-1.5 shadow-[10px_10px_0_#E5337A]">
+        <div class="relative flex h-[420px] flex-col overflow-hidden rounded-[2.2rem] bg-paper px-6 pb-6 pt-12">
+          <div class="absolute left-1/2 top-2.5 h-6 w-24 -translate-x-1/2 rounded-full bg-black"></div>
+          <p class="font-display text-[24px] leading-none tracking-wide">Yat Tat <span class="text-dopa">Ta</span></p>
+          <p class="mt-5 font-display text-[22px] leading-[1.35]">機種を変えても、<br>記録はそのまま。</p>
+          <p class="mt-2 text-[11px] font-bold leading-relaxed text-mute">Apple でログインすると、記録がアカウントに残ります。</p>
+          <p class="mt-auto font-display text-dopa">Z<span class="text-sm">z</span><span class="text-xs">z</span></p>
+          <div class="mt-1 h-[3px] w-full rounded bg-rule"></div>
+          <div class="mt-5 flex h-11 items-center justify-center rounded-full bg-black text-sm font-bold text-white">Appleで続ける</div>
+          <p class="mt-2 text-center text-[9px] text-mute">名前とメールアドレスは受け取りません。</p>
+        </div>
+      </a>
+      <div class="max-w-md space-y-3 text-sm leading-relaxed text-ink/80">
+        <p>動く見本は<a href="../../ui/pages/login/index.html" class="lnk">ページ：ログイン画面</a>にあります。押すと、寝ていた<a href="../../glossary.html#squat-squad" class="lnk">スクワットマン</a>が起き上がります。</p>
+        <p>初めてのログインだけは電波が要ります。つながらないときは「電波のあるところで、もう一度」と1行出して待つ。2回目からはログインしたままなので、地下の食堂でも叩けます。</p>
+        <p>機種変更した人は、ログインするとまず記録が届きます。はじめての幕は端末ごとの印なのでもう一度出ますが、チュートリアルは出ません。記録が1件でもある人には出さない決まりだからです。ただし、記録が届く前にスプラッシュが終わると、記録のある人にもチュートリアルが出てしまう。出すかどうかは、サーバーから最初の答えが返るまで待って決めます。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="store" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / store</p>
+    <h2 class="mt-2 font-display text-3xl">記録の置き場所</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>記録の形は変えません。完了連打1回で1件、列はいまの SquatRecord と同じ4つです。置き場所だけが、iPhone の中から利用者ごとの棚に変わります。</p>
+    </div>
+    <pre class="mt-6 max-w-3xl overflow-x-auto rounded-2xl border-2 border-ink bg-ink p-5 font-mono text-xs leading-relaxed text-paper"><span class="text-dopa-body">users/{uid}/records/{recordId}</span>
+  startedAt   timestamp   叩き始めた日時
+  day         int         記録日（yyyymmdd）。叩き始めた瞬間に決める
+  reps        int         ドパに変えたスクワットの回数。1以上
+  bonusDopa   int         フィーバータイムで取ったドパ。0以上
+  createdAt   timestamp   サーバーが受け取った日時（serverTimestamp）</pre>
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full min-w-[640px] border-collapse text-left text-sm">
+        <caption class="mb-2 text-left font-mono text-xs text-mute">表1　置き場所の決まり</caption>
+        <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="py-2 pr-3">項目</th><th class="py-2 pr-3">決まり</th><th class="py-2">理由</th></tr></thead>
+        <tbody class="[&>tr]:border-b [&>tr]:border-rule [&_td]:py-2.5 [&_td]:pr-3 [&_td]:align-top">
+          <tr><td><b>uid</b></td><td>Firebase Authentication が Apple のログインに割り当てる番号</td><td>Apple ID が同じなら、iPhone でも Android でも同じ番号になる</td></tr>
+          <tr><td><b>recordId</b></td><td>端末で作る UUID</td><td>電波がなくても、その場で番号が決まる</td></tr>
+          <tr><td><b>createdAt</b></td><td>新しく足す列。画面には使わない</td><td>あとで「前回から増えた分だけ読む」ときの目印になる（課題 <a href="../../issues/firestore-read-cost/index.html" class="lnk">firestore-read-cost</a>）。足すのはいましか楽にできない</td></tr>
+          <tr><td><b>読み書きの権限</b></td><td>自分の棚だけ。足すと消すはできるが、書き換えはできない。列と型をルールで確かめる</td><td>記録はいまも足すか消すだけ。書き換えを許す理由がない</td></tr>
+          <tr><td><b>電波がないとき</b></td><td>書き込みは端末のキャッシュに入り、画面はすぐ動く。電波が戻ったら送られる</td><td>食べた直後に、電波を待たせずに叩ける</td></tr>
+          <tr><td><b>計算する数</b></td><td>DT、DPW、連続記録、休み券はいまどおり記録から計算する。サーバーには置かない</td><td>計算した数を保存すると記録と食い違う日が来る、という<a href="../../database/index.html" class="lnk">データベースの方針</a>のまま</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="arrival" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / arrival</p>
+    <h2 class="mt-2 font-display text-3xl">叩いている最中に記録が届いたら</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>いまは、記録を読み直すのが起動したときと消したときだけです。Firestore では、ほかの端末で叩いた記録や、ログイン直後に届く記録が、いつでも割り込んできます。届くたびに読み直せばいい、と最初は考えました。</p>
+      <p>ところが、<a href="../../glossary.html#done-mash" class="lnk">完了連打</a>の途中で読み直すと、<a href="../../glossary.html#dt" class="lnk">DT</a> が一気に跳ねます。<a href="../../glossary.html#milestone" class="lnk">節目</a>は叩くたびに「前の DT から今の DT までに閾値をまたいだか」で決めるので、届いた分まで自分の連打の手柄になってしまう。叩いている最中に届いた記録は、連打を閉じてから読み直します。</p>
+    </div>
+  </section>
+
+  <section id="account" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / account</p>
+    <h2 class="mt-2 font-display text-3xl">設定シートのアカウントの欄</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">アカウントを作れるアプリは、アプリの中から削除もできないと App Store の審査を通りません。削除は取り返しがつかないので、確かめる画面を1枚挟み、もう一度 Apple で本人か確かめてから消します。下の見本は、押すと確かめる画面が出ます。</p>
+    <div class="mt-8 flex flex-col items-center gap-8 md:flex-row md:items-start md:justify-center">
+      <div class="w-[300px] shrink-0 rounded-[2.8rem] border-[6px] border-ink bg-ink p-1.5 shadow-[10px_10px_0_#E5337A]">
+        <div class="app a-bg relative h-[560px] overflow-hidden rounded-[2.2rem]">
+          <div class="absolute left-1/2 top-2.5 z-40 h-6 w-24 -translate-x-1/2 rounded-full bg-black"></div>
+          <div class="absolute inset-0 bg-black/30"></div>
+          <div class="a-card absolute inset-x-0 bottom-0 top-12 flex flex-col rounded-t-[1.8rem] border-t-2 a-line px-5 pt-3">
+            <div class="mx-auto h-1.5 w-10 rounded-full bg-rule"></div>
+            <div class="mt-3 flex items-center justify-between">
+              <p class="text-base font-black a-ink">設定</p>
+              <span class="rounded-full border-2 border-ink bg-gold px-3 py-1 text-xs font-black text-ink shadow-[0_3px_0_#1C1916]">閉じる</span>
+            </div>
+            <div class="mt-5 space-y-2 opacity-40">
+              <div class="rounded-2xl border-2 a-line px-3 py-2.5 text-sm font-bold">目標回数　<span class="num">20</span> 回</div>
+              <div class="rounded-2xl border-2 a-line px-3 py-2.5 text-sm font-bold">今日まだ通知　21:00</div>
+              <div class="rounded-2xl border-2 a-line px-3 py-2.5 text-sm font-bold">使い方をもう一度</div>
+            </div>
+            <div class="relative mt-5">
+              <span class="absolute right-0 -top-0.5 rounded-full bg-dopa px-2 py-0.5 font-mono text-[9px] font-bold text-white">NEW</span>
+              <p class="text-[11px] font-bold a-mute">アカウント</p>
+              <div class="mt-2 rounded-2xl border-2 a-line">
+                <div class="flex items-center justify-between px-3 py-3"><p class="text-sm font-bold a-ink">Apple でログイン中</p><span class="text-base"></span></div>
+                <button id="logout" type="button" class="block w-full border-t-2 a-rule px-3 py-3 text-left text-sm font-bold a-ink">ログアウト</button>
+                <button id="delete" type="button" class="block w-full border-t-2 a-rule px-3 py-3 text-left text-sm font-bold text-[#E0302A]">アカウントを削除</button>
+              </div>
+              <p class="mt-2 text-[10px] leading-relaxed a-mute">削除すると、これまでの記録がすべて消えます。元には戻せません。</p>
+            </div>
+            <p class="mt-5 text-[10px] leading-relaxed a-mute">膝や腰が痛むとき、医師から運動を止められているときは、休んでください。…</p>
+          </div>
+          <div id="dialog" class="absolute inset-0 z-50 hidden place-items-center bg-black/40 px-6">
+            <div class="w-full rounded-2xl bg-white/95 text-center text-ink backdrop-blur">
+              <p id="d-title" class="px-4 pt-4 text-[15px] font-bold"></p>
+              <p id="d-body" class="px-4 pb-4 pt-1 text-[12px] leading-relaxed"></p>
+              <div class="grid grid-cols-2 border-t border-black/15 text-[15px]">
+                <button id="d-cancel" class="border-r border-black/15 py-2.5 text-[#0A7AFF]">やめる</button>
+                <button id="d-ok" class="py-2.5 font-bold"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ul class="flex max-w-xs flex-col gap-3 text-sm leading-relaxed">
+        <li class="border-l-4 border-ink pl-3"><b>Apple でログイン中</b>：誰のアカウントかは出さない。メールアドレスを受け取っていないので、出せるものがない。</li>
+        <li class="border-l-4 border-gold pl-3"><b>ログアウト</b>：確かめてから、ログイン画面へ戻る。記録はアカウントに残り、同じ Apple ID でログインすると戻る。端末のキャッシュは消す。</li>
+        <li class="border-l-4 border-[#E0302A] pl-3"><b>アカウントを削除</b>：確かめる、Apple でもう一度本人確認、記録をすべて消す、Apple との連携を切る、アカウントを消す、ログイン画面へ。電波がないと押せない。</li>
+        <li class="border-l-4 border-rule pl-3"><b>叩いている最中</b>：どちらも押せない。「使い方をもう一度」と同じ。</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="impl" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">07 / implementation</p>
+    <h2 class="mt-2 font-display text-3xl">作るもの</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">保存の仕組みを入れ替えるので、端末にある記録は消えます。リリース前の開発者の端末だけで、捨てることに合意済みです（2026-10-07）。</p>
+    <ol class="mt-6 flex max-w-3xl flex-col gap-3 text-sm">
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>1. <code class="font-mono text-xs">project.yml</code> に Firebase の SDK（FirebaseAuth、FirebaseFirestore）を Swift Package で足し、Sign in with Apple の entitlement を足す</b><br><span class="text-ink/70">SDK がないと Firestore に触れない。entitlement がないと、Apple のログインの画面が開かない。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>2. <code class="font-mono text-xs">SquatRecord</code> を SwiftData の <code class="font-mono text-xs">@Model</code> から普通の struct に替え、SwiftData を外す</b><br><span class="text-ink/70">一本化すると決めたので、SwiftData を残す理由がない。struct なら Firestore の文書との行き来も、テストで作るのも軽い。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>3. 記録の出し入れを <code class="font-mono text-xs">RecordStore</code>（足す、消す、全部消す、変わったら知らせる）にまとめ、Firestore 版とメモリ版を作る</b><br><span class="text-ink/70">テストと計測モード（<a href="../../glossary.html#perf-mode" class="lnk">-perf</a>）の仮の記録を、利用者の棚に書かないため。いまの「計測モードはメモリだけの保存先を使う」と同じ考え方。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>4. <code class="font-mono text-xs">AppModel</code> を <code class="font-mono text-xs">ModelContext</code> から <code class="font-mono text-xs">RecordStore</code> に替え、届いた記録で計算し直す。叩いている最中は閉じるまで待つ</b><br><span class="text-ink/70">ほかの端末の記録やログイン直後の記録を画面に出すため。待つ理由は05。今日まだ通知の予約も、読み直したら組み直す。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>5. チュートリアルを出すかは、サーバーから最初の答えが返ってから決める。電波がなければ、キャッシュの答えで決める</b><br><span class="text-ink/70">機種変更した人に、記録が届く前にチュートリアルを出さないため。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>6. ログイン画面と、ログインの状態で画面を切り替える入り口（<code class="font-mono text-xs">YatTatTaApp</code>）</b><br><span class="text-ink/70">ログインしないと叩けない、と決めたから。ログインしたら、その uid の棚で <code class="font-mono text-xs">AppModel</code> を作る。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>7. 設定シートのアカウントの欄。ログアウトと、アカウントの削除（本人確認、記録の削除、Apple との連携を切る、アカウントの削除）</b><br><span class="text-ink/70">削除は App Store の審査の条件。Apple との連携を切ることも、Sign in with Apple を使うアプリに求められている。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>8. Firestore のルール（<code class="font-mono text-xs">firebase/firestore.rules</code>）を書き、リポジトリに置く</b><br><span class="text-ink/70">アプリに埋め込む Firebase の鍵は、誰でも読める。他人の棚を読ませないのはルールの仕事。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>9. 文言を日本語と英語で足し、<a href="../../devops/localization/index.html" class="lnk">訳語表</a>にアカウント（Account）、ログイン（Sign in）、ログアウト（Sign out）を足す</b><br><span class="text-ink/70">多言語の決まり事で、文言を足すときは2言語同時。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>10. テスト：メモリ版の RecordStore で今の79個を通す。叩いている最中に届いた記録で DT と節目が動かない、閉じたら入る、届いた記録で今日の記録と連続記録が直る</b><br><span class="text-ink/70">保存の仕組みを替えても、数の計算が変わっていないことを押さえる。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>11. 開発者が実機で確かめる：ログイン、機内モードで叩いて戻したら届く、アプリを消して入れ直したら戻る、アカウントの削除</b><br><span class="text-ink/70">電波と Apple のログインは、シミュレーターでは確かめきれない。</span></li>
+    </ol>
+  </section>
+
+  <section id="ask" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">08 / developer</p>
+    <h2 class="mt-2 font-display text-3xl">開発者にお願いすること</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">Firebase と Apple Developer の画面での作業は、開発者のアカウントでしかできません。手順は<a href="../../devops/firebase/index.html" class="lnk">Firebase の準備と運用</a>にまとめました。実装を始める前に済んでいれば、途中で止まりません。</p>
+    <ol class="mt-6 grid max-w-3xl gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">1　約10分</p><p class="mt-2">Firebase のプロジェクトを作り、iOS アプリ（com.yat-tat-ta）を登録する。</p></li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">2　約5分</p><p class="mt-2">Firestore を東京（asia-northeast1）に作る。</p></li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">3　約15分</p><p class="mt-2">Authentication で Apple を有効にし、Apple Developer で作った鍵を登録する（削除のときに連携を切るために要る）。</p></li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">4　約2分</p><p class="mt-2"><code class="font-mono text-xs">GoogleService-Info.plist</code> を <code class="font-mono text-xs">ios/YatTatTa/</code> に置く。Git には入れない。</p></li>
+    </ol>
+  </section>
+
+  <section id="later" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">09 / later</p>
+    <h2 class="mt-2 font-display text-3xl">リリースまでに残ること</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>サーバーを持ったことで、リリース前に片づける仕事が3つ増えました。どれも今回の実装は止めないので、課題に分けます。</p>
+    </div>
+    <ul class="mt-6 grid max-w-3xl gap-3 text-sm sm:grid-cols-3">
+      <li class="rounded-2xl border border-rule bg-white p-4"><a href="../../issues/privacy-policy/index.html" class="font-bold lnk">privacy-policy</a><p class="mt-2 text-ink/70">プライバシーポリシーと、App Store のプライバシーの表示。優先度：高（リリース前に必須）。</p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><a href="../../issues/firebase-environments/index.html" class="font-bold lnk">firebase-environments</a><p class="mt-2 text-ink/70">開発用と本番用の Firebase を分ける、App Check を入れる。優先度：高（リリース前）。</p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><a href="../../issues/firestore-read-cost/index.html" class="font-bold lnk">firestore-read-cost</a><p class="mt-2 text-ink/70">起動のたびに全部の記録を読む費用。優先度：低（利用者が増えてから）。</p></li>
+    </ul>
+  </section>
+
+  <section id="links" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">10 / links</p>
+    <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">機能</p><a href="../../features/account/index.html" class="mt-1 block font-bold lnk">アカウント</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">画面</p><a href="../../ui/pages/login/index.html" class="mt-1 block font-bold lnk">ログイン画面</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">データベース</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../database/index.html" class="font-bold lnk">データベース</a><a href="../../database/squat-record/index.html" class="font-bold lnk">SquatRecord</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">開発/運用</p><a href="../../devops/firebase/index.html" class="mt-1 block font-bold lnk">Firebase の準備と運用</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../glossary.html#account" class="font-bold lnk">アカウント</a><a href="../../glossary.html#firestore" class="font-bold lnk">Firestore</a><a href="../../glossary.html#record" class="font-bold lnk">記録</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">前回のセッション</p><a href="../20261007-0918-tutorial/index.html" class="mt-1 block font-bold lnk">チュートリアルを入れる</a></li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script>
+(function () {
+  var dlg = document.getElementById('dialog'), title = document.getElementById('d-title'), body = document.getElementById('d-body'), ok = document.getElementById('d-ok');
+  var texts = {
+    logout: ['ログアウトしますか？', '記録はアカウントに残ります。同じ Apple ID でログインすると戻ります。', 'ログアウト', '#0A7AFF'],
+    delete: ['アカウントを削除しますか？', 'これまでの記録 128 件がすべて消えます。元には戻せません。', '削除する', '#E0302A']
+  };
+  function open(kind) {
+    var t = texts[kind];
+    title.textContent = t[0]; body.textContent = t[1]; ok.textContent = t[2]; ok.style.color = t[3];
+    dlg.classList.remove('hidden'); dlg.classList.add('grid');
+  }
+  function close() { dlg.classList.add('hidden'); dlg.classList.remove('grid'); }
+  document.getElementById('logout').addEventListener('click', function () { open('logout'); });
+  document.getElementById('delete').addEventListener('click', function () { open('delete'); });
+  document.getElementById('d-cancel').addEventListener('click', close);
+  ok.addEventListener('click', close);
+})();
+</script>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

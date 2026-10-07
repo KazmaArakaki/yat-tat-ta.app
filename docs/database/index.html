@@ -36,7 +36,8 @@ tailwind.config = {
   <header class="animate-rise">
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">database</p>
     <h1 class="mt-2 font-display text-4xl leading-tight">データベース</h1>
-    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">端末の中だけに保存するデータの全体図。サーバーもアカウントも持たない。保存の仕組みは SwiftData で、表は <b>SquatRecord</b> の1つだけ。</p>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">保存するデータの全体図。記録は <a href="../glossary.html#firestore" class="text-dopa underline underline-offset-4">Firestore</a> に、利用者の<a href="../glossary.html#account" class="text-dopa underline underline-offset-4">アカウント</a>ごとに置く。表は <b>SquatRecord</b> の1つだけ。端末の設定は、いまどおり端末の UserDefaults に置く。</p>
+    <p class="mt-3 max-w-2xl rounded-2xl border-2 border-dopa bg-dopa-soft p-4 text-sm leading-relaxed">2026-10-07 の設計で、記録の置き場所を端末の SwiftData から Firestore へ移すと決めた。サーバーもアカウントも持たない、というこれまでの前提は改める。実装が済むまで、アプリは SwiftData のまま（<a href="../sessions/20261007-0957-firestore/index.html" class="text-dopa underline underline-offset-4">記録を Firestore に移す</a>）。</p>
   </header>
 
   <section id="why-one" class="animate-rise mt-10 [animation-delay:100ms]">
@@ -50,13 +51,13 @@ tailwind.config = {
   <section id="figure" class="mt-16">
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">overview</p>
     <h2 class="mt-2 font-display text-3xl">保存するものと、計算するもの</h2>
-    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">実線の枠が端末に保存するもの、点線の枠が起動のたびに計算するもの。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">実線の枠が保存するもの、点線の枠が起動のたびに計算するもの。</p>
     <div class="mt-6 grid items-stretch gap-4 md:grid-cols-[1fr_auto_1fr]">
       <div class="flex flex-col gap-4">
         <a href="squat-record/index.html" class="group block rounded-2xl border-2 border-ink bg-white p-5 shadow-[6px_6px_0_#E5337A] transition hover:-translate-y-0.5">
-          <p class="font-mono text-xs text-dopa">SwiftData</p>
+          <p class="font-mono text-xs text-dopa">Firestore　users/{uid}/records</p>
           <p class="mt-1 font-display text-xl group-hover:text-dopa">SquatRecord</p>
-          <p class="mt-2 font-mono text-xs leading-relaxed text-ink/80">id / startedAt / day / reps / bonusDopa</p>
+          <p class="mt-2 font-mono text-xs leading-relaxed text-ink/80">id / startedAt / day / reps / bonusDopa / createdAt</p>
           <p class="mt-2 text-sm leading-relaxed">完了連打1回で1件。</p>
         </a>
         <div class="rounded-2xl border-2 border-ink bg-white p-5">
@@ -73,6 +74,13 @@ tailwind.config = {
         <li class="rounded-xl border-2 border-dashed border-mute bg-white/70 px-4 py-3"><b>節目</b>：上の数が閾値をまたいだか</li>
       </ul>
     </div>
+  </section>
+
+  <section id="account" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">feature / account</p>
+    <h2 class="mt-2 font-display text-3xl">アカウントと記録のつながり</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80"><a href="../features/account/index.html" class="text-dopa underline underline-offset-4">アカウント</a>は表を持たない。Firebase Authentication が Apple のログインに割り当てる番号（uid）が、そのまま記録の棚の名前になる。同じ Apple ID なら、機種を替えても Android からでも同じ uid になり、同じ棚を読む。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">読み書きできるのは自分の棚だけで、記録は足すか消すだけ。この決まりはアプリではなく Firestore のルールで守る（<a href="../devops/firebase/index.html#security" class="text-dopa underline underline-offset-4">ルール</a>）。アカウントを削除すると、棚の記録をすべて消してからアカウントを消す。</p>
   </section>
 
   <section id="done-mash" class="mt-16">

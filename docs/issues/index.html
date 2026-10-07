@@ -36,6 +36,39 @@ tailwind.config = {
     <h1 class="mt-2 font-display text-4xl">課題一覧</h1>
     <p class="mt-4 text-sm text-ink/80">セッションの中で片付かず、先に送った作業。完了したものは各セクションの下に、取り消し線を引いて残しています。</p>
 
+    <section id="server" class="mt-10">
+      <h2 class="font-display text-xl">サーバー</h2>
+      <ul class="mt-3 border-t-2 border-ink">
+        <li class="border-b border-rule">
+          <a href="privacy-policy/index.html" class="group block py-5">
+            <div class="flex flex-wrap items-center gap-3">
+              <h3 class="font-display text-lg group-hover:text-dopa">プライバシーポリシーと App Store のプライバシーの表示</h3>
+              <span class="rounded-full border border-ink px-2.5 py-0.5 font-mono text-[11px] font-bold">優先度：高</span>
+            </div>
+            <p class="mt-2 text-sm leading-relaxed text-ink/80">記録を Firestore に置き、アカウントを作るようになった。リリースまでにポリシーを公開し、プライバシーの表示を埋める。</p>
+          </a>
+        </li>
+        <li class="border-b border-rule">
+          <a href="firebase-environments/index.html" class="group block py-5">
+            <div class="flex flex-wrap items-center gap-3">
+              <h3 class="font-display text-lg group-hover:text-dopa">開発用と本番用の Firebase を分け、App Check を入れる</h3>
+              <span class="rounded-full border border-ink px-2.5 py-0.5 font-mono text-[11px] font-bold">優先度：高</span>
+            </div>
+            <p class="mt-2 text-sm leading-relaxed text-ink/80">いまは開発中のビルドも本番と同じデータベースに書く。利用者が0人のうちに分ける。</p>
+          </a>
+        </li>
+        <li class="border-b border-rule">
+          <a href="firestore-read-cost/index.html" class="group block py-5">
+            <div class="flex flex-wrap items-center gap-3">
+              <h3 class="font-display text-lg group-hover:text-dopa">起動のたびに全部の記録を読む費用</h3>
+              <span class="rounded-full border border-ink px-2.5 py-0.5 font-mono text-[11px] font-bold">優先度：低</span>
+            </div>
+            <p class="mt-2 text-sm leading-relaxed text-ink/80">記録が増えるほど読み取りの回数が増える。1日3万回を超えたら、増えた分だけ読む形に変える。</p>
+          </a>
+        </li>
+      </ul>
+    </section>
+
     <section id="app" class="mt-10">
       <h2 class="font-display text-xl">アプリの中身</h2>
       <ul class="mt-3 border-t-2 border-ink">

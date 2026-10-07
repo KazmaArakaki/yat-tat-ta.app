@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>開発用と本番用の Firebase を分け、App Check を入れる</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: { rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } } },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-3xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <a href="../index.html" class="hover:text-dopa hover:underline">issues</a>
+      <span>/</span>
+      <span>サーバー</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight">開発用と本番用の Firebase を分け、App Check を入れる</h1>
+    <div class="mt-4 flex flex-wrap gap-2 font-mono text-xs font-bold">
+      <span class="rounded-full border border-ink bg-white px-3 py-1 text-ink">優先度：高</span>
+      <span class="rounded-full border border-dopa bg-dopa-soft px-3 py-1 text-ink">状態：未着手</span>
+    </div>
+  </header>
+
+  <section id="summary" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916]">
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-dopa">概要</p>
+      <p class="mt-3 font-bold leading-relaxed">いまの設計では Firebase のプロジェクトは1つだけで、開発中のビルドも本番の利用者と同じデータベースに書く。<br>リリースまでに、開発用と本番用を分け、アプリ以外からの読み書きを App Check で断る。</p>
+    </div>
+    
+    <h2 class="mt-10 font-display text-2xl">分けたい理由</h2>
+    <div class="mt-3 space-y-3 text-sm leading-relaxed"><p>開発中は、ルールを書き換えて試したり、アカウントの削除を何度も試したりする。本番のデータベースでそれをやると、書き間違えたルールが利用者の記録をそのまま危険にさらす。Debug ビルドは開発用、Release ビルドは本番用の <code class="font-mono text-xs">GoogleService-Info.plist</code> を読むように、ビルドの設定で切り替える形を考えている。</p></div>
+    <h2 class="mt-10 font-display text-2xl">App Check</h2>
+    <div class="mt-3 space-y-3 text-sm leading-relaxed"><p>アプリに埋め込む Firebase の鍵は、誰でも取り出せる。他人の記録を読めないのはルールが守っているが、アプリを通さずに Firebase へ大量に問い合わせることはできてしまう。App Check（iOS では App Attest）を入れると、本物のアプリからの問い合わせだけを通せる。</p></div>
+    <dl class="mt-10 grid gap-3 text-sm sm:grid-cols-2">
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <dt class="font-mono text-xs text-mute">優先度が高の理由</dt>
+        <dd class="mt-1 leading-relaxed">本番に利用者が入ってからでは、分ける作業そのものが記録の引っ越しになる。利用者が0人のいまが一番安い。</dd>
+      </div>
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <dt class="font-mono text-xs text-mute">先送りにした理由</dt>
+        <dd class="mt-1 leading-relaxed">リリース前は利用者がいないので、1つのプロジェクトでも壊れて困る記録がない。まず1つで保存の仕組みを動かし、確かめてから分ける。</dd>
+      </div>
+    </dl>
+    <p class="mt-6 text-sm">見つけたセッション：<a href="../../sessions/20261007-0957-firestore/index.html" class="text-dopa underline underline-offset-4">記録を Firestore に移す</a></p>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

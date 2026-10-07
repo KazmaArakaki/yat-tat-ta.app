@@ -10,6 +10,10 @@
   // セッション一覧（新しい順）。新しいセッションは先頭に足す。
   var sessions = [
     {
+      path: "sessions/20261007-0957-firestore/index.html",
+      label: "10/07 記録を Firestore に移す"
+    },
+    {
       path: "sessions/20261007-0918-tutorial/index.html",
       label: "10/07 チュートリアルを入れる"
     },
@@ -114,6 +118,7 @@
       label: "Features",
       items: [
         { label: "機能一覧", path: "features/index.html", level: 0 },
+        { label: "アカウント", path: "features/account/index.html", level: 1 },
         { label: "完了連打", path: "features/done-mash/index.html", level: 1 },
         { label: "ドパの合計", path: "features/dopa-totals/index.html", level: 1 },
         { label: "連続記録と休み券", path: "features/streak/index.html", level: 1 },
@@ -137,6 +142,7 @@
         { label: "フィーバータイム", path: "ui/components/fever/index.html", level: 1 },
         { label: "履歴のグラフ", path: "ui/components/history-chart/index.html", level: 1 },
         { label: "ページ一覧", path: "ui/pages/index.html", level: 0 },
+        { label: "ログイン画面", path: "ui/pages/login/index.html", level: 1 },
         { label: "ホーム", path: "ui/pages/home/index.html", level: 1 },
         { label: "設定シート", path: "ui/pages/settings/index.html", level: 1 },
         { label: "今日の記録", path: "ui/pages/today-records/index.html", level: 1 },
@@ -156,6 +162,7 @@
         { label: "開発/運用一覧", path: "devops/index.html", level: 0 },
         { label: "iOS 開発環境", path: "devops/ios-dev-environment/index.html", level: 1 },
         { label: "iOS プロジェクトの設定", path: "devops/ios-project/index.html", level: 1 },
+        { label: "Firebase の準備と運用", path: "devops/firebase/index.html", level: 1 },
         { label: "声と効果音の出どころ", path: "devops/sound-assets/index.html", level: 1 },
         { label: "健康効果の書き方", path: "devops/health-wording/index.html", level: 1 },
         { label: "処理落ちの確かめ方", path: "devops/perf-check/index.html", level: 1 },
@@ -166,6 +173,9 @@
       label: "Issues",
       items: [
         { label: "課題一覧", path: "issues/index.html", level: 0 },
+        { label: "プライバシーポリシー", path: "issues/privacy-policy/index.html", level: 1 },
+        { label: "Firebase の環境を分ける", path: "issues/firebase-environments/index.html", level: 1 },
+        { label: "読み取りの費用", path: "issues/firestore-read-cost/index.html", level: 1 },
       ]
     }
   ];

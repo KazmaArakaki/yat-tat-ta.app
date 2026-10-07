@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>起動のたびに全部の記録を読む費用</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: { rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } } },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-3xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <a href="../index.html" class="hover:text-dopa hover:underline">issues</a>
+      <span>/</span>
+      <span>サーバー</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight">起動のたびに全部の記録を読む費用</h1>
+    <div class="mt-4 flex flex-wrap gap-2 font-mono text-xs font-bold">
+      <span class="rounded-full border border-ink bg-white px-3 py-1 text-ink">優先度：低</span>
+      <span class="rounded-full border border-dopa bg-dopa-soft px-3 py-1 text-ink">状態：未着手</span>
+    </div>
+  </header>
+
+  <section id="summary" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916]">
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-dopa">概要</p>
+      <p class="mt-3 font-bold leading-relaxed">いまの設計では、アプリは自分の記録をすべて Firestore から読み、<a href="../../glossary.html#dt" class="text-dopa underline underline-offset-4">DT</a> や<a href="../../glossary.html#streak" class="text-dopa underline underline-offset-4">連続記録</a>を計算する。<br>記録が増えるほど、起動のたびの読み取り回数が増えていく。</p>
+    </div>
+    
+    <h2 class="mt-10 font-display text-2xl">どれくらい増えるか</h2>
+    <div class="mt-3 space-y-3 text-sm leading-relaxed"><p>1日に3回叩く人なら、1年で約1,100件になる。Firestore は読んだ文書の数で数えるので、全部を読み直すと1回で約1,100回の読み取りになる。Firestore の説明によると、つなぎっぱなしの読み込みでも、30分以上切れてからつなぎ直すと全部を読み直した扱いになる。食事のたびに開くアプリなので、開くたびにほぼ全部を読むと見ておく。</p><p>無料で使える読み取りは1日5万回（執筆時点の公開値）。1年使った人の起動が、全員合わせて1日に45回を超えると、無料の枠を出る計算になる。超えた分の単価は地域で違うので、Firebase の料金表で確かめる。</p></div>
+    <h2 class="mt-10 font-display text-2xl">直し方の候補</h2>
+    <div class="mt-3 space-y-3 text-sm leading-relaxed"><ol class="list-decimal space-y-2 pl-5"><li><b>増えた分だけ読む</b>：端末のキャッシュにある記録はキャッシュから読み、サーバーには「前回より後に届いた記録」（createdAt で絞る）だけを聞く。消した記録は伝わらないので、消す代わりに「消した」印を立てる形に変える必要がある。createdAt は<a href="../../sessions/20261007-0957-firestore/index.html" class="text-dopa underline underline-offset-4">今回の設計</a>で先に足してある。</li><li><b>日ごとの合計を置く</b>：記録とは別に、日ごとの合計を持つ。読む数は日数まで減るが、計算した数を保存しないという<a href="../../database/index.html" class="text-dopa underline underline-offset-4">データベースの方針</a>に反する。選ぶなら方針から見直す。</li></ol></div>
+    <dl class="mt-10 grid gap-3 text-sm sm:grid-cols-2">
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <dt class="font-mono text-xs text-mute">優先度が低の理由</dt>
+        <dd class="mt-1 leading-relaxed">1人あたりの記録が千件を超えるのは、使い始めて1年ほどたってから。利用者が少ないうちは無料の枠に収まる。</dd>
+      </div>
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <dt class="font-mono text-xs text-mute">先送りにした理由</dt>
+        <dd class="mt-1 leading-relaxed">リリース前で、利用者も記録もまだない。全部を読むほうが作りが単純で、記録と画面の数が食い違わない。Firebase の使用量の画面で、読み取りが1日3万回を超えたら取りかかる。</dd>
+      </div>
+    </dl>
+    <p class="mt-6 text-sm">見つけたセッション：<a href="../../sessions/20261007-0957-firestore/index.html" class="text-dopa underline underline-offset-4">記録を Firestore に移す</a></p>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>
