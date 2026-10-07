@@ -112,6 +112,9 @@ final class SquatStageUIView: UIView {
         stamp.layer.borderWidth = 3
         stamp.layer.cornerRadius = 10
         stamp.clipsToBounds = true
+        // 英語の RED HOT は「激熱」より長い。幅を広げても収まらなければ、文字を縮める
+        stamp.adjustsFontSizeToFitWidth = true
+        stamp.minimumScaleFactor = 0.6
         stamp.isHidden = true
         addSubview(stamp)
 
@@ -142,7 +145,10 @@ final class SquatStageUIView: UIView {
         numberShadow.frame = numberBox.bounds.offsetBy(dx: 3, dy: 4)
         comboLabel.frame = CGRect(x: 0, y: 104, width: bounds.width, height: 28)
         gained.frame = CGRect(x: 0, y: bounds.height - 40, width: bounds.width, height: 36)
-        stamp.frame = CGRect(x: bounds.width - 104, y: 20, width: 84, height: 46)
+        // 幅は文字に合わせる。広げすぎると残りの数にかかるので、128 までにする
+        let stampWidth = min(max(84, stamp.intrinsicContentSize.width + 24), 128)
+        stamp.bounds = CGRect(x: 0, y: 0, width: stampWidth, height: 46)
+        stamp.center = CGPoint(x: bounds.width - 20 - stampWidth / 2, y: 20 + 23)
 
         CATransaction.begin()
         CATransaction.setDisableActions(true)
