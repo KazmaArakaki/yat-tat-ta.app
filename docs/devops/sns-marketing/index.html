@@ -90,6 +90,31 @@ tailwind.config = {
     </ol>
   </section>
 
+  <section id="account" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">account</p>
+    <h2 class="mt-2 font-display text-3xl">X のアカウント</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>投稿は、アプリ専用の新しいアカウントから出す（開発者が決定、2026-10-07）。フォロワー0から始まるので、最初の投稿はアプリの公開日まで取っておく。リンクを貼れない投稿は、見た人が DL まで進めない。</p>
+      <p>自己紹介に「作った本人が運用している」と書く。決まり事の3のとおり、誰が言っているかを見て分かるようにするため。</p>
+    </div>
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full min-w-[36rem] text-left text-sm">
+        <caption class="pb-2 text-left font-mono text-xs text-mute">表2　プロフィールに入れるもの</caption>
+        <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="py-2 pr-3">欄</th><th class="py-2 pr-3">入れるもの</th></tr></thead>
+        <tbody class="[&>tr]:border-b [&>tr]:border-rule [&_td]:py-2.5 [&_td]:pr-3 [&_td]:align-top">
+          <tr><td class="font-bold">名前</td><td>スクワットアプリ【Yat Tat Ta】広報兼サポート担当（開発者が決定、2026-10-07）</td></tr>
+          <tr><td class="font-bold">ユーザー名</td><td><a class="lnk" href="https://x.com/yattattadotcom">@yattattadotcom</a>（開発者が作成、2026-10-07）</td></tr>
+          <tr><td class="font-bold">自己紹介</td><td>食後のスクワット、終わったら回数だけ叩く iPhone アプリ「Yat Tat Ta」。叩くたびに演出がインフレ、ときどき FEVER、最後の1打で筋肉確定。個人開発。作った本人が運用しています。</td></tr>
+          <tr><td class="font-bold">ウェブサイト</td><td>https://yat-tat-ta.web.app/（公開日に App Store のページへ差し替える）</td></tr>
+          <tr><td class="font-bold">アイコン</td><td>アプリアイコンと同じ絵。400 × 400。X が丸く切り抜く</td></tr>
+          <tr><td class="font-bold">ヘッダー</td><td>スクワットマンの隊列。1500 × 500</td></tr>
+          <tr><td class="font-bold">固定する投稿</td><td>公開日に出す動画の投稿</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">アイコンとヘッダーは <code class="font-mono text-xs">cd ios &amp;&amp; python3 Design/x_profile.py</code> で ios/Design/Reels/x-profile/ に書き出す（Git には入れない）。ヘッダーの隊列は、動画の左右の隊列と同じ <code class="font-mono text-xs">reel_squad.swift</code> で描く。</p>
+  </section>
+
   <section id="make" class="mt-16">
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">make</p>
     <h2 class="mt-2 font-display text-3xl">動画の作り方（約3分）</h2>

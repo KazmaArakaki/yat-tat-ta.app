@@ -1,6 +1,6 @@
-// SNS の動画の左右の余白に並べる、スクワットマンの隊列を描く
+// SNS の動画の左右の余白に並べる、スクワットマンの隊列を描く。X のヘッダーの絵にも使う
 //
-// compose_reel.py から呼ぶ。1回の動きぶんの絵を PNG の連番で書き出し、動画の側で繰り返す。
+// compose_reel.py と x_profile.py から呼ぶ。1回の動きぶんの絵を PNG の連番で書き出し、動画の側で繰り返す。
 // 関節の位置と色は ios/YatTatTa/Home/SquatStageView.swift の SquatterLayer と同じ。人形を直したら、ここも直す。
 //
 //     swift Design/reel_squad.swift <書き出す先> <幅> <高さ> <姿> <1回の枚数>
@@ -49,9 +49,15 @@ let frames = sleeping ? 1 : Int(args[5])!
 
 // 2列を互い違いに並べる。人形の高さ（足首から頭まで）は約 90 × k
 let k: CGFloat = 1.05
-let columns: [CGFloat] = [CGFloat(width) * 0.3, CGFloat(width) * 0.72]
+// 狭い帯（動画の余白）は2列。広い絵（X のヘッダー）は、幅に合わせて列を増やす
+let columnCount = max(2, width / 83)
+let columns: [CGFloat] = columnCount == 2
+    ? [CGFloat(width) * 0.3, CGFloat(width) * 0.72]
+    : (0..<columnCount).map { (CGFloat($0) + 0.5) * CGFloat(width) / CGFloat(columnCount) }
 let rowStep: CGFloat = 118
 let rows = Int((CGFloat(height) - 40) / rowStep)
+// 頭のてっぺん（足首の約95上）から、最後の段の足首までを、上下のまん中に置く
+let top = (CGFloat(height) - (rowStep * CGFloat(rows - 1) + rowStep / 2) + 95) / 2
 
 try? FileManager.default.createDirectory(at: out, withIntermediateDirectories: true)
 for frame in 0..<frames {
@@ -66,7 +72,7 @@ for frame in 0..<frames {
     var index = 0
     for row in 0..<rows {
         for (c, x) in columns.enumerated() {
-            let ankle = CGPoint(x: x - (sleeping ? 10 : 0), y: 40 + rowStep * CGFloat(row + 1) - (c == 1 ? rowStep / 2 : 0))
+            let ankle = CGPoint(x: x - (sleeping ? 10 : 0), y: top + rowStep * CGFloat(row) + (c % 2 == 1 ? rowStep / 2 : 0))
             // 少しずつ遅れて動く。波のように見せる
             let phase = (CGFloat(frame) / CGFloat(frames) + CGFloat(index) * 0.083).truncatingRemainder(dividingBy: 1)
             let depth = (1 - cos(phase * 2 * .pi)) / 2
