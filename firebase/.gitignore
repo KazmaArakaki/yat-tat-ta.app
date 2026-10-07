@@ -1,0 +1,3 @@
+# firebase-tools が deploy のときに作るキャッシュとログ
+.firebase/
+*-debug.log
