@@ -19,11 +19,28 @@ targets:
         product: FirebaseAuth
       - package: Firebase
         product: FirebaseFirestore
-    # Sign in with Apple。GoogleService-Info.plist は Git に入れず、YatTatTa/ に置く
+      - package: Firebase
+        product: FirebaseAppCheck
+    # Sign in with Apple と、App Check の App Attest（Release で使う）
     entitlements:
       path: YatTatTa/YatTatTa.entitlements
       properties:
         com.apple.developer.applesignin: [Default]
+        com.apple.developer.devicecheck.appattest-environment: production
+    # Debug は開発用、Release は本番用の Firebase に書く（docs/devops/firebase#environments）
+    # 設定ファイルは Firebase/Dev と Firebase/Prod に置き、ビルドの最後にアプリへ写す
+    postBuildScripts:
+      - name: Firebase の設定ファイルを写す
+        script: |
+          if [ ! -f "${SCRIPT_INPUT_FILE_0}" ]; then
+            echo "error: ${SCRIPT_INPUT_FILE_0} がありません。docs/devops/firebase の手順で置いてください"
+            exit 1
+          fi
+          cp "${SCRIPT_INPUT_FILE_0}" "${SCRIPT_OUTPUT_FILE_0}"
+        inputFiles:
+          - $(SRCROOT)/Firebase/$(FIREBASE_ENV)/GoogleService-Info.plist
+        outputFiles:
+          - $(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/GoogleService-Info.plist
     scheme:
       testTargets: [YatTatTaTests]
     settings:
@@ -64,6 +81,11 @@ targets:
         LOCALIZATION_PREFERS_STRING_CATALOGS: YES
         # アイコンは Icon Composer の YatTatTa/AppIcon.icon。層の SVG は Design/app_icon.py で書き出す
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+      configs:
+        Debug:
+          FIREBASE_ENV: Dev
+        Release:
+          FIREBASE_ENV: Prod
   YatTatTaTests:
     type: bundle.unit-test
     platform: iOS

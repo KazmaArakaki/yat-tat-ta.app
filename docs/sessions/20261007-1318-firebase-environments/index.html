@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="session-state" content="planning">
-<meta name="state" content="planning">
+<meta name="session-state" content="done">
+<meta name="state" content="done">
 <title>Firebase を開発用と本番用に分ける</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,7 +58,7 @@ tailwind.config = {
       <time datetime="2026-10-07T13:18">2026-10-07 13:18</time>
       <span>/</span>
       <span>設計セッション</span>
-      <span class="rounded-full border border-gold bg-gold/15 px-2.5 py-0.5 font-bold text-ink">状態：planning</span>
+      <span class="rounded-full border border-signal bg-signal/10 px-2.5 py-0.5 font-bold text-ink">状態：done</span>
     </div>
     <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl"><a href="../../glossary.html#firebase-environment" class="text-dopa">Firebase</a> を開発用と本番用に分ける</h1>
   </header>
@@ -135,8 +135,14 @@ tailwind.config = {
     <ol class="mt-6 grid max-w-3xl gap-3 text-sm sm:grid-cols-2"><li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">1　約10分</p><p class="mt-2">Firebase で開発用のプロジェクト <code class="font-mono text-xs">yat-tat-ta-dev</code> を作り、iOS アプリ（com.yat-tat-ta）を登録する。Google アナリティクスは入れない。</p></li><li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">2　約5分</p><p class="mt-2">Firestore を東京（asia-northeast1）に本番モードで作る。</p></li><li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">3　約5分</p><p class="mt-2">Authentication で Apple を有効にし、本番と同じ Services ID と鍵を入れる。Apple Developer の Services ID の設定に、開発用のドメインと Return URL を足す。</p></li><li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">4　約3分</p><p class="mt-2">設定ファイルを2つ置く。開発用は <code class="font-mono text-xs">ios/Firebase/Dev/</code>、いまの本番用は <code class="font-mono text-xs">ios/YatTatTa/</code> から <code class="font-mono text-xs">ios/Firebase/Prod/</code> へ移す。</p></li><li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">5　約5分</p><p class="mt-2">両方のプロジェクトの App Check で、iOS アプリに App Attest を登録する。Apple Developer で App ID に App Attest を足す。</p></li></ol>
   </section>
 
+  <section id="build" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">07 / build</p>
+    <h2 class="mt-2 font-display text-3xl">作ったところ</h2>
+    <ul class="mt-6 flex max-w-3xl flex-col gap-2 text-sm"><li class="rounded-2xl border border-rule bg-white p-4">本番用の設定ファイルを <code class="font-mono text-xs">ios/Firebase/Prod/</code> へ移し、開発者が開発用を <code class="font-mono text-xs">ios/Firebase/Dev/</code> に置いた。<code class="font-mono text-xs">project.yml</code> の <code class="font-mono text-xs">FIREBASE_ENV</code>（Debug は Dev、Release は Prod）で、ビルドの最後にアプリへ写す。ファイルがなければ、置き場所を書いたエラーで止まる。</li><li class="rounded-2xl border border-rule bg-white p-4">App Check は <code class="font-mono text-xs">AppCheckSetup</code> で選ぶ。Release は App Attest、Debug はデバッグ用のトークン。entitlement に App Attest（production）を足した。テストを1つ足し（Debug のビルドに本番のプロジェクトの設定が入っていたら落ちる）、全88個が通る。Release のビルドに本番の設定が入ることも確かめた。</li><li class="rounded-2xl border border-rule bg-white p-4"><code class="font-mono text-xs">firebase/.firebaserc</code> に dev と prod を置き、既定のプロジェクトをなくした。</li><li class="rounded-2xl border border-rule bg-white p-4">開発用のプロジェクトに iOS アプリを登録するとき、一度 Services ID のバンドル ID（com.yat-tat-ta.signin）で登録してしまい、com.yat-tat-ta で登録し直した。</li><li class="rounded-2xl border border-rule bg-white p-4">開発用の Firestore を作る前にルールを反映したら、firebase-tools が米国（nam5）にデータベースを作った。空だったので開発者の合意を得て消し、東京に作り直した。同じ名前で作り直せるまで約5分かかった。<code class="font-mono text-xs">firebase.json</code> に置き場所（asia-northeast1）を書いて、二度と起きないようにした。</li><li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4">開発者が、両方のプロジェクトで App Check の Firestore を「適用」にし、実機の Debug ビルドで叩いた記録が開発用の yat-tat-ta-dev に入り、本番の yat-tat-ta には入らないことを確かめた（2026-10-07）。</li><li class="rounded-2xl border border-rule bg-white p-4">Release の App Attest が本番で通るかは、TestFlight のビルドでしか確かめられない。最初に TestFlight へ出すときに確かめる（課題 firebase-environments に残した）。</li></ul>
+  </section>
+
   <section id="links" class="mt-20">
-    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">07 / links</p>
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">08 / links</p>
     <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
     <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
       <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">課題</p><a href="../../issues/firebase-environments/index.html" class="mt-1 block font-bold lnk">firebase-environments</a></li>

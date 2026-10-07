@@ -60,6 +60,8 @@ import SwiftUI
             account = nil
             return
         }
+        // Debug は開発用、Release は本番用の設定ファイルが入っている（project.yml の FIREBASE_ENV）
+        AppCheckSetup.install()
         FirebaseApp.configure()
         account = Account()
     }

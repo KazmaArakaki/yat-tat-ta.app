@@ -1,5 +1,5 @@
 # XcodeGen が project.yml から生成する
 *.xcodeproj/
 xcuserdata/
-# Firebase の設定。リポジトリが公開でも置かない（docs/devops/firebase）
-YatTatTa/GoogleService-Info.plist
+# Firebase の設定。開発用は Firebase/Dev、本番用は Firebase/Prod に置き、Git には入れない（docs/devops/firebase）
+Firebase/*/GoogleService-Info.plist

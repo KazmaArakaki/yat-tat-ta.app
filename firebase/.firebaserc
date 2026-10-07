@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "yat-tat-ta"
+    "dev": "yat-tat-ta-dev",
+    "prod": "yat-tat-ta"
   }
 }
