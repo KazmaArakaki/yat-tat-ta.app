@@ -20,10 +20,10 @@ var Splash = (function () {
   // ひかえめモード。波もしゃがみも飛ぶ数字もなく、置いて、消すだけ。振動の3拍は変えない
   var STILL = { beats: [0.15, 0.45, 0.75], seat: 0, handoff: 0.9, end: 1.15 };
 
-  // スクワット隊の点（SquatterLayer.stand / squat）。足元が原点、上が負
+  // スクワットマンの点（SquatterLayer.stand / squat）。足元が原点、上が負
   var STAND = { legs: [[12, 0], [0, 0], [0, -21], [0, -42], [0, -72]], arm: [[0, -72], [4, -58], [6, -46]], head: [2, -86] };
   var SQUAT = { legs: [[12, 0], [0, 0], [15, -15], [-7, -25], [3, -55]], arm: [[3, -55], [17, -55], [31, -56]], head: [7, -69] };
-  // 仰向けに寝た姿（ホームで寝ている隊）
+  // 仰向けに寝た姿（ホームで寝ているスクワットマン）
   var LIE = { legs: [[44, -14], [40, -7], [19, -7], [-2, -7], [-32, -7]], arm: [[-32, -7], [-18, -3], [-6, -3]], head: [-46, -12] };
 
   function el(name, attrs, parent) {
@@ -45,7 +45,7 @@ var Splash = (function () {
     return u < 0.4 ? easeOut(u / 0.4) : 1 - easeInOut((u - 0.4) / 0.6);
   }
 
-  // 人形1人。黒い縁は暗い配色でも黒のまま（隊と履歴と同じ）
+  // 人形1人。黒い縁は暗い配色でも黒のまま（スクワットマンと履歴と同じ）
   function figure(parent, color, pose) {
     var g = el("g", {}, parent);
     var round = { fill: "none", "stroke-linecap": "round", "stroke-linejoin": "round" };
@@ -81,7 +81,7 @@ var Splash = (function () {
     el("stop", { offset: 1, "stop-color": DOPA, "stop-opacity": 0 }, lg);
     // 上から差す光。床に近いほど濃い
     el("polygon", { points: "-4,-112 16,-112 32,0 -20,0", fill: "url(#" + id + ")" }, g);
-    // 床の印。隊と同じ黒い縁
+    // 床の印。スクワットマンと同じ黒い縁
     el("ellipse", { cx: 6, cy: 0, rx: 24, ry: 7.5, fill: DOPA, stroke: ONGOLD, "stroke-width": 3.5 }, g);
     el("ellipse", { cx: 3, cy: -1.5, rx: 11, ry: 2.6, fill: "#fff", opacity: 0.35 }, g);
     return g;
@@ -153,7 +153,7 @@ var Splash = (function () {
         }).join("") +
       '</div>';
     phone.appendChild(home);
-    // 寝ている隊（長押しで起こす）
+    // 寝ているスクワットマン（長押しで起こす）
     var stage = home.querySelector("[data-stage]");
     var sv = el("svg", { width: W - 40, height: 260, viewBox: "0 0 " + (W - 40) + " 260", style: "position:absolute;left:0;bottom:30px" });
     stage.appendChild(sv);
@@ -416,7 +416,7 @@ var Splash = (function () {
     }
     var phr = [line(458, 24, "食べたら、"), line(458, 24, "しゃがんで、"), line(458, 24, "<span style='color:" + DOPA + "'>叩く。</span>")];
     var sayA = line(424, 17, "1日1回で、1人ずつ。");
-    var sayB = line(452, 17, "<span style='color:" + DOPA + "'>来週には、7人の隊になる。</span>");
+    var sayB = line(452, 17, "<span style='color:" + DOPA + "'>来週には、7人のスクワットマンになる。</span>");
 
     // 終わりの一言と数
     var info = document.createElement("div");

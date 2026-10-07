@@ -22,7 +22,7 @@ import Testing
         return model
     }
 
-    /// 隊を起こして叩き切り、1件作る。start は叩き始めの時刻（touch.timestamp と同じ時計）
+    /// スクワットマンを起こして叩き切り、1件作る。start は叩き始めの時刻（touch.timestamp と同じ時計）
     private func mash(_ model: AppModel, from start: TimeInterval) {
         model.wake()
         for i in 0..<5 { _ = model.tap(at: start + Double(i) * 0.2) }

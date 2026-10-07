@@ -1085,18 +1085,18 @@
         }
       }
     },
-    "完了連打。スクワット隊が寝ています" : {
+    "完了連打。スクワットマンが寝ています" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Done mash. The squad is asleep"
+            "value" : "Done mash. Squatman is asleep"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "完了連打。スクワット隊が寝ています"
+            "value" : "完了連打。スクワットマンが寝ています"
           }
         }
       }
@@ -1991,18 +1991,18 @@
         }
       }
     },
-    "来週には、7人の隊になる。" : {
+    "来週には、7人のスクワットマンになる。" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "By next week, a squad of seven."
+            "value" : "By next week, seven Squatmen."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "来週には、7人の隊になる。"
+            "value" : "来週には、7人のスクワットマンになる。"
           }
         }
       }
@@ -2311,34 +2311,34 @@
         }
       }
     },
-    "隊は寝ています。ポケットの中で数えないように。画面を長押しして起こしてください。" : {
+    "スクワットマンは寝ています。ポケットの中で数えないように。画面を長押しして起こしてください。" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The squad is asleep, so nothing counts from your pocket. Press and hold the screen to wake them up."
+            "value" : "Squatman is asleep, so nothing counts from your pocket. Press and hold the screen to wake Squatman up."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "隊は寝ています。ポケットの中で数えないように。画面を長押しして起こしてください。"
+            "value" : "スクワットマンは寝ています。ポケットの中で数えないように。画面を長押しして起こしてください。"
           }
         }
       }
     },
-    "隊を起こす" : {
+    "スクワットマンを起こす" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wake the squad"
+            "value" : "Wake up Squatman"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "隊を起こす"
+            "value" : "スクワットマンを起こす"
           }
         }
       }

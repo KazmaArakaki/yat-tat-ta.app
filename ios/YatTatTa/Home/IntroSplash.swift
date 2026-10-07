@@ -161,7 +161,7 @@ struct IntroSplash: View {
             .frame(maxWidth: .infinity)
             .offset(y: layout.rowBase + 48)
             .opacity(window(t, T.row + 1.2, T.seat + 0.2, 0.5, 0.5))
-        Text("来週には、7人の隊になる。")
+        Text("来週には、7人のスクワットマンになる。")
             .font(.label(17, black: true))
             .foregroundStyle(Color.dopa)
             .frame(maxWidth: .infinity)

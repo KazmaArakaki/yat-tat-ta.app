@@ -176,7 +176,7 @@ struct TutorialOverlay: View {
 
     private var title: LocalizedStringResource {
         switch step {
-        case .wake: "隊を起こす"
+        case .wake: "スクワットマンを起こす"
         case .mash: "スクワット1回で、1回叩く"
         case .after: "いまのは練習"
         case .streak: "続けた日"
@@ -188,7 +188,7 @@ struct TutorialOverlay: View {
 
     private var message: LocalizedStringResource {
         switch step {
-        case .wake: "隊は寝ています。ポケットの中で数えないように。画面を長押しして起こしてください。"
+        case .wake: "スクワットマンは寝ています。ポケットの中で数えないように。画面を長押しして起こしてください。"
         case .mash: "本番は、しゃがんだ回数だけ叩きます。いまは練習。しゃがまずに\(TutorialStep.practiceReps)回どうぞ。"
         case .after: "練習は記録に残りません。本番は、食べてしゃがんだあとに。途中でやめても、叩いた分は残ります。"
         case .streak: "叩いた日は、ここが1日伸びます。休んだ日は、休み券がつなぎます。押すと、今日の記録。"

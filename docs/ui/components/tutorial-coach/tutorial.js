@@ -1,6 +1,6 @@
 // チュートリアルの見本。ホームのモックに案内を重ね、7つの場面を順に動かす
 // 人形の描き方は ui/pages/home と同じ（アプリの SquatterLayer の点）
-// スクワット隊の見本。横向きの棒人間を SVG で描き、立つ姿としゃがむ姿のあいだを動かす
+// スクワットマンの見本。横向きの棒人間を SVG で描き、立つ姿としゃがむ姿のあいだを動かす
 var SQUAD = (function () {
   var P = {
     stand: { toe: [12, 0], ankle: [0, 0], knee: [0, -20], hip: [0, -40], sh: [0, -72], hand: [2, -46], head: [0, -88] },
@@ -121,8 +121,8 @@ var SQUAD = (function () {
 // 場面。照らす場所（target）と、吹き出しを置く場所（place）と、進み方（next）を持つ
 var TUTORIAL_STEPS = [
   { id: 'wake', target: 'stage', place: 'bottom', sec: 5, next: false,
-    title: '隊を起こす',
-    body: '隊は寝ています。ポケットの中で数えないように。画面を長押しして起こしてください。' },
+    title: 'スクワットマンを起こす',
+    body: 'スクワットマンは寝ています。ポケットの中で数えないように。画面を長押しして起こしてください。' },
   { id: 'mash', target: 'stage', place: 'bottom', sec: 12, next: false,
     title: 'スクワット1回で、1回叩く',
     body: '本番は、しゃがんだ回数だけ叩きます。いまは練習。しゃがまずに10回どうぞ。' },

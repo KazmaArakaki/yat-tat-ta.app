@@ -130,7 +130,7 @@
         { label: "基本方針", path: "ui/principles.html", level: 0 },
         { label: "コンポーネント一覧", path: "ui/components/index.html", level: 0 },
         { label: "ロゴ", path: "ui/components/logo/index.html", level: 1 },
-        { label: "スクワット隊", path: "ui/components/squat-squad/index.html", level: 1 },
+        { label: "スクワットマン", path: "ui/components/squat-squad/index.html", level: 1 },
         { label: "スプラッシュ", path: "ui/components/splash/index.html", level: 1 },
         { label: "チュートリアルの案内", path: "ui/components/tutorial-coach/index.html", level: 1 },
         { label: "ドパ突破", path: "ui/components/dopa-toppa/index.html", level: 1 },

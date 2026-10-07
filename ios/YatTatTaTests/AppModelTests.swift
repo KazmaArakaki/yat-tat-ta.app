@@ -11,7 +11,7 @@ import Testing
         return UserDefaults(suiteName: name)!
     }()
 
-    /// awake なら、長押しで隊を起こしたところから始める
+    /// awake なら、長押しでスクワットマンを起こしたところから始める
     private func makeModel(now: Date = .now, awake: Bool = true) -> AppModel {
         let model = AppModel(context: container.mainContext, defaults: defaults, now: { now })
         // フィーバーのくじは外れに固定する。当てたいテストだけ差し替える
@@ -50,7 +50,7 @@ import Testing
         #expect(model.tap(at: 0.8 + MashSession.lockAfterFinale) != nil)
     }
 
-    @Test func 寝ている隊は叩いても数えず起こすと数える() {
+    @Test func 寝ているスクワットマンは叩いても数えず起こすと数える() {
         let model = makeModel(awake: false)
         #expect(!model.squadAwake)
         #expect(model.tap(at: 0) == nil)
@@ -61,7 +61,7 @@ import Testing
         #expect(model.session.isOpen)
     }
 
-    @Test func 叩き切ると隊は寝る() {
+    @Test func 叩き切るとスクワットマンは寝る() {
         let model = makeModel()
         model.targetReps = 5
         for i in 0..<4 { _ = model.tap(at: Double(i) * 0.2) }
@@ -71,7 +71,7 @@ import Testing
         #expect(model.tap(at: 10) == nil)
     }
 
-    @Test func 途中で記録が閉じても隊は起きたまま() {
+    @Test func 途中で記録が閉じてもスクワットマンは起きたまま() {
         let model = makeModel()
         for i in 0..<3 { _ = model.tap(at: Double(i) * 0.2) }
         model.sceneDidLeave()

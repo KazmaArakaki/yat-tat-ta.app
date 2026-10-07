@@ -47,7 +47,7 @@ extension AppModel {
         case .splash: showSplash(.regular)
         case .intro: showSplash(.intro)
         case .squad:
-            // 目標100で、残り3（PUSH）まで叩いた隊。20人
+            // 目標100で、残り3（PUSH）まで叩いたスクワットマン。20人
             targetReps = 100
             let start = ProcessInfo.processInfo.systemUptime
             let lottery = draw

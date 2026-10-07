@@ -24,7 +24,7 @@ nonisolated enum ToneSynth {
         return render(format: format, duration: 0.35, decay: 0.1, gain: 0.35, frequencies: [frequency(semitone)])
     }
 
-    /// 寝ていたスクワット隊が起きた。低い音から跳ね上がる「ぴょこっ」
+    /// 寝ていたスクワットマンが起きた。低い音から跳ね上がる「ぴょこっ」
     static func wake(format: AVAudioFormat) -> AVAudioPCMBuffer {
         sequence(format: format, semitones: [-5, 7], step: 0.07, decay: 0.06, gain: 0.4)
     }

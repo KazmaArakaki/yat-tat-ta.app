@@ -21,7 +21,7 @@ import SwiftData
     var showsReminderAsk = false
     /// ドパドパの段階。画面全体の地を変える
     private(set) var hypeStage = HypeStage.normal
-    /// スクワット隊が起きているか。寝ていて記録も開いていなければ、叩いても数えない
+    /// スクワットマンが起きているか。寝ていて記録も開いていなければ、叩いても数えない
     ///
     /// 叩き切ったときだけ寝る。時間がたっても、途中で記録が閉じても起きたまま。端末には残さない。
     private(set) var squadAwake = false
@@ -113,7 +113,7 @@ import SwiftData
 
     // MARK: - 叩く
 
-    /// 長押しで隊を起こす。うっかり触れた指で記録が始まらないように
+    /// 長押しでスクワットマンを起こす。うっかり触れた指で記録が始まらないように
     func wake() {
         guard !squadAwake else { return }
         // チュートリアルでは、起こす場面でだけ起きる
@@ -153,7 +153,7 @@ import SwiftData
         } else {
             hypeStage = tap.isFinal ? .normal : tap.stage
             if tap.combo >= 10 && tap.combo % 10 == 0 { feel.play(.voiceCombo) }
-            // スクワット隊が1人増える
+            // スクワットマンが1人増える
             if tap.index % SquatStageUIView.recruitEvery == 0 && !tap.isFinal
                 && 1 + tap.index / SquatStageUIView.recruitEvery <= SquatStageUIView.maxMembers { feel.recruit() }
             if tap.stage == .push && tap.enteredStage && !practice { rainbow = finalTapReachesMilestone() }
@@ -291,7 +291,7 @@ import SwiftData
 
     /// 「はじめる」とスキップ。どちらも見せたことにする
     ///
-    /// 練習の途中なら練習を捨てる。隊は寝かせて、本番は起こすところから。
+    /// 練習の途中なら練習を捨てる。スクワットマンは寝かせて、本番は起こすところから。
     func endTutorial() {
         guard tutorial != nil else { return }
         if session.isOpen { close(completed: false) }
@@ -324,7 +324,7 @@ import SwiftData
         feverTask?.cancel()
         fever = nil
         feel.stopBGM()
-        // 叩き切ったら隊は寝る。次の記録も起こすところから
+        // 叩き切ったらスクワットマンは寝る。次の記録も起こすところから
         if completed { squadAwake = false }
         guard let closed = session.close() else { return }
         // 練習は記録を作らない。途中で閉じたら捨てるだけ

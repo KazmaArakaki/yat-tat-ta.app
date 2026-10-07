@@ -1,7 +1,7 @@
 import SwiftUI
 import UIKit
 
-/// 完了連打の叩く場所。画面中央の広い範囲で、スクワット隊がしゃがむ
+/// 完了連打の叩く場所。画面中央の広い範囲で、スクワットマンがしゃがむ
 ///
 /// SwiftUI のジェスチャーは指を離したときに反応するので、UIKit の touchesBegan で指が触れた瞬間に受ける。
 /// 叩いた瞬間の数字と動きは UIKit の中で直接変え、SwiftUI の描き直しを待たない。
@@ -48,9 +48,9 @@ final class SquatStageUIView: UIView {
     private let crowd = CALayer()
     private let halo = CAGradientLayer()
     private var members: [SquatterLayer] = []
-    /// 隊の全員がいまとっている姿勢
+    /// スクワットマンの全員がいまとっている姿勢
     private var pose = SquatterLayer.Pose.lie
-    /// 寝ている隊を起こそうと押している指。wakeHold 押し続けたら起きる
+    /// 寝ているスクワットマンを起こそうと押している指。wakeHold 押し続けたら起きる
     private var wakingTouch: UITouch?
     private var wakeWork: DispatchWorkItem?
     private var stage = HypeStage.normal
@@ -62,7 +62,7 @@ final class SquatStageUIView: UIView {
         isMultipleTouchEnabled = true
         clipsToBounds = false
 
-        // 虹の先バレ。隊の後ろで回る輪
+        // 虹の先バレ。スクワットマンの後ろで回る輪
         halo.type = .conic
         halo.colors = ([0xFF3B5C, 0xFF9F1C, 0xFFE14D, 0x3DDC84, 0x2F79F7, 0x8E5CF7, 0xFF3B5C] as [UInt32])
             .map { UIColor(hex: $0).cgColor }
@@ -94,7 +94,7 @@ final class SquatStageUIView: UIView {
         comboLabel.alpha = 0
         for label in [caption, gained, comboLabel] {
             label.textAlignment = .center
-            // 隊より手前に出し、暗転した地や放射線の上でも読めるよう黒い影を付ける
+            // スクワットマンより手前に出し、暗転した地や放射線の上でも読めるよう黒い影を付ける
             label.layer.zPosition = 60
             label.layer.shadowColor = UIColor.black.cgColor
             label.layer.shadowOpacity = 0.85
@@ -125,7 +125,7 @@ final class SquatStageUIView: UIView {
 
     // MARK: - 置き方
 
-    /// 隊の足元が並ぶ場所
+    /// スクワットマンの足元が並ぶ場所
     private var crowdFrame: CGRect {
         CGRect(x: 0, y: 112, width: bounds.width, height: max(0, bounds.height - 112 - 48))
     }
@@ -222,12 +222,12 @@ final class SquatStageUIView: UIView {
         }
         gained.text = model.converted > 0 ? String(localized: "+\(model.converted) ドパ")
             : isAsleep ? String(localized: "長押しで起こす") : String(localized: "叩いてしゃがむ")
-        accessibilityLabel = isAsleep ? String(localized: "完了連打。スクワット隊が寝ています")
+        accessibilityLabel = isAsleep ? String(localized: "完了連打。スクワットマンが寝ています")
             : String(localized: "完了連打。スクワット 残り \(model.remaining)")
         accessibilityHint = isAsleep ? String(localized: "ダブルタップで起こす") : nil
     }
 
-    /// 隊の人数をそろえる。増えた人は跳ねて現れる
+    /// スクワットマンの人数をそろえる。増えた人は跳ねて現れる
     private func setMembers(_ count: Int, animated: Bool) {
         let count = min(max(count, 1), Self.maxMembers)
         while members.count > count { members.removeLast().removeFromSuperlayer() }
@@ -332,7 +332,7 @@ final class SquatStageUIView: UIView {
         return true
     }
 
-    /// 隊の全員が揃ってしゃがむ。しゃがむのは速く、立ち上がりは少し遅く。寝ているときは動かない
+    /// スクワットマンの全員が揃ってしゃがむ。しゃがむのは速く、立ち上がりは少し遅く。寝ているときは動かない
     private func squat(_ down: Bool) {
         guard pose == .stand || pose == .squat else { return }
         let target: SquatterLayer.Pose = down ? .squat : .stand
@@ -347,7 +347,7 @@ final class SquatStageUIView: UIView {
 
     // MARK: - 起こす
 
-    /// 隊が寝ていて、叩いても数えない間
+    /// スクワットマンが寝ていて、叩いても数えない間
     private var isAsleep: Bool {
         guard let model else { return true }
         return !model.squadAwake && !model.session.isOpen
@@ -725,7 +725,7 @@ final class SquatStageUIView: UIView {
 /// スクワットをする人1人。横向きの棒人間を、太い ink の線の上に色の線を重ねて描く
 ///
 /// どの姿勢も同じ数の点でできた線なので、線の形ごと動かせる。
-/// 位置（position）は立ったときの足首の場所。寝た姿は、隊の真ん中に来るよう右へずらして描く。
+/// 位置（position）は立ったときの足首の場所。寝た姿は、スクワットマンの真ん中に来るよう右へずらして描く。
 final class SquatterLayer: CALayer {
     /// 足首から頭のてっぺんまでの高さ
     var height: CGFloat = 160 { didSet { redraw() } }

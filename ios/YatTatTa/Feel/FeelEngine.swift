@@ -234,13 +234,13 @@ final class FeelEngine {
         }
     }
 
-    /// スクワット隊に1人増えた。高い音とトンという振動
+    /// スクワットマンに1人増えた。高い音とトンという振動
     func recruit() {
         play(milestoneBuffers[safe: 1])
         buzz(.reelStop)
     }
 
-    /// 寝ていた隊が起きた。指を離す前に、もう叩けると分かるように
+    /// 寝ていたスクワットマンが起きた。指を離す前に、もう叩けると分かるように
     func wake() {
         play(wakeBuffer)
         buzz(.reelStop)

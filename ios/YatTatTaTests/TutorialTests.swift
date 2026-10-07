@@ -111,7 +111,7 @@ import Testing
         #expect(model.tutorial == nil)
     }
 
-    @Test func 練習の途中でスキップすると練習を捨てて隊は寝る() {
+    @Test func 練習の途中でスキップすると練習を捨ててスクワットマンは寝る() {
         let model = makeModel()
         model.startTutorial()
         model.wake()

@@ -84,7 +84,7 @@ tailwind.config = {
     <h2 class="mt-2 font-display text-3xl">幕を見たあとに、分からないこと</h2>
     <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
       <p>最初の起動には、もう<a href="../../glossary.html#intro-splash" class="lnk">はじめての幕</a>があります。14秒で、人形1人が「食べたら、しゃがんで、叩く」をやって見せる。何をするアプリかは、これで伝わるはずです。</p>
-      <p>ところが、幕が消えたあとのホームでは、<a href="../../glossary.html#squat-squad" class="lnk">スクワット隊</a>が床に寝ています。叩いても何も起きません。0.5秒の長押しで<a href="../../glossary.html#wake-up" class="lnk">起こす</a>決まりは、ポケットの中で記録が始まらないための一段で、見ただけでは分からない。最初の食事のあと、20回しゃがんでから寝ている隊を叩き、反応がなくて閉じる。いちばん避けたい初日です。</p>
+      <p>ところが、幕が消えたあとのホームでは、<a href="../../glossary.html#squat-squad" class="lnk">スクワットマン</a>が床に寝ています。叩いても何も起きません。0.5秒の長押しで<a href="../../glossary.html#wake-up" class="lnk">起こす</a>決まりは、ポケットの中で記録が始まらないための一段で、見ただけでは分からない。最初の食事のあと、20回しゃがんでから寝ているスクワットマンを叩き、反応がなくて閉じる。いちばん避けたい初日です。</p>
       <p>帯を押すと今日の記録、カードを押すと履歴、歯車で回数。こちらは困るほどではないものの、自分で見つけるまで気付かない人がいそうです。幕は見せるだけで、触らせない。チュートリアルの仕事は、その残りを指でやってもらうことです。</p>
     </div>
   </section>
@@ -96,7 +96,7 @@ tailwind.config = {
       <p>幕とは別に、チュートリアルだけで約1分にします（開発者が決定、2026-10-07）。幕の14秒と合わせると、最初の起動は75秒ほど。長いかどうかは、叩いている時間の割合で決まると考えました。7つの場面のうち、手を動かすのは最初の2つで、その2つに17秒を使います。</p>
     </div>
     <ol class="mt-6 grid gap-3 text-sm sm:grid-cols-2 lg:grid-cols-4">
-      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">1 起こす　5秒</p><p class="mt-2 leading-relaxed">叩く場所を照らし、長押しで隊を起こしてもらう。起きたら次へ。</p></li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">1 起こす　5秒</p><p class="mt-2 leading-relaxed">叩く場所を照らし、長押しでスクワットマンを起こしてもらう。起きたら次へ。</p></li>
       <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">2 練習連打　12秒</p><p class="mt-2 leading-relaxed">しゃがまずに10回叩く。CHANCE、激熱、PUSH、筋肉確定まで本番どおりに出る。</p></li>
       <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">3 いまのは練習　8秒</p><p class="mt-2 leading-relaxed">記録に残らないこと、本番は食べてしゃがんだあと、途中でやめても残ることを言う。</p></li>
       <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs font-bold text-mute">4 続けた日　9秒</p><p class="mt-2 leading-relaxed">連続記録の帯を照らす。休み券と、押すと今日の記録が開くこと。</p></li>
@@ -122,14 +122,14 @@ tailwind.config = {
         <tbody class="[&>tr]:border-b [&>tr]:border-rule [&_td]:py-2.5 [&_td]:pr-3 [&_td]:align-top">
           <tr><td><b>回数</b></td><td>いつも10回。目標回数によらない</td><td>10回で CHANCE（3打目）、激熱（6打目）、PUSH（8打目）を全部通る。20回だと場面2だけで20秒を超える</td></tr>
           <tr><td><b>記録</b></td><td>作らない。DT、DPW、連続記録、今日の記録は動かない</td><td>スクワットをしていない1打を混ぜない</td></tr>
-          <tr><td><b>隊の上の文字</b></td><td>「練習 残り」</td><td>本番の「スクワット 残り」と見分ける</td></tr>
+          <tr><td><b>スクワットマンの上の文字</b></td><td>「練習 残り」</td><td>本番の「スクワット 残り」と見分ける</td></tr>
           <tr><td><b>「+N ドパ」</b></td><td>出さない。飛ぶドパの粒と文字は出す</td><td>増えたように見せると、カードの 0 と食い違う</td></tr>
           <tr><td><b>フィーバーのくじ</b></td><td>引かない</td><td>練習で当たると、本番の驚きを先に使ってしまう</td></tr>
           <tr><td><b>節目、ドパ突破、虹の先バレ</b></td><td>出さない</td><td>どれも記録の数から決まる。練習は数を動かさない</td></tr>
           <tr><td><b>フィナーレ</b></td><td>本番と同じ2段。確定は「筋肉確定」で、下の「+N ドパ」の代わりに「練習 10回」。ねぎらいは「あんたはえらい！」。言葉は回さない。長さは本番と同じく声の長さで決まる（約3秒）</td><td>本番のごほうびを1度見せておく。言葉を回すと、本番の1回目が2番目の言葉から始まってしまう</td></tr>
           <tr><td><b>今日まだ通知の問いかけ</b></td><td>出さない</td><td>問いかけは「初めて叩き切ったあと」。練習は数えない</td></tr>
           <tr><td><b>60秒止まったとき</b></td><td>閉じない。案内を出したまま待つ</td><td>記録がないので、閉じても残すものがない</td></tr>
-          <tr><td><b>終わったあとの隊</b></td><td>倒れ込んで寝る</td><td>本番でも叩き切ったら寝る。最初の本番も起こすところから</td></tr>
+          <tr><td><b>終わったあとのスクワットマン</b></td><td>倒れ込んで寝る</td><td>本番でも叩き切ったら寝る。最初の本番も起こすところから</td></tr>
         </tbody>
       </table>
     </div>
@@ -158,7 +158,7 @@ tailwind.config = {
   <section id="mock" class="mt-20">
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / mock</p>
     <h2 class="mt-2 font-display text-3xl">触って確かめる</h2>
-    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">ホームの上に暗い幕をかけ、1か所だけを照らして、吹き出しで言います。吹き出しが代わりに言うので、隊の下の「長押しで起こす」は案内のあいだ隠します。長押しで起こして、10回叩いてみてください。場面ごとに選んで見るときは<a href="../../ui/components/tutorial-coach/index.html" class="lnk">部品：チュートリアルの案内</a>へ。</p>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">ホームの上に暗い幕をかけ、1か所だけを照らして、吹き出しで言います。吹き出しが代わりに言うので、スクワットマンの下の「長押しで起こす」は案内のあいだ隠します。長押しで起こして、10回叩いてみてください。場面ごとに選んで見るときは<a href="../../ui/components/tutorial-coach/index.html" class="lnk">部品：チュートリアルの案内</a>へ。</p>
     <div class="mt-8 flex flex-col items-center gap-8 md:flex-row md:items-start md:justify-center">
       <div id="phone"></div>
       <div class="max-w-xs text-sm leading-relaxed">
@@ -203,7 +203,7 @@ tailwind.config = {
     <h2 class="mt-2 font-display text-3xl">作ったところ</h2>
     <ul class="mt-6 flex max-w-3xl flex-col gap-2 text-sm">
       <li class="rounded-2xl border border-rule bg-white p-4">練習のフィナーレは、本番と同じ2段（確定とねぎらい）にした。確定の下の「+N ドパ」を「練習 10回」に替え、ねぎらいは「あんたはえらい！」に固定。設計では1段に縮める案だったが、本番のごほうびをそのまま1度見せるほうを取った。長さは声で決まり、約3秒。</li>
-      <li class="rounded-2xl border border-rule bg-white p-4">照らす場所の位置は <code class="font-mono text-xs">onGeometryChange</code> で画面全体の座標を測って渡す。穴は当たり判定からも抜いてあり、叩く場面ではそのまま下の隊に指が届く。叩く場所はもとから広いので、穴を広げずにそのまま照らす（広げるとカードにかかった）。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">照らす場所の位置は <code class="font-mono text-xs">onGeometryChange</code> で画面全体の座標を測って渡す。穴は当たり判定からも抜いてあり、叩く場面ではそのまま下のスクワットマンに指が届く。叩く場所はもとから広いので、穴を広げずにそのまま照らす（広げるとカードにかかった）。</li>
       <li class="rounded-2xl border border-rule bg-white p-4">文言20個を日本語と英語で足した。英語は訳語表に3行足した。</li>
       <li class="rounded-2xl border border-rule bg-white p-4">テストを10個足した（<code class="font-mono text-xs">TutorialTests</code>）。練習で記録が増えない、くじを引かない、問いかけが出ない、途中でスキップやアプリを離れたら練習を捨てる、記録がある人には出ない、など。全79個が通る。</li>
       <li class="rounded-2xl border border-rule bg-white p-4">シミュレーターで、7つの場面を起動引数（<code class="font-mono text-xs">-demo tutorial</code>、<code class="font-mono text-xs">tutorial-mash</code> ほか）で開き、照らす位置と吹き出しを日本語と英語で確かめた。長押しと連打の手触り、通しの時間はまだ。実機で確かめる。</li>
@@ -230,7 +230,7 @@ tailwind.config = {
   var now = document.getElementById('now'), done = document.getElementById('done');
   var api = TUTORIAL.mount(document.getElementById('phone'), {
     onStep: function (i) { now.textContent = names[i]; },
-    onEnd: function (skipped) { done.textContent = skipped ? 'スキップしました。ホームだけが残ります。' : 'おわり。ホームだけが残り、隊は寝ています。'; done.classList.remove('hidden'); }
+    onEnd: function (skipped) { done.textContent = skipped ? 'スキップしました。ホームだけが残ります。' : 'おわり。ホームだけが残り、スクワットマンは寝ています。'; done.classList.remove('hidden'); }
   });
   document.getElementById('again').addEventListener('click', function () { done.classList.add('hidden'); api.jump(0); });
 })();

@@ -70,7 +70,7 @@ tailwind.config = {
   <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">ui / components / splash</p>
   <h1 class="mt-2 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">スプラッシュ</span></h1>
   <div class="mt-4 max-w-2xl space-y-3 text-sm leading-relaxed text-ink/80">
-    <p>起動したとき、ホームの上に1.65秒だけ重ねる幕です。ロゴを見せる場所ではありません。これまで続けた日が、<a href="../../../glossary.html#squat-squad" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スクワット隊</a>の人形になって曜日ごとに並び、古い日から順に1回ずつしゃがむ。その波が届く先、人形のいない床の印に上から光が差しているところが<a href="../../../glossary.html#today-seat" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日の席</a>です。</p>
+    <p>起動したとき、ホームの上に1.65秒だけ重ねる幕です。ロゴを見せる場所ではありません。これまで続けた日が、<a href="../../../glossary.html#squat-squad" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スクワットマン</a>の人形になって曜日ごとに並び、古い日から順に1回ずつしゃがむ。その波が届く先、人形のいない床の印に上から光が差しているところが<a href="../../../glossary.html#today-seat" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日の席</a>です。</p>
     <p>上の名前は「Yat」「Tat」「Ta」と1語ずつ落ちて、着地でつぶれます。3拍めの「Ta」が、波が今日の席に届く瞬間と重なる。振動もこの3拍に合わせます。最後に大きな数だけがホームの連続記録の位置へ飛び、そのまま<a href="../../../glossary.html#streak" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">連続記録</a>の帯の数になります。</p>
     <p>インストールして最初の1回だけは、並べる日がまだありません。代わりに<a href="../../../glossary.html#intro-splash" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">はじめての幕</a>（14.0秒）で、1人の人形が「食べたら、しゃがんで、叩く」をやって見せ、今週の席に入ります。タブの「はじめての起動」で再生できます。</p>
   </div>
@@ -90,7 +90,7 @@ tailwind.config = {
       <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="py-2 pr-4">部品</th><th class="py-2 pr-4">見た目</th><th class="py-2">なぜ</th></tr></thead>
       <tbody>
         <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">名前</td><td class="py-3 pr-4">SF Pro Rounded の Black、30pt。「Ta」だけ dopa。1語ずつ上から落ち、着地で横に広がって縦につぶれる</td><td class="py-3">Yat Tat Ta は「やったった」。3拍で言い切る名前を、3回のしゃがみとして見せる</td></tr>
-        <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">隊列</td><td class="py-3 pr-4">1日に1人。gold の体に黒い縁（隊と履歴と同じ人形）。7列で曜日にそろえ、古い日が左上、今日が右下。行の高さは最大58pt、週が増えると縮む。8週を超えたら古い週を「＋N日」にまとめる</td><td class="py-3">続けた日数が、数ではなく人数で見える。1行が1週間なので、休み券をもらった7日ごとの区切りも読める</td></tr>
+        <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">隊列</td><td class="py-3 pr-4">1日に1人。gold の体に黒い縁（スクワットマンと履歴と同じ人形）。7列で曜日にそろえ、古い日が左上、今日が右下。行の高さは最大58pt、週が増えると縮む。8週を超えたら古い週を「＋N日」にまとめる</td><td class="py-3">続けた日数が、数ではなく人数で見える。1行が1週間なので、休み券をもらった7日ごとの区切りも読める</td></tr>
         <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">休み券の日</td><td class="py-3 pr-4">人形の代わりに signal の札</td><td class="py-3">人形が欠けた日を、途切れに見せない。帯と履歴と同じ札</td></tr>
         <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">今日の席</td><td class="py-3 pr-4">人形はいない。床に dopa の丸い印（黒い縁 3.5pt）を置き、上から薄い光（下ほど濃い dopa、上で消える）を差す。波が届くと、輪が床の上に楕円で広がり、そのあと1.1秒周期でゆっくり濃淡を繰り返す。今日済みなら、印の上に人形が立って2回しゃがむ。ほかの人形の足元にも薄い影を落とし、印が「人の立つ場所」だと読めるようにする</td><td class="py-3">隊列の最後が空いている。舞台に光だけが当たっていて、立つ人をまだ待っている形。点線で人形の輪郭を描く案は、人形そのものが欠けて見え、違和感があった（開発者のレビュー）</td></tr>
         <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">はじめての幕</td><td class="py-3 pr-4">高さ約220pt の人形1人と、下の1行「食べたら、しゃがんで、叩く。」。今の語だけ濃く、ほかは薄い。そのあと今週の7つの席（左端が今日、曜日の札つき、7つめは休み券）。今日の席だけ光が差し、明日からの席は床の印の輪郭（点線の楕円）だけ。明日からの6人は0.85の濃さで一瞬だけ立つ</td><td class="py-3">何をするアプリか、続けると何が起きるかを、文ではなく動きで先に見せる</td></tr>
@@ -106,7 +106,7 @@ tailwind.config = {
   <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
     <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">機能</p><a href="../../../features/splash/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スプラッシュ</a></li>
     <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">引き継ぐ先</p><a href="../streak-bar/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">連続記録の帯</a></li>
-    <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">人形のもと</p><a href="../squat-squad/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スクワット隊</a></li>
+    <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">人形のもと</p><a href="../squat-squad/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スクワットマン</a></li>
     <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">決めたセッション</p><a href="../../../sessions/20261007-0017-splash/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スプラッシュを作る</a></li>
   </ul>
 </section>
