@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="session-state" content="developing">
-<meta name="state" content="developing">
+<meta name="session-state" content="done">
+<meta name="state" content="done">
 <title>App Store の審査に出す準備</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,7 +47,7 @@ tailwind.config = {
       <time datetime="2026-10-07T15:23">2026-10-07 15:23</time>
       <span>/</span>
       <span>設計セッション</span>
-      <span class="rounded-full border border-gold bg-gold/15 px-2.5 py-0.5 font-bold text-ink">状態：developing</span>
+      <span class="rounded-full border border-signal bg-signal/10 px-2.5 py-0.5 font-bold text-ink">状態：done</span>
     </div>
     <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl">App Store の審査に出す準備</h1>
   </header>
@@ -155,7 +155,9 @@ tailwind.config = {
       <li class="rounded-2xl border border-rule bg-white p-4">App Store Connect で必須の枠は 6.3 インチ（Dynamic Island 搭載 iPhone、中型ディスプレイ）だけで、6.9 インチは任意だった。開発者が日本語の6枚を 6.3 インチの枠に上げた（2026-10-07）。</li>
       <li class="rounded-2xl border border-rule bg-white p-4">著作権と運営者の表記を「Kazma Arakaki」から「Kazuma Arakaki」に改めた（開発者が決定、2026-10-07）。プライバシーポリシーの運営者名と、公開4ページの © の行も同じに直した。ポリシーには改定日を足していない。制定日と同じ日で、まだ利用者がいない時点の表記の直しだから。</li>
       <li class="rounded-2xl border border-rule bg-white p-4">価格を無料から US$0.99 に改めた（開発者が決定、2026-10-07）。有料で売るには、有料 App の契約が有効になっている必要がある。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">アプリ情報で「規制対象の医療機器か」を聞かれ、「いいえ」と答えた。理由は<a href="../../devops/app-store/index.html#other" class="lnk">掲載情報の表3</a>。</li>
       <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4">24枚を撮り、6枚とも狙った場面になっていることを目で確かめた（2026-10-07）。6.9 インチは 1320 × 2868、6.3 インチは 1206 × 2622。残りは App Store Connect への入力（上の6）。</li>
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4">開発者が App Store Connect に文言、スクリーンショット（日本語と英語の 6.3 インチ）、年齢制限（9+）、価格（US$0.99）、配信地域、審査メモを入れ、ビルド 1.0 (1) を審査へ提出した（2026-10-07）。公開は手動。審査で止められたら、理由を見て新しいセッションで直す。</li>
     </ul>
   </section>
 
