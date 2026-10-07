@@ -47,8 +47,10 @@ import SwiftUI
         }
         perf = nil
         if AppModel.demoRequested {
-            // 演出の見本も、ログインせずにメモリだけの記録で開く
-            let model = AppModel(store: MemoryRecordStore())
+            // 演出の見本も、ログインせずにメモリだけの記録で開く。-seed ならスクリーンショット用の記録を入れる
+            let model = ShotSeed.isOn
+                ? AppModel(store: MemoryRecordStore(records: ShotSeed.records(today: RecordDay(.now))), defaults: ShotSeed.defaults())
+                : AppModel(store: MemoryRecordStore())
             model.splashPaused = true
             model.feel.start()
             account = nil

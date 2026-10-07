@@ -70,7 +70,10 @@ struct HomeView: View {
         }
         .foregroundStyle(Color.ink)
         #if DEBUG
-        .task { model.runDemoFromLaunchArguments() }
+        .task {
+            model.runDemoFromLaunchArguments()
+            if model.demoOpensHistory { history = model.history() }
+        }
         #endif
         .onChange(of: model.tapTick) {
             guard model.hypeStage == .push, !reduceMotion else { return }

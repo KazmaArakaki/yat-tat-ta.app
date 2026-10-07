@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="session-state" content="planning">
-<meta name="state" content="planning">
+<meta name="session-state" content="developing">
+<meta name="state" content="developing">
 <title>App Store の審査に出す準備</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,7 +47,7 @@ tailwind.config = {
       <time datetime="2026-10-07T15:23">2026-10-07 15:23</time>
       <span>/</span>
       <span>設計セッション</span>
-      <span class="rounded-full border border-gold bg-gold/15 px-2.5 py-0.5 font-bold text-ink">状態：planning</span>
+      <span class="rounded-full border border-gold bg-gold/15 px-2.5 py-0.5 font-bold text-ink">状態：developing</span>
     </div>
     <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl">App Store の審査に出す準備</h1>
   </header>
@@ -105,7 +105,7 @@ tailwind.config = {
     <h2 class="mt-2 font-display text-3xl">シミュレーターで叩いたあとの画面を撮るには</h2>
     <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
       <p>シミュレーターでは連打できません。そのために、演出の場面を叩かずに出す見本（起動引数 <code class="font-mono text-xs">-demo</code>）がすでにあります。フィーバーも筋肉確定も、これで出せる。</p>
-      <p>足りないのは記録です。見本はメモリだけの空の記録で開くので、帯は「1日目」、カードはドパ0、履歴は空のまま。ストアに並べるには寂しすぎます。そこで、見本の記録（起動引数 <code class="font-mono text-xs">-seed</code>）を足します。40日ぶん、朝昼晩の時刻に少しずつばらつきを持たせ、途中に休み券を使った日を1日入れる。今日は1件もなく、スプラッシュでは空いた今日の席が見えます。</p>
+      <p>足りないのは記録です。見本はメモリだけの空の記録で開くので、帯は「1日目」、カードはドパ0、履歴は空のまま。ストアに並べるには寂しすぎます。そこで、見本の記録（起動引数 <code class="font-mono text-xs">-seed</code>）を足します。昨日まで34日ぶん、朝昼晩の時刻に少しずつばらつきを持たせ、途中に休み券で埋まる日を1日入れる。今日は1件もなく、スプラッシュでは空いた今日の席が見えます。</p>
       <p>見出しの帯は、撮ったあとの画像に Swift のスクリプトで描き足します。macOS に入っている CoreGraphics だけで描けるので、Python の画像の部品のような道具を増やさずに済む。文字はアプリと同じ、システムの丸ゴシックの太字です。</p>
     </div>
     <a href="screenshots.html" class="mt-6 block max-w-3xl rounded-2xl border-2 border-ink bg-white p-5 shadow-[4px_4px_0_#1C1916] transition hover:-translate-y-0.5">
@@ -142,8 +142,22 @@ tailwind.config = {
     </ol>
   </section>
 
+  <section id="build" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">07 / build</p>
+    <h2 class="mt-2 font-display text-3xl">作ったところ</h2>
+    <ul class="mt-6 flex max-w-3xl flex-col gap-2 text-sm">
+      <li class="rounded-2xl border border-rule bg-white p-4"><code class="font-mono text-xs">ShotSeed</code> を足した。連続33日（34日のうち1日は休み券）、DPW 468、DT 1,936 の人になる。テストを3つ足し、全91個が通る。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">最初に撮ったホームでは、休み券を使ったという帯が画面の上にかぶった。帯は「まだ見せていない休み券」があると出るので、見本の設定で見せたことにした。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">自己ベストは昨日で終わる7日も数えるので、今日まだ叩いていない見本では、DPW が自己ベストを超えることはない。直近7日を濃くして、前の7日（361）より多く見せるところまでにした。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">フィーバーの見本は、そのままだと「+0 ドパ」と出る。<code class="font-mono text-xs">-seed</code> のときだけ、24ドパ取ったところから始める。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">待ち時間は撮りながら決めた。squad は約6秒たってから PUSH になる（見本の記録だと、97打の途中で DT が2,000をまたぎ、先にドパ突破が出る）。起動したてのシミュレーターでは最初の数枚が白いまま写ったので、撮る前に1回開いておくようにした。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">見出しの日本語は、システムに任せると細い字で描かれた。代わりの書体にヒラギノ角ゴの W8 を指定した。</li>
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4">24枚を撮り、6枚とも狙った場面になっていることを目で確かめた（2026-10-07）。6.9 インチは 1320 × 2868、6.3 インチは 1206 × 2622。残りは App Store Connect への入力（上の6）。</li>
+    </ul>
+  </section>
+
   <section id="links" class="mt-20">
-    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">07 / links</p>
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">08 / links</p>
     <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
     <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
       <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">開発/運用</p><a href="../../devops/app-store/index.html" class="mt-1 block font-bold lnk">App Store の掲載情報</a></li>

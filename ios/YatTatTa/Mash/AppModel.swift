@@ -39,6 +39,8 @@ import Observation
     #if DEBUG
     /// 見本で、確定を飛ばしてねぎらいから出す
     @ObservationIgnored var demoSkipToNegirai = false
+    /// 見本で、ホームを開いたら履歴のシートを開く
+    @ObservationIgnored var demoOpensHistory = false
     /// 計測モードでは、今日まだ通知の予約に触れない。仮の記録で予約し直さないように
     @ObservationIgnored var remindersPaused = false
     #endif
@@ -495,9 +497,10 @@ import Observation
         hypeStage = stage
         showBanner(stage)
     }
-    func setDemoFever() {
+    func setDemoFever(gained: Int = 0) {
         feel.playBGM(.bgmMash)
         startFever()
+        fever?.gained = gained
     }
     func setDemoFinale(_ event: FinaleEvent, skipToNegirai: Bool) {
         demoSkipToNegirai = skipToNegirai

@@ -3,3 +3,5 @@
 xcuserdata/
 # Firebase の設定。開発用は Firebase/Dev、本番用は Firebase/Prod に置き、Git には入れない（docs/devops/firebase）
 Firebase/*/GoogleService-Info.plist
+# スクリーンショットは Design/screenshots.sh でいつでも撮り直せる（docs/devops/app-store#screenshots）
+Design/Screenshots/
