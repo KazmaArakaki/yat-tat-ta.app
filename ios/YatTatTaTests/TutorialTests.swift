@@ -1,26 +1,24 @@
 import Foundation
-import SwiftData
 import Testing
 @testable import YatTatTa
 
 /// チュートリアルと練習連打。練習が記録に漏れないことをいちばんに確かめる
 @MainActor struct TutorialTests {
-    private let container = try! ModelContainer(
-        for: SquatRecord.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    private let store = MemoryRecordStore()
     private let defaults: UserDefaults = {
         let name = "TutorialTests-\(UUID())"
         return UserDefaults(suiteName: name)!
     }()
 
     private func makeModel() -> AppModel {
-        let model = AppModel(context: container.mainContext, defaults: defaults)
+        let model = AppModel(store: store, defaults: defaults)
         // くじは当たりに固定する。練習では引かないことを確かめるため
         model.draw = { 0 }
         return model
     }
 
     private func records() -> [SquatRecord] {
-        (try? container.mainContext.fetch(FetchDescriptor<SquatRecord>())) ?? []
+        store.records
     }
 
     /// 起こして、練習を叩き切るところまで
@@ -36,8 +34,7 @@ import Testing
     }
 
     @Test func 記録がある人には出ない() {
-        container.mainContext.insert(SquatRecord(startedAt: .now, day: RecordDay(.now), reps: 20, bonusDopa: 0))
-        try? container.mainContext.save()
+        store.add(SquatRecord(startedAt: .now, day: RecordDay(.now), reps: 20, bonusDopa: 0))
         let model = makeModel()
         model.finishSplash()
         #expect(model.tutorial == nil)
@@ -139,8 +136,7 @@ import Testing
     }
 
     @Test func 見直しでは記録がある人も練習で記録が増えない() {
-        container.mainContext.insert(SquatRecord(startedAt: .now, day: RecordDay(.now), reps: 20, bonusDopa: 0))
-        try? container.mainContext.save()
+        store.add(SquatRecord(startedAt: .now, day: RecordDay(.now), reps: 20, bonusDopa: 0))
         let model = makeModel()
         model.startTutorial()
         practice(model)

@@ -4,11 +4,26 @@ options:
     iOS: "26.0"
   # 開発言語。文言は String Catalog（Localizable.xcstrings）に集める
   developmentLanguage: ja
+packages:
+  # 記録は Firestore、ログインは Firebase Authentication（docs/devops/firebase）
+  Firebase:
+    url: https://github.com/firebase/firebase-ios-sdk
+    from: "12.19.0"
 targets:
   YatTatTa:
     type: application
     platform: iOS
     sources: [YatTatTa]
+    dependencies:
+      - package: Firebase
+        product: FirebaseAuth
+      - package: Firebase
+        product: FirebaseFirestore
+    # Sign in with Apple。GoogleService-Info.plist は Git に入れず、YatTatTa/ に置く
+    entitlements:
+      path: YatTatTa/YatTatTa.entitlements
+      properties:
+        com.apple.developer.applesignin: [Default]
     scheme:
       testTargets: [YatTatTaTests]
     settings:

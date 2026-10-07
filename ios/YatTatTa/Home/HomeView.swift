@@ -5,6 +5,8 @@ import SwiftUI
 /// 画面はこの1枚だけ。フィナーレやカードは上に重ねて、用が済めば消す。
 struct HomeView: View {
     let model: AppModel
+    /// 設定シートのアカウントの欄に使う。計測モードと演出の見本では nil
+    let account: Account?
     @State private var showsSettings = false
     @State private var showsToday = false
     /// 開いた時点の履歴。開くたびに記録を読み直す
@@ -76,7 +78,7 @@ struct HomeView: View {
             withAnimation(.easeOut(duration: 0.18)) { swell = false }
         }
         .sheet(isPresented: $showsSettings) {
-            SettingsView(model: model)
+            SettingsView(model: model, account: account)
         }
         .sheet(isPresented: $showsToday) {
             TodayRecordsView(model: model)

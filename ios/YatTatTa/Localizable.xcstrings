@@ -257,6 +257,38 @@
         }
       }
     },
+    "Apple でログインすると、記録がアカウントに残ります。iPhone を替えても、アプリを入れ直しても戻ります。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign in with Apple and your sets stay with your account. They come back on a new iPhone, or after you reinstall."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple でログインすると、記録がアカウントに残ります。iPhone を替えても、アプリを入れ直しても戻ります。"
+          }
+        }
+      }
+    },
+    "Apple でログイン中" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Signed in with Apple"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple でログイン中"
+          }
+        }
+      }
+    },
     "DPW" : {
       "localizations" : {
         "en" : {
@@ -337,6 +369,22 @@
         }
       }
     },
+    "OK" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        }
+      }
+    },
     "iPhone の設定で通知が切られています。設定を開く" : {
       "localizations" : {
         "en" : {
@@ -399,6 +447,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "げきあつ！"
+          }
+        }
+      }
+    },
+    "これまでの記録 %lld 件がすべて消えます。元には戻せません。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All %lld sets you've logged will be deleted. This can't be undone."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "これまでの記録 %lld 件がすべて消えます。元には戻せません。"
           }
         }
       }
@@ -697,6 +761,22 @@
         }
       }
     },
+    "やめる" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "やめる"
+          }
+        }
+      }
+    },
     "よっ、ふともも番長！" : {
       "comment" : "声のファイルがないときの読み上げ",
       "localizations" : {
@@ -730,6 +810,54 @@
         }
       }
     },
+    "アカウント" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Account"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アカウント"
+          }
+        }
+      }
+    },
+    "アカウントを削除" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete Account"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アカウントを削除"
+          }
+        }
+      }
+    },
+    "アカウントを削除しますか？" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete your account?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アカウントを削除しますか？"
+          }
+        }
+      }
+    },
     "ラッシュ！" : {
       "comment" : "声のファイルがないときの読み上げ",
       "localizations" : {
@@ -743,6 +871,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ラッシュ！"
+          }
+        }
+      }
+    },
+    "ログアウト" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign Out"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ログアウト"
+          }
+        }
+      }
+    },
+    "ログアウトしますか？" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign out?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ログアウトしますか？"
+          }
+        }
+      }
+    },
+    "ログアウトできませんでした。もう一度試してください。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn't sign out. Please try again."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ログアウトできませんでした。もう一度試してください。"
           }
         }
       }
@@ -1149,6 +1325,22 @@
         }
       }
     },
+    "名前とメールアドレスは受け取りません。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We never receive your name or email."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "名前とメールアドレスは受け取りません。"
+          }
+        }
+      }
+    },
     "回" : {
       "localizations" : {
         "en" : {
@@ -1458,6 +1650,22 @@
         }
       }
     },
+    "機種を変えても、\n記録はそのまま。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Switch phones.\nKeep every set."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "機種を変えても、\n記録はそのまま。"
+          }
+        }
+      }
+    },
     "次の節目 %@" : {
       "localizations" : {
         "en" : {
@@ -1697,6 +1905,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "自己ベスト、更新！"
+          }
+        }
+      }
+    },
+    "記録はアカウントに残ります。同じ Apple ID でログインすると戻ります。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your sets stay with your account. Sign in with the same Apple ID to get them back."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "記録はアカウントに残ります。同じ Apple ID でログインすると戻ります。"
           }
         }
       }
@@ -2087,6 +2311,22 @@
         }
       }
     },
+    "つながりませんでした。電波のあるところで、もう一度押してください。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn't connect. Try again where you have a signal."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "つながりませんでした。電波のあるところで、もう一度押してください。"
+          }
+        }
+      }
+    },
     "はじめる" : {
       "localizations" : {
         "en" : {
@@ -2179,6 +2419,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "使い方をもう一度"
+          }
+        }
+      }
+    },
+    "削除する" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "削除する"
+          }
+        }
+      }
+    },
+    "削除すると、これまでの記録がすべて消えます。元には戻せません。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deleting removes every set you've logged. This can't be undone."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "削除すると、これまでの記録がすべて消えます。元には戻せません。"
+          }
+        }
+      }
+    },
+    "削除できませんでした。電波のあるところで、もう一度試してください。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn't delete. Try again where you have a signal."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "削除できませんでした。電波のあるところで、もう一度試してください。"
           }
         }
       }

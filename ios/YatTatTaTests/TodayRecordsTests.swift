@@ -1,11 +1,9 @@
 import Foundation
-import SwiftData
 import Testing
 @testable import YatTatTa
 
 @MainActor struct TodayRecordsTests {
-    private let container = try! ModelContainer(
-        for: SquatRecord.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    private let store = MemoryRecordStore()
     private let defaults = UserDefaults(suiteName: "TodayRecordsTests-\(UUID())")!
     /// 2026-10-06 の20時（JST）。記録日は 20261006
     private let now = Date(timeIntervalSince1970: 1_791_284_400)
@@ -14,9 +12,9 @@ import Testing
     private func makeModel(pastDays days: Int = 0) -> AppModel {
         let today = RecordDay(now)
         for i in 1...max(days, 1) where days > 0 {
-            container.mainContext.insert(SquatRecord(startedAt: now, day: today.adding(days: -i), reps: 10))
+            store.add(SquatRecord(startedAt: now, day: today.adding(days: -i), reps: 10))
         }
-        let model = AppModel(context: container.mainContext, defaults: defaults, now: { [now] in now })
+        let model = AppModel(store: store, defaults: defaults, now: { [now] in now })
         model.draw = { 1 }
         model.targetReps = 5
         return model
@@ -74,7 +72,7 @@ import Testing
 
     @Test func 昨日の記録は消せない() {
         let model = makeModel(pastDays: 1)
-        let yesterday = try! container.mainContext.fetch(FetchDescriptor<SquatRecord>()).first!
+        let yesterday = store.records.first!
         model.delete(yesterday)
         #expect(model.ledger.dopaTotal == 10)
     }

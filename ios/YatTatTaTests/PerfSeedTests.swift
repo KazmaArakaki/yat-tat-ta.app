@@ -1,17 +1,14 @@
 import Foundation
-import SwiftData
 import Testing
 @testable import YatTatTa
 
 @MainActor struct PerfSeedTests {
-    private let container = try! ModelContainer(
-        for: SquatRecord.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    private let store = MemoryRecordStore()
     private let now = Date(timeIntervalSince1970: 1_791_000_000)
 
     private func makeModel() -> AppModel {
-        let context = container.mainContext
-        PerfSeed.records(today: RecordDay(now), now: now).forEach(context.insert)
-        let model = AppModel(context: context, defaults: PerfSeed.defaults(), now: { [now] in now })
+        PerfSeed.records(today: RecordDay(now), now: now).forEach(store.add)
+        let model = AppModel(store: store, defaults: PerfSeed.defaults(), now: { [now] in now })
         let draw = PerfSeed.FeverDraw()
         model.draw = { draw.next() }
         model.wake()

@@ -786,8 +786,8 @@ final class SquatterLayer: CALayer {
         arm: [.init(x: 3, y: -55), .init(x: 17, y: -55), .init(x: 31, y: -56)],
         head: .init(x: 7, y: -69))
 
-    /// 仰向けに寝た姿。つま先を上に向け、頭を左に置く
-    private static let lie = Joints(
+    /// 仰向けに寝た姿。つま先を上に向け、頭を左に置く。ログイン画面でも、この姿で寝ている
+    static let lie = Joints(
         legs: [.init(x: 44, y: -14), .init(x: 40, y: -7), .init(x: 19, y: -7), .init(x: -2, y: -7), .init(x: -32, y: -7)],
         arm: [.init(x: -32, y: -7), .init(x: -18, y: -3), .init(x: -6, y: -3)],
         head: .init(x: -46, y: -12))

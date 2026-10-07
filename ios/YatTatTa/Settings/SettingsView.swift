@@ -1,9 +1,13 @@
 import SwiftUI
 
-/// 設定シート。目標回数と今日まだ通知だけを置き、一番下に注意書きを添える
+/// 設定シート。目標回数と今日まだ通知を置き、アカウントの欄と、一番下に注意書きを添える
 struct SettingsView: View {
     let model: AppModel
+    /// 計測モードと演出の見本では nil。アカウントの欄を出さない
+    let account: Account?
     @State private var denied = false
+    @State private var confirmsSignOut = false
+    @State private var confirmsDelete = false
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
 
@@ -67,6 +71,8 @@ struct SettingsView: View {
                     .disabled(model.session.isOpen)
                 }
 
+                if let account { accountSection(account) }
+
                 // 注意書き。健康効果は書かず、休んでほしい場面だけを書く（docs/devops/health-wording）
                 Section {
                 } footer: {
@@ -84,6 +90,54 @@ struct SettingsView: View {
             }
         }
         .task { denied = await model.reminderDenied() }
+        .disabled(account?.busy == true)
+        .overlay {
+            if account?.busy == true { ProgressView().controlSize(.large) }
+        }
+    }
+
+    /// ログアウトと、アカウントの削除。どちらも叩いている最中は押せない（docs/features/account）
+    private func accountSection(_ account: Account) -> some View {
+        Section {
+            Text("Apple でログイン中").font(.label(16))
+            Button {
+                confirmsSignOut = true
+            } label: {
+                Text("ログアウト").font(.label(16)).foregroundStyle(Color.ink)
+            }
+            Button(role: .destructive) {
+                confirmsDelete = true
+            } label: {
+                Text("アカウントを削除").font(.label(16))
+            }
+        } header: {
+            Text("アカウント")
+        } footer: {
+            Text("削除すると、これまでの記録がすべて消えます。元には戻せません。")
+        }
+        .disabled(model.session.isOpen)
+        .alert(Text("ログアウトしますか？"), isPresented: $confirmsSignOut) {
+            Button(role: .cancel) {} label: { Text("やめる") }
+            Button {
+                dismiss()
+                account.signOut()
+            } label: { Text("ログアウト") }
+        } message: {
+            Text("記録はアカウントに残ります。同じ Apple ID でログインすると戻ります。")
+        }
+        .alert(Text("アカウントを削除しますか？"), isPresented: $confirmsDelete) {
+            Button(role: .cancel) {} label: { Text("やめる") }
+            Button(role: .destructive) {
+                Task { await account.deleteAccount() }
+            } label: { Text("削除する") }
+        } message: {
+            Text("これまでの記録 \(model.recordCount) 件がすべて消えます。元には戻せません。")
+        }
+        .alert(Text(account.failure?.message ?? ""), isPresented: Binding(
+            get: { account.failure == .signOut || account.failure == .delete },
+            set: { if !$0 { account.failure = nil } })) {
+            Button {} label: { Text("OK") }
+        }
     }
 
     private func stepButton(_ symbol: String, delta: Int) -> some View {

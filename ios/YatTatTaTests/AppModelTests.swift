@@ -1,11 +1,9 @@
 import Foundation
-import SwiftData
 import Testing
 @testable import YatTatTa
 
 @MainActor struct AppModelTests {
-    private let container = try! ModelContainer(
-        for: SquatRecord.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    private let store = MemoryRecordStore()
     private let defaults: UserDefaults = {
         let name = "AppModelTests-\(UUID())"
         return UserDefaults(suiteName: name)!
@@ -13,7 +11,7 @@ import Testing
 
     /// awake なら、長押しでスクワットマンを起こしたところから始める
     private func makeModel(now: Date = .now, awake: Bool = true) -> AppModel {
-        let model = AppModel(context: container.mainContext, defaults: defaults, now: { now })
+        let model = AppModel(store: store, defaults: defaults, now: { now })
         // フィーバーのくじは外れに固定する。当てたいテストだけ差し替える
         model.draw = { 1 }
         if awake { model.wake() }
@@ -21,7 +19,7 @@ import Testing
     }
 
     private func records() -> [SquatRecord] {
-        (try? container.mainContext.fetch(FetchDescriptor<SquatRecord>())) ?? []
+        store.records
     }
 
     @Test func 叩き切ると記録が1件できてフィナーレが出る() {
@@ -115,8 +113,7 @@ import Testing
 
     @Test func DTの節目は連打の途中でもまたいだ1打で出る() {
         let model = makeModel()
-        container.mainContext.insert(SquatRecord(startedAt: .now, day: RecordDay(.now), reps: 95))
-        try! container.mainContext.save()
+        store.add(SquatRecord(startedAt: .now, day: RecordDay(.now), reps: 95))
         let reloaded = makeModel()
         for i in 0..<5 { _ = reloaded.tap(at: Double(i) * 0.2) }
         // 100 は DT の節目でもあるので、札ではなく金のドパ突破で出す
@@ -127,8 +124,7 @@ import Testing
     }
 
     @Test func 百の倍数をまたぐとドパ突破が出る() {
-        container.mainContext.insert(SquatRecord(startedAt: .now, day: RecordDay(.now), reps: 195))
-        try! container.mainContext.save()
+        store.add(SquatRecord(startedAt: .now, day: RecordDay(.now), reps: 195))
         let model = makeModel()
         for i in 0..<4 { _ = model.tap(at: Double(i) * 0.2) }
         #expect(model.toppa == nil)

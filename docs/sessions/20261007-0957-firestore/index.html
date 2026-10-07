@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="session-state" content="planning">
-<meta name="state" content="planning">
+<meta name="session-state" content="done">
+<meta name="state" content="done">
 <title>記録を Firestore に移す</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,7 +58,7 @@ tailwind.config = {
       <time datetime="2026-10-07T09:57">2026-10-07 09:57</time>
       <span>/</span>
       <span>設計セッション</span>
-      <span class="rounded-full border border-gold bg-gold/15 px-2.5 py-0.5 font-bold text-ink">状態：planning</span>
+      <span class="rounded-full border border-signal bg-signal/10 px-2.5 py-0.5 font-bold text-ink">状態：done</span>
     </div>
     <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl">記録を <a href="../../glossary.html#firestore" class="text-dopa">Firestore</a> に移す</h1>
   </header>
@@ -234,7 +234,7 @@ tailwind.config = {
       <li class="rounded-2xl border border-rule bg-white p-4"><b>2. <code class="font-mono text-xs">SquatRecord</code> を SwiftData の <code class="font-mono text-xs">@Model</code> から普通の struct に替え、SwiftData を外す</b><br><span class="text-ink/70">一本化すると決めたので、SwiftData を残す理由がない。struct なら Firestore の文書との行き来も、テストで作るのも軽い。</span></li>
       <li class="rounded-2xl border border-rule bg-white p-4"><b>3. 記録の出し入れを <code class="font-mono text-xs">RecordStore</code>（足す、消す、全部消す、変わったら知らせる）にまとめ、Firestore 版とメモリ版を作る</b><br><span class="text-ink/70">テストと計測モード（<a href="../../glossary.html#perf-mode" class="lnk">-perf</a>）の仮の記録を、利用者の棚に書かないため。いまの「計測モードはメモリだけの保存先を使う」と同じ考え方。</span></li>
       <li class="rounded-2xl border border-rule bg-white p-4"><b>4. <code class="font-mono text-xs">AppModel</code> を <code class="font-mono text-xs">ModelContext</code> から <code class="font-mono text-xs">RecordStore</code> に替え、届いた記録で計算し直す。叩いている最中は閉じるまで待つ</b><br><span class="text-ink/70">ほかの端末の記録やログイン直後の記録を画面に出すため。待つ理由は05。今日まだ通知の予約も、読み直したら組み直す。</span></li>
-      <li class="rounded-2xl border border-rule bg-white p-4"><b>5. チュートリアルを出すかは、サーバーから最初の答えが返ってから決める。電波がなければ、キャッシュの答えで決める</b><br><span class="text-ink/70">機種変更した人に、記録が届く前にチュートリアルを出さないため。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>5. チュートリアルを出すかは、サーバーから最初の答えが返ってから決める</b><br><span class="text-ink/70">機種変更した人に、記録が届く前にチュートリアルを出さないため。</span></li>
       <li class="rounded-2xl border border-rule bg-white p-4"><b>6. ログイン画面と、ログインの状態で画面を切り替える入り口（<code class="font-mono text-xs">YatTatTaApp</code>）</b><br><span class="text-ink/70">ログインしないと叩けない、と決めたから。ログインしたら、その uid の棚で <code class="font-mono text-xs">AppModel</code> を作る。</span></li>
       <li class="rounded-2xl border border-rule bg-white p-4"><b>7. 設定シートのアカウントの欄。ログアウトと、アカウントの削除（本人確認、記録の削除、Apple との連携を切る、アカウントの削除）</b><br><span class="text-ink/70">削除は App Store の審査の条件。Apple との連携を切ることも、Sign in with Apple を使うアプリに求められている。</span></li>
       <li class="rounded-2xl border border-rule bg-white p-4"><b>8. Firestore のルール（<code class="font-mono text-xs">firebase/firestore.rules</code>）を書き、リポジトリに置く</b><br><span class="text-ink/70">アプリに埋め込む Firebase の鍵は、誰でも読める。他人の棚を読ませないのはルールの仕事。</span></li>
@@ -251,7 +251,7 @@ tailwind.config = {
     <ol class="mt-6 grid max-w-3xl gap-3 text-sm sm:grid-cols-2">
       <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">1　約10分</p><p class="mt-2">Firebase のプロジェクトを作り、iOS アプリ（com.yat-tat-ta）を登録する。</p></li>
       <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">2　約5分</p><p class="mt-2">Firestore を東京（asia-northeast1）に作る。</p></li>
-      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">3　約15分</p><p class="mt-2">Authentication で Apple を有効にし、Apple Developer で作った鍵を登録する（削除のときに連携を切るために要る）。</p></li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">3　約15分</p><p class="mt-2">Authentication で Apple を有効にし、OAuth コードフローの構成（Services ID と鍵）も登録する（削除のときに連携を切るために要る）。</p></li>
       <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">4　約2分</p><p class="mt-2"><code class="font-mono text-xs">GoogleService-Info.plist</code> を <code class="font-mono text-xs">ios/YatTatTa/</code> に置く。Git には入れない。</p></li>
     </ol>
   </section>
@@ -269,8 +269,25 @@ tailwind.config = {
     </ul>
   </section>
 
+  <section id="build" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">11 / build</p>
+    <h2 class="mt-2 font-display text-3xl">作ったところ</h2>
+    <ul class="mt-6 flex max-w-3xl flex-col gap-2 text-sm">
+      <li class="rounded-2xl border border-rule bg-white p-4">Firebase の SDK は 12.19 系（FirebaseAuth、FirebaseFirestore）。<code class="font-mono text-xs">GoogleService-Info.plist</code> は <code class="font-mono text-xs">ios/.gitignore</code> に入れた。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">SwiftData を外し、記録の出し入れを <code class="font-mono text-xs">RecordStore</code> にまとめた。Firestore 版は、届いた記録の顔ぶれ（ID）が変わったときと、サーバーの答えが初めて返ったときだけ知らせる。自分の書き込みが戻ってきた知らせでは、計算し直さない。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">チュートリアルは、サーバーの答えが返るまで待つ。設計では「電波がなければキャッシュの答えで決める」としていたが、やめた。初めてのログインには電波が要るので、記録が0件のまま電波がない人は、ほぼいない。キャッシュで決めると、機種を替えた人にチュートリアルが出るおそれのほうが大きい。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">演出の見本（<code class="font-mono text-xs">-demo</code>）も、計測モードと同じくメモリだけの記録で、ログインせずに開く。シミュレーターで Apple のログインを毎回せずに済む。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">文言18個を日本語と英語で足し、<a href="../../devops/localization/index.html" class="lnk">訳語表</a>に3行足した。ルールは <code class="font-mono text-xs">firebase/firestore.rules</code> に置いた。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">テストを6個足した（<code class="font-mono text-xs">RecordSyncTests</code>）。叩いている最中に届いた記録で DT と節目が動かない、届いた記録で今日の記録と連続記録が直る、サーバーの答えを待ってチュートリアルを決める、文書と記録の行き来。全85個が通る。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">開発者がルールを反映した（Firebase CLI、2026-10-07）。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">実機で、Xcode のビルドが Firebase の部品のダウンロードでつまずいた。コマンドラインのビルドと Xcode が、同じ置き場に同時にダウンロードしたため。Xcode を閉じて置き場（DerivedData の SourcePackages/artifacts）を消し、Reset Package Caches で取り直したら通った。Xcode を開いている間は、コマンドラインでビルドしない。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">アプリを消して入れ直すと、ログイン画面を出さずにログインしたまま始まった。Firebase がログイン状態を iPhone のキーチェーンに残し、キーチェーンはアプリを消しても残るため。入れ直した人にログインし直してもらう理由がないので、このままにする。新しい iPhone ではキーチェーンが空なので、ログイン画面から入る。</li>
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4">開発者が実機で確かめた（2026-10-07）。ログインして叩いた記録が Firestore に入る。機内モードで叩いた記録は、電波が戻ったら入る。入れ直すと記録が戻る。ログアウトしてログインし直すと記録が戻る。アカウントを削除すると、記録もユーザーも消えてログイン画面に戻る。</li>
+    </ul>
+  </section>
+
   <section id="links" class="mt-20">
-    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">10 / links</p>
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">12 / links</p>
     <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
     <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
       <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">機能</p><a href="../../features/account/index.html" class="mt-1 block font-bold lnk">アカウント</a></li>

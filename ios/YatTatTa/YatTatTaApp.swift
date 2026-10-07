@@ -1,34 +1,27 @@
-import SwiftData
+import FirebaseCore
 import SwiftUI
 
 @main struct YatTatTaApp: App {
-    private let container: ModelContainer
-    @State private var model: AppModel
+    /// ふだんはアカウント。計測モードと演出の見本は、メモリだけの記録でログインせずに開く
+    private let account: Account?
+    @State private var localModel: AppModel?
     #if DEBUG
     /// 計測モード（起動引数 -perf）のときだけある
     private let perf: PerfMonitor?
     private let feverDraw = PerfSeed.FeverDraw()
     #endif
 
+    /// テストの入れ物として起動された。Firebase に触れず、画面も出さない
+    private static var isTesting: Bool {
+        ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
+    }
+
     init() {
         #if DEBUG
-        let perfOn = PerfSeed.isOn
-        #else
-        let perfOn = false
-        #endif
-        do {
-            // 計測モードは、メモリだけの保存先を使う。端末に保存された記録には触れない
-            container = try ModelContainer(
-                for: SquatRecord.self, configurations: ModelConfiguration(isStoredInMemoryOnly: perfOn))
-        } catch {
-            fatalError("SwiftData: \(error)")
-        }
-        #if DEBUG
-        if perfOn {
-            let records = PerfSeed.records(today: RecordDay(.now), now: .now)
-            records.forEach(container.mainContext.insert)
-            try? container.mainContext.save()
-            let model = AppModel(context: container.mainContext, defaults: PerfSeed.defaults())
+        if PerfSeed.isOn {
+            // 計測モードは、メモリだけの記録を使う。利用者の棚には触れない
+            let store = MemoryRecordStore(records: PerfSeed.records(today: RecordDay(.now), now: .now))
+            let model = AppModel(store: store, defaults: PerfSeed.defaults())
             model.remindersPaused = true
             model.splashPaused = true
             let draw = feverDraw
@@ -48,36 +41,66 @@ import SwiftUI
             monitor.start()
             perf = monitor
             model.feel.start()
-            _model = State(initialValue: model)
+            account = nil
+            _localModel = State(initialValue: model)
             return
         }
         perf = nil
+        if AppModel.demoRequested {
+            // 演出の見本も、ログインせずにメモリだけの記録で開く
+            let model = AppModel(store: MemoryRecordStore())
+            model.splashPaused = true
+            model.feel.start()
+            account = nil
+            _localModel = State(initialValue: model)
+            return
+        }
         #endif
-        let model = AppModel(context: container.mainContext)
-        model.feel.start()
-        #if DEBUG
-        model.splashPaused = AppModel.demoRequested
-        #endif
-        // 最初の1枚から幕を重ねる。ホームが一瞬見えてから幕が出ないように
-        model.presentSplashIfNeeded()
-        _model = State(initialValue: model)
+        guard !Self.isTesting else {
+            account = nil
+            return
+        }
+        FirebaseApp.configure()
+        account = Account()
     }
 
     var body: some Scene {
         WindowGroup {
-            HomeView(model: model)
-                #if DEBUG
-                .overlay(alignment: .topLeading) {
-                    if let perf {
-                        PerfHUD(monitor: perf, model: model) {
-                            feverDraw.reset()
-                            model.resetForPerf(PerfSeed.records(today: RecordDay(.now), now: .now))
-                            perf.reset()
+            if let localModel {
+                HomeView(model: localModel, account: nil)
+                    #if DEBUG
+                    .overlay(alignment: .topLeading) {
+                        if let perf {
+                            PerfHUD(monitor: perf, model: localModel) {
+                                feverDraw.reset()
+                                localModel.resetForPerf(PerfSeed.records(today: RecordDay(.now), now: .now))
+                                perf.reset()
+                            }
                         }
                     }
-                }
-                #endif
+                    #endif
+            } else if let account {
+                AccountRoot(account: account)
+            }
         }
-        .modelContainer(container)
+    }
+}
+
+/// ログインの状態で、ログイン画面とホームを切り替える
+private struct AccountRoot: View {
+    let account: Account
+
+    var body: some View {
+        Group {
+            if let model = account.model, !account.welcoming {
+                HomeView(model: model, account: account)
+            } else if account.state == .checking {
+                // ログインしているかは、端末の中だけで一瞬で分かる。その間は地の色だけ
+                Color.paper.ignoresSafeArea()
+            } else {
+                LoginView(account: account)
+            }
+        }
+        .animation(.easeOut(duration: 0.25), value: account.model == nil || account.welcoming)
     }
 }

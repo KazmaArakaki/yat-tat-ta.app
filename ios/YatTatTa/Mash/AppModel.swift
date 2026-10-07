@@ -1,11 +1,10 @@
 import Foundation
 import Observation
-import SwiftData
 
 /// 画面が読む状態と、叩いたときの処理
 ///
 /// 起動時に記録を全部読み、Ledger で計算する。叩いている間は画面の中の数を1ずつ足すだけで、
-/// 記録を閉じたときに1件保存し、計算し直す。
+/// 記録を閉じたときに1件保存し、計算し直す。ほかの端末の記録が届いたときも計算し直す。
 @Observable final class AppModel {
     private(set) var ledger: Ledger
     private(set) var session: MashSession
@@ -61,7 +60,7 @@ import SwiftData
     #endif
 
     @ObservationIgnored let feel = FeelEngine()
-    @ObservationIgnored private let context: ModelContext
+    @ObservationIgnored private let store: RecordStore
     @ObservationIgnored private let defaults: UserDefaults
     @ObservationIgnored private let reminder = ReminderScheduler()
     @ObservationIgnored private var daily: Ledger.DailyReps = [:]
@@ -74,10 +73,18 @@ import SwiftData
     @ObservationIgnored private var feverResultTask: Task<Void, Never>?
     /// いまのフィーバーが始まったときの、この連打のフィーバーのドパ
     @ObservationIgnored private var feverBaseline = 0
+    /// 叩いている最中に記録が届いた。連打を閉じてから計算し直す
+    ///
+    /// 途中で計算し直すと DT が跳ね、届いた分まで自分の連打で節目をまたいだことになる。
+    @ObservationIgnored private var recordsPending = false
+    /// チュートリアルを出すかを、サーバーの答えが返るまで決めずに待っている
+    ///
+    /// 機種を替えた人は、記録が届くまで記録が0件に見える。そのまま決めるとチュートリアルが出てしまう。
+    @ObservationIgnored private var tutorialWaiting = false
     @ObservationIgnored private let now: () -> Date
 
-    init(context: ModelContext, defaults: UserDefaults = .standard, now: @escaping () -> Date = Date.init) {
-        self.context = context
+    init(store: RecordStore, defaults: UserDefaults = .standard, now: @escaping () -> Date = Date.init) {
+        self.store = store
         self.defaults = defaults
         self.now = now
         defaults.register(defaults: [
@@ -87,6 +94,7 @@ import SwiftData
         session = MashSession(target: defaults.integer(forKey: SettingKey.targetReps))
         ledger = Ledger(daily: [:], today: RecordDay(now()))
         loadRecords()
+        store.onChange = { [weak self] in self?.recordsDidChange() }
     }
 
     // MARK: - 画面に出す数
@@ -273,6 +281,10 @@ import SwiftData
     /// スプラッシュが消えたとき。まだ終えていなくて、記録が1件もない人にだけ出す
     func presentTutorialIfNeeded() {
         guard !defaults.bool(forKey: SettingKey.tutorialShown), ledger.dopaTotal == 0 else { return }
+        guard store.isSynced else {
+            tutorialWaiting = true
+            return
+        }
         startTutorial()
     }
 
@@ -330,21 +342,17 @@ import SwiftData
         // 練習は記録を作らない。途中で閉じたら捨てるだけ
         if isPracticing {
             if completed { showPracticeFinale(reps: closed.reps) }
+            if recordsPending { recordsDidChange() }
             return
         }
 
         let wasDoneToday = ledger.streak.doneToday
         let day = RecordDay(closed.startedAt)
-        context.insert(SquatRecord(startedAt: closed.startedAt, day: day, reps: closed.reps, bonusDopa: closed.bonusDopa))
-        do {
-            try context.save()
-        } catch {
-            print("SwiftData: \(error)")
-        }
-        daily[day, default: 0] += closed.reps + closed.bonusDopa
+        store.add(SquatRecord(startedAt: closed.startedAt, day: day, reps: closed.reps, bonusDopa: closed.bonusDopa))
+        // 叩いている最中に届いた記録も、ここで一緒に入る
+        recordsPending = false
         // session は作り直さない。叩き切ったあとの「数えない間」を残すため
-        ledger = Ledger(daily: daily, today: RecordDay(now()))
-        refreshTodayRecords()
+        recalculate()
 
         // その日最初の記録が閉じたとき、連続記録が伸びる
         let extended = !wasDoneToday && ledger.streak.doneToday
@@ -508,30 +516,53 @@ import SwiftData
         idleTask?.cancel()
         finaleTask?.cancel()
         finale = nil
-        for record in (try? context.fetch(FetchDescriptor<SquatRecord>())) ?? [] { context.delete(record) }
-        records.forEach(context.insert)
-        try? context.save()
+        (store as? MemoryRecordStore)?.replace(with: records)
         loadRecords()
     }
     #endif
 
     // MARK: - 記録を読む
 
+    /// 記録の件数。アカウントを削除するときに、消える件数として見せる
+    var recordCount: Int { store.records.count }
+
     private func loadRecords() {
-        let records = (try? context.fetch(FetchDescriptor<SquatRecord>())) ?? []
-        daily = [:]
-        for r in records { daily[r.recordDay, default: 0] += r.dopa }
+        recalculate()
+        updateNotices()
+    }
+
+    private func recalculate() {
+        daily = Self.daily(of: store.records)
         ledger = Ledger(daily: daily, today: RecordDay(now()))
         refreshTodayRecords()
-        updateNotices()
+    }
+
+    private static func daily(of records: [SquatRecord]) -> Ledger.DailyReps {
+        var daily: Ledger.DailyReps = [:]
+        for r in records { daily[r.recordDay, default: 0] += r.dopa }
+        return daily
     }
 
     private func refreshTodayRecords() {
         let today = ledger.today.value
-        let descriptor = FetchDescriptor<SquatRecord>(
-            predicate: #Predicate { $0.day == today },
-            sortBy: [SortDescriptor(\.startedAt, order: .reverse)])
-        todayRecords = (try? context.fetch(descriptor)) ?? []
+        todayRecords = store.records.filter { $0.day == today }.sorted { $0.startedAt > $1.startedAt }
+    }
+
+    /// ほかの端末の記録が届いた、サーバーの答えが返った。叩いている最中なら、閉じるまで待つ
+    private func recordsDidChange() {
+        guard !session.isOpen else {
+            recordsPending = true
+            return
+        }
+        recordsPending = false
+        if Self.daily(of: store.records) != daily {
+            loadRecords()
+            rescheduleReminder()
+        }
+        if tutorialWaiting && store.isSynced {
+            tutorialWaiting = false
+            presentTutorialIfNeeded()
+        }
     }
 
     // MARK: - 今日の記録
@@ -542,12 +573,7 @@ import SwiftData
     /// 出した節目の札は取り消さない。数が戻るので、次にまたいだときにもう一度出る。
     func delete(_ record: SquatRecord) {
         guard !session.isOpen, record.day == ledger.today.value else { return }
-        context.delete(record)
-        do {
-            try context.save()
-        } catch {
-            print("SwiftData: \(error)")
-        }
+        store.delete(record)
         loadRecords()
         rescheduleReminder()
     }
@@ -556,8 +582,7 @@ import SwiftData
 
     /// 履歴のグラフ。シートを開くときに1回だけ作る。叩くたびには作らない
     func history() -> History {
-        let records = (try? context.fetch(FetchDescriptor<SquatRecord>())) ?? []
-        return History(records: records, restPassDays: ledger.streak.restPassDays, today: ledger.today)
+        History(records: store.records, restPassDays: ledger.streak.restPassDays, today: ledger.today)
     }
 
     /// 午前4時をまたいだら計算し直す。DPW から7日前の分が抜け、連続記録や休み券が動く

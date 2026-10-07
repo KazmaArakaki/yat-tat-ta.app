@@ -46,8 +46,13 @@ struct SquatFigure: View {
     ///
     /// foot はかかと（点の原点）を置く位置。k は点1つぶんの大きさ。squat は 0 が立った姿、1 がしゃがんだ姿。
     static func draw(in context: GraphicsContext, foot: CGPoint, k: CGFloat, squat: CGFloat, color: Color) {
-        let a = SquatterLayer.stand, b = SquatterLayer.squat
-        let mix = { (p: CGPoint, q: CGPoint) in CGPoint(x: p.x + (q.x - p.x) * squat, y: p.y + (q.y - p.y) * squat) }
+        draw(in: context, foot: foot, k: k, from: SquatterLayer.stand, to: SquatterLayer.squat, progress: squat, color: color)
+    }
+
+    /// 2つの姿のあいだを描く。progress は 0 が from、1 が to。ログイン画面で、寝た姿から起き上がるときにも使う
+    static func draw(in context: GraphicsContext, foot: CGPoint, k: CGFloat, from a: SquatterLayer.Joints,
+                     to b: SquatterLayer.Joints, progress: CGFloat, color: Color) {
+        let mix = { (p: CGPoint, q: CGPoint) in CGPoint(x: p.x + (q.x - p.x) * progress, y: p.y + (q.y - p.y) * progress) }
         let legs = zip(a.legs, b.legs).map(mix)
         let arm = zip(a.arm, b.arm).map(mix)
         let head = mix(a.head, b.head)

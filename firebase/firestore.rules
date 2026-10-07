@@ -1,0 +1,26 @@
+rules_version = '2';
+
+// 記録の置き場所の決まり（docs/devops/firebase）
+// アプリに埋め込む鍵は誰でも取り出せる。他人の記録を読ませない、壊れた記録を書かせないのは、このルール。
+// 記録の列を変えたら、ios/YatTatTa/Model/FirestoreRecordStore.swift と同じコミットで直し、反映する。
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isValidRecord(d) {
+      return d.keys().hasOnly(['startedAt', 'day', 'reps', 'bonusDopa', 'createdAt'])
+        && d.keys().hasAll(['startedAt', 'day', 'reps', 'bonusDopa', 'createdAt'])
+        && d.startedAt is timestamp
+        && d.day is int && d.day >= 20260101 && d.day <= 99991231
+        && d.reps is int && d.reps >= 1 && d.reps <= 1000
+        && d.bonusDopa is int && d.bonusDopa >= 0
+        && d.createdAt == request.time;
+    }
+
+    // 自分の棚だけ。記録は足すか消すだけで、書き換えない
+    match /users/{uid}/records/{recordId} {
+      allow read, delete: if request.auth != null && request.auth.uid == uid;
+      allow create: if request.auth != null && request.auth.uid == uid
+        && isValidRecord(request.resource.data);
+      allow update: if false;
+    }
+  }
+}
