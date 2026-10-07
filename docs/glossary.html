@@ -91,6 +91,8 @@ tailwind.config = {
     <a href="#splash" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">スプラッシュ</a>
     <a href="#today-seat" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">今日の席</a>
     <a href="#intro-splash" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">はじめての幕</a>
+    <a href="#tutorial" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">チュートリアル</a>
+    <a href="#practice-mash" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">練習連打</a>
     <a href="#translation-table" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">訳語表</a>
   </nav>
 
@@ -1004,8 +1006,42 @@ tailwind.config = {
       <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>入れ直すと端末の設定も消えるので、出ます。叩くたびに次の場面へ進むので、急ぐなら続けて叩いてください。</p>
     </div>
     <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
-      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#splash" class="text-dopa underline underline-offset-4">スプラッシュ</a><a href="#today-seat" class="text-dopa underline underline-offset-4">今日の席</a><a href="#squat-squad" class="text-dopa underline underline-offset-4">スクワット隊</a><a href="#rest-pass" class="text-dopa underline underline-offset-4">休み券</a><a href="#meal-squat" class="text-dopa underline underline-offset-4">毎食後スクワット</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#splash" class="text-dopa underline underline-offset-4">スプラッシュ</a><a href="#today-seat" class="text-dopa underline underline-offset-4">今日の席</a><a href="#squat-squad" class="text-dopa underline underline-offset-4">スクワット隊</a><a href="#rest-pass" class="text-dopa underline underline-offset-4">休み券</a><a href="#meal-squat" class="text-dopa underline underline-offset-4">毎食後スクワット</a><a href="#tutorial" class="text-dopa underline underline-offset-4">チュートリアル</a></p></div>
       <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="features/splash/index.html" class="text-signal underline underline-offset-4">機能：スプラッシュ</a><a href="ui/components/splash/index.html" class="text-signal underline underline-offset-4">部品：スプラッシュ</a><a href="sessions/20261007-0017-splash/index.html" class="text-signal underline underline-offset-4">セッション：スプラッシュを作る</a></p></div>
+    </div>
+  </section>
+
+  <section id="tutorial" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#tutorial</p>
+    <h2 class="mt-1 font-display text-2xl">チュートリアル</h2>
+    <p class="mt-3 leading-relaxed">ホームの上に重ねて、使い方を自分の指で1度やってもらう約1分の案内。<a href="#intro-splash" class="text-dopa underline underline-offset-4">はじめての幕</a>が消えたあと、まだ記録が1件もない人に1度だけ出す。幕は見せるだけで触らせないが、チュートリアルは触らせる。<a href="#wake-up" class="text-dopa underline underline-offset-4">起こす</a>、<a href="#practice-mash" class="text-dopa underline underline-offset-4">練習連打</a>で10回叩く、連続記録の帯、DPW と DT のカード、設定の歯車を順に照らし、「食べたら、しゃがんで、叩く。」で終える。右上の「スキップ」でいつでも抜けられ、設定シートの「使い方をもう一度」から何度でも見直せる。見せたかどうかは端末の設定（tutorialShown）に残す。2026-10-07、開発者の注文「チュートリアルを導入したい。全体で1分程度で完了するボリューム感で。」から決めた。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>はじめての幕があるのに、チュートリアルも要りますか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>幕で分かるのは、何をするアプリかまでです。長押しで起こすことは、やってみないと分かりません。最初の食事のあとに、寝ている隊を叩いて何も起きない、を避けたいんです。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>途中でアプリを閉じたら、どうなりますか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>終えるかスキップするまでは「見せた」にしないので、次に開いたときに頭からもう一度出ます。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#practice-mash" class="text-dopa underline underline-offset-4">練習連打</a><a href="#intro-splash" class="text-dopa underline underline-offset-4">はじめての幕</a><a href="#wake-up" class="text-dopa underline underline-offset-4">起こす</a><a href="#streak" class="text-dopa underline underline-offset-4">連続記録</a><a href="#target-reps" class="text-dopa underline underline-offset-4">目標回数</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="features/tutorial/index.html" class="text-signal underline underline-offset-4">機能：チュートリアル</a><a href="ui/components/tutorial-coach/index.html" class="text-signal underline underline-offset-4">部品：チュートリアルの案内</a><a href="sessions/20261007-0918-tutorial/index.html" class="text-signal underline underline-offset-4">セッション：チュートリアルを入れる</a></p></div>
+    </div>
+  </section>
+
+  <section id="practice-mash" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#practice-mash</p>
+    <h2 class="mt-1 font-display text-2xl">練習連打</h2>
+    <p class="mt-3 leading-relaxed"><a href="#tutorial" class="text-dopa underline underline-offset-4">チュートリアル</a>の中でだけ叩く、記録にならない<a href="#done-mash" class="text-dopa underline underline-offset-4">完了連打</a>。回数は<a href="#target-reps" class="text-dopa underline underline-offset-4">目標回数</a>によらず10回で、<a href="#dopadopa" class="text-dopa underline underline-offset-4">ドパドパ</a>の段階も<a href="#finale" class="text-dopa underline underline-offset-4">フィナーレ</a>も本番と同じに出る。ただし<a href="#record" class="text-dopa underline underline-offset-4">記録</a>を作らないので、DT、DPW、連続記録は1も動かない。<a href="#fever" class="text-dopa underline underline-offset-4">フィーバータイム</a>のくじも引かず、<a href="#milestone" class="text-dopa underline underline-offset-4">節目</a>も今日まだ通知の問いかけも出さない。隊の上の文字は「練習 残り」。スクワットをしていない1打を記録に混ぜない、という完了連打の前提を守るための形（開発者が決定、2026-10-07）。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>練習連打の10ドパは、DT に入らないんですね。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>入りません。1ドパはスクワット1回です。しゃがんでいない10回を入れると、最初の1日目が嘘になります。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>目標回数を50にしている人が見直したら、練習も50回ですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>いつも10回です。10回あれば CHANCE から PUSH まで全部通るので、1分に収まります。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#tutorial" class="text-dopa underline underline-offset-4">チュートリアル</a><a href="#done-mash" class="text-dopa underline underline-offset-4">完了連打</a><a href="#record" class="text-dopa underline underline-offset-4">記録</a><a href="#dopadopa" class="text-dopa underline underline-offset-4">ドパドパ</a><a href="#fever" class="text-dopa underline underline-offset-4">フィーバータイム</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="features/tutorial/index.html" class="text-signal underline underline-offset-4">機能：チュートリアル</a><a href="features/done-mash/index.html" class="text-signal underline underline-offset-4">機能：完了連打</a></p></div>
     </div>
   </section>
 

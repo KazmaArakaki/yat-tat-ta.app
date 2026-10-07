@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="session-state" content="planning">
+<meta name="state" content="planning">
+<title>チュートリアルを入れる</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=M+PLUS+Rounded+1c:wght@500;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+        round: ['"M PLUS Rounded 1c"', '"Noto Sans JP"', 'sans-serif']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } }
+      },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+<style>
+.app { --a-bg:#FBF6EE; --a-card:#FFFFFF; --a-ink:#1C1916; --a-mute:#6E655C; --a-rule:#E7DDCC; --a-line:#1C1916; --a-soft:#FFE6F0; }
+.app.dark { --a-bg:#16120F; --a-card:#231D18; --a-ink:#F5EEE3; --a-mute:#A89C8E; --a-rule:#3A312A; --a-line:#F5EEE3; --a-soft:#3A1726; }
+.a-bg { background:var(--a-bg); color:var(--a-ink); }
+.a-card { background:var(--a-card); }
+.a-ink { color:var(--a-ink); }
+.a-mute { color:var(--a-mute); }
+.a-line { border-color:var(--a-line); }
+.a-soft { background:var(--a-soft); }
+.a-shadow { box-shadow:4px 4px 0 var(--a-line); }
+.num { font-family:"M PLUS Rounded 1c","Noto Sans JP",sans-serif; font-weight:900; font-variant-numeric:tabular-nums; letter-spacing:-0.02em; }
+.ticket { width:14px; height:18px; border-radius:3px; background:#2F79F7; position:relative; }
+.ticket.empty { background:transparent; border:2px dashed var(--a-rule); }
+.ring { position:absolute; border-radius:9999px; border:3px solid #E5337A; pointer-events:none; }
+@keyframes pop { 0%{transform:scale(.3);opacity:0} 60%{transform:scale(1.08);opacity:1} 100%{transform:scale(1)} }
+@keyframes ringout { 0%{transform:translate(-50%,-50%) scale(.2);opacity:1} 100%{transform:translate(-50%,-50%) scale(1);opacity:0} }
+.pop { animation:pop .45s cubic-bezier(.2,1.4,.4,1) both; }
+.squad-pop { transform-box:fill-box; transform-origin:50% 100%; animation:squadpop .5s cubic-bezier(.2,1.6,.4,1) both; }
+@keyframes squadpop { 0%{ transform:scale(0); } 100%{ transform:scale(1); } }
+.stage { position:relative; touch-action:manipulation; user-select:none; -webkit-user-select:none; cursor:pointer; }
+.lnk { text-decoration:underline; text-decoration-color:rgba(229,51,122,.5); text-decoration-thickness:2px; text-underline-offset:4px; }
+.lnk:hover { text-decoration-color:#E5337A; }
+</style>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-5xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <time datetime="2026-10-07T09:18">2026-10-07 09:18</time>
+      <span>/</span>
+      <span>設計セッション</span>
+      <span class="rounded-full border border-gold bg-gold/10 px-2.5 py-0.5 font-bold text-ink">状態：planning</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl"><a href="../../glossary.html#tutorial" class="text-dopa">チュートリアル</a>を入れる</h1>
+  </header>
+
+  <section id="order" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="relative overflow-hidden rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916] sm:p-8">
+      <div class="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-dopa-soft"></div>
+      <p class="relative font-mono text-xs uppercase tracking-[0.2em] text-dopa">開発者の注文</p>
+      <p class="relative mt-6 font-display text-3xl leading-snug tracking-wide sm:text-4xl">チュートリアルを導入したい。<br>全体で1分程度で完了するボリューム感で。</p>
+    </div>
+  </section>
+
+  <section id="gap" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01 / gap</p>
+    <h2 class="mt-2 font-display text-3xl">幕を見たあとに、分からないこと</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>最初の起動には、もう<a href="../../glossary.html#intro-splash" class="lnk">はじめての幕</a>があります。14秒で、人形1人が「食べたら、しゃがんで、叩く」をやって見せる。何をするアプリかは、これで伝わるはずです。</p>
+      <p>ところが、幕が消えたあとのホームでは、<a href="../../glossary.html#squat-squad" class="lnk">スクワット隊</a>が床に寝ています。叩いても何も起きません。0.5秒の長押しで<a href="../../glossary.html#wake-up" class="lnk">起こす</a>決まりは、ポケットの中で記録が始まらないための一段で、見ただけでは分からない。最初の食事のあと、20回しゃがんでから寝ている隊を叩き、反応がなくて閉じる。いちばん避けたい初日です。</p>
+      <p>帯を押すと今日の記録、カードを押すと履歴、歯車で回数。こちらは困るほどではないものの、自分で見つけるまで気付かない人がいそうです。幕は見せるだけで、触らせない。チュートリアルの仕事は、その残りを指でやってもらうことです。</p>
+    </div>
+  </section>
+
+  <section id="minute" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / one minute</p>
+    <h2 class="mt-2 font-display text-3xl">1分を7つに割る</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>幕とは別に、チュートリアルだけで約1分にします（開発者が決定、2026-10-07）。幕の14秒と合わせると、最初の起動は75秒ほど。長いかどうかは、叩いている時間の割合で決まると考えました。7つの場面のうち、手を動かすのは最初の2つで、その2つに17秒を使います。</p>
+    </div>
+    <ol class="mt-6 grid gap-3 text-sm sm:grid-cols-2 lg:grid-cols-4">
+      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">1 起こす　5秒</p><p class="mt-2 leading-relaxed">叩く場所を照らし、長押しで隊を起こしてもらう。起きたら次へ。</p></li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">2 練習連打　12秒</p><p class="mt-2 leading-relaxed">しゃがまずに10回叩く。CHANCE、激熱、PUSH、筋肉確定まで本番どおりに出る。</p></li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">3 いまのは練習　8秒</p><p class="mt-2 leading-relaxed">記録に残らないこと、本番は食べてしゃがんだあと、途中でやめても残ることを言う。</p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs font-bold text-mute">4 続けた日　9秒</p><p class="mt-2 leading-relaxed">連続記録の帯を照らす。休み券と、押すと今日の記録が開くこと。</p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs font-bold text-mute">5 ためたドパ　9秒</p><p class="mt-2 leading-relaxed">DPW と DT のカードを照らす。1回1ドパと、押すと履歴。</p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs font-bold text-mute">6 回数を変える　6秒</p><p class="mt-2 leading-relaxed">歯車を照らす。目標回数はいま20回、5〜100回で変えられる。</p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs font-bold text-mute">7 おわり　5秒</p><p class="mt-2 leading-relaxed">「食べたら、しゃがんで、叩く。」と「はじめる」。押すとホームだけが残る。</p></li>
+      <li class="rounded-2xl border-2 border-dashed border-rule p-4"><p class="font-mono text-xs font-bold text-mute">合計　約54秒</p><p class="mt-2 leading-relaxed text-ink/70">読む速さで前後する。スキップはいつでも押せる。</p></li>
+    </ol>
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">教えないものもあります。<a href="../../glossary.html#fever" class="lnk">フィーバータイム</a>は、いつ来るか分からないこと自体が中身なので、先に言いません。今日まだ通知も、いまどおり初めて叩き切ったあとに問いかけます。</p>
+  </section>
+
+  <section id="practice" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / practice</p>
+    <h2 class="mt-2 font-display text-3xl">しゃがんでいない10回の行き先</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>練習で叩いた10回を、最初の<a href="../../glossary.html#record" class="lnk">記録</a>にしてしまう手もありました。インストールしたその場で1日目がつく。気持ちのいい始まりになったはずです。</p>
+      <p>それでも記録にはしません（開発者が決定、2026-10-07）。1ドパはスクワット1回、というのが<a href="../../glossary.html#done-mash" class="lnk">完了連打</a>の前提で、アプリはしゃがんだかを確かめない代わりに、叩く人を信じています。チュートリアルの側から「しゃがまずに叩いて」と頼んでおいて、その10回を数えるわけにはいかない。この叩き方を<a href="../../glossary.html#practice-mash" class="lnk">練習連打</a>と呼びます。</p>
+    </div>
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full min-w-[640px] border-collapse text-left text-sm">
+        <caption class="mb-2 text-left font-mono text-xs text-mute">表1　練習連打と本番の違い</caption>
+        <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="py-2 pr-3">項目</th><th class="py-2 pr-3">練習連打</th><th class="py-2">理由</th></tr></thead>
+        <tbody class="[&>tr]:border-b [&>tr]:border-rule [&_td]:py-2.5 [&_td]:pr-3 [&_td]:align-top">
+          <tr><td><b>回数</b></td><td>いつも10回。目標回数によらない</td><td>10回で CHANCE（3打目）、激熱（6打目）、PUSH（8打目）を全部通る。20回だと場面2だけで20秒を超える</td></tr>
+          <tr><td><b>記録</b></td><td>作らない。DT、DPW、連続記録、今日の記録は動かない</td><td>スクワットをしていない1打を混ぜない</td></tr>
+          <tr><td><b>隊の上の文字</b></td><td>「練習 残り」</td><td>本番の「スクワット 残り」と見分ける</td></tr>
+          <tr><td><b>「+N ドパ」</b></td><td>出さない。飛ぶドパの粒と文字は出す</td><td>増えたように見せると、カードの 0 と食い違う</td></tr>
+          <tr><td><b>フィーバーのくじ</b></td><td>引かない</td><td>練習で当たると、本番の驚きを先に使ってしまう</td></tr>
+          <tr><td><b>節目、ドパ突破、虹の先バレ</b></td><td>出さない</td><td>どれも記録の数から決まる。練習は数を動かさない</td></tr>
+          <tr><td><b>フィナーレ</b></td><td>筋肉確定（1.2秒）と「やったった！」に「練習 10回」の札（1.6秒）。言葉は回さず、いつも「筋肉」</td><td>本番のごほうびを1度見せておく。言葉を回すと、本番の1回目が2番目の言葉から始まってしまう</td></tr>
+          <tr><td><b>今日まだ通知の問いかけ</b></td><td>出さない</td><td>問いかけは「初めて叩き切ったあと」。練習は数えない</td></tr>
+          <tr><td><b>60秒止まったとき</b></td><td>閉じない。案内を出したまま待つ</td><td>記録がないので、閉じても残すものがない</td></tr>
+          <tr><td><b>終わったあとの隊</b></td><td>倒れ込んで寝る</td><td>本番でも叩き切ったら寝る。最初の本番も起こすところから</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="when" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / when</p>
+    <h2 class="mt-2 font-display text-3xl">誰に、いつ出すか</h2>
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full min-w-[640px] border-collapse text-left text-sm">
+        <caption class="mb-2 text-left font-mono text-xs text-mute">表2　出すときと抜けるとき</caption>
+        <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="py-2 pr-3">項目</th><th class="py-2 pr-3">決まり</th><th class="py-2">理由</th></tr></thead>
+        <tbody class="[&>tr]:border-b [&>tr]:border-rule [&_td]:py-2.5 [&_td]:pr-3 [&_td]:align-top">
+          <tr><td><b>出すとき</b></td><td><a href="../../glossary.html#splash" class="lnk">スプラッシュ</a>が消えた直後。まだ見せていなくて（tutorialShown が false）、記録が1件もないとき</td><td>幕を見た人がそのまま続けて触れる。記録がある人は、もう使い方を知っている</td></tr>
+          <tr><td><b>見せたことにするとき</b></td><td>「はじめる」を押したとき、スキップしたとき</td><td>最後まで見た、か、いらないと言った。どちらも2度目はいらない</td></tr>
+          <tr><td><b>途中で離れたとき</b></td><td>アプリを離れたら、練習の途中なら練習を捨て、いまの場面の頭に戻す。終了されたら、次の起動で場面1から</td><td>見せたことにしていないので、もう一度出してよい</td></tr>
+          <tr><td><b>見直す</b></td><td>設定シートの一番下に「使い方をもう一度」。押すとシートを閉じて場面1から。記録のある人にも同じ練習連打</td><td>友だちに見せたい、忘れた。練習は記録を動かさないので、何度やってもよい</td></tr>
+          <tr><td><b>出さないとき</b></td><td>計測モード（-perf）、演出の確認用の起動引数があるとき</td><td>スプラッシュと同じ</td></tr>
+          <tr><td><b>重ね物</b></td><td>途切れたときのカード、休み券の帯は、チュートリアルが終わってから</td><td>記録が1件もない人には、どちらもまだ出ない。見直しのときだけ重なりうる</td></tr>
+          <tr><td><b>照らした場所</b></td><td>場面4〜6で帯やカードや歯車を押しても開かない。どこを叩いても次へ進む</td><td>シートが開くと、閉じるまで案内が止まる</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="mock" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / mock</p>
+    <h2 class="mt-2 font-display text-3xl">触って確かめる</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">ホームの上に暗い幕をかけ、1か所だけを照らして、吹き出しで言います。吹き出しが代わりに言うので、隊の下の「長押しで起こす」は案内のあいだ隠します。長押しで起こして、10回叩いてみてください。場面ごとに選んで見るときは<a href="../../ui/components/tutorial-coach/index.html" class="lnk">部品：チュートリアルの案内</a>へ。</p>
+    <div class="mt-8 flex flex-col items-center gap-8 md:flex-row md:items-start md:justify-center">
+      <div id="phone"></div>
+      <div class="max-w-xs text-sm leading-relaxed">
+        <p class="font-mono text-xs text-mute">いまの場面</p>
+        <p id="now" class="mt-1 font-display text-2xl">1 起こす</p>
+        <p id="done" class="mt-4 hidden rounded-2xl bg-dopa-soft p-4 font-bold"></p>
+        <button id="again" class="mt-4 rounded-full border-2 border-ink px-4 py-2 text-sm font-black hover:bg-gold">▶ 最初から</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="impl" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / implementation</p>
+    <h2 class="mt-2 font-display text-3xl">作るもの</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">SwiftData の記録の形は変わりません。端末の設定（UserDefaults）に、見せたかどうかの tutorialShown を1つ足すだけです。消えても、記録がある人には出ない。</p>
+    <ol class="mt-6 flex max-w-3xl flex-col gap-3 text-sm">
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>1. <code class="font-mono text-xs">TutorialStep</code>（7つの場面）と、<code class="font-mono text-xs">AppModel</code> の <code class="font-mono text-xs">tutorial</code>、始める、進める、終える</b><br><span class="text-ink/70">場面はホームの帯、叩く場所、カード、歯車をまたぐ。画面1枚の状態として AppModel に置けば、HomeView が重ね物を出すいまの形（スプラッシュやフィナーレ）にそろう。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>2. <code class="font-mono text-xs">MashSession</code> に練習の印。<code class="font-mono text-xs">AppModel.tap</code> と <code class="font-mono text-xs">close</code> で、練習なら記録、くじ、節目、ドパ突破、問いかけを通らない</b><br><span class="text-ink/70">叩く手触りと段階の演出は本番の道をそのまま使いたい。別の連打を作ると、演出を直すたびに2か所直すことになる。DT と DPW は練習の分を足さない。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>3. <code class="font-mono text-xs">SettingKey.tutorialShown</code> と、スプラッシュが消えたときに出すかを決める処理</b><br><span class="text-ink/70">はじめての幕は、出す瞬間に introShown を立てる。チュートリアルは途中で終了されたら出し直したいので、終えたときに立てる。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>4. <code class="font-mono text-xs">TutorialOverlay</code>（暗い幕、照らす枠、吹き出し、スキップ）。帯、叩く場所、カード、歯車の位置は anchorPreference で受け取る</b><br><span class="text-ink/70">照らす枠は、端末の大きさや文字の大きさで動く本物の位置に合わせる必要がある。いまのスプラッシュも帯の数字の位置を受け取って飛んでいる。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>5. <code class="font-mono text-xs">SquatStageView</code> の「練習 残り」と、案内中は下の文字と「+N ドパ」を隠す。<code class="font-mono text-xs">FinaleOverlay</code> の「練習 10回」の札</b><br><span class="text-ink/70">本番と練習を見分ける。練習のドパを増えたように見せない。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>6. 設定シートの一番下に「使い方をもう一度」</b><br><span class="text-ink/70">見直す入り口。注意書きの上に置く。<a href="../../ui/pages/settings/index.html" class="lnk">設定シートの見本</a>にも同じ行を足す。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>7. 文言を日本語と英語で <code class="font-mono text-xs">Localizable.xcstrings</code> に足し、<a href="../../devops/localization/index.html" class="lnk">訳語表</a>にチュートリアル（Tutorial）と練習（Practice）を足す</b><br><span class="text-ink/70">多言語の決まり事で、文言を足すときは2言語同時。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>8. テスト：練習で記録が増えない、くじを引かない、問いかけが出ない、出す条件、終えたときとスキップで tutorialShown が立つ</b><br><span class="text-ink/70">練習が記録に漏れると、連続記録と DT が狂う。いちばん壊したくないところを押さえる。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>9. 開発者が実機で、通しの時間と、長押しが伝わるかを確かめる</b><br><span class="text-ink/70">約1分に収まるかは、読む速さと叩く速さ次第。シミュレーターでは長押しの手触りが分からない。</span></li>
+    </ol>
+  </section>
+
+  <section id="decisions" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">07 / decisions</p>
+    <h2 class="mt-2 font-display text-3xl">決めたこと</h2>
+    <ul class="mt-6 flex max-w-3xl flex-col gap-2 text-sm">
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　チュートリアルは、はじめての幕とは別にし、単体で約1分（開発者が決定、2026-10-07）。</li>
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　練習の連打は記録しない。DT、DPW、連続記録に入れず、フィーバーのくじも引かない（開発者が決定、2026-10-07）。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>提案</b>　練習は10回。場面は7つ（起こす、練習連打、いまのは練習、続けた日、ためたドパ、回数を変える、おわり）。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>提案</b>　フィーバータイムは教えない。設定シートから見直せる。</li>
+    </ul>
+  </section>
+
+  <section id="links" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">08 / links</p>
+    <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">機能</p><a href="../../features/tutorial/index.html" class="mt-1 block font-bold lnk">チュートリアル</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">コンポーネント</p><a href="../../ui/components/tutorial-coach/index.html" class="mt-1 block font-bold lnk">チュートリアルの案内</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../glossary.html#tutorial" class="font-bold lnk">チュートリアル</a><a href="../../glossary.html#practice-mash" class="font-bold lnk">練習連打</a><a href="../../glossary.html#intro-splash" class="font-bold lnk">はじめての幕</a><a href="../../glossary.html#wake-up" class="font-bold lnk">起こす</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">前回のセッション</p><a href="../20261007-0153-logo/index.html" class="mt-1 block font-bold lnk">ロゴを作る</a></li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script src="../../ui/components/tutorial-coach/tutorial.js"></script>
+<script>
+(function () {
+  var names = ['1 起こす', '2 練習連打', '3 いまのは練習', '4 続けた日', '5 ためたドパ', '6 回数を変える', '7 おわり'];
+  var now = document.getElementById('now'), done = document.getElementById('done');
+  var api = TUTORIAL.mount(document.getElementById('phone'), {
+    onStep: function (i) { now.textContent = names[i]; },
+    onEnd: function (skipped) { done.textContent = skipped ? 'スキップしました。ホームだけが残ります。' : 'おわり。ホームだけが残り、隊は寝ています。'; done.classList.remove('hidden'); }
+  });
+  document.getElementById('again').addEventListener('click', function () { done.classList.add('hidden'); api.jump(0); });
+})();
+</script>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>
