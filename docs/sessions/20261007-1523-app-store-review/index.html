@@ -134,7 +134,7 @@ tailwind.config = {
     <h2 class="mt-2 font-display text-3xl">開発者にお願いすること（約45分）</h2>
     <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">App Store Connect の画面での作業です。文言は<a href="../../devops/app-store/index.html" class="lnk">App Store の掲載情報</a>のコピーのボタンから取れます。</p>
     <ol class="mt-6 grid max-w-3xl gap-3 text-sm sm:grid-cols-2">
-      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">1　約10分</p><p class="mt-2">撮ったスクリーンショット24枚を目で見て、日本語と英語、6.9 インチと 6.3 インチの枠に上げる。</p></li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">1　約10分</p><p class="mt-2">撮ったスクリーンショットを目で見て、日本語と英語の 6.3 インチの枠（必須）に上げる。6.9 インチは任意で、メディアマネージャーから足す。</p></li>
       <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">2　約15分</p><p class="mt-2">日本語と英語の、サブタイトル、プロモーション用テキスト、説明文、キーワードを入れる。カテゴリと著作権を入れる。</p></li>
       <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">3　約5分</p><p class="mt-2">年齢制限の質問に答え、9+ になることを確かめる。</p></li>
       <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">4　約5分</p><p class="mt-2">価格（無料）と配信地域（中国本土を除く）、コンテンツの権利を入れる。</p></li>
@@ -152,6 +152,7 @@ tailwind.config = {
       <li class="rounded-2xl border border-rule bg-white p-4">フィーバーの見本は、そのままだと「+0 ドパ」と出る。<code class="font-mono text-xs">-seed</code> のときだけ、24ドパ取ったところから始める。</li>
       <li class="rounded-2xl border border-rule bg-white p-4">待ち時間は撮りながら決めた。squad は約6秒たってから PUSH になる（見本の記録だと、97打の途中で DT が2,000をまたぎ、先にドパ突破が出る）。起動したてのシミュレーターでは最初の数枚が白いまま写ったので、撮る前に1回開いておくようにした。</li>
       <li class="rounded-2xl border border-rule bg-white p-4">見出しの日本語は、システムに任せると細い字で描かれた。代わりの書体にヒラギノ角ゴの W8 を指定した。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">App Store Connect で必須の枠は 6.3 インチ（Dynamic Island 搭載 iPhone、中型ディスプレイ）だけで、6.9 インチは任意だった。開発者が日本語の6枚を 6.3 インチの枠に上げた（2026-10-07）。</li>
       <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4">24枚を撮り、6枚とも狙った場面になっていることを目で確かめた（2026-10-07）。6.9 インチは 1320 × 2868、6.3 インチは 1206 × 2622。残りは App Store Connect への入力（上の6）。</li>
     </ul>
   </section>
