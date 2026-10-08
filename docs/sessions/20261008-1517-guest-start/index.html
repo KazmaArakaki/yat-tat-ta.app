@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="session-state" content="developing">
-<meta name="state" content="developing">
+<meta name="session-state" content="done">
+<meta name="state" content="done">
 <title>ログインせずに始める</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,7 +58,7 @@ tailwind.config = {
       <time datetime="2026-10-08T15:17">2026-10-08 15:17</time>
       <span>/</span>
       <span>設計セッション</span>
-      <span class="rounded-full border border-dopa bg-dopa-soft px-2.5 py-0.5 font-bold text-ink">状態：developing</span>
+      <span class="rounded-full border border-signal bg-signal/10 px-2.5 py-0.5 font-bold text-ink">状態：done</span>
     </div>
     <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl">ログインせずに始める</h1>
   </header>
@@ -222,7 +222,7 @@ tailwind.config = {
       <li class="rounded-2xl border border-rule bg-white p-4"><b>6. <code class="font-mono text-xs">SettingsView</code>：まだログインしていない人の欄（Appleで続ける、記録をすべて削除、切り替えの確かめ）</b><br><span class="text-ink/70">Apple でのログインを、好きなときに選べるようにするため。</span></li>
       <li class="rounded-2xl border border-rule bg-white p-4"><b>7. 文言を日本語と英語で11件足し、使わなくなった3件を消す。ビルド番号を 2 に上げる</b><br><span class="text-ink/70">多言語の決まり事と、審査に出し直すため。</span></li>
     </ol>
-    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">シミュレーター向けのビルドと、既存のテストは通りました。匿名ログインと Apple の引き継ぎは Firebase の設定が要るので、まだ実機で確かめていません。</p>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">シミュレーター向けのビルドと、既存のテストは通りました。匿名ログインと Apple の引き継ぎは Firebase の設定が要るので、このあと開発者が実機で確かめました（07）。</p>
   </section>
 
   <section id="device" class="mt-20">
@@ -234,6 +234,7 @@ tailwind.config = {
       <p>そこで、切り替えでは匿名アカウントを消さず、記録だけ消してから Apple でログインするよう直しました。空になった匿名アカウントは、どの記録とも結びつかないまま Firebase に残ります。「記録をすべて削除」も同じで、匿名アカウントを消せなければ、ログアウトして手放します。どこで止まったかが Xcode のコンソールで分かるよう、失敗ごとにログの文言も分けました。</p>
       <p>ところが、直して試してもらっても同じ文言が出ました。分けたログが指したのは、匿名の記録を消す一歩目です。Firestore が「Missing or insufficient permissions.」と断っていて、その前に App Check のデバッグトークンの交換が 403 で失敗していました。確かめの手順でアプリを消して入れ直したため、実機のデバッグトークンが新しくなり、開発用のプロジェクトに登録されていなかった。今回の文言の原因はこちらで、Firestore への読み書きはすべて断られていました（<a href="../../devops/firebase/index.html" class="lnk">Firebase の準備と運用</a>に、実機でも入れ直すとトークンが変わることを足した）。</p>
       <p>開発用のプロジェクトにトークンを登録すると、設定シートから Apple でログインできました（開発者が実機で確かめた、2026-10-08）。</p>
+      <p>続けて、入れ直してすぐ叩けること、まだアカウントのない Apple ID で引き継いでも記録が残ること、ログアウトすると記録のない状態から始まることも確かめました（開発者が実機で確かめた、2026-10-08）。</p>
       <p>匿名アカウントを消さない直しは、取り消していません。5分を過ぎると消せないのは Firebase の決まりなので、App Check が通っていても、いずれ同じところで止まります。</p>
     </div>
   </section>
@@ -250,8 +251,16 @@ tailwind.config = {
     </ol>
   </section>
 
+  <section id="resubmit" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">09 / resubmit</p>
+    <h2 class="mt-2 font-display text-3xl">出し直した</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>開発者が上の4つを済ませ、1.0 (2) で審査に出し直しました（2026-10-08）。App Store Connect の 1.0 のページでは、ビルド (1) を「−」で外さないと (2) が選択肢に出ず、ここで一度つまずきました（<a href="../../devops/app-store/index.html" class="lnk">App Store の準備と審査</a>の審査の履歴）。結果はまだ出ていません。</p>
+    </div>
+  </section>
+
   <section id="later" class="mt-20">
-    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">09 / later</p>
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">10 / later</p>
     <h2 class="mt-2 font-display text-3xl">残したこと</h2>
     <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
       <p>新しい iPhone に替えた人は、空のホームから始まります。Apple でログインすれば記録が戻るのに、そのことは設定シートを開かないと分からない。しかも先に何回か叩いてしまうと、その分は切り替えで捨てることになります。どこで知らせるかは画面の判断が要るので、出し直しを優先して課題に分けました。</p>
