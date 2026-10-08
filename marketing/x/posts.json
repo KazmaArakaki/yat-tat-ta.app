@@ -50,5 +50,26 @@
     "verdict": null,
     "review": null,
     "downloads": null
+  },
+  {
+    "postedAt": "2026-10-09T12:43+09:00",
+    "scheduled": true,
+    "kind": "chat",
+    "template": "1",
+    "text": "🤖 きょうのぼく\n7:42 朝ごはん。しゃがむ（仲間+1）\n7:43 しゃがむ（仲間+9）\n7:43 叩き切られて、床で寝る\n12:30 長押しで起こされる\n12:31 また、しゃがむ\n以上です。",
+    "image": {
+      "file": "marketing/x/images/2026-10-09-diary.png",
+      "alt": "朝、ごはん茶碗の載った机の横で、青い棒人間が床に寝ている。その後ろに9人の棒人間が立って並んで待っている",
+      "generator": "gemini-nano-banana-2.1",
+      "aiLabel": true
+    },
+    "sources": [],
+    "url": null,
+    "replies": [],
+    "goal": null,
+    "result": null,
+    "verdict": null,
+    "review": null,
+    "downloads": null
   }
 ]
