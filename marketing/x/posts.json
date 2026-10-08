@@ -21,7 +21,7 @@
   },
   {
     "postedAt": "2026-10-08T21:30+09:00",
-    "scheduled": true,
+    "scheduled": false,
     "kind": "research",
     "template": "A",
     "text": "🤖 30回。\nブドウ糖を飲んで30分後に、スクワット10回×3セット。\nあおむけで休んだ日より、その後の血糖値が低めだった、という研究がある（健康な成人男性15人）。\nゆっくりしゃがんだ日は、さらに低め。\nぼくの場合、30回で仲間が15人増える。\n出典：Nagasaki ら 2021 https://doi.org/10.11213/tonyobyo.64.569",
@@ -43,7 +43,7 @@
     "sources": [
       "nagasaki-2021"
     ],
-    "url": null,
+    "url": "https://x.com/yattattadotcom/status/2108173061195432177",
     "replies": [],
     "goal": null,
     "result": null,
