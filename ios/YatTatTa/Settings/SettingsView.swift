@@ -1,6 +1,10 @@
+import AuthenticationServices
 import SwiftUI
 
 /// 設定シート。目標回数と今日まだ通知を置き、アカウントの欄と、一番下に注意書きを添える
+///
+/// アカウントの欄は、Apple でログインしているかで中身が替わる。まだなら Apple のボタンと記録の削除、
+/// ログイン中ならログアウトとアカウントの削除
 struct SettingsView: View {
     let model: AppModel
     /// 計測モードと演出の見本では nil。アカウントの欄を出さない
@@ -10,6 +14,7 @@ struct SettingsView: View {
     @State private var confirmsDelete = false
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
+    @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
         NavigationStack {
@@ -71,7 +76,9 @@ struct SettingsView: View {
                     .disabled(model.session.isOpen)
                 }
 
-                if let account { accountSection(account) }
+                if let account {
+                    if account.isGuest { guestSection(account) } else { accountSection(account) }
+                }
 
                 // 集める情報と使い方。Safari で開く
                 Section {
@@ -134,7 +141,7 @@ struct SettingsView: View {
                 account.signOut()
             } label: { Text("ログアウト") }
         } message: {
-            Text("記録はアカウントに残ります。同じ Apple ID でログインすると戻ります。")
+            Text("記録はアカウントに残ります。同じ Apple ID でログインすると戻ります。この iPhone は、記録のない状態から始まります。")
         }
         .alert(Text("アカウントを削除しますか？"), isPresented: $confirmsDelete) {
             Button(role: .cancel) {} label: { Text("やめる") }
@@ -144,11 +151,61 @@ struct SettingsView: View {
         } message: {
             Text("これまでの記録 \(model.recordCount) 件がすべて消えます。元には戻せません。")
         }
-        .alert(Text(account.failure?.message ?? ""), isPresented: Binding(
-            get: { account.failure == .signOut || account.failure == .delete },
-            set: { if !$0 { account.failure = nil } })) {
-            Button {} label: { Text("OK") }
+        .modifier(FailureAlert(account: account))
+    }
+
+    /// まだ Apple でログインしていない人の欄。ログインは好きなときに。叩くのに要らない（docs/features/account）
+    private func guestSection(_ account: Account) -> some View {
+        Group {
+            Section {
+                SignInWithAppleButton(.continue) { request in
+                    account.failure = nil
+                    account.prepare(request)
+                } onCompletion: { result in
+                    Task { await account.complete(result) }
+                }
+                .signInWithAppleButtonStyle(colorScheme == .dark ? .white : .black)
+                .frame(height: 44)
+                .clipShape(.capsule)
+                .listRowBackground(Color.clear)
+                .listRowInsets(EdgeInsets())
+            } header: {
+                Text("アカウント")
+            } footer: {
+                Text("Apple でログインすると、いまの記録がアカウントに残り、iPhone を替えても戻ります。名前とメールアドレスは受け取りません。")
+            }
+            Section {
+                Button(role: .destructive) {
+                    confirmsDelete = true
+                } label: {
+                    Text("記録をすべて削除").font(.label(16))
+                }
+            } footer: {
+                Text("削除すると、これまでの記録がすべて消えます。元には戻せません。")
+            }
         }
+        .disabled(model.session.isOpen)
+        .alert(Text("記録をすべて削除しますか？"), isPresented: $confirmsDelete) {
+            Button(role: .cancel) {} label: { Text("やめる") }
+            Button(role: .destructive) {
+                Task { await account.deleteAccount() }
+            } label: { Text("削除する") }
+        } message: {
+            Text("これまでの記録 \(model.recordCount) 件がすべて消えます。元には戻せません。")
+        }
+        .alert(Text("この Apple ID には、別の記録があります"), isPresented: Binding(
+            get: { account.pendingSwitch != nil },
+            set: { if !$0 { account.pendingSwitch = nil } })) {
+            Button(role: .cancel) {} label: { Text("やめる") }
+            Button(role: .destructive) {
+                guard let credential = account.pendingSwitch else { return }
+                // 切り替わると、ホームごとこのシートも作り直される
+                Task { await account.switchAccount(to: credential) }
+            } label: { Text("切り替える") }
+        } message: {
+            Text("切り替えると、この iPhone で付けた記録 \(model.recordCount) 件は消えます。元には戻せません。")
+        }
+        .modifier(FailureAlert(account: account))
     }
 
     private func stepButton(_ symbol: String, delta: Int) -> some View {
@@ -175,5 +232,18 @@ struct SettingsView: View {
     private static func minutes(of date: Date) -> Int {
         let c = Calendar.current.dateComponents([.hour, .minute], from: date)
         return (c.hour ?? 0) * 60 + (c.minute ?? 0)
+    }
+}
+
+/// ログイン、ログアウト、削除が失敗したときの知らせ
+private struct FailureAlert: ViewModifier {
+    let account: Account
+
+    func body(content: Content) -> some View {
+        content.alert(Text(account.failure?.message ?? ""), isPresented: Binding(
+            get: { account.failure == .signIn || account.failure == .signOut || account.failure == .delete },
+            set: { if !$0 { account.failure = nil } })) {
+            Button {} label: { Text("OK") }
+        }
     }
 }

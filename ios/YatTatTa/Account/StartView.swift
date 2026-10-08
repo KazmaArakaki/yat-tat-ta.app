@@ -1,23 +1,21 @@
-import AuthenticationServices
 import SwiftUI
 
-/// ログイン画面。まだログインしていない人が、起動して最初に見る
+/// はじめの画面。最初の起動で匿名のアカウントを作れなかった人だけが見る
 ///
-/// ボタンは「Appleで続ける」の1つだけ。床で寝ているスクワットマンは、ログインすると起き上がる
-/// （docs/ui/pages/login）。
-struct LoginView: View {
+/// ふだんは誰も見ない。最初の起動は何も聞かずにホームへ進むが、匿名のアカウントを作るには電波が要る。
+/// つながらなかったときだけ、ここで待つ。床で寝ているスクワットマンは、つながると起き上がる（docs/ui/pages/start）。
+struct StartView: View {
     let account: Account
-    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text(verbatim: "Yat Tat ") + Text(verbatim: "Ta").foregroundStyle(Color.dopa)
-            Text("機種を変えても、\n記録はそのまま。")
+            Text("つながったら、\nすぐ叩けます。")
                 .font(.label(30, black: true))
                 .lineSpacing(4)
                 .padding(.top, 28)
-            Text("Apple でログインすると、記録がアカウントに残ります。iPhone を替えても、アプリを入れ直しても戻ります。")
+            Text("はじめての起動だけ、電波が要ります。ログインは要りません。2回目からは、電波がなくても叩けます。")
                 .font(.label(14))
                 .foregroundStyle(Color.mute)
                 .lineSpacing(3)
@@ -27,8 +25,8 @@ struct LoginView: View {
             sleeper
             Spacer(minLength: 24)
 
-            if account.failure == .signIn {
-                Text(Account.Failure.signIn.message)
+            if account.failure == .start {
+                Text(Account.Failure.start.message)
                     .font(.label(13))
                     .padding(.horizontal, 12)
                     .padding(.vertical, 8)
@@ -36,27 +34,23 @@ struct LoginView: View {
                     .background(Color.dopaSoft, in: .rect(cornerRadius: 12))
                     .padding(.bottom, 12)
             }
-            SignInWithAppleButton(.continue) { request in
-                account.failure = nil
-                account.prepare(request)
-            } onCompletion: { result in
-                Task { await account.complete(result) }
+            Button {
+                Task { await account.retryStart() }
+            } label: {
+                ZStack {
+                    Text("もう一度").opacity(account.busy ? 0 : 1)
+                    if account.busy { ProgressView().tint(Color.paper) }
+                }
+                .font(.label(17, black: true))
+                .foregroundStyle(Color.paper)
+                .frame(maxWidth: .infinity)
+                .frame(height: 50)
+                .background(Color.ink, in: .capsule)
             }
-            .signInWithAppleButtonStyle(colorScheme == .dark ? .white : .black)
-            .frame(height: 50)
-            .clipShape(.capsule)
+            .buttonStyle(.plain)
             .disabled(account.busy)
-            .overlay {
-                if account.busy && !account.welcoming {
-                    Capsule().fill(colorScheme == .dark ? Color.white : Color.black)
-                    ProgressView().tint(colorScheme == .dark ? .black : .white)
-                }
-            }
-            VStack(spacing: 4) {
-                Text("名前とメールアドレスは受け取りません。")
-                Link(destination: Legal.privacyPolicy) {
-                    Text("プライバシーポリシー").underline()
-                }
+            Link(destination: Legal.privacyPolicy) {
+                Text("プライバシーポリシー").underline()
             }
             .font(.label(11))
             .foregroundStyle(Color.mute)
@@ -72,7 +66,7 @@ struct LoginView: View {
         .background(Color.paper)
     }
 
-    /// 床と、寝ているスクワットマン。ログインできたら起き上がる
+    /// 床と、寝ているスクワットマン。つながったら起き上がる
     private var sleeper: some View {
         let awake = account.welcoming
         return ZStack(alignment: .bottom) {
@@ -86,7 +80,7 @@ struct LoginView: View {
     }
 }
 
-/// 寝た姿から立った姿へ。ログインできたときに1度だけ起き上がる
+/// 寝た姿から立った姿へ。つながったときに1度だけ起き上がる
 private struct WakingFigure: View {
     let awake: Bool
     let animated: Bool

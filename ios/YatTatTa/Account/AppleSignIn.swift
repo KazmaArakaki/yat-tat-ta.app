@@ -23,7 +23,7 @@ struct AppleNonce {
 
 /// ボタンを使わずに Apple のログインのシートを出す。アカウントを削除する前の本人確認で使う
 ///
-/// ログイン画面では、Apple の決まりどおり標準のボタン（SignInWithAppleButton）を使う。
+/// 設定シートでは、Apple の決まりどおり標準のボタン（SignInWithAppleButton）を使う。
 final class AppleSignIn: NSObject, ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
     private var continuation: CheckedContinuation<ASAuthorizationAppleIDCredential, Error>?
 

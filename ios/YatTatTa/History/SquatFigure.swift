@@ -49,7 +49,7 @@ struct SquatFigure: View {
         draw(in: context, foot: foot, k: k, from: SquatterLayer.stand, to: SquatterLayer.squat, progress: squat, color: color)
     }
 
-    /// 2つの姿のあいだを描く。progress は 0 が from、1 が to。ログイン画面で、寝た姿から起き上がるときにも使う
+    /// 2つの姿のあいだを描く。progress は 0 が from、1 が to。はじめの画面で、寝た姿から起き上がるときにも使う
     static func draw(in context: GraphicsContext, foot: CGPoint, k: CGFloat, from a: SquatterLayer.Joints,
                      to b: SquatterLayer.Joints, progress: CGFloat, color: Color) {
         let mix = { (p: CGPoint, q: CGPoint) in CGPoint(x: p.x + (q.x - p.x) * progress, y: p.y + (q.y - p.y) * progress) }

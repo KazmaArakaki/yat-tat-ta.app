@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>機種変更した人が引き継ぎに気づきにくい</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: { rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } } },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-3xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <a href="../index.html" class="hover:text-dopa hover:underline">issues</a>
+      <span>/</span>
+      <span>アプリの中身</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight">機種変更した人が引き継ぎに気づきにくい</h1>
+    <div class="mt-4 flex flex-wrap gap-2 font-mono text-xs font-bold">
+      <span class="rounded-full border border-ink bg-white px-3 py-1 text-ink">優先度：中</span>
+      <span class="rounded-full border border-dopa bg-dopa-soft px-3 py-1 text-ink">状態：未着手</span>
+    </div>
+  </header>
+
+  <section id="summary" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916]">
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-dopa">概要</p>
+      <p class="mt-3 font-bold leading-relaxed">Apple でログインしていた人が新しい iPhone に替えると、アプリは<a href="../../glossary.html#guest-account" class="text-dopa underline underline-offset-4">匿名アカウント</a>で、記録のない空のホームから始まる。<br>記録は Apple でログインすれば戻るのに、それを知る場所は設定シートの中にしかない。</p>
+    </div>
+
+    <h2 class="mt-10 font-display text-2xl">何が起きるか</h2>
+    <div class="mt-3 space-y-3 text-sm leading-relaxed"><p>2026-10-08 まで、最初の起動はログイン画面でした。機種変更した人も、そこで Apple のボタンを押すしかなく、押せば記録が戻った。ログインせずに始める作りに変えてから、この道が消えています。新しい iPhone で開くと、はじめての幕とチュートリアルが流れ、空のホームに着く。記録が消えたと思う人がいてもおかしくありません。</p><p>もう一つ、気づくのが遅いほど損をします。匿名のまま何日か叩いてから設定シートで Apple でログインすると、その Apple ID には前の記録があるので、<a href="../../glossary.html#account-link" class="text-dopa underline underline-offset-4">引き継ぎ</a>ではなく切り替えになる。匿名で付けた記録は、確かめたうえで捨てる決まりです（開発者が決定、2026-10-08）。</p></div>
+    <h2 class="mt-10 font-display text-2xl">作るときに考えること</h2>
+    <div class="mt-3 space-y-3 text-sm leading-relaxed"><ol class="list-decimal space-y-2 pl-5"><li>どこで知らせるか。チュートリアルの前後、ホームの一行、設定の歯車の印など。ログインを促す画面を最初に出すと、また 5.1.1(v) に触れるおそれがある。閉じられること、叩くのを妨げないことが条件。</li><li>誰に出すか。前の iPhone で使っていた人だけを見分ける手段は、いまのところない。全員に出すなら、一度きりで消える形にする。</li><li>捨てる代わりに合わせる作りにするか。記録は UUID ごとの文書なので、匿名の棚から Apple の棚へ写せば重ならない。確かめの画面が要らなくなる代わりに、写す途中で電波が切れたときの扱いを決める必要がある。</li></ol></div>
+    <dl class="mt-10 grid gap-3 text-sm sm:grid-cols-2">
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <dt class="font-mono text-xs text-mute">優先度が中の理由</dt>
+        <dd class="mt-1 leading-relaxed">困るのは、公開前から Apple でログインしていた人が機種を替えたときだけで、公開直後の利用者はまだいない。ただし、起きたときは「記録が消えた」と受け取られる。</dd>
+      </div>
+      <div class="rounded-2xl border border-rule bg-white p-4">
+        <dt class="font-mono text-xs text-mute">先送りにした理由</dt>
+        <dd class="mt-1 leading-relaxed">リジェクトへの対応として、審査の出し直しを先にした。どこで、誰に、どう知らせるかは画面の判断が要り、審査の指摘とも関わるので、急いで決めたくない。</dd>
+      </div>
+    </dl>
+    <p class="mt-6 text-sm">見つけたセッション：<a href="../../sessions/20261008-1517-guest-start/index.html" class="text-dopa underline underline-offset-4">ログインせずに始める</a>　関連する機能：<a href="../../features/account/index.html" class="text-dopa underline underline-offset-4">アカウント</a></p>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

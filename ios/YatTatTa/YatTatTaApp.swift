@@ -2,7 +2,7 @@ import FirebaseCore
 import SwiftUI
 
 @main struct YatTatTaApp: App {
-    /// ふだんはアカウント。計測モードと演出の見本は、メモリだけの記録でログインせずに開く
+    /// ふだんはアカウント。計測モードと演出の見本は、メモリだけの記録でアカウントを作らずに開く
     private let account: Account?
     @State private var localModel: AppModel?
     #if DEBUG
@@ -90,19 +90,21 @@ import SwiftUI
     }
 }
 
-/// ログインの状態で、ログイン画面とホームを切り替える
+/// アカウントの状態で、はじめの画面とホームを切り替える
 private struct AccountRoot: View {
     let account: Account
 
     var body: some View {
         Group {
             if let model = account.model, !account.welcoming {
+                // アカウントが替わったら、開いていたシートごと作り直す
                 HomeView(model: model, account: account)
-            } else if account.state == .checking {
-                // ログインしているかは、端末の中だけで一瞬で分かる。その間は地の色だけ
-                Color.paper.ignoresSafeArea()
+                    .id(ObjectIdentifier(model))
+            } else if account.state == .offline || account.welcoming {
+                StartView(account: account)
             } else {
-                LoginView(account: account)
+                // ログインしているかは端末の中だけで一瞬で分かる。匿名のアカウントを作るのも、電波があれば一瞬。その間は地の色だけ
+                Color.paper.ignoresSafeArea()
             }
         }
         .animation(.easeOut(duration: 0.25), value: account.model == nil || account.welcoming)

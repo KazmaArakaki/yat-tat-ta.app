@@ -94,6 +94,8 @@ tailwind.config = {
     <a href="#tutorial" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">チュートリアル</a>
     <a href="#practice-mash" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">練習連打</a>
     <a href="#account" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">アカウント</a>
+    <a href="#guest-account" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">匿名アカウント</a>
+    <a href="#account-link" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">引き継ぎ</a>
     <a href="#firestore" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">Firestore</a>
     <a href="#privacy-policy" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">プライバシーポリシー</a>
     <a href="#firebase-environment" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">開発用と本番用</a>
@@ -1065,17 +1067,51 @@ tailwind.config = {
   <section id="account" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
     <p class="font-mono text-xs text-mute">#account</p>
     <h2 class="mt-1 font-display text-2xl">アカウント</h2>
-    <p class="mt-3 leading-relaxed"><a href="#record" class="text-dopa underline underline-offset-4">記録</a>の持ち主。最初の起動で Apple でログインすると作られ、Firebase Authentication が番号（uid）を1つ割り当てる。記録はこの番号の棚に置くので、同じ Apple ID でログインすれば、機種を替えても、アプリを入れ直しても、いずれ Android 版でも同じ記録が戻る。受け取るのは番号だけで、名前とメールアドレスは求めない。ログインしないと叩けない。設定シートからログアウトと削除ができ、削除すると記録もすべて消える。目標回数や通知のような端末の設定は、アカウントではなく端末に属する。2026-10-07、開発者の問い「新しいiPhoneに買い換えたらスクワットの記録は無くなる？」から決めた。</p>
+    <p class="mt-3 leading-relaxed"><a href="#record" class="text-dopa underline underline-offset-4">記録</a>の持ち主。Firebase Authentication が番号（uid）を1つ割り当て、記録はこの番号の棚に置く。最初の起動では何も聞かずに<a href="#guest-account" class="text-dopa underline underline-offset-4">匿名アカウント</a>を作るので、ログインしなくても叩ける。設定シートで Apple でログインすると、匿名アカウントを Apple ID へ<a href="#account-link" class="text-dopa underline underline-offset-4">引き継ぎ</a>、以後は同じ Apple ID でログインすれば、機種を替えても、アプリを入れ直しても、いずれ Android 版でも同じ記録が戻る。受け取るのは番号だけで、名前とメールアドレスは求めない。削除すると記録もすべて消える。目標回数や通知のような端末の設定は、アカウントではなく端末に属する。2026-10-07、開発者の問い「新しいiPhoneに買い換えたらスクワットの記録は無くなる？」から作った。最初は「ログインしないと叩けない」決まりだったが、2026-10-08 に App Store の審査で断られ（ガイドライン 5.1.1(v)）、匿名で始める形に変えた。</p>
     <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
     <div class="mt-2 flex flex-col gap-2 text-sm">
       <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>機種変更したら、記録はどうなりますか。</p>
-      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>同じ Apple ID でログインすれば戻ります。記録は iPhone ではなく、アカウントのほうに付いているので。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>Apple でログインしていれば、同じ Apple ID でログインし直すと戻ります。記録は iPhone ではなく、アカウントのほうに付いているので。ログインしていない匿名のままだと、新しい iPhone には持っていけません。</p>
       <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>ログアウトしたら記録は消えますか。</p>
-      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>消えません。アカウントに残っています。消えるのは、設定シートでアカウントを削除したときだけです。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>消えません。アカウントに残っています。この iPhone は、記録のない新しい匿名アカウントで始まり直します。消えるのは、設定シートで削除したときだけです。</p>
     </div>
     <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
-      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#record" class="text-dopa underline underline-offset-4">記録</a><a href="#firestore" class="text-dopa underline underline-offset-4">Firestore</a><a href="#intro-splash" class="text-dopa underline underline-offset-4">はじめての幕</a><a href="#tutorial" class="text-dopa underline underline-offset-4">チュートリアル</a></p></div>
-      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="features/account/index.html" class="text-signal underline underline-offset-4">機能：アカウント</a><a href="ui/pages/login/index.html" class="text-signal underline underline-offset-4">ページ：ログイン画面</a><a href="sessions/20261007-0957-firestore/index.html" class="text-signal underline underline-offset-4">セッション：記録を Firestore に移す</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#record" class="text-dopa underline underline-offset-4">記録</a><a href="#guest-account" class="text-dopa underline underline-offset-4">匿名アカウント</a><a href="#account-link" class="text-dopa underline underline-offset-4">引き継ぎ</a><a href="#firestore" class="text-dopa underline underline-offset-4">Firestore</a><a href="#tutorial" class="text-dopa underline underline-offset-4">チュートリアル</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="features/account/index.html" class="text-signal underline underline-offset-4">機能：アカウント</a><a href="ui/pages/start/index.html" class="text-signal underline underline-offset-4">ページ：はじめの画面</a><a href="ui/pages/settings/index.html" class="text-signal underline underline-offset-4">ページ：設定シート</a><a href="sessions/20261007-0957-firestore/index.html" class="text-signal underline underline-offset-4">セッション：記録を Firestore に移す</a><a href="sessions/20261008-1517-guest-start/index.html" class="text-signal underline underline-offset-4">セッション：ログインせずに始める</a></p></div>
+    </div>
+  </section>
+
+  <section id="guest-account" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#guest-account</p>
+    <h2 class="mt-1 font-display text-2xl">匿名アカウント</h2>
+    <p class="mt-3 leading-relaxed">最初の起動で、名前もメールアドレスも聞かずに Firebase が作る<a href="#account" class="text-dopa underline underline-offset-4">アカウント</a>。Apple でログインした人と同じく uid を1つ持ち、<a href="#record" class="text-dopa underline underline-offset-4">記録</a>は users/{uid}/records の棚に置く。ログイン画面を挟まずにホームへ進めるので、起動してすぐ叩ける。キーチェーンに残るので、同じ iPhone に入れ直しても記録は戻るが、別の iPhone へは持っていけない。持っていきたい人は、設定シートの「Appleで続ける」で<a href="#account-link" class="text-dopa underline underline-offset-4">引き継ぎ</a>をする。作るには電波が要り、はじめての起動で電波がなければ、はじめの画面で待つ。2026-10-08、App Store の審査で「アカウントと関係ない機能のために登録を求めないこと」（ガイドライン 5.1.1(v)）と断られて導入した。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>匿名アカウントの人は、何かできないことがありますか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>叩くのも、記録を見るのも、全部できます。できないのは、機種を替えたときに記録を連れていくことだけです。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>Apple でログインしていた人がログアウトしたら？</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>その iPhone は新しい匿名アカウントで始まります。前の記録は Apple ID のほうに残っていて、ログインし直せば戻ります。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#account" class="text-dopa underline underline-offset-4">アカウント</a><a href="#account-link" class="text-dopa underline underline-offset-4">引き継ぎ</a><a href="#record" class="text-dopa underline underline-offset-4">記録</a><a href="#review-note" class="text-dopa underline underline-offset-4">審査メモ</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="features/account/index.html" class="text-signal underline underline-offset-4">機能：アカウント</a><a href="ui/pages/start/index.html" class="text-signal underline underline-offset-4">ページ：はじめの画面</a><a href="sessions/20261008-1517-guest-start/index.html" class="text-signal underline underline-offset-4">セッション：ログインせずに始める</a></p></div>
+    </div>
+  </section>
+
+  <section id="account-link" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#account-link</p>
+    <h2 class="mt-1 font-display text-2xl">引き継ぎ</h2>
+    <p class="mt-3 leading-relaxed"><a href="#guest-account" class="text-dopa underline underline-offset-4">匿名アカウント</a>を、Apple ID に結びつけること。設定シートの「Appleで続ける」から行う。Firebase の link を使うので uid が変わらず、匿名で付けた<a href="#record" class="text-dopa underline underline-offset-4">記録</a>がそのまま Apple のアカウントに残る。その Apple ID にもう別のアカウントがある（入れ直す前や、前の iPhone で使っていた）ときは引き継げない。そのときは確かめてから Apple ID のほうへ切り替え、匿名で付けた記録は消す。空になった匿名アカウントは消さずに残す（消すには直前のログインが要り、匿名では確かめ直せない）（記録が0件なら確かめずに切り替える）。2つの棚を合わせる処理は作らない（開発者が決定、2026-10-08）。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>新しい iPhone で、うっかり何回か叩いてからログインしたら？</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>その Apple ID には前の iPhone の記録があるので、引き継げません。「この Apple ID には、別の記録があります」と出て、切り替えると新しい iPhone で叩いた分は消えます。前の記録は戻ります。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>両方の記録を合わせられないんですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>いまはやりません。数回分を捨てても困る人は少ないと見て、作りを簡単にしました。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#guest-account" class="text-dopa underline underline-offset-4">匿名アカウント</a><a href="#account" class="text-dopa underline underline-offset-4">アカウント</a><a href="#record" class="text-dopa underline underline-offset-4">記録</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="features/account/index.html" class="text-signal underline underline-offset-4">機能：アカウント</a><a href="ui/pages/settings/index.html" class="text-signal underline underline-offset-4">ページ：設定シート</a><a href="sessions/20261008-1517-guest-start/index.html" class="text-signal underline underline-offset-4">セッション：ログインせずに始める</a></p></div>
     </div>
   </section>
 
@@ -1099,7 +1135,7 @@ tailwind.config = {
   <section id="privacy-policy" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
     <p class="font-mono text-xs text-mute">#privacy-policy</p>
     <h2 class="mt-1 font-display text-2xl">プライバシーポリシー</h2>
-    <p class="mt-3 leading-relaxed">アプリが利用者のどの情報を集め、何に使い、どこに預け、どう消せるかを書いた公開のページ。<a href="#account" class="text-dopa underline underline-offset-4">アカウント</a>を作って<a href="#record" class="text-dopa underline underline-offset-4">記録</a>を <a href="#firestore" class="text-dopa underline underline-offset-4">Firestore</a> に置くようになり、リリース前に必要になった。Firebase Hosting で日本語（/privacy/）と英語（/privacy/en/）を出し、ログイン画面と設定シートから開く。冒頭に「集めるのはログインの番号と記録だけ」「広告や分析に使わない」「いつでも全部消せる」の3行を置く。運営者は App Store の販売元と同じ個人名、問い合わせ先は support@yat-tat-ta.com（2026-10-07 決定）。</p>
+    <p class="mt-3 leading-relaxed">アプリが利用者のどの情報を集め、何に使い、どこに預け、どう消せるかを書いた公開のページ。<a href="#account" class="text-dopa underline underline-offset-4">アカウント</a>を作って<a href="#record" class="text-dopa underline underline-offset-4">記録</a>を <a href="#firestore" class="text-dopa underline underline-offset-4">Firestore</a> に置くようになり、リリース前に必要になった。Firebase Hosting で日本語（/privacy/）と英語（/privacy/en/）を出し、はじめの画面と設定シートから開く。冒頭に「集めるのはアカウントの番号と記録だけ」「広告や分析に使わない」「いつでも全部消せる」の3行を置く。運営者は App Store の販売元と同じ個人名、問い合わせ先は support@yat-tat-ta.com（2026-10-07 決定）。</p>
     <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
     <div class="mt-2 flex flex-col gap-2 text-sm">
       <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>目標回数も、プライバシーポリシーに書きますか。</p>
@@ -1177,23 +1213,23 @@ tailwind.config = {
     </div>
     <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
       <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#review-note" class="text-dopa underline underline-offset-4">審査メモ</a><a href="#caption-band" class="text-dopa underline underline-offset-4">見出しの帯</a><a href="#health-claim" class="text-dopa underline underline-offset-4">健康効果</a><a href="#translation-table" class="text-dopa underline underline-offset-4">訳語表</a></p></div>
-      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="devops/app-store/index.html" class="text-signal underline underline-offset-4">devops：App Store の掲載情報</a><a href="sessions/20261007-1523-app-store-review/index.html" class="text-signal underline underline-offset-4">セッション：App Store の審査に出す準備</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="devops/app-store/index.html" class="text-signal underline underline-offset-4">devops：App Store の掲載情報</a><a href="sessions/20261007-1523-app-store-review/index.html" class="text-signal underline underline-offset-4">セッション：App Store の審査に出す準備</a><a href="sessions/20261008-1517-guest-start/index.html" class="text-signal underline underline-offset-4">セッション：ログインせずに始める</a></p></div>
     </div>
   </section>
 
   <section id="review-note" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
     <p class="font-mono text-xs text-mute">#review-note</p>
     <h2 class="mt-1 font-display text-2xl">審査メモ</h2>
-    <p class="mt-3 leading-relaxed">App Store Connect の「App Review に関する情報」のメモ欄に入れる、審査の人あての英語の文。ログインが Apple だけでデモ用のアカウントが要らないこと、最初にログインを求める理由（記録を<a href="#account" class="text-dopa underline underline-offset-4">アカウント</a>に置き、機種を替えても戻すため）、試し方（スクワットマンを長押しで起こして20回叩く）、演出に賭けも通貨も購入もないこと、<a href="#account" class="text-dopa underline underline-offset-4">アカウント</a>の削除の場所を書く。審査ガイドライン 5.1.1 の「ログインを求める理由」と、演出が疑似ギャンブルに見える心配に、先に答えておくためのもの（2026-10-07 設計）。</p>
+    <p class="mt-3 leading-relaxed">App Store Connect の「App Review に関する情報」のメモ欄に入れる、審査の人あての英語の文。ログインがなくても全部使えること（最初の起動で<a href="#guest-account" class="text-dopa underline underline-offset-4">匿名アカウント</a>を作る）、Apple でのログインは任意で、記録を<a href="#account" class="text-dopa underline underline-offset-4">アカウント</a>に残して機種を替えても戻すためのものであること、試し方（スクワットマンを長押しで起こして20回叩く）、演出に賭けも通貨も購入もないこと、<a href="#account" class="text-dopa underline underline-offset-4">アカウント</a>の削除の場所を書く。演出が疑似ギャンブルに見える心配と、ログインについての疑問に、先に答えておくためのもの（2026-10-07 設計）。最初の版は「ログインを最初に求める理由」を書いていたが、2026-10-08 の審査でガイドライン 5.1.1(v) により断られ、ログインせずに始める作りに直して書き換えた。</p>
     <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
     <div class="mt-2 flex flex-col gap-2 text-sm">
       <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>審査の人にデモ用のアカウントを渡さなくていいんですか。</p>
-      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>ログインは Apple だけなので、審査の人は自分の Apple ID で入れます。渡すかわりに、審査メモでそう書いておきます。</p>
-      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>審査で「ログインなしで使わせて」と言われたら？</p>
-      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>まず審査メモのとおり、記録を機種変更で戻すためだと返事をします。それでも通らなければ、ログインせずに始める作りを考えます。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>ログインしなくても全部使えるので要りません。Apple でのログインを試したいときも、審査の人は自分の Apple ID で入れます。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>最初の審査で「ログインなしで使わせて」と言われたのは、どうしてですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>叩いて記録するのは、アカウントがなくてもできる機能だからです。審査メモで理由を書いても通らないので、匿名で始めて、Apple のログインは設定シートに移しました。</p>
     </div>
     <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
-      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#store-listing" class="text-dopa underline underline-offset-4">掲載情報</a><a href="#account" class="text-dopa underline underline-offset-4">アカウント</a><a href="#fever" class="text-dopa underline underline-offset-4">フィーバータイム</a><a href="#wake-up" class="text-dopa underline underline-offset-4">起こす</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#store-listing" class="text-dopa underline underline-offset-4">掲載情報</a><a href="#account" class="text-dopa underline underline-offset-4">アカウント</a><a href="#guest-account" class="text-dopa underline underline-offset-4">匿名アカウント</a><a href="#fever" class="text-dopa underline underline-offset-4">フィーバータイム</a><a href="#wake-up" class="text-dopa underline underline-offset-4">起こす</a></p></div>
       <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="devops/app-store/index.html#review" class="text-signal underline underline-offset-4">devops：審査メモ</a><a href="features/account/index.html" class="text-signal underline underline-offset-4">機能：アカウント</a><a href="sessions/20261007-1523-app-store-review/index.html" class="text-signal underline underline-offset-4">セッション：App Store の審査に出す準備</a></p></div>
     </div>
   </section>

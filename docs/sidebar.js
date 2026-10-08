@@ -10,6 +10,10 @@
   // セッション一覧（新しい順）。新しいセッションは先頭に足す。
   var sessions = [
     {
+      path: "sessions/20261008-1517-guest-start/index.html",
+      label: "10/08 ログインせずに始める"
+    },
+    {
       path: "sessions/20261008-0920-x-operator/index.html",
       label: "10/08 X の広報担当AI",
       children: [
@@ -173,7 +177,7 @@
         { label: "フィーバータイム", path: "ui/components/fever/index.html", level: 1 },
         { label: "履歴のグラフ", path: "ui/components/history-chart/index.html", level: 1 },
         { label: "ページ一覧", path: "ui/pages/index.html", level: 0 },
-        { label: "ログイン画面", path: "ui/pages/login/index.html", level: 1 },
+        { label: "はじめの画面", path: "ui/pages/start/index.html", level: 1 },
         { label: "ホーム", path: "ui/pages/home/index.html", level: 1 },
         { label: "設定シート", path: "ui/pages/settings/index.html", level: 1 },
         { label: "今日の記録", path: "ui/pages/today-records/index.html", level: 1 },
@@ -207,6 +211,7 @@
       label: "Issues",
       items: [
         { label: "課題一覧", path: "issues/index.html", level: 0 },
+        { label: "引き継ぎに気づく場所", path: "issues/guest-restore-hint/index.html", level: 1 },
         { label: "読み取りの費用", path: "issues/firestore-read-cost/index.html", level: 1 },
         { label: "叩いた結果を外に出す口", path: "issues/share-result/index.html", level: 1 },
       ]

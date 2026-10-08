@@ -79,7 +79,7 @@ tailwind.config = {
   <section id="account" class="mt-16">
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">feature / account</p>
     <h2 class="mt-2 font-display text-3xl">アカウントと記録のつながり</h2>
-    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80"><a href="../features/account/index.html" class="text-dopa underline underline-offset-4">アカウント</a>は表を持たない。Firebase Authentication が Apple のログインに割り当てる番号（uid）が、そのまま記録の棚の名前になる。同じ Apple ID なら、機種を替えても Android からでも同じ uid になり、同じ棚を読む。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80"><a href="../features/account/index.html" class="text-dopa underline underline-offset-4">アカウント</a>は表を持たない。Firebase Authentication が割り当てる番号（uid）が、そのまま記録の棚の名前になる。最初の起動で作る<a href="../glossary.html#guest-account" class="text-dopa underline underline-offset-4">匿名アカウント</a>にも uid があり、Apple でログインすると、その uid のまま Apple ID に<a href="../glossary.html#account-link" class="text-dopa underline underline-offset-4">引き継ぐ</a>ので、棚は移さない。同じ Apple ID なら、機種を替えても Android からでも同じ uid になり、同じ棚を読む。</p>
     <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">読み書きできるのは自分の棚だけで、記録は足すか消すだけ。この決まりはアプリではなく Firestore のルールで守る（<a href="../devops/firebase/index.html#security" class="text-dopa underline underline-offset-4">ルール</a>）。アカウントを削除すると、棚の記録をすべて消してからアカウントを消す。</p>
   </section>
 

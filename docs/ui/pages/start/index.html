@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ログイン画面</title>
+<title>はじめの画面</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=M+PLUS+Rounded+1c:wght@500;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -62,33 +62,33 @@ tailwind.config = {
 .tabbtn[aria-selected="true"] { background:#1C1916; color:#FBF6EE; }
 .squad-pop { transform-box:fill-box; transform-origin:50% 100%; animation:squadpop .5s cubic-bezier(.2,1.6,.4,1) both; }
 @keyframes squadpop { 0%{ transform:scale(0); } 100%{ transform:scale(1); } }
-/* ログイン画面だけで使う */
+/* はじめの画面だけで使う */
 .zzz { position:absolute; font-family:"Dela Gothic One",sans-serif; color:#E5337A; animation:zfloat 3.6s ease-in-out infinite; opacity:0; }
 @keyframes zfloat { 0%{transform:translate(0,0) rotate(-8deg);opacity:0} 20%{opacity:1} 100%{transform:translate(18px,-46px) rotate(10deg);opacity:0} }
 .apple-btn { transition:transform .06s, box-shadow .06s; }
 .apple-btn:active { transform:translateY(3px); }
 .spin { width:16px; height:16px; border-radius:9999px; border:2.5px solid currentColor; border-right-color:transparent; animation:spin .7s linear infinite; }
 @keyframes spin { to { transform:rotate(360deg) } }
-.app.dark .apple-btn { background:#FFFFFF; color:#000000; }
+.app.dark .apple-btn { background:#F5EEE3; color:#16120F; }
 </style>
 </head>
 <body class="min-h-screen bg-paper font-sans text-ink antialiased">
 <main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
 <article class="mx-auto max-w-5xl">
 <header class="animate-rise">
-  <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">ui / pages / login</p>
-  <h1 class="mt-2 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">ログイン</span>画面</h1>
+  <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">ui / pages / start</p>
+  <h1 class="mt-2 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">はじめ</span>の画面</h1>
   <div class="mt-4 max-w-2xl space-y-3 text-sm leading-relaxed text-ink/80">
-    <p>まだ<a href="../../../glossary.html#account" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">アカウント</a>でログインしていない人が、起動して最初に見る画面です。ボタンは「Appleで続ける」の1つだけ。ログインが済むと、いまどおりスプラッシュからホームへ進みます。</p>
-    <p>床で寝ている<a href="../../../glossary.html#squat-squad" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スクワットマン</a>は、ログインすると起き上がります。ホームで長押しして<a href="../../../glossary.html#wake-up" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">起こす</a>のと同じ姿で、このアプリでは「寝ている＝まだ始まっていない」です。ボタンを押すと、このモックでも起き上がります。</p>
+    <p>ふだんは誰も見ない画面です。最初の起動では何も聞かずに<a href="../../../glossary.html#guest-account" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">匿名アカウント</a>を作ってホームへ進みますが、作るには電波が要ります。はじめての起動で電波がなかった人だけが、ここで待ちます。ボタンは「もう一度」の1つだけで、ログインのボタンはありません。</p>
+    <p>旧ログイン画面（2026-10-07）を作り替えたものです。最初にログインを求める作りは、2026-10-08 の App Store の審査で断られました（<a href="../../../features/account/index.html#history" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">アカウント</a>）。床で寝ている<a href="../../../glossary.html#squat-squad" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スクワットマン</a>は残しました。ホームで長押しして<a href="../../../glossary.html#wake-up" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">起こす</a>のと同じ姿で、「寝ている＝まだ始まっていない」。つながると起き上がります。</p>
   </div>
 </header>
 
 <div class="mt-8 flex flex-wrap gap-2 text-xs font-bold" role="tablist" aria-label="状態">
   <button class="tabbtn rounded-full border-2 border-ink px-3 py-1.5" role="tab" aria-selected="true" data-state="idle">はじめ</button>
   <button class="tabbtn rounded-full border-2 border-ink px-3 py-1.5" role="tab" aria-selected="false" data-state="busy">つないでいる</button>
-  <button class="tabbtn rounded-full border-2 border-ink px-3 py-1.5" role="tab" aria-selected="false" data-state="offline">つながらない</button>
-  <button class="tabbtn rounded-full border-2 border-ink px-3 py-1.5" role="tab" aria-selected="false" data-state="done">ログインできた</button>
+  <button class="tabbtn rounded-full border-2 border-ink px-3 py-1.5" role="tab" aria-selected="false" data-state="offline">またつながらない</button>
+  <button class="tabbtn rounded-full border-2 border-ink px-3 py-1.5" role="tab" aria-selected="false" data-state="done">つながった</button>
   <span class="mx-1 w-px self-stretch bg-rule"></span>
   <button id="theme" class="rounded-full border-2 border-ink bg-white px-3 py-1.5">暗い配色</button>
 </div>
@@ -99,8 +99,8 @@ tailwind.config = {
     <div class="absolute left-1/2 top-2.5 z-40 h-6 w-24 -translate-x-1/2 rounded-full bg-black"></div>
 
     <p class="font-display text-[28px] leading-none tracking-wide a-ink">Yat Tat <span class="text-dopa">Ta</span></p>
-    <p class="mt-6 font-display text-[26px] leading-[1.35] a-ink">機種を変えても、<br>記録はそのまま。</p>
-    <p class="mt-3 text-[12px] font-bold leading-relaxed a-mute">Apple でログインすると、記録がアカウントに残ります。iPhone を替えても、アプリを入れ直しても戻ります。</p>
+    <p class="mt-6 font-display text-[26px] leading-[1.35] a-ink">つながったら、<br>すぐ叩けます。</p>
+    <p class="mt-3 text-[12px] font-bold leading-relaxed a-mute">はじめての起動だけ、電波が要ります。ログインは要りません。2回目からは、電波がなくても叩けます。</p>
 
     <div class="relative mt-auto">
       <span class="zzz text-[18px]" style="left:58px;top:18px;animation-delay:0s">Z</span>
@@ -130,21 +130,21 @@ tailwind.config = {
     </div>
 
     <div class="mt-4">
-      <p id="error" class="mb-3 hidden rounded-xl a-soft px-3 py-2 text-[11px] font-bold leading-relaxed a-ink">つながりませんでした。電波のあるところで、もう一度押してください。</p>
-      <button id="apple" type="button" class="apple-btn flex h-12 w-full items-center justify-center gap-2 rounded-full bg-black text-[15px] font-bold text-white">
-        <span id="apple-mark" class="text-[18px] leading-none"></span>
-        <span id="apple-label">Appleで続ける</span>
+      <p id="error" class="mb-3 hidden rounded-xl a-soft px-3 py-2 text-[11px] font-bold leading-relaxed a-ink">はじめての起動は、電波が要ります。電波のあるところで、もう一度押してください。</p>
+      <button id="apple" type="button" class="apple-btn flex h-12 w-full items-center justify-center gap-2 rounded-full bg-ink text-[16px] font-black text-paper">
+        <span id="apple-mark" class="hidden"></span>
+        <span id="apple-label">もう一度</span>
       </button>
-      <p class="mt-3 text-center text-[10px] leading-relaxed a-mute">名前とメールアドレスは受け取りません。<br><a href="../../../../firebase/public/privacy/index.html" class="underline underline-offset-2">プライバシーポリシー</a></p>
+      <p class="mt-3 text-center text-[10px] leading-relaxed a-mute"><a href="../../../../firebase/public/privacy/index.html" class="underline underline-offset-2">プライバシーポリシー</a></p>
     </div>
   </div>
   </div>
 
   <ul class="flex max-w-xs flex-col gap-3 text-sm leading-relaxed">
-    <li class="border-l-4 border-ink pl-3"><b>Appleで続ける</b>：iOS の標準のボタン（<code class="font-mono text-xs">SignInWithAppleButton</code>、種類は continue）。文字と形は Apple の決まりどおりで、色だけ配色に合わせて黒と白を替える。</li>
-    <li class="border-l-4 border-dopa pl-3"><b>つないでいる</b>：ボタンの文字が回る印に替わり、押せなくなる。Apple のシートを閉じたら、はじめに戻る。</li>
-    <li class="border-l-4 border-gold pl-3"><b>つながらない</b>：ボタンの上に1行だけ出す。初めてのログインだけは電波が要る。2回目からはログインしたままなので、電波がなくても叩ける。</li>
-    <li class="border-l-4 border-signal pl-3"><b>ログインできた</b>：スクワットマンが跳ねて起き、0.6秒でスプラッシュへ。</li>
+    <li class="border-l-4 border-ink pl-3"><b>はじめ</b>：匿名アカウントを作れなかった直後。失敗の1行はまだ出さない。見出しと説明で、電波が要ることは伝わる。</li>
+    <li class="border-l-4 border-dopa pl-3"><b>つないでいる</b>：「もう一度」を押すと、文字が回る印に替わり、押せなくなる。</li>
+    <li class="border-l-4 border-gold pl-3"><b>またつながらない</b>：押してもつながらなかったときだけ、ボタンの上に1行出す。</li>
+    <li class="border-l-4 border-signal pl-3"><b>つながった</b>：スクワットマンが跳ねて起き、0.6秒でホームへ。スプラッシュとはじめての幕は、いまどおり続く。</li>
     <li class="border-l-4 border-rule pl-3"><b>プライバシーポリシー</b>：Safari で開く。端末の言語が日本語なら <code class="font-mono text-xs">/privacy/</code>、ほかは <code class="font-mono text-xs">/privacy/en/</code>（<a href="../../../glossary.html#privacy-policy" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">プライバシーポリシー</a>）。</li>
   </ul>
 </div>
@@ -172,9 +172,9 @@ tailwind.config = {
     var busy = state === 'busy', done = state === 'done';
     err.classList.toggle('hidden', state !== 'offline');
     btn.disabled = busy || done;
-    mark.className = busy ? 'spin' : 'text-[18px] leading-none';
-    mark.textContent = busy ? '' : '';
-    label.textContent = busy ? 'つないでいます' : done ? 'ようこそ' : 'Appleで続ける';
+    mark.className = busy ? 'spin' : 'hidden';
+    label.textContent = busy ? '' : 'もう一度';
+    label.style.display = busy ? 'none' : '';
     sleep.style.display = done ? 'none' : '';
     stand.style.display = done ? '' : 'none';
     zs.forEach(function (z) { z.style.display = done ? 'none' : ''; });

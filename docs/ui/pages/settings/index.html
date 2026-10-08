@@ -70,7 +70,11 @@ tailwind.config = {
   <h1 class="mt-2 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">設定</span>シート</h1>
   <div class="mt-4 max-w-2xl space-y-3 text-sm leading-relaxed text-ink/80"><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">ホームの右上の歯車から、下に出すシートです。置く設定は2つだけ。その下に、チュートリアルを見直す行と、<a href="../../../glossary.html#account" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">アカウント</a>の欄。<a href="../../../glossary.html#target-reps" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">目標回数</a>と、<a href="../../../glossary.html#today-reminder" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日まだ通知</a>。一番下に<a href="../../../glossary.html#caution-note" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">注意書き</a>を添えます。</p><p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">音の ON/OFF は置きません。マナーモードに従って黙るので、iPhone の側で切り替えられます。−と＋、通知のスイッチは、このモックでも動きます。</p></div>
 </header>
-<div class="mt-10 flex flex-col items-center gap-10 md:flex-row md:items-start md:justify-center">
+<div class="mt-8 flex flex-wrap gap-2 text-xs font-bold" role="tablist" aria-label="アカウントの状態">
+  <button class="acct-tab rounded-full border-2 border-ink bg-ink px-3 py-1.5 text-paper" role="tab" aria-selected="true" data-acct="guest">匿名</button>
+  <button class="acct-tab rounded-full border-2 border-ink bg-white px-3 py-1.5" role="tab" aria-selected="false" data-acct="apple">Apple でログイン中</button>
+</div>
+<div class="mt-8 flex flex-col items-center gap-10 md:flex-row md:items-start md:justify-center">
   <div class="w-[300px] shrink-0 rounded-[2.8rem] border-[6px] border-ink bg-ink p-1.5 shadow-[10px_10px_0_#E5337A] ">
   <div class="app  a-bg relative flex h-[650px] flex-col overflow-hidden rounded-[2.2rem] px-5 pb-6 pt-11">
     <div class="absolute left-1/2 top-2.5 z-40 h-6 w-24 -translate-x-1/2 rounded-full bg-black"></div>
@@ -110,6 +114,13 @@ tailwind.config = {
 </div></div>
 </div>
 <div class="absolute inset-0 z-20 bg-black/30"></div>
+<div id="switch-alert" class="absolute inset-0 z-50 hidden place-items-center bg-black/40 px-8">
+  <div class="w-full rounded-2xl a-card text-center">
+    <p class="px-4 pt-4 text-sm font-bold a-ink">この Apple ID には、別の記録があります</p>
+    <p class="px-4 pb-3 pt-1 text-[11px] leading-relaxed a-ink">切り替えると、この iPhone で付けた記録 12 件は消えます。元には戻せません。</p>
+    <div class="grid grid-cols-2 border-t a-rule text-sm"><button type="button" data-close class="border-r a-rule py-2.5 text-[#0A7AFF]">やめる</button><button type="button" data-close class="py-2.5 font-bold text-[#E0302A]">切り替える</button></div>
+  </div>
+</div>
 <div class="a-card absolute inset-x-0 bottom-0 top-24 z-30 flex flex-col overflow-y-auto rounded-t-[1.8rem] border-t-2 a-line px-5 pb-6 pt-3" style="animation:rise .35s ease-out both">
   <div class="mx-auto h-1.5 w-10 rounded-full bg-rule"></div>
   <div class="mt-3 flex items-center justify-between">
@@ -140,11 +151,18 @@ tailwind.config = {
     <p class="mt-2 text-[10px] leading-relaxed a-mute">その日まだ叩いていないときだけ、1回。7日開かなければ、しばらく止まります。</p>
   </div>
   <div class="mt-6 rounded-2xl border-2 a-line px-3 py-3"><a href="../../../features/tutorial/index.html" class="text-sm font-bold a-ink">使い方をもう一度</a></div>
-  <div class="mt-6">
+  <div id="acct-guest" class="mt-6">
+    <p class="text-[11px] font-bold a-mute">アカウント</p>
+    <button type="button" id="link-apple" class="mt-2 flex h-11 w-full items-center justify-center gap-1.5 rounded-full bg-black text-sm font-bold text-white"><span class="text-base leading-none"></span>Appleで続ける</button>
+    <p class="mt-2 text-[10px] leading-relaxed a-mute">Apple でログインすると、いまの記録がアカウントに残り、iPhone を替えても戻ります。名前とメールアドレスは受け取りません。</p>
+    <div class="mt-4 rounded-2xl border-2 a-line"><a href="../../../features/account/index.html" class="block px-3 py-3 text-sm font-bold text-[#E0302A]">記録をすべて削除</a></div>
+    <p class="mt-2 text-[10px] leading-relaxed a-mute">削除すると、これまでの記録がすべて消えます。元には戻せません。</p>
+  </div>
+  <div id="acct-apple" class="mt-6 hidden">
     <p class="text-[11px] font-bold a-mute">アカウント</p>
     <div class="mt-2 rounded-2xl border-2 a-line">
       <p class="px-3 py-3 text-sm font-bold a-ink">Apple でログイン中</p>
-      <a href="../login/index.html" class="block border-t-2 a-rule px-3 py-3 text-sm font-bold a-ink">ログアウト</a>
+      <a href="../../../features/account/index.html" class="block border-t-2 a-rule px-3 py-3 text-sm font-bold a-ink">ログアウト</a>
       <a href="../../../features/account/index.html" class="block border-t-2 a-rule px-3 py-3 text-sm font-bold text-[#E0302A]">アカウントを削除</a>
     </div>
     <p class="mt-2 text-[10px] leading-relaxed a-mute">削除すると、これまでの記録がすべて消えます。元には戻せません。</p>
@@ -158,7 +176,7 @@ tailwind.config = {
   <li class="border-l-4 border-gold pl-3"><b>目標回数</b>：−と＋で5回ずつ。5〜100回。既定は20。叩いている途中で変えても、その記録は叩き始めたときの回数のまま。</li>
   <li class="border-l-4 border-dopa pl-3"><b>今日まだ通知</b>：ON/OFF と時刻。既定は 21:00。OFF にすると時刻の行が薄くなる。</li>
   <li class="border-l-4 border-signal pl-3"><b>使い方をもう一度</b>：シートを閉じて<a href="../../../glossary.html#tutorial" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">チュートリアル</a>を場面1から。練習は記録を動かさない。叩いている最中は押せない。</li>
-  <li class="border-l-4 border-[#E0302A] pl-3"><b>アカウント</b>：ログアウトと、アカウントの削除。どちらも確かめる画面を挟み、叩いている最中は押せない。決まりは<a href="../../../features/account/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">機能：アカウント</a>。</li>
+  <li class="border-l-4 border-[#E0302A] pl-3"><b>アカウント</b>：中身は、Apple でログインしているかで替わる。<a href="../../../glossary.html#guest-account" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">匿名アカウント</a>の人には「Appleで続ける」（iOS の標準のボタン）と「記録をすべて削除」。押すと Apple ID へ<a href="../../../glossary.html#account-link" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">引き継ぐ</a>。その Apple ID に別の記録があれば、確かめてから切り替える（このモックでもボタンで出る）。Apple でログイン中の人には「ログアウト」と「アカウントを削除」。どれも叩いている最中は押せない。決まりは<a href="../../../features/account/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">機能：アカウント</a>。</li>
   <li class="border-l-4 border-ink pl-3"><b>プライバシーポリシー</b>：Safari で<a href="../../../glossary.html#privacy-policy" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">プライバシーポリシー</a>を開く。端末の言語で日本語か英語のページ。</li>
   <li class="border-l-4 border-rule pl-3"><b>注意書き</b>：一番下に、見出しなしで常に出す。文面の決まりは <a href="../../../devops/health-wording/index.html#caution" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">健康効果の書き方</a>。</li>
   <li class="border-l-4 border-ink pl-3"><b>閉じる</b>：ホームに戻る。下へ引いても閉じる。</li>
@@ -179,6 +197,21 @@ tailwind.config = {
     sw.classList.toggle('bg-dopa', on); sw.classList.toggle('bg-rule', !on);
     sw.firstElementChild.style.transform = on ? 'translateX(20px)' : 'none';
     time.style.opacity = on ? 1 : .35;
+  });
+  var alertBox = document.getElementById('switch-alert');
+  document.getElementById('link-apple').addEventListener('click', function () { alertBox.classList.remove('hidden'); alertBox.classList.add('grid'); });
+  alertBox.querySelectorAll('[data-close]').forEach(function (b) { b.addEventListener('click', function () { alertBox.classList.add('hidden'); alertBox.classList.remove('grid'); }); });
+  document.querySelectorAll('.acct-tab').forEach(function (t) {
+    t.addEventListener('click', function () {
+      var apple = t.dataset.acct === 'apple';
+      document.getElementById('acct-guest').classList.toggle('hidden', apple);
+      document.getElementById('acct-apple').classList.toggle('hidden', !apple);
+      document.querySelectorAll('.acct-tab').forEach(function (u) {
+        var on = u === t;
+        u.setAttribute('aria-selected', on ? 'true' : 'false');
+        u.classList.toggle('bg-ink', on); u.classList.toggle('text-paper', on); u.classList.toggle('bg-white', !on);
+      });
+    });
   });
 })();
 </script>

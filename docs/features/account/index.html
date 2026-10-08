@@ -41,46 +41,67 @@ tailwind.config = {
       <a href="../index.html" class="hover:text-ink">features</a><span>/</span><span>はじめる</span>
     </div>
     <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">アカウント</span></h1>
-    <p class="mt-4 max-w-2xl text-base leading-relaxed">最初の起動で Apple でログインしてもらい、<a href="../../glossary.html#record" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録</a>をその人の<a href="../../glossary.html#account" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">アカウント</a>に残す。記録は <a href="../../glossary.html#firestore" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">Firestore</a> に置くので、iPhone を替えても、アプリを入れ直しても、いずれ Android 版を出しても同じ記録が戻る。設定シートからログアウトとアカウントの削除ができる。2026-10-07 設計。</p>
+    <p class="mt-4 max-w-2xl text-base leading-relaxed"><a href="../../glossary.html#record" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録</a>の持ち主を決める。最初の起動では何も聞かずに<a href="../../glossary.html#guest-account" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">匿名アカウント</a>を作るので、ログインしなくてもすぐ叩ける。Apple でログインすると、その<a href="../../glossary.html#account" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">アカウント</a>に記録が残り、iPhone を替えても、いずれ Android 版を出しても同じ記録が戻る。記録は <a href="../../glossary.html#firestore" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">Firestore</a> に置く。2026-10-07 設計、2026-10-08 改訂。</p>
   </header>
 
-  <section id="rules" class="mt-16">
-    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01 / rules</p>
+  <section id="history" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01 / history</p>
+    <h2 class="mt-2 font-display text-3xl">ログインを最初に求めなくなった理由</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>2026-10-07 の設計では、ログインを一番前に置きました。全員の記録が必ずアカウントに残る、というのが開発者の決定で、ログインしないと叩けない作りです。審査の人には<a href="../../glossary.html#review-note" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">審査メモ</a>で理由（機種を替えても記録を戻すため）を書いておけば足りるはずでした。</p>
+      <p>2026-10-08、App Store の審査で断られました。理由はガイドライン 5.1.1(v)。「アカウントと関係ない機能を使うのに、登録やログインを求めてはいけない」。叩いて記録するのは、アカウントがなくてもできる機能です。理由を書いても、この決まりは越えられません。</p>
+      <p>そこで、起動したら Firebase の匿名アカウントを作り、ログイン画面を挟まずにホームへ進む形に変えました。記録の棚（users/{uid}/records）は匿名でも同じなので、Firestore のルールも記録の形も変わりません。Apple でのログインは設定シートへ移し、匿名アカウントを Apple ID へ<a href="../../glossary.html#account-link" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">引き継ぐ</a>だけにしました（開発者が決定、2026-10-08）。経緯は<a href="../../sessions/20261008-1517-guest-start/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">セッション：ログインせずに始める</a>にあります。</p>
+    </div>
+  </section>
+
+  <section id="rules" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / rules</p>
     <h2 class="mt-2 font-display text-3xl">決まりごと</h2>
     <div class="mt-6 overflow-x-auto">
       <table class="w-full min-w-[640px] border-collapse text-left text-sm">
         <caption class="mb-2 text-left font-mono text-xs text-mute">表1　アカウントの決まり</caption>
         <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="py-2 pr-3">項目</th><th class="py-2 pr-3">決まり</th><th class="py-2">理由</th></tr></thead>
-        <tbody class="[&>tr]:border-b [&>tr]:border-rule [&_td]:py-2.5 [&_td]:pr-3 [&_td]:align-top"><tr><td><b>ログインするとき</b></td><td>最初の起動で、ログイン画面から。ログインしないと叩けない</td><td>全員の記録が必ずアカウントに残る（開発者が決定、2026-10-07）</td></tr><tr><td><b>ログインの手段</b></td><td>Apple だけ。ボタンは「Appleで続ける」</td><td>iPhone には Apple ID が必ずある。Firebase なら Android からも同じ Apple ID でログインできる</td></tr><tr><td><b>受け取るもの</b></td><td>Firebase が割り当てる番号（uid）だけ。名前とメールアドレスは求めない</td><td>記録の持ち主が決まれば足りる。受け取らなければ、守るものも減る</td></tr><tr><td><b>2回目からの起動</b></td><td>ログインしたまま。電波がなくても叩ける</td><td>初めてのログインだけは電波が要る</td></tr><tr><td><b>同じ iPhone に入れ直したとき</b></td><td>ログインしたまま始まる。Firebase がログイン状態をキーチェーンに残し、キーチェーンはアプリを消しても残る</td><td>入れ直した人に、ログインし直してもらう理由がない。開発者が実機で確かめた（2026-10-07）</td></tr><tr><td><b>機種変更、入れ直し</b></td><td>同じ Apple ID でログインすると記録が戻る。<a href="../../glossary.html#intro-splash" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">はじめての幕</a>は端末ごとなのでもう一度出るが、チュートリアルは出ない</td><td>チュートリアルは記録が1件もない人にだけ出す。記録が届くまで待ってから決める</td></tr><tr><td><b>ログアウト</b></td><td>設定シートから。確かめてからログイン画面へ。端末のキャッシュは消す</td><td>記録はアカウントに残る。同じ iPhone を別の人が使っても、前の人の記録が見えない</td></tr><tr><td><b>アカウントの削除</b></td><td>設定シートから。確かめる、Apple でもう一度本人確認、記録をすべて消す、Apple との連携を切る、アカウントを消す</td><td>App Store の審査の条件。取り返しがつかないので2段で確かめる</td></tr><tr><td><b>叩いている最中</b></td><td>ログアウトも削除も押せない</td><td>閉じていない記録の行き先がなくなる</td></tr><tr><td><b>端末の設定</b></td><td>目標回数、今日まだ通知、見せた印は端末に残す。ログアウトしても変わらない</td><td>端末の持ち主の好みで、記録ではない</td></tr></tbody>
+        <tbody class="[&>tr]:border-b [&>tr]:border-rule [&_td]:py-2.5 [&_td]:pr-3 [&_td]:align-top"><tr><td><b>始めるとき</b></td><td>最初の起動で、何も聞かずに<a href="../../glossary.html#guest-account" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">匿名アカウント</a>を作り、そのままホームへ。ログインしなくても全部使える</td><td>叩いて記録するのは、アカウントがなくてもできる機能。App Store の審査で、登録を求めないよう求められた（ガイドライン 5.1.1(v)、2026-10-08）</td></tr><tr><td><b>はじめての起動に電波がない</b></td><td>はじめの画面で待つ。「もう一度」で作り直す。つながったら、寝ていたスクワットマンが起き上がってホームへ</td><td>匿名アカウントを作るのにだけ電波が要る。2回目からは電波がなくても叩ける</td></tr><tr><td><b>Apple でのログイン</b></td><td>好きなときに、設定シートの「Appleで続ける」から。匿名アカウントを Apple ID へ<a href="../../glossary.html#account-link" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">引き継ぎ</a>、uid も記録もそのまま</td><td>ログインする理由は、機種を替えても記録を戻すことだけ。叩くのには要らない</td></tr><tr><td><b>Apple ID に別のアカウントがあるとき</b></td><td>「この Apple ID には、別の記録があります」と確かめてから、Apple ID のほうへ切り替える。匿名で付けた記録を消してから切り替える。空になった匿名アカウントは残す（消すには直前のログインが要り、匿名ではログインし直せない）。記録が0件なら確かめずに切り替える</td><td>2つの棚を合わせる処理は作らない（開発者が決定、2026-10-08）。入れ直しや機種変更の直後で、捨てる記録は少ないはず</td></tr><tr><td><b>ログインの手段</b></td><td>Apple だけ。ボタンは「Appleで続ける」</td><td>iPhone には Apple ID が必ずある。Firebase なら Android からも同じ Apple ID でログインできる</td></tr><tr><td><b>受け取るもの</b></td><td>Firebase が割り当てる番号（uid）だけ。名前とメールアドレスは求めない</td><td>記録の持ち主が決まれば足りる。受け取らなければ、守るものも減る</td></tr><tr><td><b>同じ iPhone に入れ直したとき</b></td><td>前のアカウントのまま始まる。匿名でも Apple でも同じ。Firebase がログイン状態をキーチェーンに残し、キーチェーンはアプリを消しても残る</td><td>開発者が実機で確かめた（2026-10-07、Apple のとき）</td></tr><tr><td><b>機種変更</b></td><td>新しい iPhone は匿名アカウントで始まる。設定シートで同じ Apple ID でログインすると記録が戻る。<a href="../../glossary.html#intro-splash" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">はじめての幕</a>は端末ごとなのでもう一度出る</td><td>匿名のままだった人の記録は、新しい iPhone へは持っていけない</td></tr><tr><td><b>ログアウト</b></td><td>Apple でログイン中の人だけ。設定シートから、確かめてから。端末のキャッシュは消し、新しい匿名アカウントで始まる</td><td>記録は Apple のアカウントに残る。同じ iPhone を別の人が使っても、前の人の記録が見えない</td></tr><tr><td><b>削除</b></td><td>Apple でログイン中の人は「アカウントを削除」。確かめる、Apple でもう一度本人確認、記録をすべて消す、Apple との連携を切る、アカウントを消す。匿名の人は「記録をすべて削除」。確かめてから、記録を消す。匿名アカウントも消すが、最後のログインから時間がたっていて消せなければ、空のまま手放す。どちらも、そのあと新しい匿名アカウントで始まる</td><td>App Store の審査の条件。取り返しがつかないので確かめる</td></tr><tr><td><b>叩いている最中</b></td><td>ログイン、ログアウト、削除は押せない</td><td>閉じていない記録の行き先がなくなる</td></tr><tr><td><b>端末の設定</b></td><td>目標回数、今日まだ通知、見せた印は端末に残す。ログアウトしても、切り替えても変わらない</td><td>端末の持ち主の好みで、記録ではない</td></tr></tbody>
       </table>
     </div>
   </section>
 
   <section id="screens" class="mt-20">
-    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / screens</p>
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / screens</p>
     <h2 class="mt-2 font-display text-3xl">関連する画面</h2>
     <ul class="mt-6 flex max-w-3xl flex-col gap-2 text-sm">
-      <li class="rounded-2xl border border-rule bg-white p-4"><a href="../../ui/pages/login/index.html" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ログイン画面</a>　まだログインしていない人が、起動して最初に見る。新しい画面。</li>
-      <li class="rounded-2xl border border-rule bg-white p-4"><a href="../../ui/pages/settings/index.html" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">設定シート</a>　使い方をもう一度の下に、アカウントの欄（ログイン中、ログアウト、アカウントを削除）がある。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><a href="../../ui/pages/start/index.html" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">はじめの画面</a>　はじめての起動で電波がなく、匿名アカウントを作れなかった人だけが見る。ふだんは誰も見ない。旧ログイン画面を作り替えた。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><a href="../../ui/pages/settings/index.html" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">設定シート</a>　使い方をもう一度の下に、アカウントの欄がある。匿名の人には「Appleで続ける」と「記録をすべて削除」、Apple でログイン中の人には「ログアウト」と「アカウントを削除」。</li>
     </ul>
   </section>
 
   <section id="components" class="mt-20">
-    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / components</p>
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / components</p>
     <h2 class="mt-2 font-display text-3xl">関連するコンポーネント</h2>
-    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">サンプル：ログインして3か月、記録が128件ある人。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">サンプル：匿名で始めて1週間、記録が12件ある人。Apple でログイン中の人は、ログインして3か月、記録が128件。</p>
     <div class="mt-6 grid gap-6 md:grid-cols-2">
       <div class="rounded-3xl border-2 border-ink bg-white p-5">
-        <a href="../../ui/pages/login/index.html" class="font-mono text-xs font-bold text-dopa underline underline-offset-4">login / Appleで続ける</a>
-        <div class="mt-4 rounded-2xl bg-paper p-5">
-          <p class="font-display text-xl leading-snug">機種を変えても、<br>記録はそのまま。</p>
-          <div class="mt-5 flex h-11 items-center justify-center rounded-full bg-black text-sm font-bold text-white">Appleで続ける</div>
-          <p class="mt-2 text-center text-[10px] text-mute">名前とメールアドレスは受け取りません。</p>
+        <a href="../../ui/pages/settings/index.html" class="font-mono text-xs font-bold text-dopa underline underline-offset-4">settings / アカウントの欄（匿名）</a>
+        <p class="mt-4 px-1 text-[11px] font-bold text-mute">アカウント</p>
+        <div class="mt-1 flex h-11 items-center justify-center rounded-full bg-black text-sm font-bold text-white">Appleで続ける</div>
+        <p class="mt-2 px-1 text-[11px] leading-relaxed text-mute">Apple でログインすると、いまの記録がアカウントに残り、iPhone を替えても戻ります。名前とメールアドレスは受け取りません。</p>
+        <div class="mt-3 rounded-2xl border-2 border-ink">
+          <p class="px-3 py-3 text-sm font-bold text-[#E0302A]">記録をすべて削除</p>
         </div>
-        <p class="mt-3 text-sm leading-relaxed text-ink/80">iOS の標準のボタン。文字と形は Apple の決まりどおり。</p>
+        <p class="mt-2 px-1 text-[11px] leading-relaxed text-mute">削除すると、これまでの記録がすべて消えます。元には戻せません。</p>
+        <p class="mt-3 text-sm leading-relaxed text-ink/80">Apple のボタンは iOS の標準のもの。文字と形は Apple の決まりどおり。</p>
       </div>
       <div class="rounded-3xl border-2 border-ink bg-white p-5">
-        <a href="../../sessions/20261007-0957-firestore/index.html#account" class="font-mono text-xs font-bold text-dopa underline underline-offset-4">settings / アカウントの欄</a>
+        <a href="../../ui/pages/settings/index.html" class="font-mono text-xs font-bold text-dopa underline underline-offset-4">alert / 切り替えの確認</a>
+        <div class="mx-auto mt-4 max-w-[240px] rounded-2xl bg-paper text-center ring-1 ring-rule">
+          <p class="px-4 pt-3 text-sm font-bold">この Apple ID には、別の記録があります</p>
+          <p class="px-4 pb-3 pt-1 text-[11px] leading-relaxed">切り替えると、この iPhone で付けた記録 12 件は消えます。元には戻せません。</p>
+          <div class="grid grid-cols-2 border-t border-rule text-sm"><span class="border-r border-rule py-2 text-[#0A7AFF]">やめる</span><span class="py-2 font-bold text-[#E0302A]">切り替える</span></div>
+        </div>
+        <p class="mt-4 text-sm leading-relaxed text-ink/80">「Appleで続ける」を押して、その Apple ID にもう別のアカウントがあったときだけ出る。記録が0件なら出さずに切り替える。</p>
+      </div>
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <a href="../../ui/pages/settings/index.html" class="font-mono text-xs font-bold text-dopa underline underline-offset-4">settings / アカウントの欄（Apple でログイン中）</a>
         <div class="mt-4 rounded-2xl border-2 border-ink">
           <p class="px-3 py-3 text-sm font-bold">Apple でログイン中</p>
           <p class="border-t-2 border-rule px-3 py-3 text-sm font-bold">ログアウト</p>
@@ -92,14 +113,24 @@ tailwind.config = {
           <div class="grid grid-cols-2 border-t border-rule text-sm"><span class="border-r border-rule py-2 text-[#0A7AFF]">やめる</span><span class="py-2 font-bold text-[#E0302A]">削除する</span></div>
         </div>
       </div>
+      <div class="rounded-3xl border-2 border-ink bg-white p-5">
+        <a href="../../ui/pages/start/index.html" class="font-mono text-xs font-bold text-dopa underline underline-offset-4">start / もう一度</a>
+        <div class="mt-4 rounded-2xl bg-paper p-5">
+          <p class="font-display text-xl leading-snug">つながったら、<br>すぐ叩けます。</p>
+          <p class="mt-2 text-[11px] leading-relaxed text-mute">はじめての起動だけ、電波が要ります。ログインは要りません。2回目からは、電波がなくても叩けます。</p>
+          <p class="mt-4 rounded-xl bg-dopa-soft px-3 py-2 text-[11px]">はじめての起動は、電波が要ります。電波のあるところで、もう一度押してください。</p>
+          <div class="mt-3 flex h-11 items-center justify-center rounded-full bg-ink text-sm font-black text-paper">もう一度</div>
+        </div>
+        <p class="mt-3 text-sm leading-relaxed text-ink/80">失敗の1行は、「もう一度」を押してもつながらなかったときだけ出る。</p>
+      </div>
     </div>
   </section>
 
   <section id="links" class="mt-20">
-    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / links</p>
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / links</p>
     <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
     <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
-      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">設計の経緯</p><a href="../../sessions/20261007-0957-firestore/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録を Firestore に移す</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">設計の経緯</p><a href="../../sessions/20261007-0957-firestore/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録を Firestore に移す</a><a href="../../sessions/20261008-1517-guest-start/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ログインせずに始める</a></li>
       <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">開発/運用</p><a href="../../devops/firebase/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">Firebase の準備と運用</a></li>
       <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">データベース</p><a href="../../database/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">データベース</a></li>
       <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">ほかの機能</p><a href="../tutorial/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">チュートリアル</a><a href="../splash/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スプラッシュ</a></li>

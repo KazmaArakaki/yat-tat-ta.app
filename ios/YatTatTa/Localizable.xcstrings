@@ -81,6 +81,22 @@
         }
       }
     },
+    "%lld / %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld / %2$lld"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld / %lld"
+          }
+        }
+      }
+    },
     "%lld件　%lldドパ" : {
       "localizations" : {
         "en" : {
@@ -125,6 +141,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%1$lld回で%2$lldドパ。今夜のおやつのあとにでも。"
+          }
+        }
+      }
+    },
+    "%lld日連続" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld days in a row"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld日連続"
           }
         }
       }
@@ -177,6 +209,22 @@
         }
       }
     },
+    "＋%lld日" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "+%lld days"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "＋%lld日"
+          }
+        }
+      }
+    },
     "+1人" : {
       "localizations" : {
         "en" : {
@@ -225,6 +273,38 @@
         }
       }
     },
+    "1人目は、今日のあなたです。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The first one is you, today."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1人目は、今日のあなたです。"
+          }
+        }
+      }
+    },
+    "1回に叩く数は、いま%lld回。ここで%lld〜%lld回に変えられます。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You tap %1$lld times per set right now. Change it here, from %2$lld to %3$lld."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1回に叩く数は、いま%lld回。ここで%lld〜%lld回に変えられます。"
+          }
+        }
+      }
+    },
     "1打で1ドパ。今日の分は、まだ0です。" : {
       "localizations" : {
         "en" : {
@@ -237,6 +317,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "1打で1ドパ。今日の分は、まだ0です。"
+          }
+        }
+      }
+    },
+    "1日1回で、1人ずつ。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One a day, one more in line."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1日1回で、1人ずつ。"
           }
         }
       }
@@ -257,18 +353,18 @@
         }
       }
     },
-    "Apple でログインすると、記録がアカウントに残ります。iPhone を替えても、アプリを入れ直しても戻ります。" : {
+    "Apple でログインすると、いまの記録がアカウントに残り、iPhone を替えても戻ります。名前とメールアドレスは受け取りません。" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sign in with Apple and your sets stay with your account. They come back on a new iPhone, or after you reinstall."
+            "value" : "Sign in with Apple to keep your current records in your account, so they come back on a new iPhone. We never receive your name or email address."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apple でログインすると、記録がアカウントに残ります。iPhone を替えても、アプリを入れ直しても戻ります。"
+            "value" : "Apple でログインすると、いまの記録がアカウントに残り、iPhone を替えても戻ります。名前とメールアドレスは受け取りません。"
           }
         }
       }
@@ -369,6 +465,22 @@
         }
       }
     },
+    "iPhone の設定で通知が切られています。設定を開く" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifications are off in iPhone Settings. Open Settings"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iPhone の設定で通知が切られています。設定を開く"
+          }
+        }
+      }
+    },
     "OK" : {
       "localizations" : {
         "en" : {
@@ -385,18 +497,50 @@
         }
       }
     },
-    "iPhone の設定で通知が切られています。設定を開く" : {
+    "アカウント" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Notifications are off in iPhone Settings. Open Settings"
+            "value" : "Account"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "iPhone の設定で通知が切られています。設定を開く"
+            "value" : "アカウント"
+          }
+        }
+      }
+    },
+    "アカウントを削除" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete Account"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アカウントを削除"
+          }
+        }
+      }
+    },
+    "アカウントを削除しますか？" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete your account?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アカウントを削除しますか？"
           }
         }
       }
@@ -414,6 +558,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "あんたはえらい！"
+          }
+        }
+      }
+    },
+    "いまのは練習" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "That was practice"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "いまのは練習"
           }
         }
       }
@@ -451,6 +611,22 @@
         }
       }
     },
+    "この Apple ID には、別の記録があります" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This Apple ID already has records"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "この Apple ID には、別の記録があります"
+          }
+        }
+      }
+    },
     "これまでの記録 %lld 件がすべて消えます。元には戻せません。" : {
       "localizations" : {
         "en" : {
@@ -479,6 +655,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "しばらく通知を止めます。また開いたら再開します。"
+          }
+        }
+      }
+    },
+    "しゃがんで、" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "squat,"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "しゃがんで、"
+          }
+        }
+      }
+    },
+    "スキップ" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skip"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "スキップ"
           }
         }
       }
@@ -515,6 +723,70 @@
         }
       }
     },
+    "スクワット1回が1ドパ。DPW は7日間、DT はこれまでの全部。押すと、履歴。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One squat is 1 Dopa. DPW counts the last 7 days, DT counts everything. Tap for your History."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "スクワット1回が1ドパ。DPW は7日間、DT はこれまでの全部。押すと、履歴。"
+          }
+        }
+      }
+    },
+    "スクワット1回で、1回叩く" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One squat, one tap"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "スクワット1回で、1回叩く"
+          }
+        }
+      }
+    },
+    "スクワットマンは寝ています。ポケットの中で数えないように。画面を長押しして起こしてください。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Squatman is asleep, so nothing counts from your pocket. Press and hold the screen to wake Squatman up."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "スクワットマンは寝ています。ポケットの中で数えないように。画面を長押しして起こしてください。"
+          }
+        }
+      }
+    },
+    "スクワットマンを起こす" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wake up Squatman"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "スクワットマンを起こす"
+          }
+        }
+      }
+    },
     "その日まだ叩いていない夜に、1回だけ知らせます。7日開かなければ、自分から止まります。" : {
       "localizations" : {
         "en" : {
@@ -527,6 +799,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "その日まだ叩いていない夜に、1回だけ知らせます。7日開かなければ、自分から止まります。"
+          }
+        }
+      }
+    },
+    "タップで次へ ›" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap to continue ›"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "タップで次へ ›"
+          }
+        }
+      }
+    },
+    "ダブルタップで起こす" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Double-tap to wake up"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ダブルタップで起こす"
           }
         }
       }
@@ -547,6 +851,22 @@
         }
       }
     },
+    "ためたドパ" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your Dopa"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ためたドパ"
+          }
+        }
+      }
+    },
     "チャンス！" : {
       "comment" : "声のファイルがないときの読み上げ",
       "localizations" : {
@@ -560,6 +880,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "チャンス！"
+          }
+        }
+      }
+    },
+    "つながったら、\nすぐ叩けます。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connect once,\nthen mash away."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "つながったら、\nすぐ叩けます。"
+          }
+        }
+      }
+    },
+    "つながりませんでした。電波のあるところで、もう一度押してください。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn't connect. Try again where you have a signal."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "つながりませんでした。電波のあるところで、もう一度押してください。"
           }
         }
       }
@@ -695,6 +1047,54 @@
         }
       }
     },
+    "はじめての起動だけ、電波が要ります。ログインは要りません。2回目からは、電波がなくても叩けます。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Only the first launch needs a connection. No sign-in required. After that, you can mash offline."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "はじめての起動だけ、電波が要ります。ログインは要りません。2回目からは、電波がなくても叩けます。"
+          }
+        }
+      }
+    },
+    "はじめての起動は、電波が要ります。電波のあるところで、もう一度押してください。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The first launch needs a connection. Find a signal and tap again."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "はじめての起動は、電波が要ります。電波のあるところで、もう一度押してください。"
+          }
+        }
+      }
+    },
+    "はじめる" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Let's go"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "はじめる"
+          }
+        }
+      }
+    },
     "フィーバー！" : {
       "comment" : "声のファイルがないときの読み上げ",
       "localizations" : {
@@ -740,6 +1140,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ベスト更新中"
+          }
+        }
+      }
+    },
+    "もう一度" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try Again"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "もう一度"
           }
         }
       }
@@ -822,54 +1238,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "よっ、太もも番長！"
-          }
-        }
-      }
-    },
-    "アカウント" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Account"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "アカウント"
-          }
-        }
-      }
-    },
-    "アカウントを削除" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Delete Account"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "アカウントを削除"
-          }
-        }
-      }
-    },
-    "アカウントを削除しますか？" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Delete your account?"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "アカウントを削除しますか？"
           }
         }
       }
@@ -1016,6 +1384,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "今日の1回で"
+          }
+        }
+      }
+    },
+    "今日の1回で%lld日目" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Today's tap makes day %lld"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "今日の1回で%lld日目"
           }
         }
       }
@@ -1181,6 +1565,22 @@
         }
       }
     },
+    "使い方をもう一度" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Replay the Tutorial"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "使い方をもう一度"
+          }
+        }
+      }
+    },
     "最初の1回で" : {
       "localizations" : {
         "en" : {
@@ -1193,6 +1593,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "最初の1回で"
+          }
+        }
+      }
+    },
+    "最初の1回で、1日目。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Day 1 starts with your first tap."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最初の1回で、1日目。"
+          }
+        }
+      }
+    },
+    "最初の1回で1日目" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Day 1 starts today"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最初の1回で1日目"
           }
         }
       }
@@ -1229,6 +1661,86 @@
         }
       }
     },
+    "切り替える" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Switch"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "切り替える"
+          }
+        }
+      }
+    },
+    "切り替えると、この iPhone で付けた記録 %lld 件は消えます。元には戻せません。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Switching will erase the %lld records made on this iPhone. This can't be undone."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "切り替えると、この iPhone で付けた記録 %lld 件は消えます。元には戻せません。"
+          }
+        }
+      }
+    },
+    "削除する" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "削除する"
+          }
+        }
+      }
+    },
+    "削除すると、これまでの記録がすべて消えます。元には戻せません。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deleting removes every set you've logged. This can't be undone."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "削除すると、これまでの記録がすべて消えます。元には戻せません。"
+          }
+        }
+      }
+    },
+    "削除できませんでした。電波のあるところで、もう一度試してください。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn't delete. Try again where you have a signal."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "削除できませんでした。電波のあるところで、もう一度試してください。"
+          }
+        }
+      }
+    },
     "前の7日 %lld　ベスト %lld" : {
       "localizations" : {
         "en" : {
@@ -1241,6 +1753,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "前の7日 %1$lld　ベスト %2$lld"
+          }
+        }
+      }
+    },
+    "叩いた日は、ここが1日伸びます。休んだ日は、休み券がつなぎます。押すと、今日の記録。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Each day you tap adds a day here. A Rest Pass covers a day you skip. Tap it to see Today."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "叩いた日は、ここが1日伸びます。休んだ日は、休み券がつなぎます。押すと、今日の記録。"
           }
         }
       }
@@ -1261,54 +1789,6 @@
         }
       }
     },
-    "長押しで起こす" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "HOLD TO WAKE UP"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "長押しで起こす"
-          }
-        }
-      }
-    },
-    "完了連打。スクワットマンが寝ています" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Done mash. Squatman is asleep"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "完了連打。スクワットマンが寝ています"
-          }
-        }
-      }
-    },
-    "ダブルタップで起こす" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Double-tap to wake up"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ダブルタップで起こす"
-          }
-        }
-      }
-    },
     "叩き放題" : {
       "localizations" : {
         "en" : {
@@ -1321,6 +1801,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "叩き放題"
+          }
+        }
+      }
+    },
+    "叩く。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "tap."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "叩く。"
           }
         }
       }
@@ -1342,6 +1838,7 @@
       }
     },
     "名前とメールアドレスは受け取りません。" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1369,6 +1866,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "回"
+          }
+        }
+      }
+    },
+    "回数を変える" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change the count"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "回数を変える"
           }
         }
       }
@@ -1451,6 +1964,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "完了連打。スクワット 残り %lld"
+          }
+        }
+      }
+    },
+    "完了連打。スクワットマンが寝ています" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done mash. Squatman is asleep"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "完了連打。スクワットマンが寝ています"
           }
         }
       }
@@ -1633,6 +2162,38 @@
         }
       }
     },
+    "本番は、しゃがんだ回数だけ叩きます。いまは練習。しゃがまずに%lld回どうぞ。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "For real, you tap once for every squat you did. This is practice, so no squats needed. Tap %lld times."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "本番は、しゃがんだ回数だけ叩きます。いまは練習。しゃがまずに%lld回どうぞ。"
+          }
+        }
+      }
+    },
+    "来週には、7人のスクワットマンになる。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "By next week, seven Squatmen."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "来週には、7人のスクワットマンになる。"
+          }
+        }
+      }
+    },
     "根性" : {
       "localizations" : {
         "en" : {
@@ -1662,22 +2223,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "根性、確定！"
-          }
-        }
-      }
-    },
-    "機種を変えても、\n記録はそのまま。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Switch phones.\nKeep every set."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "機種を変えても、\n記録はそのまま。"
           }
         }
       }
@@ -1859,6 +2404,22 @@
         }
       }
     },
+    "節目" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Milestone"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "節目"
+          }
+        }
+      }
+    },
     "継続" : {
       "localizations" : {
         "en" : {
@@ -1888,6 +2449,70 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "継続、確定！"
+          }
+        }
+      }
+    },
+    "続けた日" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your streak"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "続けた日"
+          }
+        }
+      }
+    },
+    "練習 %lld回" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PRACTICE ×%lld"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "練習 %lld回"
+          }
+        }
+      }
+    },
+    "練習 残り" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PRACTICE LEFT"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "練習 残り"
+          }
+        }
+      }
+    },
+    "練習は記録に残りません。本番は、食べてしゃがんだあとに。途中でやめても、叩いた分は残ります。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Practice isn't logged. Do the real thing after you eat and squat. If you stop partway, the taps you made still count."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "練習は記録に残りません。本番は、食べてしゃがんだあとに。途中でやめても、叩いた分は残ります。"
           }
         }
       }
@@ -1925,18 +2550,50 @@
         }
       }
     },
-    "記録はアカウントに残ります。同じ Apple ID でログインすると戻ります。" : {
+    "記録はアカウントに残ります。同じ Apple ID でログインすると戻ります。この iPhone は、記録のない状態から始まります。" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your sets stay with your account. Sign in with the same Apple ID to get them back."
+            "value" : "Your records stay in your account and come back when you sign in with the same Apple ID. This iPhone will start fresh with no records."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "記録はアカウントに残ります。同じ Apple ID でログインすると戻ります。"
+            "value" : "記録はアカウントに残ります。同じ Apple ID でログインすると戻ります。この iPhone は、記録のない状態から始まります。"
+          }
+        }
+      }
+    },
+    "記録をすべて削除" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete All Records"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "記録をすべて削除"
+          }
+        }
+      }
+    },
+    "記録をすべて削除しますか？" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete all records?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "記録をすべて削除しますか？"
           }
         }
       }
@@ -2022,6 +2679,22 @@
         }
       }
     },
+    "長押しで起こす" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HOLD TO WAKE UP"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "長押しで起こす"
+          }
+        }
+      }
+    },
     "閉じる" : {
       "localizations" : {
         "en" : {
@@ -2055,102 +2728,6 @@
         }
       }
     },
-    "食べたら、しゃがんで、叩く" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eat, squat, tap"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "食べたら、しゃがんで、叩く"
-          }
-        }
-      }
-    },
-    "＋%lld日" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "+%lld days"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "＋%lld日"
-          }
-        }
-      }
-    },
-    "今日の1回で%lld日目" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Today's tap makes day %lld"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "今日の1回で%lld日目"
-          }
-        }
-      }
-    },
-    "節目" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Milestone"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "節目"
-          }
-        }
-      }
-    },
-    "%lld日連続" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld days in a row"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld日連続"
-          }
-        }
-      }
-    },
-    "最初の1回で1日目" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Day 1 starts today"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "最初の1回で1日目"
-          }
-        }
-      }
-    },
     "食べたら、" : {
       "localizations" : {
         "en" : {
@@ -2167,34 +2744,18 @@
         }
       }
     },
-    "しゃがんで、" : {
+    "食べたら、しゃがんで、叩く" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "squat,"
+            "value" : "Eat, squat, tap"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "しゃがんで、"
-          }
-        }
-      }
-    },
-    "叩く。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "tap."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "叩く。"
+            "value" : "食べたら、しゃがんで、叩く"
           }
         }
       }
@@ -2211,438 +2772,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "食べたら、しゃがんで、叩く。"
-          }
-        }
-      }
-    },
-    "1日1回で、1人ずつ。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "One a day, one more in line."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "1日1回で、1人ずつ。"
-          }
-        }
-      }
-    },
-    "来週には、7人のスクワットマンになる。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "By next week, seven Squatmen."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "来週には、7人のスクワットマンになる。"
-          }
-        }
-      }
-    },
-    "1人目は、今日のあなたです。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The first one is you, today."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "1人目は、今日のあなたです。"
-          }
-        }
-      }
-    },
-    "%lld / %lld" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$lld / %2$lld"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld / %lld"
-          }
-        }
-      }
-    },
-    "1回に叩く数は、いま%lld回。ここで%lld〜%lld回に変えられます。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You tap %1$lld times per set right now. Change it here, from %2$lld to %3$lld."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "1回に叩く数は、いま%lld回。ここで%lld〜%lld回に変えられます。"
-          }
-        }
-      }
-    },
-    "いまのは練習" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "That was practice"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "いまのは練習"
-          }
-        }
-      }
-    },
-    "ためたドパ" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your Dopa"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ためたドパ"
-          }
-        }
-      }
-    },
-    "つながりませんでした。電波のあるところで、もう一度押してください。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Couldn't connect. Try again where you have a signal."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "つながりませんでした。電波のあるところで、もう一度押してください。"
-          }
-        }
-      }
-    },
-    "はじめる" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Let's go"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "はじめる"
-          }
-        }
-      }
-    },
-    "スキップ" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Skip"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "スキップ"
-          }
-        }
-      }
-    },
-    "スクワット1回が1ドパ。DPW は7日間、DT はこれまでの全部。押すと、履歴。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "One squat is 1 Dopa. DPW counts the last 7 days, DT counts everything. Tap for your History."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "スクワット1回が1ドパ。DPW は7日間、DT はこれまでの全部。押すと、履歴。"
-          }
-        }
-      }
-    },
-    "スクワット1回で、1回叩く" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "One squat, one tap"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "スクワット1回で、1回叩く"
-          }
-        }
-      }
-    },
-    "タップで次へ ›" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tap to continue ›"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "タップで次へ ›"
-          }
-        }
-      }
-    },
-    "使い方をもう一度" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Replay the Tutorial"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "使い方をもう一度"
-          }
-        }
-      }
-    },
-    "削除する" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Delete"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "削除する"
-          }
-        }
-      }
-    },
-    "削除すると、これまでの記録がすべて消えます。元には戻せません。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Deleting removes every set you've logged. This can't be undone."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "削除すると、これまでの記録がすべて消えます。元には戻せません。"
-          }
-        }
-      }
-    },
-    "削除できませんでした。電波のあるところで、もう一度試してください。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Couldn't delete. Try again where you have a signal."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "削除できませんでした。電波のあるところで、もう一度試してください。"
-          }
-        }
-      }
-    },
-    "叩いた日は、ここが1日伸びます。休んだ日は、休み券がつなぎます。押すと、今日の記録。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Each day you tap adds a day here. A Rest Pass covers a day you skip. Tap it to see Today."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "叩いた日は、ここが1日伸びます。休んだ日は、休み券がつなぎます。押すと、今日の記録。"
-          }
-        }
-      }
-    },
-    "回数を変える" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Change the count"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "回数を変える"
-          }
-        }
-      }
-    },
-    "最初の1回で、1日目。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Day 1 starts with your first tap."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "最初の1回で、1日目。"
-          }
-        }
-      }
-    },
-    "本番は、しゃがんだ回数だけ叩きます。いまは練習。しゃがまずに%lld回どうぞ。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "For real, you tap once for every squat you did. This is practice, so no squats needed. Tap %lld times."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "本番は、しゃがんだ回数だけ叩きます。いまは練習。しゃがまずに%lld回どうぞ。"
-          }
-        }
-      }
-    },
-    "続けた日" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your streak"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "続けた日"
-          }
-        }
-      }
-    },
-    "練習 %lld回" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "PRACTICE ×%lld"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "練習 %lld回"
-          }
-        }
-      }
-    },
-    "練習 残り" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "PRACTICE LEFT"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "練習 残り"
-          }
-        }
-      }
-    },
-    "練習は記録に残りません。本番は、食べてしゃがんだあとに。途中でやめても、叩いた分は残ります。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Practice isn't logged. Do the real thing after you eat and squat. If you stop partway, the taps you made still count."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "練習は記録に残りません。本番は、食べてしゃがんだあとに。途中でやめても、叩いた分は残ります。"
-          }
-        }
-      }
-    },
-    "スクワットマンは寝ています。ポケットの中で数えないように。画面を長押しして起こしてください。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Squatman is asleep, so nothing counts from your pocket. Press and hold the screen to wake Squatman up."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "スクワットマンは寝ています。ポケットの中で数えないように。画面を長押しして起こしてください。"
-          }
-        }
-      }
-    },
-    "スクワットマンを起こす" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wake up Squatman"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "スクワットマンを起こす"
           }
         }
       }
