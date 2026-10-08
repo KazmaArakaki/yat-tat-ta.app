@@ -1,0 +1,32 @@
+[
+  {
+    "id": "nagasaki-2021",
+    "kind": "paper",
+    "title": "糖負荷後高血糖に対する自体重スクワットの急性降下作用",
+    "authors": "Nagasaki K, Tamari Y, Nishimura K",
+    "year": 2021,
+    "url": "https://www.jstage.jst.go.jp/article/tonyobyo/64/12/64_569/_article/-char/ja/",
+    "doi": "10.11213/tonyobyo.64.569",
+    "subjects": "健康な成人男性15人",
+    "design": "75g のブドウ糖の飲み物のあと、120分あおむけで休む日と、30分後にスクワット10回×3セット（80 BPM と 40 BPM）をする日を比べた",
+    "findings": "どちらのスクワットも、運動の30分後の血糖値が休む日より低かった。40 BPM（ゆっくり）のほうが低く、60分後と、血糖値の曲線の下の面積でも低かった",
+    "checked": "2026-10-08 に AI が J-STAGE の要旨を読んだ",
+    "notes": "題名と誌名に病名が入る。投稿と画像では、題名と誌名を書かず「Nagasaki ら 2021」と DOI のリンクにする",
+    "usedIn": []
+  },
+  {
+    "id": "gao-2024",
+    "kind": "paper",
+    "title": "Enhanced muscle activity during interrupted sitting improves glycemic control in overweight and obese men",
+    "authors": "Gao Y, Li Q-Y, Finni T, Pesola AJ",
+    "year": 2024,
+    "url": "https://jyx.jyu.fi/handle/123456789/100173",
+    "doi": "10.1111/sms.14628",
+    "subjects": "過体重と肥満の男性18人（21.0 ± 1.2歳）",
+    "design": "8.5時間すわり続ける日、30分まとめて歩く日、45分ごとに3分歩く日、45分ごとにスクワットで休む日を比べた（どれも10回ずつ）",
+    "findings": "どの対策も、すわり続ける日より食後の血糖値の上がり方を小さくした。こまめに歩く日とスクワットの日は、まとめて歩く日より良かった。太ももとお尻の筋肉がよく働くほど、上がり方が小さかった",
+    "checked": "2026-10-08 に AI が JYX の要旨を読んだ",
+    "notes": "対象の体重の条件を省かない。投稿では病名を避けて「体重が多めの男性」と書く。スクワットの休みの長さは要旨にない",
+    "usedIn": []
+  }
+]
