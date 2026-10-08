@@ -1,4 +1,4 @@
-// チュートリアルの見本。ホームのモックに案内を重ね、7つの場面を順に動かす
+// チュートリアルの見本。ホームのモックに案内を重ね、8つの場面を順に動かす（記録を残す場面は、まだ Apple でログインしていない人だけ。opts.guest が false なら飛ばす）
 // 人形の描き方は ui/pages/home と同じ（アプリの SquatterLayer の点）
 // スクワットマンの見本。横向きの棒人間を SVG で描き、立つ姿としゃがむ姿のあいだを動かす
 var SQUAD = (function () {
@@ -138,6 +138,10 @@ var TUTORIAL_STEPS = [
   { id: 'gear', target: 'gear', place: 'below', sec: 6, next: true,
     title: '回数を変える',
     body: '1回に叩く数は、いま20回。ここで5〜100回に変えられます。' },
+  // まだ Apple でログインしていない人だけ。叩いても進まず、Apple で続けるか、あとでを選ぶ
+  { id: 'account', target: null, place: 'account', sec: 8, next: false,
+    title: '記録を残す',
+    body: 'Apple でログインすると、記録がアカウントに残ります。iPhone を替えても、同じ Apple ID でログインすれば戻ります。' },
   { id: 'finish', target: null, place: 'center', sec: 5, next: true,
     title: '食べたら、しゃがんで、叩く。',
     body: '最初の1回で、1日目。' }
@@ -212,6 +216,9 @@ var TUTORIAL = (function () {
     var num = $('num'), cap = $('cap'), hint = $('hint'), gain = $('gain'), banner = $('banner'), fin = $('finale');
     var squad = SQUAD.build(stageEl, { count: 1, palette: 'mix', asleep: true });
     var step = 0, left = PRACTICE, done = 0, locked = false, timers = [];
+    // スキップを押して、記録を残す場面に来た。「あとで」でそのまま終える
+    var skipping = false;
+    function indexOf(id) { for (var i = 0; i < TUTORIAL_STEPS.length; i++) if (TUTORIAL_STEPS[i].id === id) return i; return -1; }
     function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
 
     function targetRect(name) {
@@ -235,11 +242,25 @@ var TUTORIAL = (function () {
       }
       hole.classList.toggle('pulse', !!st.target);
       // 照らした場所だけ触れる。叩く場面は穴の中を叩かせ、ほかは吹き出しで進める
-      coach.style.pointerEvents = st.next ? 'auto' : 'none';
+      // 照らす場所のない場面（記録を残す、おわり）は、幕の下に触らせない
+      coach.style.pointerEvents = st.next || !st.target ? 'auto' : 'none';
       var dots = TUTORIAL_STEPS.slice(0, 6).map(function (_, i) {
         return '<span class="h-1.5 rounded-full ' + (i === step ? 'w-5 bg-dopa' : i < step ? 'w-1.5 bg-ink' : 'w-1.5 bg-rule') + '"></span>';
       }).join('');
-      if (st.place === 'center') {
+      if (st.place === 'account') {
+        // 記録を残す。ログインしなくても全部使えることも、同じ重さで書く
+        bubble.className = 'coach-bubble pointer-events-auto center';
+        bubble.innerHTML =
+          '<div class="text-left">' +
+          '<p class="font-display text-[22px] leading-snug">' + st.title + '</p>' +
+          '<p class="mt-3 text-[13px] leading-relaxed">' + st.body + '</p>' +
+          '<p class="mt-2 text-[13px] font-black leading-relaxed">前の iPhone で Apple でログインしていた人は、ここで続けると、これまでの記録が戻ります。</p>' +
+          '<p class="mt-2 text-[11px] leading-relaxed text-mute">ログインしなくても、このまま全部使えます。あとからでも、歯車の設定からできます。</p>' +
+          '</div>' +
+          '<button data-apple class="mt-5 flex h-11 w-full items-center justify-center gap-1.5 rounded-full bg-black text-[15px] font-bold text-white"><span class="text-base leading-none"></span>Appleで続ける</button>' +
+          '<button data-later class="mt-2.5 w-full rounded-full border-2 border-ink bg-gold py-2.5 text-base font-black text-ink shadow-[0_4px_0_#1C1916] active:translate-y-1 active:shadow-none">あとで</button>' +
+          '<p class="mt-2.5 text-[10px] text-mute">名前とメールアドレスは受け取りません。</p>';
+      } else if (st.place === 'center') {
         bubble.className = 'coach-bubble pointer-events-auto center';
         bubble.innerHTML =
           '<p class="font-display text-[26px] leading-snug">食べたら、<br>しゃがんで、<br><span class="text-dopa">叩く。</span></p>' +
@@ -258,14 +279,33 @@ var TUTORIAL = (function () {
         else bubble.style.cssText = '';
       }
       var skip = bubble.querySelector('[data-skip]');
-      if (skip) skip.addEventListener('click', function (e) { e.stopPropagation(); finish(true); });
+      if (skip) skip.addEventListener('click', function (e) {
+        e.stopPropagation();
+        // 記録を残す場面だけは飛ばさない。練習の途中なら練習を捨てる
+        if (opts.guest !== false && step < indexOf('account')) {
+          skipping = true;
+          resetPractice(true);
+          if (!squad.asleep) squad.collapse();
+          go(indexOf('account'));
+        } else finish(true);
+      });
+      // 見本では、Apple で続けると引き継げたことにして、あとでと同じに進む
+      [bubble.querySelector('[data-apple]'), bubble.querySelector('[data-later]')].forEach(function (b) {
+        if (b) b.addEventListener('click', function (e) {
+          e.stopPropagation();
+          if (skipping) finish(true); else go(indexOf('finish'));
+        });
+      });
       var go = bubble.querySelector('[data-go]');
       if (go) go.addEventListener('click', function (e) { e.stopPropagation(); finish(false); });
     }
 
     coach.addEventListener('click', function () {
       var st = TUTORIAL_STEPS[step];
-      if (st.next && st.place !== 'center') go(step + 1);
+      if (!st.next || st.place === 'center') return;
+      var nextStep = step + 1;
+      if (TUTORIAL_STEPS[nextStep].id === 'account' && opts.guest === false) nextStep = indexOf('finish');
+      go(nextStep);
     });
 
     function finish(skipped) {
@@ -341,6 +381,7 @@ var TUTORIAL = (function () {
     // タブから場面を選んだとき。練習の途中は頭からにする
     function jump(i) {
       timers.forEach(clearTimeout); timers = [];
+      skipping = false;
       fin.classList.add('hidden'); fin.classList.remove('flex');
       coach.style.display = '';
       var id = TUTORIAL_STEPS[i].id;

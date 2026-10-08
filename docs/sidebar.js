@@ -10,6 +10,10 @@
   // セッション一覧（新しい順）。新しいセッションは先頭に足す。
   var sessions = [
     {
+      path: "sessions/20261008-1710-account-tutorial-step/index.html",
+      label: "10/08 チュートリアルで記録を残す"
+    },
+    {
       path: "sessions/20261008-1517-guest-start/index.html",
       label: "10/08 ログインせずに始める"
     },
@@ -211,7 +215,6 @@
       label: "Issues",
       items: [
         { label: "課題一覧", path: "issues/index.html", level: 0 },
-        { label: "引き継ぎに気づく場所", path: "issues/guest-restore-hint/index.html", level: 1 },
         { label: "読み取りの費用", path: "issues/firestore-read-cost/index.html", level: 1 },
         { label: "叩いた結果を外に出す口", path: "issues/share-result/index.html", level: 1 },
       ]

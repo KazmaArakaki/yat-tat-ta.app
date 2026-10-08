@@ -56,6 +56,10 @@ import Observation
     ///
     /// 出している間の連打は練習連打。記録を作らず、フィーバーのくじも引かない。
     private(set) var tutorial: TutorialStep?
+    /// チュートリアルで、記録を残す場面を出すか。まだ Apple でログインしていない人だけ。Account が決める
+    @ObservationIgnored var offersAccount = false
+    /// スキップを押して、記録を残す場面に来た。「あとで」でそのまま終える
+    @ObservationIgnored private var tutorialSkipping = false
     /// スプラッシュを出した記録日。同じ日に開き直しても出さない
     @ObservationIgnored private var splashDay: RecordDay?
     #if DEBUG
@@ -296,13 +300,36 @@ import Observation
     func startTutorial() {
         guard !session.isOpen, finale == nil else { return }
         squadAwake = false
+        tutorialSkipping = false
         tutorial = .wake
     }
 
     /// どこかを叩いたとき。叩けば進む場面でだけ進む
     func advanceTutorial() {
-        guard let tutorial, tutorial.advancesByTap, let next = tutorial.next else { return }
+        guard let tutorial, tutorial.advancesByTap, var next = tutorial.next else { return }
+        if next == .account && !offersAccount { next = .finish }
         self.tutorial = next
+    }
+
+    /// 吹き出しの「スキップ」。記録を残す場面だけは飛ばさずに出す
+    ///
+    /// 機種を替えた人ほど使い方を知っていてスキップする。その人に、Apple でログインすれば記録が戻ることを伝える。
+    func skipTutorial() {
+        guard let tutorial else { return }
+        guard offersAccount, tutorial.rawValue < TutorialStep.account.rawValue else {
+            endTutorial()
+            return
+        }
+        if session.isOpen { close(completed: false) }
+        squadAwake = false
+        tutorialSkipping = true
+        self.tutorial = .account
+    }
+
+    /// 記録を残す場面の「あとで」と、Apple に引き継げたとき。スキップして来たなら、そのまま終える
+    func leaveAccountStep() {
+        guard tutorial == .account else { return }
+        if tutorialSkipping { endTutorial() } else { tutorial = .finish }
     }
 
     /// 「はじめる」とスキップ。どちらも見せたことにする
@@ -313,6 +340,7 @@ import Observation
         if session.isOpen { close(completed: false) }
         tutorial = nil
         squadAwake = false
+        tutorialSkipping = false
         defaults.set(true, forKey: SettingKey.tutorialShown)
     }
 

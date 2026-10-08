@@ -2775,6 +2775,102 @@
           }
         }
       }
+    },
+    "記録を残す" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keep Your Records"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "記録を残す"
+          }
+        }
+      }
+    },
+    "Apple でログインすると、記録がアカウントに残ります。iPhone を替えても、同じ Apple ID でログインすれば戻ります。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign in with Apple and your records are kept in your account. Switch iPhones, sign in with the same Apple ID, and they come back."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple でログインすると、記録がアカウントに残ります。iPhone を替えても、同じ Apple ID でログインすれば戻ります。"
+          }
+        }
+      }
+    },
+    "前の iPhone で Apple でログインしていた人は、ここで続けると、これまでの記録が戻ります。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Signed in with Apple on your old iPhone? Continue here to bring back your records."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "前の iPhone で Apple でログインしていた人は、ここで続けると、これまでの記録が戻ります。"
+          }
+        }
+      }
+    },
+    "ログインしなくても、このまま全部使えます。あとからでも、歯車の設定からできます。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can use everything without signing in. You can also do this later from Settings (the gear)."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ログインしなくても、このまま全部使えます。あとからでも、歯車の設定からできます。"
+          }
+        }
+      }
+    },
+    "あとで" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Later"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "あとで"
+          }
+        }
+      }
+    },
+    "切り替えると、この iPhone で付けた記録は消えます。元には戻せません。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Switching will erase the records made on this iPhone. This can't be undone."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "切り替えると、この iPhone で付けた記録は消えます。元には戻せません。"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

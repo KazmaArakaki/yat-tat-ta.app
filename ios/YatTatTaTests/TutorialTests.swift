@@ -108,6 +108,57 @@ import Testing
         #expect(model.tutorial == nil)
     }
 
+    @Test func まだAppleでログインしていない人には歯車のあとに記録を残す場面が出る() {
+        let model = makeModel()
+        model.offersAccount = true
+        model.startTutorial()
+        practice(model)
+        model.skipFinale()
+        for _ in 0..<3 { model.advanceTutorial() }
+        #expect(model.tutorial == .gear)
+        model.advanceTutorial()
+        #expect(model.tutorial == .account)
+        // 叩いても進まない。Apple で続けるか、あとでを選ぶ
+        model.advanceTutorial()
+        #expect(model.tutorial == .account)
+        model.leaveAccountStep()
+        #expect(model.tutorial == .finish)
+    }
+
+    @Test func スキップしても記録を残す場面は出してあとでならそのまま終える() {
+        let model = makeModel()
+        model.offersAccount = true
+        model.startTutorial()
+        model.wake()
+        _ = model.tap(at: 0)
+        model.skipTutorial()
+        #expect(model.tutorial == .account)
+        #expect(!model.session.isOpen)
+        #expect(!model.squadAwake)
+        #expect(records().isEmpty)
+        #expect(!defaults.bool(forKey: SettingKey.tutorialShown))
+        model.leaveAccountStep()
+        #expect(model.tutorial == nil)
+        #expect(defaults.bool(forKey: SettingKey.tutorialShown))
+    }
+
+    @Test func Appleでログイン中の人のスキップはそのまま終える() {
+        let model = makeModel()
+        model.startTutorial()
+        model.skipTutorial()
+        #expect(model.tutorial == nil)
+        #expect(defaults.bool(forKey: SettingKey.tutorialShown))
+    }
+
+    @Test func 記録を残す場面でのスキップは終える() {
+        let model = makeModel()
+        model.offersAccount = true
+        model.startTutorial()
+        model.skipTutorial()
+        model.skipTutorial()
+        #expect(model.tutorial == nil)
+    }
+
     @Test func 練習の途中でスキップすると練習を捨ててスクワットマンは寝る() {
         let model = makeModel()
         model.startTutorial()

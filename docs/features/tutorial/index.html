@@ -41,7 +41,7 @@ tailwind.config = {
       <a href="../index.html" class="hover:text-ink">features</a><span>/</span><span>はじめる</span>
     </div>
     <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">チュートリアル</span></h1>
-    <p class="mt-4 max-w-2xl text-base leading-relaxed"><a href="../../glossary.html#intro-splash" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">はじめての幕</a>が消えたあと、記録がまだ1件もない人に1度だけ、使い方を自分の指でやってもらう約1分の案内。ホームに暗い幕をかけて1か所ずつ照らし、スクワットマンを<a href="../../glossary.html#wake-up" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">起こす</a>、記録にならない<a href="../../glossary.html#practice-mash" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">練習連打</a>を10回、帯、カード、歯車の順に回る。設定シートから何度でも見直せる。2026-10-07 設計。</p>
+    <p class="mt-4 max-w-2xl text-base leading-relaxed"><a href="../../glossary.html#intro-splash" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">はじめての幕</a>が消えたあと、記録がまだ1件もない人に1度だけ、使い方を自分の指でやってもらう約1分の案内。ホームに暗い幕をかけて1か所ずつ照らし、スクワットマンを<a href="../../glossary.html#wake-up" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">起こす</a>、記録にならない<a href="../../glossary.html#practice-mash" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">練習連打</a>を10回、帯、カード、歯車の順に回る。まだ Apple でログインしていない人には、最後に<a href="../../glossary.html#keep-records-step" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録を残す</a>場面を挟む。設定シートから何度でも見直せる。2026-10-07 設計、2026-10-08 に記録を残す場面を追加。</p>
   </header>
 
   <section id="rules" class="mt-16">
@@ -58,7 +58,8 @@ tailwind.config = {
           <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">4 続けた日</td><td class="py-3 pr-4"><a href="../../glossary.html#streak" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">連続記録</a>の帯。休み券がつなぐこと、押すと今日の記録</td><td class="py-3 pr-4">どこかを叩く</td><td class="py-3 pr-4">9秒</td></tr>
           <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">5 ためたドパ</td><td class="py-3 pr-4">DPW と DT のカード。1回1ドパ、押すと履歴</td><td class="py-3 pr-4">どこかを叩く</td><td class="py-3 pr-4">9秒</td></tr>
           <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">6 回数を変える</td><td class="py-3 pr-4">設定の歯車。<a href="../../glossary.html#target-reps" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">目標回数</a>はいま何回で、5〜100回で変えられる</td><td class="py-3 pr-4">どこかを叩く</td><td class="py-3 pr-4">6秒</td></tr>
-          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">7 おわり</td><td class="py-3 pr-4">全体を暗く。「食べたら、しゃがんで、叩く。」「最初の1回で、1日目。」</td><td class="py-3 pr-4">「はじめる」</td><td class="py-3 pr-4">5秒</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">7 記録を残す</td><td class="py-3 pr-4">まだ Apple でログインしていない人だけ。全体を暗くしてまん中にカード。Apple でログインすれば記録が残り機種を替えても戻ること、前の iPhone でログインしていた人はここで記録が戻ること、ログインしなくても全部使えること</td><td class="py-3 pr-4">「Appleで続ける」か「あとで」</td><td class="py-3 pr-4">8秒</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">8 おわり</td><td class="py-3 pr-4">全体を暗く。「食べたら、しゃがんで、叩く。」「最初の1回で、1日目。」</td><td class="py-3 pr-4">「はじめる」</td><td class="py-3 pr-4">5秒</td></tr>
         </tbody>
       </table>
     </div>
@@ -69,8 +70,8 @@ tailwind.config = {
         <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">項目</th><th class="py-2 pr-4 font-bold">決まり</th><th class="py-2 pr-4 font-bold">理由</th></tr></thead>
         <tbody>
           <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">出すとき</td><td class="py-3 pr-4"><a href="../../glossary.html#splash" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スプラッシュ</a>が消えた直後。端末の設定 tutorialShown が false で、記録が1件もないとき</td><td class="py-3 pr-4">幕を見た人がそのまま続けて触れる。記録がある人は使い方を知っている</td></tr>
-          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">見せたことにする</td><td class="py-3 pr-4">「はじめる」を押したとき、スキップしたとき</td><td class="py-3 pr-4">途中で終了されたら、次の起動で場面1から出し直したい</td></tr>
-          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">スキップ</td><td class="py-3 pr-4">吹き出しの右上に、場面1〜6でいつも出す</td><td class="py-3 pr-4">急いでいる人を1分待たせない</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">見せたことにする</td><td class="py-3 pr-4">「はじめる」を押したとき、スキップして終えたとき</td><td class="py-3 pr-4">途中で終了されたら、次の起動で場面1から出し直したい</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">スキップ</td><td class="py-3 pr-4">吹き出しの右上に、場面1〜6でいつも出す。まだ Apple でログインしていない人は、押すと場面7へ飛び（練習の途中なら捨てる）、そこで「あとで」ならそのまま終わる</td><td class="py-3 pr-4">急いでいる人を1分待たせない。ただ、機種を替えた人ほど使い方を知っていてスキップするので、記録を戻す場面だけは飛ばさない</td></tr>
           <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">アプリを離れた</td><td class="py-3 pr-4">練習の途中なら練習を捨て、いまの場面の頭に戻す</td><td class="py-3 pr-4">練習は記録がないので、捨てても失うものがない</td></tr>
           <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">見直す</td><td class="py-3 pr-4">設定シートの一番下の「使い方をもう一度」。シートを閉じて場面1から</td><td class="py-3 pr-4">練習は記録を動かさないので、記録のある人が何度やってもよい</td></tr>
           <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">照らした場所</td><td class="py-3 pr-4">場面4〜6では押しても開かない。どこを叩いても次へ</td><td class="py-3 pr-4">シートが開くと、閉じるまで案内が止まる</td></tr>
@@ -78,6 +79,15 @@ tailwind.config = {
           <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">ひかえめモード</td><td class="py-3 pr-4">照らす枠の移動と点滅、吹き出しの浮き上がりを止める。練習連打は本番と同じ扱い</td><td class="py-3 pr-4"><a href="../../glossary.html#reduced-effects-mode" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ひかえめモード</a>の考え方</td></tr>
         </tbody>
       </table>
+    </div>
+
+
+    <h3 class="mt-12 font-display text-xl">記録を残す場面は、なぜ全員に出すのか</h3>
+    <div class="mt-3 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>2026-10-08 に、最初の起動でログインを求めない作りへ変えました（<a href="../account/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">アカウント</a>）。それから、新しい iPhone に替えた人は<a href="../../glossary.html#guest-account" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">匿名アカウント</a>で、記録のない空のホームから始まります。Apple でログインすれば記録は戻るのに、そのことは設定シートの中にしか書いてありませんでした。</p>
+      <p>機種を替えた人だけに出せれば、それがいちばん静かです。けれど、前の iPhone で使っていた人を見分ける手は、いまのアプリにはありません。開発者の決定は「全員に出しますが、1行ではなくチュートリアルとして丁寧に出してください。」でした（2026-10-08）。初めての人にとっても、いずれ機種を替えたときの話として無駄にはなりません。</p>
+      <p>出す位置は、歯車のあとです。使い方を一通り触ってからなので、ログインの話が最初に来ません。練習連打は記録を作らないので、この場面で Apple ID のほうへ切り替えても、捨てる記録はふつう1件もありません。前の記録のある Apple ID で続けると、アカウントごと替わってチュートリアルは消え、戻ってきた記録の入ったホームになります。</p>
+      <p>文面では、ログインしなくても全部使えることを、ログインの得と同じ重さで書きます。「あとで」も「はじめる」と同じ金色の大きいボタンです。ログインを求める画面に見えると、App Store の審査（ガイドライン 5.1.1(v)）でまた断られるかもしれないからです。</p>
     </div>
 
     <p class="mt-10 font-mono text-xs text-mute">表3　練習連打が本番と違うところ</p>
@@ -92,7 +102,7 @@ tailwind.config = {
         </tbody>
       </table>
     </div>
-    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">記録の保存の形は変わりません。端末の設定に tutorialShown を1つ足すだけです。</p>
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">記録の保存の形は変わりません。端末の設定に tutorialShown を1つ足すだけです。記録を残す場面を出すかは、端末にもサーバーにも残さず、起動のたびにいまのアカウントが匿名かどうかで決めます。</p>
   </section>
 
   <section id="screens" class="mt-20">
@@ -107,10 +117,10 @@ tailwind.config = {
   <section id="components" class="mt-20">
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / components</p>
     <h2 class="mt-2 font-display text-3xl">関連するコンポーネント</h2>
-    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">サンプル：インストールしたばかりで、記録は0件。目標回数は既定の20回。長押しで起こして、10回叩けます。</p>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">サンプル：インストールしたばかりで、記録は0件、Apple ではまだログインしていない。目標回数は既定の20回。長押しで起こして、10回叩けます。「スキップ」を押すと、記録を残す場面に飛びます。</p>
     <div class="mt-6 grid gap-6 md:grid-cols-[auto_1fr]">
       <div class="rounded-3xl border-2 border-ink bg-white p-5">
-        <div class="flex items-baseline justify-between gap-6"><a href="../../ui/components/tutorial-coach/index.html" class="font-mono text-xs font-bold text-dopa underline underline-offset-4">tutorial-coach</a><button type="button" id="again" class="rounded-full border-2 border-ink bg-gold px-3 py-0.5 text-[11px] font-black shadow-[0_2px_0_#1C1916]">▶ 最初から</button></div>
+        <div class="flex items-baseline justify-between gap-6"><a href="../../ui/components/tutorial-coach/index.html" class="font-mono text-xs font-bold text-dopa underline underline-offset-4">tutorial-coach</a><span class="flex gap-2"><button type="button" id="keep" class="rounded-full border-2 border-ink bg-white px-3 py-0.5 text-[11px] font-black shadow-[0_2px_0_#1C1916]">記録を残す</button><button type="button" id="again" class="rounded-full border-2 border-ink bg-gold px-3 py-0.5 text-[11px] font-black shadow-[0_2px_0_#1C1916]">▶ 最初から</button></span></div>
         <div id="phone" class="mt-4"></div>
       </div>
       <div class="rounded-3xl border-2 border-ink bg-white p-5">
@@ -126,9 +136,9 @@ tailwind.config = {
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / links</p>
     <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
     <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
-      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">設計の経緯</p><a href="../../sessions/20261007-0918-tutorial/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">チュートリアルを入れる</a></li>
-      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../glossary.html#tutorial" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">チュートリアル</a><a href="../../glossary.html#practice-mash" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">練習連打</a><a href="../../glossary.html#intro-splash" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">はじめての幕</a><a href="../../glossary.html#wake-up" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">起こす</a></p></li>
-      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">ほかの機能</p><a href="../splash/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スプラッシュ</a><a href="../done-mash/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">完了連打</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">設計の経緯</p><a href="../../sessions/20261007-0918-tutorial/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">チュートリアルを入れる</a><a href="../../sessions/20261008-1710-account-tutorial-step/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">チュートリアルに記録を残す場面を足す</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../glossary.html#tutorial" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">チュートリアル</a><a href="../../glossary.html#practice-mash" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">練習連打</a><a href="../../glossary.html#intro-splash" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">はじめての幕</a><a href="../../glossary.html#wake-up" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">起こす</a><a href="../../glossary.html#keep-records-step" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">記録を残す（場面）</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">ほかの機能</p><a href="../splash/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スプラッシュ</a><a href="../done-mash/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">完了連打</a><a href="../account/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">アカウント</a></li>
     </ul>
   </section>
 
@@ -139,6 +149,7 @@ tailwind.config = {
 (function () {
   var api = TUTORIAL.mount(document.getElementById('phone'), {});
   document.getElementById('again').addEventListener('click', function () { api.jump(0); });
+  document.getElementById('keep').addEventListener('click', function () { api.jump(TUTORIAL.STEPS.findIndex(function (s) { return s.id === 'account'; })); });
 })();
 </script>
 <script src="../../sidebar.js" defer></script>

@@ -81,6 +81,7 @@ import UserNotifications
             guard state == .signedIn(uid: uid), model == nil else { return }
             let store = FirestoreRecordStore(uid: uid)
             let model = AppModel(store: store)
+            model.offersAccount = isGuest
             model.feel.start()
             model.presentSplashIfNeeded()
             self.store = store
@@ -177,6 +178,7 @@ import UserNotifications
             do {
                 try await user.link(with: credential)
                 isGuest = false
+                model?.offersAccount = false
             } catch let error as NSError where error.domain == AuthErrorDomain && error.code == AuthErrorCode.credentialAlreadyInUse.rawValue {
                 guard let updated = error.userInfo[AuthErrorUserInfoUpdatedCredentialKey] as? AuthCredential else {
                     print("Auth: 切り替え用の証明がない: \(error)")

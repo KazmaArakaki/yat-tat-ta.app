@@ -108,8 +108,10 @@ struct HomeView: View {
     @ViewBuilder private var tutorial: some View {
         if let step = model.tutorial, model.finale == nil {
             TutorialOverlay(step: step, frames: tutorialFrames, targetReps: model.targetReps,
-                            firstTime: model.ledger.dopaTotal == 0,
+                            firstTime: model.ledger.dopaTotal == 0, account: account,
                             advance: { withAnimation { model.advanceTutorial() } },
+                            skip: { withAnimation { model.skipTutorial() } },
+                            leaveAccount: { withAnimation { model.leaveAccountStep() } },
                             end: { withAnimation { model.endTutorial() } })
                 .transition(.opacity)
         }

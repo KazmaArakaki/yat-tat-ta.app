@@ -1,3 +1,4 @@
+import AuthenticationServices
 import SwiftUI
 
 /// チュートリアルの案内。ホームに暗い幕をかけ、1か所だけを照らして、吹き出しで言う
@@ -11,10 +12,17 @@ struct TutorialOverlay: View {
     let targetReps: Int
     /// 記録がまだ1件もない人か。おわりの一言を変える
     let firstTime: Bool
+    /// 記録を残す場面の Apple のボタンに使う。演出の見本では nil
+    let account: Account?
     let advance: () -> Void
+    /// 吹き出しの「スキップ」。記録を残す場面へ飛ぶか、終える
+    let skip: () -> Void
+    /// 記録を残す場面の「あとで」と、Apple に引き継げたとき
+    let leaveAccount: () -> Void
     let end: () -> Void
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.colorScheme) private var colorScheme
     @State private var pulse = false
 
     var body: some View {
@@ -77,7 +85,11 @@ struct TutorialOverlay: View {
 
     /// 叩く場所を照らすときは下のカードの上に、帯と歯車は下に、カードは上に置く
     @ViewBuilder private func bubbleArea(size: CGSize, hole: CGRect?, safe: EdgeInsets) -> some View {
-        if step == .finish {
+        if step == .account, let account {
+            accountCard(account)
+                .padding(.horizontal, 20)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+        } else if step == .account || step == .finish {
             finishCard
                 .padding(.horizontal, 20)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -107,7 +119,7 @@ struct TutorialOverlay: View {
             HStack {
                 dots
                 Spacer()
-                Button(action: end) {
+                Button(action: skip) {
                     Text("スキップ").font(.label(13)).underline().foregroundStyle(Color.mute)
                         .padding(.vertical, 4).padding(.leading, 12)
                 }
@@ -172,6 +184,91 @@ struct TutorialOverlay: View {
         .toyCard(radius: 24, shadow: 6)
     }
 
+    /// 記録を残す場面。まだ Apple でログインしていない人にだけ出す（docs/features/tutorial）
+    ///
+    /// 新しい iPhone に替えた人は、ここで Apple で続けると前の記録が戻る。ログインしなくても全部使えることも、
+    /// 同じ重さで書く。ログインを求める画面に見せない（審査ガイドライン 5.1.1(v)）。
+    private func accountCard(_ account: Account) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text(title).font(.label(24, black: true))
+            Text(message)
+                .font(.label(15))
+                .lineSpacing(3)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.top, 12)
+            Text("前の iPhone で Apple でログインしていた人は、ここで続けると、これまでの記録が戻ります。")
+                .font(.label(15, black: true))
+                .lineSpacing(3)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.top, 10)
+            Text("ログインしなくても、このまま全部使えます。あとからでも、歯車の設定からできます。")
+                .font(.label(13))
+                .foregroundStyle(Color.mute)
+                .lineSpacing(2)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.top, 10)
+
+            if account.failure == .signIn {
+                Text(Account.Failure.signIn.message)
+                    .font(.label(13))
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 8)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(Color.dopaSoft, in: .rect(cornerRadius: 12))
+                    .padding(.top, 14)
+            }
+            SignInWithAppleButton(.continue) { request in
+                account.failure = nil
+                account.prepare(request)
+            } onCompletion: { result in
+                Task { await account.complete(result) }
+            }
+            .signInWithAppleButtonStyle(colorScheme == .dark ? .white : .black)
+            .frame(height: 50)
+            .clipShape(.capsule)
+            .disabled(account.busy)
+            .overlay {
+                if account.busy {
+                    Capsule().fill(colorScheme == .dark ? Color.white : Color.black)
+                    ProgressView().tint(colorScheme == .dark ? .black : .white)
+                }
+            }
+            .padding(.top, 20)
+            Button(action: leaveAccount) {
+                Text("あとで")
+                    .font(.label(17, black: true))
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 13)
+                    .background(Color.gold, in: .capsule)
+                    .overlay(Capsule().strokeBorder(Color.ink, lineWidth: 2))
+                    .foregroundStyle(Color.onGold)
+            }
+            .buttonStyle(.plain)
+            .disabled(account.busy)
+            .padding(.top, 10)
+            Text("名前とメールアドレスは受け取りません。")
+                .font(.label(11))
+                .foregroundStyle(Color.mute)
+                .frame(maxWidth: .infinity)
+                .padding(.top, 10)
+        }
+        .padding(24)
+        .toyCard(radius: 24, shadow: 6)
+        // 引き継げたら、おわりへ進む。前の記録のある Apple ID なら、アカウントごと替わってこの画面は消える
+        .onChange(of: account.isGuest) { _, guest in if !guest { leaveAccount() } }
+        .alert(Text("この Apple ID には、別の記録があります"), isPresented: Binding(
+            get: { account.pendingSwitch != nil },
+            set: { if !$0 { account.pendingSwitch = nil } })) {
+            Button(role: .cancel) {} label: { Text("やめる") }
+            Button(role: .destructive) {
+                guard let credential = account.pendingSwitch else { return }
+                Task { await account.switchAccount(to: credential) }
+            } label: { Text("切り替える") }
+        } message: {
+            Text("切り替えると、この iPhone で付けた記録は消えます。元には戻せません。")
+        }
+    }
+
     // MARK: - 文言
 
     private var title: LocalizedStringResource {
@@ -182,6 +279,7 @@ struct TutorialOverlay: View {
         case .streak: "続けた日"
         case .totals: "ためたドパ"
         case .gear: "回数を変える"
+        case .account: "記録を残す"
         case .finish: "食べたら、しゃがんで、叩く。"
         }
     }
@@ -194,6 +292,7 @@ struct TutorialOverlay: View {
         case .streak: "叩いた日は、ここが1日伸びます。休んだ日は、休み券がつなぎます。押すと、今日の記録。"
         case .totals: "スクワット1回が1ドパ。DPW は7日間、DT はこれまでの全部。押すと、履歴。"
         case .gear: "1回に叩く数は、いま\(targetReps)回。ここで\(TargetReps.range.lowerBound)〜\(TargetReps.range.upperBound)回に変えられます。"
+        case .account: "Apple でログインすると、記録がアカウントに残ります。iPhone を替えても、同じ Apple ID でログインすれば戻ります。"
         case .finish: firstTime ? "最初の1回で、1日目。" : "食べたら、しゃがんで、叩く。"
         }
     }

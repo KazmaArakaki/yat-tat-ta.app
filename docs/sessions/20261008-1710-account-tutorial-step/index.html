@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="session-state" content="done">
+<meta name="state" content="done">
+<title>チュートリアルで記録を残す</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=M+PLUS+Rounded+1c:wght@500;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+        round: ['"M PLUS Rounded 1c"', '"Noto Sans JP"', 'sans-serif']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } }
+      },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+<style>
+.app { --a-bg:#FBF6EE; --a-card:#FFFFFF; --a-ink:#1C1916; --a-mute:#6E655C; --a-rule:#E7DDCC; --a-line:#1C1916; --a-soft:#FFE6F0; }
+.app.dark { --a-bg:#16120F; --a-card:#231D18; --a-ink:#F5EEE3; --a-mute:#A89C8E; --a-rule:#3A312A; --a-line:#F5EEE3; --a-soft:#3A1726; }
+.a-bg { background:var(--a-bg); color:var(--a-ink); }
+.a-card { background:var(--a-card); }
+.a-ink { color:var(--a-ink); }
+.a-mute { color:var(--a-mute); }
+.a-line { border-color:var(--a-line); }
+.a-rule { border-color:var(--a-rule); }
+.a-soft { background:var(--a-soft); }
+.lnk { text-decoration:underline; text-decoration-color:rgba(229,51,122,.5); text-decoration-thickness:2px; text-underline-offset:4px; }
+.lnk:hover { text-decoration-color:#E5337A; }
+.tabbtn[aria-selected="true"] { background:#1C1916; color:#FBF6EE; }
+.flow-arrow { font-family:"JetBrains Mono",monospace; color:#6E655C; }
+</style>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-5xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <time datetime="2026-10-08T17:10">2026-10-08 17:10</time>
+      <span>/</span>
+      <span>設計セッション</span>
+      <span class="rounded-full border border-signal bg-signal/10 px-2.5 py-0.5 font-bold text-ink">状態：done</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl">チュートリアルで記録を残す</h1>
+  </header>
+
+  <section id="order" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="relative overflow-hidden rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916] sm:p-8">
+      <div class="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-dopa-soft"></div>
+      <p class="relative font-mono text-xs uppercase tracking-[0.2em] text-dopa">開発者の注文</p>
+      <p class="relative mt-6 font-display text-2xl leading-snug tracking-wide sm:text-3xl">guest-restore-hint の課題に取りかかって</p>
+      <p class="relative mt-6 border-t-2 border-dashed border-rule pt-6 text-base font-bold leading-relaxed sm:text-lg">全員に出しますが、１行ではなくチュートリアルとして丁寧に出してください。</p>
+    </div>
+  </section>
+
+  <section id="why" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01 / why</p>
+    <h2 class="mt-2 font-display text-3xl">新しい iPhone で、記録が消えたように見える</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>前のセッション<a href="../20261008-1517-guest-start/index.html" class="lnk">ログインせずに始める</a>で、最初の起動はログイン画面を通らなくなりました。Apple でログインしていた人が新しい iPhone に替えると、<a href="../../glossary.html#guest-account" class="lnk">匿名アカウント</a>で空のホームから始まります。Apple でログインすれば記録は戻るのに、それを知る場所は設定シートの中にしかありません（課題 <a href="../../issues/guest-restore-hint/index.html" class="lnk">guest-restore-hint</a>）。</p>
+      <p>気づくのが遅いほど損もします。匿名のまま叩いた記録は、Apple のアカウントへ切り替えるときに捨てる決まりだからです。</p>
+      <p>前の iPhone で使っていた人だけを見分けて知らせる手も考えました。iCloud の key-value storage に「Apple でログインしたことがある」という印を置けば、同じ Apple ID の新しい iPhone で読めます。それでも開発者は、全員に、チュートリアルの1場面として丁寧に出すほうを選びました（開発者が決定、2026-10-08）。iCloud を使っていない人にも届き、新しい権限も要りません。</p>
+    </div>
+  </section>
+
+  <section id="decisions" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / decisions</p>
+    <h2 class="mt-2 font-display text-3xl">決めたこと</h2>
+    <ul class="mt-6 flex max-w-3xl flex-col gap-2 text-sm">
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　機種変更で記録が戻ることは、全員に、チュートリアルの1場面として伝える。1行の注意書きにはしない（開発者が決定、2026-10-08）。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>提案</b>　場面の名前は「<a href="../../glossary.html#keep-records-step" class="lnk">記録を残す</a>」。歯車（回数を変える）のあと、おわりの前に置く。歯車の場面で設定シートの場所を見せた直後なので、「あとからでも歯車から」が通じる。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>提案</b>　まだ Apple でログインしていない人にだけ出す。ログイン中の人が「使い方をもう一度」で見直すときは飛ばす。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>提案</b>　「スキップ」を押しても、この場面だけは出す。機種を替えた人ほど使い方を知っていて、スキップを押すはずだから。スキップで来たときの「あとで」は、おわりを挟まずにそのまま閉じる。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>提案</b>　ボタンは「Appleで続ける」と「あとで」の2つ。「ログインしなくても、このまま全部使えます」を同じカードに書き、ログインを求める画面に見せない（ガイドライン 5.1.1(v)）。</li>
+    </ul>
+  </section>
+
+  <section id="flow" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / flow</p>
+    <h2 class="mt-2 font-display text-3xl">場面の並び</h2>
+    <ol class="mt-6 flex flex-wrap items-center gap-2 text-sm font-bold">
+      <li class="rounded-2xl border border-rule bg-white px-4 py-3">起こす</li><li class="flow-arrow">→</li>
+      <li class="rounded-2xl border border-rule bg-white px-4 py-3">練習連打</li><li class="flow-arrow">→</li>
+      <li class="rounded-2xl border border-rule bg-white px-4 py-3">いまのは練習</li><li class="flow-arrow">→</li>
+      <li class="rounded-2xl border border-rule bg-white px-4 py-3">続けた日</li><li class="flow-arrow">→</li>
+      <li class="rounded-2xl border border-rule bg-white px-4 py-3">ためたドパ</li><li class="flow-arrow">→</li>
+      <li class="rounded-2xl border border-rule bg-white px-4 py-3">回数を変える</li><li class="flow-arrow">→</li>
+      <li class="rounded-2xl border-2 border-ink bg-white px-4 py-3 shadow-[4px_4px_0_#1C1916]">記録を残す<span class="block text-[11px] font-normal text-mute">まだログインしていない人だけ。新しい場面</span></li><li class="flow-arrow">→</li>
+      <li class="rounded-2xl border border-rule bg-white px-4 py-3">おわり</li>
+    </ol>
+    <div class="mt-6 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>機種を替えた人がここで「Appleで続ける」を押すと、その Apple ID にはもう前のアカウントがあるので、<a href="../../glossary.html#account-link" class="lnk">引き継ぎ</a>ではなく切り替えになります。捨てる記録はありません。練習連打は記録を作らないので、匿名の記録はまだ0件です。確かめの画面も出さずに切り替わり、ホームが前の記録で作り直されます。記録のある人にはチュートリアルを出さない決まりなので、続きは出ません。</p>
+      <p>初めて Apple を使う人なら、引き継ぎがそのまま済み、おわりの場面へ進みます。</p>
+    </div>
+  </section>
+
+  <section id="card" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / card</p>
+    <h2 class="mt-2 font-display text-3xl">記録を残す場面のカード</h2>
+    <div class="mt-8 grid items-start gap-8 md:grid-cols-[316px_1fr]">
+      <div class="w-[300px] rounded-[2.8rem] border-[6px] border-ink bg-ink p-1.5 shadow-[10px_10px_0_#E5337A]">
+        <div class="relative flex h-[600px] items-center overflow-hidden rounded-[2.2rem] bg-paper px-4">
+          <div class="absolute left-1/2 top-2.5 z-10 h-6 w-24 -translate-x-1/2 rounded-full bg-black"></div>
+          <div class="absolute inset-0 bg-black/60"></div>
+          <div class="relative rounded-3xl border-2 border-ink bg-white p-5 shadow-[0_6px_0_#1C1916]">
+            <p class="font-round text-[19px] font-black">記録を残す</p>
+            <p class="mt-2.5 text-[12px] leading-relaxed">Apple でログインすると、記録がアカウントに残ります。iPhone を替えても、同じ Apple ID でログインすれば戻ります。</p>
+            <p class="mt-2 text-[12px] font-black leading-relaxed">前の iPhone で Apple でログインしていた人は、ここで続けると、これまでの記録が戻ります。</p>
+            <p class="mt-2 text-[10.5px] leading-relaxed text-mute">ログインしなくても、このまま全部使えます。あとからでも、歯車の設定からできます。</p>
+            <div class="mt-4 flex h-10 items-center justify-center rounded-full bg-black text-[13px] font-bold text-white"> Appleで続ける</div>
+            <div class="mt-2 flex h-10 items-center justify-center rounded-full border-2 border-ink bg-gold text-[13px] font-black">あとで</div>
+            <p class="mt-2 text-center text-[9px] text-mute">名前とメールアドレスは受け取りません。</p>
+          </div>
+        </div>
+      </div>
+      <ul class="flex max-w-md flex-col gap-3 text-sm leading-relaxed">
+        <li class="border-l-4 border-ink pl-3"><b>照らす場所はない</b>：おわりの場面と同じく、幕の真ん中にカードを置く。幕を叩いても進まない。どちらかのボタンを選んでもらう。</li>
+        <li class="border-l-4 border-dopa pl-3"><b>太字の1文</b>：機種を替えた人に向けた文。読み飛ばされないよう、この1文だけ太くした。</li>
+        <li class="border-l-4 border-gold pl-3"><b>「あとで」</b>：ほかの場面の「はじめる」と同じ金色のボタン。Apple のボタンと同じ大きさにして、どちらも選べることを形で示す。</li>
+        <li class="border-l-4 border-rule pl-3"><b>つながらないとき</b>：カードの中に「つながりませんでした」を出す。匿名で叩いた記録がある人（見直しのとき）が、記録のある Apple ID で続けると、切り替えの確かめが出る。</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="impl" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / implementation</p>
+    <h2 class="mt-2 font-display text-3xl">作ったもの</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">記録の形も置き場所も変えていません。</p>
+    <ol class="mt-6 flex max-w-3xl flex-col gap-3 text-sm">
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>1. <code class="font-mono text-xs">TutorialStep</code> に <code class="font-mono text-xs">.account</code> を足す。照らす場所なし、叩いても進まない、進み具合の点には数えない</b><br><span class="text-ink/70">出さない人がいる場面なので、点に数えると人によって点の数が変わる。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>2. <code class="font-mono text-xs">AppModel</code>：<code class="font-mono text-xs">offersAccount</code>、<code class="font-mono text-xs">skipTutorial</code>、<code class="font-mono text-xs">leaveAccountStep</code></b><br><span class="text-ink/70">出すかどうかと、スキップしても出す決まりを、画面ではなくモデルに置いてテストできるようにするため。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>3. <code class="font-mono text-xs">Account</code>：作った <code class="font-mono text-xs">AppModel</code> に、匿名アカウントかどうかを渡す。引き継げたら外す</b><br><span class="text-ink/70">ログイン中の人が見直すときに、この場面を飛ばすため。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>4. <code class="font-mono text-xs">TutorialOverlay</code>：記録を残すカード。吹き出しの「スキップ」を <code class="font-mono text-xs">skipTutorial</code> につなぐ</b><br><span class="text-ink/70">Apple のボタン、失敗の一言、切り替えの確かめは、設定シートと同じ <code class="font-mono text-xs">Account</code> の処理を使う。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>5. テストを4つ足す。文言を日本語と英語で6件足す</b><br><span class="text-ink/70">出る人と出ない人、スキップしたとき、場面の中でのスキップ。テストは全部で91件、すべて通った。</span></li>
+    </ol>
+  </section>
+
+  <section id="ask" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / developer</p>
+    <h2 class="mt-2 font-display text-3xl">開発者にお願いすること</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">カードの見た目と Apple のボタンは、実機でしか確かめられません。アプリを消して入れ直すと、匿名アカウントで始まり、チュートリアルが流れます（デバッグトークンの登録し直しを忘れずに）。</p>
+    <ol class="mt-6 grid max-w-3xl gap-3 text-sm sm:grid-cols-3">
+      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">1　約3分</p><p class="mt-2">チュートリアルを最後まで進め、歯車のあとに記録を残すカードが出ること、「あとで」でおわりへ進むことを見る。</p></li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">2　約3分</p><p class="mt-2">入れ直して、最初の場面で「スキップ」。記録を残すカードが出て、「あとで」で閉じることを見る。</p></li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">3　約3分</p><p class="mt-2">入れ直して、カードで「Appleで続ける」。前の記録が戻り、チュートリアルが消えることを見る。</p></li>
+    </ol>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>
