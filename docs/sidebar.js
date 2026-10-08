@@ -10,6 +10,14 @@
   // セッション一覧（新しい順）。新しいセッションは先頭に足す。
   var sessions = [
     {
+      path: "sessions/20261008-0920-x-operator/index.html",
+      label: "10/08 X の広報担当AI",
+      children: [
+        { path: "sessions/20261008-0920-x-operator/cases.html", label: "AI で運用した X アカウントの事例" },
+        { path: "sessions/20261008-0920-x-operator/tone.html", label: "面白いアカウントの口調" }
+      ]
+    },
+    {
       path: "sessions/20261007-1727-sns-marketing/index.html",
       label: "10/07 SNS で売る事例の調査",
       children: [
@@ -191,7 +199,8 @@
         { label: "処理落ちの確かめ方", path: "devops/perf-check/index.html", level: 1 },
         { label: "多言語の決まり事", path: "devops/localization/index.html", level: 1 },
         { label: "App Store の掲載情報", path: "devops/app-store/index.html", level: 1 },
-        { label: "SNS で発信するときの決まり事", path: "devops/sns-marketing/index.html", level: 1 }
+        { label: "SNS で発信するときの決まり事", path: "devops/sns-marketing/index.html", level: 1 },
+        { label: "広報担当AI の決まり事", path: "devops/x-operator/index.html", level: 1 }
       ]
     },
     {

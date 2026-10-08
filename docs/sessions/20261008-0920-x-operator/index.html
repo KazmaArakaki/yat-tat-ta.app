@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="session-state" content="developing">
+<meta name="state" content="developing">
+<title>X の広報担当AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=M+PLUS+Rounded+1c:wght@500;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+        round: ['"M PLUS Rounded 1c"', '"Noto Sans JP"', 'sans-serif']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } }
+      },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+<style>
+.lnk { text-decoration:underline; text-decoration-color:rgba(229,51,122,.5); text-decoration-thickness:2px; text-underline-offset:4px; }
+.lnk:hover { text-decoration-color:#E5337A; }
+</style>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-5xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <time datetime="2026-10-08T09:20">2026-10-08 09:20</time>
+      <span>/</span>
+      <span>設計セッション</span>
+      <span class="rounded-full border border-dopa bg-dopa-soft px-2.5 py-0.5 font-bold text-ink">状態：developing</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl">X の広報担当AI</h1>
+  </header>
+
+  <section id="order" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="relative overflow-hidden rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916] sm:p-8">
+      <div class="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-dopa-soft"></div>
+      <p class="relative font-mono text-xs uppercase tracking-[0.2em] text-dopa">開発者の注文</p>
+      <p class="relative mt-6 font-display text-3xl leading-snug tracking-wide sm:text-4xl">審査待ちの間に、X のアカウントへ投稿する AI について考えたい</p>
+      <p class="relative mt-4 text-sm text-ink/70">アカウント <a href="https://x.com/yattattadotcom" class="lnk">@yattattadotcom</a> は作ってあり、自己紹介に「作った本人（とAI）が運用しています」と書いた（<a href="../20261007-1727-sns-marketing/index.html" class="lnk">前のセッション</a>）。名前は「広報兼サポート担当」。</p>
+    </div>
+  </section>
+
+  <section id="rules" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01 / rules</p>
+    <h2 class="mt-2 font-display text-3xl">X は AI の投稿を許しているのか</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>2026年の X は、AI のアカウントを締め出しにかかっています。170万の AI ボットを消し、X の幹部は「人が画面を叩いていないアカウントは止める」とまで言った、と報じられました。広報担当を AI にした途端、アカウントごと止められるのではないか。最初に引っかかったのはそこでした。</p>
+      <p>読み進めると、線は別のところに引かれていました。幹部自身が「公式の API なら使ってよい」と添えています。止められているのは、画面を自動で操作するボットと、頼まれてもいないのに他人の投稿へ返信して回る AI です。自分の投稿を API で出すこと、AI が書いた文を出すことは、X の自動化のルールで認められています。</p>
+    </div>
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full min-w-[36rem] text-left text-sm">
+        <caption class="pb-2 text-left font-mono text-xs text-mute">表1　自動で動かすときの X のルール（2026年4月改定。公式のページは 403 で読めず、検索の抜粋と解説で確かめた）</caption>
+        <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="py-2 pr-3">してよい</th><th class="py-2 pr-3">してはいけない</th></tr></thead>
+        <tbody class="[&>tr]:border-b [&>tr]:border-rule [&_td]:py-2.5 [&_td]:pr-3 [&_td]:align-top">
+          <tr><td>公式の API で、自分の投稿を出す。AI が書いた文でもよい</td><td>ブラウザやアプリの画面を自動で操作して投稿する</td></tr>
+          <tr><td>自分あての返信や引用に、1回だけ自動で返信する</td><td>頼まれていない人へ、自動で返信やメンションを送って回る</td></tr>
+          <tr><td>予約投稿</td><td>同じ文の投稿を繰り返す。誤解を招くリンクを自動で送る</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">API で動かすアカウントは、プロフィールに「自動化」のラベル（Automated）を付ける決まりがある。ラベルは、運用している人のアカウントとつながる。また、API からの返信は、相手がこちらをメンションしたか引用したときにしか送れなくなった（2026年2月）。</p>
+    <p class="mt-3 font-mono text-[11px] text-mute [&_a]:break-all">出典 <a class="lnk" href="https://help.x.com/en/rules-and-policies/x-automation">X Automation rules</a>（検索の抜粋） / <a class="lnk" href="https://piunikaweb.com/2026/02/24/x-api-blocks-automated-spam-replies/">PiunikaWeb 2026-02-24</a> / <a class="lnk" href="https://almcorp.com/blog/x-ai-bot-crackdown-grok-human-only-rules/">ALM Corp</a> / <a class="lnk" href="https://www.socialmediatoday.com/news/x-formerly-twitter-moves-to-stamp-out-ai-bots-while-promoting-grok/812910/">Social Media Today</a></p>
+  </section>
+
+  <section id="role" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / role</p>
+    <h2 class="mt-2 font-display text-3xl">広報担当AI の仕事</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p><a href="../../glossary.html#x-operator" class="lnk">広報担当AI</a>は、@yattattadotcom の文を書く役です。出すのは開発者で、X のアプリから手で出します（開発者が決定、2026-10-08）。</p>
+      <p>全部を任せたい気持ちは分かります。けれども、フォロワー0の新しいアカウントで、最初の数本が売り込みに見えれば、「興味なし」とミュートで大きく減点されます（<a href="../20261007-1727-sns-marketing/x-video.html#algorithm" class="lnk">X の重み</a>）。健康の効果を書かない、パチンコの語を書かない、という決まり事も、一度破れば取り消せません。AI に任せる範囲は、出した投稿の数字を見ながら広げます。</p>
+    </div>
+    <ol class="mt-6 grid max-w-3xl gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs font-bold text-dopa">1　書く</p><p class="mt-2">投稿の文を書き、要るなら動画を作る（<code class="font-mono text-xs">reel.sh</code>）。<a href="../../devops/sns-marketing/index.html#check" class="lnk">出す直前の点検5つ</a>に自分でかける。</p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs font-bold text-dopa">2　見せる</p><p class="mt-2">開発者に下書きを見せ、OK をもらう。直しを頼まれたら書き直す。</p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs font-bold text-dopa">3　出す</p><p class="mt-2">開発者が X のアプリに文を貼り、動画を付けて出す（動画は AirDrop で iPhone へ）。出した投稿の URL を Claude に伝え、記録に残す。同じ文を二度出さないため。</p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs font-bold text-dopa">4　答える</p><p class="mt-2">開発者が、届いた返信や質問をこの会話に貼る。AI が返事の下書きを作り、開発者が自分の言葉に直して手で出す。1つの問いに返事は1回。</p></li>
+    </ol>
+  </section>
+
+  <section id="how" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / how</p>
+    <h2 class="mt-2 font-display text-3xl">どこで動かし、誰が出すか</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>サーバーに AI を置き、毎日決まった時刻に動かす。最初はそう考えました。ところが、開発者が見てから出すなら、毎日の起点は開発者になります。それなら、いま使っている Claude Code のセッションで「今日の投稿を作って」と頼めば足ります。</p>
+      <p>次に考えたのは、OK のあとに API で出すことでした。ただ、X の API には下書きを置く口がなく、下書きはどのみち会話の中にあります。そして事例では、API で1件ずつ承認して出していたアカウントでも凍結されていました。1日1本なら、開発者がアプリに貼って出しても約2分です。それなら、人が画面を叩いて出すのがいちばん安全です。</p>
+    </div>
+    <div class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <div class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><p class="font-mono text-xs font-bold text-dopa">決定　手で出す</p><p class="mt-2 leading-relaxed">開発者が Claude Code で頼む → AI が会話の中に下書き → 開発者が直して OK → 開発者が X のアプリから手で出す（開発者が決定、2026-10-08）。X の API も、自動化のラベルも要らない。費用もかからない。</p></div>
+      <div class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">あとで考える　API で出す</p><p class="mt-2 leading-relaxed">投稿が続き、1本2分の手間を省く価値が出てきたら。そのときは自動化のラベルを付け、1日の上限と止める仕組みを入れる。返事は API では出さない（AI の返信は X の事前の承認が要る）。</p></div>
+    </div>
+  </section>
+
+  <section id="impl" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / implementation</p>
+    <h2 class="mt-2 font-display text-3xl">作ったもの</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">アプリのデータにも、保存している記録にも触れません。X の API を使わないので、鍵も費用もありません。</p>
+    <ol class="mt-6 flex max-w-3xl flex-col gap-3 text-sm">
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>1. スキル <code class="font-mono text-xs">.claude/skills/x-post/</code></b><br><span class="text-ink/70">「今日の投稿を作って」で動く。種類を決める → ネタを選ぶ → 書く → 画像 → 宣伝なら目標 → 自分で点検 → 見せる → 出したら記録、の手順。決まり事は docs を毎回読ませ、スキルには写さない。二重に持つと、片方だけ直して食い違う。投稿はしない。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>2. 投稿の記録 <code class="font-mono text-xs">marketing/x/posts.json</code></b><br><span class="text-ink/70">出した日時、種類、型、文、画像、使ったストック、URL、返事、宣伝の目標と結果。割合を数える、同じ文を出さない、効いた型を見返す、ためのもの。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>3. 紹介のストック <code class="font-mono text-xs">marketing/x/sources.json</code></b><br><span class="text-ink/70">読んだ論文と紹介したいポスト。確かめた中身を残し、下書きのたびに数字を取り違えないようにする（開発者の注文、2026-10-08）。要旨を確かめた2本を入れてある。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>4. 画像のカード <code class="font-mono text-xs">marketing/x/card.py</code></b><br><span class="text-ink/70">見出し、本文、対象と出典、スクワットマンの隊列を 1200 × 675 に描く（開発者の注文、2026-10-08）。AI の画像生成は使わない。人形は動画と同じ reel_squad.swift で描く。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>5. 小ネタの絵 <code class="font-mono text-xs">marketing/x/gemini_image.py</code></b><br><span class="text-ink/70">Nano Banana 2.1 に、場面の説明と、reel_squad.swift で描いたスクワットマンの見本を渡す。1枚約7円と数え、月900円で止まる（開発者の注文、2026-10-08）。</span></li>
+    </ol>
+  </section>
+
+  <section id="cases" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / cases</p>
+    <h2 class="mt-2 font-display text-3xl">事例を見て、直したところ</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>出す前に人が見れば、凍結は避けられる。この設計の柱はそこでした。ところが、1件ずつ人が承認し、AI だと名乗っていたアカウントでも凍結されていました。人の承認が守るのは文の中身で、X が見ているのはアカウントの振る舞いです。</p>
+      <p>もう1つ、返信には別の決まりがありました。AI が書いた返信は、X の事前の承認が要る。人が見た下書きが、これに当たるかは書かれていません。</p>
+    </div>
+    <ul class="mt-6 flex max-w-3xl flex-col gap-2 text-sm">
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　投稿も返事も、AI は下書きまで。開発者が直して X のアプリから手で出す（開発者が決定、2026-10-08）。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>提案</b>　毎日同じ時刻に出さない。手で出すなら、自然にそうなる。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>提案</b>　開発者も @yattattadotcom で手を動かす。ときどき、いいねや、手で書いた投稿を混ぜる。投稿のほかに何もしないアカウントは、凍結の理由に挙がっていた。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>提案</b>　URL だけの投稿をしない。本文と動画で何のアプリか分かる投稿にする（<a href="../20261007-1727-sns-marketing/x-video.html" class="lnk">X の縦型動画の型</a>のとおり）。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>提案</b>　良し悪しはフォロワーではなく DL で見る。App Store Connect の DL の数と、出した投稿の日時を記録に並べる。AI に30日任せた例は、65本出して売上$0だった。</li>
+    </ul>
+    <a href="cases.html" class="mt-6 block max-w-3xl rounded-2xl border-2 border-ink bg-white p-5 shadow-[4px_4px_0_#1C1916] transition hover:-translate-y-0.5">
+      <p class="font-mono text-xs font-bold text-dopa">事例</p>
+      <p class="mt-1 font-display text-xl">AI で運用した X アカウントの事例</p>
+      <p class="mt-1 text-sm text-ink/70">うまくいった6件、うまくいかなかった8件、設計にかかわる X の決まり、AI だと名乗ったアカウントの受け止められ方。</p>
+    </a>
+  </section>
+
+  <section id="persona" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / persona</p>
+    <h2 class="mt-2 font-display text-3xl">スクワットマンとして、名乗って書く</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>開発者の注文は4つでした（2026-10-08）。AI の投稿には、それと分かる印を付ける。AI はスクワットマンとして話す。雑談8割、宣伝2割で出す。宣伝には、下書きの段階で24時間の目標を置き、出したあとで評価する。</p>
+      <p>声を一から作るより、アプリで起きていることを性格にしました。指が触れたらしゃがみ、2回ごとに仲間が増え、叩き切ったら床で寝る。雑談の種がアプリの中にあれば、雑談がそのままアプリの紹介にもなります。</p>
+    </div>
+    <ul class="mt-6 flex max-w-3xl flex-col gap-2 text-sm">
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　AI が書いた投稿の頭に「🤖」（<a href="../../glossary.html#ai-label" class="lnk">AI ラベル</a>）。AI はスクワットマンとして話す。雑談8割、<a href="../../glossary.html#promo-post" class="lnk">宣伝投稿</a>2割。宣伝には24時間の目標（表示、いいね、リポスト）を置く（開発者の注文、2026-10-08）。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><s><b>提案</b>　一人称は「ぼく」、常体の短い文、少しとぼけた声。</s>開発者が「面白くなさすぎる」と判断し、作り直した。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>提案</b>　直近10本で宣伝が2本未満、かつ前の宣伝から雑談が3本以上なら、宣伝を書いてよい。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>提案</b>　最初の3本の目標は仮に、表示1,000、いいね10、リポスト2。4本目からは、これまでの中央値の1.2倍。24時間後に開発者が数を貼り、AI が達成か未達かと、次に変えることを記録する。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>提案</b>　自己紹介に「🤖 の付いた投稿は、AI のスクワットマンが書いています。」を足す。</li>
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　雑談の見本を見た開発者が「面白くなさすぎる」と判断した。雑談の大半を、スクワットの新しい研究や話題のポストの紹介にする。割合は紹介6、小ネタ2、宣伝2（開発者が決定、2026-10-08）。</li>
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　SNS で研究を紹介してよいことにした。「こういう研究がある」で止め、対象と出典を付け、同じ投稿でアプリを勧めない。AI は要旨を読んでから書き、開発者が出典を確かめてから出す（開発者が決定、2026-10-08）。「SNS では研究の1文も書かない」という前の決まりを改めた。決まりの元は<a href="../../devops/health-wording/index.html#sns" class="lnk">健康効果の書き方</a>。</li>
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　審査待ちの間から、雑談を出し始める（開発者が決定、2026-10-08）。</li>
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　開発者が新しい口調と型を「良い感じ」と判断した。投稿に画像を付けてよい。引用した論文とポストは紹介のストックにためる（開発者の注文、2026-10-08）。画像は AI で生成せず、スクワットマンの絵と文字だけのカードにする。</li>
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　小ネタの画像にかぎり、Gemini（Nano Banana 2.1）で描いてよい。文字を描かせない、アプリと同じ棒人間を見本に渡す、X の「AIで生成」ラベルを付ける、目で見てから使う（開発者が決定、2026-10-08）。鍵の月の上限は1,000円で、スクリプトは900円で止まる。前の「AI の画像生成は使わない」を、小ネタについて改めた。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">口調と文体は、X で人気のある面白いアカウントを調べてから決め直す（開発者の注文、2026-10-08）。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>提案</b>　面白さは声より仕掛けから来ていた（<a href="tone.html" class="lnk">面白いアカウントの口調</a>）。一人称が仲間の人数で変わる（ぼく → ぼくら → 我々）、ト書き（しゃがむ）（仲間+1）、棒人間の自虐を型にする。研究の紹介は3つの型（数字と仲間の換算、〇〇派と〇〇派、いい話とただし書き）、小ネタは4つの型。見本は<a href="../../devops/x-operator/index.html#persona" class="lnk">広報担当AI の決まり事</a>。</li>
+    </ul>
+    <a href="../../devops/x-operator/index.html" class="mt-6 block max-w-3xl rounded-2xl border-2 border-ink bg-white p-5 shadow-[4px_4px_0_#1C1916] transition hover:-translate-y-0.5">
+      <p class="font-mono text-xs font-bold text-dopa">決まり事</p>
+      <p class="mt-1 font-display text-xl">広報担当AI の決まり事</p>
+      <p class="mt-1 text-sm text-ink/70">AI ラベル、スクワットマンの声と書かないこと、文の見本、雑談と宣伝の数え方、宣伝の目標と24時間後の振り返り、記録の形。</p>
+    </a>
+  </section>
+
+  <section id="ask" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">07 / developer</p>
+    <h2 class="mt-2 font-display text-3xl">開発者に決めてほしいこと</h2>
+    <ol class="mt-6 grid max-w-3xl gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><p class="font-mono text-xs font-bold text-dopa">決定</p><p class="mt-2"><s>出す前に全部見るか、動かし方、自動化のラベル。</s>手で出すので、全部を見ることになり、ラベルは要らない（2026-10-08）。</p></li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">決定</p><p class="mt-2"><s>審査待ちの間に出すか。</s>雑談を今日から出す（2026-10-08）。</p></li>
+    </ol>
+  </section>
+
+  <section id="links" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">08 / links</p>
+    <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">開発/運用</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../devops/x-operator/index.html" class="font-bold lnk">広報担当AI の決まり事</a><a href="../../devops/sns-marketing/index.html" class="font-bold lnk">SNS で発信するときの決まり事</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../glossary.html#x-operator" class="font-bold lnk">広報担当AI</a><a href="../../glossary.html#source-stock" class="font-bold lnk">紹介のストック</a><a href="../../glossary.html#stealth-marketing" class="font-bold lnk">ステマ規制</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">前のセッション</p><a href="../20261007-1727-sns-marketing/index.html" class="mt-1 block font-bold lnk">SNS で売る事例の調査</a></li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

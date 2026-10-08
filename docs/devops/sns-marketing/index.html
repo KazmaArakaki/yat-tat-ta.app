@@ -50,7 +50,7 @@ tailwind.config = {
 
   <section id="why" class="mt-14">
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">why</p>
-    <h2 class="mt-2 font-display text-3xl">ストアで避けた言葉は、SNS でも避ける</h2>
+    <h2 class="mt-2 font-display text-3xl">ストアより、投稿のほうが慎重に</h2>
     <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
       <p>App Store の説明文には、健康の効果も、パチンコの語も、慎重に外しました。説明文は審査の人が読み、年齢制限の答えと照らされるからです。</p>
       <p>SNS の投稿は、誰にも審査されません。だから緩めていい、と考えたくなる。けれども、投稿のほうが条件は悪いのです。説明文には研究の1文の前後に注意書きを置けましたが、15秒の動画のキャプションにはその余地がない。<a href="../app-store/index.html" class="lnk">掲載情報</a>でキーワードに健康の語を入れなかったのと、同じ理由です。</p>
@@ -66,7 +66,7 @@ tailwind.config = {
         <caption class="pb-2 text-left font-mono text-xs text-mute">表1　SNS で発信するときの決まり（2026-10-07 に読んだ規約と法令による）</caption>
         <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="py-2 pr-3">#</th><th class="py-2 pr-3">決まり</th><th class="py-2 pr-3">理由</th></tr></thead>
         <tbody class="[&>tr]:border-b [&>tr]:border-rule [&_td]:py-3 [&_td]:pr-3 [&_td]:align-top">
-          <tr><td class="font-mono font-bold text-dopa">1</td><td class="font-bold">健康の効果を書かない。研究の1文も投稿には書かない。ダイエット、痩せる、血糖値の語も使わない</td><td>投稿は前後の文脈を持てない。書いてよい範囲は<a href="../health-wording/index.html" class="lnk">健康効果の書き方</a>のストアの説明文だけで、SNS はキーワードと同じ扱いにする</td></tr>
+          <tr><td class="font-mono font-bold text-dopa">1</td><td class="font-bold">アプリと体の効果を結ばない。研究は「こういう研究がある」で止め、対象と出典を付けた紹介の投稿でだけ書く。紹介の投稿でアプリを勧めない。痩せる、治る、病気の名前、「〇%下がる」の言い切りは書かない</td><td>投稿は前後の文脈を持ちにくい。研究の紹介の決まりは<a href="../health-wording/index.html#sns" class="lnk">健康効果の書き方の SNS の節</a>。2026-10-08 に「SNS では研究の1文も書かない」から改めた（開発者が決定）</td></tr>
           <tr><td class="font-mono font-bold text-dopa">2</td><td class="font-bold">パチンコ、スロット、ギャンブル、くじ、当たりの語を書かない。演出の言葉（激熱、FEVER）は、画面にあるとおり見せてよい</td><td>ストアの掲載情報の決まり4と揃える。ストアで避けた語を SNS で使えば、ストアで避けた意味が薄れる。<a href="../../glossary.html#dopa-apps" class="lnk">ドパ〇〇</a>の他のアプリがパチンコ風を名乗っていても、真似しない</td></tr>
           <tr><td class="font-mono font-bold text-dopa">3</td><td class="font-bold">人に頼んだ投稿、物や値引きやお金を渡した投稿には、冒頭に分かりやすく「PR」か「広告」を出させる。TikTok はブランドコンテンツの設定、X は Paid Partnership のラベルを使う。自分のアカウントは、プロフィールに作った本人だと書く</td><td><a href="../../glossary.html#stealth-marketing" class="lnk">ステマ規制</a>（2023/10/1 施行）。処分されるのは頼んだ側。ハッシュタグの山に #PR を紛れ込ませるのも、分かりにくい表示とされうる。表示のない投稿は TikTok のおすすめに載らないことがある</td></tr>
           <tr><td class="font-mono font-bold text-dopa">4</td><td class="font-bold">★やレビューと引き換えに、何も渡さない。アプリの中で評価を頼むなら、Apple の仕組み（SKStoreReviewController）だけを使う</td><td>App Store 審査ガイドライン 5.6.1 と 3.2.2。お金や見返りでレビューを集めると、Developer Program から除かれることもある。高評価と引き換えの割引は、日本でステマ規制の措置命令になった（2024/6、2025/3）</td></tr>
@@ -82,7 +82,7 @@ tailwind.config = {
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">check</p>
     <h2 class="mt-2 font-display text-3xl">出す直前の点検（約1分）</h2>
     <ol class="mt-6 flex max-w-2xl flex-col gap-2 text-sm">
-      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><b class="font-mono text-dopa">1</b>　体がどうなる、と読める言葉はないか（痩せる、血糖値、健康に）</li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><b class="font-mono text-dopa">1</b>　アプリを使うと体がこうなる、と読めないか。研究の紹介なら、対象と出典があり、アプリを勧めていないか</li>
       <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><b class="font-mono text-dopa">2</b>　パチンコ、ギャンブルの語はないか（キャプション、ハッシュタグ、動画の文字）</li>
       <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><b class="font-mono text-dopa">3</b>　映っている画面は、ストアに出ている版のものか</li>
       <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><b class="font-mono text-dopa">4</b>　人に頼んだ投稿なら、冒頭に PR の表示があるか</li>
@@ -104,7 +104,7 @@ tailwind.config = {
         <tbody class="[&>tr]:border-b [&>tr]:border-rule [&_td]:py-2.5 [&_td]:pr-3 [&_td]:align-top">
           <tr><td class="font-bold">名前</td><td>スクワットアプリ【Yat Tat Ta】広報兼サポート担当（開発者が決定、2026-10-07）</td></tr>
           <tr><td class="font-bold">ユーザー名</td><td><a class="lnk" href="https://x.com/yattattadotcom">@yattattadotcom</a>（開発者が作成、2026-10-07）</td></tr>
-          <tr><td class="font-bold">自己紹介</td><td>食後のスクワット、終わったら回数だけ叩く iPhone アプリ「Yat Tat Ta」。叩くたびに演出がインフレ、ときどき FEVER、最後の1打で筋肉確定。個人開発。作った本人（とAI）が運用しています。（開発者が決定、2026-10-08）</td></tr>
+          <tr><td class="font-bold">自己紹介</td><td>食後のスクワット、終わったら回数だけ叩く iPhone アプリ「Yat Tat Ta」。叩くたびに演出がインフレ、ときどき FEVER、最後の1打で筋肉確定。個人開発。作った本人（とAI）が運用しています。（開発者が決定、2026-10-08）<br><span class="text-ink/60">足す提案：「🤖 の付いた投稿は、AI のスクワットマンが書いています。」（<a href="../x-operator/index.html#label" class="lnk">AI ラベル</a>）</span></td></tr>
           <tr><td class="font-bold">ウェブサイト</td><td>https://yat-tat-ta.web.app/（公開日に App Store のページへ差し替える）</td></tr>
           <tr><td class="font-bold">アイコン</td><td>アプリアイコンと同じ絵。400 × 400。X が丸く切り抜く</td></tr>
           <tr><td class="font-bold">ヘッダー</td><td>スクワットマンの隊列。1500 × 500</td></tr>
@@ -112,6 +112,7 @@ tailwind.config = {
         </tbody>
       </table>
     </div>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">投稿と返事を書く AI の設計は<a href="../../sessions/20261008-0920-x-operator/index.html" class="lnk">X の広報担当AI</a>。</p>
     <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">アイコンとヘッダーは <code class="font-mono text-xs">cd ios &amp;&amp; python3 Design/x_profile.py</code> で ios/Design/Reels/x-profile/ に書き出す（Git には入れない）。ヘッダーの隊列は、動画の左右の隊列と同じ <code class="font-mono text-xs">reel_squad.swift</code> で描く。</p>
   </section>
 

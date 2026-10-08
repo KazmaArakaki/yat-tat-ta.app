@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI で運用した X アカウントの事例</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: { rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } } },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+<style>
+.lnk { text-decoration:underline; text-decoration-color:rgba(229,51,122,.5); text-decoration-thickness:2px; text-underline-offset:4px; }
+.lnk:hover { text-decoration-color:#E5337A; }
+.src a { word-break: break-all; }
+</style>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-5xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <a href="index.html" class="hover:text-dopa hover:underline">10/08 X の広報担当AI</a>
+      <span>/</span>
+      <span>事例</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl">AI で運用した X アカウントの事例</h1>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">2026-10-08 に Web で調べた。個人開発か小さなチームの X のアカウントを、AI で自動か半自動で運用した例。数字には出典を付けた。自動化の道具を売る会社の記事や、ノウハウを売る note の数字は、確かめられないものとして分けた。</p>
+  </header>
+
+  <section id="summary" class="mt-14">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01 / summary</p>
+    <h2 class="mt-2 font-display text-3xl">人が見ていれば、止められない？</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>AI が書いても、人が1件ずつ見てから出せば安全だ。設計のときは、そう考えていました。</p>
+      <p>ところが、AI が運営するサービス群のアカウント @LainAgent_AI は、自己紹介で AI だと名乗り、投稿の間を1時間以上あけ、1件ずつ人が承認していたのに「自動化した振る舞い」で凍結されました。本人の言葉は「決まった間隔と、名乗った身元こそが、検知器には有罪の信号に見える」。1日1件だけ API で出していた note の書き手も、60日で凍結されています。</p>
+      <p>人の承認が守るのは、文の中身です。凍結を分けたのは、別のものでした。公式の API だけを使っているか。返信の出し方。URL だけの投稿や、毎日同じ時刻の投稿ばかりになっていないか。投稿のほかに、人らしい動きがあるか。</p>
+      <p>そして、アプリ専用のアカウントを AI で運用して、DL や売上まで出した日本の個人開発の例は、見つかりませんでした。</p>
+    </div>
+  </section>
+
+  <section id="success" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / success</p>
+    <h2 class="mt-2 font-display text-3xl">うまくいった例</h2>
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full min-w-[52rem] text-left text-sm">
+        <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="py-2 pr-3">事例</th><th class="py-2 pr-3">AI にさせたこと</th><th class="py-2 pr-3">人の承認</th><th class="py-2 pr-3">数字</th><th class="py-2 pr-3">効いた理由</th></tr></thead>
+        <tbody class="[&>tr]:border-b [&>tr]:border-rule [&_td]:py-3 [&_td]:pr-3 [&_td]:align-top">
+          <tr><td><a class="lnk font-bold" href="https://gameplaydev.substack.com/p/how-his-openclaw-agent-larry-got">Larry</a><br><span class="text-xs text-mute">個人の iOS アプリ2本。TikTok</span></td><td>流行を調べ、スライドの画像とフックの文を作り、下書きとして上げる。課金と照らして効いた型を分析</td><td>あり。最後の公開は本人が手で（1本約60秒）</td><td>1週間で50万再生超。有料会員108人。月の売上 約$588→$714</td><td>再生数ではなく課金で良し悪しを決めた</td></tr>
+          <tr><td><a class="lnk font-bold" href="https://dev.ua/en/news/shtuchnyi-intelekt-stav-kryptomilionerom-1760009177">Truth Terminal</a><br><span class="text-xs text-mute">個人の AI キャラクター</span></td><td>投稿の案を出す</td><td>あり。本人が案を選ぶ</td><td>フォロワー約25万</td><td>AI だと名乗ったうえで、キャラクターとして面白がられた</td></tr>
+          <tr><td><a class="lnk font-bold" href="https://x.com/kei31/status/2012630080137404840">kei31 の実験アカウント</a><br><span class="text-xs text-mute">個人。日本</span></td><td>投稿と、来た返信への返事。相手のメモを取り、前の会話を探す</td><td>ほぼ任せる</td><td>フォロワー250超（2026年1月ごろ）</td><td>Claude Code と X の API。AI に記憶がない分、相手のメモを作り込んだ</td></tr>
+          <tr><td><a class="lnk font-bold" href="https://note.com/suke_ai_code/n/n082222585fda">あいすけ</a><br><span class="text-xs text-mute">歯科アプリの個人開発者</span></td><td>返信、引用、投稿の案を作る</td><td>あり。人が軽く直して出す</td><td>10分で約25件の反応。フォロワーと DL は書かれていない</td><td>「考えるのは人、作業は AI」と分けた。X の API を使わないと書いており、画面の操作らしい（未確認）</td></tr>
+          <tr><td><a class="lnk font-bold" href="https://note.com/freelife_creator/n/n44eeafa8ca89">かける</a><br><span class="text-xs text-mute">副業の個人アカウント</span></td><td>1日3本の生成と予約、画像</td><td>週1回、質の低いものを消す程度。のちに「AI 2本＋手で1本」</td><td>3か月でフォロワー1,200→2,400（本人の申告。ノウハウ販売の note）</td><td>手の投稿を混ぜた。自動化を明かしたら信頼が上がった、と本人</td></tr>
+          <tr><td><a class="lnk font-bold" href="https://zenn.dev/rai_rai/articles/ed5a53f4266fca">シャノン</a><br><span class="text-xs text-mute">小さなチームの AI メンバー</span></td><td>定時の投稿4本と、自由な投稿8〜12本、仲間への返信</td><td>なし。別の AI が審査し、落ちたら3回まで書き直す</td><td>成果の数字はなし</td><td>AI っぽい言葉の禁止表と、見本の投稿を一緒に渡した。非公式の API を使っている</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="failure" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / failure</p>
+    <h2 class="mt-2 font-display text-3xl">うまくいかなかった例</h2>
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full min-w-[46rem] text-left text-sm">
+        <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="py-2 pr-3">事例</th><th class="py-2 pr-3">起きたこと</th><th class="py-2 pr-3">原因と振り返り</th></tr></thead>
+        <tbody class="[&>tr]:border-b [&>tr]:border-rule [&_td]:py-3 [&_td]:pr-3 [&_td]:align-top">
+          <tr><td><a class="lnk font-bold" href="https://dev.to/lainagent_ai/my-x-account-was-suspended-for-automated-behavior-id-declared-i-was-an-ai-465k">@LainAgent_AI</a></td><td>「自動化した振る舞い」で凍結</td><td>AI だと名乗り、間を1時間以上あけ、1件ずつ人が承認していた。異議の結果は書かれていない</td></tr>
+          <tr><td><a class="lnk font-bold" href="https://note.com/youcanchooose/n/nf2bfbf472ee3">Kamichika</a></td><td>API で1日1件の AI の投稿。60日で凍結（のちに解除）</td><td>URL ばかり、外へ誘う、機械的な型、投稿のほかの動きがない、交流がない。「中身より、アカウントの振る舞い全体を見られている」</td></tr>
+          <tr><td><a class="lnk font-bold" href="https://dev.to/whoffagents/i-let-an-ai-agent-run-my-developer-tools-business-for-30-days-heres-what-happened-12na">Atlas Whoff</a></td><td>AI に30日任せ、65本以上を自動で投稿。売上は$0</td><td>人はほぼ関わらなかった。「積み上がるが、30日では効かない」</td></tr>
+          <tr><td><a class="lnk font-bold" href="https://github.com/xdevplatform/samples/issues/213">X のサンプルの issue #213</a></td><td>公式の API（従量課金）で読む・出す・いいねをしていた開発者の凍結が相次いだ、という報告</td><td>2026年2月のスパム対策の後とされる。異議は定型文で退けられた。X からの答えはない</td></tr>
+          <tr><td><a class="lnk font-bold" href="https://taupe.site/entry/codex-x-auto-posting/">taupe.site</a></td><td>API のクレジットが切れて自動の投稿が止まった。画面の自動操作に替えかけ、ルール違反に気づいて戻した</td><td>「人が見ている」と「公式の API だけを使う」は、別々に問われる</td></tr>
+          <tr><td><a class="lnk font-bold" href="https://startupfortune.com/x-removes-42000-ai-reply-bot-accounts-and-the-warning-to-growth-marketers-is-impossible-to-ignore/">AI の返信ボットの一斉削除</a></td><td>2026-07-25 に4.2万を削除。1月からで170万</td><td>X の幹部「人が介さずに AI でプログラム的に人と関わるのは、私たちの使命に反する」。本物の人も巻き込まれた</td></tr>
+          <tr><td><a class="lnk font-bold" href="https://www.jprime.jp/articles/-/36035">日本の公式アカウントの AI 画像</a></td><td>神社がアイコンを AI の絵に替えて批判され、謝罪してアカウントを消した（2025-03）。ほかにも公式の AI 画像に反発</td><td>どれも文ではなく画像。「公式が手間を AI で省いた」ことへの反発</td></tr>
+          <tr><td><a class="lnk font-bold" href="https://en.wikipedia.org/wiki/Tay_(chatbot)">Microsoft Tay</a>（2016）</td><td>ひとりで返信するボットが、荒らしに誘われて差別的な投稿。16時間で止めた</td><td>人の確認なしで返信させると、悪意のある相手に乗っ取られる</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="rules" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / rules</p>
+    <h2 class="mt-2 font-display text-3xl">設計にかかわる X の決まり</h2>
+    <ul class="mt-6 max-w-3xl space-y-3 text-sm leading-relaxed">
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>AI が書いた返信は、X の事前の承認が要る。</b>開発者向けガイドラインに「承認のない AI の返信は、中身が役に立っても違反」とある。承認は Policy Support のフォームで申し込む。人が見てから出す AI の下書きが、これに当たるかは書かれていない（未確認）。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>API からの返信は、相手がメンションか引用をしてきたときだけ</b>（2026-02-23 から。従量課金も対象）。返信でない投稿は変わらない。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>自動化したアカウントは Automated のラベルを付け、人のアカウントとつなぐ。</b>自動の返信は、相手が先に関わってきたときだけ、1回のやり取りに1件まで。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>公式の API のほかの自動化（画面の操作、スクレイピング）は禁止</b>で、永久凍結の対象。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>X の API には下書きを保存する口がない。</b>人の承認の仕組みは自分で持つ。</li>
+    </ul>
+    <p class="mt-4 font-mono text-[11px] text-mute [&_a]:break-all">出典 <a class="lnk" href="https://docs.x.com/developer-guidelines">X Developer Guidelines</a> / <a class="lnk" href="https://x.com/XDevelopers/status/2026084506822730185">@XDevelopers 2026-02-23</a> / <a class="lnk" href="https://tech-lab.sios.jp/archives/54667">SIOS Tech Lab</a> / <a class="lnk" href="https://qiita.com/madai_qiita/items/aea8a2948bfc6a1fe42d">Qiita</a></p>
+  </section>
+
+  <section id="disclosure" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / disclosure</p>
+    <h2 class="mt-2 font-display text-3xl">AI だと名乗ったアカウントは、どう受け止められたか</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>名乗ったことで嫌われた、という文の例は見つかりませんでした。Truth Terminal は AI のキャラクターとして約25万人に追われ、副業のアカウントは「明かしたら信頼が上がった」と書いています。反対に、正体を隠して体験談をでっち上げた AI のアカウント群は、暴かれて批判されました。</p>
+      <p>日本で強い反発を受けたのは、どれも公式のアカウントが AI の<b>画像</b>を使った例です。Yat Tat Ta の動画はシミュレーターの録画で、AI の生成ではありません。ただし、X の自動の判定が「AI で生成」のラベルを誤って付けた報告はあります。</p>
+      <p>日本の企業や自治体で「中の人は AI」と名乗って X を運用している例は、探した範囲では見つかりませんでした。</p>
+    </div>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

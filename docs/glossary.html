@@ -105,6 +105,10 @@ tailwind.config = {
     <a href="#hook" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">フック</a>
     <a href="#build-in-public" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">ビルド・イン・パブリック</a>
     <a href="#stealth-marketing" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">ステマ規制</a>
+    <a href="#x-operator" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">広報担当AI</a>
+    <a href="#ai-label" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">AI ラベル</a>
+    <a href="#promo-post" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">宣伝投稿</a>
+    <a href="#source-stock" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">紹介のストック</a>
   </nav>
 
   <!-- Yat Tat Ta -->
@@ -1262,6 +1266,77 @@ tailwind.config = {
     <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
       <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#store-listing" class="text-dopa underline underline-offset-4">掲載情報</a><a href="#build-in-public" class="text-dopa underline underline-offset-4">ビルド・イン・パブリック</a></p></div>
       <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="devops/sns-marketing/index.html#rules" class="text-signal underline underline-offset-4">devops：SNS で発信するときの決まり事</a><a href="sessions/20261007-1727-sns-marketing/cases.html#f8" class="text-signal underline underline-offset-4">事例：ステマで処分</a></p></div>
+    </div>
+  </section>
+
+  <!-- 広報担当AI -->
+  <section id="x-operator" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#x-operator</p>
+    <h2 class="mt-1 font-display text-2xl">広報担当AI</h2>
+    <p class="mt-3 leading-relaxed">X のアカウント @yattattadotcom の投稿と返事の下書きを書く AI。アカウントの名前の「広報兼サポート担当」にあたる。下書きは Claude Code の会話に出し、開発者が直して X のアプリから手で出す。AI が自分で投稿することはしない。自己紹介の「作った本人（とAI）」の AI はこれ。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>広報担当AI に任せたら、毎日勝手に投稿してくれるんですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>書くところまでは任せられます。出すのは開発者で、X のアプリから手で出します。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>質問が来たら、自動で答えてくれますか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>返事の下書きは書きます。出すのは投稿と同じく開発者です。AI が書いた返信を自動で出すには、X の事前の承認が要ります。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#stealth-marketing" class="text-dopa underline underline-offset-4">ステマ規制</a><a href="#hook" class="text-dopa underline underline-offset-4">フック</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="sessions/20261008-0920-x-operator/index.html" class="text-signal underline underline-offset-4">セッション：X の広報担当AI</a><a href="devops/sns-marketing/index.html#account" class="text-signal underline underline-offset-4">devops：X のアカウント</a></p></div>
+    </div>
+  </section>
+
+  <!-- AI ラベル -->
+  <section id="ai-label" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#ai-label</p>
+    <h2 class="mt-1 font-display text-2xl">AI ラベル</h2>
+    <p class="mt-3 leading-relaxed">広報担当AI が書いた X の投稿の頭に置く「🤖」。出すのは開発者の手でも、文を AI が書いたことを読む人に見せるための印。開発者が自分で書いた投稿には付けない。開発者が半分以上を書き直したら外す。自己紹介で 🤖 の意味を説明する（2026-10-08、開発者の注文）。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>ぼくが少し直してから出すなら、AI が書いたとは言えないんじゃないですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>言い回しを直したくらいなら、🤖 は残します。半分以上を書き直したら、あなたの投稿として外してください。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>文の最後じゃなくて、頭に置くのはなぜですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>長い投稿は途中で折りたたまれます。頭の1文字なら、必ず見えます。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#x-operator" class="text-dopa underline underline-offset-4">広報担当AI</a><a href="#promo-post" class="text-dopa underline underline-offset-4">宣伝投稿</a><a href="#stealth-marketing" class="text-dopa underline underline-offset-4">ステマ規制</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="devops/x-operator/index.html#label" class="text-signal underline underline-offset-4">devops：広報担当AI の決まり事</a></p></div>
+    </div>
+  </section>
+  <!-- 宣伝投稿 -->
+  <section id="promo-post" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#promo-post</p>
+    <h2 class="mt-1 font-display text-2xl">宣伝投稿</h2>
+    <p class="mt-3 leading-relaxed">広報担当AI の投稿のうち、アプリを勧めるもの。App Store のリンク、動画、機能のどれかを見せる。リンクがなくても、勧めていれば宣伝に数える。残りは雑談投稿で、何も売らない。割合は雑談8割、宣伝2割。宣伝投稿には、下書きの段階で出してから24時間の目標（表示、いいね、リポスト）を置き、24時間後に達成か未達かを記録する（2026-10-08、開発者の注文）。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>スクワットマンが「今日は60回しゃがんだ」とだけ言う投稿は、宣伝ですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>雑談です。アプリを勧めていないので。ここに「食後のスクワットを記録するアプリ」と足したら宣伝です。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>目標の数は、どうやって決めるんですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>最初の3本は仮の数です。そのあとは、これまでの宣伝の中央値の1.2倍にします。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#x-operator" class="text-dopa underline underline-offset-4">広報担当AI</a><a href="#ai-label" class="text-dopa underline underline-offset-4">AI ラベル</a><a href="#hook" class="text-dopa underline underline-offset-4">フック</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="devops/x-operator/index.html#goals" class="text-signal underline underline-offset-4">devops：宣伝の目標と振り返り</a></p></div>
+    </div>
+  </section>
+
+  <!-- 紹介のストック -->
+  <section id="source-stock" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#source-stock</p>
+    <h2 class="mt-1 font-display text-2xl">紹介のストック</h2>
+    <p class="mt-3 leading-relaxed">広報担当AI が紹介に使う論文と X のポストをためておく場所（<code class="font-mono text-sm">marketing/x/sources.json</code>）。読んで確かめた中身（対象、比べたこと、要旨の結果）と、題名や誌名に病名が入るかどうかを残す。紹介に使ったら、投稿の URL を書き足す（2026-10-08、開発者の注文）。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>面白そうなポストを見つけたら、どうすればいいですか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>URL を会話に貼ってください。紹介のストックに足しておき、紹介の番が来たら使います。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>同じ論文を何回も紹介してしまいませんか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>使ったものには投稿の URL が付くので、まだ使っていないものから選びます。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#x-operator" class="text-dopa underline underline-offset-4">広報担当AI</a><a href="#health-claim" class="text-dopa underline underline-offset-4">健康効果</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="devops/x-operator/index.html#research" class="text-signal underline underline-offset-4">devops：研究と話題の紹介</a></p></div>
     </div>
   </section>
 

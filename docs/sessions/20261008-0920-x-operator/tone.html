@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>面白いアカウントの口調</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: { rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } } },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+<style>
+.lnk { text-decoration:underline; text-decoration-color:rgba(229,51,122,.5); text-decoration-thickness:2px; text-underline-offset:4px; }
+.lnk:hover { text-decoration-color:#E5337A; }
+.src a { word-break: break-all; }
+</style>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-5xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <a href="index.html" class="hover:text-dopa hover:underline">10/08 X の広報担当AI</a>
+      <span>/</span>
+      <span>口調の調査</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl">面白いアカウントの口調</h1>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">2026-10-08 に Web で調べた。X のページはほとんど読めなかったので、フォロワーの数は記事や SNS 運用会社のまとめ（【業者】）からで、いまの値ではない。決めた声は<a href="../../devops/x-operator/index.html#persona" class="lnk">広報担当AI の決まり事</a>にある。</p>
+  </header>
+
+  <section id="kigyou" class="mt-14">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01 / 中の人</p>
+    <h2 class="mt-2 font-display text-3xl">面白さは、声より仕掛け</h2>
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full min-w-[44rem] text-left text-sm">
+        <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="py-2 pr-3">アカウント</th><th class="py-2 pr-3">仕掛け</th><th class="py-2 pr-3">出典</th></tr></thead>
+        <tbody class="[&>tr]:border-b [&>tr]:border-rule [&_td]:py-2.5 [&_td]:pr-3 [&_td]:align-top">
+          <tr><td class="font-bold">シャープ</td><td>淡々とした独り言。宣伝しない。リストラ報道の日は顔文字の1行だけ出し、応援が集まった。「嫌い」を表明しないと決めている</td><td><a class="lnk" href="https://oggi.jp/7436699">Oggi</a></td></tr>
+          <tr><td class="font-bold">キングジム</td><td>毎週金曜の朝に同じアスキーアート。決まった型の繰り返し</td><td><a class="lnk" href="https://xtrend.nikkei.com/atcl/contents/18/00135/00021/">日経クロストレンド</a></td></tr>
+          <tr><td class="font-bold">セガ</td><td>朝の挨拶を定番にし、自分の弱いところを笑う</td><td><a class="lnk" href="https://gaiax-socialmedialab.jp/sns-manager-casestudies/">Gaiax</a>【業者】</td></tr>
+          <tr><td class="font-bold">タニタ</td><td>話題に「タニタ調べ」で乗る（ゴジラの体重）</td><td><a class="lnk" href="https://gaiax-socialmedialab.jp/post-56684/">Gaiax</a>【業者】</td></tr>
+          <tr><td class="font-bold">井村屋</td><td>二択で論争に火種をまく。他社との会話は短く切り上げる、などの決まりを持つ</td><td><a class="lnk" href="https://xtrend.nikkei.com/atcl/contents/18/00135/00008/">日経クロストレンド</a></td></tr>
+          <tr><td class="font-bold">ローソン（あきこちゃん）</td><td>店員というキャラの人格。問いかけで返信を誘う。2026-08 に国内企業で初めてフォロワー1000万</td><td><a class="lnk" href="https://gourmet.watch.impress.co.jp/docs/news/2138698.html">グルメ Watch</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="chara" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / キャラクター</p>
+    <h2 class="mt-2 font-display text-3xl">キャラクターが話すアカウント</h2>
+    <ul class="mt-6 max-w-3xl space-y-2 text-sm leading-relaxed">
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>チキンラーメンのひよこちゃん</b>：かわいい見た目に毒と自虐。ひよこの形の大根おろしにお湯を注いで崩す投稿は約1.3万いいね（<a class="lnk" href="https://nlab.itmedia.co.jp/cont/articles/3697234/">ねとらぼ</a>）</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>くまモン</b>：一人称ボク、語尾「〜だモン」。宣伝を直接せず、本人の感想として届ける（<a class="lnk" href="https://www.comnico.jp/we-love-social/character-account">comnico</a>【業者】）</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>有頂天エイリアンズ</b>（ヤッホーブルーイング、2025-07〜）：「地球に来たばかりの宇宙人」を AI が運用。AI のずれを、キャラの設定で吸収している（<a class="lnk" href="https://www.adkms.jp/news/20250710-2/">ADK</a>）</li>
+    </ul>
+  </section>
+
+  <section id="science" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / 研究の紹介</p>
+    <h2 class="mt-2 font-display text-3xl">誇張しないと、伸びないのか</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>研究の紹介で伸びているアカウントには、見出しで言い切る型が多くあります。「〜と判明」で始め、最後に条件を明かす。科学ライターからは、この構造そのものへの批判が出ていました（<a class="lnk" href="https://x.com/Science_Release/status/2047498852203474995">投稿</a>）。</p>
+      <p>では、誇張しないと読まれないのか。英国の大学の健康のプレスリリースを調べた研究では、誇張しても報道の量は増えず、ただし書きを付けても減りませんでした（<a class="lnk" href="https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0168217">Sumner ら 2016</a>）。報道についての研究なので、X の伸びに当てはまるかは確かめられていません。それでも、ただし書きをオチに使う型（型C）を置く理由にはなります。</p>
+    </div>
+  </section>
+
+  <section id="fail" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / 失敗</p>
+    <h2 class="mt-2 font-display text-3xl">中の人の失敗</h2>
+    <ul class="mt-6 max-w-3xl space-y-2 text-sm leading-relaxed">
+      <li class="rounded-2xl border border-rule bg-white p-4">シャープ製品の公式が、ほかの会社のゲームに独自の値を付けて返信し、運営を止めた（2017、<a class="lnk" href="https://www.itmedia.co.jp/news/articles/1707/11/news082.html">ITmedia</a>）。→ 誰かの好きなものを値踏みしない</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">アツギが、性的と受け取られたイラストに公式ではしゃいで謝罪（2020、<a class="lnk" href="https://nlab.itmedia.co.jp/cont/articles/3311850/">ねとらぼ</a>）。→ 内輪ノリと客層のずれ</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">掲示板を AI で要約して自動で投稿し、地域を貶める文が出て謝罪（2025、<a class="lnk" href="https://www.itmedia.co.jp/aiplus/articles/2506/02/news073.html">ITmedia</a>）。→ AI の文を人が読まずに出さない</li>
+      <li class="rounded-2xl border border-rule bg-white p-4">AI で加工した写真のラベルの文字が崩れたまま投稿し謝罪（2026-08、<a class="lnk" href="https://www.itmedia.co.jp/aiplus/article/2608/17/2000000564/">ITmedia</a>）。→ 画像の文字を目で確かめる</li>
+    </ul>
+  </section>
+
+  <section id="check" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / check</p>
+    <h2 class="mt-2 font-display text-3xl">見本の論文を確かめたこと</h2>
+    <ul class="mt-6 max-w-3xl space-y-2 text-sm leading-relaxed">
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>Nagasaki ら 2021</b>（<a class="lnk" href="https://www.jstage.jst.go.jp/article/tonyobyo/64/12/64_569/_article/-char/ja/">J-STAGE</a>）：健康な成人男性15人。75g のブドウ糖の飲み物のあと、120分あおむけで休む日と、30分後にスクワット10回×3セット（速いテンポと遅いテンポ）をする日を比べた。どちらのスクワットも血糖値が低く、遅いテンポのほうが低かった。要旨と見本が合っている</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>Gao ら 2024</b>（<a class="lnk" href="https://jyx.jyu.fi/handle/123456789/100173">JYX</a>）：過体重と肥満の男性18人（21.0 ± 1.2歳）。8.5時間すわり続ける日、30分まとめて歩く日、45分ごとに3分歩く日、45分ごとにスクワットで休む日を比べた。どの対策も食後の血糖値の上がり方を小さくし、こまめな2つはまとめて歩くより良かった。調査の下書きは対象の体重の条件を省き、スクワットの休みを「3分」としていた。要旨にないので、見本では直した</li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>
