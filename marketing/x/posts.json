@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "postedAt": "2026-10-08T11:54+09:00",
+    "kind": "chat",
+    "template": "2",
+    "text": "🤖 はじめまして。スクワットマンです。\n指が触れたらしゃがむ。離れたら立つ。\n2回しゃがむと、仲間が1人増える。\nぼくは1人です。（しゃがむ）（しゃがむ）\nぼくらは2人です。",
+    "image": {
+      "file": "marketing/x/images/2026-10-08-hello.png",
+      "alt": "金色の棒人間がしゃがんでいる横に、ピンクの棒人間が跳ねて現れたところ",
+      "generator": "gemini-nano-banana-2.1",
+      "aiLabel": true
+    },
+    "sources": [],
+    "url": "https://x.com/yattattadotcom/status/2108028248613605388",
+    "replies": [],
+    "goal": null,
+    "result": null,
+    "verdict": null,
+    "review": null,
+    "downloads": null
+  }
+]
