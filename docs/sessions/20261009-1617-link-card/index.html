@@ -161,6 +161,8 @@ tailwind.config = {
   <p>直したあと、X アプリの投稿画面が開き、投稿すると横長のカードが出て、押すと LP に移りました。LINE でも、送った URL にカードが出ました（開発者が実機で確かめた、2026-10-09。開発用の Firebase）。</p>
   <p>本番（yat-tat-ta）も Blaze に上げ、予算のアラート、Cloud Run Functions の利用額上限、asia-northeast1 の Storage をそろえてから、<code class="font-mono text-xs">--force</code> 付きでデプロイしました（2026-10-09）。関数は2つとも作れ、<code class="font-mono text-xs">/s/</code> の振り分けは開発用と同じ答えを返し、改定したプライバシーポリシーも公開されました。本番のリンクカードは Release のビルド（App Attest）からしか作れないので、TestFlight で確かめます。</p>
   <p>X への共有に、ハッシュタグ <code class="font-mono text-xs">#YatTatTa #食後スクワット</code>（英語のときは <code class="font-mono text-xs">#YatTatTa</code> だけ）を付けることにしました（開発者が決定、2026-10-09）。アプリの名前のタグは、利用者が何を貼っているかを検索で拾うため。タグは文と URL の間に置き、URL を最後に残します。X は最後の URL からカードを作るからです。</p>
+  <p>関数の依存パッケージにあった中程度の脆弱性8件は、どれも <code class="font-mono text-xs">uuid</code> の同じ1件（GHSA-w5hq-g745-h8pq）が firebase-admin 13 から伝わったものでした。こちらのコードは <code class="font-mono text-xs">uuid</code> を使わず、実際の危険はほぼないと見たうえで、開発者の判断で firebase-admin 14 と firebase-functions 7 に上げました（2026-10-09）。<code class="font-mono text-xs">npm audit</code> は0件になり、開発用で新しいカードが描けることを確かめました。</p>
+  <p>LINE では、プレビューが右の小さな正方形になり、カードが読めませんでした。大きく出す条件は公式の資料に見当たらず、開発用で <code class="font-mono text-xs">og:description</code> を外す、題名と説明を外す、画像の大きさの宣言を外す、<code class="font-mono text-xs">og:type</code> を変える、など5通りを試しても、全部同じ小さな正方形でした（開発者が LINE で確かめた）。正方形のカードを作っても、この大きさでは読めないので作りません（開発者が判断）。代わりに、LINE の文を「N日連続！」「7マスの絵文字」「今日と7日のドパ」「食べたら、しゃがんで、叩く。」の4行と URL にしました（開発者が決定）。</p>
     </div>
     <ul class="mt-6 flex max-w-3xl flex-col gap-2 text-sm">
       <li class="rounded-2xl border border-rule bg-white p-4"><b>2回目の叩き切りで、共有の誘いが出なかった</b><br><span class="text-ink/70">1回目に X か LINE のボタンを押し、投稿画面を開いていた。投稿画面が開いたら、その日は共有したと数えるので、作りどおり。投稿したかまでは、アプリからは分からない。</span></li>

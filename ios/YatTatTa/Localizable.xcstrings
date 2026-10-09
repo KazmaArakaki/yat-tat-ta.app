@@ -3046,6 +3046,38 @@
           }
         }
       }
+    },
+    "Yat Tat Ta で%lld日連続！" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld days in a row on Yat Tat Ta!"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yat Tat Ta で%lld日連続！"
+          }
+        }
+      }
+    },
+    "今日は%lldドパ、この7日で%lldドパ。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Today %1$lld Dopa, %2$lld Dopa over 7 days."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "今日は%lldドパ、この7日で%lldドパ。"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

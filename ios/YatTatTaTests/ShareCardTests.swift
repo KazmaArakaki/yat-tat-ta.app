@@ -83,4 +83,21 @@ struct ShareCardTests {
             .queryItems?.first { $0.name == "message" }?.value)
         #expect(en.hasSuffix(" #YatTatTa " + link.absoluteString))
     }
+
+    @Test func LINEの文はURLの前の4行でカードの中身を伝える() {
+        var daily: Ledger.DailyReps = [:]
+        for back in 2...8 { daily[today.adding(days: -back)] = 20 }
+        daily[today] = 45
+        let card = ShareCard(ledger: Ledger(daily: daily, today: today), daily: daily, todaySets: 2)
+        #expect(ShareService.weekEmoji(card) == "🟥🟥🟥🟥🟥🟦🟥")
+        let lines = ShareService.lineMessage(card).split(separator: "\n").map(String.init)
+        #expect(lines.count == 4)
+        #expect(lines[1] == "🟥🟥🟥🟥🟥🟦🟥")
+        #expect(lines[2].contains("45") && lines[2].contains("\(card.dopaPerWeek)"))
+    }
+
+    @Test func 叩かなかった日は白いマス() {
+        let card = ShareCard(ledger: Ledger(daily: [today: 20], today: today), daily: [today: 20], todaySets: 1)
+        #expect(ShareService.weekEmoji(card) == "⬜⬜⬜⬜⬜⬜🟥")
+    }
 }

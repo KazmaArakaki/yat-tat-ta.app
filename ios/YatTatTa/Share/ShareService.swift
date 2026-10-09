@@ -53,23 +53,44 @@ enum ShareTarget: CaseIterable {
         language == "ja" ? ["YatTatTa", "食後スクワット"] : ["YatTatTa"]
     }
 
+    /// LINE の文。LINE のプレビューは小さな正方形で、カードの数字が読めない。そこで、文でカードの中身を伝える
+    ///
+    /// 7マスは、カードと同じ古い日から今日の順に、叩いた日 🟥、休み券の日 🟦、叩かなかった日 ⬜（開発者が決定、2026-10-09）。
+    static func lineMessage(_ card: ShareCard) -> String {
+        [
+            String(localized: "Yat Tat Ta で\(card.streak)日連続！"),
+            weekEmoji(card),
+            String(localized: "今日は\(card.todayDopa)ドパ、この7日で\(card.dopaPerWeek)ドパ。"),
+            String(localized: "食べたら、しゃがんで、叩く。"),
+        ].joined(separator: "\n")
+    }
+
+    static func weekEmoji(_ card: ShareCard) -> String {
+        card.week.map { cell in
+            switch cell {
+            case .done: "🟥"
+            case .rest: "🟦"
+            case .none: "⬜"
+            }
+        }.joined()
+    }
+
     private static func message(_ card: ShareCard) -> String {
         String(localized: "Yat Tat Ta で\(card.streak)日連続。食べたら、しゃがんで、叩く。")
     }
 
     /// 投稿画面を開く URL。LINE はアプリが入っていればアプリが開く。X はアプリが入っていないときだけ使う
     static func intent(_ target: ShareTarget, card: ShareCard, link: URL, language: String = language) -> URL {
-        let message = message(card)
         var components: URLComponents
         switch target {
         case .x:
             components = URLComponents(string: "https://x.com/intent/post")!
-            components.queryItems = [URLQueryItem(name: "text", value: message), URLQueryItem(name: "url", value: link.absoluteString),
+            components.queryItems = [URLQueryItem(name: "text", value: message(card)), URLQueryItem(name: "url", value: link.absoluteString),
                                      URLQueryItem(name: "hashtags", value: hashtags(language: language).joined(separator: ","))]
         case .line, .other:
             // LINE は文だけを受け取る。URL は文の最後に付ける
             components = URLComponents(string: "https://line.me/R/share")!
-            components.queryItems = [URLQueryItem(name: "text", value: message + "\n" + link.absoluteString)]
+            components.queryItems = [URLQueryItem(name: "text", value: lineMessage(card) + "\n" + link.absoluteString)]
         }
         // + を空白と読む相手がいるので、文の中の + も逃がす
         components.percentEncodedQuery = components.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
