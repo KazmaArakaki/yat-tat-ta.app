@@ -53,8 +53,9 @@ struct ShareCardTests {
     @MainActor @Test func Xの投稿画面には文とURLを分けて渡す() throws {
         let card = ShareCard(ledger: Ledger(daily: [today: 20], today: today), daily: [today: 20], todaySets: 1)
         let link = URL(string: "https://yat-tat-ta.web.app/s/0123456789abcdef0123")!
-        let url = ShareService.intent(.x, card: card, link: link)
+        let url = ShareService.intent(.x, card: card, link: link, language: "ja")
         let items = try #require(URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems)
+        #expect(items.first { $0.name == "hashtags" }?.value == "YatTatTa,食後スクワット")
         #expect(url.host() == "x.com")
         #expect(items.first { $0.name == "url" }?.value == link.absoluteString)
         #expect(items.first { $0.name == "text" }?.value?.contains("1") == true)
@@ -72,10 +73,14 @@ struct ShareCardTests {
     @MainActor @Test func XアプリにはmessageでURLを文の最後に付けて渡す() throws {
         let card = ShareCard(ledger: Ledger(daily: [today: 20], today: today), daily: [today: 20], todaySets: 1)
         let link = URL(string: "https://yat-tat-ta.web.app/s/0123456789abcdef0123")!
-        let url = ShareService.xApp(card: card, link: link)
+        let url = ShareService.xApp(card: card, link: link, language: "ja")
         let message = try #require(URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems?.first { $0.name == "message" }?.value)
         #expect(url.scheme == "twitter")
         #expect(url.host() == "post")
-        #expect(message.hasSuffix(" " + link.absoluteString))
+        // タグは文と URL の間。X は最後の URL からカードを作る
+        #expect(message.hasSuffix(" #YatTatTa #食後スクワット " + link.absoluteString))
+        let en = try #require(URLComponents(url: ShareService.xApp(card: card, link: link, language: "en"), resolvingAgainstBaseURL: false)?
+            .queryItems?.first { $0.name == "message" }?.value)
+        #expect(en.hasSuffix(" #YatTatTa " + link.absoluteString))
     }
 }

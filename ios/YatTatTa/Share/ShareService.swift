@@ -35,13 +35,22 @@ enum ShareTarget: CaseIterable {
     /// X アプリの投稿画面。アプリが入っていなければ開けない（open が false を返す）
     ///
     /// 文と URL を分けて渡す口はないので、文の最後に URL を付ける。
-    static func xApp(card: ShareCard, link: URL) -> URL {
+    static func xApp(card: ShareCard, link: URL, language: String = language) -> URL {
+        let tags = hashtags(language: language).map { "#" + $0 }.joined(separator: " ")
         var components = URLComponents()
         components.scheme = "twitter"
         components.host = "post"
-        components.queryItems = [URLQueryItem(name: "message", value: message(card) + " " + link.absoluteString)]
+        // X はいちばん最後の URL からカードを作るので、タグは文と URL の間に置く
+        components.queryItems = [URLQueryItem(name: "message", value: message(card) + " " + tags + " " + link.absoluteString)]
         components.percentEncodedQuery = components.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
         return components.url!
+    }
+
+    /// X に付けるハッシュタグ（# なし）。利用者の投稿を検索で拾えるように、アプリの名前は必ず付ける
+    ///
+    /// 日本語のときは、やっていることのタグも足す（開発者が決定、2026-10-09）。体への効果は書かない（SNS の決まり1）。
+    static func hashtags(language: String) -> [String] {
+        language == "ja" ? ["YatTatTa", "食後スクワット"] : ["YatTatTa"]
     }
 
     private static func message(_ card: ShareCard) -> String {
@@ -49,13 +58,14 @@ enum ShareTarget: CaseIterable {
     }
 
     /// 投稿画面を開く URL。LINE はアプリが入っていればアプリが開く。X はアプリが入っていないときだけ使う
-    static func intent(_ target: ShareTarget, card: ShareCard, link: URL) -> URL {
+    static func intent(_ target: ShareTarget, card: ShareCard, link: URL, language: String = language) -> URL {
         let message = message(card)
         var components: URLComponents
         switch target {
         case .x:
             components = URLComponents(string: "https://x.com/intent/post")!
-            components.queryItems = [URLQueryItem(name: "text", value: message), URLQueryItem(name: "url", value: link.absoluteString)]
+            components.queryItems = [URLQueryItem(name: "text", value: message), URLQueryItem(name: "url", value: link.absoluteString),
+                                     URLQueryItem(name: "hashtags", value: hashtags(language: language).joined(separator: ","))]
         case .line, .other:
             // LINE は文だけを受け取る。URL は文の最後に付ける
             components = URLComponents(string: "https://line.me/R/share")!
@@ -78,7 +88,7 @@ enum ShareTarget: CaseIterable {
     }
 
     /// カードの言語。アプリの文言と同じ言語にする
-    private static var language: String {
+    nonisolated static var language: String {
         Bundle.main.preferredLocalizations.first == "ja" ? "ja" : "en"
     }
 

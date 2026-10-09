@@ -160,6 +160,7 @@ tailwind.config = {
       <p>X での共有を試すと、X アプリの中のブラウザが立ち上がりました（開発者が実機で確かめた、2026-10-09）。<code class="font-mono text-xs">x.com/intent/post</code> は X アプリに渡らず、アプリの中のブラウザで開く。そこでは X にログインしていないので、投稿できません。X アプリの投稿画面を直接開く URL スキーム（<code class="font-mono text-xs">twitter://post?message=</code>）を先に試し、X アプリが入っていないときだけ Web の投稿口を開くようにしました。この口は文と URL を分けて受け取れないので、URL は文の最後に付けます。</p>
   <p>直したあと、X アプリの投稿画面が開き、投稿すると横長のカードが出て、押すと LP に移りました。LINE でも、送った URL にカードが出ました（開発者が実機で確かめた、2026-10-09。開発用の Firebase）。</p>
   <p>本番（yat-tat-ta）も Blaze に上げ、予算のアラート、Cloud Run Functions の利用額上限、asia-northeast1 の Storage をそろえてから、<code class="font-mono text-xs">--force</code> 付きでデプロイしました（2026-10-09）。関数は2つとも作れ、<code class="font-mono text-xs">/s/</code> の振り分けは開発用と同じ答えを返し、改定したプライバシーポリシーも公開されました。本番のリンクカードは Release のビルド（App Attest）からしか作れないので、TestFlight で確かめます。</p>
+  <p>X への共有に、ハッシュタグ <code class="font-mono text-xs">#YatTatTa #食後スクワット</code>（英語のときは <code class="font-mono text-xs">#YatTatTa</code> だけ）を付けることにしました（開発者が決定、2026-10-09）。アプリの名前のタグは、利用者が何を貼っているかを検索で拾うため。タグは文と URL の間に置き、URL を最後に残します。X は最後の URL からカードを作るからです。</p>
     </div>
     <ul class="mt-6 flex max-w-3xl flex-col gap-2 text-sm">
       <li class="rounded-2xl border border-rule bg-white p-4"><b>2回目の叩き切りで、共有の誘いが出なかった</b><br><span class="text-ink/70">1回目に X か LINE のボタンを押し、投稿画面を開いていた。投稿画面が開いたら、その日は共有したと数えるので、作りどおり。投稿したかまでは、アプリからは分からない。</span></li>
