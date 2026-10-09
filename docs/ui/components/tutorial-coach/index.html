@@ -75,7 +75,7 @@ tailwind.config = {
     <div class="w-full max-w-xs">
       <div class="rounded-2xl border-2 border-ink bg-white p-5 shadow-[4px_4px_0_#1C1916]">
         <p class="font-mono text-xs text-mute">通しの時間（目安）</p>
-        <p class="num mt-1 text-4xl"><span id="elapsed">0:00</span><span class="ml-2 font-sans text-sm font-bold text-mute">/ 約 1:02</span></p>
+        <p class="num mt-1 text-4xl"><span id="elapsed">0:00</span><span class="ml-2 font-sans text-sm font-bold text-mute">/ 約 1:09</span></p>
         <ol id="timeline" class="mt-4 flex flex-col gap-1.5 text-xs"></ol>
         <button id="restart" class="mt-5 w-full rounded-full border-2 border-ink py-2 text-sm font-black hover:bg-gold">▶ 最初から通す</button>
       </div>
@@ -95,17 +95,19 @@ tailwind.config = {
         <tr><td><b>2 練習連打</b></td><td>同じ</td><td>10回を叩き切り、練習のフィナーレ（筋肉確定、あんたはえらい！）が終わった</td><td class="num">12秒</td></tr>
         <tr><td><b>3 いまのは練習</b></td><td>同じ（スクワットマンはまた寝ている）</td><td>どこかを叩く</td><td class="num">8秒</td></tr>
         <tr><td><b>4 続けた日</b></td><td>連続記録の帯</td><td>どこかを叩く</td><td class="num">9秒</td></tr>
-        <tr><td><b>5 ためたドパ</b></td><td>DPW と DT のカード</td><td>どこかを叩く</td><td class="num">9秒</td></tr>
-        <tr><td><b>6 回数を変える</b></td><td>設定の歯車</td><td>どこかを叩く</td><td class="num">6秒</td></tr>
-        <tr><td><b>7 記録を残す</b></td><td>なし（全体を暗く、まん中にカード）。まだ Apple でログインしていない人だけ</td><td>「Appleで続ける」か「あとで」を押す。叩いても進まない</td><td class="num">8秒</td></tr>
-        <tr><td><b>8 おわり</b></td><td>なし（全体を暗く）</td><td>「はじめる」を押す</td><td class="num">5秒</td></tr>
+        <tr><td><b>5 記録を貼る</b></td><td>なし（全体を暗く、まん中に<a href="../../../glossary.html#share-card" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日の記録カード</a>の見本）。見本は初めての日に1回叩いたところ（1日連続）</td><td>どこかを叩く</td><td class="num">7秒</td></tr>
+        <tr><td><b>6 ためたドパ</b></td><td>DPW と DT のカード</td><td>どこかを叩く</td><td class="num">9秒</td></tr>
+        <tr><td><b>7 回数を変える</b></td><td>設定の歯車</td><td>どこかを叩く</td><td class="num">6秒</td></tr>
+        <tr><td><b>8 記録を残す</b></td><td>なし（全体を暗く、まん中にカード）。まだ Apple でログインしていない人だけ</td><td>「Appleで続ける」か「あとで」を押す。叩いても進まない</td><td class="num">8秒</td></tr>
+        <tr><td><b>9 おわり</b></td><td>なし（全体を暗く）</td><td>「はじめる」を押す</td><td class="num">5秒</td></tr>
       </tbody>
     </table>
   </div>
   <ul class="mt-6 flex max-w-3xl flex-col gap-2 text-sm leading-relaxed">
-    <li class="rounded-2xl border border-rule bg-white p-4"><b>スキップ</b>：吹き出しの右上に、1〜6の場面でいつも出す。まだ Apple でログインしていない人は、押すと7の<a href="../../../glossary.html#keep-records-step" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録を残す</a>へ飛び（練習の途中なら練習を捨てる）、そこで「あとで」を押すとそのまま終わる。Apple でログイン中の人は、その場で終わる。どちらも見せたことにする。機種を替えた人ほど使い方を知っていてスキップするので、記録を戻す道だけは飛ばさない。</li>
-    <li class="rounded-2xl border border-rule bg-white p-4"><b>記録を残す</b>：ログインを求める画面に見せないよう、ログインしなくても全部使えることを同じ重さで書き、「あとで」も金色の大きいボタンにする。見本では「Appleで続ける」を押すと、引き継げたものとして8へ進む。前の記録のある Apple ID なら、本物はアカウントごと替わってチュートリアルが消え、記録の入ったホームになる。</li>
-    <li class="rounded-2xl border border-rule bg-white p-4"><b>照らした場所は押せない</b>：4〜6で帯やカードを押しても、今日の記録や履歴は開かない。どこを叩いても次へ進むだけ。開いてしまうと、シートを閉じるまで案内が止まるから。</li>
+    <li class="rounded-2xl border border-rule bg-white p-4"><b>スキップ</b>：吹き出しの右上に、1〜7の場面でいつも出す。まだ Apple でログインしていない人は、押すと8の<a href="../../../glossary.html#keep-records-step" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録を残す</a>へ飛び（練習の途中なら練習を捨てる）、そこで「あとで」を押すとそのまま終わる。Apple でログイン中の人は、その場で終わる。どちらも見せたことにする。機種を替えた人ほど使い方を知っていてスキップするので、記録を戻す道だけは飛ばさない。</li>
+    <li class="rounded-2xl border border-rule bg-white p-4"><b>記録を残す</b>：ログインを求める画面に見せないよう、ログインしなくても全部使えることを同じ重さで書き、「あとで」も金色の大きいボタンにする。見本では「Appleで続ける」を押すと、引き継げたものとして9へ進む。前の記録のある Apple ID なら、本物はアカウントごと替わってチュートリアルが消え、記録の入ったホームになる。</li>
+    <li class="rounded-2xl border border-rule bg-white p-4"><b>記録を貼る</b>：叩き切ったあとに出る<a href="../../../glossary.html#share-prompt" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">共有の誘い</a>が、最初の1回で何のカードか分かっているように、先に形を見せる。進み具合の点に数える（点は1〜7の7つ。記録を残すとおわりは数えない）。</li>
+    <li class="rounded-2xl border border-rule bg-white p-4"><b>照らした場所は押せない</b>：4、6、7で帯やカードを押しても、今日の記録や履歴は開かない。どこを叩いても次へ進むだけ。開いてしまうと、シートを閉じるまで案内が止まるから。</li>
     <li class="rounded-2xl border border-rule bg-white p-4"><b>ひかえめモード</b>：照らす枠の移動と点滅、吹き出しの浮き上がりを止める。練習連打の演出は本番と同じ扱い（揺れと粒を止め、文字と色だけ）。</li>
     <li class="rounded-2xl border border-rule bg-white p-4"><b>VoiceOver</b>：場面が変わるたびに、吹き出しの見出しと本文を読む。起こすのはダブルタップ、叩くのは直接操作（いまの完了連打と同じ）。</li>
   </ul>
@@ -119,7 +121,7 @@ tailwind.config = {
   var tabs = document.getElementById('tabs'), timeline = document.getElementById('timeline');
   var elapsedEl = document.getElementById('elapsed'), ended = document.getElementById('ended');
   var started = Date.now(), tick = null, current = 0;
-  var names = ['1 起こす', '2 練習連打', '3 いまのは練習', '4 続けた日', '5 ためたドパ', '6 回数を変える', '7 記録を残す', '8 おわり'];
+  var names = ['1 起こす', '2 練習連打', '3 いまのは練習', '4 続けた日', '5 記録を貼る', '6 ためたドパ', '7 回数を変える', '8 記録を残す', '9 おわり'];
   TUTORIAL.STEPS.forEach(function (s, i) {
     var b = document.createElement('button');
     b.className = 'tabbtn rounded-full border border-ink bg-white px-3 py-1 text-sm font-bold';

@@ -24,6 +24,8 @@ struct TutorialOverlay: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.colorScheme) private var colorScheme
     @State private var pulse = false
+    /// 記録を貼る場面で見せる、今日の記録カードの見本
+    @State private var sampleCard: UIImage?
 
     var body: some View {
         GeometryReader { geo in
@@ -85,7 +87,11 @@ struct TutorialOverlay: View {
 
     /// 叩く場所を照らすときは下のカードの上に、帯と歯車は下に、カードは上に置く
     @ViewBuilder private func bubbleArea(size: CGSize, hole: CGRect?, safe: EdgeInsets) -> some View {
-        if step == .account, let account {
+        if step == .share {
+            shareCard
+                .padding(.horizontal, 20)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+        } else if step == .account, let account {
             accountCard(account)
                 .padding(.horizontal, 20)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -184,6 +190,47 @@ struct TutorialOverlay: View {
         .toyCard(radius: 24, shadow: 6)
     }
 
+    /// 記録を貼る場面。今日の記録カードの見本と、どこから貼れるかを見せる（docs/features/share-card）
+    ///
+    /// 見本は、初めての日に目標回数を1回叩いたところ。叩けば進む場面なので、カードを叩いても進む。
+    private var shareCard: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack {
+                dots
+                Spacer()
+                Button(action: skip) {
+                    Text("スキップ").font(.label(13)).underline().foregroundStyle(Color.mute)
+                        .padding(.vertical, 4).padding(.leading, 12)
+                }
+                .buttonStyle(.plain)
+            }
+            Text(title).font(.label(17, black: true))
+            if let sampleCard {
+                Image(uiImage: sampleCard)
+                    .resizable()
+                    .aspectRatio(4 / 5, contentMode: .fit)
+                    .frame(height: 240)
+                    .clipShape(.rect(cornerRadius: 12))
+                    .overlay(RoundedRectangle(cornerRadius: 12).strokeBorder(Color.ink, lineWidth: 2))
+                    .frame(maxWidth: .infinity)
+                    .accessibilityHidden(true)
+            }
+            Text(message).font(.label(14)).foregroundStyle(Color.ink.opacity(0.8))
+                .fixedSize(horizontal: false, vertical: true)
+            Text("タップで次へ ›").font(.label(13, black: true)).foregroundStyle(Color.dopa)
+                .frame(maxWidth: .infinity, alignment: .trailing)
+        }
+        .padding(16)
+        .toyCard(radius: 20, shadow: 4)
+        .contentShape(.rect)
+        .onTapGesture(perform: advance)
+        .accessibilityElement(children: .contain)
+        .transition(.opacity)
+        .task {
+            sampleCard = ShareCardView.render(.sample(today: RecordDay(.now), reps: targetReps))
+        }
+    }
+
     /// 記録を残す場面。まだ Apple でログインしていない人にだけ出す（docs/features/tutorial）
     ///
     /// 新しい iPhone に替えた人は、ここで Apple で続けると前の記録が戻る。ログインしなくても全部使えることも、
@@ -277,6 +324,7 @@ struct TutorialOverlay: View {
         case .mash: "スクワット1回で、1回叩く"
         case .after: "いまのは練習"
         case .streak: "続けた日"
+        case .share: "記録を貼る"
         case .totals: "ためたドパ"
         case .gear: "回数を変える"
         case .account: "記録を残す"
@@ -290,6 +338,7 @@ struct TutorialOverlay: View {
         case .mash: "本番は、しゃがんだ回数だけ叩きます。いまは練習。しゃがまずに\(TutorialStep.practiceReps)回どうぞ。"
         case .after: "練習は記録に残りません。本番は、食べてしゃがんだあとに。途中でやめても、叩いた分は残ります。"
         case .streak: "叩いた日は、ここが1日伸びます。休んだ日は、休み券がつなぎます。押すと、今日の記録。"
+        case .share: "叩いた日は、今日の記録をこのカードにして、X や LINE に貼れます。叩き終わると聞きます。今日の記録の左上からも。"
         case .totals: "スクワット1回が1ドパ。DPW は7日間、DT はこれまでの全部。押すと、履歴。"
         case .gear: "1回に叩く数は、いま\(targetReps)回。ここで\(TargetReps.range.lowerBound)〜\(TargetReps.range.upperBound)回に変えられます。"
         case .account: "Apple でログインすると、記録がアカウントに残ります。iPhone を替えても、同じ Apple ID でログインすれば戻ります。"

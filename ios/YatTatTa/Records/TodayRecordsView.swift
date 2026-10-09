@@ -8,8 +8,6 @@ import SwiftUI
 struct TodayRecordsView: View {
     let model: AppModel
     @Environment(\.dismiss) private var dismiss
-    /// 共有する画像。シートを開いたときと、記録を消したときに作り直す
-    @State private var shareImage: Image?
 
     var body: some View {
         NavigationStack {
@@ -52,11 +50,10 @@ struct TodayRecordsView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     // 1度も叩いていない人には、出すものがない
-                    if let shareImage, model.ledger.dopaTotal > 0 {
-                        let card = model.shareCard
-                        ShareLink(item: shareImage,
-                                  message: Text("Yat Tat Ta で\(card.streak)日連続。食べたら、しゃがんで、叩く。https://yat-tat-ta.web.app"),
-                                  preview: SharePreview(Text("今日の記録"), image: shareImage)) {
+                    if model.ledger.dopaTotal > 0 {
+                        Button {
+                            ShareSheet.present(model.shareCard) { if $0 { model.markShared() } }
+                        } label: {
                             Image(systemName: "square.and.arrow.up")
                         }
                         .accessibilityLabel(Text("今日の記録を共有"))
@@ -67,7 +64,6 @@ struct TodayRecordsView: View {
                 }
             }
         }
-        .task(id: model.shareCard) { shareImage = ShareCardView.render(model.shareCard) }
     }
 }
 

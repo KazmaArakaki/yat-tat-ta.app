@@ -87,6 +87,7 @@ tailwind.config = {
     <a href="#touch-to-fire" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">タッチ→発火</a>
     <a href="#today-records" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">今日の記録</a>
     <a href="#share-card" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">今日の記録カード</a>
+    <a href="#share-prompt" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">共有の誘い</a>
     <a href="#history" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">履歴</a>
     <a href="#moving-average" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">7日移動平均</a>
     <a href="#splash" class="rounded-full border border-ink bg-white px-3 py-1 hover:bg-dopa-soft">スプラッシュ</a>
@@ -951,7 +952,7 @@ tailwind.config = {
   <section id="share-card" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
     <p class="font-mono text-xs text-mute">#share-card</p>
     <h2 class="mt-1 font-display text-2xl">今日の記録カード</h2>
-    <p class="mt-3 leading-relaxed">利用者が SNS に貼るための、1枚の画像。<a href="#today-records" class="text-dopa underline underline-offset-4">今日の記録</a>のシートの左上にある共有のボタンから、iOS の共有シートに渡す。載せるのは、いまの<a href="#streak" class="text-dopa underline underline-offset-4">連続記録</a>の日数、6日前から今日までの7つのマス（叩いた日はピンク、<a href="#rest-pass" class="text-dopa underline underline-offset-4">休み券</a>でつないだ日は青（アプリの休み券と同じ色）、叩かなかった日は空）、今日の<a href="#dopa-point" class="text-dopa underline underline-offset-4">ドパ</a>、<a href="#dpw" class="text-dopa underline underline-offset-4">DPW</a>。いつ出しても同じ形にして、Wordle のマス目のように形で覚えてもらう。画像は端末の中で作り、サーバーには送らない。体への効果も、パチンコの語も載せない。2026-10-09 設計。</p>
+    <p class="mt-3 leading-relaxed">利用者が SNS に貼るための、1枚の画像。<a href="#today-records" class="text-dopa underline underline-offset-4">今日の記録</a>のシートの左上にある共有のボタンから、iOS の共有シートに渡す。載せるのは、いまの<a href="#streak" class="text-dopa underline underline-offset-4">連続記録</a>の日数、6日前から今日までの7つのマス（叩いた日はピンク、<a href="#rest-pass" class="text-dopa underline underline-offset-4">休み券</a>でつないだ日は青（アプリの休み券と同じ色）、叩かなかった日は空）、今日の<a href="#dopa-point" class="text-dopa underline underline-offset-4">ドパ</a>、<a href="#dpw" class="text-dopa underline underline-offset-4">DPW</a>。いつ出しても同じ形にして、Wordle のマス目のように形で覚えてもらう。画像は端末の中で作り、サーバーには送らない。体への効果も、パチンコの語も載せない。今日まだ共有していなければ、アプリを開いたときと叩き切ったあとに<a href="#share-prompt" class="text-dopa underline underline-offset-4">共有の誘い</a>で勧める。共有シートで送り終えた日は「共有した」として、その日はもう誘わない。<a href="#tutorial" class="text-dopa underline underline-offset-4">チュートリアル</a>の「記録を貼る」場面でも、見本のカードを見せる。2026-10-09 設計。次のリリースで出す（開発者が決定、2026-10-09）。</p>
     <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
     <div class="mt-2 flex flex-col gap-2 text-sm">
       <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>筋肉確定の瞬間を貼れたほうが盛り上がりませんか。</p>
@@ -960,8 +961,25 @@ tailwind.config = {
       <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>休み券でつないだ日です。叩いてはいないけれど、連続は切れていない日だと、見た人にも分かります。</p>
     </div>
     <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
-      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#today-records" class="text-dopa underline underline-offset-4">今日の記録</a><a href="#streak" class="text-dopa underline underline-offset-4">連続記録</a><a href="#rest-pass" class="text-dopa underline underline-offset-4">休み券</a><a href="#dpw" class="text-dopa underline underline-offset-4">DPW</a><a href="#dopa-point" class="text-dopa underline underline-offset-4">ドパ</a><a href="#squat-squad" class="text-dopa underline underline-offset-4">スクワットマン</a></p></div>
-      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="features/share-card/index.html" class="text-signal underline underline-offset-4">機能：今日の記録カード</a><a href="ui/pages/today-records/index.html" class="text-signal underline underline-offset-4">画面：今日の記録</a><a href="sessions/20261009-1053-share-card/index.html" class="text-signal underline underline-offset-4">セッション：今日の記録カードを共有する</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#today-records" class="text-dopa underline underline-offset-4">今日の記録</a><a href="#streak" class="text-dopa underline underline-offset-4">連続記録</a><a href="#rest-pass" class="text-dopa underline underline-offset-4">休み券</a><a href="#dpw" class="text-dopa underline underline-offset-4">DPW</a><a href="#dopa-point" class="text-dopa underline underline-offset-4">ドパ</a><a href="#squat-squad" class="text-dopa underline underline-offset-4">スクワットマン</a><a href="#share-prompt" class="text-dopa underline underline-offset-4">共有の誘い</a><a href="#tutorial" class="text-dopa underline underline-offset-4">チュートリアル</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="features/share-card/index.html" class="text-signal underline underline-offset-4">機能：今日の記録カード</a><a href="ui/pages/today-records/index.html" class="text-signal underline underline-offset-4">画面：今日の記録</a><a href="sessions/20261009-1053-share-card/index.html" class="text-signal underline underline-offset-4">セッション：今日の記録カードを共有する</a><a href="sessions/20261009-1229-share-prompt/index.html" class="text-signal underline underline-offset-4">セッション：共有を誘う</a></p></div>
+    </div>
+  </section>
+
+  <section id="share-prompt" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
+    <p class="font-mono text-xs text-mute">#share-prompt</p>
+    <h2 class="mt-1 font-display text-2xl">共有の誘い</h2>
+    <p class="mt-3 leading-relaxed"><a href="#share-card" class="text-dopa underline underline-offset-4">今日の記録カード</a>を貼るよう勧める、ホームの下から出るカード。「今日の記録を貼りませんか」の見出しに、今日のカードの縮小画像を添え、「今日はしない」と「共有する」の2つのボタンを置く。出すのは、アプリを開いたとき（その日最初ならスプラッシュとチュートリアルが消えたあと）と、叩き切ったあとの演出が終わったとき。今日の<a href="#record" class="text-dopa underline underline-offset-4">記録</a>が1件もなければ、載せるものがないので出さない。共有シートで送り終えた日と、「今日はしない」を押した日は、もう出さない。共有シートを閉じただけなら、次の機会にまた出す。<a href="#finale" class="text-dopa underline underline-offset-4">フィナーレ</a>、途切れたときのカード、通知の問いかけと重ねて出さない。2026-10-09、開発者の注文「シェアの動線がわかりづらいです。」から決めた。</p>
+    <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>朝いちばんに開いたときにも、共有の誘いは出ますか。</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>まだ叩いていなければ出ません。貼れるのは今日のカードで、叩く前だと今日の分が空だからです。</p>
+      <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>共有シートを開いて、やっぱりやめたら？</p>
+      <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>送り終えていないので、共有したことにはなりません。次に叩き切ったときに、もう一度だけ誘います。</p>
+    </div>
+    <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#share-card" class="text-dopa underline underline-offset-4">今日の記録カード</a><a href="#today-records" class="text-dopa underline underline-offset-4">今日の記録</a><a href="#finale" class="text-dopa underline underline-offset-4">フィナーレ</a><a href="#splash" class="text-dopa underline underline-offset-4">スプラッシュ</a><a href="#tutorial" class="text-dopa underline underline-offset-4">チュートリアル</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="features/share-card/index.html" class="text-signal underline underline-offset-4">機能：今日の記録カード</a><a href="sessions/20261009-1229-share-prompt/index.html" class="text-signal underline underline-offset-4">セッション：共有を誘う</a></p></div>
     </div>
   </section>
 
@@ -1053,7 +1071,7 @@ tailwind.config = {
   <section id="tutorial" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
     <p class="font-mono text-xs text-mute">#tutorial</p>
     <h2 class="mt-1 font-display text-2xl">チュートリアル</h2>
-    <p class="mt-3 leading-relaxed">ホームの上に重ねて、使い方を自分の指で1度やってもらう約1分の案内。<a href="#intro-splash" class="text-dopa underline underline-offset-4">はじめての幕</a>が消えたあと、まだ記録が1件もない人に1度だけ出す。幕は見せるだけで触らせないが、チュートリアルは触らせる。<a href="#wake-up" class="text-dopa underline underline-offset-4">起こす</a>、<a href="#practice-mash" class="text-dopa underline underline-offset-4">練習連打</a>で10回叩く、連続記録の帯、DPW と DT のカード、設定の歯車を順に照らし、「食べたら、しゃがんで、叩く。」で終える。まだ Apple でログインしていない人には、歯車のあとに<a href="#keep-records-step" class="text-dopa underline underline-offset-4">記録を残す</a>場面を挟む。右上の「スキップ」でいつでも抜けられる（記録を残す場面だけは、スキップしても出す）。設定シートの「使い方をもう一度」から何度でも見直せる。見せたかどうかは端末の設定（tutorialShown）に残す。2026-10-07、開発者の注文「チュートリアルを導入したい。全体で1分程度で完了するボリューム感で。」から決めた。</p>
+    <p class="mt-3 leading-relaxed">ホームの上に重ねて、使い方を自分の指で1度やってもらう約1分の案内。<a href="#intro-splash" class="text-dopa underline underline-offset-4">はじめての幕</a>が消えたあと、まだ記録が1件もない人に1度だけ出す。幕は見せるだけで触らせないが、チュートリアルは触らせる。<a href="#wake-up" class="text-dopa underline underline-offset-4">起こす</a>、<a href="#practice-mash" class="text-dopa underline underline-offset-4">練習連打</a>で10回叩く、連続記録の帯を照らし、「記録を貼る」場面で<a href="#share-card" class="text-dopa underline underline-offset-4">今日の記録カード</a>の見本（初めての日に1回叩いたところ）を見せ、DPW と DT のカード、設定の歯車を順に照らし、「食べたら、しゃがんで、叩く。」で終える。まだ Apple でログインしていない人には、歯車のあとに<a href="#keep-records-step" class="text-dopa underline underline-offset-4">記録を残す</a>場面を挟む。場面は全部で9つ、進み具合の点はそのうち7つ（記録を残すとおわりは数えない）。右上の「スキップ」でいつでも抜けられる（記録を残す場面だけは、スキップしても出す）。設定シートの「使い方をもう一度」から何度でも見直せる。見せたかどうかは端末の設定（tutorialShown）に残す。2026-10-07、開発者の注文「チュートリアルを導入したい。全体で1分程度で完了するボリューム感で。」から決めた。</p>
     <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
     <div class="mt-2 flex flex-col gap-2 text-sm">
       <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>はじめての幕があるのに、チュートリアルも要りますか。</p>
@@ -1062,7 +1080,7 @@ tailwind.config = {
       <p class="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-dopa-soft px-4 py-2"><b class="mr-2 font-mono text-[11px] text-dopa">ドメインエキスパート</b>終えるかスキップするまでは「見せた」にしないので、次に開いたときに頭からもう一度出ます。</p>
     </div>
     <div class="mt-5 grid gap-3 text-sm sm:grid-cols-2">
-      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#practice-mash" class="text-dopa underline underline-offset-4">練習連打</a><a href="#intro-splash" class="text-dopa underline underline-offset-4">はじめての幕</a><a href="#wake-up" class="text-dopa underline underline-offset-4">起こす</a><a href="#streak" class="text-dopa underline underline-offset-4">連続記録</a><a href="#target-reps" class="text-dopa underline underline-offset-4">目標回数</a><a href="#keep-records-step" class="text-dopa underline underline-offset-4">記録を残す（場面）</a></p></div>
+      <div><p class="text-xs font-bold text-mute">関連する用語</p><p class="mt-1 flex flex-wrap gap-2"><a href="#practice-mash" class="text-dopa underline underline-offset-4">練習連打</a><a href="#intro-splash" class="text-dopa underline underline-offset-4">はじめての幕</a><a href="#wake-up" class="text-dopa underline underline-offset-4">起こす</a><a href="#streak" class="text-dopa underline underline-offset-4">連続記録</a><a href="#target-reps" class="text-dopa underline underline-offset-4">目標回数</a><a href="#keep-records-step" class="text-dopa underline underline-offset-4">記録を残す（場面）</a><a href="#share-card" class="text-dopa underline underline-offset-4">今日の記録カード</a></p></div>
       <div><p class="text-xs font-bold text-mute">関連する機能</p><p class="mt-1 flex flex-wrap gap-2"><a href="features/tutorial/index.html" class="text-signal underline underline-offset-4">機能：チュートリアル</a><a href="ui/components/tutorial-coach/index.html" class="text-signal underline underline-offset-4">部品：チュートリアルの案内</a><a href="sessions/20261007-0918-tutorial/index.html" class="text-signal underline underline-offset-4">セッション：チュートリアルを入れる</a></p></div>
     </div>
   </section>

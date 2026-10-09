@@ -95,7 +95,7 @@ import Testing
         #expect(model.tutorial == .wake)
         practice(model)
         model.skipFinale()
-        for expected in [TutorialStep.streak, .totals, .gear, .finish] {
+        for expected in [TutorialStep.streak, .share, .totals, .gear, .finish] {
             model.advanceTutorial()
             #expect(model.tutorial == expected)
         }
@@ -114,7 +114,7 @@ import Testing
         model.startTutorial()
         practice(model)
         model.skipFinale()
-        for _ in 0..<3 { model.advanceTutorial() }
+        for _ in 0..<4 { model.advanceTutorial() }
         #expect(model.tutorial == .gear)
         model.advanceTutorial()
         #expect(model.tutorial == .account)

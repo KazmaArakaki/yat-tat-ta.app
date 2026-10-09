@@ -58,6 +58,8 @@ import Observation
     private(set) var tutorial: TutorialStep?
     /// チュートリアルで、記録を残す場面を出すか。まだ Apple でログインしていない人だけ。Account が決める
     @ObservationIgnored var offersAccount = false
+    /// 今日の記録カードの共有を促すカードを出しているか（docs/features/share-card）
+    var showsSharePrompt = false
     /// スキップを押して、記録を残す場面に来た。「あとで」でそのまま終える
     @ObservationIgnored private var tutorialSkipping = false
     /// スプラッシュを出した記録日。同じ日に開き直しても出さない
@@ -257,6 +259,7 @@ import Observation
         refreshIfDayChanged(now())
         rescheduleReminder()
         presentSplashIfNeeded()
+        offerShareIfNeeded()
     }
 
     // MARK: - スプラッシュ
@@ -282,6 +285,35 @@ import Observation
     func finishSplash() {
         splash = nil
         presentTutorialIfNeeded()
+        offerShareIfNeeded()
+    }
+
+    // MARK: - 共有
+
+    /// 今日の記録があって、今日まだ共有していなければ、共有を促すカードを出す
+    ///
+    /// アプリを開いたときと、叩き切ったあとの演出が終わったときに呼ぶ。今日まだ叩いていなければ、載せるものがないので出さない。
+    /// 「今日はしない」を押された日も出さない。ほかの重ね物を出している間は待たずにやめる。次の機会にまた見る。
+    func offerShareIfNeeded() {
+        let today = ledger.today.value
+        guard !todayRecords.isEmpty,
+              defaults.integer(forKey: SettingKey.sharedDay) != today,
+              defaults.integer(forKey: SettingKey.shareDeclinedDay) != today,
+              splash == nil, tutorial == nil, finale == nil, !session.isOpen,
+              breakNotice == nil, !showsReminderAsk else { return }
+        showsSharePrompt = true
+    }
+
+    /// 共有シートで送り終えた。今日はもう促さない
+    func markShared() {
+        defaults.set(ledger.today.value, forKey: SettingKey.sharedDay)
+        showsSharePrompt = false
+    }
+
+    /// 促すカードの「今日はしない」
+    func declineShare() {
+        defaults.set(ledger.today.value, forKey: SettingKey.shareDeclinedDay)
+        showsSharePrompt = false
     }
 
     // MARK: - チュートリアル
@@ -441,6 +473,7 @@ import Observation
     /// 練習のフィナーレが終わったら、チュートリアルを「いまのは練習」へ
     private func finaleDidEnd(_ event: FinaleEvent) {
         if event.practice && tutorial == .mash { tutorial = .after }
+        if event.completed && !event.practice { offerShareIfNeeded() }
     }
 
     /// 練習連打を叩き切ったとき。確定とねぎらいを本番と同じに見せる

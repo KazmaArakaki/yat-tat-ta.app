@@ -132,6 +132,10 @@ var TUTORIAL_STEPS = [
   { id: 'streak', target: 'bar', place: 'below', sec: 9, next: true,
     title: '続けた日',
     body: '叩いた日は、ここが1日伸びます。休んだ日は、休み券がつなぎます。押すと、今日の記録。' },
+  // 今日の記録カードの見本。照らす場所はなく、まん中のカードを叩けば進む
+  { id: 'share', target: null, place: 'share', sec: 7, next: true,
+    title: '記録を貼る',
+    body: '叩いた日は、今日の記録をこのカードにして、X や LINE に貼れます。叩き終わると聞きます。今日の記録の左上からも。' },
   { id: 'totals', target: 'cards', place: 'above', sec: 9, next: true,
     title: 'ためたドパ',
     body: 'スクワット1回が1ドパ。DPW は7日間、DT はこれまでの全部。押すと、履歴。' },
@@ -242,12 +246,30 @@ var TUTORIAL = (function () {
       }
       hole.classList.toggle('pulse', !!st.target);
       // 照らした場所だけ触れる。叩く場面は穴の中を叩かせ、ほかは吹き出しで進める
-      // 照らす場所のない場面（記録を残す、おわり）は、幕の下に触らせない
+      // 照らす場所のない場面（記録を貼る、記録を残す、おわり）は、幕の下に触らせない
       coach.style.pointerEvents = st.next || !st.target ? 'auto' : 'none';
-      var dots = TUTORIAL_STEPS.slice(0, 6).map(function (_, i) {
+      var dots = TUTORIAL_STEPS.slice(0, 7).map(function (_, i) {
         return '<span class="h-1.5 rounded-full ' + (i === step ? 'w-5 bg-dopa' : i < step ? 'w-1.5 bg-ink' : 'w-1.5 bg-rule') + '"></span>';
       }).join('');
-      if (st.place === 'account') {
+      if (st.place === 'share') {
+        // 記録を貼る。見本は、初めての日に目標回数を1回叩いたところ（1日連続、今日20ドパ）
+        var cells = [0, 0, 0, 0, 0, 0, 1].map(function (on, i) {
+          return '<span class="aspect-square flex-1 rounded-[4px] ' + (on ? 'bg-dopa ring-2 ring-ink' : 'bg-rule') + '"></span>';
+        }).join('');
+        bubble.className = 'coach-bubble pointer-events-auto center';
+        bubble.innerHTML =
+          '<div class="flex items-center justify-between"><div class="flex items-center gap-1">' + dots + '</div>' +
+          '<button data-skip class="text-[11px] font-bold text-mute underline underline-offset-2">スキップ</button></div>' +
+          '<p class="mt-2 text-left text-[15px] font-black leading-snug">' + st.title + '</p>' +
+          '<div class="mx-auto mt-3 w-[150px] rounded-xl border-2 border-ink bg-paper p-2.5 text-left">' +
+            '<div class="flex items-baseline justify-between"><span class="font-round text-[11px] font-black">Yat Tat <span class="text-dopa">Ta</span></span><span class="font-mono text-[7px] text-mute">2026/10/09</span></div>' +
+            '<div class="mt-1.5 flex items-end gap-2 rounded-lg border-2 border-ink bg-white px-2 py-1.5 shadow-[2px_2px_0_#1C1916]"><span class="text-[22px] leading-none text-gold">●</span><span><span class="block font-round text-[30px] font-black leading-none">1</span><span class="text-[9px] font-black">日連続</span></span></div>' +
+            '<div class="mt-2 flex gap-[3px]">' + cells + '</div>' +
+            '<div class="mt-1.5 flex gap-1 text-[7px]"><span class="flex-1 rounded border border-rule bg-white px-1 py-0.5">今日 <b class="text-[10px]">20</b> ドパ</span><span class="flex-1 rounded border border-rule bg-white px-1 py-0.5">DPW <b class="text-[10px]">20</b> ドパ</span></div>' +
+          '</div>' +
+          '<p class="mt-3 text-left text-[12px] leading-relaxed text-ink/75">' + st.body + '</p>' +
+          '<p class="mt-2 text-right text-[12px] font-black text-dopa">タップで次へ ›</p>';
+      } else if (st.place === 'account') {
         // 記録を残す。ログインしなくても全部使えることも、同じ重さで書く
         bubble.className = 'coach-bubble pointer-events-auto center';
         bubble.innerHTML =

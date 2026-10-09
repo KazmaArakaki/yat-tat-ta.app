@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="session-state" content="developing">
+<meta name="state" content="developing">
+<title>共有を促し、チュートリアルで見せる</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=M+PLUS+Rounded+1c:wght@500;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+        round: ['"M PLUS Rounded 1c"', '"Noto Sans JP"', 'sans-serif']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } }
+      },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+<style>
+.app { --a-bg:#FBF6EE; --a-card:#FFFFFF; --a-ink:#1C1916; --a-mute:#6E655C; --a-rule:#E7DDCC; --a-line:#1C1916; --a-soft:#FFE6F0; }
+.app.dark { --a-bg:#16120F; --a-card:#231D18; --a-ink:#F5EEE3; --a-mute:#A89C8E; --a-rule:#3A312A; --a-line:#F5EEE3; --a-soft:#3A1726; }
+.a-bg { background:var(--a-bg); color:var(--a-ink); }
+.a-card { background:var(--a-card); }
+.a-ink { color:var(--a-ink); }
+.a-mute { color:var(--a-mute); }
+.a-line { border-color:var(--a-line); }
+.a-rule { border-color:var(--a-rule); }
+.a-soft { background:var(--a-soft); }
+.lnk { text-decoration:underline; text-decoration-color:rgba(229,51,122,.5); text-decoration-thickness:2px; text-underline-offset:4px; }
+.lnk:hover { text-decoration-color:#E5337A; }
+.tabbtn[aria-selected="true"] { background:#1C1916; color:#FBF6EE; }
+.flow-arrow { font-family:"JetBrains Mono",monospace; color:#6E655C; }
+</style>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-5xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <time datetime="2026-10-09T12:29">2026-10-09 12:29</time>
+      <span>/</span>
+      <span>設計セッション</span>
+      <span class="rounded-full border border-dopa bg-dopa-soft px-2.5 py-0.5 font-bold text-ink">状態：developing</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl">共有を促し、チュートリアルで見せる</h1>
+  </header>
+
+  <section id="order" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="relative overflow-hidden rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916] sm:p-8">
+      <div class="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-dopa-soft"></div>
+      <p class="relative font-mono text-xs uppercase tracking-[0.2em] text-dopa">開発者の注文</p>
+      <p class="relative mt-6 font-display text-2xl leading-snug tracking-wide sm:text-3xl">シェアの動線が<br>わかりづらいです。</p>
+      <p class="relative mt-6 border-t-2 border-dashed border-rule pt-6 text-base font-bold leading-relaxed sm:text-lg">スクワット開始前（アプリ起動時、スクワット完了時）に、今日の分のシェアがなければダイアログでシェアを促したい。また、シェア機能についてもチュートリアルに入れたい。カードのデザインもいい感じなので、公開２週間待たずに次のリリースで出したい。</p>
+    </div>
+  </section>
+
+  <section id="why" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01 / why</p>
+    <h2 class="mt-2 font-display text-3xl">ボタンは、開かれないシートの中にあった</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>前のセッション<a href="../20261009-1053-share-card/index.html" class="lnk">今日の記録カードを共有する</a>では、共有のボタンを今日の記録のシートの左上に置きました。そのシートは連続記録の帯の左を押すと開きます。叩いて、演出を見て、アプリを閉じる人は、そこまで行きません。</p>
+      <p>そこで、カードのほうから利用者の前に出ることにしました。叩いた日に1度、ホームの下から<a href="../../glossary.html#share-prompt" class="lnk">共有の誘い</a>を出す。チュートリアルにも、カードの見本を見せる場面を足す。共有は公開2週間を待たず、次のリリースで出します（開発者が決定、2026-10-09）。</p>
+    </div>
+  </section>
+
+  <section id="decisions" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / decisions</p>
+    <h2 class="mt-2 font-display text-3xl">決めたこと</h2>
+    <ul class="mt-6 flex max-w-3xl flex-col gap-2 text-sm">
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　今日まだ共有していなければ、アプリを開いたときと、叩き切ったときに、ダイアログで共有を促す（開発者が決定、2026-10-09）。</li>
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　共有の場面をチュートリアルに入れる（開発者が決定、2026-10-09）。</li>
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　共有は次のリリースで出す。課題の「公開2週間待つ」は取りやめる（開発者が決定、2026-10-09）。</li>
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　「スクワット開始前（アプリ起動時）」は、その日もう叩いた記録があるときの起動のこと。今日まだ叩いていなければ、今日のカードに載せるものがない（今日のマスは空、今日のドパは0）ので出さない（開発者が確認、2026-10-09）。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>提案</b>　ボタンは「今日はしない」と「共有する」。「今日はしない」を押した日は、もう出さない。押さずに閉じたときや、共有シートを閉じただけのときは、次の機会にまた出す。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>提案</b>　「共有した」と数えるのは、共有シートで送り終えたときだけ。そのために、共有シートを SwiftUI の <code class="font-mono text-xs">ShareLink</code> から UIKit の <code class="font-mono text-xs">UIActivityViewController</code> に替える。<code class="font-mono text-xs">ShareLink</code> は送り終えたかを教えてくれない。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>提案</b>　チュートリアルの新しい場面は「記録を貼る」。続けた日のすぐあとに置く。帯の左から今日の記録のシートが開く、と言った直後なので、「今日の記録の左上からも」が通じる。</li>
+    </ul>
+  </section>
+
+  <section id="prompt" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / prompt</p>
+    <h2 class="mt-2 font-display text-3xl">共有の誘い</h2>
+    <div class="mt-8 grid items-start gap-8 md:grid-cols-[390px_1fr]">
+      <img src="prompt.png" alt="共有の誘い。見出し「今日の記録を貼りませんか」、今日の記録カードの縮小画像、ボタン「今日はしない」と「共有する」" class="w-[390px] rounded-2xl border border-rule">
+      <div class="max-w-md space-y-4 text-sm leading-relaxed text-ink/80">
+        <p>途切れたときのカードや、通知の問いかけと同じく、ホームの下から出ます。中に今日のカードそのものを縮めて見せるので、何が貼られるかは押す前に分かります。</p>
+        <p>ほかの重ね物（スプラッシュ、チュートリアル、叩いたあとの演出、途切れたときのカード、通知の問いかけ）を出している間は出しません。その間に機会が来たら、待たずにやめます。途切れたときのカードと通知の問いかけは、閉じたところでもう一度見ます。初めて叩き切った日は通知の問いかけが先に出て、閉じたあとに誘いが出ます。</p>
+      </div>
+    </div>
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full min-w-[640px] border-collapse text-left text-sm">
+        <caption class="mb-2 text-left font-mono text-xs text-mute">表1　出すときと、出さないとき</caption>
+        <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="py-2 pr-3">場面</th><th class="py-2">出るか</th></tr></thead>
+        <tbody class="[&>tr]:border-b [&>tr]:border-rule [&_td]:py-2.5 [&_td]:pr-3 [&_td]:align-top">
+          <tr><td>叩き切って、演出が終わった</td><td>出る（今日まだ共有していなければ）</td></tr>
+          <tr><td>アプリを開いた。今日もう叩いている</td><td>出る。その日最初に開いたときは、スプラッシュが消えてから</td></tr>
+          <tr><td>アプリを開いた。今日まだ叩いていない</td><td>出ない。今日のカードに載せるものがない</td></tr>
+          <tr><td>途中で閉じた連打の演出のあと</td><td>出ない。叩き切ったときだけ</td></tr>
+          <tr><td>チュートリアルの練習連打のあと</td><td>出ない。練習は記録にならない</td></tr>
+          <tr><td>今日もう共有した、または「今日はしない」を押した</td><td>出ない。次の記録日になったらまた出る</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="tutorial" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / tutorial</p>
+    <h2 class="mt-2 font-display text-3xl">チュートリアルの「記録を貼る」</h2>
+    <div class="mt-8 grid items-start gap-8 md:grid-cols-[390px_1fr]">
+      <img src="tutorial-share.png" alt="チュートリアルの記録を貼る場面。1日連続の見本カードと説明" class="w-[390px] rounded-2xl border border-rule">
+      <div class="max-w-md space-y-4 text-sm leading-relaxed text-ink/80">
+        <p>見本は、初めての日に目標回数を1回叩いたときのカードです（1日連続、今日のマスだけピンク）。チュートリアルを見る人は、まだ1度も叩いていません。自分が最初の1回を叩いたらこうなる、という形で見せます。</p>
+        <p>照らす場所はなく、叩けば次へ進みます。進み具合の点は6つから7つになりました。</p>
+      </div>
+    </div>
+    <ol class="mt-6 flex flex-wrap items-center gap-2 text-sm font-bold">
+      <li class="rounded-2xl border border-rule bg-white px-4 py-3">起こす</li><li class="flow-arrow">→</li>
+      <li class="rounded-2xl border border-rule bg-white px-4 py-3">練習連打</li><li class="flow-arrow">→</li>
+      <li class="rounded-2xl border border-rule bg-white px-4 py-3">いまのは練習</li><li class="flow-arrow">→</li>
+      <li class="rounded-2xl border border-rule bg-white px-4 py-3">続けた日</li><li class="flow-arrow">→</li>
+      <li class="rounded-2xl border-2 border-ink bg-white px-4 py-3 shadow-[4px_4px_0_#1C1916]">記録を貼る<span class="block text-[11px] font-normal text-mute">新しい場面</span></li><li class="flow-arrow">→</li>
+      <li class="rounded-2xl border border-rule bg-white px-4 py-3">ためたドパ</li><li class="flow-arrow">→</li>
+      <li class="rounded-2xl border border-rule bg-white px-4 py-3">回数を変える</li><li class="flow-arrow">→</li>
+      <li class="rounded-2xl border border-rule bg-white px-4 py-3">記録を残す<span class="block text-[11px] font-normal text-mute">まだログインしていない人だけ</span></li><li class="flow-arrow">→</li>
+      <li class="rounded-2xl border border-rule bg-white px-4 py-3">おわり</li>
+    </ol>
+  </section>
+
+  <section id="impl" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / implementation</p>
+    <h2 class="mt-2 font-display text-3xl">作ったもの</h2>
+    <ol class="mt-6 flex max-w-3xl flex-col gap-3 text-sm">
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>1. <code class="font-mono text-xs">AppModel</code>：<code class="font-mono text-xs">showsSharePrompt</code>、<code class="font-mono text-xs">offerShareIfNeeded</code>、<code class="font-mono text-xs">markShared</code>、<code class="font-mono text-xs">declineShare</code>。端末の設定に、共有した日と「今日はしない」の日を置く</b><br><span class="text-ink/70">出す条件をモデルに置き、テストで押さえるため。共有した日は記録ではなく端末の好みなので、Firestore には置かない。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>2. <code class="font-mono text-xs">ShareSheet</code>：<code class="font-mono text-xs">UIActivityViewController</code> を、いちばん上の画面から出す</b><br><span class="text-ink/70">送り終えたかを受け取るため。今日の記録のシートの上からも出せる。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>3. <code class="font-mono text-xs">SharePromptCard</code> を作り、ホームの重ね物の並びに足す</b><br><span class="text-ink/70">途切れたときのカードと通知の問いかけのあとに置き、同時には出さない。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>4. チュートリアルに <code class="font-mono text-xs">.share</code> を足し、見本のカード（<code class="font-mono text-xs">ShareCard.sample</code>）を見せる</b><br><span class="text-ink/70">共有できることを、最初に1度は見てもらうため。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>5. テストを6つ足し、チュートリアルのテスト2つを場面の追加に合わせる。文言を日本語と英語で7件足す</b><br><span class="text-ink/70">テストは全部で104件、すべて通った。</span></li>
+    </ol>
+  </section>
+
+  <section id="ask" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / developer</p>
+    <h2 class="mt-2 font-display text-3xl">開発者にお願いすること</h2>
+    <ol class="mt-6 grid max-w-3xl gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">1　約5分</p><p class="mt-2">実機で叩き切り、誘いが出ること、「共有する」で送り終えるとその日はもう出ないことを見る。</p></li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">2　約3分</p><p class="mt-2">設定の「使い方をもう一度」で、記録を貼る場面を見る。</p></li>
+    </ol>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

@@ -166,7 +166,7 @@ struct HomeView: View {
                 .allowsHitTesting(false)
         }
 
-        // 休み券の帯、途切れたときのカード、通知の問いかけは、スプラッシュとチュートリアルが消えてから出す
+        // 休み券の帯、途切れたときのカード、通知の問いかけ、共有の促しは、スプラッシュとチュートリアルが消えてから出す
         if model.splash == nil && model.tutorial == nil {
             notices
         }
@@ -191,6 +191,7 @@ struct HomeView: View {
                 Spacer()
                 StreakBreakCard(notice: notice) {
                     withAnimation { model.breakNotice = nil }
+                    model.offerShareIfNeeded()
                 }
             }
             .transition(.move(edge: .bottom))
@@ -201,6 +202,19 @@ struct HomeView: View {
                 ReminderAskCard(minutes: model.reminderMinutes) { yes in
                     withAnimation { model.showsReminderAsk = false }
                     if yes { Task { await model.enableReminder() } }
+                    model.offerShareIfNeeded()
+                }
+            }
+            .transition(.move(edge: .bottom))
+        } else if model.showsSharePrompt && model.finale == nil {
+            scrim
+            VStack {
+                Spacer()
+                SharePromptCard(card: model.shareCard) {
+                    withAnimation { model.showsSharePrompt = false }
+                    ShareSheet.present(model.shareCard) { if $0 { model.markShared() } }
+                } decline: {
+                    withAnimation { model.declineShare() }
                 }
             }
             .transition(.move(edge: .bottom))

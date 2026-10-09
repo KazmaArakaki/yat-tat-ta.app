@@ -27,6 +27,12 @@ nonisolated struct ShareCard: Equatable, Sendable {
     /// 6日前から今日まで、古い順に7つ
     let week: [Cell]
 
+    /// チュートリアルの見本。初めての日に1回叩いたところ
+    static func sample(today: RecordDay, reps: Int) -> ShareCard {
+        let daily: Ledger.DailyReps = [today: reps]
+        return ShareCard(ledger: Ledger(daily: daily, today: today), daily: daily, todaySets: 1)
+    }
+
     init(ledger: Ledger, daily: Ledger.DailyReps, todaySets: Int) {
         today = ledger.today
         streak = ledger.streak.current

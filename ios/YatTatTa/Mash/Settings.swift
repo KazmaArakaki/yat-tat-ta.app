@@ -22,6 +22,10 @@ enum SettingKey {
     static let introShown = "introShown"
     /// チュートリアルを終えたか、スキップしたか。途中で終了されたら立たない
     static let tutorialShown = "tutorialShown"
+    /// 今日の記録カードを最後に共有した記録日。その日はもう共有を促さない
+    static let sharedDay = "sharedDay"
+    /// 共有を促して「今日はしない」を押された記録日
+    static let shareDeclinedDay = "shareDeclinedDay"
 }
 
 enum TargetReps {
