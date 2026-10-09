@@ -55,8 +55,8 @@ targets:
         # INFOPLIST_KEY_ で書けないキーだけを置く。生成分とマージされる
         INFOPLIST_FILE: YatTatTa/Info.plist
         # App Store Connect のバージョンとそろえる。TestFlight に上げるたびに CURRENT_PROJECT_VERSION を1つ上げる
-        MARKETING_VERSION: "1.1"
-        CURRENT_PROJECT_VERSION: "3"
+        MARKETING_VERSION: "1.2"
+        CURRENT_PROJECT_VERSION: "4"
         # 端末の言語が日本語でも英語でもないときに使う言語（Info.plist の CFBundleDevelopmentRegion）。
         # 文言を書く言語（String Catalog の元の言語）は、プロジェクトの developmentLanguage の日本語のまま
         DEVELOPMENT_LANGUAGE: en
