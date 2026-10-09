@@ -4,9 +4,12 @@
 // クローラーまで LP に移って、LP の OGP が出てしまう。クローラーにも人にも同じ HTML を返す（docs/features/share-card）。
 
 const text = {
-  ja: { title: (s) => `${s}日連続 | Yat Tat Ta`, description: "食べたら、しゃがんで、叩く。", landing: "/" },
+  ja: { title: (s) => `${s}日連続 | Yat Tat Ta`, description: "食べて、しゃがんで、連続タップ。", landing: "/" },
   en: { title: (s) => `${s} days in a row | Yat Tat Ta`, description: "Eat, squat, tap.", landing: "/en/" },
 };
+
+/// LP の Google アナリティクスで、リンクカードから来た人を見分ける印（docs/features/landing-page）
+const campaign = "?utm_source=share_card&utm_medium=social&utm_campaign=share";
 
 const escape = (s) => String(s).replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
 
@@ -37,8 +40,8 @@ export function sharePage({ id, origin, lang, streak }) {
 <meta name="twitter:image" content="${escape(image)}">
 </head>
 <body>
-<script>location.replace(${JSON.stringify(t.landing)})</script>
-<noscript><a href="${t.landing}">Yat Tat Ta</a></noscript>
+<script>location.replace(${JSON.stringify(t.landing + campaign)})</script>
+<noscript><a href="${escape(t.landing + campaign)}">Yat Tat Ta</a></noscript>
 </body>
 </html>
 `;

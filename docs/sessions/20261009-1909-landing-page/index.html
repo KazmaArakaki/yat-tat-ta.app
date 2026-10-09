@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="session-state" content="developing">
+<meta name="state" content="developing">
+<title>LP を作り直し、見た人とボタンを数える</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=M+PLUS+Rounded+1c:wght@500;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+        round: ['"M PLUS Rounded 1c"', '"Noto Sans JP"', 'sans-serif']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } }
+      },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+<style>
+.app { --a-bg:#FBF6EE; --a-card:#FFFFFF; --a-ink:#1C1916; --a-mute:#6E655C; --a-rule:#E7DDCC; --a-line:#1C1916; --a-soft:#FFE6F0; }
+.app.dark { --a-bg:#16120F; --a-card:#231D18; --a-ink:#F5EEE3; --a-mute:#A89C8E; --a-rule:#3A312A; --a-line:#F5EEE3; --a-soft:#3A1726; }
+.a-bg { background:var(--a-bg); color:var(--a-ink); }
+.a-card { background:var(--a-card); }
+.a-ink { color:var(--a-ink); }
+.a-mute { color:var(--a-mute); }
+.a-line { border-color:var(--a-line); }
+.a-rule { border-color:var(--a-rule); }
+.a-soft { background:var(--a-soft); }
+.lnk { text-decoration:underline; text-decoration-color:rgba(229,51,122,.5); text-decoration-thickness:2px; text-underline-offset:4px; }
+.lnk:hover { text-decoration-color:#E5337A; }
+.tabbtn[aria-selected="true"] { background:#1C1916; color:#FBF6EE; }
+.flow-arrow { font-family:"JetBrains Mono",monospace; color:#6E655C; }
+</style>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-5xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <time datetime="2026-10-09T19:09">2026-10-09 19:09</time>
+      <span>/</span>
+      <span>設計セッション</span>
+      <span class="rounded-full border border-dopa bg-dopa-soft px-2.5 py-0.5 font-bold text-ink">状態：developing</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl">LP を作り直し、見た人とボタンを数える</h1>
+  </header>
+
+  <section id="order" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="relative overflow-hidden rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916] sm:p-8">
+      <div class="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-dopa-soft"></div>
+      <p class="relative font-mono text-xs uppercase tracking-[0.2em] text-dopa">開発者の注文</p>
+      <p class="relative mt-6 font-display text-2xl leading-snug tracking-wide sm:text-3xl">待っている間に<br>LP を充実させたい。</p>
+      <p class="relative mt-6 border-t-2 border-dashed border-rule pt-6 text-base font-bold leading-relaxed sm:text-lg">スクリーンショットや30秒動画などのメディアアセットを充実させ、見ているだけで楽しいような LP デザインにして（Pinterest と Dribbble の LP のまとめを参考に）。また、ユーザーのコンバージョンを測定できるようにして。</p>
+    </div>
+  </section>
+
+  <section id="why" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01 / why</p>
+    <h2 class="mt-2 font-display text-3xl">リンクカードの行き先が、サポートのページだった</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>LINE や X のリンクカードを押した人は、<a href="../../glossary.html#landing-page" class="lnk">LP</a> に移ります。ところが、そこにあったのは問い合わせ先とプライバシーポリシーへのリンクだけのサポートのページでした。カードで興味を持った人が、何のアプリかも、どう楽しいのかも分からないまま帰っていく。</p>
+      <p>このページは App Store Connect の<b>サポート URL</b> でもあります。Apple はサポート URL に問い合わせ先を載せるよう求めているので、サポートの欄はページの下に残し、上を宣伝のページに作り替えました。</p>
+      <p>参考に挙げてもらった Pinterest と Dribbble のまとめは、ログインや JavaScript がないと中身が出ず、こちらからは開けませんでした。アプリの LP によくある型（動画の入った冒頭、使い方の数歩、スクリーンショットの帯、機能の箱、くり返すボタン、よくある質問）で組み、見た目はアプリの「紙の地に太い枠とずらした影」で振り切っています。</p>
+    </div>
+  </section>
+
+  <section id="decisions" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / decisions</p>
+    <h2 class="mt-2 font-display text-3xl">決めたこと</h2>
+    <ul class="mt-6 flex max-w-3xl flex-col gap-2 text-sm">
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　計測は Google アナリティクス 4（開発者が決定、2026-10-09）。公開ページの「外のサービスへ送らない」という方針は、LP について変える。送り先と送る情報は、プライバシーポリシーの「公開ページで外部に送られる情報」に書く（電気通信事業法の外部送信規律）。</li>
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　動画は LP 用の30秒を、日本語と英語で新しく作る（開発者が決定、2026-10-09）。</li>
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　合言葉を「食べたら、しゃがんで、叩く。」から「食べて、しゃがんで、連続タップ。」に改める。「叩く」では、初めての人に何を叩くのかが分からない。「食べたら、しゃがんで、連打。」も比べたうえで、いちばん思い浮かべやすいものを選んだ（開発者が決定、2026-10-09）。LP、リンクカード、動画の最後の画面、共有の文はすぐ、App Store のサブタイトルとアプリの中（はじめての幕、チュートリアル、通知）は 1.2 から。英語の「Eat. Squat. Tap.」は変えない。リンクカードは絵柄の版を 2 に上げ、前の画像を使い回さないようにした。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>提案</b>　App Store のボタンは Apple の公式のバッジを使い、ページに同梱する。Apple のロゴを使った自作のボタンは、マーケティングのガイドラインで認められていない。Apple のサーバーから毎回読み込むと、見た人の情報が Apple にも送られる。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>提案</b>　App Store へのリンクに<a href="../../glossary.html#campaign-link" class="lnk">キャンペーンリンク</a>の印（pt と ct）を付け、App Store Connect の App 分析で、LP のどのボタンから来た人が実際に入れたかまで見る。GA4 で数えられるのは「ボタンを押した」まで。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>提案</b>　EEA、英国、スイスから開いた人には Cookie を使わない（同意モード）。広告の機能は切る。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>提案</b>　リンクカードから LP に移すとき、<code class="font-mono text-xs">utm_source=share_card</code> を付けて、カードから来た人を見分ける。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>提案</b>　プライバシーポリシーのページは、今までどおり外のものを読み込まない。</li>
+    </ul>
+  </section>
+
+  <section id="look" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / look</p>
+    <h2 class="mt-2 font-display text-3xl">できあがり</h2>
+    <div class="mt-8 grid items-start gap-8 md:grid-cols-[1fr_300px]">
+      <img src="lp-desktop.jpg" alt="LP の PC の幅の全体" class="w-full rounded-2xl border border-rule">
+      <div class="space-y-4">
+        <img src="lp-mobile.jpg" alt="LP のスマホの幅の上のほう" class="w-[300px] rounded-2xl border border-rule">
+        <p class="text-sm leading-relaxed text-ink/80">見本は、動きを減らす設定で撮ったもの。ふだんは見出しが1行ずつ落ちてきて、動画の後ろで光が回り、下をスクワットマンが行進し、節が下から出てきます。</p>
+      </div>
+    </div>
+    <ol class="mt-8 grid max-w-3xl gap-2 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>冒頭</b>：「食べて、しゃがんで、連続タップ。」と、30秒の動画。「買い切り。広告なし、アプリ内課金なし。ログインもいりません。」</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>3歩</b>：食べる、しゃがむ、叩く。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>スクリーンショット</b>：App Store と同じ6枚を、横に流す。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>機能</b>：演出、連続記録と休み券、ドパ、共有カード、ログインなし、今日まだ通知。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>帯</b>：黒地に「スクワット、終わった？」と、もう一度のバッジ。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>よくある質問とサポート</b>：料金、ログイン、機種変更、回数、電波、対応機種。その下に問い合わせ先と、記録とアカウントの説明。</li>
+    </ol>
+  </section>
+
+  <section id="video" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / video</p>
+    <h2 class="mt-2 font-display text-3xl">30秒の動画</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>SNS 用の縦動画は、叩き切って「今日もお疲れ！」が消えたところで終わる24秒でした。LP 用は、その直後に出る共有の誘いを4.5秒見せてから終えます。「叩く、派手になる、FEVER、筋肉確定、カードにして貼れる」が29秒前後に収まりました。</p>
+      <p>作り方は SNS 用と同じ <code class="font-mono text-xs">ios/Design/reel.sh</code> で、言語と種類を選べるようにしました（<code class="font-mono text-xs">reel.sh ja lp</code>、<code class="font-mono text-xs">reel.sh en lp</code>）。英語の帯の文字は、日本語と同じ大きさでははみ出したので、短く言い直して少し小さくしました。日本語の最後の帯も、最初の「今日の記録は、カードにして貼れる」がはみ出したので「記録は、カードで貼れる」に縮めています。</p>
+      <p>録ったままの動画は1本 33MB あります。LP には 540 × 960 に縮め、1本およそ 4.3MB にして載せました。音は最初は出さず、「音を出す」を押した人だけに流します。</p>
+    </div>
+  </section>
+
+  <section id="measure" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / measure</p>
+    <h2 class="mt-2 font-display text-3xl">何が数えられるか</h2>
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full min-w-[640px] border-collapse text-left text-sm">
+        <caption class="mb-2 text-left font-mono text-xs text-mute">表1　LP から App Store までの、どこで何を数えるか</caption>
+        <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="py-2 pr-3">段階</th><th class="py-2 pr-3">どこで見るか</th><th class="py-2">中身</th></tr></thead>
+        <tbody class="[&>tr]:border-b [&>tr]:border-rule [&_td]:py-2.5 [&_td]:pr-3 [&_td]:align-top">
+          <tr><td><b>LP を見た</b></td><td>GA4</td><td>page_view。流入元（X、LINE、検索、リンクカード＝<code class="font-mono text-xs">share_card</code>）ごと</td></tr>
+          <tr><td><b>動画の音を出した</b></td><td>GA4</td><td>video_sound_on</td></tr>
+          <tr><td><b>App Store のボタンを押した</b></td><td>GA4</td><td>app_store_click。押した場所（上の帯 bar、冒頭 hero、下の帯 cta）ごと。キーイベントにして、LP のコンバージョンとして見る</td></tr>
+          <tr><td><b>App Store のページを見た、入れた</b></td><td>App Store Connect の App 分析</td><td>キャンペーン（<code class="font-mono text-xs">ct=lp_ja_hero</code> など）ごとの、ページの表示、App の入手、売上</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="impl" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / implementation</p>
+    <h2 class="mt-2 font-display text-3xl">作ったもの</h2>
+    <ol class="mt-6 flex max-w-3xl flex-col gap-3 text-sm">
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>1. <code class="font-mono text-xs">firebase/public/index.html</code>、<code class="font-mono text-xs">en/index.html</code>、<code class="font-mono text-xs">lp.css</code>、<code class="font-mono text-xs">lp.js</code></b><br><span class="text-ink/70">LP の本体。書体は Google Fonts の Dela Gothic One と M PLUS Rounded 1c。動きを減らす設定では、演出を止める。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>2. <code class="font-mono text-xs">firebase/public/media/</code></b><br><span class="text-ink/70">30秒の動画と最初のコマ、スクリーンショット12枚（webp）、共有カードの見本、LP の OGP 画像、公式の App Store バッジ。合計およそ 11MB。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>3. <code class="font-mono text-xs">ios/Design/reel.sh</code>、<code class="font-mono text-xs">compose_reel.py</code>、<code class="font-mono text-xs">AppModel+Demo.swift</code></b><br><span class="text-ink/70">LP 用と英語の動画を作るため。SNS 用の動画の作り方は変えていない。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>4. プライバシーポリシーに「公開ページで外部に送られる情報」</b><br><span class="text-ink/70">Google アナリティクスと Google Fonts の、送り先、送る情報、目的、止め方。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>5. <code class="font-mono text-xs">functions/src/page.js</code>：リンクカードから LP へ移すとき utm を付ける。<code class="font-mono text-xs">firebase.json</code>：media のキャッシュ</b><br><span class="text-ink/70">関数のテストは8件すべて通った。</span></li>
+    </ol>
+  </section>
+
+  <section id="ask" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">07 / developer</p>
+    <h2 class="mt-2 font-display text-3xl">開発者にお願いすること</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">1 と 2 の値が入るまで、Google アナリティクスは読み込まれず、App Store へのリンクにキャンペーンの印も付きません。値は <code class="font-mono text-xs">firebase/public/lp.js</code> のいちばん上の2行に入れます。</p>
+    <ol class="mt-6 grid max-w-3xl gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">1　約10分</p><p class="mt-2">Google アナリティクスで、プロパティとウェブのデータストリーム（https://yat-tat-ta.web.app）を作り、測定 ID（G- で始まる）を控える。</p></li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">2　約3分</p><p class="mt-2">App Store Connect の App 分析で「キャンペーンリンクを生成」を開き、出てくるリンクの <code class="font-mono text-xs">pt=</code> の値（プロバイダ ID）を控える。</p></li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">3　約5分</p><p class="mt-2">Hosting と関数をデプロイし、LP を実機で開いて見る。</p></li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">4　翌日</p><p class="mt-2">GA4 に app_store_click が届いたら、管理画面でキーイベントにする。</p></li>
+    </ol>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

@@ -147,7 +147,7 @@ var TUTORIAL_STEPS = [
     title: '記録を残す',
     body: 'Apple でログインすると、記録がアカウントに残ります。iPhone を替えても、同じ Apple ID でログインすれば戻ります。' },
   { id: 'finish', target: null, place: 'center', sec: 5, next: true,
-    title: '食べたら、しゃがんで、叩く。',
+    title: '食べて、しゃがんで、連続タップ。',
     body: '最初の1回で、1日目。' }
 ];
 
@@ -285,7 +285,7 @@ var TUTORIAL = (function () {
       } else if (st.place === 'center') {
         bubble.className = 'coach-bubble pointer-events-auto center';
         bubble.innerHTML =
-          '<p class="font-display text-[26px] leading-snug">食べたら、<br>しゃがんで、<br><span class="text-dopa">叩く。</span></p>' +
+          '<p class="font-display text-[26px] leading-snug">食べて、<br>しゃがんで、<br><span class="text-dopa">連続タップ。</span></p>' +
           '<p class="mt-3 text-sm font-bold text-mute">' + st.body + '</p>' +
           '<button data-go class="mt-6 w-full rounded-full border-2 border-ink bg-gold py-3 text-base font-black text-ink shadow-[0_4px_0_#1C1916] active:translate-y-1 active:shadow-none">はじめる</button>';
       } else {

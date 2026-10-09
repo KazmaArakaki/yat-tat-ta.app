@@ -73,11 +73,12 @@ tailwind.config = {
         <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="w-32 py-2 pr-3">欄</th><th class="py-2 pr-3">日本語</th><th class="py-2 pr-3">英語</th><th class="w-20 py-2">上限</th></tr></thead>
         <tbody class="[&>tr]:border-b [&>tr]:border-rule [&_td]:py-2.5 [&_td]:pr-3 [&_td]:align-top">
           <tr><td><b>名前</b></td><td>Yat Tat Ta</td><td>Yat Tat Ta</td><td class="font-mono text-xs">30</td></tr>
-          <tr><td><b>サブタイトル</b></td><td>食べたら、しゃがんで、叩く。<br><span class="text-xs text-mute">14字。はじめての幕の3つの言葉をつなげた1文</span></td><td>Eat. Squat. Tap for Dopa.<br><span class="text-xs text-mute">25字。2026-10-06 に決めたもの</span></td><td class="font-mono text-xs">30</td></tr>
+          <tr><td><b>サブタイトル</b></td><td>食べて、しゃがんで、連続タップ。<br><span class="text-xs text-mute">1.2 から（2026-10-09 に開発者が決定）。1.1 までは「食べて、しゃがんで、連続タップ。」。「叩く」では何を叩くか分からないため</span><br><span class="text-xs text-mute">14字。はじめての幕の3つの言葉をつなげた1文</span></td><td>Eat. Squat. Tap for Dopa.<br><span class="text-xs text-mute">25字。2026-10-06 に決めたもの</span></td><td class="font-mono text-xs">30</td></tr>
           <tr><td><b>プロモーション用テキスト</b></td><td>食後のスクワットが終わったら、回数だけ叩く。叩くたびに CHANCE、激熱!!、FEVER。最後の1打で筋肉確定。地味な20回が、毎回お祭りになります。<br><span class="text-xs text-mute">76字</span></td><td>Done with your after-meal squats? Tap once for every rep. CHANCE!, RED HOT!!, FEVER!!, then one last tap locks it all in. Twenty quiet squats, turned into a party.<br><span class="text-xs text-mute">163字</span></td><td class="font-mono text-xs">170</td></tr>
           <tr><td><b>キーワード</b></td><td class="font-mono text-xs">スクワット,食後,運動,習慣,記録,筋トレ,継続,連続記録,カウンター,連打,太もも,毎日,ストリーク,フィットネス,宅トレ<br><span class="font-sans text-mute">62字</span></td><td class="font-mono text-xs">squat,workout,habit,tracker,streak,exercise,fitness,counter,after meal,daily,legs,routine,reps,home<br><span class="font-sans text-mute">99字</span></td><td class="font-mono text-xs">100</td></tr>
           <tr><td><b>カテゴリ</b></td><td colspan="2">プライマリ：ヘルスケア／フィットネス。セカンダリ：エンターテインメント</td><td></td></tr>
           <tr><td><b>サポート URL</b></td><td>https://yat-tat-ta.web.app/</td><td>https://yat-tat-ta.web.app/en/</td><td></td></tr>
+          <tr><td colspan="4" class="text-xs text-mute">サポート URL は <a href="../../glossary.html#landing-page" class="lnk">LP</a> を兼ねる（2026-10-09 から）。LP のいちばん下に問い合わせ先とプライバシーポリシーの欄を残しているので、URL は変えない。</td></tr>
           <tr><td><b>プライバシーポリシー URL</b></td><td>https://yat-tat-ta.web.app/privacy/</td><td>https://yat-tat-ta.web.app/privacy/en/</td><td></td></tr>
           <tr><td><b>著作権</b></td><td colspan="2">2026 Kazuma Arakaki</td><td></td></tr>
         </tbody>
@@ -229,6 +230,20 @@ Deletion: Settings (gear icon, top right) &gt; Account &gt; Delete Account, or D
     </div>
   </section>
 
+  <section id="campaign" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">campaign</p>
+    <h2 class="mt-2 font-display text-3xl">LP から何人が入れたか</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p><a href="../../glossary.html#landing-page" class="lnk">LP</a> の Google アナリティクスで分かるのは、App Store のボタンを押したところまでです。その先で実際に入れたかは、App Store へのリンクに付けた<a href="../../glossary.html#campaign-link" class="lnk">キャンペーンリンク</a>の印で、App Store Connect の中で数えます（2026-10-09）。</p>
+      <p>リンクの形は <code class="font-mono text-xs">https://apps.apple.com/app/apple-store/id6819943075?pt=［プロバイダ ID］&amp;ct=［名前］&amp;mt=8</code>。LP では ct を <code class="font-mono text-xs">lp_ja_hero</code> のように「LP、言語、置いた場所（bar、hero、cta）」で付けます。<code class="font-mono text-xs">firebase/public/lp.js</code> がリンクを組み立てるので、HTML は直さなくてよい。</p>
+    </div>
+    <ol class="mt-6 flex max-w-3xl flex-col gap-2 text-sm">
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>1. プロバイダ ID を調べる（約3分）</b>：App Store Connect の「アプリ」から Yat Tat Ta を開き、App 分析（Analytics）の「獲得」の欄にある「キャンペーンリンクを生成」を開く。出てくるリンクの <code class="font-mono text-xs">pt=</code> の値がプロバイダ ID。開発者のアカウントで1つで、アプリが増えても同じ。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>2. lp.js に入れて Hosting に出す（約5分）</b>：<code class="font-mono text-xs">PROVIDER_TOKEN</code> に入れ、<code class="font-mono text-xs">firebase/</code> で <code class="font-mono text-xs">npx firebase-tools deploy --only hosting -P prod</code>。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>3. 見る</b>：App 分析の「獲得」→「キャンペーン」で、ct ごとに App Store のページを開いた数と、入れた数が並ぶ。数が出るのは、その ct から何人か来てから（少ないうちは出ない）。</li>
+    </ol>
+  </section>
+
   <section id="screenshots" class="mt-16">
     <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">screenshots</p>
     <h2 class="mt-2 font-display text-3xl">スクリーンショット</h2>
@@ -276,7 +291,7 @@ Deletion: Settings (gear icon, top right) &gt; Account &gt; Delete Account, or D
     <h2 class="mt-2 font-display text-3xl">関連</h2>
     <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
       <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">セッション</p><a href="../../sessions/20261007-1523-app-store-review/index.html" class="mt-1 block font-bold lnk">App Store の審査に出す準備</a><a href="../../sessions/20261008-1517-guest-start/index.html" class="mt-1 block font-bold lnk">ログインせずに始める</a></li>
-      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../glossary.html#store-listing" class="font-bold lnk">掲載情報</a><a href="../../glossary.html#review-note" class="font-bold lnk">審査メモ</a><a href="../../glossary.html#caption-band" class="font-bold lnk">見出しの帯</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../glossary.html#store-listing" class="font-bold lnk">掲載情報</a><a href="../../glossary.html#campaign-link" class="font-bold lnk">キャンペーンリンク</a><a href="../../glossary.html#landing-page" class="font-bold lnk">LP</a><a href="../../glossary.html#review-note" class="font-bold lnk">審査メモ</a><a href="../../glossary.html#caption-band" class="font-bold lnk">見出しの帯</a></p></li>
       <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">devops</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../health-wording/index.html" class="font-bold lnk">健康効果の書き方</a><a href="../localization/index.html" class="font-bold lnk">多言語の決まり事</a><a href="../sound-assets/index.html" class="font-bold lnk">声と効果音の出どころ</a></p></li>
       <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">機能</p><a href="../../features/account/index.html" class="mt-1 block font-bold lnk">アカウント</a></li>
     </ul>

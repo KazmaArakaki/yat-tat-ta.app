@@ -61,7 +61,7 @@ enum ShareTarget: CaseIterable {
             String(localized: "Yat Tat Ta で\(card.streak)日連続！"),
             weekEmoji(card),
             String(localized: "今日は\(card.todayDopa)ドパ、この7日で\(card.dopaPerWeek)ドパ。"),
-            String(localized: "食べたら、しゃがんで、叩く。"),
+            String(localized: "食べて、しゃがんで、連続タップ。"),
         ].joined(separator: "\n")
     }
 
@@ -76,7 +76,7 @@ enum ShareTarget: CaseIterable {
     }
 
     private static func message(_ card: ShareCard) -> String {
-        String(localized: "Yat Tat Ta で\(card.streak)日連続。食べたら、しゃがんで、叩く。")
+        String(localized: "Yat Tat Ta で\(card.streak)日連続。食べて、しゃがんで、連続タップ。")
     }
 
     /// 投稿画面を開く URL。LINE はアプリが入っていればアプリが開く。X はアプリが入っていないときだけ使う

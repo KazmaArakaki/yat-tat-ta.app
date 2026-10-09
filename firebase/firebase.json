@@ -20,6 +20,26 @@
           "region": "asia-northeast1"
         }
       }
+    ],
+    "headers": [
+      {
+        "source": "/media/**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=604800"
+          }
+        ]
+      },
+      {
+        "source": "/@(lp.css|lp.js)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=3600"
+          }
+        ]
+      }
     ]
   },
   "functions": [

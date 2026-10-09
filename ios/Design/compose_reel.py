@@ -3,7 +3,7 @@
 
 reel.sh から呼ぶ。直接は使わない。
 
-    python3 Design/compose_reel.py <作業場所> <録画を始めた時刻> <書き出す先>
+    python3 Design/compose_reel.py <作業場所> <録画を始めた時刻> <書き出す先> [ja|en] [sns|lp]
 
 作業場所には screen.mov（シミュレーターの録画）、reel.caf（アプリが書いた音）、
 reel.json（音の始まりの時刻と、場面の時刻）を置いておく。
@@ -28,18 +28,32 @@ FONT = "/System/Library/Fonts/ヒラギノ角ゴシック W8.ttc"
 FONT_MID = "/System/Library/Fonts/ヒラギノ角ゴシック W6.ttc"
 
 # 帯の文字。（文字, 出し始める場面, 消す場面）。場面の時刻はアプリが reel.json に書く
-CAPTIONS = [
-    ("スクワット、終わった？", "start", "tap"),
-    ("1回＝1打", "tap", "chance"),
-    ("叩くたびに、どんどん派手に", "chance", "fever"),
-    ("FEVER！5秒間、叩き放題", "fever", "feverEnd"),
-    ("最後の1打で、筋肉確定。", "feverEnd", "end"),
-]
+# LP の動画（lp）は、叩き切ったあとの共有の誘い（share）まで続く
+CAPTIONS = {
+    "ja": [
+        ("スクワット、終わった？", "start", "tap"),
+        ("1回＝1打", "tap", "chance"),
+        ("叩くたびに、どんどん派手に", "chance", "fever"),
+        ("FEVER！5秒間、叩き放題", "fever", "feverEnd"),
+        ("最後の1打で、筋肉確定。", "feverEnd", "share"),
+        ("記録は、カードで貼れる", "share", "end"),
+    ],
+    # 英語は1行が長くなるので、短く言い直し、文字も小さくする（CAPTION_SIZE）
+    "en": [
+        ("Squats done?", "start", "tap"),
+        ("1 squat = 1 tap", "tap", "chance"),
+        ("Each tap gets louder", "chance", "fever"),
+        ("FEVER! 5 sec of tapping", "fever", "feverEnd"),
+        ("Last tap: locked in!", "feverEnd", "share"),
+        ("Share it as a card", "share", "end"),
+    ],
+}
+CAPTION_SIZE = {"ja": 74, "en": 68}
 # 左右の余白のスクワットマン。1回の動きの秒数。起きる前は寝ていて、フィーバーの間は速くなる
 SQUAD_SECONDS = 1.2
 SQUAD_FEVER_SECONDS = 0.4
 CARD_TITLE = "Yat Tat Ta"
-CARD_LINE = "食べたら、しゃがんで、叩く。"
+CARD_LINE = {"ja": "食べて、しゃがんで、連続タップ。", "en": "Eat, squat, tap."}
 
 ICON_ASSETS = Path(__file__).resolve().parent.parent / "YatTatTa" / "AppIcon.icon" / "Assets"
 ICON_FILL = "#E9A800"
@@ -90,8 +104,14 @@ def text(work: Path, name: str, value: str) -> str:
 
 def main() -> None:
     work, record_start, out = Path(sys.argv[1]), float(sys.argv[2]), sys.argv[3]
+    lang = sys.argv[4] if len(sys.argv) > 4 else "ja"
+    kind = sys.argv[5] if len(sys.argv) > 5 else "sns"
     reel = json.loads((work / "reel.json").read_text())
     events = {"start": 0.0, **reel["events"]}
+    # SNS の動画には共有の場面がない。最後の文字は終わりまで出す
+    captions = [c for c in CAPTIONS[lang] if kind == "lp" or c[1] != "share"]
+    if kind != "lp":
+        captions = [(t, a, "end" if b == "share" else b) for t, a, b in captions]
     duration = events["end"]
     # 録画の頭から、アプリが音を書き始めたところまでを切る
     offset = max(0.0, reel["audioStart"] - record_start)
@@ -130,12 +150,12 @@ def main() -> None:
         filters.append(f"[{last}][{name}_l]overlay=0:{BAND}:enable='{enable}'[{name}_a]")
         filters.append(f"[{name}_a][{name}_r]overlay={W - side}:{BAND}:enable='{enable}'[{name}_b]")
         last = f"{name}_b"
-    for i, (caption, start, end) in enumerate(CAPTIONS):
+    for i, (caption, start, end) in enumerate(captions):
         begin, finish = events.get(start), events.get(end, duration)
         if begin is None:
             continue
         filters.append(
-            f"[{last}]drawtext=fontfile={bold}:textfile={text(work, f'caption{i}', caption)}:fontsize=74"
+            f"[{last}]drawtext=fontfile={bold}:textfile={text(work, f'caption{i}', caption)}:fontsize={CAPTION_SIZE[lang]}"
             f":fontcolor={INK}:x=(w-tw)/2:y=({BAND}-th)/2+16:enable='between(t,{begin:.3f},{finish:.3f})'[c{i}]")
         last = f"c{i}"
     filters += [
@@ -145,7 +165,7 @@ def main() -> None:
         f"[card_bg][icon]overlay=({W}-440)/2:520:shortest=1,"
         f"drawtext=fontfile={bold}:textfile={text(work, 'title', CARD_TITLE)}:fontsize=110:fontcolor={INK}"
         f":x=(w-tw)/2:y=1060,"
-        f"drawtext=fontfile={mid}:textfile={text(work, 'line', CARD_LINE)}:fontsize=58:fontcolor={MUTE}"
+        f"drawtext=fontfile={mid}:textfile={text(work, 'line', CARD_LINE[lang])}:fontsize=58:fontcolor={MUTE}"
         f":x=(w-tw)/2:y=1230[card]",
         f"anullsrc=r=48000:cl=stereo,atrim=0:{CARD_SECONDS}[card_a]",
         f"[{last}][main_a][card][card_a]concat=n=2:v=1:a=1[v][a]",

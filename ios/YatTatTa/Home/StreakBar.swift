@@ -66,7 +66,7 @@ struct StreakBar: View {
         if streak.doneToday { return todayCount > 0 ? "✓ 今日のぶんは済み（\(todayCount)回）" : "✓ 今日のぶんは済み" }
         if streak.current > 0 { return "今日はまだ。1回で\(streak.nextCount)日目" }
         if streak.best > 0 { return "最長記録 \(streak.best)日" }
-        return "食べたら、しゃがんで、叩く"
+        return "食べて、しゃがんで、連続タップ"
     }
 
     /// 2枚分の枠を常に出し、持っていない枠は点線にする

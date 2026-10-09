@@ -22,7 +22,7 @@ const color = {
 };
 
 const words = {
-  ja: { streak: "日連続", today: "今日", dopa: "ドパ", tagline: "食べたら、しゃがんで、叩く。", weekdays: "日月火水木金土" },
+  ja: { streak: "日連続", today: "今日", dopa: "ドパ", tagline: "食べて、しゃがんで、連続タップ。", weekdays: "日月火水木金土" },
   en: { streak: "days in a row", today: "Today", dopa: "Dopa", tagline: "Eat, squat, tap.", weekdays: "SMTWTFS" },
 };
 
@@ -50,9 +50,13 @@ export function normalize(data) {
   };
 }
 
+/// カードの絵柄の版。絵柄や文言を変えたら上げて、前の画像を使い回さないようにする
+/// 2：下の言葉を「食べて、しゃがんで、連続タップ。」に（2026-10-09）
+const DESIGN = 2;
+
 /// 見た目を決める数字から作る名前。同じ見た目なら同じ名前
 export function hashOf(card) {
-  const key = [card.lang, card.day, card.streak, card.week, card.today, card.dpw].join("|");
+  const key = [DESIGN, card.lang, card.day, card.streak, card.week, card.today, card.dpw].join("|");
   return createHash("sha256").update(key).digest("hex").slice(0, 20);
 }
 
@@ -144,8 +148,9 @@ function tree(card) {
       ]),
       h("div", { display: "flex", justifyContent: "space-between" }, cells),
       h("div", { display: "flex", gap: 16 }, [stat(w.today, card.today), stat("DPW", card.dpw)]),
-      h("div", { display: "flex", justifyContent: "space-between", alignItems: "baseline" }, [
-        h("div", { fontSize: 26, fontWeight: 900 }, w.tagline),
+      // 言葉と URL は2行に分ける。日本語の言葉は1行に並べると URL ごと折り返す
+      h("div", { display: "flex", flexDirection: "column", gap: 2 }, [
+        h("div", { fontSize: 26, fontWeight: 900, whiteSpace: "nowrap" }, w.tagline),
         h("div", { fontSize: 20, color: color.mute }, "yat-tat-ta.web.app"),
       ]),
     ]),

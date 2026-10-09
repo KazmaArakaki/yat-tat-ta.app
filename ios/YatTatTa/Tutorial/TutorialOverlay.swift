@@ -165,9 +165,9 @@ struct TutorialOverlay: View {
         VStack(spacing: 12) {
             // はじめての幕と同じ3つの言葉。3つ続けて読むと1文になる
             VStack(spacing: 2) {
-                Text("食べたら、")
+                Text("食べて、")
                 Text("しゃがんで、")
-                Text("叩く。").foregroundStyle(Color.dopa)
+                Text("連続タップ。").foregroundStyle(Color.dopa)
             }
             .font(.label(30, black: true))
             .accessibilityElement(children: .combine)
@@ -328,7 +328,7 @@ struct TutorialOverlay: View {
         case .totals: "ためたドパ"
         case .gear: "回数を変える"
         case .account: "記録を残す"
-        case .finish: "食べたら、しゃがんで、叩く。"
+        case .finish: "食べて、しゃがんで、連続タップ。"
         }
     }
 
@@ -342,7 +342,7 @@ struct TutorialOverlay: View {
         case .totals: "スクワット1回が1ドパ。DPW は7日間、DT はこれまでの全部。押すと、履歴。"
         case .gear: "1回に叩く数は、いま\(targetReps)回。ここで\(TargetReps.range.lowerBound)〜\(TargetReps.range.upperBound)回に変えられます。"
         case .account: "Apple でログインすると、記録がアカウントに残ります。iPhone を替えても、同じ Apple ID でログインすれば戻ります。"
-        case .finish: firstTime ? "最初の1回で、1日目。" : "食べたら、しゃがんで、叩く。"
+        case .finish: firstTime ? "最初の1回で、1日目。" : "食べて、しゃがんで、連続タップ。"
         }
     }
 }

@@ -13,8 +13,8 @@ test("リンクカードのメタタグに、同じハッシュの画像を入�
 });
 
 test("人のブラウザは JavaScript で LP へ移す。英語なら英語の LP", () => {
-  assert.match(page("ja"), /location.replace\("\/"\)/);
-  assert.match(page("en"), /location.replace\("\/en\/"\)/);
+  assert.match(page("ja"), /location.replace\("\/\?utm_source=share_card&utm_medium=social&utm_campaign=share"\)/);
+  assert.match(page("en"), /location.replace\("\/en\/\?utm_source=share_card/);
   assert.match(page("en"), /13 days in a row/);
 });
 

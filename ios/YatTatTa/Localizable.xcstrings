@@ -1516,22 +1516,6 @@
         }
       }
     },
-    "今日はまだです。食べたら、しゃがんで、叩く。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Not yet today. Eat, squat, tap."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "今日はまだです。食べたら、しゃがんで、叩く。"
-          }
-        }
-      }
-    },
     "今日まだ通知" : {
       "localizations" : {
         "en" : {
@@ -1881,22 +1865,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "叩き放題"
-          }
-        }
-      }
-    },
-    "叩く。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "tap."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "叩く。"
           }
         }
       }
@@ -2823,70 +2791,6 @@
         }
       }
     },
-    "食べたら、" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "After you eat,"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "食べたら、"
-          }
-        }
-      }
-    },
-    "食べたら、しゃがんで、叩く" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eat, squat, tap"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "食べたら、しゃがんで、叩く"
-          }
-        }
-      }
-    },
-    "食べたら、しゃがんで、叩く。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eat, squat, tap."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "食べたら、しゃがんで、叩く。"
-          }
-        }
-      }
-    },
-    "Yat Tat Ta で%lld日連続。食べたら、しゃがんで、叩く。https://yat-tat-ta.web.app" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld days in a row on Yat Tat Ta. Eat, squat, tap. https://yat-tat-ta.web.app"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Yat Tat Ta で%lld日連続。食べたら、しゃがんで、叩く。https://yat-tat-ta.web.app"
-          }
-        }
-      }
-    },
     "今日の記録を貼りませんか" : {
       "localizations" : {
         "en" : {
@@ -2999,22 +2903,6 @@
         }
       }
     },
-    "Yat Tat Ta で%lld日連続。食べたら、しゃがんで、叩く。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld days in a row on Yat Tat Ta. Eat, squat, tap."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Yat Tat Ta で%lld日連続。食べたら、しゃがんで、叩く。"
-          }
-        }
-      }
-    },
     "叩いた日は、今日の記録をこのカードにして、X や LINE に貼れます。叩き終わると聞きます。今日の記録のシートからも。" : {
       "localizations" : {
         "en" : {
@@ -3075,6 +2963,118 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "今日は%lldドパ、この7日で%lldドパ。"
+          }
+        }
+      }
+    },
+    "今日はまだです。食べて、しゃがんで、連続タップ。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not yet today. Eat, squat, tap."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "今日はまだです。食べて、しゃがんで、連続タップ。"
+          }
+        }
+      }
+    },
+    "連続タップ。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "tap."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "連続タップ。"
+          }
+        }
+      }
+    },
+    "食べて、" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "After you eat,"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "食べて、"
+          }
+        }
+      }
+    },
+    "食べて、しゃがんで、連続タップ" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eat, squat, tap"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "食べて、しゃがんで、連続タップ"
+          }
+        }
+      }
+    },
+    "食べて、しゃがんで、連続タップ。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eat, squat, tap."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "食べて、しゃがんで、連続タップ。"
+          }
+        }
+      }
+    },
+    "Yat Tat Ta で%lld日連続。食べて、しゃがんで、連続タップ。https://yat-tat-ta.web.app" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld days in a row on Yat Tat Ta. Eat, squat, tap. https://yat-tat-ta.web.app"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yat Tat Ta で%lld日連続。食べて、しゃがんで、連続タップ。https://yat-tat-ta.web.app"
+          }
+        }
+      }
+    },
+    "Yat Tat Ta で%lld日連続。食べて、しゃがんで、連続タップ。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld days in a row on Yat Tat Ta. Eat, squat, tap."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yat Tat Ta で%lld日連続。食べて、しゃがんで、連続タップ。"
           }
         }
       }

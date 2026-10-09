@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LP（公開ページ）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } },
+        pulse2: { '0%,100%': { transform: 'scale(1)' }, '50%': { transform: 'scale(1.04)' } }
+      },
+      animation: { rise: 'rise .5s ease-out both', pulse2: 'pulse2 1.6s ease-in-out infinite' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-4xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <a href="../index.html" class="hover:text-ink">features</a><span>/</span><span>アプリの外</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">LP</span>（公開ページ）</h1>
+    <p class="mt-4 max-w-2xl text-base leading-relaxed"><a href="https://yat-tat-ta.web.app/" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">https://yat-tat-ta.web.app/</a>（日本語）と <a href="https://yat-tat-ta.web.app/en/" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">/en/</a>（英語）に置く、アプリの紹介のページ。初めて Yat Tat Ta を知った人が、App Store に進む前に「何をするアプリか」を見る場所で、<a href="../../glossary.html#link-card" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">リンクカード</a>を押した人もここに着きます。見た人数と App Store のボタンを押した数を Google アナリティクスで数え、そこから先で入れたかは<a href="../../glossary.html#campaign-link" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">キャンペーンリンク</a>で見ます。2026-10-09 に、サポートだけのページから作り替えました。</p>
+  </header>
+
+  <section id="why" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01 / why</p>
+    <h2 class="mt-2 font-display text-3xl">サポートのページでは、なぜ足りなくなったのか</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>もとのページは、App Store Connect にサポート URL として出すためのものでした。問い合わせ先とプライバシーポリシーへのリンク、記録とアカウントの説明だけ。1.0 の公開まではそれで足りていました。</p>
+      <p>状況を変えたのはリンクカードです。LINE や X でカードを押した人は、このページに着く。カードで日数とマスを見て興味を持った人に、問い合わせ先だけを見せても、App Store には進んでもらえません。そこで、審査の結果を待つあいだに、スクリーンショットと30秒の動画で「見ているだけで楽しい」ページに作り替えることになりました（開発者の注文、2026-10-09）。参考に挙がった Pinterest と Dribbble の LP のまとめは、どちらもこちらからは開けなかったので、アプリの LP でよくある型（大きな見出しと動画、使い方の3歩、スクリーンショットの横流し、機能、もう一度ボタン、よくある質問）で組みました。</p>
+      <p>あわせて、見た人がどれだけ App Store まで進んだかを測りたい、という注文もありました。これまでの公開ページは「外のフォントも読み込まない。開いた人の情報を、ほかのサービスへ送らない」方針でしたが、開発者の判断で Google アナリティクスを入れ、この方針を変えています（2026-10-09）。</p>
+    </div>
+  </section>
+
+  <section id="layout" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / layout</p>
+    <h2 class="mt-2 font-display text-3xl">上から順に</h2>
+    <ol class="mt-6 flex max-w-3xl flex-col gap-2 text-sm">
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>1. 上の帯</b>：ロゴ、言語の切り替え、小さな App Store のバッジ。スクロールしても上に残る。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>2. 冒頭</b>：「食べて、しゃがんで、連続タップ。」（英語は「Eat. Squat. Tap.」）、<a href="../../glossary.html#store-listing" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">掲載情報</a>のプロモーション用テキスト、App Store のバッジ、「買い切り。広告なし、アプリ内課金なし。ログインもいりません。」。右に30秒の動画を傾けた枠で置き、後ろで放射の光が回り、「1回＝1打」の丸いシールが揺れる。下を<a href="../../glossary.html#squat-squad" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">スクワットマン</a>が行進する。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>3. 3歩</b>：食べる、しゃがむ、叩く。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>4. スクリーンショット</b>：App Store と同じ6枚を、横にスクロールで流す。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>5. 機能</b>：演出（CHANCE、激熱!!、FEVER、筋肉確定）、<a href="../../glossary.html#streak" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">連続記録</a>と<a href="../../glossary.html#rest-pass" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">休み券</a>、<a href="../../glossary.html#dopa-point" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ドパ</a>、<a href="../../glossary.html#share-card" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日の記録カード</a>、ログインなしで始められること、<a href="../../glossary.html#today-reminder" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日まだ通知</a>。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>6. もう一度ボタン</b>：黒地に「スクワット、終わった？」と App Store のバッジ。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>7. よくある質問</b>：料金、ログイン、機種変更、回数、電波、対応機種の6つ。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>8. サポート</b>：問い合わせ、<a href="../../glossary.html#privacy-policy" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">プライバシーポリシー</a>、記録とアカウント。フッターに Google アナリティクスで数えていることの一言。</li>
+    </ol>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">見た目はアプリと同じ紙の地、太い黒の枠、ずらした影。書体は Google Fonts の Dela Gothic One（見出し）と M PLUS Rounded 1c（本文）。見出しは1行ずつ落ちてきて、下の節はスクロールで下から出てくる。動きを減らす設定の人には、動きを全部止めて最初から見せる。</p>
+  </section>
+
+  <section id="rules" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / rules</p>
+    <h2 class="mt-2 font-display text-3xl">決まりごと</h2>
+    <p class="mt-8 font-mono text-xs text-mute">表1　LP の決まり</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[34rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">項目</th><th class="py-2 pr-4 font-bold">決まり</th><th class="py-2 pr-4 font-bold">理由</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">サポート URL を兼ねる</td><td class="py-3 pr-4">いちばん下に、問い合わせ、プライバシーポリシー、記録とアカウントの欄を残す</td><td class="py-3 pr-4">App Store Connect のサポート URL がこのページ。Apple はサポート URL に問い合わせ先を求める。審査中の版ではサポート URL を変えられない</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">App Store のボタン</td><td class="py-3 pr-4">Apple の公式のバッジ（日本語版と英語版）を、形も色も変えずに置く。バッジのファイルはページに同梱する</td><td class="py-3 pr-4">Apple のロゴを使った自作のボタンは、App Store のマーケティングのガイドラインで認められない。表示のたびに Apple から読むと、見た人の情報が Apple にも送られる</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">見た人数とボタン</td><td class="py-3 pr-4">Google アナリティクス 4 で、ページを見た数（page_view）、App Store のボタンを押した数（app_store_click、置いた場所 bar、hero、cta ごと）、動画の音を出した数（video_sound_on）を数える。app_store_click をキーイベントにする</td><td class="py-3 pr-4">開発者が決定（2026-10-09）。LP から App Store へ進んだ割合を見るため</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">入れたか</td><td class="py-3 pr-4">App Store へのリンクを<a href="../../glossary.html#campaign-link" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">キャンペーンリンク</a>にする（ct は lp_言語_置いた場所）。App Store Connect の App 分析で見る</td><td class="py-3 pr-4">Google アナリティクスは App Store のボタンを押したところまでしか見えない</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">リンクカードから来た人</td><td class="py-3 pr-4"><a href="../../glossary.html#link-card" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">リンクカード</a>から LP へ移すとき、URL に utm_source=share_card を付ける</td><td class="py-3 pr-4">Google アナリティクスで、利用者の投稿から来た人を見分けるため</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">同意と Cookie</td><td class="py-3 pr-4">欧州経済領域、英国、スイスから開いた人には Cookie を使わせない（同意モードで analytics_storage を断る）。ほかの地域は使う。広告の機能（Google シグナル、広告のパーソナライズ）は切る</td><td class="py-3 pr-4">欧州では Cookie に同意が要る。同意の画面を出さずに済ませるため、その地域では Cookie を使わない</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">外部に送る情報の公表</td><td class="py-3 pr-4">プライバシーポリシーの「公開ページで外部に送られる情報」に、Google アナリティクスと Google Fonts の送り先、送る情報、目的、止め方を書く。プライバシーポリシーのページ自体は外部を読み込まない</td><td class="py-3 pr-4">電気通信事業法の外部送信規律。アプリそのものは今も分析に使わないことも書き分ける</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">書かないこと</td><td class="py-3 pr-4">体への効果、パチンコやくじの語。文言は掲載情報のプロモーション用テキストとスクリーンショットをそのまま使う</td><td class="py-3 pr-4"><a href="../../glossary.html#store-listing" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">掲載情報</a>と <a href="../../devops/sns-marketing/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">SNS の決まり事</a>の1と2にそろえる</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-bold">動画</td><td class="py-3 pr-4">LP 用の30秒を日本語と英語で作る。叩き切ったあとの共有の誘いまで見せる。音なしで、見えている間だけ流し、「音を出す」で頭から音付きで流す</td><td class="py-3 pr-4">開発者が決定（2026-10-09）。SNS の縦動画は叩き切ったところで終わり、共有の場面がない</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="screens" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / screens</p>
+    <h2 class="mt-2 font-display text-3xl">関連する画面</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><a href="https://yat-tat-ta.web.app/" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">LP（日本語）</a><p class="mt-1 text-ink/80">公開中のページ。英語は /en/。</p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><a href="https://yat-tat-ta.web.app/privacy/#lp" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">プライバシーポリシーの「公開ページで外部に送られる情報」</a><p class="mt-1 text-ink/80">フッターの「詳しく」から開く。</p></li>
+    </ul>
+  </section>
+
+  <section id="components" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / components</p>
+    <h2 class="mt-2 font-display text-3xl">関連するコンポーネント</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">冒頭の左半分を縮めて写したもの。実物の動画と放射の光は、公開ページで見られます。</p>
+    <div class="mt-6 max-w-md rounded-3xl border-2 border-ink bg-paper p-6 shadow-[8px_8px_0_#1C1916]">
+      <span class="inline-block -rotate-2 rounded-full border-2 border-ink bg-gold px-3 text-[11px] font-bold shadow-[2px_2px_0_#1C1916]">食後のスクワットのための iPhone アプリ</span>
+      <p class="mt-4 font-display text-4xl leading-tight">食べて、<br>しゃがんで、<br><span class="text-dopa">連続タップ。</span></p>
+      <p class="mt-3 text-xs font-bold leading-relaxed">スクワットが終わったら、回数だけ叩く。叩くたびに CHANCE、激熱!!、FEVER。最後の1打で筋肉確定。</p>
+      <span class="mt-4 inline-flex items-center gap-2 rounded-xl bg-ink px-3 py-1.5 text-white"><span class="text-[10px] leading-tight">App Store から<br><b class="text-sm">ダウンロード</b></span></span>
+      <p class="mt-3 text-[11px] font-bold text-mute">買い切り。広告なし、アプリ内課金なし。ログインもいりません。</p>
+    </div>
+    <p class="mt-3 text-xs text-mute">バッジは見本の図です。実物は Apple の公式のバッジを使います。</p>
+  </section>
+
+  <section id="links" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / links</p>
+    <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">設計の経緯</p><a href="../../sessions/20261009-1909-landing-page/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">LP を作り替える</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../glossary.html#landing-page" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">LP（公開ページ）</a><a href="../../glossary.html#campaign-link" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">キャンペーンリンク</a><a href="../../glossary.html#link-card" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">リンクカード</a><a href="../../glossary.html#privacy-policy" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">プライバシーポリシー</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">ほかの機能</p><a href="../share-card/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日の記録カード</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">開発/運用</p><a href="../../devops/firebase/index.html#hosting" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">Firebase の準備と運用（公開ページ）</a><a href="../../devops/app-store/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">App Store の掲載情報</a><a href="../../devops/sns-marketing/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">SNS で発信するときの決まり事（動画の作り方）</a></li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

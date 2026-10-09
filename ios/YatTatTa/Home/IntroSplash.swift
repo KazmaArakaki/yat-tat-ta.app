@@ -3,7 +3,7 @@ import SwiftUI
 /// はじめての幕。インストールして最初の起動で1度だけ（14.0秒）
 ///
 /// 場面ごとに一呼吸おく。言葉は1つずつ出して、読み終わる間を置いてから次へ。
-/// 1人の人形が、食べたら、しゃがんで、叩く、をゆっくりやって見せ、
+/// 1人の人形が、食べて、しゃがんで、連続タップ、をゆっくりやって見せ、
 /// その人形が今週の隊列の左端（今日の席）に入って消える。明日からの6人を1人ずつ立たせて見せてから、
 /// 今日の席と「1人目は、今日のあなたです。」だけを残す。
 struct IntroSplash: View {
@@ -19,11 +19,11 @@ struct IntroSplash: View {
     enum T {
         /// Yat / Tat / Ta。最初の0.6秒は地の色だけ
         static let beats = [0.6, 1.0, 1.4]
-        /// 「食べたら、」人形が静かに立つ
+        /// 「食べて、」人形が静かに立つ
         static let eat = 2.6
         /// 「しゃがんで、」1.4秒かけて1回
         static let squat = 3.8
-        /// 「叩く。」0.3秒おいて、足元から輪とドパの粒
+        /// 「連続タップ。」0.3秒おいて、足元から輪とドパの粒
         static let tap = 5.4
         static let tapHit = tap + 0.3
         /// 一呼吸のあと、人形が今日の席へ縮んで入り、今週の席が並ぶ
@@ -72,7 +72,7 @@ struct IntroSplash: View {
         .contentShape(.rect)
         .onTapGesture { next() }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(Text(verbatim: "Yat Tat Ta. ") + Text("食べたら、しゃがんで、叩く。") + Text(verbatim: " ")
+        .accessibilityLabel(Text(verbatim: "Yat Tat Ta. ") + Text("食べて、しゃがんで、連続タップ。") + Text(verbatim: " ")
                             + Text("1日1回で、1人ずつ。") + Text(verbatim: " ") + Text("1人目は、今日のあなたです。"))
         .onAppear {
             clock.start()
@@ -143,9 +143,9 @@ struct IntroSplash: View {
 
     @ViewBuilder private func words(t: Double, layout: Layout) -> some View {
         let phrases: [(LocalizedStringKey, Double, Double, Color)] = [
-            ("食べたら、", T.eat, T.squat, .ink),
+            ("食べて、", T.eat, T.squat, .ink),
             ("しゃがんで、", T.squat, T.tap, .ink),
-            ("叩く。", T.tap, T.row - 0.2, .dopa),
+            ("連続タップ。", T.tap, T.row - 0.2, .dopa),
         ]
         ForEach(0..<phrases.count, id: \.self) { i in
             let p = phrases[i]

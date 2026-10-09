@@ -94,6 +94,10 @@ extension AppModel {
         static var audioURL: URL { URL.documentsDirectory.appending(path: "reel.caf") }
         /// 書き終えた合図。録った音の始まりの時刻（1970年からの秒）と、場面の時刻（音の始まりからの秒）
         static var doneURL: URL { URL.documentsDirectory.appending(path: "reel.json") }
+        /// LP の動画。叩き切ったあとの共有の誘いまで録る
+        static let shareArgument = "-reelShare"
+        /// 共有の誘いを見せる秒数
+        static let shareSeconds: TimeInterval = 4.5
 
         /// n 打目のあとの間。0.6秒から詰めていき、0.28秒で止める
         static func interval(after n: Int) -> TimeInterval { max(0.28, 0.62 - 0.026 * Double(n)) }
@@ -164,6 +168,12 @@ extension AppModel {
             try? await Task.sleep(for: .seconds(1.5))
             while finale != nil { try? await Task.sleep(for: .seconds(0.1)) }
             try? await Task.sleep(for: .seconds(0.3))
+            // LP の動画では、そのあと出る共有の誘いを見せてから終える（ios/Design/reel.sh lp）
+            if ProcessInfo.processInfo.arguments.contains(Reel.shareArgument) {
+                for _ in 0..<20 where !showsSharePrompt { try? await Task.sleep(for: .seconds(0.1)) }
+                mark("share")
+                try? await Task.sleep(for: .seconds(Reel.shareSeconds))
+            }
             mark("end")
             if records { feel.stopRecording() }
             let done = try? JSONSerialization.data(withJSONObject: ["audioStart": audioStart, "events": events])

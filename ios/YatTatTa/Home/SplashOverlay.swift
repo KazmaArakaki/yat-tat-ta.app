@@ -162,7 +162,7 @@ struct SplashOverlay: View {
         if s.doneToday { return Text("✓ 今日のぶんは済み") }
         if s.current > 0 { return Text("今日の1回で\(s.nextCount)日目") }
         if s.best > 0 { return Text("最長記録 \(s.best)日") }
-        return Text("食べたら、しゃがんで、叩く")
+        return Text("食べて、しゃがんで、連続タップ")
     }
 
     private var accessibilityText: Text {

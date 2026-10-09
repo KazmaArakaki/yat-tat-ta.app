@@ -10,6 +10,10 @@
   // セッション一覧（新しい順）。新しいセッションは先頭に足す。
   var sessions = [
     {
+      path: "sessions/20261009-1909-landing-page/index.html",
+      label: "10/09 LP を作り直す"
+    },
+    {
       path: "sessions/20261009-1617-link-card/index.html",
       label: "10/09 LINE と X にリンクカードを出す"
     },
@@ -176,6 +180,7 @@
         { label: "今日まだ通知", path: "features/today-reminder/index.html", level: 1 },
         { label: "今日の記録", path: "features/today-records/index.html", level: 1 },
         { label: "今日の記録カード", path: "features/share-card/index.html", level: 1 },
+        { label: "LP（公開ページ）", path: "features/landing-page/index.html", level: 1 },
         { label: "履歴", path: "features/history/index.html", level: 1 },
         { label: "スプラッシュ", path: "features/splash/index.html", level: 1 },
         { label: "チュートリアル", path: "features/tutorial/index.html", level: 1 }

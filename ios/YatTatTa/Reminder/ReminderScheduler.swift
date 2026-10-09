@@ -53,7 +53,7 @@ final class ReminderScheduler {
     /// 文面は4つを日ごとに回す。同じ文面が続くと効き目が落ちるため
     static func message(for day: RecordDay, target: Int) -> String {
         let messages = [
-            String(localized: "今日はまだです。食べたら、しゃがんで、叩く。"),
+            String(localized: "今日はまだです。食べて、しゃがんで、連続タップ。"),
             String(localized: "\(target)回で\(target)ドパ。今夜のおやつのあとにでも。"),
             String(localized: "連続記録は、今日の1回でつながります。"),
             String(localized: "1打で1ドパ。今日の分は、まだ0です。"),

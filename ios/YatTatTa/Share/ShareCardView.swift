@@ -53,7 +53,7 @@ struct ShareCardView: View {
 
             Spacer(minLength: 0)
             HStack(alignment: .firstTextBaseline) {
-                Text("食べたら、しゃがんで、叩く。").font(.label(13, black: true))
+                Text("食べて、しゃがんで、連続タップ。").font(.label(13, black: true))
                 Spacer()
                 Text(verbatim: "yat-tat-ta.web.app").font(.label(11)).foregroundStyle(Color.mute)
             }
@@ -123,7 +123,7 @@ enum ShareSheet {
     @discardableResult
     @MainActor static func present(_ card: ShareCard, completion: @escaping (Bool) -> Void) -> Bool {
         guard let image = ShareCardView.render(card), let top = topViewController() else { return false }
-        let text = String(localized: "Yat Tat Ta で\(card.streak)日連続。食べたら、しゃがんで、叩く。https://yat-tat-ta.web.app")
+        let text = String(localized: "Yat Tat Ta で\(card.streak)日連続。食べて、しゃがんで、連続タップ。https://yat-tat-ta.web.app")
         let controller = UIActivityViewController(activityItems: [image, text], applicationActivities: nil)
         controller.completionWithItemsHandler = { _, completed, _, _ in completion(completed) }
         top.present(controller, animated: true)
