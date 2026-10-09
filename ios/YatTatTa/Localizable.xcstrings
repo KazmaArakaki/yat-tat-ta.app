@@ -2887,22 +2887,6 @@
         }
       }
     },
-    "今日の記録を共有" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Share Today's Record"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "今日の記録を共有"
-          }
-        }
-      }
-    },
     "今日の記録を貼りませんか" : {
       "localizations" : {
         "en" : {
@@ -2967,22 +2951,6 @@
         }
       }
     },
-    "叩いた日は、今日の記録をこのカードにして、X や LINE に貼れます。叩き終わると聞きます。今日の記録の左上からも。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "On days you tap, you can post today's record as this card to X, LINE, and more. We'll ask when you finish. You can also share from the top left of Today."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "叩いた日は、今日の記録をこのカードにして、X や LINE に貼れます。叩き終わると聞きます。今日の記録の左上からも。"
-          }
-        }
-      }
-    },
     "LINEで共有する" : {
       "localizations" : {
         "en" : {
@@ -3043,6 +3011,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Yat Tat Ta で%lld日連続。食べたら、しゃがんで、叩く。"
+          }
+        }
+      }
+    },
+    "叩いた日は、今日の記録をこのカードにして、X や LINE に貼れます。叩き終わると聞きます。今日の記録のシートからも。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On days you tap, you can post today's record as this card to X, LINE, and more. We'll ask when you finish. You can also share from Today's record sheet."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "叩いた日は、今日の記録をこのカードにして、X や LINE に貼れます。叩き終わると聞きます。今日の記録のシートからも。"
+          }
+        }
+      }
+    },
+    "今日の記録を貼る" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share Today's Record"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "今日の記録を貼る"
           }
         }
       }

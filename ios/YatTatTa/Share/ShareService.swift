@@ -21,6 +21,8 @@ enum ShareTarget: CaseIterable {
         case .line, .x:
             do {
                 let url = try await linkCard(for: card)
+                // X は、アプリを直接開く。x.com の投稿口はアプリの中のブラウザで開き、ログインしていない
+                if target == .x, await UIApplication.shared.open(xApp(card: card, link: url)) { return true }
                 let opened = await UIApplication.shared.open(intent(target, card: card, link: url))
                 return opened ? true : await sheet(card)
             } catch {
@@ -30,9 +32,25 @@ enum ShareTarget: CaseIterable {
         }
     }
 
-    /// 投稿画面を開く URL。どちらもアプリが入っていればアプリが、なければブラウザが開く
+    /// X アプリの投稿画面。アプリが入っていなければ開けない（open が false を返す）
+    ///
+    /// 文と URL を分けて渡す口はないので、文の最後に URL を付ける。
+    static func xApp(card: ShareCard, link: URL) -> URL {
+        var components = URLComponents()
+        components.scheme = "twitter"
+        components.host = "post"
+        components.queryItems = [URLQueryItem(name: "message", value: message(card) + " " + link.absoluteString)]
+        components.percentEncodedQuery = components.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
+        return components.url!
+    }
+
+    private static func message(_ card: ShareCard) -> String {
+        String(localized: "Yat Tat Ta で\(card.streak)日連続。食べたら、しゃがんで、叩く。")
+    }
+
+    /// 投稿画面を開く URL。LINE はアプリが入っていればアプリが開く。X はアプリが入っていないときだけ使う
     static func intent(_ target: ShareTarget, card: ShareCard, link: URL) -> URL {
-        let message = String(localized: "Yat Tat Ta で\(card.streak)日連続。食べたら、しゃがんで、叩く。")
+        let message = message(card)
         var components: URLComponents
         switch target {
         case .x:

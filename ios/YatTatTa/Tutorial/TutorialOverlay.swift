@@ -338,7 +338,7 @@ struct TutorialOverlay: View {
         case .mash: "本番は、しゃがんだ回数だけ叩きます。いまは練習。しゃがまずに\(TutorialStep.practiceReps)回どうぞ。"
         case .after: "練習は記録に残りません。本番は、食べてしゃがんだあとに。途中でやめても、叩いた分は残ります。"
         case .streak: "叩いた日は、ここが1日伸びます。休んだ日は、休み券がつなぎます。押すと、今日の記録。"
-        case .share: "叩いた日は、今日の記録をこのカードにして、X や LINE に貼れます。叩き終わると聞きます。今日の記録の左上からも。"
+        case .share: "叩いた日は、今日の記録をこのカードにして、X や LINE に貼れます。叩き終わると聞きます。今日の記録のシートからも。"
         case .totals: "スクワット1回が1ドパ。DPW は7日間、DT はこれまでの全部。押すと、履歴。"
         case .gear: "1回に叩く数は、いま\(targetReps)回。ここで\(TargetReps.range.lowerBound)〜\(TargetReps.range.upperBound)回に変えられます。"
         case .account: "Apple でログインすると、記録がアカウントに残ります。iPhone を替えても、同じ Apple ID でログインすれば戻ります。"

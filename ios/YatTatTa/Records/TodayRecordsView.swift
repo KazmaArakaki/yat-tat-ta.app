@@ -4,16 +4,39 @@ import SwiftUI
 ///
 /// 今日（記録日）の記録を新しい順に並べ、左へスワイプして「消す」で1件取り消す。
 /// 確かめの問いは挟まない。スワイプと押すことの2手で、うっかりでは起きにくいから。
-/// 左上の共有のボタンで、今日の記録カードを画像にして共有シートに渡す（docs/features/share-card）。
+/// 上に共有のボタンを3つ並べ、今日の記録カードを LINE、X、ほかのアプリへ渡す（docs/features/share-card）。
 struct TodayRecordsView: View {
     let model: AppModel
     @Environment(\.dismiss) private var dismiss
-    /// LINE か X のリンクカードを作っている
-    @State private var sharing = false
+    /// 共有している先。LINE と X は、リンクカードを作るのに1、2秒かかる
+    @State private var sharing: ShareTarget?
 
     var body: some View {
         NavigationStack {
             List {
+                // 共有のボタン。1度も叩いていない人には、出すものがない
+                if model.ledger.dopaTotal > 0 {
+                    Section {
+                        VStack(spacing: 8) {
+                            ForEach(ShareTarget.allCases, id: \.self) { target in
+                                ShareTargetButton(target: target, busy: sharing == target) {
+                                    sharing = target
+                                    Task {
+                                        if await ShareService.share(model.shareCard, to: target) { model.markShared() }
+                                        sharing = nil
+                                    }
+                                }
+                            }
+                        }
+                        .disabled(sharing != nil)
+                        .listRowBackground(Color.clear)
+                        .listRowInsets(EdgeInsets())
+                    } header: {
+                        Text("今日の記録を貼る")
+                            .font(.label(13))
+                            .foregroundStyle(Color.mute)
+                    }
+                }
                 if model.todayRecords.isEmpty {
                     Section {
                         Text("今日の記録はまだありません。\n叩くと、ここに1件ずつ並びます。")
@@ -50,29 +73,6 @@ struct TodayRecordsView: View {
             .navigationTitle(Text("今日の記録"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    // 1度も叩いていない人には、出すものがない
-                    if sharing {
-                        ProgressView()
-                    } else if model.ledger.dopaTotal > 0 {
-                        Menu {
-                            ForEach(ShareTarget.allCases, id: \.self) { target in
-                                Button {
-                                    sharing = true
-                                    Task {
-                                        if await ShareService.share(model.shareCard, to: target) { model.markShared() }
-                                        sharing = false
-                                    }
-                                } label: {
-                                    Text(target.title)
-                                }
-                            }
-                        } label: {
-                            Image(systemName: "square.and.arrow.up")
-                        }
-                        .accessibilityLabel(Text("今日の記録を共有"))
-                    }
-                }
                 ToolbarItem(placement: .confirmationAction) {
                     Button { dismiss() } label: { Text("閉じる") }
                 }

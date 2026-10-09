@@ -135,7 +135,7 @@ var TUTORIAL_STEPS = [
   // 今日の記録カードの見本。照らす場所はなく、まん中のカードを叩けば進む
   { id: 'share', target: null, place: 'share', sec: 7, next: true,
     title: '記録を貼る',
-    body: '叩いた日は、今日の記録をこのカードにして、X や LINE に貼れます。叩き終わると聞きます。今日の記録の左上からも。' },
+    body: '叩いた日は、今日の記録をこのカードにして、X や LINE に貼れます。叩き終わると聞きます。今日の記録のシートからも。' },
   { id: 'totals', target: 'cards', place: 'above', sec: 9, next: true,
     title: 'ためたドパ',
     body: 'スクワット1回が1ドパ。DPW は7日間、DT はこれまでの全部。押すと、履歴。' },

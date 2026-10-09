@@ -68,4 +68,14 @@ struct ShareCardTests {
         #expect(url.host() == "line.me")
         #expect(text.hasSuffix("\n" + link.absoluteString))
     }
+
+    @MainActor @Test func XアプリにはmessageでURLを文の最後に付けて渡す() throws {
+        let card = ShareCard(ledger: Ledger(daily: [today: 20], today: today), daily: [today: 20], todaySets: 1)
+        let link = URL(string: "https://yat-tat-ta.web.app/s/0123456789abcdef0123")!
+        let url = ShareService.xApp(card: card, link: link)
+        let message = try #require(URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems?.first { $0.name == "message" }?.value)
+        #expect(url.scheme == "twitter")
+        #expect(url.host() == "post")
+        #expect(message.hasSuffix(" " + link.absoluteString))
+    }
 }
