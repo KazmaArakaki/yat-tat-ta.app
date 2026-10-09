@@ -14,7 +14,20 @@
     "url": "https://x.com/yattattadotcom/status/2108028248613605388",
     "replies": [],
     "goal": null,
-    "result": null,
+    "result": {
+      "views": 5,
+      "likes": 0,
+      "reposts": 0,
+      "replies": 0,
+      "bookmarks": null,
+      "shares": null,
+      "profileVisits": 0,
+      "follows": null,
+      "engagements": 3,
+      "detailExpands": 3,
+      "at": "2026-10-09T11:57+09:00",
+      "note": "X の Post Analytics（ブラウザ版）の画面から。ブックマーク、共有、フォローは画面に出ていなかった"
+    },
     "verdict": null,
     "review": null,
     "downloads": null
