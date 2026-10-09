@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>今日の記録カード</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } },
+        pulse2: { '0%,100%': { transform: 'scale(1)' }, '50%': { transform: 'scale(1.04)' } }
+      },
+      animation: { rise: 'rise .5s ease-out both', pulse2: 'pulse2 1.6s ease-in-out infinite' }
+    }
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-4xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <a href="../index.html" class="hover:text-ink">features</a><span>/</span><span>ふり返って続ける</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">今日の記録カード</span></h1>
+    <p class="mt-4 max-w-2xl text-base leading-relaxed">続けた日数と、この7日の叩き方を1枚の画像にして、利用者が自分で SNS に貼れるようにする。開発者の投稿だけでは届く数に上限があり、宣伝を運ぶのは利用者の投稿だからです。2026-10-09 決定。</p>
+  </header>
+
+  <section id="why" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01 / why</p>
+    <h2 class="mt-2 font-display text-3xl">なぜ、筋肉確定の瞬間ではないのか</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>いちばん盛り上がるのは、叩き切ったあとの<a href="../../glossary.html#muscle-kakutei" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">筋肉確定</a>です。そこに共有のボタンを出す案もありました。ただ、演出は数秒で流れていき、ボタンを出せばその途中に割り込みます。</p>
+      <p>そこで、叩き終えて落ち着いてから開く<a href="../../glossary.html#today-records" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日の記録</a>のシートに、共有の口を置きました（開発者が決定、2026-10-09）。カードはいつ出しても同じ形です。Wordle の絵文字のマス目がそうだったように、見た人が形で「あのアプリだ」と覚えられる。動画は作らず、画像だけにしました。</p>
+      <p>課題 <a href="../../issues/share-result/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">share-result</a> では、公開から2週間たち、利用者が何を貼っているかを見てから形を決めるつもりでした。開発者の指示で、公開前に作ることにしています。利用者の投稿が見えてきたら、形を見直す余地は残っています。</p>
+    </div>
+  </section>
+
+  <section id="rules" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / rules</p>
+    <h2 class="mt-2 font-display text-3xl">決まりごと</h2>
+    <p class="mt-8 font-mono text-xs text-mute">表1　今日の記録カードの決まり</p>
+    <div class="mt-2 overflow-x-auto">
+      <table class="w-full min-w-[34rem] border-collapse text-sm">
+        <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">項目</th><th class="py-2 pr-4 font-bold">決まり</th><th class="py-2 pr-4 font-bold">理由</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">出す場所</td><td class="py-3 pr-4">今日の記録のシートの左上、共有のボタン。1度も叩いていない人には出さない</td><td class="py-3 pr-4">演出の途中に割り込まない。叩いていなければ、載せる数がない。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">載せるもの</td><td class="py-3 pr-4">いまの<a href="../../glossary.html#streak" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">連続記録</a>の日数、6日前から今日までの7マスと曜日、今日のドパ、<a href="../../glossary.html#dpw" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">DPW</a>、日付、「食べたら、しゃがんで、叩く。」、yat-tat-ta.web.app</td><td class="py-3 pr-4">続けた日数がいちばん大きい。7マスは、日数だけでは分からない休み方まで見せる。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">7マスの色</td><td class="py-3 pr-4">叩いた日はピンク、<a href="../../glossary.html#rest-pass" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">休み券</a>でつないだ日は青（アプリの休み券と同じ色）、叩かなかった日は空。今日のマスだけ太い枠</td><td class="py-3 pr-4">連続が切れていない理由が、見た人にも形で分かる。今日まだ叩いていなければ、今日は空のまま出る。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">大きさと色</td><td class="py-3 pr-4">1080 × 1350 ピクセル（4:5）。画面の色の設定によらず、いつも明るい色で描く</td><td class="py-3 pr-4">X にもストーリーにも、そのまま貼れる。暗い色のときだけ見た目が変わると、形で覚えてもらえない。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">添える文</td><td class="py-3 pr-4">「Yat Tat Ta でN日連続。食べたら、しゃがんで、叩く。https://yat-tat-ta.web.app」。英語の端末では英語</td><td class="py-3 pr-4">共有先のアプリが文も受け取れるとき、どこのアプリかが分かるように。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">書かないこと</td><td class="py-3 pr-4">体への効果、パチンコやくじの語</td><td class="py-3 pr-4"><a href="../../devops/sns-marketing/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">SNS で発信するときの決まり事</a>の1と2。利用者が貼る画像でも、文言を決めているのはこちら。</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-bold">送るもの</td><td class="py-3 pr-4">何も送らない。画像は端末の中で作り、iOS の共有シートに渡すだけ</td><td class="py-3 pr-4">プライバシーポリシーも、App Store の年齢制限の答えも変えずに済む。</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="screens" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / screens</p>
+    <h2 class="mt-2 font-display text-3xl">関連する画面</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><a href="../../ui/pages/today-records/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日の記録</a><p class="mt-1 text-ink/80">左上の共有のボタンから、iOS の共有シートが開く。</p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><a href="../../ui/pages/home/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ホーム</a><p class="mt-1 text-ink/80">連続記録の帯の左側を押すと、今日の記録のシートが開く。</p></li>
+    </ul>
+  </section>
+
+  <section id="components" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / components</p>
+    <h2 class="mt-2 font-display text-3xl">関連するコンポーネント</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">サンプル：13日連続、今日45ドパ、DPW 145ドパ。木曜日は休み券でつないだ。アプリが書き出した画像そのものです。</p>
+    <div class="mt-6 grid items-start gap-8 md:grid-cols-[360px_1fr]">
+      <img src="../../sessions/20261009-1053-share-card/card.png" alt="今日の記録カードの見本。13日連続、7つのマス、今日45ドパ、DPW145ドパ" class="w-[360px] rounded-2xl border-2 border-ink shadow-[8px_8px_0_#1C1916]">
+      <ul class="flex max-w-sm flex-col gap-3 text-sm leading-relaxed">
+        <li class="border-l-4 border-gold pl-3"><b>しゃがんだスクワットマン</b>：ホームと同じ部品で描く。主役はスクワットマンという<a href="../../devops/sns-marketing/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">決まり事</a>の7のとおり。</li>
+        <li class="border-l-4 border-dopa pl-3"><b>7マス</b>：左が6日前、右端の太い枠が今日。下に曜日。</li>
+        <li class="border-l-4 border-ink pl-3"><b>今日と DPW</b>：ドパの数だけ。回数や件数は載せない。</li>
+        <li class="border-l-4 border-rule pl-3"><b>いちばん下</b>：はじめての幕と同じ「食べたら、しゃがんで、叩く。」と、公開ページの URL。</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="links" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / links</p>
+    <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
+    <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">設計の経緯</p><a href="../../sessions/20261009-1053-share-card/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日の記録カードを共有する</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">もとの課題</p><a href="../../issues/share-result/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">叩いた結果を外に出す口</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../glossary.html#share-card" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">今日の記録カード</a><a href="../../glossary.html#today-records" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">今日の記録</a><a href="../../glossary.html#streak" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">連続記録</a><a href="../../glossary.html#rest-pass" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">休み券</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">ほかの機能</p><a href="../today-records/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日の記録</a><a href="../streak/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">連続記録と休み券</a></li>
+    </ul>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

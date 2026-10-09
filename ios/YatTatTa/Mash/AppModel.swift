@@ -559,6 +559,9 @@ import Observation
     /// 記録の件数。アカウントを削除するときに、消える件数として見せる
     var recordCount: Int { store.records.count }
 
+    /// 共有する今日の記録カード。今日の記録のシートから出す
+    var shareCard: ShareCard { ShareCard(ledger: ledger, daily: daily, todaySets: todayRecords.count) }
+
     private func loadRecords() {
         recalculate()
         updateNotices()

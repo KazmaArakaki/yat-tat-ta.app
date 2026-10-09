@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="session-state" content="developing">
+<meta name="state" content="developing">
+<title>今日の記録カードを共有する</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=M+PLUS+Rounded+1c:wght@500;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+        round: ['"M PLUS Rounded 1c"', '"Noto Sans JP"', 'sans-serif']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } }
+      },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+<style>
+.app { --a-bg:#FBF6EE; --a-card:#FFFFFF; --a-ink:#1C1916; --a-mute:#6E655C; --a-rule:#E7DDCC; --a-line:#1C1916; --a-soft:#FFE6F0; }
+.app.dark { --a-bg:#16120F; --a-card:#231D18; --a-ink:#F5EEE3; --a-mute:#A89C8E; --a-rule:#3A312A; --a-line:#F5EEE3; --a-soft:#3A1726; }
+.a-bg { background:var(--a-bg); color:var(--a-ink); }
+.a-card { background:var(--a-card); }
+.a-ink { color:var(--a-ink); }
+.a-mute { color:var(--a-mute); }
+.a-line { border-color:var(--a-line); }
+.a-rule { border-color:var(--a-rule); }
+.a-soft { background:var(--a-soft); }
+.lnk { text-decoration:underline; text-decoration-color:rgba(229,51,122,.5); text-decoration-thickness:2px; text-underline-offset:4px; }
+.lnk:hover { text-decoration-color:#E5337A; }
+.tabbtn[aria-selected="true"] { background:#1C1916; color:#FBF6EE; }
+.flow-arrow { font-family:"JetBrains Mono",monospace; color:#6E655C; }
+</style>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-5xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <time datetime="2026-10-09T10:53">2026-10-09 10:53</time>
+      <span>/</span>
+      <span>設計セッション</span>
+      <span class="rounded-full border border-dopa bg-dopa-soft px-2.5 py-0.5 font-bold text-ink">状態：developing</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl">今日の記録カードを共有する</h1>
+  </header>
+
+  <section id="order" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="relative overflow-hidden rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916] sm:p-8">
+      <div class="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-dopa-soft"></div>
+      <p class="relative font-mono text-xs uppercase tracking-[0.2em] text-dopa">開発者の注文</p>
+      <p class="relative mt-6 font-display text-2xl leading-snug tracking-wide sm:text-3xl">待ってる間に<br>issues/share-result を進めたい</p>
+    </div>
+  </section>
+
+  <section id="why" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01 / why</p>
+    <h2 class="mt-2 font-display text-3xl">利用者の投稿を、待たずに作る</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>課題 <a href="../../issues/share-result/index.html" class="lnk">share-result</a> は、公開から2週間待ち、利用者が何を撮って貼っているかを見てから形を決める、としていました。Wordle の共有のボタンも、利用者が先に始めていた遊びを公式にしたものだったからです。</p>
+      <p>それでも、審査の結果を待つ間に作っておくことになりました（開発者の指示、2026-10-09）。公開の初日から貼れる口があれば、最初の利用者の投稿が宣伝を運びます。形を外したら、利用者が貼る物を見てから直せばいい。</p>
+    </div>
+  </section>
+
+  <section id="decisions" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / decisions</p>
+    <h2 class="mt-2 font-display text-3xl">決めたこと</h2>
+    <ul class="mt-6 flex max-w-3xl flex-col gap-2 text-sm">
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　共有するのは<a href="../../glossary.html#share-card" class="lnk">今日の記録カード</a>。筋肉確定の瞬間ではなく、叩いたあと落ち着いてから出せるもの（開発者が決定、2026-10-09）。</li>
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　画像だけ。動画は作らない（開発者が決定、2026-10-09）。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>提案</b>　入口は<a href="../../features/today-records/index.html" class="lnk">今日の記録</a>のシートの左上。1度も叩いていない人には出さない。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>提案</b>　カードはいつも同じ形。連続日数を主役に、7日分のマス目、今日と DPW のドパを載せる。4:5 の縦長（1080 × 1350）で、画面の色の設定によらず明るい色で描く。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>提案</b>　画像に添える文は「Yat Tat Ta でN日連続。食べたら、しゃがんで、叩く。」と公開ページの URL。体への効果も、パチンコの語も入れない（<a href="../../devops/sns-marketing/index.html" class="lnk">SNS の決まり事</a>の1と2）。</li>
+    </ul>
+  </section>
+
+  <section id="card" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / card</p>
+    <h2 class="mt-2 font-display text-3xl">カードの形</h2>
+    <div class="mt-8 grid items-start gap-8 md:grid-cols-[360px_1fr]">
+      <img src="card.png" alt="今日の記録カードの見本。13日連続、7つのマス目（木曜だけ青）、今日45ドパ、DPW 145ドパ" class="w-[360px] rounded-2xl border-2 border-ink shadow-[8px_8px_0_#E5337A]">
+      <ul class="flex max-w-md flex-col gap-3 text-sm leading-relaxed">
+        <li class="border-l-4 border-ink pl-3"><b>連続日数</b>：いちばん大きく。続けた日数は、見た人がすぐ比べられる数で、毎日貼る理由にもなる。横にしゃがんだ金のスクワットマン。</li>
+        <li class="border-l-4 border-dopa pl-3"><b>7日分のマス目</b>：叩いた日はピンク、休み券でつないだ日は青（アプリの休み券と同じ色）、叩かなかった日は空。今日のマスだけ黒い枠。Wordle のマス目のように、数字を読まなくても形で分かる。</li>
+        <li class="border-l-4 border-gold pl-3"><b>今日と DPW</b>：ドパの数だけを出す。何回しゃがんだかは、カードを見る人には要らない。</li>
+        <li class="border-l-4 border-rule pl-3"><b>下の行</b>：はじめての幕と同じ3つの言葉と、公開ページの URL。App Store の URL は公開まで決まらないので、公開ページから App Store へつなぐ。</li>
+      </ul>
+    </div>
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-ink/80">見本は、13日続けた人の画像をテストの中で書き出したもの（木曜は休み券でつないだ日）。最初に描いたときは下に大きな余白が残ったので、連続日数とスクワットマンを大きくし、マス目の下に曜日を足した。</p>
+  </section>
+
+  <section id="rules" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / rules</p>
+    <h2 class="mt-2 font-display text-3xl">課題に書いてあった3つの確かめ</h2>
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full min-w-[640px] border-collapse text-left text-sm">
+        <caption class="mb-2 text-left font-mono text-xs text-mute">表1　確かめたこと</caption>
+        <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="py-2 pr-3">確かめること</th><th class="py-2 pr-3">結果</th><th class="py-2">理由</th></tr></thead>
+        <tbody class="[&>tr]:border-b [&>tr]:border-rule [&_td]:py-2.5 [&_td]:pr-3 [&_td]:align-top">
+          <tr><td><b>年齢制限の答え</b></td><td>変えない</td><td>Apple の定義（2026-10-09 に読んだ）では、ユーザー生成コンテンツは利用者の作った物をアプリの一部として広く配ること、メッセージとチャットはアプリの中で利用者どうしがやりとりすること。共有シートで他のアプリに画像を渡すだけなので、どちらにも当たらない</td></tr>
+          <tr><td><b>画像の文言</b></td><td>決まり事の1と2に沿う</td><td>載せるのは日数、ドパ、マス目、3つの言葉だけ。体への効果も、パチンコの語もない</td></tr>
+          <tr><td><b>サーバー</b></td><td>何も送らない</td><td>画像は端末の中で作り、共有シートに渡すだけ。プライバシーポリシーは変えない</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="impl" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / implementation</p>
+    <h2 class="mt-2 font-display text-3xl">作ったもの</h2>
+    <ol class="mt-6 flex max-w-3xl flex-col gap-3 text-sm">
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>1. <code class="font-mono text-xs">ShareCard</code>：カードに載せる数を、<code class="font-mono text-xs">Ledger</code> と日ごとの合計から作る。<code class="font-mono text-xs">AppModel.shareCard</code> で取り出す</b><br><span class="text-ink/70">マス目の色分け（叩いた日、休み券の日、空の日）を、絵と切り離してテストできるようにするため。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>2. <code class="font-mono text-xs">ShareCardView</code>：カードの絵と、<code class="font-mono text-xs">ImageRenderer</code> で3倍の画像にする関数</b><br><span class="text-ink/70">端末の中で画像にするため。色はいつも明るいほうに固定する。暗い画面のまま貼られると、ほかの人の画面では沈んで見える。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>3. <code class="font-mono text-xs">TodayRecordsView</code>：左上に共有のボタン（<code class="font-mono text-xs">ShareLink</code>）。シートを開いたときと、記録を消したときに画像を作り直す</b><br><span class="text-ink/70">iOS の共有シートなら、X、LINE、インスタのストーリー、写真への保存が、何も作らずにそろう。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>4. テストを3つ足す。文言を日本語と英語で2件足す</b><br><span class="text-ink/70">マス目の並びと今日のドパ、休み券の日、今日まだ叩いていない日。テストは全部で98件、すべて通った。</span></li>
+    </ol>
+  </section>
+
+  <section id="ask" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / developer</p>
+    <h2 class="mt-2 font-display text-3xl">開発者にお願いすること</h2>
+    <ol class="mt-6 grid max-w-3xl gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">1　約3分</p><p class="mt-2">実機で今日の記録のシートを開き、左上の共有のボタンから、X とメッセージにカードを貼ってみる。</p></li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">2　約2分</p><p class="mt-2">端末を暗い色の設定にしても、カードが明るい色のままか見る。</p></li>
+    </ol>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

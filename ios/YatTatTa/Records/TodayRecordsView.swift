@@ -4,9 +4,12 @@ import SwiftUI
 ///
 /// 今日（記録日）の記録を新しい順に並べ、左へスワイプして「消す」で1件取り消す。
 /// 確かめの問いは挟まない。スワイプと押すことの2手で、うっかりでは起きにくいから。
+/// 左上の共有のボタンで、今日の記録カードを画像にして共有シートに渡す（docs/features/share-card）。
 struct TodayRecordsView: View {
     let model: AppModel
     @Environment(\.dismiss) private var dismiss
+    /// 共有する画像。シートを開いたときと、記録を消したときに作り直す
+    @State private var shareImage: Image?
 
     var body: some View {
         NavigationStack {
@@ -47,11 +50,24 @@ struct TodayRecordsView: View {
             .navigationTitle(Text("今日の記録"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    // 1度も叩いていない人には、出すものがない
+                    if let shareImage, model.ledger.dopaTotal > 0 {
+                        let card = model.shareCard
+                        ShareLink(item: shareImage,
+                                  message: Text("Yat Tat Ta で\(card.streak)日連続。食べたら、しゃがんで、叩く。https://yat-tat-ta.web.app"),
+                                  preview: SharePreview(Text("今日の記録"), image: shareImage)) {
+                            Image(systemName: "square.and.arrow.up")
+                        }
+                        .accessibilityLabel(Text("今日の記録を共有"))
+                    }
+                }
                 ToolbarItem(placement: .confirmationAction) {
                     Button { dismiss() } label: { Text("閉じる") }
                 }
             }
         }
+        .task(id: model.shareCard) { shareImage = ShareCardView.render(model.shareCard) }
     }
 }
 

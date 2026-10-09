@@ -10,6 +10,10 @@
   // セッション一覧（新しい順）。新しいセッションは先頭に足す。
   var sessions = [
     {
+      path: "sessions/20261009-1053-share-card/index.html",
+      label: "10/09 今日の記録カードを共有する"
+    },
+    {
       path: "sessions/20261008-1710-account-tutorial-step/index.html",
       label: "10/08 チュートリアルで記録を残す"
     },
@@ -163,6 +167,7 @@
         { label: "連続記録と休み券", path: "features/streak/index.html", level: 1 },
         { label: "今日まだ通知", path: "features/today-reminder/index.html", level: 1 },
         { label: "今日の記録", path: "features/today-records/index.html", level: 1 },
+        { label: "今日の記録カード", path: "features/share-card/index.html", level: 1 },
         { label: "履歴", path: "features/history/index.html", level: 1 },
         { label: "スプラッシュ", path: "features/splash/index.html", level: 1 },
         { label: "チュートリアル", path: "features/tutorial/index.html", level: 1 }
@@ -216,7 +221,6 @@
       items: [
         { label: "課題一覧", path: "issues/index.html", level: 0 },
         { label: "読み取りの費用", path: "issues/firestore-read-cost/index.html", level: 1 },
-        { label: "叩いた結果を外に出す口", path: "issues/share-result/index.html", level: 1 },
       ]
     }
   ];
