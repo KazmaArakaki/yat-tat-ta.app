@@ -8,14 +8,15 @@
 (() => {
   // GA4 の測定 ID と、App Store Connect のプロバイダ ID（キャンペーンのリンクに要る）。
   // どちらも空なら、その仕組みは動かさない
-  const GA_ID = "";
-  const PROVIDER_TOKEN = "";
+  const GA_ID = "G-R8RS8DE6MW";
+  const PROVIDER_TOKEN = "122127746";
   const APP_ID = "6819943075";
 
   // ---- 1. Google アナリティクス ----
   window.dataLayer = window.dataLayer || [];
   function gtag() { window.dataLayer.push(arguments); }
-  if (GA_ID) {
+  // 本番の LP だけで数える。開発用（yat-tat-ta-dev.web.app）や手元で開いたときは送らない
+  if (GA_ID && location.hostname === "yat-tat-ta.web.app") {
     const eea = ["AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "GR", "HU", "IS", "IE", "IT", "LV", "LI",
       "LT", "LU", "MT", "NL", "NO", "PL", "PT", "RO", "SK", "SI", "ES", "SE", "GB", "CH"];
     gtag("consent", "default", { ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied", analytics_storage: "denied", region: eea });
