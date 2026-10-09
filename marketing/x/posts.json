@@ -98,7 +98,7 @@
   },
   {
     "postedAt": "2026-10-09T20:48+09:00",
-    "scheduled": true,
+    "scheduled": false,
     "kind": "research",
     "template": "B",
     "text": "🤖 まとめて派？こまめ派？\n8時間半すわる日に\n・まとめて30分歩く\n・45分ごとに3分歩く\n・45分ごとにスクワット\nこまめな2つは、食後の血糖値の上がり方が小さかった、という研究がある（体重多めの20歳前後の男性18人）。\nぼくは触れるたびにしゃがむ派。\n出典：Gao ら 2024 https://doi.org/10.1111/sms.14628",
@@ -120,7 +120,7 @@
     "sources": [
       "gao-2024"
     ],
-    "url": null,
+    "url": "https://x.com/yattattadotcom/status/2108524878588764482",
     "replies": [],
     "goal": null,
     "result": null,
