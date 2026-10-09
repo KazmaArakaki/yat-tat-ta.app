@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="session-state" content="developing">
-<meta name="state" content="developing">
+<meta name="session-state" content="done">
+<meta name="state" content="done">
 <title>LP を作り直し、見た人とボタンを数える</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,7 +58,7 @@ tailwind.config = {
       <time datetime="2026-10-09T19:09">2026-10-09 19:09</time>
       <span>/</span>
       <span>設計セッション</span>
-      <span class="rounded-full border border-dopa bg-dopa-soft px-2.5 py-0.5 font-bold text-ink">状態：developing</span>
+      <span class="rounded-full border border-signal bg-signal/10 px-2.5 py-0.5 font-bold text-ink">状態：done</span>
     </div>
     <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl">LP を作り直し、見た人とボタンを数える</h1>
   </header>
@@ -156,8 +156,17 @@ tailwind.config = {
     </ol>
   </section>
 
+  <section id="released" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">08 / released</p>
+    <h2 class="mt-2 font-display text-3xl">出した</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>GA4 の測定 ID（G-R8RS8DE6MW）と App Store Connect のプロバイダ ID（122127746）を <code class="font-mono text-xs">lp.js</code> に入れ、開発用で確かめてから本番に出しました（2026-10-09）。GA4 は本番の LP（yat-tat-ta.web.app）でだけ読み込むようにし、開発用や手元で開いた分が数字に混ざらないようにしています。プロパティの業種は「美容・フィットネス」、拡張計測機能はページビュー、スクロール、離脱クリックを有効にしました。</p>
+      <p>開発者が iPhone で本番の LP を開き、App Store のバッジを押すと、GA4 のリアルタイムに page_view と app_store_click が届きました。動画の再生は数えない（開発者が決定）。YouTube への埋め込みも検討しましたが、傾いた枠で音なしに流す演出が作れず、プレーヤーのぶん重くなるので、ページに直接置くままにしました。</p>
+    </div>
+  </section>
+
   <section id="ask" class="mt-20">
-    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">07 / developer</p>
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">09 / developer</p>
     <h2 class="mt-2 font-display text-3xl">開発者にお願いすること</h2>
     <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">1 と 2 の値が入るまで、Google アナリティクスは読み込まれず、App Store へのリンクにキャンペーンの印も付きません。値は <code class="font-mono text-xs">firebase/public/lp.js</code> のいちばん上の2行に入れます。</p>
     <ol class="mt-6 grid max-w-3xl gap-3 text-sm sm:grid-cols-2">
