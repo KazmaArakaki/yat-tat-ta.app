@@ -95,5 +95,37 @@
     "verdict": null,
     "review": null,
     "downloads": null
+  },
+  {
+    "postedAt": "2026-10-09T20:48+09:00",
+    "scheduled": true,
+    "kind": "research",
+    "template": "B",
+    "text": "🤖 まとめて派？こまめ派？\n8時間半すわる日に\n・まとめて30分歩く\n・45分ごとに3分歩く\n・45分ごとにスクワット\nこまめな2つは、食後の血糖値の上がり方が小さかった、という研究がある（体重多めの20歳前後の男性18人）。\nぼくは触れるたびにしゃがむ派。\n出典：Gao ら 2024 https://doi.org/10.1111/sms.14628",
+    "image": {
+      "file": "marketing/x/images/2026-10-09-gao.png",
+      "alt": "「こまめ派。」の見出しと、8時間半すわる日に45分ごとに3分歩くかスクワットで休むと、まとめて30分歩くより食後の血糖値の上がり方が小さかったという研究の紹介。体重多めの20歳前後の男性18人、Gao ら 2024。右にしゃがむ棒人間の列",
+      "generator": "card.py",
+      "aiLabel": false,
+      "card": {
+        "headline": "こまめ派。",
+        "lines": [
+          "8時間半すわる日に、45分ごとに\n3分歩く・スクワットで休む。",
+          "まとめて30分歩くより、食後の血糖値の\n上がり方が小さかった、\nという研究がある。"
+        ],
+        "note": "体重多めの20歳前後の男性18人／Gao ら 2024",
+        "pose": "squat"
+      }
+    },
+    "sources": [
+      "gao-2024"
+    ],
+    "url": null,
+    "replies": [],
+    "goal": null,
+    "result": null,
+    "verdict": null,
+    "review": null,
+    "downloads": null
   }
 ]
