@@ -15,18 +15,20 @@
     "replies": [],
     "goal": null,
     "result": {
-      "views": 5,
+      "views": 7,
       "likes": 0,
       "reposts": 0,
       "replies": 0,
-      "bookmarks": null,
+      "bookmarks": 0,
       "shares": null,
       "profileVisits": 0,
       "follows": null,
       "engagements": 3,
       "detailExpands": 3,
-      "at": "2026-10-09T11:57+09:00",
-      "note": "X の Post Analytics（ブラウザ版）の画面から。ブックマーク、共有、フォローは画面に出ていなかった"
+      "at": "2026-10-09T12:16+0900",
+      "note": "X の Post Analytics（ブラウザ版）の画面から。ブックマーク、共有、フォローは画面に出ていなかった",
+      "quotes": 0,
+      "by": "api"
     },
     "verdict": null,
     "review": null,
@@ -59,7 +61,16 @@
     "url": "https://x.com/yattattadotcom/status/2108173061195432177",
     "replies": [],
     "goal": null,
-    "result": null,
+    "result": {
+      "views": 4,
+      "likes": 0,
+      "reposts": 0,
+      "replies": 0,
+      "quotes": 0,
+      "bookmarks": 0,
+      "at": "2026-10-09T12:16+0900",
+      "by": "api"
+    },
     "verdict": null,
     "review": null,
     "downloads": null

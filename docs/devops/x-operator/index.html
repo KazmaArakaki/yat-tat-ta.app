@@ -258,14 +258,15 @@ App Store：（リンク）</p></div>
         <caption class="pb-2 text-left font-mono text-xs text-mute">表2　種類ごとの目標</caption>
         <thead><tr class="border-b-2 border-ink font-mono text-xs text-mute"><th class="py-2 pr-3">種類</th><th class="py-2 pr-3">役目</th><th class="py-2 pr-3">見る数</th><th class="py-2 pr-3">見方</th><th class="py-2 pr-3">最初の目標（仮）</th></tr></thead>
         <tbody class="[&>tr]:border-b [&>tr]:border-rule [&_td]:py-2.5 [&_td]:pr-3 [&_td]:align-top">
-          <tr><td class="font-bold">研究の紹介</td><td>人に送られる、あとで読み返される</td><td>ブックマーク、共有</td><td>週に1回、その週の中央値</td><td>ブックマーク 5、共有 1</td></tr>
-          <tr><td class="font-bold">小ネタ</td><td>話しかけたくなる、また見たくなる</td><td>返信、プロフィールへのアクセス、フォロー</td><td>週に1回、その週の中央値</td><td>返信 1、プロフィールへのアクセス 5、フォロー 1</td></tr>
+          <tr><td class="font-bold">研究の紹介</td><td>あとで読み返される、人が一言添えて広める</td><td>ブックマーク、引用</td><td>週に1回、その週の中央値</td><td>ブックマーク 5、引用 1</td></tr>
+          <tr><td class="font-bold">小ネタ</td><td>話しかけたくなる、また見たくなる</td><td>返信（その週の中央値）と、アカウントのフォロワーの週の増え</td><td>週に1回</td><td>返信 1、フォロワーの増え 5</td></tr>
           <tr><td class="font-bold">宣伝</td><td>アプリを知ってもらう</td><td>表示、いいね、リポスト（できればその日の DL も）</td><td>1本ごと</td><td>表示 1,000、いいね 10、リポスト 2</td></tr>
         </tbody>
       </table>
     </div>
     <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
-      <p>見る数は、X の重みから選びました。いちばん大きいのはリンクをコピーして送られることで20、返信が5、フォローが4、いいねは0.5です（<a href="../../sessions/20261007-1727-sns-marketing/x-video.html#algorithm" class="lnk">X の重み</a>）。研究の紹介は送られることを、小ネタは返信とフォローを狙います。</p>
+      <p>見る数は、X の重みから選びました。いちばん大きいのはリンクをコピーして送られることで20、返信と引用が5、フォローが4、いいねは0.5です（<a href="../../sessions/20261007-1727-sns-marketing/x-video.html#algorithm" class="lnk">X の重み</a>）。研究の紹介は読み返されて広まることを、小ネタは返信とフォローを狙います。</p>
+      <p>はじめは研究の紹介で「共有」、小ネタで「投稿ごとのフォロー」と「プロフィールへのアクセス」を見るつもりでした。ところが、共有と投稿ごとのフォローは、X の API でも Post Analytics の画面でも取れませんでした。プロフィールへのアクセスは、@yattattadotcom でのログインが要ります。そこで、取れる数に替えました（2026-10-09）。共有のかわりに、送る相手に一言添える「引用」。投稿ごとのフォローのかわりに、アカウント全体のフォロワーの週の増えです。</p>
       <p>宣伝のほかは、1本ごとではなく、1週間まとめて見ます。フォロワーがほとんどいないうちは数が小さく、1本ごとの差はたまたまで決まりやすいからです。</p>
       <p>最初の目標は、どれも根拠のない見当です。それでも置くのは、外れた幅が次の目標の手がかりになるからです（開発者の注文、2026-10-08）。</p>
     </div>
@@ -277,16 +278,21 @@ App Store：（リンク）</p></div>
       <li>公開日の投稿や、新しい型を試す投稿は、目標を変えてよい。変えた理由を書く</li>
     </ul>
 
-    <h3 class="mt-10 font-display text-xl">24時間後の数（全部の投稿、約3分）</h3>
-    <ol class="mt-3 flex max-w-2xl flex-col gap-2 text-sm">
-      <li class="rounded-2xl border border-rule bg-white p-4"><b>1.</b>　開発者が、X で投稿の「Post Analytics」を開き、画面の写しか数をこの会話に貼る。ブラウザ版の画面には、表示（Impressions）、エンゲージメント、詳細のクリック（Detail expands）、プロフィールへのアクセス、いいね、リポスト、返信が出る。ブックマーク、共有、フォローは、1本目（2026-10-09）の画面には出ていなかった。0のときは出ないのかは確かめていない。画面に出ていない数は null にする</li>
-      <li class="rounded-2xl border border-rule bg-white p-4"><b>2.</b>　AI が posts.json のその投稿の result に書く</li>
-      <li class="rounded-2xl border border-rule bg-white p-4"><b>3.</b>　宣伝なら、目標と比べて達成か未達かを書き、効いたか効かなかった理由を1つと、次の宣伝で変えることを1つ書く</li>
-    </ol>
+    <h3 class="mt-10 font-display text-xl">数の集め方</h3>
+    <div class="mt-3 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>数は X の API で読みます。<code class="font-mono text-xs">python3 marketing/x/metrics.py</code> が、記録にある全部の投稿の公開の数（表示、いいね、リポスト、返信、引用、ブックマーク）と、アカウントのフォロワーの数を読み、posts.json と weekly.json に書きます（開発者が決定、2026-10-09）。画面から数を写す手間をなくし、写し間違いもなくすためです。</p>
+      <p>読むだけで、投稿、返信、いいね、フォロー、DM はしません。開発者の申請もこの使い道だけで出しました。アプリは @yattattadotcom の開発者のアカウントの Default Project（Pay Per Use）にあります（2026-10-09）。はじめは、凍結の心配から切り離すために個人のアカウントで作るつもりでした。ただ、凍結の理由に挙がっていたのは投稿や交流を自動でする振る舞いで、週に10件ほど読むだけなら心配は小さいと見て、@yattattadotcom のまま使うことにしました（開発者が決定）。広告の API（Ads）のプロジェクトは使いません。鍵は <code class="font-mono text-xs">.tmp/x-bearer-token.secret</code>（Git に入らない）。</p>
+      <p>読む1件 $0.005（2026 の公開値）。週に1回、10件ほど読んで約 $0.05。スクリプトは月 $2 の見込みに届いたら止まり、使った分を <code class="font-mono text-xs">marketing/x/x-api-usage.json</code> に残します。</p>
+    </div>
+    <ul class="mt-3 max-w-2xl list-disc space-y-1.5 pl-5 text-sm leading-relaxed">
+      <li>週の振り返り：振り返りの前に、全部の投稿を読む</li>
+      <li>宣伝：出して24時間たったら、その投稿だけを読む（<code class="font-mono text-xs">metrics.py &lt;投稿のID&gt;</code>）。目標と比べて、達成か未達か、効いたか効かなかった理由と、次に変えることを書く</li>
+      <li>API が使えないとき：X の Post Analytics の画面の写しを会話に貼ってもらい、写す</li>
+    </ul>
 
     <h3 class="mt-10 font-display text-xl"><a href="../../glossary.html#weekly-review" class="hover:text-dopa">週の振り返り</a>（週に1回、約5分）</h3>
     <ol class="mt-3 flex max-w-2xl flex-col gap-2 text-sm">
-      <li class="rounded-2xl border border-rule bg-white p-4"><b>1.</b>　週が終わったら（最初は 10-15）、AI が研究の紹介と小ネタのそれぞれで、その週の数の中央値を出す</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>1.</b>　週が終わったら（最初は 10-15）、AI が metrics.py で数を読み、研究の紹介と小ネタのそれぞれで、その週の数の中央値と、フォロワーの週の増えを出す</li>
       <li class="rounded-2xl border border-rule bg-white p-4"><b>2.</b>　目標と比べて、達成か未達かを書く。型ごとの差も見る（研究の A/B/C、小ネタの 1〜4）</li>
       <li class="rounded-2xl border border-rule bg-white p-4"><b>3.</b>　次の週に増やす型と減らす型を1つずつ決め、次の週の目標を置く。<code class="font-mono text-xs">marketing/x/weekly.json</code> に残す</li>
     </ol>
@@ -306,8 +312,8 @@ App Store：（リンク）</p></div>
   "url": "https://x.com/yattattadotcom/status/…",
   "replies": [],
   "goal": { "views": 1000, "likes": 10, "reposts": 2, "basis": "最初の3本の仮の目標" },
-  "result": { "views": 0, "likes": 0, "reposts": 0, "replies": 0, "bookmarks": 0,
-              "shares": 0, "profileVisits": 0, "follows": 0, "at": "…" },
+  "result": { "views": 0, "likes": 0, "reposts": 0, "replies": 0, "quotes": 0,
+              "bookmarks": 0, "at": "…", "by": "api" },
   "verdict": { "views": "未達", "likes": "達成", "reposts": "未達" },
   "review": "効いた・効かなかった理由と、次に変えること",
   "downloads": null
