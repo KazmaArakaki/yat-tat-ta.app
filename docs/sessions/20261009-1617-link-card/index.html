@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="session-state" content="developing">
+<meta name="state" content="developing">
+<title>LINE と X にリンクカードを出す</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;700&family=M+PLUS+Rounded+1c:wght@500;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FBF6EE', ink: '#1C1916', mute: '#6E655C', rule: '#E7DDCC',
+        dopa: { DEFAULT: '#E5337A', soft: '#FFE6F0', pale: '#FFF3E4', body: '#FF97BF' },
+        signal: '#2F79F7', gold: '#E9A800', violet: '#7B4FD6'
+      },
+      fontFamily: {
+        sans: ['"Noto Sans JP"', 'sans-serif'],
+        display: ['"Dela Gothic One"', '"Noto Sans JP"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+        round: ['"M PLUS Rounded 1c"', '"Noto Sans JP"', 'sans-serif']
+      },
+      keyframes: {
+        rise: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'none' } }
+      },
+      animation: { rise: 'rise .5s ease-out both' }
+    }
+  }
+}
+</script>
+<style>
+.app { --a-bg:#FBF6EE; --a-card:#FFFFFF; --a-ink:#1C1916; --a-mute:#6E655C; --a-rule:#E7DDCC; --a-line:#1C1916; --a-soft:#FFE6F0; }
+.app.dark { --a-bg:#16120F; --a-card:#231D18; --a-ink:#F5EEE3; --a-mute:#A89C8E; --a-rule:#3A312A; --a-line:#F5EEE3; --a-soft:#3A1726; }
+.a-bg { background:var(--a-bg); color:var(--a-ink); }
+.a-card { background:var(--a-card); }
+.a-ink { color:var(--a-ink); }
+.a-mute { color:var(--a-mute); }
+.a-line { border-color:var(--a-line); }
+.a-rule { border-color:var(--a-rule); }
+.a-soft { background:var(--a-soft); }
+.lnk { text-decoration:underline; text-decoration-color:rgba(229,51,122,.5); text-decoration-thickness:2px; text-underline-offset:4px; }
+.lnk:hover { text-decoration-color:#E5337A; }
+.tabbtn[aria-selected="true"] { background:#1C1916; color:#FBF6EE; }
+.flow-arrow { font-family:"JetBrains Mono",monospace; color:#6E655C; }
+</style>
+</head>
+<body class="min-h-screen bg-paper font-sans text-ink antialiased">
+<main class="px-4 pb-24 pt-10 sm:px-10 lg:pt-16">
+<article class="mx-auto max-w-5xl">
+
+  <header class="animate-rise">
+    <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-mute">
+      <time datetime="2026-10-09T16:17">2026-10-09 16:17</time>
+      <span>/</span>
+      <span>設計セッション</span>
+      <span class="rounded-full border border-dopa bg-dopa-soft px-2.5 py-0.5 font-bold text-ink">状態：developing</span>
+    </div>
+    <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl">LINE と X にリンクカードを出す</h1>
+  </header>
+
+  <section id="order" class="animate-rise mt-8 [animation-delay:100ms]">
+    <div class="relative overflow-hidden rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916] sm:p-8">
+      <div class="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-dopa-soft"></div>
+      <p class="relative font-mono text-xs uppercase tracking-[0.2em] text-dopa">開発者の注文</p>
+      <p class="relative mt-6 font-display text-2xl leading-snug tracking-wide sm:text-3xl">共有ボタンを３つに分けたい。<br>「LINEで共有する」「Xで共有する」<br>「他の方法で共有する」</p>
+    </div>
+  </section>
+
+  <section id="why" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">01 / why</p>
+    <h2 class="mt-2 font-display text-3xl">LINE と X には、画像を渡せない</h2>
+    <div class="mt-4 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>ボタンを分けるだけなら簡単だ、と最初は思いました。ところが、アプリから LINE や X の投稿画面を直接開くとき、渡せるのは文と URL だけです。X の投稿画面を開く口（<code class="font-mono text-xs">x.com/intent/post</code>）も、LINE の共有の口（<code class="font-mono text-xs">line.me/R/share</code>）も、画像を受け取りません。画像ごと渡せるのは iOS の共有シートだけで、共有シートは相手のアプリを先に選んでおけない。</p>
+      <p>カードの画像は端末の中にしかないので、URL から読ませることもできません。開発者とやりとりして、カードの数字だけをサーバーに送り、サーバーが描いたカードを URL の <a href="../../glossary.html#link-card" class="lnk">リンクカード</a>（OGP 画像）として出す形に決めました（開発者と合意、2026-10-09）。前のセッションまでの「サーバーには何も送らない」は、LINE と X に限って変わります。</p>
+    </div>
+  </section>
+
+  <section id="flow" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">02 / flow</p>
+    <h2 class="mt-2 font-display text-3xl">押してから、カードが出るまで</h2>
+    <ol class="mt-6 flex max-w-3xl flex-col gap-2 text-sm">
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>1.</b> 利用者が「Xで共有する」か「LINEで共有する」を押す。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>2.</b> アプリは、ログインのトークンと App Check を付けて、カードの数字（日付、連続日数、7マス、今日のドパ、DPW、言語）を関数 <code class="font-mono text-xs">createShareCard</code> に送る。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>3.</b> 関数は値の範囲を確かめ、横長のカードを描いて Cloud Storage の <code class="font-mono text-xs">share/[ハッシュ].png</code> に置き、<code class="font-mono text-xs">https://yat-tat-ta.web.app/s/[ハッシュ]</code> を返す。同じ見た目なら同じハッシュで、2度は描かない。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>4.</b> アプリは、文とその URL を入れて X か LINE の投稿画面を開く。開けたら、今日は共有したことにする。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>5.</b> X や LINE のクローラーが <code class="font-mono text-xs">/s/[ハッシュ]</code> を読みに来る。関数 <code class="font-mono text-xs">share</code> が、OGP のメタタグを入れた HTML を返す。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>6.</b> クローラーが <code class="font-mono text-xs">/s/[ハッシュ].png</code> を読みに来る。置いてある画像をそのまま返す。どちらも CDN が1年覚えるので、関数が動くのはほぼ1回。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>7.</b> タイムラインやトークに、文と大きなカードが並ぶ。人がカードを押すと、同じ HTML の JavaScript が LP（英語なら <code class="font-mono text-xs">/en/</code>）へ移す。</li>
+    </ol>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">押したあとに移すのが LP だけなのは、開発者の提案です。見た人は押す前にカードを見ているので、もう一度見せるより、何のアプリかを見せるほうがいい。HTTP のリダイレクトにしないのは、クローラーまで LP に移って、LP の OGP が出てしまうからです。</p>
+  </section>
+
+  <section id="images" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / images</p>
+    <h2 class="mt-2 font-display text-3xl">リンクカードと、3つのボタン</h2>
+    <div class="mt-8 grid items-start gap-8 lg:grid-cols-[1fr_340px]">
+      <div class="space-y-4">
+        <img src="og-ja.png" alt="日本語のリンクカード。13日連続、7マス、今日45ドパ、DPW 145ドパ" class="w-full rounded-2xl border border-rule">
+        <img src="og-en.png" alt="英語のリンクカード" class="w-full rounded-2xl border border-rule">
+      </div>
+      <img src="prompt.png" alt="共有の誘い。LINEで共有する、Xで共有する、他の方法で共有する、今日はしない" class="w-[340px] rounded-2xl border border-rule">
+    </div>
+    <div class="mt-6 max-w-2xl space-y-4 text-sm leading-relaxed text-ink/80">
+      <p>リンクカードは横長（1200 × 630）です。X と LINE のリンクカードがこの比率なので、アプリの縦長のカード（4:5）を横に組み直しました。描くのはサーバーの satori と resvg で、文字はドキュメントでも使っている M PLUS Rounded 1c（OFL）を、使う文字だけに絞って関数に入れています。最初に描いたとき、3桁の日数が枠からはみ出し、ロゴの語の間が開きすぎたので、桁数で文字を小さくし、語の間を自分で決めました。</p>
+      <p>「他の方法で共有する」は今までどおり、共有シートで縦長の画像ごと渡します。LINE と X でも、電波がないときや関数が失敗したときは、この形に切り替えます。</p>
+    </div>
+  </section>
+
+  <section id="decisions" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / decisions</p>
+    <h2 class="mt-2 font-display text-3xl">決めたこと</h2>
+    <ul class="mt-6 flex max-w-3xl flex-col gap-2 text-sm">
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　共有のボタンは「LINEで共有する」「Xで共有する」「他の方法で共有する」の3つ（開発者が決定、2026-10-09）。</li>
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　先に画像を作って URL を返し、その URL を共有する（開発者の案、2026-10-09）。共有する URL は画像ではなく HTML のページにする。X は画像の URL からリンクカードを作らない。</li>
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　画像はサーバーで描き、アプリからは受け取らない。任意の画像を上げられると、こちらが利用者の画像を公開する形になり、悪用の口にもなる（開発者と合意、2026-10-09）。</li>
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　数字はアプリの申告を信じ、ありえない値だけを断る。サーバーで記録から計算し直すと、連続記録の計算を2つ持つことになる（開発者と合意、2026-10-09）。</li>
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　作った画像は消さない。消すと過去の投稿のカードが出なくなる（開発者と合意、2026-10-09）。</li>
+      <li class="rounded-2xl border-2 border-dopa bg-dopa-soft p-4"><b>決定</b>　カードを押したら LP へ移すだけ（開発者の提案、2026-10-09）。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>提案</b>　関数は、ログイン中（匿名を含む）で App Check の通ったアプリからだけ受け付ける。uid は確かめるのに使うだけで、画像にもどこにも残さない。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>提案</b>　LINE と X は、投稿画面を開けたら今日は共有したことにする。投稿したかまでは分からない。</li>
+    </ul>
+  </section>
+
+  <section id="impl" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / implementation</p>
+    <h2 class="mt-2 font-display text-3xl">作ったもの</h2>
+    <ol class="mt-6 flex max-w-3xl flex-col gap-3 text-sm">
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>1. <code class="font-mono text-xs">firebase/functions/src/card.js</code>：数字の確かめ（<code class="font-mono text-xs">normalize</code>）、ハッシュ、横長のカードの描画</b><br><span class="text-ink/70">関数の入口から切り離し、手元でテストできるようにした。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>2. <code class="font-mono text-xs">firebase/functions/src/page.js</code>：<code class="font-mono text-xs">/s/[ハッシュ]</code> の HTML</b><br><span class="text-ink/70">OGP のメタタグと、人だけを LP へ移す1行。埋める値は逃がす。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>3. <code class="font-mono text-xs">firebase/functions/src/index.js</code>：<code class="font-mono text-xs">createShareCard</code>（onCall）と <code class="font-mono text-xs">share</code>（onRequest）。<code class="font-mono text-xs">firebase.json</code> に関数、<code class="font-mono text-xs">/s/**</code> の振り分け、Storage のルールを足す</b><br><span class="text-ink/70">Storage はアプリから直接触らせない。書くのも読むのも関数だけ。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>4. iOS：<code class="font-mono text-xs">ShareService</code>（3つの道と、失敗したときの共有シート）、<code class="font-mono text-xs">SharePromptCard</code> を3つのボタンに、今日の記録のシートの共有をメニューに。<code class="font-mono text-xs">project.yml</code> に FirebaseFunctions</b><br><span class="text-ink/70">リンクカードを作る1、2秒は、押したボタンに回る印を出し、ほかを押せなくする。</span></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>5. テスト：関数側に8つ（値の確かめ、ハッシュ、PNG の大きさ、HTML）、iOS に3つ（送る数字、X と LINE の URL）。文言を日本語と英語で4件足し、使わなくなった2件を消す</b><br><span class="text-ink/70">iOS のテストは全部で107件、すべて通った。</span></li>
+    </ol>
+  </section>
+
+  <section id="ask" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / developer</p>
+    <h2 class="mt-2 font-display text-3xl">開発者にお願いすること</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">まだ何もデプロイしていません。1〜3 が済むまで、LINE と X のボタンは関数を呼べず、共有シートに切り替わります。手順は <a href="../../devops/firebase/index.html" class="lnk">Firebase の準備と運用</a>にあります。</p>
+    <ol class="mt-6 grid max-w-3xl gap-3 text-sm sm:grid-cols-2">
+      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">1　約10分</p><p class="mt-2">開発用と本番用の Firebase を Blaze（従量課金）に上げる。予算のアラートも付ける。</p></li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">2　約5分</p><p class="mt-2">両方で Storage を始め、既定のバケットを asia-northeast1 に作る。</p></li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">3　約10分</p><p class="mt-2"><code class="font-mono text-xs">firebase/functions</code> で <code class="font-mono text-xs">npm ci</code>、<code class="font-mono text-xs">firebase/</code> で <code class="font-mono text-xs">npx firebase-tools deploy --only functions,hosting,storage -P dev</code>。</p></li>
+      <li class="rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_#1C1916]"><p class="font-mono text-xs font-bold text-dopa">4　約10分</p><p class="mt-2">実機（Debug）から X と LINE に共有して、カードが出るか、押すと LP に移るかを見る。<code class="font-mono text-xs">/s/</code> の URL がスラッシュ付きへ移されていないかも見る。</p></li>
+    </ol>
+  </section>
+
+</article>
+</main>
+<script src="../../sidebar.js" defer></script>
+</body>
+</html>

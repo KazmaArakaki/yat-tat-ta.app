@@ -119,12 +119,15 @@ extension ShareCardView {
 ///
 /// 送り終えた日は、もう共有を促さない（AppModel.markShared）。閉じただけなら何もしない。
 enum ShareSheet {
-    @MainActor static func present(_ card: ShareCard, completion: @escaping (Bool) -> Void) {
-        guard let image = ShareCardView.render(card), let top = topViewController() else { return }
+    /// 出せたら true。出せなければ completion は呼ばない
+    @discardableResult
+    @MainActor static func present(_ card: ShareCard, completion: @escaping (Bool) -> Void) -> Bool {
+        guard let image = ShareCardView.render(card), let top = topViewController() else { return false }
         let text = String(localized: "Yat Tat Ta で\(card.streak)日連続。食べたら、しゃがんで、叩く。https://yat-tat-ta.web.app")
         let controller = UIActivityViewController(activityItems: [image, text], applicationActivities: nil)
         controller.completionWithItemsHandler = { _, completed, _, _ in completion(completed) }
         top.present(controller, animated: true)
+        return true
     }
 
     /// いちばん上に出ている画面。今日の記録のシートの上からも出せるように
@@ -140,14 +143,17 @@ enum ShareSheet {
 /// 共有を促すカード。今日の記録があって、今日まだ共有していないとき、ホームの下から出す
 ///
 /// アプリを開いたときと、叩き切ったあとの演出が終わったときに出る。「今日はしない」でその日は出さない。
+/// LINE と X は、リンクカードを作るのに1、2秒かかる。その間は押したボタンに回る印を出し、ほかを押せなくする。
 struct SharePromptCard: View {
     let card: ShareCard
-    let share: () -> Void
+    /// 渡し終えたら返る
+    let share: (ShareTarget) async -> Void
     let decline: () -> Void
     @State private var image: UIImage?
+    @State private var busy: ShareTarget?
 
     var body: some View {
-        VStack(spacing: 14) {
+        VStack(spacing: 12) {
             Text("今日の記録を貼りませんか")
                 .font(.label(17, black: true))
                 .multilineTextAlignment(.center)
@@ -155,40 +161,82 @@ struct SharePromptCard: View {
                 Image(uiImage: image)
                     .resizable()
                     .aspectRatio(4 / 5, contentMode: .fit)
-                    .frame(height: 220)
+                    .frame(height: 200)
                     .clipShape(.rect(cornerRadius: 12))
                     .overlay(RoundedRectangle(cornerRadius: 12).strokeBorder(Color.ink, lineWidth: 2))
                     .accessibilityLabel(Text("今日の記録カード。\(card.streak)日連続"))
             }
-            Text("X や LINE に、今日の記録カードを貼れます。")
-                .font(.label(13))
-                .foregroundStyle(Color.mute)
-                .multilineTextAlignment(.center)
-            HStack(spacing: 10) {
-                Button(action: decline) {
-                    Text("今日はしない")
-                        .font(.label(15, black: true))
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 14)
-                        .overlay(Capsule().strokeBorder(Color.ink, lineWidth: 2))
-                        .foregroundStyle(Color.ink)
+            VStack(spacing: 8) {
+                ForEach(ShareTarget.allCases, id: \.self) { target in
+                    ShareTargetButton(target: target, busy: busy == target) {
+                        busy = target
+                        Task {
+                            await share(target)
+                            busy = nil
+                        }
+                    }
                 }
-                .buttonStyle(.plain)
-                Button(action: share) {
-                    Text("共有する")
-                        .font(.label(15, black: true))
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 14)
-                        .background(Color.gold, in: .capsule)
-                        .overlay(Capsule().strokeBorder(Color.ink, lineWidth: 2))
-                        .foregroundStyle(Color.onGold)
-                }
-                .buttonStyle(.plain)
             }
+            .padding(.top, 4)
+            Button(action: decline) {
+                Text("今日はしない").font(.label(14)).underline().foregroundStyle(Color.mute)
+                    .padding(.vertical, 6)
+            }
+            .buttonStyle(.plain)
         }
+        .disabled(busy != nil)
         .padding(20)
         .toyCard(radius: 24, shadow: 6)
         .padding(16)
         .task(id: card) { image = ShareCardView.render(card) }
+    }
+}
+
+/// 共有する先のボタン。LINE は緑、X は黒、ほかは枠だけ
+struct ShareTargetButton: View {
+    let target: ShareTarget
+    let busy: Bool
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            ZStack {
+                Text(target.title).opacity(busy ? 0 : 1)
+                if busy { ProgressView().tint(target.foreground) }
+            }
+            .font(.label(15, black: true))
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 13)
+            .background(target.background, in: .capsule)
+            .overlay(Capsule().strokeBorder(Color.ink, lineWidth: 2))
+            .foregroundStyle(target.foreground)
+        }
+        .buttonStyle(.plain)
+    }
+}
+
+extension ShareTarget {
+    var title: LocalizedStringResource {
+        switch self {
+        case .line: "LINEで共有する"
+        case .x: "Xで共有する"
+        case .other: "他の方法で共有する"
+        }
+    }
+
+    /// LINE の緑は LINE のブランドの色
+    var background: Color {
+        switch self {
+        case .line: Color(red: 6 / 255, green: 199 / 255, blue: 85 / 255)
+        case .x: .black
+        case .other: .card
+        }
+    }
+
+    var foreground: Color {
+        switch self {
+        case .line, .x: .white
+        case .other: .ink
+        }
     }
 }

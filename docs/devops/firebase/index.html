@@ -47,7 +47,7 @@ tailwind.config = {
     <div class="rounded-3xl border-2 border-ink bg-white p-6 shadow-[8px_8px_0_#1C1916]">
       <p class="font-mono text-xs uppercase tracking-[0.2em] text-dopa">決まり事</p>
       <ul class="mt-3 list-disc space-y-2 pl-5 font-bold leading-relaxed">
-        <li>Firebase で使うのは、Authentication（<a href="../../glossary.html#guest-account" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">匿名</a>と Apple のログイン）、<a href="../../glossary.html#firestore" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">Firestore</a>、Hosting（公開ページ）の3つだけ。</li>
+        <li>Firebase で使うのは、Authentication（<a href="../../glossary.html#guest-account" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">匿名</a>と Apple のログイン）、<a href="../../glossary.html#firestore" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">Firestore</a>、Hosting（公開ページ）、Cloud Functions と Cloud Storage（<a href="../../glossary.html#link-card" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">リンクカード</a>）だけ。Functions のために、両方のプロジェクトを Blaze プランにしている。</li>
         <li><code class="font-mono text-sm">GoogleService-Info.plist</code> は Git に入れない。</li>
         <li>テストと<a href="../../glossary.html#perf-mode" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">計測モード</a>は Firestore に触れない。メモリ版の RecordStore を使う。</li>
         <li>記録の列を足したり変えたりしたら、同じコミットでルールも直し、開発用と本番用の両方に反映する。</li>
@@ -126,11 +126,26 @@ service cloud.firestore {
     </div>
     <ul class="mt-4 flex flex-col gap-2 text-sm">
       <li class="rounded-2xl border border-rule bg-white p-4"><b>出す前の確認</b>：開発用のコンテナの reverse-proxy が、<code class="font-mono text-xs">firebase/public/</code> を <code class="font-mono text-xs">http://site.yat-tat-ta.localhost/</code> で返す（<code class="font-mono text-xs">.devcontainer/reverse-proxy</code>）。ファイルを直せば、再読み込みで反映される。</li>
-      <li class="rounded-2xl border border-rule bg-white p-4"><b>出し方</b>：<code class="font-mono text-xs">firebase/</code> で <code class="font-mono text-xs">npx firebase-tools deploy --only hosting -P prod</code>。ルールとは別に出せる。開発用には出さない。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>出し方</b>：<code class="font-mono text-xs">firebase/</code> で <code class="font-mono text-xs">npx firebase-tools deploy --only hosting -P prod</code>。ルールとは別に出せる。開発用にも出すのは、<code class="font-mono text-xs">/s/</code> の振り分けを確かめるときだけ（<a href="#link-card" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">リンクカードの関数</a>）。</li>
       <li class="rounded-2xl border border-rule bg-white p-4"><b>日本語と英語は同時に直す</b>：<code class="font-mono text-xs">/privacy/</code> と <code class="font-mono text-xs">/privacy/en/</code>、<code class="font-mono text-xs">/</code> と <code class="font-mono text-xs">/en/</code>。片方だけ直すと、言語で書いてあることが食い違う。</li>
       <li class="rounded-2xl border border-rule bg-white p-4"><b>ポリシーを変えたら改定日を書く</b>：制定日の下に「改定日：」を足す。集める情報を増やすときは、出す前にポリシーを直す。</li>
       <li class="rounded-2xl border border-rule bg-white p-4"><b>外のフォントやスクリプトを読み込まない</b>：開いた人の情報を、ほかのサービスへ送らないため。</li>
       <li class="rounded-2xl border border-rule bg-white p-4"><b>URL を変えない</b>：アプリと App Store Connect が同じ URL を開く。変えるとアプリを出し直すことになる。</li>
+    </ul>
+  </section>
+
+  <section id="link-card" class="mt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">functions</p>
+    <h2 class="mt-2 font-display text-3xl">リンクカードの関数（約23分）</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">LINE と X に出る<a href="../../glossary.html#link-card" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">リンクカード</a>は、Cloud Functions が描いて Cloud Storage に置きます（<a href="../../features/share-card/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日の記録カード</a>）。関数は2つ。<code class="font-mono text-xs">createShareCard</code> はアプリから数字を受け取ってカードを描き、<code class="font-mono text-xs">share</code> は Hosting の <code class="font-mono text-xs">/s/**</code> から来たクローラーと人に HTML と画像を返します。元のファイルは <code class="font-mono text-xs">firebase/functions/</code> です。</p>
+    <ol class="mt-6 flex flex-col gap-3 text-sm"><li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">1</span><div><b>両方のプロジェクトを Blaze に上げる（約5分）</b><br>Firebase コンソールの「使用量と請求額」で、開発用と本番用を従量課金の Blaze プランに切り替え、請求先のカードを登録する。Cloud Functions は Blaze でないと置けない。呼び出しは月200万回まで無料で、HTML と画像は CDN が覚えるので、この規模ならほぼ0円の見込み。念のため予算のアラート（例：月500円）を付けておく。</div></li><li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">2</span><div><b>Cloud Storage の既定のバケットを作る（約3分）</b><br>両方のプロジェクトの Storage で「始める」を押す。場所は東京（asia-northeast1）。本番モード（全部断る）で作り、下の 5 で <code class="font-mono text-xs">storage.rules</code> を反映する。</div></li><li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">3</span><div><b>関数の依存パッケージを入れる（約2分）</b><br><code class="font-mono text-xs">firebase/functions/</code> で <code class="font-mono text-xs">npm ci</code>。<code class="font-mono text-xs">node_modules/</code> は Git に入らない。描画を変えたら <code class="font-mono text-xs">npm test</code> を流す（入力の確かめ、ハッシュ、1200 × 630 の PNG、HTML のメタタグ）。</div></li><li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">4</span><div><b>開発用に出して確かめる（約10分）</b><br><code class="font-mono text-xs">firebase/</code> で <code class="font-mono text-xs">npx firebase-tools deploy --only functions,hosting,storage -P dev</code>。Debug のアプリで「Xで共有する」を押し、返ってきた <code class="font-mono text-xs">https://yat-tat-ta-dev.web.app/s/[ハッシュ]</code> をブラウザで開いて LP に移ること、<code class="font-mono text-xs">/s/[ハッシュ].png</code> でカードが出ることを見る。</div></li><li class="flex gap-4 rounded-2xl border border-rule bg-white p-4"><span class="font-display text-2xl text-mute">5</span><div><b>本番に出す（約3分）</b><br><code class="font-mono text-xs">npx firebase-tools deploy --only functions,hosting,storage -P prod</code>。アプリの新しい版を出すより先に出す。関数がない間に「LINEで共有する」を押されると、共有シートに切り替わるだけで壊れはしないが、リンクカードは出ない。</div></li></ol>
+    <ul class="mt-6 flex flex-col gap-2 text-sm">
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>関数の場所</b>：どちらも東京（asia-northeast1）。アプリの <code class="font-mono text-xs">Functions.functions(region:)</code> と、<code class="font-mono text-xs">firebase.json</code> の rewrites の region を同じにする。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>App Check</b>：<code class="font-mono text-xs">createShareCard</code> は onCall の <code class="font-mono text-xs">enforceAppCheck</code> で断る。コンソールの App Check で Cloud Functions の「適用」を押す必要はない。Debug のアプリはデバッグトークンの登録が要る（<a href="#environments" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">開発用と本番用</a>）。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>Storage のルール</b>：<code class="font-mono text-xs">firebase/storage.rules</code> はアプリからの読み書きを全部断る。画像は関数（管理者の権限）だけが書き、<code class="font-mono text-xs">/s/[ハッシュ].png</code> から関数を通して返す。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>フォント</b>：M PLUS Rounded 1c を、カードに出る文字だけに絞って <code class="font-mono text-xs">firebase/functions/fonts/</code> に同梱している（OFL、<code class="font-mono text-xs">OFL.txt</code>）。カードに新しい文字を足したら、絞り直す。足りない字は描かれない。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>確かめること</b>：Hosting は <code class="font-mono text-xs">trailingSlash: true</code> なので、<code class="font-mono text-xs">/s/[ハッシュ]</code> がスラッシュ付きへ移されないかを開発用で見る（移されても動くが、og:url とずれる）。X の Card Validator はもうないので、実際に X に投稿してカードが出るかを見る。LINE は自分あてのトークに URL を送って見る。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>作った画像は消さない</b>：消すと過去の投稿のカードが出なくなる。1枚およそ50KB で、無料枠の 5GB に収まる。消してほしいと頼まれたら、<code class="font-mono text-xs">share/[ハッシュ].png</code> を Storage から手で消す。</li>
     </ul>
   </section>
 
@@ -141,6 +156,7 @@ service cloud.firestore {
       <li><a href="../../sessions/20261007-0957-firestore/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">セッション：記録を Firestore に移す</a></li>
       <li><a href="../../features/account/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">機能：アカウント</a></li>
       <li><a href="../ios-project/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">iOS プロジェクトの設定</a></li>
+      <li><a href="../../sessions/20261009-1617-link-card/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">セッション：LINE と X のリンクカード</a></li>
     </ul>
   </section>
 

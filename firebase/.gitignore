@@ -1,3 +1,5 @@
 # firebase-tools が deploy のときに作るキャッシュとログ
 .firebase/
 *-debug.log
+# 関数の依存パッケージ
+functions/node_modules/

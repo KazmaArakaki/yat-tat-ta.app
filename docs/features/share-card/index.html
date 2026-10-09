@@ -41,7 +41,7 @@ tailwind.config = {
       <a href="../index.html" class="hover:text-ink">features</a><span>/</span><span>ふり返って続ける</span>
     </div>
     <h1 class="mt-4 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">今日の記録カード</span></h1>
-    <p class="mt-4 max-w-2xl text-base leading-relaxed">続けた日数と、この7日の叩き方を1枚の画像にして、利用者が自分で SNS に貼れるようにする。開発者の投稿だけでは届く数に上限があり、宣伝を運ぶのは利用者の投稿だからです。今日まだ貼っていない人には、アプリを開いたときと叩き切ったあとに<a href="../../glossary.html#share-prompt" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">共有の誘い</a>で勧めます。次のリリースで出す（開発者が決定、2026-10-09）。</p>
+    <p class="mt-4 max-w-2xl text-base leading-relaxed">続けた日数と、この7日の叩き方を1枚の画像にして、利用者が自分で SNS に貼れるようにする。開発者の投稿だけでは届く数に上限があり、宣伝を運ぶのは利用者の投稿だからです。今日まだ貼っていない人には、アプリを開いたときと叩き切ったあとに<a href="../../glossary.html#share-prompt" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">共有の誘い</a>で勧めます。渡し方は3つ。「LINEで共有する」「Xで共有する」は横長の<a href="../../glossary.html#link-card" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">リンクカード</a>の URL を、「他の方法で共有する」は縦長の画像そのものを渡します。次のリリースで出す（開発者が決定、2026-10-09）。</p>
   </header>
 
   <section id="why" class="mt-16">
@@ -53,6 +53,8 @@ tailwind.config = {
       <p>課題 <a href="../../issues/share-result/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">share-result</a> では、公開から2週間たち、利用者が何を貼っているかを見てから形を決めるつもりでした。開発者の指示で、公開前に作ることにしています。利用者の投稿が見えてきたら、形を見直す余地は残っています。</p>
       <p>シートに置くだけでは足りませんでした。開発者が実機で触ってみると、共有のボタンがどこにあるのか分かりにくい（2026-10-09）。今日の記録のシートは、連続記録の帯の左側を押さないと開かないからです。そこで、今日まだ貼っていなければ、アプリを開いたときと叩き切ったあとの演出が終わったときに、ホームの下から<a href="../../glossary.html#share-prompt" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">共有の誘い</a>を出すことにしました。演出の途中には割り込まないので、筋肉確定を避けた理由とはぶつかりません。<a href="../../glossary.html#tutorial" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">チュートリアル</a>にも「記録を貼る」場面を足し、最初の1回の前にカードの形を見せます。</p>
       <p>リリースも早めました。カードの形がいい、というのが開発者の判断で、公開2週間を待たずに次のリリースで出します（開発者が決定、2026-10-09）。</p>
+      <p>同じ日に、共有のボタンを「LINEで共有する」「Xで共有する」「他の方法で共有する」の3つに分けたい、という注文が来ました。ここで壁に当たります。LINE と X の投稿画面には、アプリから画像を渡せない。渡せるのは文と URL だけです。画像を端末の中だけで作っている限り、LINE や X が URL から読みに行ける場所に、カードがありません。</p>
+      <p>そこで、LINE と X のときだけ、カードの数字をサーバーに送ることにしました。サーバーが決まった形でカードを描いて置き、その URL を投稿画面に渡す。LINE と X は URL を読みに来て、OGP の<a href="../../glossary.html#link-card" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">リンクカード</a>として出します。画像を先に作っておく形も、カードを押したら LP へ移る形も、開発者の提案です（2026-10-09）。「他の方法で共有する」は、これまでどおり共有シートに縦長の画像ごと渡し、サーバーには何も送りません。</p>
     </div>
   </section>
 
@@ -64,34 +66,59 @@ tailwind.config = {
       <table class="w-full min-w-[34rem] border-collapse text-sm">
         <thead><tr class="border-b-2 border-ink text-left"><th class="py-2 pr-4 font-bold">項目</th><th class="py-2 pr-4 font-bold">決まり</th><th class="py-2 pr-4 font-bold">理由</th></tr></thead>
         <tbody>
-          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">出す場所</td><td class="py-3 pr-4">今日の記録のシートの左上、共有のボタン。1度も叩いていない人には出さない。ほかに、共有の誘いとチュートリアルの「記録を貼る」場面</td><td class="py-3 pr-4">演出の途中に割り込まない。叩いていなければ、載せる数がない。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">出す場所</td><td class="py-3 pr-4">今日の記録のシートの左上、共有のメニュー（3つの渡し方）。1度も叩いていない人には出さない。ほかに、共有の誘いとチュートリアルの「記録を貼る」場面</td><td class="py-3 pr-4">演出の途中に割り込まない。叩いていなければ、載せる数がない。</td></tr>
           <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">誘う時機</td><td class="py-3 pr-4">アプリを開いたとき（その日最初ならスプラッシュとチュートリアルが消えたあと）と、叩き切ったあとの演出が終わったとき。練習連打のあとは誘わない。途切れたときのカードや通知の問いかけが閉じたときにも、もう一度見る</td><td class="py-3 pr-4">叩いた直後がいちばん貼りたい時。開いたときにも誘うのは、叩いたあとすぐ閉じた人が、あとから開いたときに貼れるように。</td></tr>
           <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">誘う条件</td><td class="py-3 pr-4">今日の記録が1件以上あり、今日まだ共有していず、「今日はしない」も押していない。スプラッシュ、チュートリアル、フィナーレ、叩いている最中、途切れたときのカード、通知の問いかけがどれも出ていない</td><td class="py-3 pr-4">今日まだ叩いていなければ、今日のマスは空で、貼るものがない。重ね物の上に重ねると、どちらも読まれない。</td></tr>
-          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">共有したかの判定</td><td class="py-3 pr-4">iOS の共有シートで送り終えたときだけ、その記録日を「共有した日」として端末に残す（sharedDay）。シートを閉じただけなら残さない。「今日はしない」を押した日も別に残す（shareDeclinedDay）。シートの左上のボタンから送っても同じ</td><td class="py-3 pr-4">送ったかどうかを受け取るために、ShareLink ではなく UIActivityViewController を使う。閉じただけで「共有した」にすると、迷っただけの人を二度と誘えない。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">共有したかの判定</td><td class="py-3 pr-4">LINE と X は、投稿画面を開けたら「共有した」にする（投稿したかまでは分からない）。他の方法は、iOS の共有シートで送り終えたときだけ、その記録日を「共有した日」として端末に残す（sharedDay）。シートを閉じただけなら残さない。「今日はしない」を押した日も別に残す（shareDeclinedDay）。シートの左上のボタンから送っても同じ</td><td class="py-3 pr-4">送ったかどうかを受け取るために、ShareLink ではなく UIActivityViewController を使う。閉じただけで「共有した」にすると、迷っただけの人を二度と誘えない。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">渡し方</td><td class="py-3 pr-4">「LINEで共有する」（LINE の緑）「Xで共有する」（黒）「他の方法で共有する」（枠だけ）の3つ。誘いではその下に、文字のリンクで「今日はしない」</td><td class="py-3 pr-4">開発者の注文（2026-10-09）。貼る先を先に選べれば、共有シートの中で LINE や X を探さずに済む。</td></tr>
           <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">チュートリアル</td><td class="py-3 pr-4">「続けた日」と「ためたドパ」の間に「記録を貼る」場面。初めての日に目標回数を1回叩いたときの見本のカード（1日連続）と、どこから貼れるかを見せる。叩けば進む</td><td class="py-3 pr-4">最初の1回で誘いが出たとき、何のカードか分かっているように。</td></tr>
           <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">載せるもの</td><td class="py-3 pr-4">いまの<a href="../../glossary.html#streak" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">連続記録</a>の日数、6日前から今日までの7マスと曜日、今日のドパ、<a href="../../glossary.html#dpw" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">DPW</a>、日付、「食べたら、しゃがんで、叩く。」、yat-tat-ta.web.app</td><td class="py-3 pr-4">続けた日数がいちばん大きい。7マスは、日数だけでは分からない休み方まで見せる。</td></tr>
           <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">7マスの色</td><td class="py-3 pr-4">叩いた日はピンク、<a href="../../glossary.html#rest-pass" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">休み券</a>でつないだ日は青（アプリの休み券と同じ色）、叩かなかった日は空。今日のマスだけ太い枠</td><td class="py-3 pr-4">連続が切れていない理由が、見た人にも形で分かる。今日まだ叩いていなければ、今日は空のまま出る。</td></tr>
           <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">大きさと色</td><td class="py-3 pr-4">1080 × 1350 ピクセル（4:5）。画面の色の設定によらず、いつも明るい色で描く</td><td class="py-3 pr-4">X にもストーリーにも、そのまま貼れる。暗い色のときだけ見た目が変わると、形で覚えてもらえない。</td></tr>
           <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">添える文</td><td class="py-3 pr-4">「Yat Tat Ta でN日連続。食べたら、しゃがんで、叩く。https://yat-tat-ta.web.app」。英語の端末では英語</td><td class="py-3 pr-4">共有先のアプリが文も受け取れるとき、どこのアプリかが分かるように。</td></tr>
           <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">書かないこと</td><td class="py-3 pr-4">体への効果、パチンコやくじの語</td><td class="py-3 pr-4"><a href="../../devops/sns-marketing/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">SNS で発信するときの決まり事</a>の1と2。利用者が貼る画像でも、文言を決めているのはこちら。</td></tr>
-          <tr class="align-top"><td class="py-3 pr-4 font-bold">送るもの</td><td class="py-3 pr-4">何も送らない。画像は端末の中で作り、iOS の共有シートに渡すだけ</td><td class="py-3 pr-4">プライバシーポリシーも、App Store の年齢制限の答えも変えずに済む。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">送るもの</td><td class="py-3 pr-4">LINE と X のときだけ、カードの数字（日付、連続日数、7マス、今日のドパ、DPW、言語）をサーバーの関数に送る。ログイン中（匿名を含む）のアプリからだけ受け付け、App Check も確かめる。uid は確かめるのに使うだけで、残さない。他の方法では何も送らない</td><td class="py-3 pr-4">LINE と X に画像は渡せないので、カードを URL の側に持たせるしかない。数字だけなら、記録を丸ごと送らずに済む。プライバシーポリシーに書き足した（2026-10-09）。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">画像を描く場所</td><td class="py-3 pr-4">LINE と X のリンクカードはサーバーが描く。アプリからは画像を受け取らない</td><td class="py-3 pr-4">任意の画像を受け取って公開すると、利用者の作った物を配ることになり、悪用の口にもなる。数字だけなら、偽っても数字が違うカードができるだけ。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">数字の確からしさ</td><td class="py-3 pr-4">アプリの申告を信じる。ありえない値（負の数、7マスが7文字でない、など）だけを断る</td><td class="py-3 pr-4">サーバーで記録から計算し直すと、連続記録と休み券の計算をもう1つ持つことになる。Wordle のマス目と同じく、自己申告と割り切る。</td></tr>
+          <tr class="border-b border-rule align-top"><td class="py-3 pr-4 font-bold">失敗したとき</td><td class="py-3 pr-4">電波がない、関数が失敗した、投稿画面を開けなかったときは、共有シートで縦長の画像ごと渡す</td><td class="py-3 pr-4">押したのに何も起きない、を作らない。</td></tr>
+          <tr class="align-top"><td class="py-3 pr-4 font-bold">作った画像</td><td class="py-3 pr-4">消さない。1枚およそ50KB</td><td class="py-3 pr-4">消すと、過去の投稿のカードが出なくなる。Cloud Storage の無料枠 5GB に収まる。</td></tr>
         </tbody>
       </table>
     </div>
   </section>
 
+  <section id="link-card" class="mt-20">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / link card</p>
+    <h2 class="mt-2 font-display text-3xl">LINE と X に、カードはどう届くのか</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">投稿画面に渡すのは文と URL だけです。カードは、その URL を LINE と X が読みに来たときに出ます。</p>
+    <ol class="mt-6 flex max-w-3xl flex-col gap-2 text-sm leading-relaxed">
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>1.</b> 利用者が「Xで共有する」を押す。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>2.</b> アプリは、ログインのトークンを付けて、カードの数字を関数（createShareCard）に送る。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>3.</b> 関数は値の範囲を確かめ、横長のカードを描いて Cloud Storage の <code class="font-mono text-xs">share/[ハッシュ].png</code> に置き、<code class="font-mono text-xs">https://yat-tat-ta.web.app/s/[ハッシュ]</code> を返す。同じ見た目なら同じハッシュになり、2度は描かない。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>4.</b> アプリは X の投稿画面（<code class="font-mono text-xs">x.com/intent/post</code>）を、文と URL を入れて開く。LINE は <code class="font-mono text-xs">line.me/R/share</code> に、文の最後に URL を付けて渡す。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>5.</b> 投稿されると、X のクローラーが <code class="font-mono text-xs">/s/[ハッシュ]</code> を読みに来る。関数（share）は、<code class="font-mono text-xs">og:image</code> に <code class="font-mono text-xs">/s/[ハッシュ].png</code> を入れた HTML を返す。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>6.</b> クローラーが画像を読みに来る。置いてある画像をそのまま返す。HTML も画像も中身が変わらないので、Hosting の CDN に1年覚えさせる。</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>7.</b> タイムラインに、文とリンクカードが並ぶ。見た人がカードを押すと、ブラウザは JavaScript で LP（英語なら <code class="font-mono text-xs">/en/</code>）へ移る。</li>
+    </ol>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink/80">人だけを LP に移すのに、HTTP のリダイレクトは使えません。クローラーまで LP に移り、LP の OGP が出てしまうからです。クローラーは JavaScript を動かさないので、JavaScript で移せばクローラーはメタタグを読み、人は LP に着きます。クローラーにも人にも、同じ HTML を返しています。</p>
+    <div class="mt-8 grid gap-6 md:grid-cols-2">
+      <figure><img src="../../sessions/20261009-1617-link-card/og-ja.png" alt="日本語のリンクカード。13日連続、7マス、今日45ドパ、DPW145ドパ" class="w-full rounded-2xl border-2 border-ink"><figcaption class="mt-2 text-xs text-mute">日本語のリンクカード（1200 × 630）。関数が描いた画像そのもの。</figcaption></figure>
+      <figure><img src="../../sessions/20261009-1617-link-card/og-en.png" alt="英語のリンクカード。13 days in a row" class="w-full rounded-2xl border-2 border-ink"><figcaption class="mt-2 text-xs text-mute">英語の端末から共有したとき。曜日も英語になる。</figcaption></figure>
+    </div>
+  </section>
+
   <section id="screens" class="mt-20">
-    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">03 / screens</p>
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / screens</p>
     <h2 class="mt-2 font-display text-3xl">関連する画面</h2>
     <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
-      <li class="rounded-2xl border border-rule bg-white p-4"><a href="../../ui/pages/today-records/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日の記録</a><p class="mt-1 text-ink/80">左上の共有のボタンから、iOS の共有シートが開く。</p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><a href="../../ui/pages/today-records/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日の記録</a><p class="mt-1 text-ink/80">左上の共有のボタンを押すと、3つの渡し方のメニューが出る。</p></li>
       <li class="rounded-2xl border border-rule bg-white p-4"><a href="../../ui/pages/home/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">ホーム</a><p class="mt-1 text-ink/80">連続記録の帯の左側を押すと、今日の記録のシートが開く。今日まだ貼っていなければ、下から共有の誘いが出る。</p></li>
       <li class="rounded-2xl border border-rule bg-white p-4"><a href="../tutorial/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">チュートリアル</a><p class="mt-1 text-ink/80">5つめの場面「記録を貼る」で、見本のカードを見せる。</p></li>
     </ul>
   </section>
 
   <section id="components" class="mt-20">
-    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">04 / components</p>
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / components</p>
     <h2 class="mt-2 font-display text-3xl">関連するコンポーネント</h2>
     <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">サンプル：13日連続、今日45ドパ、DPW 145ドパ。木曜日は休み券でつないだ。アプリが書き出した画像そのものです。</p>
     <div class="mt-6 grid items-start gap-8 md:grid-cols-[360px_1fr]">
@@ -106,8 +133,8 @@ tailwind.config = {
     <p class="mt-12 max-w-2xl text-sm leading-relaxed text-ink/80">共有の誘いと、チュートリアルの「記録を貼る」場面。どちらもアプリが書き出した画像です。</p>
     <div class="mt-6 grid items-start gap-8 md:grid-cols-2">
       <figure>
-        <img src="../../sessions/20261009-1229-share-prompt/prompt.png" alt="共有の誘い。今日の記録を貼りませんか、の見出しと縮小したカード、今日はしない、共有するの2つのボタン" class="w-full max-w-[390px] rounded-2xl border-2 border-ink">
-        <figcaption class="mt-2 text-xs leading-relaxed text-mute">共有の誘い。「今日はしない」は枠だけ、「共有する」は金。</figcaption>
+        <img src="../../sessions/20261009-1617-link-card/prompt.png" alt="共有の誘い。今日の記録を貼りませんか、の見出しと縮小したカード、LINEで共有する、Xで共有する、他の方法で共有するの3つのボタンと、今日はしない" class="w-full max-w-[390px] rounded-2xl border-2 border-ink">
+        <figcaption class="mt-2 text-xs leading-relaxed text-mute">共有の誘い。LINE は LINE の緑、X は黒、他の方法は枠だけ。「今日はしない」は下の文字のリンク。</figcaption>
       </figure>
       <figure>
         <img src="../../sessions/20261009-1229-share-prompt/tutorial-share.png" alt="チュートリアルの記録を貼る場面。1日連続の見本のカード" class="w-full max-w-[300px] rounded-2xl border-2 border-ink">
@@ -117,13 +144,14 @@ tailwind.config = {
   </section>
 
   <section id="links" class="mt-20">
-    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">05 / links</p>
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">06 / links</p>
     <h2 class="mt-2 font-display text-3xl">関連ページ</h2>
     <ul class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
-      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">設計の経緯</p><a href="../../sessions/20261009-1053-share-card/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日の記録カードを共有する</a><a href="../../sessions/20261009-1229-share-prompt/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">共有を誘う</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">設計の経緯</p><a href="../../sessions/20261009-1053-share-card/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日の記録カードを共有する</a><a href="../../sessions/20261009-1229-share-prompt/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">共有を誘う</a><a href="../../sessions/20261009-1617-link-card/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">LINE と X のリンクカード</a></li>
       <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">もとの課題</p><a href="../../issues/share-result/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">叩いた結果を外に出す口</a></li>
-      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../glossary.html#share-card" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">今日の記録カード</a><a href="../../glossary.html#share-prompt" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">共有の誘い</a><a href="../../glossary.html#today-records" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">今日の記録</a><a href="../../glossary.html#streak" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">連続記録</a><a href="../../glossary.html#rest-pass" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">休み券</a></p></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">用語</p><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1"><a href="../../glossary.html#share-card" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">今日の記録カード</a><a href="../../glossary.html#share-prompt" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">共有の誘い</a><a href="../../glossary.html#link-card" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">リンクカード</a><a href="../../glossary.html#today-records" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">今日の記録</a><a href="../../glossary.html#streak" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">連続記録</a><a href="../../glossary.html#rest-pass" class="font-bold underline decoration-dopa/50 decoration-2 underline-offset-4">休み券</a></p></li>
       <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">ほかの機能</p><a href="../today-records/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日の記録</a><a href="../streak/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">連続記録と休み券</a><a href="../tutorial/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">チュートリアル</a></li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><p class="font-mono text-xs text-mute">開発/運用</p><a href="../../devops/firebase/index.html" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">Firebase の準備と運用（関数と Cloud Storage）</a><a href="https://yat-tat-ta.web.app/privacy/" class="mt-1 block font-bold underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">プライバシーポリシー</a></li>
     </ul>
   </section>
 

@@ -10,6 +10,10 @@
   // セッション一覧（新しい順）。新しいセッションは先頭に足す。
   var sessions = [
     {
+      path: "sessions/20261009-1617-link-card/index.html",
+      label: "10/09 LINE と X にリンクカードを出す"
+    },
+    {
       path: "sessions/20261009-1229-share-prompt/index.html",
       label: "10/09 共有を促し、チュートリアルで見せる"
     },

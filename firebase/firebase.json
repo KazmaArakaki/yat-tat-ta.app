@@ -11,6 +11,31 @@
     "ignore": [
       "firebase.json",
       "**/.*"
+    ],
+    "rewrites": [
+      {
+        "source": "/s/**",
+        "function": {
+          "functionId": "share",
+          "region": "asia-northeast1"
+        }
+      }
     ]
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "runtime": "nodejs22",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "*.log",
+        "test"
+      ]
+    }
+  ],
+  "storage": {
+    "rules": "storage.rules"
   }
 }

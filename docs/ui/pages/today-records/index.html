@@ -68,7 +68,7 @@ tailwind.config = {
 <header class="animate-rise">
   <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute">ui / pages / today-records</p>
   <h1 class="mt-2 font-display text-4xl leading-tight sm:text-5xl"><span class="text-dopa">今日の記録</span></h1>
-  <div class="mt-4 max-w-2xl space-y-3 text-sm leading-relaxed text-ink/80"><p>ホームの連続記録の帯の左側（日数と一言）を押すと、下から出すシートです。今日（午前4時区切り）の<a href="../../../glossary.html#record" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録</a>が新しい順に並びます。</p><p>左上の共有のボタンで、<a href="../../../glossary.html#share-card" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日の記録カード</a>を画像にして共有シートに渡します（1度も叩いていない人には出しません）。共有シートで送り終えたら、その日はもう共有の誘いを出しません。このモックでは、押すと渡す画像の見本が出ます。</p><p>このモックでは、行を左へドラッグすると「消す」が出ます。押すと消え、後ろの帯の一言と件数が変わります。全部消すと空のシートになります。</p></div>
+  <div class="mt-4 max-w-2xl space-y-3 text-sm leading-relaxed text-ink/80"><p>ホームの連続記録の帯の左側（日数と一言）を押すと、下から出すシートです。今日（午前4時区切り）の<a href="../../../glossary.html#record" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">記録</a>が新しい順に並びます。</p><p>左上の共有のボタンを押すと、「LINEで共有する」「Xで共有する」「他の方法で共有する」のメニューが出ます（1度も叩いていない人には出しません）。LINE と X には<a href="../../../glossary.html#share-card" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日の記録カード</a>の<a href="../../../glossary.html#link-card" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">リンクカード</a>の URL を、他の方法では縦長の画像を共有シートに渡します。送り終えたら、または LINE か X の投稿画面を開けたら、その日はもう共有の誘いを出しません。このモックでは、メニューを選ぶと渡るものの見本が出ます。</p><p>このモックでは、行を左へドラッグすると「消す」が出ます。押すと消え、後ろの帯の一言と件数が変わります。全部消すと空のシートになります。</p></div>
 </header>
 <div class="mt-10 flex flex-col items-center gap-10 md:flex-row md:items-start md:justify-center">
   <div class="w-[300px] shrink-0 rounded-[2.8rem] border-[6px] border-ink bg-ink p-1.5 shadow-[10px_10px_0_#E5337A] ">
@@ -141,18 +141,41 @@ tailwind.config = {
 </div>
 </article>
 </main>
+<div id="share-menu" class="fixed inset-0 z-50 hidden bg-black/10" role="menu">
+  <div class="absolute left-6 top-24 w-60 overflow-hidden rounded-2xl bg-white/95 text-sm shadow-xl ring-1 ring-black/10 backdrop-blur">
+    <button type="button" data-target="line" class="block w-full px-4 py-3 text-left">LINEで共有する</button>
+    <button type="button" data-target="x" class="block w-full border-t border-black/10 px-4 py-3 text-left">Xで共有する</button>
+    <button type="button" data-target="other" class="block w-full border-t border-black/10 px-4 py-3 text-left">他の方法で共有する</button>
+  </div>
+</div>
 <div id="share-sheet" class="fixed inset-0 z-50 hidden place-items-center bg-black/50 p-6">
-  <div class="w-full max-w-xs rounded-3xl bg-white p-4 text-center">
-    <p class="text-xs font-bold text-mute">共有シートに渡る画像（見本）</p>
-    <img src="../../../sessions/20261009-1053-share-card/card.png" alt="今日の記録カードの見本" class="mt-3 w-full rounded-xl border-2 border-ink">
-    <p class="mt-3 text-[11px] leading-relaxed text-ink/70">Yat Tat Ta で13日連続。食べたら、しゃがんで、叩く。https://yat-tat-ta.web.app</p>
+  <div class="w-full max-w-sm rounded-3xl bg-white p-4 text-center">
+    <p id="share-title" class="text-xs font-bold text-mute"></p>
+    <img id="share-image" src="../../../sessions/20261009-1053-share-card/card.png" alt="" class="mx-auto mt-3 w-full rounded-xl border-2 border-ink">
+    <p id="share-text" class="mt-3 text-[11px] leading-relaxed text-ink/70"></p>
     <button id="share-close" type="button" class="mt-3 w-full rounded-full border-2 border-ink bg-gold py-2 text-sm font-black">閉じる</button>
   </div>
 </div>
 <script>
 (function () {
   var sheet = document.getElementById('share-sheet');
-  document.getElementById('share').addEventListener('click', function () { sheet.classList.remove('hidden'); sheet.classList.add('grid'); });
+  var menu = document.getElementById('share-menu');
+  var samples = {
+    line: ['LINE のトークに出るリンクカード（見本）', '../../../sessions/20261009-1617-link-card/og-ja.png', 'Yat Tat Ta で13日連続。食べたら、しゃがんで、叩く。\nhttps://yat-tat-ta.web.app/s/…'],
+    x: ['X のタイムラインに出るリンクカード（見本）', '../../../sessions/20261009-1617-link-card/og-ja.png', 'Yat Tat Ta で13日連続。食べたら、しゃがんで、叩く。 https://yat-tat-ta.web.app/s/…'],
+    other: ['共有シートに渡る画像（見本）', '../../../sessions/20261009-1053-share-card/card.png', 'Yat Tat Ta で13日連続。食べたら、しゃがんで、叩く。https://yat-tat-ta.web.app']
+  };
+  document.getElementById('share').addEventListener('click', function () { menu.classList.remove('hidden'); });
+  menu.addEventListener('click', function (e) {
+    menu.classList.add('hidden');
+    var t = e.target.closest('[data-target]');
+    if (!t) return;
+    var s = samples[t.dataset.target];
+    document.getElementById('share-title').textContent = s[0];
+    var img = document.getElementById('share-image'); img.src = s[1]; img.alt = s[0];
+    document.getElementById('share-text').textContent = s[2];
+    sheet.classList.remove('hidden'); sheet.classList.add('grid');
+  });
   document.getElementById('share-close').addEventListener('click', function () { sheet.classList.add('hidden'); sheet.classList.remove('grid'); });
   var list = document.getElementById('list');
   function refresh() {

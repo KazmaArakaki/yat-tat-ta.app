@@ -210,9 +210,9 @@ struct HomeView: View {
             scrim
             VStack {
                 Spacer()
-                SharePromptCard(card: model.shareCard) {
-                    withAnimation { model.showsSharePrompt = false }
-                    ShareSheet.present(model.shareCard) { if $0 { model.markShared() } }
+                SharePromptCard(card: model.shareCard) { target in
+                    let shared = await ShareService.share(model.shareCard, to: target)
+                    withAnimation { if shared { model.markShared() } else { model.showsSharePrompt = false } }
                 } decline: {
                     withAnimation { model.declineShare() }
                 }

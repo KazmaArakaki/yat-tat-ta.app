@@ -136,7 +136,7 @@ Yat Tat Ta is an app for logging squats, not a medical app. If your knees or bac
           <tr><td rowspan="2">App 内の管理</td><td>ペアレンタルコントロール</td><td>なし</td><td>年齢で中身を切り替える仕組みがない</td></tr>
           <tr><td>年齢の確認</td><td>なし</td><td>年齢を聞かない</td></tr>
           <tr><td rowspan="5">機能</td><td>制限のない Web アクセス</td><td>なし</td><td>開くのは自分のプライバシーポリシーのページだけ。Safari に渡す</td></tr>
-          <tr><td>ユーザー生成コンテンツ</td><td>なし</td><td>人に見せる投稿がない。<a href="../../features/share-card/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日の記録カード</a>（2026-10-09）を足しても変わらない。Apple の定義は「アプリの一部として、利用者が作った内容を広く配ること」で、カードは iOS の共有シートで別のアプリに渡すだけ。アプリの中で人の画像は配らない（定義は 2026-10-09 に読み直した）</td></tr>
+          <tr><td>ユーザー生成コンテンツ</td><td>なし</td><td>人に見せる投稿がない。<a href="../../features/share-card/index.html" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">今日の記録カード</a>（2026-10-09）を足しても変わらない。Apple の定義は「アプリの一部として、利用者が作った内容を広く配ること」で、カードは iOS の共有シートで別のアプリに渡すだけ。アプリの中で人の画像は配らない（定義は 2026-10-09 に読み直した）。LINE と X の<a href="../../glossary.html#link-card" class="underline decoration-dopa/50 decoration-2 underline-offset-4 hover:decoration-dopa">リンクカード</a>（2026-10-09）でも変わらない。サーバーが受け取るのは数字だけで、画像はサーバーが決まった形で描く。利用者が作った画像や文は受け取らず、配らない</td></tr>
           <tr><td>ソーシャルメディア</td><td>なし</td><td></td></tr>
           <tr><td>メッセージとチャット</td><td>なし</td><td>アプリの中で利用者どうしがやりとりする場所はない。共有シートで渡した先のアプリでのやりとりは、そのアプリの側の話</td></tr>
           <tr><td>広告</td><td>なし</td><td>広告の SDK を入れていない</td></tr>
@@ -219,7 +219,7 @@ Deletion: Settings (gear icon, top right) &gt; Account &gt; Delete Account, or D
           <tr><td><b>コンテンツの権利</b></td><td>他者のコンテンツを含まない</td><td>声と効果音は、商用で配ってよい出どころで開発者が作った（<a href="../sound-assets/index.html" class="lnk">声と効果音の出どころ</a>）</td></tr>
           <tr><td><b>規制対象の医療機器</b></td><td>いいえ</td><td>回数と日時を記録するだけで、体の数値を測らず、診断も治療もしない。運動の記録だけのプログラムは、厚生労働省のガイドラインで医療機器にあたらない例に挙がっている（<a href="../health-wording/index.html#review" class="lnk">健康効果の書き方</a>）。説明文の「医療のためのアプリではありません」とも合う。アプリ情報で聞かれる（2026-10-07）</td></tr>
           <tr><td><b>輸出コンプライアンス</b></td><td>聞かれない</td><td>Info.plist の ITSAppUsesNonExemptEncryption を false にしてある</td></tr>
-          <tr><td><b>App のプライバシー</b></td><td>公開済み</td><td>ユーザ ID とフィットネス、トラッキングなし（<a href="../../sessions/20261007-1215-privacy-policy/index.html#label" class="lnk">プライバシーポリシーを出す</a>）</td></tr>
+          <tr><td><b>App のプライバシー</b></td><td>公開済み</td><td>ユーザ ID とフィットネス、トラッキングなし（<a href="../../sessions/20261007-1215-privacy-policy/index.html#label" class="lnk">プライバシーポリシーを出す</a>）。リンクカードを足しても項目は増えない見込み。送るのはすでに申告しているフィットネスの数字（連続日数とドパ）で、uid は確かめるのに使うだけで画像と結びつけて残さない。出す前に、App Store Connect の答えをもう一度読み直す</td></tr>
           <tr><td><b>ビルド</b></td><td>1.0 (1)</td><td>TestFlight で確かめたもの。スクリーンショットの仕組みは Debug にしか入らないので、撮るために出し直さなくてよい</td></tr>
           <tr><td><b>バージョンの公開</b></td><td>手動で公開</td><td>通ったあと、開発者が公開する日を選ぶ</td></tr>
         </tbody>

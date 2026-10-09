@@ -2935,22 +2935,6 @@
         }
       }
     },
-    "X や LINE に、今日の記録カードを貼れます。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Post today's record card to X, LINE, and more."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "X や LINE に、今日の記録カードを貼れます。"
-          }
-        }
-      }
-    },
     "今日はしない" : {
       "localizations" : {
         "en" : {
@@ -2963,22 +2947,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "今日はしない"
-          }
-        }
-      }
-    },
-    "共有する" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Share"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "共有する"
           }
         }
       }
@@ -3011,6 +2979,70 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "叩いた日は、今日の記録をこのカードにして、X や LINE に貼れます。叩き終わると聞きます。今日の記録の左上からも。"
+          }
+        }
+      }
+    },
+    "LINEで共有する" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share on LINE"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "LINEで共有する"
+          }
+        }
+      }
+    },
+    "Xで共有する" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share on X"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Xで共有する"
+          }
+        }
+      }
+    },
+    "他の方法で共有する" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share Another Way"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "他の方法で共有する"
+          }
+        }
+      }
+    },
+    "Yat Tat Ta で%lld日連続。食べたら、しゃがんで、叩く。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld days in a row on Yat Tat Ta. Eat, squat, tap."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yat Tat Ta で%lld日連続。食べたら、しゃがんで、叩く。"
           }
         }
       }

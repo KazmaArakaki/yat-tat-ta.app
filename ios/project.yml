@@ -21,6 +21,9 @@ targets:
         product: FirebaseFirestore
       - package: Firebase
         product: FirebaseAppCheck
+      # 共有のリンクカードを作る関数を呼ぶ（docs/features/share-card）
+      - package: Firebase
+        product: FirebaseFunctions
     # Sign in with Apple と、App Check の App Attest（Release で使う）
     entitlements:
       path: YatTatTa/YatTatTa.entitlements

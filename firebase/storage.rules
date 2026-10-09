@@ -1,0 +1,12 @@
+rules_version = '2';
+
+// Cloud Storage の決まり（docs/devops/firebase）
+// 置くのは、共有のリンクカードの画像（share/[ハッシュ].png）だけ。書くのも読むのも関数（管理者の権限）だけで、
+// アプリからは直接触らせない。画像は Hosting の /s/ から関数を通して返す。
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

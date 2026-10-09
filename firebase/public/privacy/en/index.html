@@ -17,10 +17,10 @@
 
   <h1>Privacy Policy</h1>
   <p class="date">Effective: October 7, 2026</p>
-  <p class="date">Revised: October 8, 2026</p>
+  <p class="date">Revised: October 9, 2026</p>
 
   <ul class="points">
-    <li>We collect only your account ID and your squat sets. You can use the App without signing in. We never receive your name or email.</li>
+    <li>We collect only your account ID, your squat sets, and the card numbers when you choose to share to LINE or X. You can use the App without signing in. We never receive your name or email.</li>
     <li>Nothing is used for ads, analytics, or tracking, and no other user can see it.</li>
     <li>You can delete all your sets and your account at any time in the app's settings.</li>
   </ul>
@@ -34,6 +34,7 @@
       <tbody>
         <tr><td>Account ID</td><td>The user ID that Firebase Authentication assigns when you first open the App. You do not enter anything for it, and it is not linked to information that identifies you. Only if you sign in with Apple do we also receive a sign-in identifier from Apple. We do not ask Apple for your name or email, and we never receive them.</td></tr>
         <tr><td>Squat sets</td><td>For each set: when you started tapping, the day it counts for, the number of squats, the Dopa earned in Fever Time, and when our server received it.</td></tr>
+        <tr><td>Card numbers when you share to LINE or X</td><td>Only when you tap "Share on LINE" or "Share on X", the App sends the numbers shown on today's record card (the date, your streak, whether you tapped on each of the last 7 days, today's Dopa, and your Dopa for the last 7 days) and your display language. Our server draws the card image from these numbers and puts it at a public URL (https://yat-tat-ta.web.app/s/…). Anyone with the URL can see the image. The image and the URL do not contain your account ID. We check your account ID when the numbers are sent, only to confirm the request comes from the App, and we do not store it with the image. With "Share Another Way", the image is made on your iPhone and nothing is sent to us.</td></tr>
         <tr><td>Connection data</td><td>When the App talks to Firebase, technical data such as your IP address and device type may be processed on Google's servers. We do not collect or use this data per user.</td></tr>
       </tbody>
     </table>
@@ -46,6 +47,7 @@
   <ul>
     <li>To save your squat sets and show the same sets when you switch phones or reinstall the App.</li>
     <li>To keep your account, and to make sure only you can read and write your sets.</li>
+    <li>To draw your record card and show it at a share URL when you choose to share to LINE or X.</li>
     <li>To prevent abuse and keep the App running safely.</li>
   </ul>
   <p>We use it for nothing else. It is never used to show ads, analyze usage, or track you across other apps and websites.</p>
@@ -55,6 +57,7 @@
   <ul>
     <li><b>Cloud Firestore</b> stores your squat sets in Tokyo (asia-northeast1).</li>
     <li><b>Firebase Authentication</b> manages your account ID. It may be processed in Google data centers, including outside Japan.</li>
+    <li><b>Cloud Functions and Cloud Storage</b> draw and store the card images you share to LINE or X, in Tokyo (asia-northeast1). The images may be delivered through Firebase Hosting's network, including outside Japan.</li>
   </ul>
   <p>Google describes how it protects data held in Firebase in its <a href="https://firebase.google.com/terms/data-processing-terms">data processing terms</a>.</p>
   <p>Sign in with Apple is optional and provided by Apple. Apple handles your information under <a href="https://www.apple.com/legal/privacy/">Apple's Privacy Policy</a>.</p>
@@ -63,6 +66,7 @@
   <h2><span class="no">4</span>How long we keep it, and how to delete it</h2>
   <p>We keep your information only while your account exists.</p>
   <p>Tap "Delete Account" in the App's settings to delete all your sets and your account and to disconnect the App from your Apple ID. If you have not signed in with Apple, tap "Delete All Records" to delete all your sets. The emptied anonymous account is deleted, or, if it cannot be deleted, the App stops using it and it remains without any sets attached. Deleted information cannot be restored. It may take some time before it is fully removed from Google's systems.</p>
+  <p>Card images you share to LINE or X are kept so they keep showing in your posts. They do not contain your account ID, so after you delete your account or sets they remain without being linked to anyone. To have a specific image removed, send us its URL at the contact below.</p>
   <p>Signing out does not delete your sets. Sign in again with the same Apple ID to get them back. After you sign out, the App starts over with a new account and no sets.</p>
 
   <h2><span class="no">5</span>Security</h2>

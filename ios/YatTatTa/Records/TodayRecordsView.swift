@@ -8,6 +8,8 @@ import SwiftUI
 struct TodayRecordsView: View {
     let model: AppModel
     @Environment(\.dismiss) private var dismiss
+    /// LINE か X のリンクカードを作っている
+    @State private var sharing = false
 
     var body: some View {
         NavigationStack {
@@ -50,9 +52,21 @@ struct TodayRecordsView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     // 1度も叩いていない人には、出すものがない
-                    if model.ledger.dopaTotal > 0 {
-                        Button {
-                            ShareSheet.present(model.shareCard) { if $0 { model.markShared() } }
+                    if sharing {
+                        ProgressView()
+                    } else if model.ledger.dopaTotal > 0 {
+                        Menu {
+                            ForEach(ShareTarget.allCases, id: \.self) { target in
+                                Button {
+                                    sharing = true
+                                    Task {
+                                        if await ShareService.share(model.shareCard, to: target) { model.markShared() }
+                                        sharing = false
+                                    }
+                                } label: {
+                                    Text(target.title)
+                                }
+                            }
                         } label: {
                             Image(systemName: "square.and.arrow.up")
                         }
