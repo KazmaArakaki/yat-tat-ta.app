@@ -72,7 +72,9 @@ for frame in 0..<frames {
     var index = 0
     for row in 0..<rows {
         for (c, x) in columns.enumerated() {
-            let ankle = CGPoint(x: x - (sleeping ? 10 : 0), y: top + rowStep * CGFloat(row) + (c % 2 == 1 ? rowStep / 2 : 0))
+            let ankle = CGPoint(x: sleeping ? min(max(x - 10, 56), CGFloat(width) - 50) : x,
+                                y: top + rowStep * CGFloat(row) + (c % 2 == 1 ? rowStep / 2 : 0))
+            // 寝ている姿は横に長い（頭が足首の左へ約53、つま先が右へ約47）。絵の端で切れないように寄せる
             // 少しずつ遅れて動く。波のように見せる
             let phase = (CGFloat(frame) / CGFloat(frames) + CGFloat(index) * 0.083).truncatingRemainder(dividingBy: 1)
             let depth = (1 - cos(phase * 2 * .pi)) / 2

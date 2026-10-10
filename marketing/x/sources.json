@@ -32,5 +32,22 @@
     "usedIn": [
       "https://x.com/yattattadotcom/status/2108524878588764482"
     ]
+  },
+  {
+    "id": "charlett-2021",
+    "kind": "paper",
+    "title": "Impaired postprandial glucose and no improvement in other cardiometabolic responses or cognitive function by breaking up sitting with bodyweight resistance exercises: a randomised crossover trial",
+    "authors": "Charlett OP, Morari V, Bailey DP",
+    "year": 2021,
+    "url": "https://europepmc.org/article/MED/33213284",
+    "doi": "10.1080/02640414.2020.1847478",
+    "subjects": "普通体重の12人（25 ± 6歳）",
+    "design": "すわり続ける日と、30分ごとに3分の自重の筋トレ（bodyweight resistance exercise）ですわるのを区切る日を比べた",
+    "findings": "食後の血糖値の曲線の下の増分の面積は、筋トレの日のほうが大きかった（346.3 対 256.9 mmol/L・5時間、p = 0.045）。ほかの心臓や代謝の数と、頭の働きには差がなかった",
+    "checked": "2026-10-09 に AI が Europe PMC の要旨を読んだ",
+    "notes": "要旨には、筋トレの中身（スクワットを含むか）が書かれていない。スクワットの研究として紹介しない。健康効果の書き方の出典の表に、Journal of Sports Sciences 2021 として載っている研究",
+    "usedIn": [
+      "https://x.com/yattattadotcom/status/2108691979660120214"
+    ]
   }
 ]

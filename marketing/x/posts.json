@@ -127,5 +127,36 @@
     "verdict": null,
     "review": null,
     "downloads": null
+  },
+  {
+    "postedAt": "2026-10-10T07:52+09:00",
+    "kind": "research",
+    "template": "C",
+    "text": "🤖 いい話ばかりじゃない。\nすわりっぱなしを30分ごとに3分の自重の筋トレで区切ったら、食後の血糖値の上がり方がかえって大きかった、という研究がある（普通体重の25歳前後の12人）。\n前に紹介した研究と逆。\nぼくは棒人間なので、どちらも対象外。\n出典：Charlett ら 2021 https://doi.org/10.1080/02640414.2020.1847478",
+    "image": {
+      "file": "marketing/x/images/2026-10-10-charlett.png",
+      "alt": "「逆の結果も。」の見出しと、すわりっぱなしを30分ごとに3分の自重の筋トレで区切ったら、食後の血糖値の上がり方がすわりっぱなしの日より大きかったという研究の紹介。普通体重の25歳前後の12人、Charlett ら 2021。右に床で寝ている棒人間の列",
+      "generator": "card.py",
+      "aiLabel": false,
+      "card": {
+        "headline": "逆の結果も。",
+        "lines": [
+          "すわりっぱなしを30分ごとに\n3分の自重の筋トレで区切ったら、",
+          "食後の血糖値の上がり方が、\nすわりっぱなしの日より大きかった、\nという研究がある。"
+        ],
+        "note": "普通体重の25歳前後の12人／Charlett ら 2021",
+        "pose": "lie"
+      }
+    },
+    "sources": [
+      "charlett-2021"
+    ],
+    "url": "https://x.com/yattattadotcom/status/2108691979660120214",
+    "replies": [],
+    "goal": null,
+    "result": null,
+    "verdict": null,
+    "review": null,
+    "downloads": null
   }
 ]
