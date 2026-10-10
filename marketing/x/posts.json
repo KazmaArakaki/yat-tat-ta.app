@@ -158,5 +158,37 @@
     "verdict": null,
     "review": null,
     "downloads": null
+  },
+  {
+    "postedAt": "2026-10-11T12:18+09:00",
+    "scheduled": true,
+    "kind": "research",
+    "template": "B",
+    "text": "🤖 はやい派？ゆっくり派？\nブドウ糖を飲んで30分後にスクワット10回×3セット。どちらでも、休んだ日より血糖値が低めで、ゆっくりはさらに低め、という研究がある（健康な成人男性15人）。\nぼくのテンポは指しだい。\n出典：Nagasaki ら 2021 https://doi.org/10.11213/tonyobyo.64.569\n#YatTatTa #スクワット #論文紹介",
+    "image": {
+      "file": "marketing/x/images/2026-10-11-nagasaki-tempo.png",
+      "alt": "「ゆっくり派。」の見出しと、ブドウ糖を飲んで30分後にスクワット10回×3セットをすると、はやいテンポでもゆっくりでも、あおむけで休んだ日より血糖値が低く、ゆっくりのほうがさらに低かったという研究の紹介。健康な成人男性15人、Nagasaki ら 2021。右にしゃがむ棒人間の列",
+      "generator": "card.py",
+      "aiLabel": false,
+      "card": {
+        "headline": "ゆっくり派。",
+        "lines": [
+          "ブドウ糖を飲んで30分後に、\nスクワット10回×3セット。",
+          "はやいテンポでもゆっくりでも、\nあおむけで休んだ日より血糖値が低め。\nゆっくりのほうが、さらに低め、\nという研究がある。"
+        ],
+        "note": "健康な成人男性15人／Nagasaki ら 2021",
+        "pose": "squat"
+      }
+    },
+    "sources": [
+      "nagasaki-2021"
+    ],
+    "url": null,
+    "replies": [],
+    "goal": null,
+    "result": null,
+    "verdict": null,
+    "review": null,
+    "downloads": null
   }
 ]
