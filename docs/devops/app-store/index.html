@@ -74,7 +74,7 @@ tailwind.config = {
         <tbody class="[&>tr]:border-b [&>tr]:border-rule [&_td]:py-2.5 [&_td]:pr-3 [&_td]:align-top">
           <tr><td><b>名前</b></td><td>Yat Tat Ta</td><td>Yat Tat Ta</td><td class="font-mono text-xs">30</td></tr>
           <tr><td><b>サブタイトル</b></td><td>食べて、しゃがんで、連続タップ。<br><span class="text-xs text-mute">1.2 から（2026-10-09 に開発者が決定）。1.1 までは「食べて、しゃがんで、連続タップ。」。「叩く」では何を叩くか分からないため</span><br><span class="text-xs text-mute">14字。はじめての幕の3つの言葉をつなげた1文</span></td><td>Eat. Squat. Tap for Dopa.<br><span class="text-xs text-mute">25字。2026-10-06 に決めたもの</span></td><td class="font-mono text-xs">30</td></tr>
-          <tr><td><b>プロモーション用テキスト</b></td><td>食後のスクワットが終わったら、回数だけ叩く。叩くたびに CHANCE、激熱!!、FEVER。最後の1打で筋肉確定。地味な20回が、毎回お祭りになります。<br><span class="text-xs text-mute">76字</span></td><td>Done with your after-meal squats? Tap once for every rep. CHANCE!, RED HOT!!, FEVER!!, then one last tap locks it all in. Twenty quiet squats, turned into a party.<br><span class="text-xs text-mute">163字</span></td><td class="font-mono text-xs">170</td></tr>
+          <tr><td><b>プロモーション用テキスト</b></td><td>食後のスクワットが終わったら、回数だけ画面を連続タップ。タップするたびに CHANCE、激熱!!、FEVER。最後の1打で筋肉確定。地味な20回が、毎回お祭りになります。<br><span class="text-xs text-mute">76字</span></td><td>Done with your after-meal squats? Tap once for every rep. CHANCE!, RED HOT!!, FEVER!!, then one last tap locks it all in. Twenty quiet squats, turned into a party.<br><span class="text-xs text-mute">163字</span></td><td class="font-mono text-xs">170</td></tr>
           <tr><td><b>キーワード</b></td><td class="font-mono text-xs">スクワット,食後,運動,習慣,記録,筋トレ,継続,連続記録,カウンター,連打,太もも,毎日,ストリーク,フィットネス,宅トレ<br><span class="font-sans text-mute">62字</span></td><td class="font-mono text-xs">squat,workout,habit,tracker,streak,exercise,fitness,counter,after meal,daily,legs,routine,reps,home<br><span class="font-sans text-mute">99字</span></td><td class="font-mono text-xs">100</td></tr>
           <tr><td><b>カテゴリ</b></td><td colspan="2">プライマリ：ヘルスケア／フィットネス。セカンダリ：エンターテインメント</td><td></td></tr>
           <tr><td><b>サポート URL</b></td><td>https://yat-tat-ta.web.app/</td><td>https://yat-tat-ta.web.app/en/</td><td></td></tr>
@@ -94,16 +94,16 @@ tailwind.config = {
     <div class="mt-6 grid gap-4 lg:grid-cols-2">
       <div class="rounded-2xl border-2 border-ink bg-white p-5">
         <div class="flex items-center justify-between"><p class="font-mono text-xs font-bold text-dopa">日本語</p><button class="copybtn rounded-full border border-ink px-3 py-1 font-mono text-[11px]" data-copy="desc-ja">コピー</button></div>
-        <p id="desc-ja" class="copy-src mt-3 text-sm leading-relaxed">食後に少し体を動かすと、血糖値の上がり方がゆるやかになる、という研究があります。でも、食べたあとにしゃがむのは、地味で、忘れます。Yat Tat Ta は、終わったスクワットの回数だけボタンを叩いて、ドパに変えるアプリです。
+        <p id="desc-ja" class="copy-src mt-3 text-sm leading-relaxed">食後に少し体を動かすと、血糖値の上がり方がゆるやかになる、という研究があります。でも、食べたあとにしゃがむのは、地味で、忘れます。Yat Tat Ta は、終わったスクワットの回数だけ画面を連続タップして、ドパに変えるアプリです。
 
-叩くたびに、画面が騒ぎます。CHANCE、激熱!!、PUSH!!。ときどき FEVER。最後の1打で「筋肉、確定！」の声が鳴り、ねぎらいの一言が出ます。
+タップするたびに、画面が騒ぎます。CHANCE、激熱!!、PUSH!!。ときどき FEVER。最後の1打で「筋肉、確定！」の声が鳴り、ねぎらいの一言が出ます。
 
 ■ できること
-・終わったスクワットの回数だけ叩く。1打がスクワット1回、1ドパ
+・終わったスクワットの回数だけ連続タップ。1回のタップがスクワット1回、1ドパ
 ・続けた日を連続記録に。7日続けるごとに休み券が1枚
 ・直近7日のドパ（DPW）を、前の7日と自己ベストに並べる
 ・いつ何回しゃがんだかを、人形の履歴で見返す
-・まだ叩いていない夜に、1回だけお知らせ
+・まだタップしていない夜に、1回だけお知らせ
 ・Apple でログインすれば、機種を変えても記録はそのまま
 
 Yat Tat Ta はスクワットの回数を記録するアプリで、医療のためのアプリではありません。膝や腰が痛むとき、医師から運動を止められているときは、休んでください。食べてすぐで気分が悪いときは、少し時間をおいてから。持病のある人は、始める前に医師に相談してください。</p>
@@ -199,6 +199,7 @@ Deletion: Settings (gear icon, top right) &gt; Account &gt; Delete Account, or D
           <tr><td>2026-10-08</td><td>1.0 (2)</td><td>承認（2026-10-08、配信可能に）</td><td>ログインせずに始める作り。ビルドを (1) から (2) に差し替え（(1) を「−」で外さないと (2) が選択肢に出ない）、審査メモと説明文を書き換え、下の返信を App Store Connect の審査のメッセージに送った</td></tr>
           <tr><td>2026-10-09</td><td>—</td><td>App Store の URL</td><td><a href="https://apps.apple.com/app/yat-tat-ta/id6819943075" class="underline">apps.apple.com/app/yat-tat-ta/id6819943075</a>（App ID 6819943075）。公開ページ（LP）のいちばん上に「App Store で見る」を置いた。リンクカードを押した人がここから App Store へ進む</td></tr>
           <tr><td>2026-10-09</td><td>1.1 (3)</td><td>承認、配信準備完了（2026-10-09）</td><td>今日の記録カードの共有（LINE、X、他の方法）と共有の誘い、チュートリアルの「記録を貼る」と「記録を残す」の場面。TestFlight で本番のリンクカードを確かめてから出した。新機能の文は「今日の記録をカードにして、LINE や X に貼れるようになりました。叩き終わると、貼るかどうかを聞きます。」「チュートリアルで、記録の貼り方と、Apple でログインして記録を残す方法を案内するようにしました。」。審査メモに、LINE と X は数字だけをサーバーに送り、リンクカードの画像を作る、という段落を足した</td></tr>
+          <tr><td>2026-10-10</td><td>1.2 (4)</td><td>提出、審査待ち</td><td>合言葉を「食べて、しゃがんで、連続タップ。」に改め、サブタイトル、プロモーション用テキスト、説明文の「叩く」を「連続タップ」「タップ」に直した。LINE の共有の文に、7日分の絵文字と今日のドパを足した。新機能の文は「LINE で共有するとき、7日分のマスと今日のドパも、文で送るようにしました。」「合言葉を「食べて、しゃがんで、連続タップ。」に変えました。」</td></tr>
         </tbody>
       </table>
     </div>
