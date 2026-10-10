@@ -275,7 +275,7 @@ App Store：（リンク）</p></div>
     <h3 class="mt-10 font-display text-xl">目標の決め直し</h3>
     <ul class="mt-3 max-w-2xl list-disc space-y-1.5 pl-5 text-sm leading-relaxed">
       <li>宣伝：最初の3本は仮の目標。4本目からは、これまでの宣伝の24時間の数の中央値に1.2を掛ける</li>
-      <li>研究の紹介と小ネタ：最初の1週間（2026-10-08〜10-14）は仮の目標。2週目からは、前の週の中央値に1.2を掛ける</li>
+      <li>研究の紹介と小ネタ：最初の週（2026-10-08〜10-10）は仮の目標。2週目からは、前の週の中央値に1.2を掛ける</li>
       <li>公開日の投稿や、新しい型を試す投稿は、目標を変えてよい。変えた理由を書く</li>
     </ul>
 
@@ -291,11 +291,13 @@ App Store：（リンク）</p></div>
       <li>API が使えないとき：X の Post Analytics の画面の写しを会話に貼ってもらい、写す</li>
     </ul>
 
-    <h3 class="mt-10 font-display text-xl"><a href="../../glossary.html#weekly-review" class="hover:text-dopa">週の振り返り</a>（週に1回、約5分）</h3>
+    <h3 class="mt-10 font-display text-xl"><a href="../../glossary.html#weekly-review" class="hover:text-dopa">週の振り返り</a>（毎週日曜、約5分）</h3>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">週は日曜から土曜まで。日曜に、前の週（日曜〜土曜）を振り返ります（開発者の注文、2026-10-10）。土曜に出た投稿も、日曜には出てからほぼ1日たっています。最初の週だけは短く、10-08（水）〜10-10（土）で、10-11（日）に振り返ります。</p>
     <ol class="mt-3 flex max-w-2xl flex-col gap-2 text-sm">
-      <li class="rounded-2xl border border-rule bg-white p-4"><b>1.</b>　週が終わったら（最初は 10-15）、AI が metrics.py で数を読み、研究の紹介と小ネタのそれぞれで、その週の数の中央値と、フォロワーの週の増えを出す</li>
-      <li class="rounded-2xl border border-rule bg-white p-4"><b>2.</b>　目標と比べて、達成か未達かを書く。型ごとの差も見る（研究の A/B/C、小ネタの 1〜4）</li>
-      <li class="rounded-2xl border border-rule bg-white p-4"><b>3.</b>　次の週に増やす型と減らす型を1つずつ決め、次の週の目標を置く。<code class="font-mono text-xs">marketing/x/weekly.json</code> に残す</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>1. 数を読む</b>　AI が metrics.py で全部の投稿とフォロワーの数を読む</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>2. インプレッションのまとめ</b>　その週の表示の合計、投稿ごとの表示、種類ごと（研究の紹介、小ネタ、宣伝）と型ごとの表示の中央値、フォロワーの増え。前の週と比べる</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>3. 目標と比べる</b>　研究の紹介と小ネタのそれぞれで、表2の数の中央値を出し、達成か未達かを書く。型ごとの差も見る</li>
+      <li class="rounded-2xl border border-rule bg-white p-4"><b>4. 次の週を決める</b>　増やす型と減らす型を1つずつ決め、次の週の目標（中央値の1.2倍）を置く。<code class="font-mono text-xs">marketing/x/weekly.json</code> に残す</li>
     </ol>
   </section>
 
