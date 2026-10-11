@@ -25,7 +25,7 @@
       "follows": null,
       "engagements": 3,
       "detailExpands": 3,
-      "at": "2026-10-09T12:16+0900",
+      "at": "2026-10-11T21:58+0900",
       "note": "X の Post Analytics（ブラウザ版）の画面から。ブックマーク、共有、フォローは画面に出ていなかった",
       "quotes": 0,
       "by": "api"
@@ -62,13 +62,13 @@
     "replies": [],
     "goal": null,
     "result": {
-      "views": 4,
+      "views": 5,
       "likes": 0,
       "reposts": 0,
       "replies": 0,
       "quotes": 0,
       "bookmarks": 0,
-      "at": "2026-10-09T12:16+0900",
+      "at": "2026-10-11T21:58+0900",
       "by": "api"
     },
     "verdict": null,
@@ -91,7 +91,16 @@
     "url": "https://x.com/yattattadotcom/status/2108402824304304329",
     "replies": [],
     "goal": null,
-    "result": null,
+    "result": {
+      "views": 3,
+      "likes": 0,
+      "reposts": 0,
+      "replies": 0,
+      "quotes": 0,
+      "bookmarks": 0,
+      "at": "2026-10-11T21:58+0900",
+      "by": "api"
+    },
     "verdict": null,
     "review": null,
     "downloads": null
@@ -123,7 +132,16 @@
     "url": "https://x.com/yattattadotcom/status/2108524878588764482",
     "replies": [],
     "goal": null,
-    "result": null,
+    "result": {
+      "views": 2,
+      "likes": 0,
+      "reposts": 0,
+      "replies": 0,
+      "quotes": 0,
+      "bookmarks": 0,
+      "at": "2026-10-11T21:58+0900",
+      "by": "api"
+    },
     "verdict": null,
     "review": null,
     "downloads": null
@@ -154,7 +172,16 @@
     "url": "https://x.com/yattattadotcom/status/2108691979660120214",
     "replies": [],
     "goal": null,
-    "result": null,
+    "result": {
+      "views": 2,
+      "likes": 0,
+      "reposts": 0,
+      "replies": 0,
+      "quotes": 0,
+      "bookmarks": 0,
+      "at": "2026-10-11T21:58+0900",
+      "by": "api"
+    },
     "verdict": null,
     "review": null,
     "downloads": null

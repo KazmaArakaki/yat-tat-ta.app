@@ -13,15 +13,79 @@
         "basis": "最初の1週間の仮の目標。根拠はない。投稿ごとのフォローとプロフィールへのアクセスは取れないので、フォロワーの週の増えに替えた（2026-10-09）"
       }
     },
-    "medians": null,
-    "verdict": null,
-    "review": null,
+    "medians": {
+      "research": {
+        "bookmarks": 0,
+        "quotes": 0
+      },
+      "chat": {
+        "replies": 0,
+        "followersGain": 0
+      }
+    },
+    "verdict": {
+      "research": "未達",
+      "chat": "未達"
+    },
+    "review": {
+      "reason": "フォロワー0のため、表示はプロフィールや検索から来た数件だけ。中身の良し悪しを測れるほど表示が届いていない。型ごとの差（2〜7）は数が小さすぎて誤差",
+      "increase": "小ネタ 2（7表示で一番多かった。誤差の範囲だが、次の週の小ネタはこの型にする）",
+      "decrease": "研究の紹介 C（逆の結果の紹介。2表示。数字が要旨の読み方に頼るので、届く前は後回し）",
+      "nextChange": "10-11 からハッシュタグを付け始めた。次の週は付けた投稿と前の週（タグなし、中央値 研究2・小ネタ5）を比べる"
+    },
     "followers": [
       {
         "at": "2026-10-09T12:16+0900",
         "count": 0
+      },
+      {
+        "at": "2026-10-11T21:58+0900",
+        "count": 0
       }
     ],
-    "note": "最初の週だけ水曜から土曜まで。2週目からは日曜〜土曜で、日曜に前の週を振り返る（2026-10-10、開発者の注文）"
+    "note": "最初の週だけ水曜から土曜まで。2週目からは日曜〜土曜で、日曜に前の週を振り返る（2026-10-10、開発者の注文）",
+    "summary": {
+      "viewsTotal": 19,
+      "posts": 5,
+      "viewsMedian": {
+        "research": 2,
+        "chat": 5
+      },
+      "viewsByTemplate": {
+        "research A": 5,
+        "research B": 2,
+        "research C": 2,
+        "chat 1": 3,
+        "chat 2": 7
+      },
+      "followersGain": 0,
+      "engagementTotal": 0,
+      "at": "2026-10-11T21:58+0900"
+    }
+  },
+  {
+    "week": "2026-10-11/2026-10-17",
+    "goals": {
+      "research": {
+        "bookmarks": 5,
+        "quotes": 1,
+        "basis": "前の週の中央値が0なので、仮の目標を据え置く（2026-10-11）"
+      },
+      "chat": {
+        "replies": 1,
+        "followersGain": 5,
+        "basis": "前の週の中央値が0なので、仮の目標を据え置く（2026-10-11）"
+      }
+    },
+    "medians": null,
+    "verdict": null,
+    "review": null,
+    "summary": null,
+    "followers": [
+      {
+        "at": "2026-10-11T21:58+0900",
+        "count": 0
+      }
+    ]
   }
 ]
