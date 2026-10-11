@@ -43,7 +43,7 @@ description: X のアカウント @yattattadotcom の投稿と返事の下書き
    - 確かめる材料（紹介なら：出典のリンク、対象、要旨のどこから取った数字か）
    - 目標：宣伝ならその投稿の目標と根拠、ほかは今週の目標
    - 点検の結果
-8. **出したと言われたら記録する。** 開発者に投稿の URL を聞き、posts.json に1件足す。予約投稿なら、予約した時刻を postedAt に、`"scheduled": true`、url を null にして先に足し、公開後に URL を書き足す。sources の usedIn も、URL が分かってから足す。紹介なら、使ったストックの `usedIn` に URL を足す。開発者が半分以上書き直していたら、🤖 を外したかを確かめ、kind を `developer` にする。
+8. **出したと言われたら記録する。** 開発者に投稿の URL を聞き、posts.json に1件足す。予約投稿なら、予約した時刻を postedAt に、`"scheduled": true`、url を null にして先に足す。公開後の URL は開発者に聞かず、`python3 marketing/x/metrics.py` がアカウントの投稿の一覧から出た時刻（分まで）で突き合わせて埋め、sources の usedIn にも足す。見つからなかったときだけ開発者に聞く。紹介なら、使ったストックの `usedIn` に URL を足す。開発者が半分以上書き直していたら、🤖 を外したかを確かめ、kind を `developer` にする。
 
 ## 固定ポストを頼まれたとき
 

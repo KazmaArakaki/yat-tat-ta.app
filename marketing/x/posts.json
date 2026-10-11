@@ -25,7 +25,7 @@
       "follows": null,
       "engagements": 3,
       "detailExpands": 3,
-      "at": "2026-10-11T21:58+0900",
+      "at": "2026-10-11T22:06+0900",
       "note": "X の Post Analytics（ブラウザ版）の画面から。ブックマーク、共有、フォローは画面に出ていなかった",
       "quotes": 0,
       "by": "api"
@@ -68,7 +68,7 @@
       "replies": 0,
       "quotes": 0,
       "bookmarks": 0,
-      "at": "2026-10-11T21:58+0900",
+      "at": "2026-10-11T22:06+0900",
       "by": "api"
     },
     "verdict": null,
@@ -98,7 +98,7 @@
       "replies": 0,
       "quotes": 0,
       "bookmarks": 0,
-      "at": "2026-10-11T21:58+0900",
+      "at": "2026-10-11T22:06+0900",
       "by": "api"
     },
     "verdict": null,
@@ -139,7 +139,7 @@
       "replies": 0,
       "quotes": 0,
       "bookmarks": 0,
-      "at": "2026-10-11T21:58+0900",
+      "at": "2026-10-11T22:06+0900",
       "by": "api"
     },
     "verdict": null,
@@ -179,7 +179,7 @@
       "replies": 0,
       "quotes": 0,
       "bookmarks": 0,
-      "at": "2026-10-11T21:58+0900",
+      "at": "2026-10-11T22:06+0900",
       "by": "api"
     },
     "verdict": null,
@@ -188,7 +188,7 @@
   },
   {
     "postedAt": "2026-10-11T12:18+09:00",
-    "scheduled": true,
+    "scheduled": false,
     "kind": "research",
     "template": "B",
     "text": "🤖 はやい派？ゆっくり派？\nブドウ糖を飲んで30分後にスクワット10回×3セット。どちらでも、休んだ日より血糖値が低めで、ゆっくりはさらに低め、という研究がある（健康な成人男性15人）。\nぼくのテンポは指しだい。\n出典：Nagasaki ら 2021 https://doi.org/10.11213/tonyobyo.64.569\n#YatTatTa #スクワット #論文紹介",
@@ -210,10 +210,19 @@
     "sources": [
       "nagasaki-2021"
     ],
-    "url": null,
+    "url": "https://x.com/yattattadotcom/status/2109121308722151843",
     "replies": [],
     "goal": null,
-    "result": null,
+    "result": {
+      "views": 0,
+      "likes": 0,
+      "reposts": 0,
+      "replies": 0,
+      "quotes": 0,
+      "bookmarks": 0,
+      "at": "2026-10-11T22:06+0900",
+      "by": "api"
+    },
     "verdict": null,
     "review": null,
     "downloads": null
