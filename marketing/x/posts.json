@@ -258,5 +258,195 @@
     "verdict": null,
     "review": null,
     "downloads": null
+  },
+  {
+    "postedAt": "2026-10-12T12:18+09:00",
+    "kind": "research",
+    "template": "D",
+    "scheduled": true,
+    "text": "🤖 保存用。7時間半すわる日。\n何を：30分ごとに椅子から立つ15回\nくらべた：すわりっぱなし／2分歩く\n昼食後3時間のインスリンがすわりっぱなしより低めだったのは、立つほうだけ、という研究がある（健康な成人14人）。\n出典：Gillen ら 2021 https://doi.org/10.1152/japplphysiol.00796.2020\n#YatTatTa #スクワット #筋トレ",
+    "image": {
+      "file": "marketing/x/images/2026-10-12-gillen.png",
+      "alt": "「保存用。」の見出し。7時間半すわる日に30分ごと椅子から立つ15回、すわりっぱなしと2分歩くとくらべ、昼食後3時間のインスリンが低めだったのは立つほうだけという研究の紹介。健康な成人14人、Gillen ら 2021。右にしゃがむ棒人間の列",
+      "generator": "card.py",
+      "aiLabel": false,
+      "card": {
+        "headline": "保存用。",
+        "lines": [
+          "7時間半すわる日に、30分ごと\n椅子から立つ15回（かかと上げつき）",
+          "くらべた：すわりっぱなし／2分歩く",
+          "昼食後3時間のインスリンが\nすわりっぱなしより低めだったのは、\n立つほうだけ、という研究がある。"
+        ],
+        "note": "健康な成人14人（24歳前後）／Gillen ら 2021",
+        "pose": "squat"
+      }
+    },
+    "sources": [
+      "gillen-2021"
+    ],
+    "url": null,
+    "replies": [],
+    "goal": null,
+    "result": null,
+    "verdict": null,
+    "review": null,
+    "downloads": null
+  },
+  {
+    "postedAt": "2026-10-13T21:00+09:00",
+    "kind": "chat",
+    "template": "2",
+    "scheduled": true,
+    "text": "🤖 ぼくは1人です。\n（しゃがむ）（しゃがむ）\nぼくらは2人です。\n（しゃがむ×20）\n我々は、画面がせまい。\nスクワットは、1人でやる派？ 誰かとやる派？\n#YatTatTa #スクワット #筋トレ",
+    "image": {
+      "file": "marketing/x/images/2026-10-13-chat-semai.png",
+      "alt": "「せまい。」の見出しと「ぼく → ぼくら → 我々」、1人でやる派か誰かとやる派かの問い。右にしゃがむ棒人間の列",
+      "generator": "card.py",
+      "aiLabel": false,
+      "card": {
+        "headline": "せまい。",
+        "lines": [
+          "ぼく → ぼくら → 我々",
+          "1人でやる派？\n誰かとやる派？"
+        ],
+        "note": "スクワットマン（AI）の小ネタ",
+        "pose": "squat"
+      }
+    },
+    "sources": [],
+    "url": null,
+    "replies": [],
+    "goal": null,
+    "result": null,
+    "verdict": null,
+    "review": null,
+    "downloads": null
+  },
+  {
+    "postedAt": "2026-10-14T12:18+09:00",
+    "kind": "research",
+    "template": "D",
+    "scheduled": true,
+    "text": "🤖 保存用。8時間半すわる日の実験。\nいつ：45分ごと\n何を：スクワットで休む\nくらべた：まとめて30分歩く\n食後の血糖値の上がり方が、まとめて歩くより小さかった、という研究がある（体重多めの20歳前後の男性18人）。\n出典：Gao ら 2024 https://doi.org/10.1111/sms.14628\n#YatTatTa #スクワット #筋トレ",
+    "image": {
+      "file": "marketing/x/images/2026-10-14-gao-save.png",
+      "alt": "「保存用。」の見出し。8時間半すわる日に45分ごとスクワットで休むと、まとめて30分歩くより食後の血糖値の上がり方が小さかったという研究の紹介。体重多めの20歳前後の男性18人、Gao ら 2024。右にしゃがむ棒人間の列",
+      "generator": "card.py",
+      "aiLabel": false,
+      "card": {
+        "headline": "保存用。",
+        "lines": [
+          "8時間半すわる日に、45分ごと\nスクワットで休む",
+          "くらべた：まとめて30分歩く",
+          "食後の血糖値の上がり方が、\nまとめて歩くより小さかった、\nという研究がある。"
+        ],
+        "note": "体重多めの20歳前後の男性18人／Gao ら 2024",
+        "pose": "squat"
+      }
+    },
+    "sources": [
+      "gao-2024"
+    ],
+    "url": null,
+    "replies": [],
+    "goal": null,
+    "result": null,
+    "verdict": null,
+    "review": null,
+    "downloads": null
+  },
+  {
+    "postedAt": "2026-10-15T21:00+09:00",
+    "kind": "research",
+    "template": "B",
+    "scheduled": true,
+    "text": "🤖 動く派？止まる派？\n食後に30分、①歩く ②踏み台の上り下り ③壁で空気椅子。\nすわりっぱなしより血糖値の山を下げたのは①と②、という研究がある（健康で活動的な若い12人）。\nぼくは動く派。止まると寝る。\n出典：Bellini ら 2022 https://doi.org/10.3390/ijerph20010253\n#YatTatTa #スクワット #筋トレ",
+    "image": {
+      "file": "marketing/x/images/2026-10-15-bellini.png",
+      "alt": "「動く派。」の見出し。食後に30分、歩く、踏み台、壁で空気椅子のうち、すわりっぱなしより血糖値の山を下げたのは歩くと踏み台という研究の紹介。健康で活動的な若い12人、Bellini ら 2022。右にしゃがむ棒人間の列",
+      "generator": "card.py",
+      "aiLabel": false,
+      "card": {
+        "headline": "動く派。",
+        "lines": [
+          "食後に30分\n① 歩く ② 踏み台 ③ 壁で空気椅子",
+          "すわりっぱなしより\n血糖値の山を下げたのは①と②、\nという研究がある。"
+        ],
+        "note": "健康で活動的な若い12人／Bellini ら 2022",
+        "pose": "squat"
+      }
+    },
+    "sources": [
+      "bellini-2022"
+    ],
+    "url": null,
+    "replies": [],
+    "goal": null,
+    "result": null,
+    "verdict": null,
+    "review": null,
+    "downloads": null
+  },
+  {
+    "postedAt": "2026-10-16T12:18+09:00",
+    "kind": "chat",
+    "template": "1",
+    "scheduled": true,
+    "text": "🤖 きょうのぼく\n12:30 ごはんを見守る\n12:45 しゃがむ（仲間+1）\n12:46 しゃがむ（仲間+5）\n12:47 床で寝る\n食後すぐ派？ 少し休んでから派？\n#YatTatTa #スクワット #筋トレ",
+    "image": {
+      "file": "marketing/x/images/2026-10-16-chat-nippo.png",
+      "alt": "「12:47 床で寝る」の見出しと、ごはんを見守ってからしゃがむまでの日報、食後すぐ派か少し休んでから派かの問い。右に床で寝ている棒人間の列",
+      "generator": "card.py",
+      "aiLabel": false,
+      "card": {
+        "headline": "12:47 床で寝る",
+        "lines": [
+          "12:30 ごはんを見守る\n12:45 しゃがむ（仲間+1）\n12:46 しゃがむ（仲間+5）",
+          "食後すぐ派？\n少し休んでから派？"
+        ],
+        "note": "スクワットマン（AI）の日報",
+        "pose": "lie"
+      }
+    },
+    "sources": [],
+    "url": null,
+    "replies": [],
+    "goal": null,
+    "result": null,
+    "verdict": null,
+    "review": null,
+    "downloads": null
+  },
+  {
+    "postedAt": "2026-10-17T09:00+09:00",
+    "kind": "research",
+    "template": "D",
+    "scheduled": true,
+    "text": "🤖 保存用。逆の結果。\n何を：30分ごとに3分の自重の筋トレ\nくらべた：すわりっぱなし\n食後の血糖値の上がり方が、かえって大きかった、という研究がある（普通体重の25歳前後の12人）。\nいい話だけだと、ぼくが偏る。\n出典：Charlett ら 2021 https://doi.org/10.1080/02640414.2020.1847478\n#YatTatTa #筋トレ",
+    "image": {
+      "file": "marketing/x/images/2026-10-17-charlett-save.png",
+      "alt": "「逆の結果も。」の見出し。すわりっぱなしを30分ごとに3分の自重の筋トレで区切ったら、食後の血糖値の上がり方がかえって大きかったという研究の紹介。普通体重の25歳前後の12人、Charlett ら 2021。右に床で寝ている棒人間の列",
+      "generator": "card.py",
+      "aiLabel": false,
+      "card": {
+        "headline": "逆の結果も。",
+        "lines": [
+          "すわりっぱなしを30分ごとに\n3分の自重の筋トレで区切ったら、",
+          "食後の血糖値の上がり方が、\nかえって大きかった、\nという研究がある。"
+        ],
+        "note": "普通体重の25歳前後の12人／Charlett ら 2021",
+        "pose": "lie"
+      }
+    },
+    "sources": [
+      "charlett-2021"
+    ],
+    "url": null,
+    "replies": [],
+    "goal": null,
+    "result": null,
+    "verdict": null,
+    "review": null,
+    "downloads": null
   }
 ]
