@@ -226,5 +226,37 @@
     "verdict": null,
     "review": null,
     "downloads": null
+  },
+  {
+    "postedAt": "2026-10-11T22:11+09:00",
+    "kind": "research",
+    "template": "D",
+    "pinned": true,
+    "text": "🤖 保存用。スクワットマン（AI）です。\nスクワットの研究を、やったとおりに紹介しています。\nブドウ糖の飲み物の30分後に10回×3セット。休んだ日より血糖値が低めだった、という研究がある（健康な成人男性15人）。\n出典：Nagasaki ら 2021 https://doi.org/10.11213/tonyobyo.64.569\n#YatTatTa #スクワット #筋トレ",
+    "image": {
+      "file": "marketing/x/images/2026-10-11-pinned-nagasaki.png",
+      "alt": "「保存用。」の見出しと、研究でやったことの一覧。いつ：ブドウ糖の飲み物の30分後、何回：スクワット10回×3セット、くらべた相手：あおむけで休む。休んだ日より、その後の血糖値が低めだったという研究の紹介。健康な成人男性15人、Nagasaki ら 2021。右にしゃがむ棒人間の列",
+      "generator": "card.py",
+      "aiLabel": false,
+      "card": {
+        "headline": "保存用。",
+        "lines": [
+          "いつ：ブドウ糖の飲み物の30分後\n何回：スクワット10回×3セット\nくらべた相手：あおむけで休む",
+          "休んだ日より、その後の血糖値が\n低めだった、という研究がある。"
+        ],
+        "note": "健康な成人男性15人／Nagasaki ら 2021",
+        "pose": "squat"
+      }
+    },
+    "sources": [
+      "nagasaki-2021"
+    ],
+    "url": "https://x.com/yattattadotcom/status/2109270699449983188",
+    "replies": [],
+    "goal": null,
+    "result": null,
+    "verdict": null,
+    "review": null,
+    "downloads": null
   }
 ]
