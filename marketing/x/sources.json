@@ -51,5 +51,35 @@
     "usedIn": [
       "https://x.com/yattattadotcom/status/2108691979660120214"
     ]
+  },
+  {
+    "id": "gillen-2021",
+    "kind": "paper",
+    "title": "Interrupting prolonged sitting with repeated chair stands or short walks reduces postprandial insulinemia in healthy adults",
+    "authors": "Gillen JB, Estafanos S, Williamson E, Hodson N, Malowany JM, Kumbhare D, Moore DR",
+    "year": 2021,
+    "url": "https://pubmed.ncbi.nlm.nih.gov/33180640/",
+    "doi": "10.1152/japplphysiol.00796.2020",
+    "subjects": "健康な成人14人（男女7人ずつ、24 ± 5歳）",
+    "design": "7.5時間の3通りをくらべた：すわりっぱなし、30分ごとに2分歩く、30分ごとに椅子から立つ15回（かかと上げつき、約1分）。朝と昼に液体の食事",
+    "findings": "朝食のあとは差がなかった。昼食のあと、インスリンの山は立つ日と歩く日の両方で低め。昼食後1時間のインスリンの面積は両方で低め、3時間では立つ日だけ低め（すわりっぱなし比 24%）。筋肉の糖の取り込みの目印には差がなかった",
+    "checked": "2026-10-11 に AI が PubMed の要旨（E-utilities）を読んだ",
+    "notes": "血糖値ではなくインスリンの結果。血糖値が下がったとは書かない。％は投稿に書かない",
+    "usedIn": []
+  },
+  {
+    "id": "bellini-2022",
+    "kind": "paper",
+    "title": "Walking Attenuates Postprandial Glycemic Response: What Else Can We Do without Leaving Home or the Office?",
+    "authors": "Bellini A, Nicolò A, Rocchi JE, Bazzucchi I, Sacchetti M",
+    "year": 2022,
+    "url": "https://pubmed.ncbi.nlm.nih.gov/36612575/",
+    "doi": "10.3390/ijerph20010253",
+    "subjects": "健康で活動的な若い人。研究1が12人、研究2が11人",
+    "design": "炭水化物の多い食事のあと30分。研究1は、歩く、踏み台の上り下り、壁にもたれて止まるスクワット、すわりっぱなし。研究2は歩くと電気刺激",
+    "findings": "研究1で、すわりっぱなしより血糖値の山を下げたと書かれているのは、歩くと踏み台。止まるスクワットは、下げたものに挙がっていない。結論は、歩くのがいちばん",
+    "checked": "2026-10-11 に AI が PubMed の要旨（E-utilities）を読んだ",
+    "notes": "止まるスクワットに差がなかったとは、要旨ではっきりとは書かれていない（下げたものに入っていないだけ）。「効かなかった」と書かず「下げたのは①と②」と書く",
+    "usedIn": []
   }
 ]
