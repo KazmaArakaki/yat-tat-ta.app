@@ -77,10 +77,54 @@
         "basis": "前の週の中央値が0なので、仮の目標を据え置く（2026-10-11）"
       }
     },
-    "medians": null,
-    "verdict": null,
-    "review": null,
-    "summary": null,
+    "medians": {
+      "research": {
+        "bookmarks": 0,
+        "quotes": 0
+      },
+      "chat": {
+        "replies": 0,
+        "followersGain": 0
+      }
+    },
+    "verdict": {
+      "research": "未達",
+      "chat": "未達"
+    },
+    "review": {
+      "reason": "表示が前の週の19から6に減り、1本あたり10を超えた投稿はなかった。二択の小ネタに返信は付かず、固定ポストのあともフォロワーは0のまま。予約で出した6本は表示0〜1で、届いていない。型の良し悪しを言える数ではない。開発者の返信（outreach）は記録が0件で、表4のいちばん効くはずの手がまだ動いていない",
+      "increase": "小ネタ 1（ト書き日報。予約の6本のうち表示が付いた唯一の投稿。誤差の範囲だが、次の週の小ネタはこの型にする）",
+      "decrease": "研究の紹介 B（〇〇派と〇〇派。2本で表示1と0。型D と中身が重なるので、紹介は型D と A に寄せる）",
+      "nextChange": "ハッシュタグを付けても表示は増えなかった（タグなしの前の週は中央値 研究2・小ネタ5、タグありのこの週は研究0・小ネタ0.5）。次の週は、開発者の返信（outreach）を posts.json に記録し、返信した日と表示の動きを比べる"
+    },
+    "summary": {
+      "viewsTotal": 6,
+      "posts": 8,
+      "viewsMedian": {
+        "research": 0,
+        "chat": 0.5
+      },
+      "viewsByTemplate": {
+        "research B": 0.5,
+        "research D": 0,
+        "chat 1": 1,
+        "chat 2": 0
+      },
+      "viewsByPost": {
+        "2026-10-11 research B": 1,
+        "2026-10-11 research D（固定）": 4,
+        "2026-10-12 research D": 0,
+        "2026-10-13 chat 2": 0,
+        "2026-10-14 research D": 0,
+        "2026-10-15 research B": 0,
+        "2026-10-16 chat 1": 1,
+        "2026-10-17 research D": 0
+      },
+      "followersGain": 0,
+      "engagementTotal": 0,
+      "outreach": 0,
+      "at": "2026-10-19T10:59+0900"
+    },
     "followers": [
       {
         "at": "2026-10-11T21:58+0900",
@@ -88,6 +132,35 @@
       },
       {
         "at": "2026-10-11T22:06+0900",
+        "count": 0
+      },
+      {
+        "at": "2026-10-19T10:59+0900",
+        "count": 0
+      }
+    ]
+  },
+  {
+    "week": "2026-10-18/2026-10-24",
+    "goals": {
+      "research": {
+        "bookmarks": 5,
+        "quotes": 1,
+        "basis": "前の週の中央値が0なので、仮の目標を据え置く（2026-10-19）"
+      },
+      "chat": {
+        "replies": 1,
+        "followersGain": 5,
+        "basis": "前の週の中央値が0なので、仮の目標を据え置く（2026-10-19）"
+      }
+    },
+    "medians": null,
+    "verdict": null,
+    "review": null,
+    "summary": null,
+    "followers": [
+      {
+        "at": "2026-10-19T10:59+0900",
         "count": 0
       }
     ]

@@ -25,7 +25,7 @@
       "follows": null,
       "engagements": 3,
       "detailExpands": 3,
-      "at": "2026-10-11T22:06+0900",
+      "at": "2026-10-19T10:59+0900",
       "note": "X の Post Analytics（ブラウザ版）の画面から。ブックマーク、共有、フォローは画面に出ていなかった",
       "quotes": 0,
       "by": "api"
@@ -68,7 +68,7 @@
       "replies": 0,
       "quotes": 0,
       "bookmarks": 0,
-      "at": "2026-10-11T22:06+0900",
+      "at": "2026-10-19T10:59+0900",
       "by": "api"
     },
     "verdict": null,
@@ -98,7 +98,7 @@
       "replies": 0,
       "quotes": 0,
       "bookmarks": 0,
-      "at": "2026-10-11T22:06+0900",
+      "at": "2026-10-19T10:59+0900",
       "by": "api"
     },
     "verdict": null,
@@ -139,7 +139,7 @@
       "replies": 0,
       "quotes": 0,
       "bookmarks": 0,
-      "at": "2026-10-11T22:06+0900",
+      "at": "2026-10-19T10:59+0900",
       "by": "api"
     },
     "verdict": null,
@@ -179,7 +179,7 @@
       "replies": 0,
       "quotes": 0,
       "bookmarks": 0,
-      "at": "2026-10-11T22:06+0900",
+      "at": "2026-10-19T10:59+0900",
       "by": "api"
     },
     "verdict": null,
@@ -214,13 +214,13 @@
     "replies": [],
     "goal": null,
     "result": {
-      "views": 0,
+      "views": 1,
       "likes": 0,
       "reposts": 0,
       "replies": 0,
       "quotes": 0,
       "bookmarks": 0,
-      "at": "2026-10-11T22:06+0900",
+      "at": "2026-10-19T10:59+0900",
       "by": "api"
     },
     "verdict": null,
@@ -254,7 +254,16 @@
     "url": "https://x.com/yattattadotcom/status/2109270699449983188",
     "replies": [],
     "goal": null,
-    "result": null,
+    "result": {
+      "views": 4,
+      "likes": 0,
+      "reposts": 0,
+      "replies": 0,
+      "quotes": 0,
+      "bookmarks": 0,
+      "at": "2026-10-19T10:59+0900",
+      "by": "api"
+    },
     "verdict": null,
     "review": null,
     "downloads": null
@@ -263,7 +272,7 @@
     "postedAt": "2026-10-12T12:18+09:00",
     "kind": "research",
     "template": "D",
-    "scheduled": true,
+    "scheduled": false,
     "text": "🤖 保存用。7時間半すわる日。\n何を：30分ごとに椅子から立つ15回\nくらべた：すわりっぱなし／2分歩く\n昼食後3時間のインスリンがすわりっぱなしより低めだったのは、立つほうだけ、という研究がある（健康な成人14人）。\n出典：Gillen ら 2021 https://doi.org/10.1152/japplphysiol.00796.2020\n#YatTatTa #スクワット #筋トレ",
     "image": {
       "file": "marketing/x/images/2026-10-12-gillen.png",
@@ -284,10 +293,19 @@
     "sources": [
       "gillen-2021"
     ],
-    "url": null,
+    "url": "https://x.com/yattattadotcom/status/2109483696474476979",
     "replies": [],
     "goal": null,
-    "result": null,
+    "result": {
+      "views": 0,
+      "likes": 0,
+      "reposts": 0,
+      "replies": 0,
+      "quotes": 0,
+      "bookmarks": 0,
+      "at": "2026-10-19T10:59+0900",
+      "by": "api"
+    },
     "verdict": null,
     "review": null,
     "downloads": null
@@ -296,7 +314,7 @@
     "postedAt": "2026-10-13T21:00+09:00",
     "kind": "chat",
     "template": "2",
-    "scheduled": true,
+    "scheduled": false,
     "text": "🤖 ぼくは1人です。\n（しゃがむ）（しゃがむ）\nぼくらは2人です。\n（しゃがむ×20）\n我々は、画面がせまい。\nスクワットは、1人でやる派？ 誰かとやる派？\n#YatTatTa #スクワット #筋トレ",
     "image": {
       "file": "marketing/x/images/2026-10-13-chat-semai.png",
@@ -314,10 +332,19 @@
       }
     },
     "sources": [],
-    "url": null,
+    "url": "https://x.com/yattattadotcom/status/2109977464302977337",
     "replies": [],
     "goal": null,
-    "result": null,
+    "result": {
+      "views": 0,
+      "likes": 0,
+      "reposts": 0,
+      "replies": 0,
+      "quotes": 0,
+      "bookmarks": 0,
+      "at": "2026-10-19T10:59+0900",
+      "by": "api"
+    },
     "verdict": null,
     "review": null,
     "downloads": null
@@ -326,7 +353,7 @@
     "postedAt": "2026-10-14T12:18+09:00",
     "kind": "research",
     "template": "D",
-    "scheduled": true,
+    "scheduled": false,
     "text": "🤖 保存用。8時間半すわる日の実験。\nいつ：45分ごと\n何を：スクワットで休む\nくらべた：まとめて30分歩く\n食後の血糖値の上がり方が、まとめて歩くより小さかった、という研究がある（体重多めの20歳前後の男性18人）。\n出典：Gao ら 2024 https://doi.org/10.1111/sms.14628\n#YatTatTa #スクワット #筋トレ",
     "image": {
       "file": "marketing/x/images/2026-10-14-gao-save.png",
@@ -347,10 +374,19 @@
     "sources": [
       "gao-2024"
     ],
-    "url": null,
+    "url": "https://x.com/yattattadotcom/status/2110208472369561858",
     "replies": [],
     "goal": null,
-    "result": null,
+    "result": {
+      "views": 0,
+      "likes": 0,
+      "reposts": 0,
+      "replies": 0,
+      "quotes": 0,
+      "bookmarks": 0,
+      "at": "2026-10-19T10:59+0900",
+      "by": "api"
+    },
     "verdict": null,
     "review": null,
     "downloads": null
@@ -359,7 +395,7 @@
     "postedAt": "2026-10-15T21:00+09:00",
     "kind": "research",
     "template": "B",
-    "scheduled": true,
+    "scheduled": false,
     "text": "🤖 動く派？止まる派？\n食後に30分、①歩く ②踏み台の上り下り ③壁で空気椅子。\nすわりっぱなしより血糖値の山を下げたのは①と②、という研究がある（健康で活動的な若い12人）。\nぼくは動く派。止まると寝る。\n出典：Bellini ら 2022 https://doi.org/10.3390/ijerph20010253\n#YatTatTa #スクワット #筋トレ",
     "image": {
       "file": "marketing/x/images/2026-10-15-bellini.png",
@@ -379,10 +415,19 @@
     "sources": [
       "bellini-2022"
     ],
-    "url": null,
+    "url": "https://x.com/yattattadotcom/status/2110702241548231117",
     "replies": [],
     "goal": null,
-    "result": null,
+    "result": {
+      "views": 0,
+      "likes": 0,
+      "reposts": 0,
+      "replies": 0,
+      "quotes": 0,
+      "bookmarks": 0,
+      "at": "2026-10-19T10:59+0900",
+      "by": "api"
+    },
     "verdict": null,
     "review": null,
     "downloads": null
@@ -391,7 +436,7 @@
     "postedAt": "2026-10-16T12:18+09:00",
     "kind": "chat",
     "template": "1",
-    "scheduled": true,
+    "scheduled": false,
     "text": "🤖 きょうのぼく\n12:30 ごはんを見守る\n12:45 しゃがむ（仲間+1）\n12:46 しゃがむ（仲間+5）\n12:47 床で寝る\n食後すぐ派？ 少し休んでから派？\n#YatTatTa #スクワット #筋トレ",
     "image": {
       "file": "marketing/x/images/2026-10-16-chat-nippo.png",
@@ -409,10 +454,19 @@
       }
     },
     "sources": [],
-    "url": null,
+    "url": "https://x.com/yattattadotcom/status/2110933248046215174",
     "replies": [],
     "goal": null,
-    "result": null,
+    "result": {
+      "views": 1,
+      "likes": 0,
+      "reposts": 0,
+      "replies": 0,
+      "quotes": 0,
+      "bookmarks": 0,
+      "at": "2026-10-19T10:59+0900",
+      "by": "api"
+    },
     "verdict": null,
     "review": null,
     "downloads": null
@@ -421,7 +475,7 @@
     "postedAt": "2026-10-17T09:00+09:00",
     "kind": "research",
     "template": "D",
-    "scheduled": true,
+    "scheduled": false,
     "text": "🤖 保存用。逆の結果。\n何を：30分ごとに3分の自重の筋トレ\nくらべた：すわりっぱなし\n食後の血糖値の上がり方が、かえって大きかった、という研究がある（普通体重の25歳前後の12人）。\nいい話だけだと、ぼくが偏る。\n出典：Charlett ら 2021 https://doi.org/10.1080/02640414.2020.1847478\n#YatTatTa #筋トレ",
     "image": {
       "file": "marketing/x/images/2026-10-17-charlett-save.png",
@@ -441,12 +495,274 @@
     "sources": [
       "charlett-2021"
     ],
+    "url": "https://x.com/yattattadotcom/status/2111245817981927932",
+    "replies": [],
+    "goal": null,
+    "result": {
+      "views": 0,
+      "likes": 0,
+      "reposts": 0,
+      "replies": 0,
+      "quotes": 0,
+      "bookmarks": 0,
+      "at": "2026-10-19T10:59+0900",
+      "by": "api"
+    },
+    "verdict": null,
+    "review": null,
+    "downloads": null
+  },
+  {
+    "postedAt": "2026-10-19T21:00+09:00",
+    "kind": "promo",
+    "template": null,
+    "text": "🤖 食べたあとにしゃがんだ回数だけ、ぼくを叩くアプリです。\n（しゃがむ）（叩かれる）（仲間+1）\n叩くたびに仲間が増えて、ときどき FEVER。\n最後はみんなで床で寝る。\nApp Store：https://apps.apple.com/app/yat-tat-ta/id6819943075\n#YatTatTa #個人開発 #iPhoneアプリ",
+    "image": {
+      "file": "ios/Design/Reels/reel-ja.mp4",
+      "alt": null,
+      "generator": "reel.sh",
+      "aiLabel": false,
+      "note": "2026-10-19 に 1.2 の画面で撮り直した SNS の縦動画（Git には入らない）"
+    },
+    "sources": [],
     "url": null,
+    "scheduled": true,
+    "replies": [],
+    "goal": {
+      "views": 1000,
+      "likes": 10,
+      "reposts": 2,
+      "basis": "最初の3本の仮の目標（1本目）"
+    },
+    "result": null,
+    "verdict": null,
+    "review": null,
+    "downloads": null
+  },
+  {
+    "postedAt": "2026-10-20T12:18+09:00",
+    "kind": "research",
+    "template": "D",
+    "text": "🤖 保存用。動く時間の実験。\n何を：スクワット・腕立て・ランジ・腹筋 各10回×3\nいつ：朝食の直前／直後／30分後\nくらべた：測ったあとで動く\n食後の血糖値が低めだったのは、直後だけ、という研究がある（大人16人）。\n出典：Solomon ら 2020 https://doi.org/10.1007/s00424-019-02300-4\n#YatTatTa #スクワット #筋トレ",
+    "image": {
+      "file": "marketing/x/images/2026-10-20-solomon-save.png",
+      "alt": "「保存用。」の見出し。スクワット・腕立て・ランジ・腹筋を各10回×3セット、朝食の直前・直後・30分後に動き、測ったあとで動く日とくらべて、食後の血糖値が低めだったのは直後だけという研究の紹介。大人16人、Solomon ら 2020。右にしゃがむ棒人間の列",
+      "generator": "card.py",
+      "aiLabel": false,
+      "card": {
+        "headline": "保存用。",
+        "lines": [
+          "スクワット・腕立て・ランジ・腹筋\n各10回×3セット",
+          "朝食の直前／直後／30分後に動く\nくらべた：測ったあとで動く",
+          "食後の血糖値が低めだったのは、\n直後だけ、という研究がある。"
+        ],
+        "note": "大人16人／Solomon ら 2020",
+        "pose": "squat"
+      }
+    },
+    "sources": [
+      "solomon-2020"
+    ],
+    "url": null,
+    "scheduled": true,
     "replies": [],
     "goal": null,
     "result": null,
     "verdict": null,
     "review": null,
     "downloads": null
+  },
+  {
+    "postedAt": "2026-10-21T21:00+09:00",
+    "kind": "research",
+    "template": "A",
+    "text": "🤖 15回。\n7時間半すわる日に、30分ごと椅子から15回立つ。\n昼食後3時間のインスリンが、すわりっぱなしより低めだった、という研究がある（健康な成人14人）。\nぼくなら15回で、仲間が7人増える。\n出典：Gillen ら 2021 https://doi.org/10.1152/japplphysiol.00796.2020\n#YatTatTa #スクワット #筋トレ",
+    "image": {
+      "file": "marketing/x/images/2026-10-21-gillen-15.png",
+      "alt": "「15回。」の見出し。7時間半すわる日に30分ごと椅子から15回立つと、昼食後3時間のインスリンがすわりっぱなしより低めだったという研究の紹介。健康な成人14人、Gillen ら 2021。右にしゃがむ棒人間の列",
+      "generator": "card.py",
+      "aiLabel": false,
+      "card": {
+        "headline": "15回。",
+        "lines": [
+          "7時間半すわる日に、30分ごと\n椅子から15回立つ。",
+          "昼食後3時間のインスリンが、\nすわりっぱなしより低めだった、\nという研究がある。"
+        ],
+        "note": "健康な成人14人（24歳前後）／Gillen ら 2021",
+        "pose": "squat"
+      }
+    },
+    "sources": [
+      "gillen-2021"
+    ],
+    "url": null,
+    "scheduled": true,
+    "replies": [],
+    "goal": null,
+    "result": null,
+    "verdict": null,
+    "review": null,
+    "downloads": null
+  },
+  {
+    "postedAt": "2026-10-22T12:18+09:00",
+    "kind": "research",
+    "template": "D",
+    "text": "🤖 保存用。椅子スクワットの実験。\n何を：20分ごと、30秒で10回立って座る\nくらべた：すわりっぱなし\n朝食後のインスリンは低め、血糖値は差がなかった、という研究がある（体重多めの平均37歳の14人）。\n出典：Hawari ら 2019 https://doi.org/10.1080/02640414.2018.1500856\n#YatTatTa #スクワット #筋トレ",
+    "image": {
+      "file": "marketing/x/images/2026-10-22-hawari-save.png",
+      "alt": "「保存用。」の見出し。20分ごとに30秒で10回椅子から立って座ると、すわりっぱなしとくらべて朝食後のインスリンは低め、血糖値は差がなかったという研究の紹介。体重多めの平均37歳の14人、Hawari ら 2019。右にしゃがむ棒人間の列",
+      "generator": "card.py",
+      "aiLabel": false,
+      "card": {
+        "headline": "保存用。",
+        "lines": [
+          "20分ごとに、30秒で10回\n椅子から立って座る",
+          "くらべた：すわりっぱなし",
+          "朝食後のインスリンは低め、\n血糖値は差がなかった、\nという研究がある。"
+        ],
+        "note": "体重多めの平均37歳の14人／Hawari ら 2019",
+        "pose": "squat"
+      }
+    },
+    "sources": [
+      "hawari-2019"
+    ],
+    "url": null,
+    "scheduled": true,
+    "replies": [],
+    "goal": null,
+    "result": null,
+    "verdict": null,
+    "review": null,
+    "downloads": null
+  },
+  {
+    "postedAt": "2026-10-23T21:00+09:00",
+    "kind": "research",
+    "template": "A",
+    "text": "🤖 3通り×4つのタイミング。\n立つ、歩く、スクワットなどを、朝食の直前・直後・30分後に。\n食後の血糖値に差が出たのは、直後に動いた日だけ、という研究がある（大人48人）。\nぼくは食べる前からしゃがんでいる。\n出典：Solomon ら 2020 https://doi.org/10.1007/s00424-019-02300-4\n#YatTatTa #スクワット #筋トレ",
+    "image": {
+      "file": "marketing/x/images/2026-10-23-solomon-timing.png",
+      "alt": "「直後だけ。」の見出し。立つ、歩く、スクワットなどを朝食の直前・直後・30分後にして、食後の血糖値に差が出たのは直後に動いた日だけという研究の紹介。大人48人、Solomon ら 2020。右にしゃがむ棒人間の列",
+      "generator": "card.py",
+      "aiLabel": false,
+      "card": {
+        "headline": "直後だけ。",
+        "lines": [
+          "立つ、歩く、スクワットなどを\n朝食の直前・直後・30分後に。",
+          "食後の血糖値に差が出たのは、\n直後に動いた日だけ、\nという研究がある。"
+        ],
+        "note": "大人48人／Solomon ら 2020",
+        "pose": "squat"
+      }
+    },
+    "sources": [
+      "solomon-2020"
+    ],
+    "url": null,
+    "scheduled": true,
+    "replies": [],
+    "goal": null,
+    "result": null,
+    "verdict": null,
+    "review": null,
+    "downloads": null
+  },
+  {
+    "postedAt": "2026-10-24T09:00+09:00",
+    "kind": "research",
+    "template": "D",
+    "text": "🤖 保存用。筋肉のほうの実験。\nいつ：7時間半すわる日の30分ごと\n何を：スクワットか歩く\nくらべた：すわりっぱなし\n食事のアミノ酸で筋肉のたんぱく質を作る速さが高めだった、という研究がある（23歳前後の男女12人）。\n出典：Moore ら 2022 https://doi.org/10.1152/japplphysiol.00106.2022\n#YatTatTa #スクワット #筋トレ",
+    "image": {
+      "file": "marketing/x/images/2026-10-24-moore-save.png",
+      "alt": "「保存用。」の見出し。7時間半すわる日の30分ごとにスクワットか歩くと、すわりっぱなしとくらべて、食事のアミノ酸で筋肉のたんぱく質を作る速さが高めだったという研究の紹介。23歳前後の男女12人、Moore ら 2022。右にしゃがむ棒人間の列",
+      "generator": "card.py",
+      "aiLabel": false,
+      "card": {
+        "headline": "保存用。",
+        "lines": [
+          "7時間半すわる日の30分ごとに\nスクワットか歩く",
+          "くらべた：すわりっぱなし",
+          "食事のアミノ酸で筋肉のたんぱく質を\n作る速さが高めだった、\nという研究がある。"
+        ],
+        "note": "23歳前後の男女12人／Moore ら 2022",
+        "pose": "squat"
+      }
+    },
+    "sources": [
+      "moore-2022"
+    ],
+    "url": null,
+    "scheduled": true,
+    "replies": [],
+    "goal": null,
+    "result": null,
+    "verdict": null,
+    "review": null,
+    "downloads": null
+  },
+  {
+    "postedAt": "2026-10-19T13:07+09:00",
+    "kind": "outreach",
+    "template": null,
+    "text": "そのスタイルで１週間で１キロ落ちてたらめちゃすごいと思います！継続継続アンド継続ですよね！頑張りましょう！！",
+    "image": null,
+    "sources": [],
+    "url": "https://x.com/yattattadotcom/status/2112032832180961281",
+    "replyTo": {
+      "url": "https://x.com/Ixulxo/status/2112024446760636904",
+      "text": "1週間で1キロしか落ちんのかー難しいダイエットとは難しい"
+    },
+    "writtenBy": "developer",
+    "replies": [],
+    "goal": null,
+    "result": null,
+    "verdict": null,
+    "review": null,
+    "downloads": null,
+    "note": "開発者が自分で書いた返信（🤖 なし）。postedAt は投稿の ID から出した時刻"
+  },
+  {
+    "postedAt": "2026-10-19T13:11+09:00",
+    "kind": "outreach",
+    "template": null,
+    "text": "ブラックミルクティーとパールは420 kcalなので1500回スクワットしたらチャラですよ！！！",
+    "image": null,
+    "sources": [],
+    "url": "https://x.com/yattattadotcom/status/2112033934993408257",
+    "replyTo": {
+      "url": "https://x.com/chi_0_29/status/2112028860321771755",
+      "text": "ゴンチャのブラックミルクティーL➕パールを、胃にぶち込んでおり、ダイエット所ではない🫪"
+    },
+    "writtenBy": "developer",
+    "replies": [],
+    "goal": null,
+    "result": null,
+    "verdict": null,
+    "review": null,
+    "downloads": null,
+    "note": "開発者が自分で書いた返信（🤖 なし）。postedAt は投稿の ID から出した時刻"
+  },
+  {
+    "postedAt": "2026-10-19T13:18+09:00",
+    "kind": "outreach",
+    "template": null,
+    "text": "トリムネ100g切り分けてるの偉すぎます",
+    "image": null,
+    "sources": [],
+    "url": "https://x.com/yattattadotcom/status/2112035695082848477",
+    "replyTo": {
+      "url": "https://x.com/muraiti9999/status/2112032763163378030",
+      "text": "🍚本日の減量昼食🍴\n\n🌟豆腐&豆乳の担々麺(鶏胸皮無100g)🐓\n\n🔥313㌍ (画像に出てる調味料は除く)\nたんぱく質:39.3\n脂質:12.4\n炭水化物:16.8\n　　　　　　　　　　　　…位なはずww\n\nローカロリー麺なので1️⃣玉18㌍です❗\n脂質も豆腐と豆乳がメインで10.4g"
+    },
+    "writtenBy": "developer",
+    "replies": [],
+    "goal": null,
+    "result": null,
+    "verdict": null,
+    "review": null,
+    "downloads": null,
+    "note": "開発者が自分で書いた返信（🤖 なし）。postedAt は投稿の ID から出した時刻"
   }
 ]

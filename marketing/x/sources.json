@@ -32,7 +32,8 @@
     "checked": "2026-10-08 に AI が JYX の要旨を読んだ",
     "notes": "対象の体重の条件を省かない。投稿では病名を避けて「体重が多めの男性」と書く。スクワットの休みの長さは要旨にない",
     "usedIn": [
-      "https://x.com/yattattadotcom/status/2108524878588764482"
+      "https://x.com/yattattadotcom/status/2108524878588764482",
+      "https://x.com/yattattadotcom/status/2110208472369561858"
     ]
   },
   {
@@ -49,7 +50,8 @@
     "checked": "2026-10-09 に AI が Europe PMC の要旨を読んだ",
     "notes": "要旨には、筋トレの中身（スクワットを含むか）が書かれていない。スクワットの研究として紹介しない。健康効果の書き方の出典の表に、Journal of Sports Sciences 2021 として載っている研究",
     "usedIn": [
-      "https://x.com/yattattadotcom/status/2108691979660120214"
+      "https://x.com/yattattadotcom/status/2108691979660120214",
+      "https://x.com/yattattadotcom/status/2111245817981927932"
     ]
   },
   {
@@ -65,7 +67,9 @@
     "findings": "朝食のあとは差がなかった。昼食のあと、インスリンの山は立つ日と歩く日の両方で低め。昼食後1時間のインスリンの面積は両方で低め、3時間では立つ日だけ低め（すわりっぱなし比 24%）。筋肉の糖の取り込みの目印には差がなかった",
     "checked": "2026-10-11 に AI が PubMed の要旨（E-utilities）を読んだ",
     "notes": "血糖値ではなくインスリンの結果。血糖値が下がったとは書かない。％は投稿に書かない",
-    "usedIn": []
+    "usedIn": [
+      "https://x.com/yattattadotcom/status/2109483696474476979"
+    ]
   },
   {
     "id": "bellini-2022",
@@ -80,6 +84,53 @@
     "findings": "研究1で、すわりっぱなしより血糖値の山を下げたと書かれているのは、歩くと踏み台。止まるスクワットは、下げたものに挙がっていない。結論は、歩くのがいちばん",
     "checked": "2026-10-11 に AI が PubMed の要旨（E-utilities）を読んだ",
     "notes": "止まるスクワットに差がなかったとは、要旨ではっきりとは書かれていない（下げたものに入っていないだけ）。「効かなかった」と書かず「下げたのは①と②」と書く",
+    "usedIn": [
+      "https://x.com/yattattadotcom/status/2110702241548231117"
+    ]
+  },
+  {
+    "id": "solomon-2020",
+    "kind": "paper",
+    "title": "Immediate post-breakfast physical activity improves interstitial postprandial glycemia: a comparison of different activity-meal timings",
+    "authors": "Solomon TPJ, Tarry E, Hudson CO, Fitt AI, Laye MJ",
+    "year": 2020,
+    "url": "https://pubmed.ncbi.nlm.nih.gov/31396757/",
+    "doi": "10.1007/s00424-019-02300-4",
+    "subjects": "大人48人を3つの運動に16人ずつ分けた（年齢と体の状態は要旨にない）",
+    "design": "500 kcal の液体の朝食。運動は、30分立つ、30分歩く、自重の運動（スクワット、腕立て、ランジ、腹筋を10回ずつ×3セット）の3通り。それぞれ、測り終えたあと（くらべる相手）、食べる直前、直後、30分後の4回を比べた。食後2時間を CGM で測った",
+    "findings": "歩くと自重の運動は、直後にすると平均、ばらつき、曲線の下の面積が下がった。立つのは直後で面積だけ下がった。直前と30分後は、どれも差がなかった。著者は「種類よりタイミング」と書いている",
+    "checked": "2026-10-19",
+    "notes": "自重の運動はスクワットだけではない（4種類）。スクワットだけの研究として紹介しない。題名に病名は入らない。著者の1人が血糖測定器の提供を受けている（利益相反の記載）",
+    "usedIn": []
+  },
+  {
+    "id": "hawari-2019",
+    "kind": "paper",
+    "title": "Effects of breaking up sedentary time with \"chair squats\" on postprandial metabolism",
+    "authors": "Hawari NSA, Wilson J, Gill JMR",
+    "year": 2019,
+    "url": "https://pubmed.ncbi.nlm.nih.gov/30058957/",
+    "doi": "10.1080/02640414.2018.1500856",
+    "subjects": "14人（男11人、女3人）、37 ± 16歳、BMI 30.5 ± 3.8",
+    "design": "朝食と3.5時間後の昼食。6.5時間すわり続ける日と、20分ごとに椅子スクワット（30秒で10回立って座る）をする日を比べた",
+    "findings": "消費エネルギーは椅子スクワットの日のほうが多かった。朝食のあとのインスリンは低め、昼食のあとは差がなかった。血糖値と中性脂肪は差がなかった",
+    "checked": "2026-10-19",
+    "notes": "対象の体重の条件を省かない。投稿では病名を避けて「体重多め」と書く。％は投稿に書かない。血糖値が下がったとは書かない",
+    "usedIn": []
+  },
+  {
+    "id": "moore-2022",
+    "kind": "paper",
+    "title": "Walking or body weight squat \"activity snacks\" increase dietary amino acid utilization for myofibrillar protein synthesis during prolonged sitting",
+    "authors": "Moore DR, Williamson EP, Hodson N, Estafanos S, Mazzulla M, Kumbhare D, Gillen JB",
+    "year": 2022,
+    "url": "https://pubmed.ncbi.nlm.nih.gov/35952344/",
+    "doi": "10.1152/japplphysiol.00106.2022",
+    "subjects": "12人（男7人、女5人）、23歳前後、BMI 25.1 前後、1日7,300歩前後",
+    "design": "7.5時間の3通り：すわりっぱなし、30分ごとに歩く、30分ごとに自重のスクワット。朝と昼に、目印を付けたアミノ酸入りの食事",
+    "findings": "太ももの筋肉で、食事のアミノ酸から筋原線維のたんぱく質を作る速さが、スクワットの日と歩く日ですわりっぱなしより高かった。長い目で筋肉の量や質がどうなるかは、これから調べることと書かれている",
+    "checked": "2026-10-19",
+    "notes": "血糖値ではなく、筋肉のたんぱく質の合成の研究。「筋肉がつく」「筋肉が増える」とは書かない",
     "usedIn": []
   }
 ]
