@@ -154,15 +154,87 @@
         "basis": "前の週の中央値が0なので、仮の目標を据え置く（2026-10-19）"
       }
     },
+    "medians": {
+      "research": {
+        "bookmarks": 0,
+        "quotes": 0
+      },
+      "chat": {
+        "replies": null,
+        "followersGain": 0
+      }
+    },
+    "verdict": {
+      "research": "未達",
+      "chat": "未達"
+    },
+    "review": {
+      "reason": "研究の紹介は5本とも表示0で、1本も届いていない。いちばん届いたのは宣伝の動画（39、いいね1）と、開発者の返信（outreach）3件（合計64、うち1件に返信1）。前の週に決めた「小ネタ 1 を増やす」は、予約に小ネタを入れ忘れて0本で、試せていない。小ネタがないので返信の中央値は出せず、フォロワーは0のまま",
+      "increase": "小ネタ 1（ト書き日報＋最後に二択。前の週に決めて試せなかったので、もう一度。直近10本の小ネタが1本なので、割合の手順でも次は小ネタ）",
+      "decrease": "研究の紹介 A（数字ドン。2本とも表示0。保存を狙う型D と中身が重なるので、紹介は型D に寄せる）",
+      "nextChange": "返信（outreach）は 10-19 の1日だけで3件、その3件だけで研究の紹介5本より多く表示された。次の週は表4のとおり1日3件を毎日続け、posts.json に記録して、返信した日と表示の動きを比べる",
+      "searchCheck": "2026-10-26 に開発者がログアウトした状態で from:yattattadotcom を検索し、投稿が1本も出なかった。検索に出ない状態（サーチバンの疑い）なので、2〜3週目の表示の数から型の良し悪しは言えない"
+    },
+    "summary": {
+      "viewsTotal": 39,
+      "posts": 6,
+      "viewsMedian": {
+        "research": 0,
+        "chat": null,
+        "promo": 39
+      },
+      "viewsByTemplate": {
+        "research A": 0,
+        "research D": 0,
+        "promo": 39
+      },
+      "viewsByPost": {
+        "2026-10-19 promo（動画）": 39,
+        "2026-10-20 research D": 0,
+        "2026-10-21 research A": 0,
+        "2026-10-22 research D": 0,
+        "2026-10-23 research A": 0,
+        "2026-10-24 research D": 0
+      },
+      "followersGain": 0,
+      "engagementTotal": 1,
+      "outreach": 3,
+      "outreachViews": 64,
+      "outreachReplies": 1,
+      "note": "viewsTotal は AI の投稿だけ。開発者の返信（outreach）の表示は outreachViews に分けた",
+      "at": "2026-10-26T13:20+0900"
+    },
+    "followers": [
+      {
+        "at": "2026-10-19T10:59+0900",
+        "count": 0
+      },
+      {
+        "at": "2026-10-26T13:20+0900",
+        "count": 0
+      }
+    ]
+  },
+  {
+    "week": "2026-10-25/2026-10-31",
+    "goals": {
+      "stage": {
+        "target": "1. 検索に戻る",
+        "check": "ログアウトした状態の from:yattattadotcom に投稿が出る",
+        "basis": "2026-10-26 に検索に出ないと分かったため。段階の目標は x-operator の表6（2026-10-26、開発者が決定）"
+      }
+    },
     "medians": null,
     "verdict": null,
     "review": null,
     "summary": null,
     "followers": [
       {
-        "at": "2026-10-19T10:59+0900",
+        "at": "2026-10-26T13:20+0900",
         "count": 0
       }
-    ]
+    ],
+    "note": "2026-10-26 から、検索に出ない状態（サーチバンの疑い）のため AI の投稿を止める。予約投稿は残っていない。電話番号とメールアドレスの確認は済み、メディアのセンシティブ設定とポストの非公開は OFF（開発者が確認）。11-02 ごろにログアウトした状態で from:yattattadotcom をもう一度検索し、出たら再開する",
+    "stage": null
   }
 ]
