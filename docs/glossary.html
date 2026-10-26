@@ -1453,7 +1453,7 @@ tailwind.config = {
   <section id="promo-post" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
     <p class="font-mono text-xs text-mute">#promo-post</p>
     <h2 class="mt-1 font-display text-2xl">宣伝投稿</h2>
-    <p class="mt-3 leading-relaxed">広報担当AI の投稿のうち、アプリを勧めるもの。App Store のリンク、動画、機能のどれかを見せる。リンクがなくても、勧めていれば宣伝に数える。残りは雑談投稿で、何も売らない。割合は雑談8割、宣伝2割。宣伝投稿には、下書きの段階で出してから24時間の目標（表示、いいね、リポスト）を置き、24時間後に達成か未達かを記録する（2026-10-08、開発者の注文）。</p>
+    <p class="mt-3 leading-relaxed">広報担当AI の投稿のうち、アプリを勧めるもの。App Store のリンク、動画、機能のどれかを見せる。リンクがなくても、勧めていれば宣伝に数える。残りは雑談投稿で、何も売らない。割合は雑談8割、宣伝2割。宣伝投稿には、下書きの段階で出してから24時間の目標（表示、いいね、リポスト）を置き、24時間後に達成か未達かを記録する（2026-10-08、開発者の注文）。2026-10-26 から、X の役目を「アプリを知ってもらい、DL につなげる」にし、アプリの動画を投稿の中心に置いた。勧めてリンクを付ける宣伝投稿は週1本までで、リンクは必ず<a href="#campaign-link" class="text-dopa underline underline-offset-4">キャンペーンリンク</a>（ct は x_promo）にする。ほかの動画は、勧めずリンクも付けない「動画の回」として出す。</p>
     <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
     <div class="mt-2 flex flex-col gap-2 text-sm">
       <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>スクワットマンが「今日は60回しゃがんだ」とだけ言う投稿は、宣伝ですか。</p>
@@ -1489,7 +1489,7 @@ tailwind.config = {
   <section id="weekly-review" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
     <p class="font-mono text-xs text-mute">#weekly-review</p>
     <h2 class="mt-1 font-display text-2xl">週の振り返り</h2>
-    <p class="mt-3 leading-relaxed">広報担当AI の研究の紹介と小ネタを、1週間まとめて目標と比べること。研究の紹介はブックマークと引用の中央値、小ネタは返信の中央値と、アカウントのフォロワーの週の増えを見る。数は X の API で読む（2026-10-09 に、取れる数に替えた）。次の週に増やす型と減らす型を決め、次の週の目標（前の週の中央値の1.2倍）を置く。宣伝は1本ごとに見るので含めない。週は日曜〜土曜で、日曜に前の週の表示のまとめと一緒に振り返る（2026-10-10、開発者の注文）。最初の週（2026-10-08〜10-10）は、根拠のない仮の目標で始めた。</p>
+    <p class="mt-3 leading-relaxed">広報担当AI の研究の紹介と小ネタを、1週間まとめて目標と比べること。研究の紹介はブックマークと引用の中央値、小ネタは返信の中央値と、アカウントのフォロワーの週の増えを見る。数は X の API で読む（2026-10-09 に、取れる数に替えた）。次の週に増やす型と減らす型を決め、次の週の目標（前の週の中央値の1.2倍）を置く。宣伝は1本ごとに見るので含めない。週は日曜〜土曜で、日曜に前の週の表示のまとめと一緒に振り返る（2026-10-10、開発者の注文）。最初の週（2026-10-08〜10-10）は、根拠のない仮の目標で始めた。2026-10-26 から、最初にアカウントが検索に出るかを確かめ、目標は段階（検索に戻る、1本で表示100、フォロワー10、X から来た DL 1件）で見る。中央値の1.2倍の目標は、1本で表示100に届いてから使う。</p>
     <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
     <div class="mt-2 flex flex-col gap-2 text-sm">
       <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>小ネタは1本ごとに当たり外れを決めないんですか。</p>
@@ -1506,7 +1506,7 @@ tailwind.config = {
   <section id="pinned-post" class="mt-14 scroll-mt-20 border-t-2 border-ink pt-6">
     <p class="font-mono text-xs text-mute">#pinned-post</p>
     <h2 class="mt-1 font-display text-2xl">固定ポスト</h2>
-    <p class="mt-3 leading-relaxed">X のプロフィールの一番上に固定しておく投稿。@yattattadotcom では、自己紹介と型D（保存版）の研究カードを1本にまとめて置く。返信やハッシュタグで見つけてプロフィールに来た人が、何のアカウントかを1本で分かり、フォローするか決められるようにするため（2026-10-11、開発者が採用）。</p>
+    <p class="mt-3 leading-relaxed">X のプロフィールの一番上に固定しておく投稿。@yattattadotcom では、自己紹介と型D（保存版）の研究カードを1本にまとめて置く。返信やハッシュタグで見つけてプロフィールに来た人が、何のアカウントかを1本で分かり、フォローするか決められるようにするため（2026-10-11、開発者が採用）。2026-10-26 から、アプリの動画と<a href="#campaign-link" class="text-dopa underline underline-offset-4">キャンペーンリンク</a>（ct は x_pinned）の1本に替える。プロフィールに来た人が、そのまま App Store に進めるようにするため。</p>
     <h3 class="mt-5 text-xs font-bold text-mute">用例</h3>
     <div class="mt-2 flex flex-col gap-2 text-sm">
       <p class="max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-white px-4 py-2 ring-1 ring-rule"><b class="mr-2 font-mono text-[11px] text-signal">開発者</b>返信を見てプロフィールに来た人は、何を見るんですか。</p>
